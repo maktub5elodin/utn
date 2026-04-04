@@ -1,0 +1,16 @@
+# PDFs grandes (>100MB, superan el límite de GitHub)
+ayga/Nociones de geometría analitica y algebra lineal - KOZAK.pdf
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code (settings locales, no van al repo)
+.claude/
