@@ -21,3 +21,6 @@ desktop.ini
 
 # Claude Code (settings locales, no van al repo)
 .claude/
+
+# Directorios excluidos temporalmente
+su_myf/
