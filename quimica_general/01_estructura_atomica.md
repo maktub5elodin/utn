@@ -37,15 +37,17 @@ Relación:           el núcleo es 100.000 veces más chico que el átomo
 
 Las tres partículas fundamentales:
 
-| Partícula | Símbolo | Carga | Masa (uma) | Masa (kg) | Ubicación |
-|---|---|---|---|---|---|
-| Protón | p⁺ | +1 | 1,0073 | 1,6725 × 10⁻²⁷ | Núcleo |
-| Neutrón | n⁰ | 0 | 1,0087 | 1,6748 × 10⁻²⁷ | Núcleo |
-| Electrón | e⁻ | −1 | 0,000549 | 9,109 × 10⁻³¹ | Corteza |
+| Partícula | Símbolo | Carga relativa | Carga (C) | Masa (uma) | Masa (g) | Ubicación |
+|---|---|---|---|---|---|---|
+| Protón | p⁺ | +1 | +1,60 × 10⁻¹⁹ | 1,0073 | 1,67 × 10⁻²⁴ | Núcleo |
+| Neutrón | n⁰ | 0 | 0 | 1,0087 | 1,67 × 10⁻²⁴ | Núcleo |
+| Electrón | e⁻ | −1 | −1,60 × 10⁻¹⁹ | 0,000549 | 9,10 × 10⁻²⁸ | Corteza |
+
+> La carga elemental `e = 1,60 × 10⁻¹⁹ C` es la unidad mínima de carga eléctrica en la naturaleza.
 
 **Observaciones críticas:**
-- El protón y el neutrón pesan prácticamente lo mismo (~1 uma cada uno).
-- El electrón pesa ~1836 veces menos que el protón → su masa es despreciable en los cálculos de masa atómica.
+- El protón y el neutrón pesan prácticamente lo mismo (~1 uma ≈ 1,67 × 10⁻²⁴ g cada uno).
+- El electrón es ~1836 veces más liviano que el protón → su masa es despreciable en cálculos de masa atómica.
 - Un átomo neutro tiene igual número de protones y electrones → carga total = 0.
 
 ---
@@ -92,6 +94,20 @@ Mismo elemento (mismo Z=17) → mismo comportamiento químico
 Diferente A → diferente masa
 ```
 
+**Isótopos del hidrógeno — los únicos con nombre propio:**
+
+| Nombre | Símbolo | Z | A | Neutrones | Estable |
+|---|---|---|---|---|---|
+| Protio | ¹₁H | 1 | 1 | 0 | Sí (99,985%) |
+| Deuterio | ²₁H o D | 1 | 2 | 1 | Sí (0,015%) |
+| Tritio | ³₁H o T | 1 | 3 | 2 | **No** (radiactivo, vida media 12,3 años) |
+
+**Isótopos del uranio** (relevantes en física nuclear):
+- `²³⁵₉₂U` — fisible, se usa en reactores y bombas nucleares (0,72% abundancia natural)
+- `²³⁸₉₂U` — más estable, se usa para producir plutonio (99,27% abundancia natural)
+
+**Isótopos radiactivos:** aquellos cuyo núcleo es inestable y se desintegra espontáneamente emitiendo radiación. Ej: ¹⁴C (usado en datación por carbono), ³H, ²³⁵U.
+
 **Masa atómica relativa (Ar):** promedio ponderado de las masas de todos los isótopos naturales, pesando por su abundancia.
 
 `Ar(Cl) = 35 × 0,7577 + 37 × 0,2423 = 26,52 + 8,97 = 35,45 uma`
@@ -109,13 +125,146 @@ Por eso la tabla periódica muestra Cl = 35,45 (no es un número entero). Es el 
 
 ---
 
+### 1.4 Moléculas e Iones
+
+Los átomos no suelen estar aislados: se combinan para formar **moléculas** o se cargan para formar **iones**.
+
+#### Moléculas
+
+Una **molécula** es la unión estable de dos o más átomos mediante enlaces covalentes.
+
+**Moléculas diatómicas** (exactamente 2 átomos):
+
+```
+Homonucleares (mismo elemento):   H₂, N₂, O₂, F₂, Cl₂, Br₂, I₂
+Heteronucleares (elementos distintos): HCl, CO, NO
+```
+
+> Truco: los elementos que en estado puro forman moléculas diatómicas son los del "7" en la tabla: H, N, O, F, Cl, Br, I.
+
+**Moléculas poliatómicas** (3 o más átomos):
+
+```
+Homonucleares: O₃ (ozono)
+Heteronucleares: H₂O, NH₃, CH₄, H₂SO₄, CO₂, HNO₃
+```
+
+#### Iones
+
+Un **ión** es un átomo (o grupo de átomos) que ganó o perdió electrones, quedando con carga eléctrica neta.
+
+**Iones monoatómicos** (un solo átomo cargado):
+- Cationes (carga +): Na⁺, K⁺, Ca²⁺, Mg²⁺, Fe²⁺, Fe³⁺, Al³⁺, Cu⁺, Cu²⁺
+- Aniones (carga −): Cl⁻, Br⁻, I⁻, F⁻, O²⁻, S²⁻, N³⁻
+
+**Iones poliatómicos** (grupo de átomos con carga neta):
+- Aniones comunes: OH⁻ (hidróxido), CN⁻ (cianuro), NO₃⁻ (nitrato), SO₄²⁻ (sulfato), CO₃²⁻ (carbonato), PO₄³⁻ (fosfato)
+- Cationes comunes: NH₄⁺ (amonio), H₃O⁺ (hidronio)
+
+**Tabla de iones comunes por grupo de la tabla periódica:**
+
+```
+Grupo 1  (ns¹):   Li⁺, Na⁺, K⁺, Rb⁺, Cs⁺            (siempre +1)
+Grupo 2  (ns²):   Be²⁺, Mg²⁺, Ca²⁺, Sr²⁺, Ba²⁺       (siempre +2)
+Grupo 13 (ns²np¹):Al³⁺                                 (siempre +3)
+Grupo 15 (ns²np³):N³⁻, P³⁻                             (siempre −3)
+Grupo 16 (ns²np⁴):O²⁻, S²⁻                             (siempre −2)
+Grupo 17 (ns²np⁵):F⁻, Cl⁻, Br⁻, I⁻                   (siempre −1)
+
+Metales de transición (cargas variables):
+  Fe:  Fe²⁺ (ferroso)  /  Fe³⁺ (férrico)
+  Cu:  Cu⁺  (cuproso)  /  Cu²⁺ (cúprico)
+  Cr:  Cr²⁺            /  Cr³⁺
+  Pb:  Pb²⁺            /  Pb⁴⁺
+  Sn:  Sn²⁺            /  Sn⁴⁺
+  Hg:  Hg⁺  (mercuroso)/  Hg²⁺ (mercúrico)
+  Mn:  Mn²⁺, Mn³⁺, Mn⁴⁺, Mn⁶⁺, Mn⁷⁺
+```
+
+> **Analogía contable:** una molécula es como una sociedad de personas (átomos) que comparten recursos (electrones) y quedan en equilibrio. Un ión es como esa misma sociedad pero que perdió o ganó un socio —queda con capital desbalanceado (carga neta).
+
+**Ejercicio rápido — "¿Comprendiste?"**
+
+Completa la tabla para cada átomo/ión:
+
+| Especie | Z | A | Protones | Neutrones | Electrones |
+|---|---|---|---|---|---|
+| ¹⁴₆C | 6 | 14 | 6 | 8 | 6 |
+| ¹¹₆C | 6 | 11 | 6 | 5 | 6 |
+| ²⁷₁₃Al³⁺ | 13 | 27 | 13 | 14 | **10** |
+| ⁷⁸₃₄Se²⁻ | 34 | 78 | 34 | 44 | **36** |
+
+Clave: el ión Al³⁺ perdió 3 e⁻ → 13−3=10 e⁻. El ión Se²⁻ ganó 2 e⁻ → 34+2=36 e⁻.
+
+---
+
 ## 2 · El Mol y las Magnitudes Atómico-Moleculares
 
 ### 2.1 La Unidad de Masa Atómica (uma)
 
-`1 uma = 1,66054 × 10⁻²⁷ kg`
+**Definición oficial (desde 1961):**
+> 1 uma = 1/12 de la masa del isótopo ¹²₆C (carbono-12)
 
-Es la escala que usamos para los átomos. Un protón pesa ~1 uma. Un átomo de carbono-12 pesa exactamente 12 uma (por definición).
+```
+1 uma = 1,66054 × 10⁻²⁴ g = 1,66054 × 10⁻²⁷ kg
+```
+
+El carbono-12 fue elegido como patrón internacional porque es el isótopo más abundante del elemento más estudiado en química orgánica. Antes de 1961 se usaban el oxígeno o el hidrógeno como referencia.
+
+**Masas de referencia en la escala uma:**
+- ¹H: 1,008 uma
+- ¹²C: 12,000 uma (por definición exacta)
+- ¹⁶O: 16,000 uma
+
+**Masa Atómica Relativa (Ar):**
+
+La masa atómica relativa compara la masa del átomo X con la doceava parte de la masa del ¹²C:
+
+```
+       masa del átomo X
+Ar = ─────────────────────
+     (1/12) × masa ¹²C
+```
+
+Ar no tiene unidades — es una razón. El valor numérico expresa "cuántas veces más pesado es ese átomo que 1 uma".
+
+> Ejemplo: Ar(Ca) = 40 significa que el calcio pesa 40 veces más que 1 uma = que pesa 40 uma.
+
+**Masa Molecular Relativa (Mr):**
+
+Para compuestos, se suman los Ar de cada átomo multiplicados por su cantidad:
+
+```
+Mr = Σ (Ar × cantidad de átomos de cada elemento)
+
+Ejemplo: SO₂
+Mr(SO₂) = Ar(S) + 2 × Ar(O)
+         = 32   + 2 × 16
+         = 32 + 32
+         = 64
+
+→ 1 mol de SO₂ = 64 g/mol
+```
+
+**Masa atómica promedio ponderado (cuando hay isótopos):**
+
+Cuando un elemento tiene varios isótopos naturales, la masa que figura en la tabla periódica es el promedio ponderado:
+
+```
+Ar promedio = Σ (masa del isótopo × abundancia fraccionaria)
+
+Ejemplo con litio (Li), que tiene 2 isótopos:
+  ⁶Li: masa = 6,015 uma, abundancia = 7,42%  →  fracción = 0,0742
+  ⁷Li: masa = 7,016 uma, abundancia = 92,58% →  fracción = 0,9258
+
+Ar(Li) = (6,015 × 0,0742) + (7,016 × 0,9258)
+       = 0,4463 + 6,4954
+       = 6,941 uma
+
+Verificación: la tabla periódica dice Li = 6,94 uma ✓
+```
+
+> Analogía contable: la masa atómica promedio es como el precio promedio ponderado de stock (FIFO/LIFO vs. promedio ponderado). No es el promedio aritmético, sino el promedio que respeta la "cantidad" de cada isótopo.
 
 ### 2.2 El Mol — El Puente entre lo Atómico y lo Macroscópico
 
@@ -181,50 +330,204 @@ En química ordinaria las conversiones masa-energía son despreciables. En físi
 Para entender la configuración electrónica hay que ver cómo llegamos al modelo actual.
 
 ```
-DALTON (1803)          THOMSON (1897)         RUTHERFORD (1911)
-Átomo como             "Pudín de pasas"        Núcleo central
-esfera sólida          electrones incrustados  denso y cargado +
-indivisible            en masa positiva        electrones orbitando
-
-Sin estructura         Descubre el electrón    Descubre el núcleo
-interna                (carga e masa)          (experimento lámina Au)
-
-     ↓                      ↓                       ↓
-
-BOHR (1913)                          MECÁNICA CUÁNTICA (1920s)
-Electrones en                        Schrödinger, Heisenberg
-órbitas circulares                   No hay órbitas definidas
-definidas (como                      sino ORBITALES (regiones
-planetas)                            de probabilidad)
-Explica espectro del H
-No funciona para
-átomos multielectrónicos
+s. V a.C.   DEMÓCRITO / LEUCIPO
+     ↓
+1803        DALTON
+     ↓
+1897        THOMSON
+     ↓
+1911        RUTHERFORD
+     ↓
+1913        BOHR
+     ↓
+1920s       MECÁNICA CUÁNTICA (Schrödinger, Heisenberg, De Broglie)
 ```
 
-### 3.1 El Modelo de Bohr y los Espectros
+---
 
-Cuando se calienta un gas (hidrógeno, por ejemplo) emite luz. Pero no cualquier luz — solo frecuencias específicas (líneas espectrales). Bohr explicó esto:
+### 3.1 Demócrito y Leucipo (siglo V a.C.)
 
-- Los electrones solo pueden estar en niveles de energía determinados (cuantizados).
-- Cuando un electrón salta de un nivel alto a uno bajo, **emite un fotón** con energía exactamente igual a la diferencia de niveles.
-- Cuando absorbe esa energía, **sube de nivel** (estado excitado).
+Los filósofos griegos **Demócrito** y **Leucipo** propusieron que la materia estaba formada por partículas indivisibles llamadas **ἄτομος** (átomos, "sin corte"). Fue una especulación filosófica sin sustento experimental — pero notablemente correcta en la idea fundamental.
+
+Esta visión fue ignorada por siglos (prevaleció la teoría de los cuatro elementos de Aristóteles) hasta que Dalton la rescató con evidencia química.
+
+---
+
+### 3.2 Modelo de Dalton (1803)
+
+John Dalton fue el primero en basar el concepto atómico en datos experimentales (leyes de Proust y Lavoisier). Sus cinco postulados:
 
 ```
-Absorción:   e⁻ + fotón → e⁻ sube de nivel
-Emisión:     e⁻ baja de nivel → emite fotón (luz)
+1. La materia está formada por partículas diminutas e indivisibles
+   llamadas ÁTOMOS.
 
-Cada transición = frecuencia específica = color específico
+2. Los átomos de un mismo elemento son IDÉNTICOS entre sí
+   (misma masa, mismas propiedades).
+
+3. Los átomos de elementos distintos son DIFERENTES.
+
+4. Los compuestos se forman por la UNIÓN de átomos de distintos
+   elementos en proporciones simples (razones de números enteros).
+
+5. En las reacciones químicas los átomos se REORDENAN pero no
+   se crean ni se destruyen (ley de conservación de la masa).
 ```
 
-**Dualidad onda-partícula (De Broglie):**
-Los electrones se comportan a veces como partículas, a veces como ondas. No es una metáfora — es experimental. Esto hace imposible definir una "órbita" precisa.
+**Lo que falló:** Dalton consideraba el átomo indivisible y sin estructura interna. Los descubrimientos posteriores (electrón, núcleo) derrumbaron esto.
 
-**Principio de Incertidumbre de Heisenberg:**
-> No es posible conocer simultáneamente con precisión arbitraria la posición y el momento (velocidad × masa) de un electrón.
+> Átomo de Dalton representado: ⬤ (esfera maciza, homogénea, sin estructura interna)
+
+---
+
+### 3.3 Modelo de Thomson (1897) — "El budín de pasas" / "La sandía"
+
+J.J. Thomson descubrió el **electrón** (1897) mediante experimentos con tubos de rayos catódicos. Midió la relación carga/masa del electrón y demostró que era la misma independientemente del material del cátodo → había partículas subatómicas universales.
+
+**Modelo propuesto:**
+> El átomo es una **gran esfera de carga positiva difusa** con los **electrones incrustados como granitos de sandía** (o pasas en un budín) distribuidos en su interior.
+
+```
+Modelo Thomson (corte transversal):
+
+    ╭──────────────────────╮
+    │  +  +  +  +  +  +   │  ← masa positiva difusa
+    │  + ●  +  + ●  +  +  │  ← ● = electrón
+    │  +  +  ● +  +  +    │
+    │  +  + ●  +  +  +    │
+    ╰──────────────────────╯
+
+Átomo eléctricamente neutro (total cargas + = total cargas −)
+```
+
+**Lo que acertó:** el átomo contiene electrones. La carga positiva y la negativa se compensan.
+**Lo que falló:** la distribución uniforme de la carga positiva. El experimento de Rutherford demostraría que toda la carga + está concentrada en un punto central.
+
+---
+
+### 3.4 Modelo de Rutherford (1911) — El Núcleo
+
+Ernest Rutherford diseñó el **experimento de la lámina de oro** para poner a prueba el modelo de Thomson.
+
+**Descripción del experimento:**
+```
+         Fuente de
+         partículas α
+              │
+              ▼
+    ════════════════  ← Lámina de oro (0,0004 mm, ~2000 átomos de espesor)
+              │
+         Pantalla ZnS
+         (detectora)
+```
+
+- Fuente: Radio (Ra) emite partículas **α** (núcleos de He²⁺, carga +2)
+- Velocidad de las α: `v ≈ 1,4 × 10⁷ m/s` (≈ 5% de la velocidad de la luz)
+- La pantalla de sulfuro de zinc (ZnS) destella al recibir una partícula α
+
+**Resultados observados:**
+
+```
+Esperado con modelo Thomson:   Observado por Rutherford:
+
+════════════════               ════════════════
+→→→→→→→→→→→→→→→               →→→→→→→→→→→→→→→   (mayoría pasan)
+→→→→→→→→→→→→→→→               → ↗ (pocas desviadas)
+→→→→→→→→→→→→→→→               ← (¡algunas rebotan!)
+
+Todas atraviesan              Solo 1 de cada ~10.000
+con leve desviación           se desvía >90° o rebota
+```
+
+**Las tres conclusiones de Rutherford:**
+
+1. **El átomo es mayoritariamente espacio vacío** → la inmensa mayoría de las α pasan sin desviarse.
+
+2. **Existe un núcleo central pequeño, denso y de carga positiva** → el que hace rebotar las α que lo impactan directamente.
+
+3. **Los electrones orbitan el núcleo a gran distancia** (como planetas al sol) → la corteza electrónica es el "espacio vacío".
+
+**Tamaños que surgen del experimento:**
+
+```
+Radio atómico:   ~100 pm = 10⁻¹⁰ m
+Radio nuclear:   ~5 × 10⁻³ pm = 5 × 10⁻¹⁵ m
+
+Relación: el núcleo es ~20.000 veces más pequeño que el átomo
+
+Analogía argentina:
+  Si el átomo fuera el Estadio Monumental de River Plate,
+  el núcleo sería una cabeza de alfiler en el centro del campo.
+  Todo lo demás es vacío (electrones orbitando en las tribunas).
+```
+
+**Lo que falló:** en el modelo de Rutherford los electrones orbitan libremente, pero la física clásica predice que una carga acelerada en movimiento circular debe irradiar energía → el electrón debería perder energía y caer al núcleo en fracción de segundo. El átomo sería inestable. Bohr resolvió esto.
+
+---
+
+### 3.5 Modelo de Bohr (1913) — Órbitas Cuantizadas
+
+Niels Bohr (físico danés) propuso en 1913 un modelo que combinaba física clásica con cuantización de la energía. Sus cuatro postulados:
+
+```
+Postulado 1 — ÓRBITAS PERMITIDAS:
+  El electrón solo puede existir en ciertas órbitas circulares
+  definidas alrededor del núcleo, sin irradiar energía.
+  (Viola la física clásica — lo asume como hecho cuántico)
+
+Postulado 2 — ENERGÍA CUANTIZADA:
+  Cada órbita tiene una energía definida (estado estacionario).
+  El electrón no puede estar "entre" órbitas.
+
+Postulado 3 — SALTOS CUÁNTICOS:
+  El electrón salta de una órbita a otra absorbiendo o emitiendo
+  exactamente un fotón cuya energía es igual a la diferencia
+  de energía entre las órbitas:
+    ΔE = E_superior − E_inferior = h · ν
+  (h = constante de Planck; ν = frecuencia del fotón)
+
+Postulado 4 — CAPACIDAD MÁXIMA:
+  Cada nivel n puede contener hasta 2n² electrones.
+    n=1 → 2×1² = 2
+    n=2 → 2×2² = 8
+    n=3 → 2×3² = 18
+    n=4 → 2×4² = 32
+```
+
+**Lo que explicó Bohr:**
+
+```
+Absorción:   e⁻ + fotón → e⁻ sube de nivel (estado excitado)
+Emisión:     e⁻ baja de nivel → emite fotón (luz de color específico)
+
+Cada transición = diferencia de energía específica = frecuencia específica = COLOR específico
+→ explicó los espectros de líneas del hidrógeno ✓
+```
+
+**Lo que falló:** funciona perfectamente para el hidrógeno (1 electrón) pero no para átomos multielectrónicos. Además, el concepto de "órbita definida" contradice el principio de incertidumbre.
+
+---
+
+### 3.6 Modelo Cuántico u Ondulatorio (1920s)
+
+Desarrollado por Schrödinger, Heisenberg, De Broglie, Pauli y otros.
+
+**Dualidad onda-partícula (De Broglie, 1924):**
+Los electrones se comportan tanto como partículas como como ondas. No es una metáfora — es experimental (difracción de electrones).
+
+**Principio de Incertidumbre de Heisenberg (1927):**
+> No es posible conocer simultáneamente con precisión arbitraria la posición y el momento de un electrón.
 
 `Δx · Δp ≥ h / (4π)`
 
-Implicancia: no hay órbitas como en Bohr. Hay **orbitales** — regiones del espacio donde la probabilidad de encontrar al electrón es alta (generalmente ≥90%).
+Implicancia: no hay órbitas definidas. Hay **orbitales** — regiones del espacio donde la probabilidad de encontrar al electrón es alta (generalmente ≥90%).
+
+**Diferencia clave:**
+```
+Bohr:            ÓRBITA — trayectoria circular definida, como un planeta
+Mecánica cuántica: ORBITAL — nube de probabilidad, región difusa
+```
+
+Es el modelo vigente y el que usamos para configuración electrónica.
 
 ---
 
