@@ -1,5 +1,12 @@
-# PDFs — se mantienen localmente pero no se suben a GitHub
+# Archivos de documentos e imágenes — se mantienen localmente pero no se suben a GitHub
 *.pdf
+*.ppt
+*.pptx
+*.doc
+*.docx
+*.jpg
+*.jpeg
+*.png
 
 # Sistema operativo
 .DS_Store
