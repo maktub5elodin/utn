@@ -16,7 +16,7 @@ Study notes for **UTN FRBA — Ingeniería Mecánica**, written in Markdown. The
 | `ingenieria_mecanica_i/` | Ingeniería Mecánica I | vacío |
 | `ingenieria_y_sociedad/` | Ingeniería y Sociedad | Arocena (1 doc) |
 | `quimica_general/` | Química General (R1091) | intro + estructura atómica |
-| `sistemas_de_representacion/` | Sistemas de Representación | solo PDFs de clase (ignorados) |
+| `sistemas_de_representacion/` | Sistemas de Representación | expectativas + TPs + normas IRAM + LibreCAD/DXF (3 docs) |
 | `su_myf/` | (excluido de git) | — |
 
 ## Writing conventions
@@ -47,6 +47,7 @@ Key sources per subject:
 - **AM1:** `Cronograma A1191 2026.pdf` (schedule)
 - **AyGA:** `Programa ALGEBRA Y GEOMETRIA ANALITICA.pdf` (syllabus), `Nociones de geometría analitica y algebra lineal - KOZAK.pdf` (738-page textbook — always use `pages:` parameter); cátedra site: `https://aga.frba.utn.edu.ar/`
 - **Física I:** `Programa- Bibliografia.pdf`
+- **Sistemas de Representación:** `CLASE 1.pdf` (condiciones, materiales, A4, rótulo, TP 1-2), `CLASE 2.pdf` (tipos de línea IRAM, aplicaciones, TP 3-6), `CLASE 3.pdf` (caligrafía tipo A tabla completa, acotación, TP 7-10). Nota: no tiene parciales — aprobación por carpeta completa.
 
 ## Git and .gitignore
 

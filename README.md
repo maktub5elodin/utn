@@ -16,7 +16,7 @@ Escritas en Markdown, en español, con diagramas ASCII y analogías contables (e
 | [`quimica_general/`](quimica_general/) | Química General | Introducción · Estructura atómica y tabla periódica |
 | [`ingenieria_y_sociedad/`](ingenieria_y_sociedad/) | Ingeniería y Sociedad | Arocena — Cambio tecnológico y desarrollo |
 | `ingenieria_mecanica_i/` | Ingeniería Mecánica I | *(próximamente)* |
-| `sistemas_de_representacion/` | Sistemas de Representación | *(próximamente)* |
+| [`sistemas_de_representacion/`](sistemas_de_representacion/) | Sistemas de Representación | Expectativas · Normas IRAM · LibreCAD/DXF |
 
 ---
 
