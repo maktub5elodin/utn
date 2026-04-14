@@ -4,34 +4,50 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repository is
 
-Study notes for **UTN FRBA — Ingeniería Mecánica**, written in Markdown. The student comes from an accounting background (Contabilidad), so all explanatory material should include conceptual bridges to that prior knowledge. Notes are in **Spanish**.
+Study notes for **UTN FRBA — Ingeniería Mecánica**, written in Markdown. The student comes from an accounting background (Contabilidad), so all explanatory material must include conceptual bridges to that prior knowledge. All notes are in **Spanish**.
 
-## Repository structure
+## Subject folders
 
-```
-utn/
-├── fisica_i/        # Física I — notes and explanations
-│   ├── 00_introduccion.md
-│   └── 01_optica.md
-└── ayga/            # Álgebra y Geometría Analítica
-    ├── 00_introduccion.md
-    └── Programa ALGEBRA Y GEOMETRIA ANALITICA.pdf   ← official syllabus
-    └── Nociones de geometría analitica y algebra lineal - KOZAK.pdf  ← main textbook
-```
+| Carpeta | Materia | Estado |
+|---|---|---|
+| `analisis_matematico_i/` | Análisis Matemático I (A1191) | 3 unidades documentadas |
+| `ayga/` | Álgebra y Geometría Analítica | intro + Unidad I |
+| `fisica_i/` | Física I | intro + óptica |
+| `ingenieria_mecanica_i/` | Ingeniería Mecánica I | vacío |
+| `ingenieria_y_sociedad/` | Ingeniería y Sociedad | Arocena (1 doc) |
+| `quimica_general/` | Química General (R1091) | intro + estructura atómica |
+| `sistemas_de_representacion/` | Sistemas de Representación | solo PDFs de clase (ignorados) |
+| `su_myf/` | (excluido de git) | — |
 
-`fisica_i/` is its own git repo. `ayga/` is not versioned yet.
+## Writing conventions
 
-## Writing style and conventions
+**File naming:** `00_introduccion.md`, `01_tema.md`, `02_tema.md`... within each subject folder.
 
-- Files are numbered `00_`, `01_`, `02_`... within each subject folder.
-- Every new topic file follows the structure established in `fisica_i/01_optica.md`: concept introduction → theory with ASCII diagrams → worked examples → summary table → common mistakes.
-- Introduction files (`00_introduccion.md`) follow the structure in `fisica_i/00_introduccion.md`: what the subject is → why engineers need it → bridges from accounting → overview of major blocks → ASCII course map → practical advice.
-- Use ASCII diagrams (not images) for all figures.
-- Analogies referencing accounting concepts (balance sheets, cash flows, ledger entries) are encouraged wherever they aid understanding.
-- Formulas are written inline with backticks: `` `F = m·a` ``. No LaTeX.
+**Document structure — topic files (`01_` onward):**
+concept introduction → theory with ASCII diagrams → worked examples → summary table → common mistakes → conceptual map
 
-## Key source material
+**Document structure — introduction files (`00_introduccion.md`):**
+what the subject is → why engineers need it → bridges from accounting → overview of major blocks → ASCII course map → practical advice
 
-- **Official syllabus PDFs** live in each subject folder — always read them before writing new content to stay aligned with the 9 thematic units and parcial structure.
-- **AyGA cátedra site:** `https://aga.frba.utn.edu.ar/` — theory, videos, GeoGebra applets, and solved exams.
-- **Kozak textbook** (`ayga/`) is the primary AyGA reference; it is 738 pages — use `pages:` parameter when reading it.
+**Style rules:**
+- ASCII diagrams only — no images, no LaTeX
+- Formulas inline with backticks: `` `F = m·a` ``
+- Accounting analogies (balance sheets, cash flows, ledger entries, weighted averages) wherever they aid understanding
+- Source footer at end of each file citing PDFs and guides used
+
+## Source material workflow
+
+Before writing any new content:
+1. Read the **official syllabus PDF** in the subject folder to identify the thematic unit (UT) and parcial coverage
+2. Read the **exercise guide PDF** for that subject to extract the problem types expected in parciales
+3. Read any **professor slide PDFs** provided — they define the exact vocabulary and depth required
+
+Key sources per subject:
+- **Química General:** `PLANIFICACIÓN R1091 TN 1ER CUAT Ricotti-Cruz_v2.pdf` (syllabus), `Guia QUIMICA GENERAL 2020 FINAL.pdf` (exercises), `La Química.pdf` (theory), professor slides as PDFs
+- **AM1:** `Cronograma A1191 2026.pdf` (schedule)
+- **AyGA:** `Programa ALGEBRA Y GEOMETRIA ANALITICA.pdf` (syllabus), `Nociones de geometría analitica y algebra lineal - KOZAK.pdf` (738-page textbook — always use `pages:` parameter); cátedra site: `https://aga.frba.utn.edu.ar/`
+- **Física I:** `Programa- Bibliografia.pdf`
+
+## Git and .gitignore
+
+PDFs, Office files (ppt/pptx, doc/docx), and images (jpg/png) are excluded from the repo — they live locally only. The `su_myf/` directory is fully excluded. Do not force-add these file types.
