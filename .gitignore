@@ -1,5 +1,5 @@
-# PDFs grandes (>100MB, superan el límite de GitHub)
-ayga/Nociones de geometría analitica y algebra lineal - KOZAK.pdf
+# PDFs — se mantienen localmente pero no se suben a GitHub
+*.pdf
 
 # Sistema operativo
 .DS_Store
