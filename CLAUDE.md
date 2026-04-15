@@ -10,7 +10,7 @@ Study notes for **UTN FRBA — Ingeniería Mecánica**, written in Markdown. The
 
 | Carpeta | Materia | Estado |
 |---|---|---|
-| `analisis_matematico_i/` | Análisis Matemático I (A1191) | 3 unidades documentadas |
+| `analisis_matematico_i/` | Análisis Matemático I (A1191) | 4 unidades documentadas |
 | `ayga/` | Álgebra y Geometría Analítica | intro + Unidad I |
 | `fisica_i/` | Física I | intro + óptica |
 | `ingenieria_mecanica_i/` | Ingeniería Mecánica I | vacío |

@@ -10,7 +10,7 @@ Escritas en Markdown, en español, con diagramas ASCII y analogías contables (e
 
 | Carpeta | Materia | Documentos |
 |---|---|---|
-| [`analisis_matematico_i/`](analisis_matematico_i/) | Análisis Matemático I | Introducción · Funciones · Topología de la recta real |
+| [`analisis_matematico_i/`](analisis_matematico_i/) | Análisis Matemático I | Introducción · Funciones · Topología · Límites |
 | [`ayga/`](ayga/) | Álgebra y Geometría Analítica | Introducción · Vectores, recta y plano |
 | [`fisica_i/`](fisica_i/) | Física I | Introducción · Óptica |
 | [`quimica_general/`](quimica_general/) | Química General | Introducción · Estructura atómica y tabla periódica |
