@@ -76,14 +76,14 @@ El rótulo va en el ángulo inferior derecho del área útil. Ancho total: 175 m
 |    UTN FRBA       |        TITULO          |     TP No XX      |
 |   (35 mm)         |      (105 mm)          |    (35 mm)        |
 +-------------------+------------------------+-------------------+
-|    S-2008         | Apellido, Nombre       | Leg. XXXX DDMMAA  |
+|    S-1055         | Apellido, Nombre       | Leg. XXXX DDMMAA  |
 |   (35 mm)         |      (105 mm)          |    (35 mm)        |
 +-------------------+------------------------+-------------------+
 ```
 
 - Siempre trazado con regla (incluso en croquis)
 - Caligrafía IRAM tipo A, h = 5 mm
-- `S-2008` = código de la materia en UTN FRBA
+- `S-1055` = código de la materia en UTN FRBA
 - La fecha `DDMMAA` = día, mes, año de entrega (ej. 140426 para 14/04/2026)
 
 ---
@@ -95,7 +95,7 @@ Durante las clases, el docente usa colores para distinguir el propósito de cada
 | Color | Significado |
 |---|---|
 | **Negro** | Trazos principales — los que van en el TP entregado |
-| **Verde** | Trazos auxiliares — guías de construcción (no van en la entrega) |
+| **Verde** | Trazos auxiliares — guías de construcción |
 | **Rojo** | Referencias y aclaraciones del docente — nunca van en los TPs |
 
 ---

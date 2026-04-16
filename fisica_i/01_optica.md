@@ -240,13 +240,13 @@ Donde:
 ```
             Normal
               |
-Medio 1 (n₁) |
-   Rayo ──►\ |
+Medio 1 (n₁)  |
+   Rayo ──►\  |
              \|  θ₁
 ──────────────●───────────────  ← Interfaz
               |\  θ₂
               | \──►  Rayo refractado
-Medio 2 (n₂) |
+Medio 2 (n₂)  |
               |
 ```
 
