@@ -18,6 +18,7 @@ desktop.ini
 .idea/
 *.swp
 *.swo
+*.dxf~
 
 # Claude Code (settings locales, no van al repo)
 .claude/
