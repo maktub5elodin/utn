@@ -14,8 +14,9 @@
 | Paredes | Sergio |
 | Perez | Lautaro |
 
-**Profesor/a:** ___________________________  
-**Docentes auxiliares:** ___________________________
+**Profesor/a de la materia:** Prof. Vella  
+**Jefe de Trabajos Prácticos (JTP):** Ing. Pella, Martín  
+**Asistentes de Trabajos Prácticos (ATP):** Ing. Lasala, José — Ing. Quevedo, Rubén — Ing. Smoisman, Sergio
 
 ---
 

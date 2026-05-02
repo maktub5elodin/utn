@@ -12,7 +12,7 @@ Study notes for **UTN FRBA — Ingeniería Mecánica**, written in Markdown. The
 |---|---|---|
 | `analisis_matematico_i/` | Análisis Matemático I (A1191) | 4 unidades documentadas |
 | `ayga/` | Álgebra y Geometría Analítica | intro + Unidad I |
-| `fisica_i/` | Física I | intro + óptica + cinemática + laboratorio (TPN2) |
+| `fisica_i/` | Física I | intro + óptica + cinemática + laboratorio (TPN1 + TPN2) |
 | `griego/` | Griego Científico | alfabeto griego completo con pronunciación |
 | `ingenieria_mecanica_i/` | Ingeniería Mecánica I | vacío |
 | `ingenieria_y_sociedad/` | Ingeniería y Sociedad | Arocena (1 doc) + 4 textos con preguntas MC (§1–§56) |
