@@ -16,6 +16,7 @@ El capítulo propone analizar la ciencia teniendo presente su relación e intera
 - b) La tecnología y la política
 - **c) La tecnología y la sociedad** ✓ *(líneas 10–13)*
 - d) La filosofía y la economía
+- e) La economía y la política
 
 ---
 
@@ -27,6 +28,7 @@ La disciplina que estudia la realidad científica y su método, también conocid
 - b) Filosofía Natural
 - **c) Epistemología** ✓ *(línea 25)*
 - d) Pensamiento Analítico
+- e) Gnoseología
 
 ---
 
@@ -38,6 +40,7 @@ Fenomenológicamente, el conocimiento humano es un proceso que:
 - b) Surge exclusivamente de la actividad científica organizada
 - **c) Se inicia en la experiencia al percibir cosas singulares y termina en la inteligencia al producir conceptos universales y abstractos** ✓ *(líneas 59–62)*
 - d) Comienza con hipótesis y culmina en su verificación empírica
+- e) Es un proceso exclusivamente intelectual que prescinde de toda experiencia sensible
 
 ---
 
@@ -49,6 +52,7 @@ El conocimiento natural, propio de todo sujeto humano, se llama "precientífico"
 - b) Es propio únicamente de personas sin formación académica formal
 - c) Utiliza un lenguaje técnico pero sin sistematización lógica
 - **d) Es anterior y necesario a toda consideración científica** ✓ *(líneas 91–92)*
+- e) Es espontáneo, informal e imprescindible, pero usa un lenguaje técnico sin orden lógico
 
 ---
 
@@ -60,6 +64,7 @@ La ciencia en sentido amplio (o *en general*) se define como:
 - b) Un conjunto de hipótesis contrastadas empíricamente y organizadas en teorías
 - **c) Un conjunto de conocimientos metódicamente adquiridos y sistemáticamente organizados** ✓ *(líneas 98–99)*
 - d) Un sistema de proposiciones analíticas demostradas por vía axiomático-deductiva
+- e) Un saber teórico que busca causas y demuestra argumentativamente sus conclusiones
 
 ---
 
@@ -71,6 +76,7 @@ Según el epistemólogo Mario Bunge, la ciencia moderna es:
 - **b) Un conocimiento racional (o lógico), sistemático, exacto, verificable y por consiguiente falible** ✓ *(líneas 117–118)*
 - c) Un saber teórico universal obtenido por métodos lógicos y experimentales
 - d) Un sistema de proposiciones analíticas y sintéticas verificadas empíricamente
+- e) Un conocimiento racional, sistemático, preciso, que formula leyes generales y acepta supuestos
 
 ---
 
@@ -82,6 +88,7 @@ La característica "exacto" de la ciencia, según Bunge, no se refiere a la lóg
 - b) Nivel de correspondencia entre las hipótesis y los resultados experimentales obtenidos
 - **c) Sentido del lenguaje: la ciencia ha de ser semánticamente clara, sin ambigüedades ni vaguedades en cuanto a la significación de sus términos** ✓ *(líneas 179–186)*
 - d) Grado de certeza con que se demuestran las proposiciones a partir de axiomas
+- e) Nivel de coherencia interna entre las diversas teorías que conforman el sistema científico
 
 ---
 
@@ -91,8 +98,9 @@ La noción contemporánea de ciencia incorpora una característica ausente en la
 
 - a) Metódicamente adquirida
 - b) Sistemáticamente organizada
-- **c) Falible (o contingente)** ✓ *(tabla línea 197, columna "La noción contemporánea")*
+- **c) Falible (o contingente)** ✓ *(tabla, línea 197)*
 - d) Empíricamente fundada
+- e) Verificable mediante pruebas experienciales
 
 ---
 
@@ -104,6 +112,7 @@ Si el objeto de estudio de una ciencia está situado en espacio y tiempo y se re
 - **b) Ciencia fáctica** ✓ *(líneas 211–212)*
 - c) Ciencia exacta
 - d) Ciencia natural
+- e) Ciencia aplicada
 
 ---
 
@@ -115,6 +124,7 @@ El método que parte de hipótesis o conjeturas y las confronta con la realidad 
 - b) Método inductivo, propio de las ciencias naturales
 - **c) Método hipotético-deductivo, propio de las ciencias fácticas** ✓ *(líneas 233–237)*
 - d) Método analítico, propio de las ciencias sociales
+- e) Método hermenéutico, propio de las ciencias del espíritu o de la cultura
 
 ---
 
@@ -126,6 +136,7 @@ Las proposiciones de las ciencias fácticas son sintéticas y *a posteriori* por
 - b) La información que atribuyen al sujeto ya estaba contenida en él de modo implícito
 - c) Se expresan en lenguaje simbólico como el de la Matemática o la Lógica
 - **d) La información nueva que atribuyen al sujeto debe ser verificada empíricamente y su verdad es contingente y provisoria** ✓ *(líneas 258–262)*
+- e) Se reducen en última instancia a proposiciones idénticas o tautológicas que no aportan contenido nuevo
 
 ---
 
@@ -137,6 +148,7 @@ La demostración en las ciencias fácticas se caracteriza por ser:
 - b) Axiomática, partiendo de principios universales evidentes a la inteligencia
 - c) Analítica y a priori, independiente de toda experiencia empírica
 - **d) Incompleta y provisional, sujeta a las pruebas experienciales** ✓ *(líneas 285–286)*
+- e) Meramente deductiva: a partir de hipótesis se extraen consecuencias sin contrastación empírica
 
 ---
 
@@ -148,6 +160,7 @@ Las ciencias fácticas sociales se distinguen de las ciencias fácticas naturale
 - b) Sus proposiciones son de carácter analítico en lugar de sintético
 - **c) Incluyen al hombre como objeto de consideración de modo directo y explícito** ✓ *(líneas 298–300)*
 - d) Se basan en entes ideales en lugar de hechos concretos
+- e) Sus objetos de estudio poseen tanto un componente natural como uno social, lo que les exige un status compartido
 
 ---
 
@@ -159,6 +172,7 @@ La relación de auxiliariedad de las ciencias formales respecto de las fácticas
 - b) Las ciencias formales supervisan y validan los experimentos realizados por las fácticas
 - **c) Las ciencias formales sustentan de modo lógico y matemático todo desarrollo o proceder posible en el ámbito científico fáctico** ✓ *(líneas 322–325)*
 - d) Las ciencias formales clasifican y ordenan los conocimientos producidos por las fácticas
+- e) Las ciencias formales garantizan el rigor racional del método axiomático-deductivo de las ciencias fácticas
 
 ---
 
@@ -170,6 +184,7 @@ Etimológicamente, la palabra "método" proviene de dos términos griegos que si
 - b) "observación" y "resultado"
 - **c) "por medio de" y "camino"** ✓ *(línea 341)*
 - d) "razón" y "orden"
+- e) "detenerse" y "pensamiento"
 
 ---
 
@@ -181,6 +196,7 @@ El método hipotético-deductivo (o método científico) puede estructurarse en 
 - **b) El contexto de descubrimiento y el contexto de justificación** ✓ *(líneas 357–358)*
 - c) El contexto inductivo y el contexto deductivo
 - d) El contexto de observación y el contexto de demostración
+- e) El contexto de formulación del problema y el contexto de elaboración del marco teórico
 
 ---
 
@@ -192,6 +208,7 @@ El contexto de descubrimiento se denomina *dinámico* porque:
 - b) Permite contrastar las proposiciones singulares con los hechos observables
 - **c) Se refiere a los factores que influyen en la producción de una teoría científica** ✓ *(líneas 363–364)*
 - d) Evalúa la validez formal de las proposiciones científicas mediante argumentación racional
+- e) Comprende la formulación del problema, la hipótesis y el marco teórico del investigador
 
 ---
 
@@ -203,6 +220,7 @@ Dentro del contexto de justificación, si al contrastar la hipótesis ésta no s
 - b) La hipótesis se considera preliminar y debe reformularse con nuevos parámetros
 - **c) La hipótesis queda falsada o refutada** ✓ *(líneas 417–418)*
 - d) La hipótesis pasa a funcionar como axioma para investigaciones posteriores
+- e) La hipótesis se suspende provisionalmente hasta reunir evidencia suficiente para una nueva contrastación
 
 ---
 
@@ -214,6 +232,7 @@ La ciencia tal como se concibe hoy nació en la Modernidad con:
 - b) Claudio Ptolomeo, con su obra *Almagesto*
 - **c) Galileo Galilei** ✓ *(líneas 431–432)*
 - d) Nicolás Copérnico, con la publicación de *De Revolutionibus*
+- e) Isaac Newton, con los *Principia Mathematica*
 
 ---
 
@@ -225,6 +244,7 @@ La historiografía habitual divide la Historia Universal en cuatro grandes perí
 - **b) Edad Antigua, Edad Media, Edad Moderna y Edad Contemporánea** ✓ *(líneas 446–447)*
 - c) Antigüedad, Medioevo, Modernidad y Posmodernidad, como cuatro etapas igualmente reconocidas
 - d) Edad Antigua, Renacimiento, Revolución Industrial y Edad Contemporánea
+- e) Edad Antigua, Edad Media, Humanismo y Renacimiento, y Edad Contemporánea
 
 ---
 
@@ -236,6 +256,7 @@ Galileo Galilei es considerado "padre de la ciencia moderna" porque:
 - b) Refutó el geocentrismo mediante cálculos matemáticos sin necesidad de experimentación
 - **c) Fue quien puso su firma en el nuevo concepto de ciencia, inaugurando el modo moderno de entender y hacer ciencia** ✓ *(líneas 521–524)*
 - d) Construyó el primer telescopio de la historia y lo usó para observar el movimiento solar
+- e) Descubrió las lunas de Júpiter y demostró con ello la falsedad matemática del sistema ptolemaico
 
 ---
 
@@ -247,6 +268,7 @@ A modo de comparación final, geocentrismo y heliocentrismo concuerdan en:
 - b) Afirmar que las esferas planetarias son perfectas y de movimiento circular uniforme
 - **c) Sostener la existencia de un universo finito con un sistema planetario de movimiento circular en torno a un centro** ✓ *(líneas 637–640)*
 - d) Negar la existencia del Cielo Empíreo como lugar trascendente al universo
+- e) Afirmar que la Tierra no se mueve y permanece en reposo absoluto respecto del cosmos
 
 ---
 
@@ -258,6 +280,7 @@ Las dos características principales de la ciencia moderna (o nueva ciencia) son
 - **b) La matematización de la naturaleza y la experimentación continua** ✓ *(líneas 652–654)*
 - c) La verificación empírica y la organización sistemática del conocimiento
 - d) La cuantificación del espacio y la clasificación taxonómica de los fenómenos
+- e) La formulación de hipótesis universales y la demostración deductiva de sus consecuencias lógicas
 
 ---
 
@@ -269,6 +292,7 @@ Según el texto, la objetividad del conocimiento descriptivo que propone la cien
 - b) La universalidad de los resultados obtenidos en distintos laboratorios del mundo
 - c) La cantidad de experimentos realizados para confirmar la hipótesis
 - **d) La nobleza y precisión del instrumento de medición** ✓ *(líneas 692–693)*
+- e) La capacidad del investigador de cuantificar el fenómeno traduciéndolo correctamente en expresiones numéricas
 
 ---
 
@@ -280,6 +304,7 @@ Según Thomas Kuhn, un paradigma es:
 - b) Un conjunto de leyes universales que dan explicación a todos los fenómenos de una disciplina
 - **c) Las diversas realizaciones científicas universalmente reconocidas que, durante cierto tiempo, proporcionan modelos de problemas y soluciones a una comunidad científica** ✓ *(líneas 711–713)*
 - d) Un modelo matemático que predice con exactitud el comportamiento de los fenómenos naturales
+- e) Un sistema de normas metodológicas que regula el trabajo de los científicos en el seno de su comunidad
 
 ---
 
@@ -291,6 +316,7 @@ La denominación "ciencia pura" hace referencia a que sus investigaciones:
 - b) Producen conclusiones definitivas e irrefutables una vez verificadas experimentalmente
 - **c) Se realizan al margen y sin atender a demandas o problemas sociales** ✓ *(líneas 784–786)*
 - d) No tienen aplicación tecnológica posible ya que son exclusivamente especulativas
+- e) Persiguen un saber teórico como valor intrínseco, en el ámbito universitario, con prevalencia de científicos con responsabilidades educativas
 
 ---
 
@@ -302,6 +328,7 @@ Según John Ziman, la ciencia colectivizada implica:
 - b) La concentración de la investigación en universidades públicas de carácter estatal
 - **c) La unificación de los fines teórico y práctico de la ciencia, permitiendo que ambos evolucionen y progresen conjuntamente sin que uno pueda prescindir del otro** ✓ *(líneas 813–817)*
 - d) La separación definitiva entre ciencia académica y ciencia aplicada para optimizar la especialización
+- e) La transición de la ciencia hacia una institución social más fuertemente organizada y gestionada, autónoma incluso dentro de organizaciones gubernamentales o empresariales
 
 ---
 
