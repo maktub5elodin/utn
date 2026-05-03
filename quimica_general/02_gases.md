@@ -20,11 +20,60 @@ Para un ingeniero mecánico, los gases aparecen en:
 
 ## Propiedades generales de los gases
 
-Los gases están constituidos por moléculas que pueden ser:
+### ★ Clasificación por atomicidad — tema marcado por la profesora
 
-- **Sustancias simples diatómicas:** H₂, N₂, O₂, F₂, Cl₂
-- **Gases nobles monoatómicos:** He, Ne, Ar (columna 18 de la tabla periódica)
-- **Compuestos gaseosos a 25°C y 1 atm:** CO₂, H₂O (vapor), CH₄, HCl, NH₃, SO₂, NO, NO₂
+Distinguir si un gas es monoatómico, diatómico o poliatómico es fundamental para calcular su masa molar correctamente a partir de la fórmula.
+
+**Monoatómicos — gases nobles (columna 18 / VIIIA):**
+
+```
+He   Ne   Ar   Kr   Xe   Rn
+ 2    10   18   36   54   86    ← número atómico Z
+
+Masa molar = masa atómica del elemento
+Ej.: M(Ar) = 39,9 g/mol  →  1 mol de Ar = 39,9 g
+```
+
+No forman moléculas: cada átomo es en sí mismo la partícula gaseosa. Son inertes y no reaccionan.
+
+**Diatómicos — sustancias simples que existen como X₂:**
+
+```
+Mnemónico: "H₂ NOFClBr I₂"  (los 7 elementos que forman moléculas diatómicas)
+
+Elemento  Fórmula  M (g/mol)  Estado a 25°C y 1 atm
+────────  ───────  ─────────  ─────────────────────
+Hidrógeno   H₂       2,02     gas   ← los 5 primeros son gases
+Nitrógeno   N₂      28,02     gas
+Oxígeno     O₂      32,00     gas
+Flúor       F₂      38,00     gas
+Cloro       Cl₂     70,90     gas
+Bromo       Br₂    159,80     líquido (gas a T > 58°C)
+Yodo        I₂     253,80     sólido  (gas a T > 184°C)
+```
+
+A 25°C y 1 atm son gases: **H₂, N₂, O₂, F₂, Cl₂** — los cinco primeros.
+
+Masa molar = 2 × masa atómica del elemento.
+Ej.: M(O₂) = 2 × 16 = 32 g/mol  →  1 mol de O₂ = 32 g
+
+**Poliatómicos:**
+
+```
+O₃ (ozono)           M = 3 × 16 = 48 g/mol   (triatómico)
+P₄ (fósforo blanco)  M = 4 × 31 = 124 g/mol  (tetratómico, sólido normalmente)
+S₈ (azufre)          M = 8 × 32 = 256 g/mol  (octaatómico, sólido normalmente)
+```
+
+**Compuestos gaseosos a 25°C y 1 atm** (mezcla de dos o más elementos):
+
+```
+CO₂  H₂O(v)  CH₄  HCl  HBr  HI  NH₃  NO  NO₂  N₂O  SO₂  H₂S  HCN
+```
+
+> **Regla práctica:** si el examen da un gas y no especifica la fórmula, verificar si es elemento (¿está en la lista de diatómicos o nobles?) o compuesto. Error clásico: calcular con M(O) = 16 g/mol cuando el gas es O₂ y M = 32 g/mol.
+
+Los gases están constituidos por moléculas que pueden ser:
 
 Propiedades macroscópicas comunes a todos los gases:
 

@@ -16,7 +16,7 @@ Study notes for **UTN FRBA — Ingeniería Mecánica**, written in Markdown. The
 | `griego/` | Griego Científico | alfabeto griego completo con pronunciación |
 | `ingenieria_mecanica_i/` | Ingeniería Mecánica I | vacío |
 | `ingenieria_y_sociedad/` | Ingeniería y Sociedad | Arocena (1 doc) + 4 textos con preguntas MC (§1–§56) |
-| `quimica_general/` | Química General (R1091) | intro + estructura atómica + gases |
+| `quimica_general/` | Química General (R1091) | intro + estructura atómica + gases + soluciones |
 | `sistemas_de_representacion/` | Sistemas de Representación | expectativas + TPs + normas IRAM + LibreCAD/DXF (3 docs) |
 | `su_myf/` | (excluido de git) | — |
 
