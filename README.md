@@ -16,7 +16,7 @@ Escritas en Markdown, en español, con diagramas ASCII y analogías contables (e
 | [`griego/`](griego/) | Griego Científico | Alfabeto griego con pronunciación y uso científico |
 | [`quimica_general/`](quimica_general/) | Química General | Introducción · Estructura atómica · Gases (UT3) · Soluciones (UT7) |
 | [`ingenieria_y_sociedad/`](ingenieria_y_sociedad/) | Ingeniería y Sociedad | Arocena · 4 textos con preguntas MC (§1–§56) |
-| `ingenieria_mecanica_i/` | Ingeniería Mecánica I | *(próximamente)* |
+| [`ingenieria_mecanica_i/`](ingenieria_mecanica_i/) | Ingeniería Mecánica I | Introducción · UT I–XI (11 unidades: ingeniería, diseño, manufactura, producción, mantenimiento, gestión, seguridad, ética, economía) |
 | [`sistemas_de_representacion/`](sistemas_de_representacion/) | Sistemas de Representación | Expectativas · Normas IRAM · LibreCAD/DXF |
 
 ---

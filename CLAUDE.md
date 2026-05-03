@@ -14,7 +14,7 @@ Study notes for **UTN FRBA — Ingeniería Mecánica**, written in Markdown. The
 | `ayga/` | Álgebra y Geometría Analítica | intro + Unidad I |
 | `fisica_i/` | Física I | intro + óptica + cinemática + laboratorio (TPN1 + TPN2) |
 | `griego/` | Griego Científico | alfabeto griego completo con pronunciación |
-| `ingenieria_mecanica_i/` | Ingeniería Mecánica I | vacío |
+| `ingenieria_mecanica_i/` | Ingeniería Mecánica I | intro + UT I al XI (12 docs: ingeniería y tecnología, diseño, actividad profesional, proyecto, manufactura, producción, mantenimiento, gestión, seguridad, ética, economía) |
 | `ingenieria_y_sociedad/` | Ingeniería y Sociedad | Arocena (1 doc) + 4 textos con preguntas MC (§1–§56) |
 | `quimica_general/` | Química General (R1091) | intro + estructura atómica + gases + soluciones |
 | `sistemas_de_representacion/` | Sistemas de Representación | expectativas + TPs + normas IRAM + LibreCAD/DXF (3 docs) |
@@ -49,6 +49,7 @@ Key sources per subject:
 - **AyGA:** `Programa ALGEBRA Y GEOMETRIA ANALITICA.pdf` (syllabus), `Nociones de geometría analitica y algebra lineal - KOZAK.pdf` (738-page textbook — always use `pages:` parameter); cátedra site: `https://aga.frba.utn.edu.ar/`
 - **Física I:** `Programa- Bibliografia.pdf`
 - **Sistemas de Representación:** `CLASE 1.pdf` (condiciones, materiales, A4, rótulo, TP 1-2), `CLASE 2.pdf` (tipos de línea IRAM, aplicaciones, TP 3-6), `CLASE 3.pdf` (caligrafía tipo A tabla completa, acotación, TP 7-10). Nota: no tiene parciales — aprobación por carpeta completa.
+- **Ingeniería Mecánica I:** `Ing. Mec. I - Plan de Estudio.pdf` (programa y cronograma 32 clases), `1.El Ing y su Profesión.pdf`, `1.LA ING. ACTUAL UNIDAD I Y UNIDAD III.pdf`, `HABILIDADES BÁSICAS DE LA INGENIERÍA.pdf`, `1.unidad I Ingeniería y Sociedad.pdf` (37 págs — perfil, ética, patentes, Revolución Industrial), `Mantenimiento[1].pdf` (UT VII completa), `ING MEC POWER 1.pdf` y `ING MEC POWER 2.pdf` (slides de cátedra).
 - **Ingeniería y Sociedad:** 4 textos del parcial, cada uno con archivo `textoN_preguntas_mc.md`. Los textos son: Bitocchi "Ciencia. Noción, origen, paradigmas y encuadre social" (§1–§27), "Estado - Nación" (§28–§36), Ramallo y Repetto "Ciencia y Tecnología en interacción. Cambio tecnológico e innovación" (§37–§47), Gottardo et al. "Globalización: noción, múltiples sentidos y perspectivas" (§48–§56).
 
 ## Convenciones específicas — Ingeniería y Sociedad (preguntas MC)
