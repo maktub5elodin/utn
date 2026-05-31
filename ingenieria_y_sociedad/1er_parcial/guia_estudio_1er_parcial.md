@@ -6,86 +6,6 @@
 > **✅** = respuesta correcta según referencia de línea del texto original.
 > **Estrategia:** aprendé el CONCEPTO, no solo la respuesta — el profesor puede cambiar el fraseo.
 
-
-## Índice de contenidos
-
-- [Texto 1 — Ciencia. Noción, Origen, Paradigmas y Encuadre Social (Bitocchi)](#texto-1-ciencia-noción-origen-paradigmas-y-encuadre-social-bitocchi)
-  - [CTS: tríada Ciencia–Tecnología–Sociedad](#cts-tríada-ciencia-tecnología-sociedad)
-  - [Epistemología: definición y etimología](#epistemología-definición-y-etimología)
-  - [Conocimiento natural vs. científico](#conocimiento-natural-vs-científico)
-  - [Ciencia en sentido amplio: conjunto de conocimientos metódicamente adquiridos y sistemáticamente organizados](#ciencia-en-sentido-amplio-conjunto-de-conocimientos-metódicamente-adquiridos-y-sistemáticamente-organizados)
-  - [Bunge: noción contemporánea (racional, sistemático, exacto, verificable, falible)](#bunge-noción-contemporánea-racional-sistemático-exacto-verificable-falible)
-  - [Marco teórico](#marco-teórico)
-  - [Ciencias formales: objeto fuera del espacio y tiempo (ideales y abstractas)](#ciencias-formales-objeto-fuera-del-espacio-y-tiempo-ideales-y-abstractas)
-  - [Ciencias fácticas: estudian sucesos concretos](#ciencias-fácticas-estudian-sucesos-concretos)
-  - [Criterios de clasificación de las ciencias (objeto / método / proposición / demostración)](#criterios-de-clasificación-de-las-ciencias-objeto-método-proposición-demostración)
-  - [Proposiciones de ciencias fácticas: sintéticas y a posteriori](#proposiciones-de-ciencias-fácticas-sintéticas-y-a-posteriori)
-  - [Demostración: formales racionalmente / fácticas empíricamente](#demostración-formales-racionalmente-fácticas-empíricamente)
-  - [Ciencias formales auxiliares de las fácticas](#ciencias-formales-auxiliares-de-las-fácticas)
-  - [Método hipotético-deductivo](#método-hipotético-deductivo)
-  - [Contexto de descubrimiento: dinámico, creativo](#contexto-de-descubrimiento-dinámico-creativo)
-  - [Contexto de justificación: estático, lógico, prueba empírica](#contexto-de-justificación-estático-lógico-prueba-empírica)
-  - [División de la Historia Universal: Antigua, Media, Moderna, Contemporánea](#división-de-la-historia-universal-antigua-media-moderna-contemporánea)
-  - [Revolución Científica / Renacimiento / Humanismo](#revolución-científica-renacimiento-humanismo)
-  - [Geocentrismo y Heliocentrismo (Copérnico / Ptolomeo)](#geocentrismo-y-heliocentrismo-copérnico-ptolomeo)
-  - [Galileo y la experimentación continua (nueva ciencia)](#galileo-y-la-experimentación-continua-nueva-ciencia)
-  - [Thomas Kuhn: paradigma y revolución científica](#thomas-kuhn-paradigma-y-revolución-científica)
-  - [Ziman: ciencia académica y ciencia colectivizada](#ziman-ciencia-académica-y-ciencia-colectivizada)
-  - [Ciencia: lenguaje exacto y evitar ambigüedad](#ciencia-lenguaje-exacto-y-evitar-ambigüedad)
-  - [Otras preguntas — Texto 1](#otras-preguntas-texto-1)
-- [Texto 2 — Estado-Nación. Transformaciones Económicas, Políticas y Culturales](#texto-2-estado-nación-transformaciones-económicas-políticas-y-culturales)
-  - [Nación: definición y componentes](#nación-definición-y-componentes)
-  - [Territorio: elemento del Estado](#territorio-elemento-del-estado)
-  - [Estado: poder organizado jurídicamente; con Constitución ordena el sistema de leyes](#estado-poder-organizado-jurídicamente-con-constitución-ordena-el-sistema-de-leyes)
-  - [Soberanía: definición](#soberanía-definición)
-  - [Legitimidad: justificación del poder](#legitimidad-justificación-del-poder)
-  - [Constitución del Estado Argentino (1853)](#constitución-del-estado-argentino-1853)
-  - [Federalismo vs. Unitarismo](#federalismo-vs-unitarismo)
-  - [Comparación Estado-Nación y Feudalismo](#comparación-estado-nación-y-feudalismo)
-  - [Otras preguntas — Texto 2](#otras-preguntas-texto-2)
-- [Texto 3 — Ciencia y Tecnología en Interacción. Cambio Tecnológico e Innovación](#texto-3-ciencia-y-tecnología-en-interacción-cambio-tecnológico-e-innovación)
-  - [Bunge: la tecnología NO es mera ciencia aplicada](#bunge-la-tecnología-no-es-mera-ciencia-aplicada)
-  - [Técnica: conocimiento vinculado a la acción](#técnica-conocimiento-vinculado-a-la-acción)
-  - [Tecnología: sistemas de acciones intencionalmente racionales](#tecnología-sistemas-de-acciones-intencionalmente-racionales)
-  - [Cambio tecnológico: invención → innovación → difusión](#cambio-tecnológico-invención-innovación-difusión)
-  - [Tecnología en sentido amplio: diseño, producción, gestión](#tecnología-en-sentido-amplio-diseño-producción-gestión)
-  - [Gianella: la ciencia formula leyes generales y abstractas](#gianella-la-ciencia-formula-leyes-generales-y-abstractas)
-  - [Otras preguntas — Texto 3](#otras-preguntas-texto-3)
-- [Texto 4 — Globalización. Noción, Múltiples Sentidos y Perspectivas](#texto-4-globalización-noción-múltiples-sentidos-y-perspectivas)
-  - [Globalización: definición y proceso histórico](#globalización-definición-y-proceso-histórico)
-  - [Regionalización de mercados (bloques económicos)](#regionalización-de-mercados-bloques-económicos)
-  - [Crisis de 1930: fin del modelo de crecimiento hacia afuera](#crisis-de-1930-fin-del-modelo-de-crecimiento-hacia-afuera)
-  - [Otras preguntas — Texto 4](#otras-preguntas-texto-4)
-- [Texto 0 — El Valor Social de la Ingeniería (La práctica tecnológica y sus dimensiones)](#texto-0-el-valor-social-de-la-ingeniería-la-práctica-tecnológica-y-sus-dimensiones)
-  - [Práctica tecnológica: 3 dimensiones (sistemas de acciones, artefactos, conocimiento)](#práctica-tecnológica-3-dimensiones-sistemas-de-acciones-artefactos-conocimiento)
-  - [Herramientas, instrumentos y técnicas de la práctica tecnológica](#herramientas-instrumentos-y-técnicas-de-la-práctica-tecnológica)
-  - [Historia ingeniería Argentina: orígenes 1870–1916](#historia-ingeniería-argentina-orígenes-1870-1916)
-  - [Crisis 1930 / guerras: concepto guía — industrialización / sustitución de importaciones](#crisis-1930-guerras-concepto-guía-industrialización-sustitución-de-importaciones)
-  - [El valor social de la ingeniería: dimensión social del ingeniero](#el-valor-social-de-la-ingeniería-dimensión-social-del-ingeniero)
-  - [Otras preguntas — Texto 0](#otras-preguntas-texto-0)
-- [Texto 5 — Políticas de Ciencia, Tecnología e Innovación](#texto-5-políticas-de-ciencia-tecnología-e-innovación)
-  - [Modelo lineal de innovación: Vannevar Bush](#modelo-lineal-de-innovación-vannevar-bush)
-  - [Ciencia para la política / política para la ciencia (dos vínculos)](#ciencia-para-la-política-política-para-la-ciencia-dos-vínculos)
-  - [Ciencia académica: réditos cognitivos](#ciencia-académica-réditos-cognitivos)
-  - [Segunda Guerra Mundial y el impulso a la ciencia](#segunda-guerra-mundial-y-el-impulso-a-la-ciencia)
-  - [INTA (1956): investigación para el sector agropecuario](#inta-1956-investigación-para-el-sector-agropecuario)
-  - [Historia CyT en Argentina: CONICET, INTI y otras instituciones](#historia-cyt-en-argentina-conicet-inti-y-otras-instituciones)
-  - [Triángulo de Sábato (universidad–gobierno–industria)](#triángulo-de-sábato-universidad-gobierno-industria)
-  - [Kirchnerismo y reactivación CyT (2003–2015)](#kirchnerismo-y-reactivación-cyt-2003-2015)
-  - [Otras preguntas — Texto 5](#otras-preguntas-texto-5)
-- [Texto 6 — La Sostenibilidad como Marco para la Acción del Ingeniero](#texto-6-la-sostenibilidad-como-marco-para-la-acción-del-ingeniero)
-  - [Agenda 21: plan de acción surgido en Cumbre de la Tierra (Río 1992)](#agenda-21-plan-de-acción-surgido-en-cumbre-de-la-tierra-río-1992)
-  - [17 ODS: universales, integrales, indivisibles (2015–2030)](#17-ods-universales-integrales-indivisibles-2015-2030)
-  - [ODS vs. Objetivos del Milenio: diferencias](#ods-vs-objetivos-del-milenio-diferencias)
-  - [Cumbre de Río+20 (2012): economía verde, crecimiento verde](#cumbre-de-río20-2012-economía-verde-crecimiento-verde)
-  - [Cumbre de Glasgow 2021](#cumbre-de-glasgow-2021)
-  - [Desarrollo sostenible: definición Brundtland](#desarrollo-sostenible-definición-brundtland)
-  - [Ingeniería sustentable: concepto](#ingeniería-sustentable-concepto)
-  - [Teorías del desarrollo / neoliberalismo / Prebisch (Centro–Periferia)](#teorías-del-desarrollo-neoliberalismo-prebisch-centro-periferia)
-  - [Otras preguntas — Texto 6](#otras-preguntas-texto-6)
-
-- [Resumen conceptual rápido — tabla de 57 conceptos](#resumen-conceptual-rápido-para-repaso-de-última-hora)
-
 ---
 ## Texto 1 — Ciencia. Noción, Origen, Paradigmas y Encuadre Social (Bitocchi)
 
@@ -797,7 +717,7 @@ e) Nivel de coherencia interna entre las diversas teorías que conforman el sist
 
 > *(sin marcador en el original — revisá el texto)*
 
-### Otras preguntas — Texto 1
+### Otros
 > *73 versión(es) de esta pregunta en el banco*
 
 **Pregunta 65:** . texto 1 ( ciencia ) :En el método que parte de axiomas se construyen teoremas basándose principalmente de modo…
@@ -1072,7 +992,7 @@ e) Feudalismo
 
 > **Respuesta correcta:** Medioevo
 
-### Otras preguntas — Texto 2
+### Otros
 > *66 versión(es) de esta pregunta en el banco*
 
 **Pregunta 89:** Segun el texto 2:"ESTADO-NACION transformaciones económicas, políticas y culturales" ¿Qué palabra aparece por primera vez en la obra El príncipe de Maquiavelo?
@@ -1251,7 +1171,7 @@ e) creencias
 
 > *(sin marcador en el original — revisá el texto)*
 
-### Otras preguntas — Texto 3
+### Otros
 > *165 versión(es) de esta pregunta en el banco*
 
 **Pregunta 104:** Segun el texto 3:"CIENCIA Y TECNOLOGIA EN INTERACCION cambio tecnologico e innovacion" ¿Qué actividades son el medio más importante para producir innovaciones tecnológicas?
@@ -1390,7 +1310,7 @@ e) la industrialización
 
 > *(sin marcador en el original — revisá el texto)*
 
-### Otras preguntas — Texto 4
+### Otros
 > *20 versión(es) de esta pregunta en el banco*
 
 **Pregunta 116:** En la línea 1455 del Texto 4, se alude: “En ocasiones, se alude a procesos de ____________ de la cultura, que presentan un carácter ambivalente”.
@@ -1594,7 +1514,7 @@ e) Técnica
 
 > **Respuesta correcta:** Social
 
-### Otras preguntas — Texto 0
+### Otros
 > *8 versión(es) de esta pregunta en el banco*
 
 **Pregunta 134:** En el párrafo de la línea 1852 del Texto 0, ¿Qué necesidad estimuló la creación de la primera carrera de ingeniería en la Universidad de Buenos Aires?
@@ -1856,7 +1776,7 @@ e) Eduardo Duhalde
 
 > *(sin marcador en el original — revisá el texto)*
 
-### Otras preguntas — Texto 5
+### Otros
 > *26 versión(es) de esta pregunta en el banco*
 
 **Pregunta 157:** En el punto 4.5 del Texto 5, ¿Bajo qué período se creó la Secretaría de Ciencia y Técnica (SECyT)?
@@ -2160,7 +2080,7 @@ e) Keynesianismo y Neoliberalismo
 
 > **Respuesta correcta:** Centro y Periferia
 
-### Otras preguntas — Texto 6
+### Otros
 > *76 versión(es) de esta pregunta en el banco*
 
 **Pregunta 184:** Del apunte 6, La sostenibilidad como marco para la acción del ingeniero: una de las nociones principales que se discutieron en la cumbre Río +20 es la siguiente:
