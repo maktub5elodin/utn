@@ -690,4 +690,411 @@ c) Verificar dimensionalmente la respuesta b).
 
 ---
 
-*Fuentes: clase de Física I (UTN FRBA, abril 2026) — cinemática: MRU y MRUA; `Programa- Bibliografia.pdf` (Física I). Elaborado para Ingeniería Mecánica, sistema MKS.*
+---
+
+## 13. Caída de Cuerpos en el Vacío
+
+La **caída libre** (o caída en el vacío) es el caso en que el único agente que actúa sobre el cuerpo es la gravedad — sin resistencia del aire. Es un MRUA con aceleración constante `g`.
+
+```
+  g ≈ 9,8 m/s²   (valor exacto)
+  g ≈ 10 m/s²    (aproximación habitual en ejercicios)
+```
+
+### Convención de signos — paso previo obligatorio
+
+Antes de plantear cualquier ecuación hay que definir el sentido positivo. Las dos convenciones más usadas:
+
+```
+  OPCIÓN A: positivo hacia ARRIBA (la más común en física universitaria)
+    eje y ↑ positivo
+    a = −g = −10 m/s²   (la gravedad apunta hacia abajo → negativa)
+
+  OPCIÓN B: positivo hacia ABAJO (útil si el objeto solo cae)
+    eje y ↓ positivo
+    a = +g = +10 m/s²   (la gravedad apunta hacia abajo → positiva)
+```
+
+> **Regla de oro:** elegir UNA convención al principio del problema y no cambiarla. Ambas son correctas; el error es mezclarlas.
+
+---
+
+### Caso 1 — Objeto soltado desde el reposo (v₀ = 0)
+
+El cuerpo se suelta desde altura H con velocidad inicial cero.
+
+**Convención: positivo hacia abajo (simplifica los signos)**
+
+```
+  v₀ = 0    a = +g = 10 m/s²    y₀ = 0
+
+  v(t) = g·t
+  y(t) = ½·g·t²
+
+  Tiempo de caída desde altura H:
+    H = ½·g·t²  →  t = √(2H/g)
+
+  Velocidad al llegar al suelo:
+    v = g·t = g·√(2H/g) = √(2·g·H)
+```
+
+**Tabla de valores a g = 10 m/s²:**
+
+```
+  t (s)  │  v (m/s)  │  y (m)
+  ───────┼───────────┼────────
+    0    │     0     │    0
+    1    │    10     │    5
+    2    │    20     │   20
+    3    │    30     │   45
+    4    │    40     │   80
+```
+
+**Ejemplo:** ¿Desde qué altura cae un objeto si tarda 3 s en llegar al suelo?
+
+```
+  y = ½·g·t² = ½ × 10 × 9 = 45 m
+```
+
+---
+
+### Caso 2 — Objeto lanzado hacia arriba con velocidad inicial
+
+El cuerpo se lanza hacia arriba con velocidad v₀ desde el nivel del suelo.
+
+**Convención: positivo hacia arriba**
+
+```
+  v₀ > 0    a = −g = −10 m/s²
+
+  v(t) = v₀ − g·t
+  y(t) = v₀·t − ½·g·t²
+```
+
+**Instante de altura máxima** — cuando v = 0:
+
+```
+  v = 0  →  v₀ − g·t_max = 0  →  t_max = v₀/g
+
+  h_max = v₀·(v₀/g) − ½·g·(v₀/g)²
+        = v₀²/g − v₀²/(2g)
+        = v₀²/(2g)
+```
+
+**Tiempo total de vuelo** (hasta volver al suelo, y = 0):
+
+```
+  0 = v₀·t − ½·g·t²  =  t·(v₀ − ½·g·t)
+  →  t = 0   (salida)
+  →  t = 2v₀/g  (llegada)   =  2 × t_max
+
+  ∴  tiempo de subida = tiempo de bajada  (simetría)
+```
+
+**Velocidad al volver al punto de lanzamiento:**
+
+```
+  v² = v₀² − 2g·(y − y₀)   con  y = y₀ = 0
+  v² = v₀²   →   |v| = v₀
+
+  Misma magnitud que al salir, sentido contrario (hacia abajo).
+```
+
+```
+  Diagrama de velocidad:
+
+  ↑ v₀              ← sube desacelerando
+       ↑ v₀/2
+            v=0     ← altura máxima
+       ↓ v₀/2
+  ↓ v₀              ← baja acelerando (misma magnitud al llegar)
+```
+
+**Ejemplo:** Pelota lanzada hacia arriba con v₀ = 20 m/s.
+
+```
+  t_max = 20/10 = 2 s
+
+  h_max = 20²/(2×10) = 400/20 = 20 m
+
+  t_vuelo = 2 × 2 = 4 s
+
+  v al volver = 20 m/s (hacia abajo)
+```
+
+---
+
+### Caso 3 — Objeto lanzado hacia abajo con velocidad inicial
+
+El cuerpo se lanza desde altura H con velocidad v₀ hacia abajo.
+
+**Convención: positivo hacia abajo**
+
+```
+  v₀ > 0    a = +g = 10 m/s²    y₀ = 0
+
+  v(t) = v₀ + g·t           ← ya tiene velocidad inicial en el sentido de caída
+  y(t) = v₀·t + ½·g·t²
+
+  Velocidad al llegar al suelo (recorre distancia H):
+    v² = v₀² + 2·g·H
+    v = √(v₀² + 2gH)
+```
+
+---
+
+### Gráficas — objeto lanzado hacia arriba
+
+```
+  y(t)                    v(t)                  a(t)
+   │      *               │  v₀                  │
+   │    *   *             │ /                     │ ─────────────
+   │   *     *            │/                      │
+   │  *       *           ●──────────── t         │     −g
+   │ *         *          │\                      │
+   │*           *         │ \                     │
+   ●─────────────── t     │  −v₀                  └────────────── t
+
+  Parábola cóncava ↓     Recta decreciente       Constante (−g)
+  Pico = h_max           Cruza en t_max          (negativo en conv. ↑)
+```
+
+---
+
+### Tabla resumen — caída de cuerpos
+
+| Caso | v₀ | Ecuación y(t) (conv. ↑) | Tiempo suelo | Velocidad suelo |
+|---|---|---|---|---|
+| Soltado | 0 | `−½gt²` (desde H) | `√(2H/g)` | `√(2gH)` |
+| Lanzado ↑ | `+v₀` | `v₀t − ½gt²` | `2v₀/g` | `v₀` (↓) |
+| Lanzado ↓ | `−v₀` | `−v₀t − ½gt²` | despejar | `√(v₀²+2gH)` |
+
+---
+
+## 14. Tiro Oblicuo
+
+El **tiro oblicuo** es el movimiento de un proyectil lanzado con velocidad inicial `v₀` formando un ángulo `θ` con la horizontal. Es el caso más general de movimiento en el plano.
+
+**Idea central:** el movimiento se descompone en dos independientes:
+```
+  Eje x  →  MRU    (no hay fuerza horizontal, ignorando el aire)
+  Eje y  →  MRUA   (actúa la gravedad, a = −g)
+```
+
+```
+              v₀
+              /
+             /  ← ángulo θ con la horizontal
+            /θ
+           ●──────────────────────────────────────────
+          P₀                                     suelo
+```
+
+---
+
+### Descomposición de la velocidad inicial
+
+```
+  vₓ₀ = v₀ · cos(θ)     ← componente horizontal
+  v_y₀ = v₀ · sen(θ)    ← componente vertical
+```
+
+```
+         v_y₀ = v₀·sen(θ)
+           ↑
+           │  /  v₀
+           │ /
+           │/ θ
+           ●─────────────→  vₓ₀ = v₀·cos(θ)
+```
+
+---
+
+### Ecuaciones de movimiento
+
+**Componente horizontal (MRU):**
+
+```
+  vₓ(t) = v₀·cos(θ)          ← constante en todo el vuelo
+
+  x(t)  = v₀·cos(θ)·t        ← crece linealmente
+```
+
+**Componente vertical (MRUA con a = −g, conv. positivo ↑):**
+
+```
+  v_y(t) = v₀·sen(θ) − g·t   ← decrece, se anula en h_max, luego negativa
+
+  y(t)   = v₀·sen(θ)·t − ½·g·t²
+```
+
+**Velocidad en cualquier instante:**
+
+```
+  v(t) = √(vₓ² + v_y²)       ← módulo
+
+  α(t) = arctan(v_y/vₓ)      ← ángulo con la horizontal (varía en el tiempo)
+```
+
+---
+
+### Puntos clave del movimiento
+
+**Altura máxima** — cuando v_y = 0:
+
+```
+  0 = v₀·sen(θ) − g·t_sub
+  t_sub = v₀·sen(θ) / g
+
+  h_max = (v₀·sen(θ))² / (2g)
+```
+
+**Tiempo total de vuelo** (regresa a y = 0):
+
+```
+  0 = v₀·sen(θ)·t − ½·g·t²  =  t·[v₀·sen(θ) − ½·g·t]
+  →  t = 0   (salida)
+  →  t_vuelo = 2·v₀·sen(θ) / g  =  2·t_sub
+```
+
+**Alcance horizontal (rango R):**
+
+```
+  R = vₓ₀ · t_vuelo
+    = v₀·cos(θ) · 2·v₀·sen(θ)/g
+    = v₀²·sen(2θ) / g            ← usando identidad: 2·senθ·cosθ = sen(2θ)
+```
+
+**Ángulo de máximo alcance:**
+
+```
+  R es máximo cuando sen(2θ) = 1  →  2θ = 90°  →  θ = 45°
+
+  R_max = v₀² / g
+```
+
+**Ángulos complementarios — mismo alcance:**
+
+```
+  sen(2θ) = sen(2·(90°−θ))  →  θ y (90°−θ) producen igual R
+
+  Ejemplos: 30° y 60°, 20° y 70°, 15° y 75°   → mismo alcance horizontal
+```
+
+```
+        h_max (45° < θ < 90°, más alto)
+        │
+        │         h_max (θ = 45°)
+        │           │
+        │   h_max (θ < 45°, más bajo)
+        │     │     │
+  ──────┼─────┼─────┼──────────────────→ x
+        0           R_max
+
+  Todos estos ángulos pueden dar el mismo R si son complementarios
+```
+
+---
+
+### Ecuación de la trayectoria (parábola)
+
+Eliminar el tiempo `t` entre las ecuaciones de x e y:
+
+```
+  De x:  t = x / (v₀·cos θ)
+
+  Sustituir en y:
+
+  y = v₀·senθ · x/(v₀cosθ)  −  ½g · [x/(v₀cosθ)]²
+
+  y = x·tanθ  −  g·x² / (2·v₀²·cos²θ)
+```
+
+**Es la ecuación de una parábola** `y = Ax + Bx²` con:
+- `A = tan θ` (pendiente inicial)
+- `B = −g/(2v₀²cos²θ)` (coeficiente negativo → abre hacia abajo)
+
+---
+
+### Velocidad en cualquier punto de la trayectoria
+
+```
+  vₓ = v₀·cosθ              (constante)
+  v_y = v₀·senθ − g·t       (varía)
+
+  En la altura máxima: v_y = 0  →  v = vₓ = v₀·cosθ  (mínima velocidad del vuelo)
+  En el suelo al caer: v_y = −v₀·senθ  →  |v| = v₀    (misma que al salir)
+```
+
+---
+
+### Ejercicio resuelto completo
+
+**Enunciado:** Un proyectil se lanza con v₀ = 40 m/s a θ = 30° sobre la horizontal desde el suelo. Calcular: a) altura máxima, b) tiempo de vuelo, c) alcance horizontal.
+
+```
+  Datos:
+    v₀ = 40 m/s     θ = 30°     g = 10 m/s²
+
+  Componentes:
+    vₓ₀ = 40·cos(30°) = 40 × 0,866 = 34,64 m/s
+    v_y₀ = 40·sen(30°) = 40 × 0,5  = 20 m/s
+
+  a) Altura máxima:
+    t_sub = v_y₀/g = 20/10 = 2 s
+    h_max = v_y₀²/(2g) = 20²/(2×10) = 400/20 = 20 m
+
+  b) Tiempo de vuelo:
+    t_vuelo = 2·t_sub = 2 × 2 = 4 s
+
+  c) Alcance horizontal:
+    R = vₓ₀·t_vuelo = 34,64 × 4 = 138,56 m
+
+    Verificación con fórmula directa:
+    R = v₀²·sen(2θ)/g = 40²·sen(60°)/10 = 1600×0,866/10 = 138,56 m  ✓
+```
+
+---
+
+### Casos especiales del tiro oblicuo
+
+| Ángulo θ | Movimiento |
+|---|---|
+| 0° | Tiro horizontal (proyectil lanzado horizontalmente) |
+| 90° | Lanzamiento vertical (tiro hacia arriba, sube y baja) |
+| 45° | Máximo alcance horizontal |
+| θ y (90°−θ) | Mismo alcance, distintas trayectorias |
+
+**Tiro horizontal (θ = 0°) — caso frecuente en ejercicios:**
+
+```
+  vₓ₀ = v₀    v_y₀ = 0
+
+  x(t) = v₀·t           (MRU)
+  y(t) = −½·g·t²        (cae desde altura H)
+
+  Tiempo de caída: t = √(2H/g)   (igual que caída libre, independiente de v₀)
+  Alcance:         R = v₀·√(2H/g)
+```
+
+---
+
+### Tabla resumen — tiro oblicuo
+
+| Magnitud | Fórmula |
+|---|---|
+| Componentes de v₀ | `vₓ₀ = v₀cosθ` · `v_y₀ = v₀senθ` |
+| Posición x(t) | `x = v₀cosθ · t` |
+| Posición y(t) | `y = v₀senθ · t − ½gt²` |
+| Velocidad vₓ(t) | `v₀cosθ` (constante) |
+| Velocidad v_y(t) | `v₀senθ − gt` |
+| Tiempo a h_max | `t_sub = v₀senθ / g` |
+| Altura máxima | `h_max = (v₀senθ)² / (2g)` |
+| Tiempo de vuelo | `t_vuelo = 2v₀senθ / g` |
+| Alcance | `R = v₀²sen(2θ) / g` |
+| Alcance máximo | `R_max = v₀²/g` (a θ=45°) |
+| Trayectoria | `y = x·tanθ − gx²/(2v₀²cos²θ)` |
+
+---
+
+*Fuentes: clase de Física I (UTN FRBA, abril–mayo 2026) — cinemática: MRU, MRUA, caída libre y tiro oblicuo; `Programa- Bibliografia.pdf` (Física I). Elaborado para Ingeniería Mecánica, sistema MKS.*

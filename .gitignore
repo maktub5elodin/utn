@@ -8,6 +8,7 @@
 *.jpeg
 *.png
 *.ods
+*.txt
 
 # Sistema operativo
 .DS_Store
@@ -26,3 +27,4 @@ desktop.ini
 
 # Directorios excluidos temporalmente
 su_myf/
+bibliografia_obligatoria/

@@ -1,6 +1,6 @@
 # Preguntas Multiple Choice — Texto 2
-**"Estado-Nación. Transformaciones económicas, políticas y culturales"**
-Cátedras II y III — Directoras: Milena Ramallo y Élida Repetto — Ingeniería y Sociedad, UTN FRBA
+**"Estado - Nación"**
+Ingeniería y Sociedad, UTN FRBA
 
 > Cada pregunta lleva el número de la sección (recuadro cuadrado) del texto.
 > La referencia de línea indica dónde se encuentra la respuesta correcta.
@@ -10,110 +10,110 @@ Cátedras II y III — Directoras: Milena Ramallo y Élida Repetto — Ingenier�
 
 ## §28 — Estado - Nación
 
-La forma política moderna denominada "Estado" tiene como tres elementos fundamentales:
+Según el texto, los tres elementos fundamentales que constituyen el Estado moderno son:
 
-- a) La soberanía, la constitución y la ciudadanía
-- b) El gobierno, la burocracia y el ejército nacional
-- c) La democracia, la economía de mercado y la identidad cultural
-- **d) La nación, el territorio y la organización jurídica** ✓ *(líneas 873–874)*
-- e) El poder legislativo, el poder ejecutivo y el poder judicial
-
----
-
-## §29 — NACIÓN
-
-Según §29, el concepto de "nación" es difícil y ambiguo principalmente porque:
-
-- a) Es un término surgido en el siglo XIX sin tradición académica consolidada
-- b) Cada Estado soberano lo redefine en su constitución según sus intereses políticos
-- **c) No existe consenso en el mundo académico y está ligado a la praxis concreta de la construcción de la realidad histórico-política** ✓ *(líneas 882–886)*
-- d) Solo puede comprenderse desde la experiencia subjetiva de pertenecer a un grupo
-- e) Ha sido utilizado con fines propagandísticos que distorsionan su sentido original
+- a) La soberanía, el gobierno y el ordenamiento jurídico
+- b) El pueblo, el territorio y la constitución nacional
+- **c) La nación, el territorio y la organización jurídica** ✓ *(líneas 873–874)*
+- d) La legitimidad, la fuerza militar y el sistema impositivo
+- e) La nación, la soberanía y el poder ejecutivo
 
 ---
 
-## §30 — TERRITORIO
+## §29 — Nación
 
-Según §30, ¿por qué pueblos como los mapuches o los kurdos son considerados "nación" pero no "Estado-Nación"?
+Según Ernest Renan, lo que constituye una nación es, fundamentalmente:
 
-- a) Porque carecen de una constitución formal y un sistema de leyes reconocido internacionalmente
-- b) Porque su identidad cultural es demasiado reciente para ser reconocida como base de un Estado
-- c) Porque adoptan un estilo de vida nómade que impide organizar instituciones políticas estables
-- **d) Porque, pese a no ser nómades, viven dispersos en territorios de otros Estados y no ejercen poder político sobre un espacio geográfico propio** ✓ *(líneas 931–933)*
-- e) Porque fueron incorporados por la fuerza a otros Estados que niegan formalmente su soberanía
-
----
-
-## §31 — ESTADO
-
-Según §31, la relación entre "Estado" y "Gobierno" es:
-
-- a) Son términos intercambiables: ambos designan al conjunto de instituciones que ejercen el poder público
-- b) El Gobierno es la denominación técnica del Estado cuando actúa en el ámbito internacional
-- c) El Estado designa las instituciones permanentes mientras el Gobierno designa las autoridades elegidas en cada período
-- **d) Estado no es sinónimo de Gobierno; el Gobierno es solamente una parte del Estado** ✓ *(línea 939)*
-- e) El Estado es la forma abstracta y el Gobierno es la expresión concreta del poder político en ejercicio
+- a) La identidad lingüística y étnica compartida por una comunidad a lo largo de generaciones
+- **b) Un alma y un principio espiritual: haber hecho grandes cosas en el pasado y el deseo de seguir viviendo juntos** ✓ *(líneas 911–921)*
+- c) La unidad cultural, lingüística y religiosa que se autoafirma en la búsqueda del poder soberano
+- d) La pertenencia a una misma región geográfica bajo un mismo sistema jurídico
+- e) El sentimiento nacional surgido de la lengua propia y la historia compartida
 
 ---
 
-## §32 — SOBERANÍA
+## §30 — Territorio
 
-En las democracias, según §32, el Estado obtiene la legitimidad de su orden jurídico de:
+El caso de los kurdos, gitanos y beduinos permite ilustrar que:
 
-- a) El reconocimiento formal de los demás Estados soberanos en el sistema internacional
-- b) La tradición histórica y los valores culturales acumulados por la nación a lo largo del tiempo
-- c) Los organismos multilaterales como la ONU que garantizan el orden jurídico global
-- **d) El poder otorgado por los ciudadanos** ✓ *(líneas 1002–1003)*
-- e) La constitución como norma suprema que preexiste y es independiente de cualquier autoridad
-
----
-
-## §33 — LEGITIMIDAD
-
-Según §33, ¿por qué la filosofía clásica considera insuficiente fundar el poder político únicamente en la fuerza?
-
-- a) Porque la fuerza genera resistencia popular y resulta económicamente costosa de sostener en el tiempo
-- b) Porque el poder basado en la fuerza no puede organizarse jurídicamente en una constitución válida
-- c) Porque la fuerza es una condición necesaria pero no suficiente para garantizar la obediencia duradera
-- d) Porque contradice los derechos naturales que la razón reconoce como universales e inalienables
-- **e) Porque si el poder se funda solo en la fuerza, resulta imposible distinguirlo del poder de una banda de ladrones** ✓ *(líneas 1040–1043)*
+- a) La identidad cultural es el elemento decisivo para constituir un Estado, aun sin territorio definido
+- b) Un pueblo puede ser reconocido como Estado si posee una organización política interna estable
+- c) La pérdida del territorio conduce a la desaparición del Estado, salvo que exista una constitución vigente
+- **d) Una nación sin territorio, aun cuando tenga identidad cultural, no constituye un Estado** ✓ *(líneas 928–933)*
+- e) Los pueblos nómades pueden alcanzar el status de Estado si la comunidad internacional los reconoce
 
 ---
 
-## §34 — EL SISTEMA POLÍTICO ESTADO-NACIÓN
+## §31 — Estado
 
-Según §34, el Estado-Nación está experimentando transformaciones. ¿Cuál de las siguientes opciones enumera correctamente los tres factores señalados en el texto?
+Según el texto, lo específico del Estado como forma de organización política es:
 
-- a) La globalización económica, las migraciones internacionales y los conflictos bélicos entre Estados
-- b) La crisis del capitalismo, el surgimiento de nuevas identidades religiosas y la tecnología digital
-- **c) El cambio en el concepto de Nación, los límites a la soberanía política por parte de la comunidad internacional, y la creciente presencia de la sociedad civil** ✓ *(líneas 1058–1066)*
-- d) La integración de mercados, la concentración del poder en organismos multilaterales y la privatización de servicios
-- e) El debilitamiento de las instituciones estatales, el avance del federalismo y la desaparición de las fronteras
-
----
-
-## §35 — LA CONSTITUCIÓN DEL ESTADO ARGENTINO
-
-Según §35, ¿por qué en 1816 se alcanzó la independencia pero no se conformó aún el Estado Argentino?
-
-- a) Porque las provincias se negaron a reconocer la autoridad del gobierno central de Buenos Aires
-- b) Porque no existía todavía una constitución que organizara jurídicamente al nuevo país
-- **c) Porque faltaban los tres elementos fundacionales: la economía no estaba integrada, el territorio estaba desintegrado en jurisdicciones provinciales y la identidad era local** ✓ *(líneas 1098–1111)*
-- d) Porque España no reconocía la independencia y mantenía presencia militar en el territorio
-- e) Porque los caudillos regionales controlaban milicias propias y rechazaban toda autoridad nacional
+- a) La división del poder político en tres ramas: Legislativo, Ejecutivo y Judicial
+- b) La sujeción de todos los ciudadanos a un sistema de leyes positivas emanadas del poder constituido
+- **c) La existencia de instituciones puras y exclusivamente políticas que no comparten con ninguna otra instancia la capacidad de tomar decisiones de carácter público** ✓ *(líneas 941–943)*
+- d) El monopolio del uso de la fuerza física legítima y el control del sistema impositivo nacional
+- e) La articulación entre el poder político y la sociedad civil a través de políticas públicas equitativas
 
 ---
 
-## §36 — COMPARACIÓN ESTADO-NACIÓN Y FEUDALISMO
+## §32 — Soberanía
 
-Según §36, ¿qué otorgaba unidad a las comunidades en la Edad Media?
+Según el texto, la soberanía implica, en su sentido etimológico y político, que:
 
-- a) La pertenencia a un territorio claramente definido con fronteras soberanas reconocidas
-- b) El poder centralizado del rey, que ejercía soberanía jurídica sobre todos sus súbditos
-- **c) La religión: las personas se sentían cristianas y se identificaban con la región en que vivían** ✓ *(líneas 1151–1154)*
-- d) La lengua común y las tradiciones culturales transmitidas de generación en generación
-- e) La obediencia al señor feudal como figura que unificaba el orden político y religioso
+- **a) No existe ninguna autoridad superior al Estado y todo el orden jurídico emana de él** ✓ *(líneas 1001–1003)*
+- b) El Estado puede imponer sus decisiones sobre los ciudadanos mediante el uso legítimo de la fuerza
+- c) Los gobiernos son los únicos protagonistas autorizados a pactar obligaciones en nombre del Estado
+- d) El poder soberano reside exclusivamente en la Constitución y no puede ser delegado a organismos internacionales
+- e) La comunidad internacional reconoce al Estado como el único actor legítimo en las relaciones exteriores
 
 ---
 
-*Fuente: Texto 2 — "Estado-Nación. Transformaciones económicas, políticas y culturales", Cátedras II y III, Ingeniería y Sociedad, UTN FRBA. Directoras: Milena Ramallo y Élida Repetto.*
+## §33 — Legitimidad
+
+La distinción entre poder legítimo e ilegítimo es, según el texto, de naturaleza:
+
+- a) Jurídica, porque la legitimidad depende del marco constitucional que regula el poder político
+- b) Analítica, porque se deduce lógicamente de la definición del poder y su capacidad para mantenerse
+- **c) Axiológica: no basta que el poder sea fuerte o duradero para que pueda considerarse justificado** ✓ *(líneas 1038–1040)*
+- d) Histórica, porque la sociedad determina a posteriori la legitimidad según los resultados obtenidos
+- e) Sociológica, porque la legitimidad depende de la aceptación voluntaria de los gobernados
+
+---
+
+## §34 — El sistema político Estado-Nación
+
+El texto señala que el Estado-Nación se está transformando por tres factores principales. ¿Cuáles son?
+
+- a) La globalización económica, el debilitamiento de los ejércitos nacionales y el surgimiento de movimientos separatistas
+- b) La crisis de legitimidad del Estado, la privatización de funciones públicas y la emergencia de superpotencias
+- c) El avance de las ideologías transnacionales, la pérdida de soberanía territorial y la homogeneización cultural
+- **d) El cambio en el concepto de Nación, los límites a la soberanía impuestos por la comunidad internacional y la creciente presencia de la sociedad civil** ✓ *(líneas 1058–1066)*
+- e) La expansión del derecho internacional, la fragmentación étnica y el debilitamiento de las instituciones republicanas
+
+---
+
+## §35 — La Constitución del Estado Argentino
+
+¿Por qué la sanción de la Constitución Nacional de 1853 no implicó la conformación inmediata del Estado Argentino?
+
+- a) Porque la independencia había sido declarada en 1816 y el texto constitucional tardó demasiado en elaborarse
+- **b) Porque para entonces ninguno de los tres elementos del Estado (nación, territorio y organización jurídica) estaba desarrollado** ✓ *(líneas 1098–1101)*
+- c) Porque el poder seguía concentrado en Buenos Aires y aún no había sido reconocido por las provincias del interior
+- d) Porque la economía regional no alcanzaba el grado de integración necesario para sostener un mercado nacional
+- e) Porque el ejército nacional aún no había sido creado y el territorio carecía de límites definidos
+
+---
+
+## §36 — Comparación Estado-Nación y Feudalismo
+
+La diferencia fundamental entre el poder político feudal y el del Estado moderno reside en que:
+
+- a) En el feudalismo el poder se ejercía sobre un territorio demarcado; en el Estado moderno los límites son difusos
+- b) En el feudalismo había separación entre lo religioso y lo político; en el Estado moderno ambos convergen
+- **c) En el feudalismo el poder era personal, fundado en el pacto feudal; en el Estado moderno se sustenta en instituciones impersonales** ✓ *(líneas 1156–1161)*
+- d) En el feudalismo la organización social era móvil y permitía la elección de autoridades; en el Estado moderno es estática
+- e) En el feudalismo existía un sistema impositivo centralizado; en el Estado moderno el poder tributario se descentraliza
+
+---
+
+*Fuente: "Estado - Nación" — Ingeniería y Sociedad, UTN FRBA*

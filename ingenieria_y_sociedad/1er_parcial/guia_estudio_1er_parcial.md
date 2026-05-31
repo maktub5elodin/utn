@@ -17,7 +17,7 @@ Epistemología · CTS (Ciencia–Tecnología–Sociedad) · Conocimiento natural
 
 **Pregunta 1:** Texto 1: ciencia, Nación, origen, paradigmas y encuadre social: ​¿Qué tríada conceptual es fundamental analizar para comprender la vida del hombre?
 
-a) Ciencia, tecnología y sociedad ✅
+a) **Ciencia, tecnología y sociedad** ✅
 b) Historia, filosofía y letras
 c) Política, economía y religión
 d) Conocimientos, método y clasificación
@@ -29,7 +29,7 @@ e) Histórica, filosofía y sociedad
 
 a) Realidad
 b) Nocion
-c) Ciencia ✅
+c) **Ciencia** ✅
 d) Modernidad
 
 > **Respuesta correcta:** Ciencia
@@ -39,7 +39,7 @@ d) Modernidad
 a) Biología
 b) Filosofía
 c) Economía
-d) CTS ✅
+d) **CTS** ✅
 e) Historia
 
 > **Respuesta correcta:** CTS
@@ -50,7 +50,7 @@ e) Historia
 **Pregunta 4:** En el texto 1, Noción, origen, paradigmas y encuadre social, la disciplina que estudia la realidad científica y su método se llama _______
 
 a) Fenomenología
-b) Epistemología ✅
+b) **Epistemología** ✅
 c) Lógica
 d) Ciencia formal
 e) Filosofía
@@ -59,7 +59,7 @@ e) Filosofía
 
 **Pregunta 5:** Del Texto 1. Ciencia. Noción, origen, paradigmas y encuadre social. Qué otro tipo de conocimiento, además del conocimiento natural, estudia la epistemología?
 
-a) Científico ✅
+a) **Científico** ✅
 b) Religioso
 c) Corporal
 d) Emocional
@@ -69,7 +69,7 @@ e) Filosófico
 
 **Pregunta 6:** Según el apunte “CIENCIA Noción, origen, paradigmas y encuadre social”, ¿Cuál es la parte de la filosofía que tiene como objeto dilucidar y esclarecer la ciencia y su método?
 
-a) La Epistemología ✅
+a) **La Epistemología** ✅
 b) La Ética
 c) La Lógica
 d) La Razón
@@ -82,7 +82,7 @@ e) La Mirada Feminista
 
 **Pregunta 7:** En el texto 1, Ciencia. Noción, origen paradigmas y encuadre social. ¿Cuál es el tiempo de conocimiento que es espontáneo, informal, práctico y usa un lenguaje vulgar?
 
-a) Conocimiento natural ✅
+a) **Conocimiento natural** ✅
 b) Conocimiento vulgar
 c) Conocimiento extraordinario
 d) Conocimiento intuitivo
@@ -93,7 +93,7 @@ e) Conocimiento espontáneo
 **Pregunta 8:** Según el texto "CIENCIA, noción, origen, paradigmas y encuadre social" En "El conocimiento científico" ¿Cómo se llama también al conocimiento natural cuando se lo considera anterior a toda consideración científica?
 
 a) Vulgar
-b) Precientífico ✅
+b) **Precientífico** ✅
 c) Espontáneo
 d) Informal
 e) Intuitivo
@@ -104,7 +104,7 @@ e) Intuitivo
 
 a) modesto
 b) científico
-c) vulgar ✅
+c) **vulgar** ✅
 d) común
 e) básico
 
@@ -115,7 +115,7 @@ e) básico
 
 **Pregunta 10:** El Texto 1. Ciencia. Noción, origen, paradigmas y encuadre social define a la ciencia como “un conjunto de conocimientos metódicamente adquiridos y ______ ______”.
 
-a) sistemáticamente organizados ✅
+a) **sistemáticamente organizados** ✅
 b) organizados lógicamente
 c) sistemáticamente definidos
 d) prácticamente ordenados
@@ -125,7 +125,7 @@ e) lógicamente estructurados
 
 **Pregunta 11:** Según el libro "CIENCIA, Noción, origen, paradigmas y encuadre social", La ciencia es un conjunto de conocimientos metódicamente adquiridos y sistemáticamente organizados. Esta definición reúne los requisitos mínimos e indispensables para que un conocimiento sea denominado ________.
 
-a) científico ✅
+a) **científico** ✅
 b) verídico
 c) real
 d) sistemático
@@ -136,7 +136,7 @@ e) metódico
 **Pregunta 12:** Del texto 1: CIENCIA Noción, origen, paradigmas y encuadre social, la ciencia es un conjunto de __________ metódicamente adquiridos y sistemáticamente organizados.
 
 a) Pensamientos
-b) Conocimientos ✅
+b) **Conocimientos** ✅
 c) Libros
 d) Opiniones
 e) Conceptos
@@ -148,7 +148,7 @@ e) Conceptos
 
 **Pregunta 13:** Según la bibliografía "Ciencia. Noción, origen, paradigmas y encuadre social". ¿Quién fue el epistemólogo que anunció la siguiente definición: "La ciencia es un conocimiento racional (o lógico), sistemático, exacto, verificable y por consiguiente falible”
 
-a) Mario Bunge. ✅
+a) **Mario Bunge.** ✅
 b) Mario Alonso.
 c) Mariano Bunge.
 d) Mariano Alonso.
@@ -160,7 +160,7 @@ e) Esteban Bunge.
 
 a) Sistemático
 b) Racional
-c) Falible ✅
+c) **Falible** ✅
 d) Verificable
 e) Exacto
 
@@ -168,7 +168,7 @@ e) Exacto
 
 **Pregunta 15:** Según el libro "CIENCIA, Noción, origen, paradigmas y encuadre social", el epistemólogo Mario Bunge nos dice que la ciencia es un conocimiento racional (o lógico), sistemático, exacto, verificable y por consiguiente _________.
 
-a) falible ✅
+a) **falible** ✅
 b) lineal
 c) demostrativo
 d) certero
@@ -181,7 +181,7 @@ e) perfecto
 
 **Pregunta 16:** Del Texto 1. Ciencia. Nocion, origen, paradigma y encuadre social, ¿Cómo se denomina el conjunto de teorías y conceptos previos desde los cuales el investigador formula su pregunta y aborda la investigación?
 
-a) Marco Teorico ✅
+a) **Marco Teorico** ✅
 b) Hipotesis
 c) Metodologia
 d) Conclusion
@@ -191,7 +191,7 @@ e) Marco empirico
 
 **Pregunta 17:** En el contexto de descubrimiento, ¿qué es una hipótesis?
 
-a) una suposición o conjetura que, desde un marco teórico específico, intenta resolver de modo provisorio el problema planteado por la pregunta (Líneas 391 a 393) ✅
+a) **una suposición o conjetura que, desde un marco teórico específico, intenta resolver de modo provisorio el problema planteado por la pregunta (Líneas 391 a 393)** ✅
 b) una proposición universal y evidente a la inteligencia que no necesita validación
 c) un axioma matemático infalible que rige sobre la naturaleza
 d) un modelo propuesto por la comunidad científica durante la Modernidad
@@ -205,7 +205,7 @@ a) Paradigma
 b) Artefacto final
 c) Producto comercial
 d) Marco teórico
-e) Prototipo ✅
+e) **Prototipo** ✅
 
 > **Respuesta correcta:** Prototipo
 
@@ -216,7 +216,7 @@ e) Prototipo ✅
 
 a) Ciencias naturales
 b) Ciencias aplicadas
-c) Ciencias formales ✅
+c) **Ciencias formales** ✅
 d) Ciencias fácticas
 e) Ciencias culturales
 
@@ -224,7 +224,7 @@ e) Ciencias culturales
 
 **Pregunta 20:** Del texto 1 “CIENCIA: Noción, origen, paradigmas y encuadre social. La ciencia puede clasificarse según su demostración. Las ciencias fácticas demuestran sus verdades probando empíricamente. Por otro lado, ¿cómo deben argumentar sus verdades las ciencias formales?
 
-a) Racionalmente ✅
+a) **Racionalmente** ✅
 b) Teóricamente
 c) Expositivamente
 d) Hipotéticamente
@@ -236,7 +236,7 @@ e) Metódicamente
 
 a) Empírico
 b) Inductivo
-c) Axiomático ✅
+c) **Axiomático** ✅
 d) Experimental
 e) Hipotético
 
@@ -247,7 +247,7 @@ e) Hipotético
 
 **Pregunta 22:** En el apunte 1. “CIENCIA. Noción, origen, paradigmas y encuadre social”; Se denominan ciencias ______ si el objeto de estudio de las ciencias está situado en espacio y tiempo y se refiere a hechos o fenómenos concretos.
 
-a) Fácticas. ✅
+a) **Fácticas.** ✅
 b) Factibles.
 c) Formales.
 d) Informales.
@@ -258,7 +258,7 @@ e) Exactas.
 **Pregunta 23:** En el texto 1, Noción, origen, paradigmas y encuadre social, según el criterio "Según su objeto de estudio", si el objeto si el objeto de las ciencias está situado en espacio y tiempo y se refiere a hechos o fenómenos concretos, se denominan ciencias _______.
 
 a) Formales
-b) Fácticas ✅
+b) **Fácticas** ✅
 c) Naturales
 d) Exactas
 e) Sociales
@@ -268,7 +268,7 @@ e) Sociales
 **Pregunta 24:** El texto “Ciencia. Noción, origen, paradigmas y encuadre social” dice que cuando el objeto de estudio de la ciencia está situado en espacio y tiempo y se refiere a hechos o fenómenos concretos se las llama ciencias _____
 
 a) teóricas
-b) fácticas ✅
+b) **fácticas** ✅
 c) naturales
 d) artificiales
 e) abstractas
@@ -280,7 +280,7 @@ e) abstractas
 
 **Pregunta 25:** En el apunte 1. “CIENCIA. Noción, origen, paradigmas y encuadre social”; Criterio de clasificación: según sea el tipo de proposición. Las proposiciones que utilizan las ciencias _________ son sintéticas y a posteriori. Sintéticas porque la información que se atribuye al sujeto sí es una información nueva, pues no está contenida en el sujeto. Es a posteriori porque requiere el contacto y la confrontación con la realidad empírica.
 
-a) Fácticas. ✅
+a) **Fácticas.** ✅
 b) Factibles.
 c) Formales.
 d) Informales.
@@ -293,7 +293,7 @@ e) Exactas.
 a) Analíticas
 b) Universales
 c) Lógicas
-d) Sintéticas ✅
+d) **Sintéticas** ✅
 e) Particulares
 
 > **Respuesta correcta:** Sintéticas
@@ -301,7 +301,7 @@ e) Particulares
 **Pregunta 27:** En el texto N°1, "Noción, origen, paradigmas y encuadre social" - La ciencia puede dividirse siguiendo 4 criterios de clasificación. Conforme el "2° Criterio de clasificación: según sea el tipo de método", el uso de proposiciones universales, no evidentes y que necesitan verificación empírica hace alusión al método _______
 
 a) Axiomático-deductivo
-b) Hipotético-deductivo ✅
+b) **Hipotético-deductivo** ✅
 c) Lógico-deductivo
 d) Teórico-deductivo
 e) Fáctico-deductivo
@@ -316,14 +316,14 @@ e) Fáctico-deductivo
 a) analíticas
 b) necesarias
 c) universales
-d) sintéticas ✅
+d) **sintéticas** ✅
 e) lógicas
 
 > **Respuesta correcta:** sintéticas
 
 **Pregunta 29:** Según la bibliografía "Ciencia. Noción, origen, paradigmas y encuadre social". Las proposiciones que aportan información nueva, requieren verificación empírica y corresponden a las ciencias fácticas, se denominan:
 
-a) Sintéticas. ✅
+a) **Sintéticas.** ✅
 b) Analíticas.
 c) Axiomáticas.
 d) Universales.
@@ -335,7 +335,7 @@ e) Deductivas.
 
 a) Analíticas
 b) Lógicas
-c) Sintéticas ✅
+c) **Sintéticas** ✅
 d) Exactas
 e) Formales
 
@@ -348,7 +348,7 @@ e) Formales
 
 a) Culturales
 b) Experimentales
-c) Formales ✅
+c) **Formales** ✅
 d) Fácticas
 e) Descriptivas
 
@@ -357,7 +357,7 @@ e) Descriptivas
 **Pregunta 32:** El texto “Ciencia. Noción, origen, paradigmas y encuadre social” indica que las ciencias fácticas, tanto las naturales y como las sociales, usan el método hipotético-deductivo y demuestran sus verdades sus verdades mediante _______
 
 a) cálculo lógico
-b) prueba empírica ✅
+b) **prueba empírica** ✅
 c) intuición racional
 d) deducción pura
 e) axiomas
@@ -366,7 +366,7 @@ e) axiomas
 
 **Pregunta 33:** En el texto “CIENCIA Noción, origen, paradigmas y encuadre social”, si el método parte de hipótesis o conjeturas (que proposiciones universales, no evidentes y que necesitan verificación empírica) y si éstas se confrontan con la realidad y se las verifica empíricamente permitiendo deducir conclusiones, entonces el método se denomina _________.
 
-a) Hipotético-deductivo ✅
+a) **Hipotético-deductivo** ✅
 b) Axiomático
 c) Deductivo
 d) Axiomático-deductivo
@@ -379,7 +379,7 @@ e) Hipotético
 
 **Pregunta 34:** Del texto 1 “CIENCIA: Noción, origen, paradigmas y encuadre social. En el diálogo experimental, la lógica y la matemática como ciencias auxiliares son clave en una de sus pilares fundamentales. El otro, en el que entra en juego la verificación empírica, la falibilidad y contingencia, se denomina ____________ continua.
 
-a) Experimentación ✅
+a) **Experimentación** ✅
 b) Comprensión
 c) Constatación
 d) Planificación
@@ -389,7 +389,7 @@ e) Examinación
 
 **Pregunta 35:** En el texto 1, Ciencia. Noción, origen paradigmas y encuadre social. ¿Cómo se denomina el método que utiliza la auxiliaridad de las ciencias?
 
-a) Axiomático deductivo ✅
+a) **Axiomático deductivo** ✅
 b) Multidisciplinario
 c) Científico aplicado
 d) Auxiliar
@@ -399,7 +399,7 @@ e) Lógico deductivo
 
 **Pregunta 36:** Según la bibliografía "Ciencia. Noción, origen, paradigmas y encuadre social". ¿Cómo se comportan las Cs. Formales respecto a las Cs. Facticas? De Modo_____
 
-a) Auxiliar ✅
+a) **Auxiliar** ✅
 b) Comparativo
 c) Deductivo
 d) Axiomático
@@ -414,7 +414,7 @@ e) Inductivo
 
 a) Inductivo
 b) Axiomático
-c) Hipotético-deductivo ✅
+c) **Hipotético-deductivo** ✅
 d) Analítico
 e) Empírico
 
@@ -424,7 +424,7 @@ e) Empírico
 
 a) Método
 b) Teoría
-c) Problema ✅
+c) **Problema** ✅
 d) Hipótesis
 e) Experimento
 
@@ -432,7 +432,7 @@ e) Experimento
 
 **Pregunta 39:** Texto 1. ciencia, Nación, origen, paradigmas y encuadre social: ​¿Cuál es el modelo de método científico utilizado actualmente para abordar hechos naturales y sociales?
 
-a) ​ Hipotético-deductivo ✅
+a) **​ Hipotético-deductivo** ✅
 b) ​Intuitivo.
 c) Metafísico.
 d) ​Anárquico
@@ -445,7 +445,7 @@ e) ​Dogmático
 
 **Pregunta 40:** texto 1 ( ciencia ) : En una teoría científica el contexto de descubrimiento es un contexto dinámico ya que se refiere a los factores que influyen en la.
 
-a) Producción ✅
+a) **Producción** ✅
 b) Destrucción
 c) Difusión
 d) Inversión
@@ -457,7 +457,7 @@ e) Competencia
 
 a) dinámico
 b) teórico
-c) estático ✅
+c) **estático** ✅
 d) creativo
 e) subjetivo
 
@@ -466,7 +466,7 @@ e) subjetivo
 **Pregunta 42:** En el texto: “Ciencia, Noción, origen, Paradigmas y encuadre social.
 
 a) El método que se divide entre contexto de descubrimiento y contexto de justificación es el:
-b) Científico ✅
+b) **Científico** ✅
 c) Empírico
 d) Teórico
 e) Deductivo
@@ -479,7 +479,7 @@ f) Analítico
 
 **Pregunta 43:** Texto1: CIENCIA, Noción, origen, paradigmas y encuadre social. Qué términos utiliza el autor para describir el "entramado de situaciones diversas" como la políticas, la culturales, la física que rodean a un hecho que se va a investigar?
 
-a) Contexto ✅
+a) **Contexto** ✅
 b) Justificación
 c) Blandas
 d) Síntesis
@@ -489,7 +489,7 @@ e) Entretejen
 
 **Pregunta 44:** Del texto 1 “CIENCIA: Noción, origen, paradigmas y encuadre social. En una muy apretada síntesis y en breves líneas, el método científico podría dividirse en 2 grandes contextos: el contexto de _________ y el contexto de justificación.
 
-a) Descubrimiento ✅
+a) **Descubrimiento** ✅
 b) Análisis
 c) Experimentación
 d) Observación
@@ -499,7 +499,7 @@ e) Conjetura
 
 **Pregunta 45:** Texto 1. ciencia, Nación, origen, paradigmas y encuadre social: ​¿Qué aspecto del investigador predomina durante el contexto de justificación al evaluar una hipótesis?
 
-a) ​ La racionalidad ✅
+a) **​ La racionalidad** ✅
 b) ​La intuición
 c) ​La creatividad
 d) ​La investigacion
@@ -513,7 +513,7 @@ e) ​El azar
 **Pregunta 46:** En el texto “Ciencia. Noción, origen, paradigmas y encuadre social” se plantea que la Historia Universal suele dividirse en cuatro edades: Antigua, Media, Moderna y _____
 
 a) Clásica
-b) Contemporánea ✅
+b) **Contemporánea** ✅
 c) Posmoderna
 d) Industrial
 e) Oscura
@@ -524,7 +524,7 @@ e) Oscura
 
 a) Imperio
 b) Cultura
-c) Cristo ✅
+c) **Cristo** ✅
 d) Ciencia
 e) Filosofía
 
@@ -534,7 +534,7 @@ e) Filosofía
 
 a) 3
 b) 2
-c) 4 ✅
+c) **4** ✅
 d) 5
 e) 1
 
@@ -548,14 +548,14 @@ e) 1
 a) Renacimiento
 b) Mitologismo
 c) Modernismo
-d) Humanismo ✅
+d) **Humanismo** ✅
 e) Individualismo
 
 > **Respuesta correcta:** Humanismo
 
 **Pregunta 50:** Texto 1. ciencia, Nación, origen, paradigmas y encuadre social: ​¿Qué nombre recibe el proceso histórico que dio origen a la concepción actual de la ciencia en la Modernidad?
 
-a) ​ Revolución Científica ✅
+a) **​ Revolución Científica** ✅
 b) Reforma Industrial
 c) ​Ilustración Clásica
 d) ​Evolución histórica
@@ -566,7 +566,7 @@ e) ​El renacimiento
 **Pregunta 51:** Según la bibliografía "Ciencia. Noción, origen, paradigmas y encuadre social". El proceso que culmina en el surgimiento de la ciencia moderna se conoce como:
 
 a) Revolución Industrial
-b) Revolución Científica ✅
+b) **Revolución Científica** ✅
 c) Renacimiento
 d) Reforma Protestante
 e) Revolución Copernicana
@@ -578,7 +578,7 @@ e) Revolución Copernicana
 
 **Pregunta 52:** Del apunte 1, Ciencia, noción,origen: El_____ es la teoría astronómica que sostiene que el planeta Tierra (inmóvil) es el centro de un universo (finito) y todos los planetas (esferas perfectas) giran en torno a ella.
 
-a) Geocentrismo ✅
+a) **Geocentrismo** ✅
 b) Big Bang
 c) Multiverso
 d) Universo oscilante
@@ -588,7 +588,7 @@ e) Estado estacionario
 
 **Pregunta 53:** En el texto 1, Ciencia. Noción, origen paradigmas y encuadre social. ¿En que concuerda el heliocentrismo y el geocentrismo?
 
-a) Existencia de un universo ✅
+a) **Existencia de un universo** ✅
 b) Paralelismo de sistemas solares
 c) Orbitar al sol
 d) Cuerpos celestes perfectamente redondeados
@@ -598,7 +598,7 @@ e) Finitud del espacio
 
 **Pregunta 54:** Según la bibliografía "Ciencia. Noción, origen, paradigmas y encuadre social". En el artículo N°1: "Noción, origen, paradigmas y encuadre social".El paradigma que sostiene, que el centro del universo es la tierra, se llama:
 
-a) Geocentrismo ✅
+a) **Geocentrismo** ✅
 b) Heliocentismo
 c) Evolucionismo
 d) Agnosticismo
@@ -611,7 +611,7 @@ e) Cristianismo
 
 **Pregunta 55:** Te 1. ciencia, Nación, origen, paradigmas y encuadre social: ​¿Qué consecuencia tuvieron los descubrimientos astronómicos de Galileo Galilei en 1610?
 
-a) ​ Revelaron anomalías ✅
+a) **​ Revelaron anomalías** ✅
 b) ​Revelaron cuerpos celestes
 c) ​Demostraron utilidad militar de los mapas.
 d) ​Validaron las teorías científicas
@@ -622,7 +622,7 @@ e) Existencia de constelaciones
 **Pregunta 56:** Del texto 1 “CIENCIA: Noción, origen, paradigmas y encuadre social. Considerando a Galileo Galilei y sus aportes en la astronomía, física y la ciencia moderna; sabemos en la actualidad que descubrió anomalías en el paradigma geocéntrico que posibilitan el acceso a uno nuevo, el heliocéntrico, a un nuevo modo de concebir el ___________ que ejemplifica claramente a un nuevo modo de concebir la ciencia.
 
 a) Humano
-b) Universo ✅
+b) **Universo** ✅
 c) Planeta
 d) Sistema
 e) Conocimiento
@@ -631,7 +631,7 @@ e) Conocimiento
 
 **Pregunta 57:** En el apunte 1. “CIENCIA. Noción, origen, paradigmas y encuadre social”; La nueva concepción de ciencia requiere experimentación continua, hay dos tipos de experimentación, experiencias que se dan espontáneamente en la realidad y _______en un laboratorio.
 
-a) Experimentos. ✅
+a) **Experimentos.** ✅
 b) Hipótesis.
 c) Mediciones.
 d) Pruebas.
@@ -645,7 +645,7 @@ e) Conclusiones.
 **Pregunta 58:** 4)Según el texto 1 “CIENCIA  Noción, origen, paradigmas y encuadre social” En “El conocimiento Cientifico 2.1” Los conocimientos _____ surgen de la naturaleza humana en contacto con el mundo para tratar con su diario acontecer.
 
 a) Cientificos
-b) Naturales ✅
+b) **Naturales** ✅
 c) Tecnologicos
 d) Logicos
 
@@ -653,7 +653,7 @@ d) Logicos
 
 **Pregunta 59:** Según la bibliografía "Ciencia. Noción, origen, paradigmas y encuadre social". ¿Cuál es el método que aplican los conocimientos científicos para que sean “sistemáticamente organizados”?
 
-a) Lógico. ✅
+a) **Lógico.** ✅
 b) Improvisado.
 c) Racional.
 d) Popular.
@@ -663,7 +663,7 @@ e) Religioso.
 
 **Pregunta 60:** Según el texto "CIENCIA, Noción, origen, paradigmas y encuadre social" Un método es un procedimiento o un camino con una serie pasos para alcanzar un ___________
 
-a) Objetivo ✅
+a) **Objetivo** ✅
 b) Meta
 c) Fin
 d) Inicio
@@ -676,7 +676,7 @@ e) Intención
 
 **Pregunta 61:** Según el físico John Ziman, ¿qué significa que la ciencia se encuentra en proceso de colectivización?
 
-a) la ciencia está en tránsito hacia la unificación de dos fines, el teórico de las ciencias puras y el práctico de las ciencias aplicadas (Líneas 813 a 815) ✅
+a) **la ciencia está en tránsito hacia la unificación de dos fines, el teórico de las ciencias puras y el práctico de las ciencias aplicadas (Líneas 813 a 815)** ✅
 b) la ciencia ha abandonado por completo el aspecto teórico para volverse únicamente industrial
 c) los investigadores ahora trabajan exclusivamente en soledad ignorando las demandas estatales
 d) la universidad se separó de manera definitiva del desarrollo de tecnologías productivas
@@ -688,7 +688,7 @@ e) el conocimiento científico se ha vuelto patrimonio exclusivo de las grandes 
 
 a) Fábricas
 b) Empresas
-c) Universidades ✅
+c) **Universidades** ✅
 d) Sindicatos
 e) Ministerios de economía
 
@@ -697,7 +697,7 @@ e) Ministerios de economía
 **Pregunta 63:** texto 1 ( ciencia ) :Según John Ziman, La ciencia se encuentra en proceso de…
 
 a) Privatización
-b) Colectivización ✅
+b) **Colectivización** ✅
 c) Individualización
 d) Desaparición
 e) Simplificación
@@ -722,7 +722,7 @@ e) Nivel de coherencia interna entre las diversas teorías que conforman el sist
 
 **Pregunta 65:** . texto 1 ( ciencia ) :En el método que parte de axiomas se construyen teoremas basándose principalmente de modo…
 
-a) deductivo ✅
+a) **deductivo** ✅
 b) inductivo
 c) analógico
 d) intuitivo
@@ -732,7 +732,7 @@ e) empírico
 
 **Pregunta 66:** texto 1 ( ciencia ) :Para la nueva ciencia todo fenómeno se lo puede medir y numerar, es decir que es:
 
-a) Mensurable ✅
+a) **Mensurable** ✅
 b) Invisible
 c) Imposible
 d) Mágico
@@ -742,7 +742,7 @@ e) Infinito
 
 **Pregunta 67:** Texto 3. Ciencia y Tecnología en interacción: ​¿Quiénes desarrollaron principalmente la primera Revolución Industrial según Mario Bunge?
 
-a) ​ Artesanos ✅
+a) **​ Artesanos** ✅
 b) ​Científicos
 c) ​Académicos
 d) ​Teólogos
@@ -763,7 +763,7 @@ Nación (pueblo + territorio + Estado) · Territorio · Estado (Constitución, s
 **Pregunta 68:** 36. En el texto 2 Estado-Nación. Según el tipo de organización del poder centralizada, monarca o presidente que rige sobre un territorio. Poder de derecho. A que pertenece:
 
 a) Estado Feudal
-b) Estado Moderno ✅
+b) **Estado Moderno** ✅
 c) Estado Plurinacional
 d) Estado Nación
 e) Estado Liberal
@@ -775,14 +775,14 @@ e) Estado Liberal
 a) Tierra
 b) Terreno
 c) Suelo
-d) Territorio ✅
+d) **Territorio** ✅
 e) Área
 
 > **Respuesta correcta:** Territorio
 
 **Pregunta 70:** Del Texto 2. Estado - Nación. Transformaciones económicas, políticas y culturales. ¿A qué se denomina escenario geográfico en el que se asienta la nación y sobre el cual ejerce poder político la comunidad, con la frontera como límite jurisdiccional?
 
-a) Territorio ✅
+a) **Territorio** ✅
 b) Estado
 c) Nación
 d) Organización Jurídica
@@ -796,7 +796,7 @@ e) Gobierno
 **Pregunta 71:** Según el texto “Estado-Nación”, el escenario geográfico en el que se asienta una nación y sobre el cual se ejerce el poder político de la comunidad es denominado _____
 
 a) región
-b) Territorio ✅
+b) **Territorio** ✅
 c) continente
 d) paisaje
 e) distrito
@@ -807,7 +807,7 @@ e) distrito
 
 a) Capital
 b) Aduana
-c) Frontera ✅
+c) **Frontera** ✅
 d) Provincia
 e) Región
 
@@ -815,7 +815,7 @@ e) Región
 
 **Pregunta 73:** Del texto 2 “ESTADO-NACIÓN: Transformaciones económicas, políticas y culturales”.La conformación del Estado Argentino requirió crear instituciones militares, económicas y políticas, utilizar los recursos para impulsar diversos sectores y crear planes para el crecimiento de distintos tipos. Sin restar importancia a lo anterior, los pilares esenciales para fundación del Estado fueron la independencia y la ratificación de la __________ Nacional.
 
-a) Constitución ✅
+a) **Constitución** ✅
 b) Universidad
 c) República
 d) Soberanía
@@ -830,7 +830,7 @@ e) Territorio
 
 a) Ley
 b) Soberanía
-c) Fuerza ✅
+c) **Fuerza** ✅
 d) Autoridad
 e) Constitución
 
@@ -838,7 +838,7 @@ e) Constitución
 
 **Pregunta 75:** Según el Texto 2. Estado - Nación, ¿cuál es el elemento fundacional del Estado Argentino?
 
-a) Constitución Nacional ✅
+a) **Constitución Nacional** ✅
 b) Estatuto Nacional
 c) Código Nacional
 d) Poder Nacional
@@ -852,7 +852,7 @@ a) Abogados
 b) Ciudadanos
 c) Empresarios
 d) Gobiernos
-e) Privados ✅
+e) **Privados** ✅
 
 > **Respuesta correcta:** Privados
 
@@ -864,14 +864,14 @@ e) Privados ✅
 a) Ley
 b) Estado
 c) Democracia
-d) Soberanía ✅
+d) **Soberanía** ✅
 e) Poder
 
 > **Respuesta correcta:** Soberanía
 
 **Pregunta 78:** En el apunte 2. “ESTADO-NACIÓN. Transformaciones económicas, políticas y culturales”; ________ etimológicamente quiere decir que no hay un poder por encima , no existe ninguna autoridad superior.
 
-a) Soberanía. ✅
+a) **Soberanía.** ✅
 b) Autonomía.
 c) Supremacía.
 d) Democracia.
@@ -883,7 +883,7 @@ e) Hegemonía.
 
 a) Nación
 b) Legalidad
-c) Soberanía ✅
+c) **Soberanía** ✅
 d) Legitimidad
 e) Autonomía
 
@@ -895,7 +895,7 @@ e) Autonomía
 **Pregunta 80:** texto 2 ( Estado-Nación) : ¿Según el texto además de la justicia que otro concepto permite distinguir el poder político de un abuso de poder?
 
 a) La burocracia
-b) La legitimidad ✅
+b) **La legitimidad** ✅
 c) La popularidad
 d) El presupuesto
 e) La tecnología
@@ -905,7 +905,7 @@ e) La tecnología
 **Pregunta 81:** Según el texto 2 “Estado-Nacion” ¿Qué concepto menciona el texto como necesario para justificar el poder más allá de la fuerza?
 
 a) Orden
-b) Legitimidad ✅
+b) **Legitimidad** ✅
 c) Autoridad
 d) Dominio
 e) Control
@@ -914,7 +914,7 @@ e) Control
 
 **Pregunta 82:** Texto 2: Estado-Nación. Transformaciones económicas, políticas y culturales. Qué concepto axiológico permite distinguir al poder político de la mera fuerza ejercida por una banda de ladrones?
 
-a) Legitimidad ✅
+a) **Legitimidad** ✅
 b) Justificación
 c) Exclusividad
 d) Persuasión
@@ -927,7 +927,7 @@ e) Obediencia
 
 **Pregunta 83:** Según el texto 2 “Estado-Nacion”
 
-a) Con que metodo se homogeneizo a la poblacion inmigrante con la local en Argentina ✅
+a) **Con que metodo se homogeneizo a la poblacion inmigrante con la local en Argentina** ✅
 b) Educacion
 c) Empleo
 d) Talleres
@@ -944,14 +944,14 @@ f) Debates
 a) Liberalismo
 b) Socialismo
 c) Federalismo
-d) Nacionalismo ✅
+d) **Nacionalismo** ✅
 e) Imperialismo
 
 > **Respuesta correcta:** Nacionalismo
 
 **Pregunta 85:** Texto 2: Estado – Nación. Trasformaciones económicas, políticas y culturales. Según el texto, ¿Qué concepto proviene de esta concepción de nación como unidad cultural, lingüística y religiosa?
 
-a) Nacionalismo ✅
+a) **Nacionalismo** ✅
 b) Liberalismo
 c) Patriotismo
 d) Federalismo
@@ -964,7 +964,7 @@ e) Regionalismo
 
 **Pregunta 86:** En el apartado  “COMPARACION ESTADO-NACION Y FEUDALISMO” del Texto 2, ¿qué componente conformaba la unidad de los Estados en la Edad Media?
 
-a) Religión ✅
+a) **Religión** ✅
 b) Feudalismo
 c) Comercio
 d) Arte
@@ -974,7 +974,7 @@ e) Cartas
 
 **Pregunta 87:** Texto 2 Estado - Nación: ¿En qué obra aparece por primera vez la palabra "Estado"?
 
-a) ​ El príncipe ✅
+a) **​ El príncipe** ✅
 b) ​El origen
 c) ​El estatuto
 d) ​El feudalismo
@@ -985,7 +985,7 @@ e) El imperio
 **Pregunta 88:** Según el texto “Estado-Nación”, el término nación comienza a utilizarse durante el _____, especialmente en el ámbito de las universidades
 
 a) Renacimiento
-b) Medioevo ✅
+b) **Medioevo** ✅
 c) Humanismo
 d) Iluminismo
 e) Feudalismo
@@ -998,7 +998,7 @@ e) Feudalismo
 **Pregunta 89:** Segun el texto 2:"ESTADO-NACION transformaciones económicas, políticas y culturales" ¿Qué palabra aparece por primera vez en la obra El príncipe de Maquiavelo?
 
 a) Gobierno
-b) Estado ✅
+b) **Estado** ✅
 c) República
 d) Nación
 e) Imperio
@@ -1009,7 +1009,7 @@ e) Imperio
 
 a) En “Nacion”
 b) el nacionalismo proviene de una concepción donde el hombre se entiende desde la diferencia originaria que es la ------
-c) Nación ✅
+c) **Nación** ✅
 d) lengua
 e) religión
 f) geografía
@@ -1019,7 +1019,7 @@ f) geografía
 **Pregunta 91:** Según el texto "ESTADO - NACIÓN transformaciones económicas, políticas y culturales" En "el sistema político Estado-Nación" ¿Qué tipo de Estado se menciona como ejemplo de una nación constituida por numerosas naciones con derecho a conservar sus tradiciones?
 
 a) Americano
-b) Plurinacional ✅
+b) **Plurinacional** ✅
 c) Transnacional
 d) Contemporáneo
 e) Internacional
@@ -1038,7 +1038,7 @@ Bunge: tecnología ≠ ciencia aplicada · Técnica · Tecnología (sistemas de 
 
 **Pregunta 92:** Texto 3: Ciencia y tecnología en interacción. Cambio tecnológico e innovación. Según el texto, ¿Cómo se denomina el conocimiento que surgió de la relación entre la técnica y la ciencia?
 
-a) Tecnología ✅
+a) **Tecnología** ✅
 b) Técnica
 c) Ciencia aplicada
 d) Ingeniería
@@ -1048,7 +1048,7 @@ e) Innovación
 
 **Pregunta 93:** Texto (3)-Ciencia y Tecnología en interacción. Cambio tecnológico e innovación. Cómo se relacionan ciencia y tecnología a lo largo del tiempo y qué papel tuvo la Revolución Industrial en esa interacción?
 
-a) Interdependencia ✅
+a) **Interdependencia** ✅
 b) Pirámides
 c) Fermentación
 d) Telescopio
@@ -1058,7 +1058,7 @@ e) Microscopio
 
 **Pregunta 94:** Del apunte 3, Ciencia y tecnología en interacción: Durante la primera parte del siglo XVIII, como era el trato de inglaterra hacia la mano de obra cualificada como los ingenieros?
 
-a) Carencia de ingenieros con una adecuada educación ✅
+a) **Carencia de ingenieros con una adecuada educación** ✅
 b) Había una sobrepoblación de ingenieros, con los cuales lideraron la 1 revolución industrial
 c) Existía una resistencia hacia los ingenieros por parte de los gremios
 d) El conocimiento en ingeniería era un secreto de estado
@@ -1072,7 +1072,7 @@ e) Los ingenieros ingleses eran mandados hacia la India a formarse adecuadamente
 **Pregunta 95:** En el texto 3 “Ciencia y tecnología en interacción” se menciona que el conocimiento técnico se contrapone al conocimiento meramente teórico llamado _____
 
 a) Doxa
-b) Episteme ✅
+b) **Episteme** ✅
 c) Dogmatismo
 d) Phronesis
 e) Método
@@ -1084,7 +1084,7 @@ e) Método
 
 **Pregunta 96:** Según el libro "Ciencia y Tecnología en interacción", la tecnología comprende sistemas de acciones socialmente _______.
 
-a) estructuradas ✅
+a) **estructuradas** ✅
 b) aisladas
 c) libres
 d) breves
@@ -1095,7 +1095,7 @@ e) nulas
 **Pregunta 97:** Aproximación a la noción de Técnica ¿Cuál es una característica fundamental de la técnica según la definición de Liz (1995)?
 
 a) Está directamente vinculada a la actividad científica moderna.
-b) las actividades o sistemas de acciones artesanales, artísticas, dirigidas hacia el propio cuerpo. ✅
+b) **las actividades o sistemas de acciones artesanales, artísticas, dirigidas hacia el propio cuerpo.** ✅
 c) Solo opera en niveles de la realidad no accesibles a los sentidos.
 d) Persigue intereses colectivos y sumamente sofisticados.
 e) Requiere obligatoriamente de instituciones como universidades para su aprendizaje.
@@ -1104,7 +1104,7 @@ e) Requiere obligatoriamente de instituciones como universidades para su aprendi
 
 **Pregunta 98:** ¿Cómo puede considerarse a la tecnología?
 
-a) las actividades o sistemas de acciones socialmente estructuradas, sumamente integradas en los procesos productivos industriales y estrechamente vinculadas al conocimiento científico (Líneas 1322-1324) ✅
+a) **las actividades o sistemas de acciones socialmente estructuradas, sumamente integradas en los procesos productivos industriales y estrechamente vinculadas al conocimiento científico (Líneas 1322-1324)** ✅
 b) el conocimiento de carácter práctico que persigue intereses estrictamente individuales orientados a modificar el entorno próximo
 c) el conjunto de saberes que se transmiten exclusivamente de manera personal de un artesano a su aprendiz
 d) las acciones intencionales de las civilizaciones antiguas para domesticar animales y manejar el fuego
@@ -1119,7 +1119,7 @@ e) la ciencia básica que busca conocer los fundamentos de los fenómenos sin ni
 
 a) SECyT
 b) INTI
-c) INTA ✅
+c) **INTA** ✅
 d) CITEFA
 e) CNEA
 
@@ -1127,7 +1127,7 @@ e) CNEA
 
 **Pregunta 100:** Según el texto "CIENCIA Y TECNOLOGÍA EN INTERACCIÓN, Cambio tecnológico e innovación" en el contexto del descubrimiento, el método tecnológico plantea un problema _________
 
-a) Práctico ✅
+a) **Práctico** ✅
 b) Teórico
 c) Importante
 d) Difícil
@@ -1137,7 +1137,7 @@ e) Relevante
 
 **Pregunta 101:** Según el libro "Ciencia y Tecnología en interacción", la invención es un proceso que lleva a la creación de algo ______.
 
-a) nuevo ✅
+a) **nuevo** ✅
 b) diferente
 c) innovador
 d) creativo
@@ -1150,7 +1150,7 @@ e) original
 
 **Pregunta 102:** Del apunte 3, Ciencia y tecnología en interacción:En sentido amplio, es posible distinguir al menos dos tipos de innovaciones tecnológicas: radicales e____.
 
-a) incrementales ✅
+a) **incrementales** ✅
 b) Artificiales
 c) Vehiculares
 d) Limpias
@@ -1176,7 +1176,7 @@ e) creencias
 
 **Pregunta 104:** Segun el texto 3:"CIENCIA Y TECNOLOGIA EN INTERACCION cambio tecnologico e innovacion" ¿Qué actividades son el medio más importante para producir innovaciones tecnológicas?
 
-a) I+D ✅
+a) **I+D** ✅
 b) patentes
 c) mercado
 d) marketing
@@ -1186,7 +1186,7 @@ e) ingeniería
 
 **Pregunta 105:** Según el libro "Ciencia y Tecnología en interacción", el vocablo griego techné se traduce como "arte", ______ o "destreza".
 
-a) habilidad ✅
+a) **habilidad** ✅
 b) ciencia
 c) razón
 d) eficiencia
@@ -1196,7 +1196,7 @@ e) mente
 
 **Pregunta 106:** En el texto 3, Ciencia y tecnología. Designa _______ _______ , que tienen como fin la creación de un objeto artificial, es decir no natural.
 
-a) Acciones intencionales ✅
+a) **Acciones intencionales** ✅
 b) Procesos mecánicos
 c) Métodos industriales
 d) Técnicas operativas
@@ -1216,7 +1216,7 @@ Globalización: definición, proceso histórico · Globalización económica / c
 
 **Pregunta 107:** Del apunte 4, Globalización, noción, múltiples sentidos y perspectivas:En términos generales, la _____se refiere a la interconexión de personas, empresas y países en todo el mundo, y se caracteriza por la creciente interdependencia e interacción.
 
-a) Globalización ✅
+a) **Globalización** ✅
 b) Universalización
 c) Aproximación
 d) Neoliberalismo
@@ -1229,14 +1229,14 @@ e) Socialismo
 a) Prohibición del comercio local
 b) Conexión comercial nacional
 c) Igualdad económica
-d) Reducción de barreras nacionales ✅
+d) **Reducción de barreras nacionales** ✅
 e) Unicidad de moneda
 
 > **Respuesta correcta:** Reducción de barreras nacionales
 
 **Pregunta 109:** En el texto 4, Globalización. La globalización ambiental implica la creciente interdependencia entre los ______ _______ y la circulación de bienes, servicios y personas en todo el mundo
 
-a) Sistemas ecológicos ✅
+a) **Sistemas ecológicos** ✅
 b) Mercados internacionales
 c) Sistemas económicos
 d) Procesos culturales
@@ -1249,7 +1249,7 @@ e) Bloques regionales
 
 **Pregunta 110:** Texto 4. Globalizacion, Nación, Múltiples sentidos y perspectivas: ​¿Cuál era el fin de crear bloques comerciales regionales en la posguerra?
 
-a) ​ Eliminar restricciones al comercio ✅
+a) **​ Eliminar restricciones al comercio** ✅
 b) ​Aislar las economías agrarias
 c) ​Prohibir la inversión extranjera
 d) ​Sancionar los mercados internos
@@ -1263,7 +1263,7 @@ a) aduanas
 b) subsidios
 c) aranceles
 d) politicas
-e) exportaciones ✅
+e) **exportaciones** ✅
 
 > **Respuesta correcta:** exportaciones
 
@@ -1284,7 +1284,7 @@ e) limitar inversiones
 
 a) Liberalización
 b) Apertura
-c) Sustitución ✅
+c) **Sustitución** ✅
 d) Dolarización
 e) Desregulación
 
@@ -1292,7 +1292,7 @@ e) Desregulación
 
 **Pregunta 114:** Texto 4. Globalizacion, Nación, Múltiples sentidos y perspectivas: ​¿Qué modelo económico finalizó en Latinoamérica con la crisis de 1930?
 
-a) ​ El crecimiento hacia afuera ✅
+a) **​ El crecimiento hacia afuera** ✅
 b) ​El nacionalismo autárquico
 c) ​El desarrollismo extranjero
 d) ​El neoliberalismo financiero
@@ -1319,14 +1319,14 @@ a) Homogeneización
 b) Asimilación
 c) Difusión
 d) Fragmentación
-e) Transnacionalización ✅
+e) **Transnacionalización** ✅
 
 > **Respuesta correcta:** Transnacionalización
 
 **Pregunta 117:** En el apunte 4:"Globalizacion:Nocion, multiples sentidos y perspectivas", ¿que etapa coincide con navegaciones transoceánicas, la teoría copernicana, la apertura comercial de las sociedades europeas hacia el Lejano Oriente y América Latina?
 
 a) Globalizacion
-b) Mundializacion ✅
+b) **Mundializacion** ✅
 c) Moderna
 d) Cientifica
 e) Pre-cientifica
@@ -1335,7 +1335,7 @@ e) Pre-cientifica
 
 **Pregunta 118:** Texto 4. Globalizacion, Nación, Múltiples sentidos y perspectivas: ​¿Qué efecto negativo puede tener la homogeneización cultural?
 
-a) ​ Pérdida de identidad cultural ✅
+a) **​ Pérdida de identidad cultural** ✅
 b) ​Aislamiento total de internet
 c) ​Prohibición de modelos de consumo
 d) ​Desaparición del ciberespacio virtual
@@ -1358,14 +1358,14 @@ Práctica tecnológica: 3 dimensiones (sistemas de acciones, artefactos, conocim
 a) Cultural
 b) Ideológico
 c) Organizacional
-d) Técnico ✅
+d) **Técnico** ✅
 e) Empresarial
 
 > **Respuesta correcta:** Técnico
 
 **Pregunta 120:** Según el libro "el valor social de la ingeniería", la tecnología implica actividades o sistemas de acciones ______ y organizados
 
-a) complejos ✅
+a) **complejos** ✅
 b) simples
 c) básicos
 d) lineales
@@ -1376,7 +1376,7 @@ e) únicos
 **Pregunta 121:** En el texto “El valor social de la ingeniería” se plantea que la tecnología entendida como sistemas de acciones se muestra como una práctica atravesada por múltiples y complejos aspectos que la componen, como el aspecto  _____, el organizacional y el cultural o ideológico
 
 a) práctico
-b) técnico ✅
+b) **técnico** ✅
 c) teórico
 d) fisico
 
@@ -1387,7 +1387,7 @@ d) fisico
 
 **Pregunta 122:** Según el texto “EL VALOR SOCIAL DE LA INGENIERÍA” En “4. Fundamentos para una actuación profesional ética y responsable de los Ingenieros” ¿Cómo define el texto a los componentes de un sistema tecnológico que no son objetos físicos ni herramientas, tales como las personas, las instituciones y los marcos legales?
 
-a) No-técnicos ✅
+a) **No-técnicos** ✅
 b) Artefactos
 c) Complejos
 d) Dinámicos
@@ -1397,7 +1397,7 @@ e) Jerarquizados
 
 **Pregunta 123:** En el texto 0, El valor social de la ingeniería. Los ingenieros son quienes buscan ________ _______ a problemas sociales y necesidades humanas, convirtiendo los diseños y prototipos en productos socioeconómicamente viables y vendibles.
 
-a) Soluciones tecnológicas ✅
+a) **Soluciones tecnológicas** ✅
 b) Respuestas innovadoras
 c) Alternativas técnicas
 d) Herramientas funcionales
@@ -1407,7 +1407,7 @@ e) Recursos industriales
 
 **Pregunta 124:** Texto (0)-El valor social de la ingeniería. Breve desarrollo sobra la profesión de la ingeniería en la Argentina. ¿Por qué es importante entender la tecnología como una práctica social compleja y no solo como un conjunto de herramientas técnicas?
 
-a) Tecnología ✅
+a) **Tecnología** ✅
 b) Artefactos
 c) Comercialización
 d) Usuarios
@@ -1420,7 +1420,7 @@ e) Producción
 
 **Pregunta 125:** Del Texto 0. El Valor Social de la Ingeniería. Breve desarrollo sobre la profesión de la ingeniería en Argentina. ¿Cuál fue el concepto guía que, ante la crisis del 30 y las guerras mundiales, impulsó a la ingeniería argentina a desarrollar proyectos industriales y empresas estatales para reducir la vulnerabilidad frente a las importaciones?
 
-a) Autonomía ✅
+a) **Autonomía** ✅
 b) Agroexportación
 c) Privatización
 d) Especulación
@@ -1430,7 +1430,7 @@ e) Globalización
 
 **Pregunta 126:** Según el apunte “EL VALOR SOCIAL DE LA INGENIERÍA Breve desarrollo sobre la profesión de la ingeniería en Argentina”, ¿cuál es el aspecto que compone la tecnología que abarca la actividad económica e industrial y lo estrictamente profesional?
 
-a) Organizacional ✅
+a) **Organizacional** ✅
 b) Técnico
 c) Cultural
 d) Ideológico
@@ -1440,7 +1440,7 @@ e) Industrial
 
 **Pregunta 127:** Del texto 0"EL VALOR SOCIAL DE LA INGENIERÍA: Breve desarrollo sobre la profesión de la ingeniería en Argentina". Habitualmente se identifica a la ___________ con la disciplina que está constituida por diversos conocimientos, que busca el equilibrio de múltiples aportes del campo científico y tecnológico.
 
-a) Ingeniería ✅
+a) **Ingeniería** ✅
 b) Manufactura
 c) Invención
 d) Optimización
@@ -1454,7 +1454,7 @@ e) Automatización
 **Pregunta 128:** En el texto “El valor social de la ingeniería” se plantea que la idea de alcanzar la “autonomía de la Nación” buscaba superar la vulnerabilidad generada por las guerras y la crisis del '30, derivada de la dependencia de _____ de insumos básicos
 
 a) inversiones
-b) importaciones ✅
+b) **importaciones** ✅
 c) industrias
 d) manufacturas
 e) compras
@@ -1466,14 +1466,14 @@ e) compras
 a) Importar innovaciones
 b) Defensa territorial
 c) Industrialización
-d) Integración nacional ✅
+d) **Integración nacional** ✅
 e) Nodernizar el campo
 
 > **Respuesta correcta:** Integración nacional
 
 **Pregunta 130:** En el punto 5.2 del Texto 0, ¿Qué ideal político-económico guio de forma prioritaria el desarrollo de la ingeniería argentina?
 
-a) Autonomía ✅
+a) **Autonomía** ✅
 b) Expansión
 c) Desarrollismo
 d) Industrialización
@@ -1488,7 +1488,7 @@ e) Progresismo
 
 a) Intelectual
 b) Social
-c) Ética ✅
+c) **Ética** ✅
 d) Cultural
 e) Política
 
@@ -1498,7 +1498,7 @@ e) Política
 
 a) Textil
 b) Naval
-c) Automotriz ✅
+c) **Automotriz** ✅
 d) Alimenticia
 e) Minera
 
@@ -1508,7 +1508,7 @@ e) Minera
 
 a) Empresarial
 b) Individual
-c) Social ✅
+c) **Social** ✅
 d) Industrial
 e) Técnica
 
@@ -1520,7 +1520,7 @@ e) Técnica
 **Pregunta 134:** En el párrafo de la línea 1852 del Texto 0, ¿Qué necesidad estimuló la creación de la primera carrera de ingeniería en la Universidad de Buenos Aires?
 
 a) Modernización
-b) Infraestructura ✅
+b) **Infraestructura** ✅
 c) Desarrollo industrial
 d) Independencia económica
 e) Inversiones
@@ -1533,14 +1533,14 @@ a) Privatización
 b) Federal
 c) Agropecuario
 d) Estatización
-e) Inversiones ✅
+e) **Inversiones** ✅
 
 > **Respuesta correcta:** Inversiones
 
 **Pregunta 136:** En el punto 5.4 del Texto 0, ¿Qué creación de la ingeniería supuso una gran oportunidad de exportación tecnológica?
 
 a) Satélite ARSAT
-b) Reactor OPAL ✅
+b) **Reactor OPAL** ✅
 c) Satelite SAC
 d) Central Hidroeléctrica
 e) Vaca Muerta
@@ -1561,7 +1561,7 @@ Vannevar Bush (modelo lineal) · Ciencia para la política / política para la c
 
 a) Circular
 b) Integral
-c) Lineal ✅
+c) **Lineal** ✅
 d) Productivo
 e) Nuclear
 
@@ -1569,7 +1569,7 @@ e) Nuclear
 
 **Pregunta 138:** Del Texto 5. Politicas de ciencia, tecnologia e innovacion se menciona que en un informe redactado por vannevar bush se propone pautas para que el desarrollo tecnológico logrado durante la guerra se reconvierta a objetivos compatiblescon un escenario político pacífico. Ya no se pondrá el foco en desarrollar armamento sino en cuestiones relativas a la salud y el desarrollo _________
 
-a) Industrial ✅
+a) **Industrial** ✅
 b) economico
 c) social
 d) cultural
@@ -1582,7 +1582,7 @@ e) cientifico
 a) Arthur Lewis
 b) Vannevar Bush
 c) Bernardo Houssay
-d) Raúl Prebisch ✅
+d) **Raúl Prebisch** ✅
 e) Manuel Savio
 
 > **Respuesta correcta:** Raúl Prebisch
@@ -1595,7 +1595,7 @@ e) Manuel Savio
 a) Un marco aduanero estricto para impedir la entrada de insumos de manufactura extranjera.
 b) Un decreto que obliga a las empresas privadas a ceder sus ganancias al sector agropecuario.
 c) Una normativa que delega la planificación tecnológica en consultoras financieras privadas.
-d) Un tipo de política pública que provee recursos y facilidades desde el Estado para el avance de las actividades científicas y tecnológicas. ✅
+d) **Un tipo de política pública que provee recursos y facilidades desde el Estado para el avance de las actividades científicas y tecnológicas.** ✅
 e) El control absoluto de la comercialización de bienes industriales por parte del ejército.
 
 > **Respuesta correcta:** Un tipo de política pública que provee recursos y facilidades desde el Estado para el avance de las actividades científicas y tecnológicas.
@@ -1603,7 +1603,7 @@ e) El control absoluto de la comercialización de bienes industriales por parte 
 **Pregunta 141:** En el punto 2 del Texto 5 “Ciencia para la política: conocimiento experto para la toma de decisiones” ¿Qué relación se establece de Ciencia para la política?
 
 a) Interdependencia
-b) Asesoramiento ✅
+b) **Asesoramiento** ✅
 c) Comercial
 d) Desarrollista
 e) Reguladora
@@ -1613,7 +1613,7 @@ e) Reguladora
 **Pregunta 142:** Ciencia para la política: conocimiento experto para la toma de decisiones ¿A qué nos referimos, según el texto, bajo la noción de "Ciencia para la política"?
 
 a) A la sustitución definitiva de los marcos constitucionales por comités de expertos.
-b) Al uso del conocimiento científico para la toma de decisiones en materia de políticas públicas. ✅
+b) **Al uso del conocimiento científico para la toma de decisiones en materia de políticas públicas.** ✅
 c) Al monopolio de la comercialización de patentes por parte de científicos universitarios.
 d) A la obligatoriedad de que los biólogos dirijan de forma directa el poder legislativo.
 e) Al financiamiento exclusivo de laboratorios automotrices en mercados internacionales.
@@ -1627,7 +1627,7 @@ e) Al financiamiento exclusivo de laboratorios automotrices en mercados internac
 
 a) Ciencia académica, Cultura burocrática y Cultura económica.
 b) Programas nacionales, Ministerios del Estado y Laboratorios públicos de I+D.
-c) Infraestructura científico tecnológica, Gobierno y Estructura productiva. ✅
+c) **Infraestructura científico tecnológica, Gobierno y Estructura productiva.** ✅
 d) Agencias de financiamiento civil, Ciencia abierta y Movimientos de innovación inclusiva.
 e) Sectores estratégicos de base, Industrias de interés nacional y Áreas de defensa.
 
@@ -1637,7 +1637,7 @@ e) Sectores estratégicos de base, Industrias de interés nacional y Áreas de d
 
 a) cultura academica
 b) cultura burocratica
-c) Cultura economica ✅
+c) **Cultura economica** ✅
 d) cultura civica
 
 > **Respuesta correcta:** Cultura economica
@@ -1647,7 +1647,7 @@ d) cultura civica
 
 **Pregunta 145:** Del Texto 5. Politicas de ciencia, tecnologia e innovacion se menciona que la Segunda Guerra Mundial, con la detonación de las bombas atómicas, constituyó un hito que mostró a la sociedad el gran potencial de la ciencia y la __________
 
-a) Tecnologia ✅
+a) **Tecnologia** ✅
 b) fuerza
 c) industria
 d) innovacion
@@ -1660,7 +1660,7 @@ e) desarrollo
 a) Capitalismo
 b) Apertura económica
 c) Estatización
-d) Sustitución de importaciones ✅
+d) **Sustitución de importaciones** ✅
 e) Económia agraria
 
 > **Respuesta correcta:** Sustitución de importaciones
@@ -1672,7 +1672,7 @@ e) Económia agraria
 
 a) CITEFA
 b) CNEA
-c) CONICET ✅
+c) **CONICET** ✅
 d) INTA
 
 > **Respuesta correcta:** CONICET
@@ -1683,7 +1683,7 @@ a) CNEA
 b) INTA
 c) CITEFA
 d) INTI
-e) CONICET ✅
+e) **CONICET** ✅
 
 > **Respuesta correcta:** CONICET
 
@@ -1693,7 +1693,7 @@ a) INTA
 b) INTI
 c) CITEFA
 d) CNEA
-e) CONICET ✅
+e) **CONICET** ✅
 
 > **Respuesta correcta:** CONICET
 
@@ -1704,7 +1704,7 @@ e) CONICET ✅
 
 a) Coordinar las estaciones experimentales que poseía la Secretaría de Agricultura y Ganadería.
 b) Responder de forma exclusiva a las solicitudes financieras de las empresas metalúrgicas y de combustibles.
-c) Fortalecer la investigación en los espacios académicos. ✅
+c) **Fortalecer la investigación en los espacios académicos.** ✅
 d) Reemplazar por completo la asistencia educacional técnica y cultural del productor rural y su familia.
 e) Funcionar como un ente dependiente de la Secretaría de Ciencia y Tecnología para la creación de programas nacionales.
 
@@ -1716,14 +1716,14 @@ a) Políticas
 b) Militares
 c) Racistas
 d) Económicas
-e) Ideológicas ✅
+e) **Ideológicas** ✅
 
 > **Respuesta correcta:** Ideológicas
 
 **Pregunta 152:** En el ultimo punto del Texto 6, ¿A través de que organismo surgieron los acuerdos en el debate del desarrollo sostenible?
 
 a) OMS
-b) ONU ✅
+b) **ONU** ✅
 c) GREENPEACE
 d) UNICEF
 e) CONICET
@@ -1739,7 +1739,7 @@ a) Electrónica
 b) Informática
 c) Ganadera
 d) Automotriz
-e) Nuclear ✅
+e) **Nuclear** ✅
 
 > **Respuesta correcta:** Nuclear
 
@@ -1747,7 +1747,7 @@ e) Nuclear ✅
 
 a) Pentágono
 b) Circuito
-c) Triángulo ✅
+c) **Triángulo** ✅
 d) Sistema
 e) Esquema
 
@@ -1782,7 +1782,7 @@ e) Eduardo Duhalde
 **Pregunta 157:** En el punto 4.5 del Texto 5, ¿Bajo qué período se creó la Secretaría de Ciencia y Técnica (SECyT)?
 
 a) Periodo Peronista
-b) Periodo Democrático ✅
+b) **Periodo Democrático** ✅
 c) Periodo Menemista
 d) Periodo Kichnerista
 e) Periodo subversivo
@@ -1791,7 +1791,7 @@ e) Periodo subversivo
 
 **Pregunta 158:** Del Texto 5. Politicas de ciencia, tecnologia e innovacion se menciona que En las universidades, predomina la visión de la “ciencia pública”, es decir, la concepción de que el conocimiento que se produce debe ser de libre disponibilidad y no estar sujeto a restricciones ____
 
-a) Comerciales ✅
+a) **Comerciales** ✅
 b) industriales
 c) tecnologicas
 d) legales
@@ -1804,7 +1804,7 @@ e) egoistas
 a) Academica
 b) Burocratica
 c) Ecnomica
-d) Social ✅
+d) **Social** ✅
 e) Civica
 
 > **Respuesta correcta:** Social
@@ -1822,7 +1822,7 @@ Desarrollo sostenible (Brundtland) · Agenda 21 (Río 1992) · 17 ODS (universal
 **Pregunta 160:** En el texto “La sostenibilidad como marco para la acción del ingeniero” se plantea que la Agenda 21 propuso alcanzar una relación entre los Estados y las sociedades que permitiera definir objetivos estratégicos de manera _____
 
 a) coordinada
-b) integral ✅
+b) **integral** ✅
 c) sostenible
 d) progresiva
 e) global
@@ -1831,7 +1831,7 @@ e) global
 
 **Pregunta 161:** Del apunte 6, La sostenibilidad como marco para la acción del ingeniero: Sin embargo, dada la extensión temática de la Agenda 21 y la disparidad de políticas y acciones concretadas por los países que suscriben, Naciones Unidas plantea la necesidad de redefinir la idea de desarrollo. Para ello, en 1999 introduce la noción de ____ (DH). El desarrollo debe separarse de criterios netamente economicistas y vincular diversos factores: la salud, el ingreso, la educación, el rol de la mujer y la situación del ambiente, entre otros. El DH debe integrar y complementar al concepto de Desarrollo Sustentable y centrarse en las personas y la necesidad de satisfacer sus necesidades básicas.
 
-a) Desarrollo humano ✅
+a) **Desarrollo humano** ✅
 b) Datos históricos
 c) Dependencia humana
 d) Doctrina hegemónica
@@ -1841,7 +1841,7 @@ e) Dimensión holística
 
 **Pregunta 162:** Del Texto 6. La sostenibilidad como marco para la accion del ingeniero ¿Qué tipo de nuevo desarrollo busca impulsar en el mundo la iniciativa internacional Agenda 21, requiriendo una relación integral entre Estados y sociedades que beneficie tanto a las generaciones presentes como a las futuras?
 
-a) Sostenible ✅
+a) **Sostenible** ✅
 b) lineal
 c) industrial
 d) comercial
@@ -1854,7 +1854,7 @@ e) social
 
 **Pregunta 163:** En el texto “Desarrollo Sostenible”, se afirma que los Objetivos de Desarrollo Sostenible contienen metas que pueden generar indicadores específicos, medibles, realistas y _______
 
-a) alcanzables ✅
+a) **alcanzables** ✅
 b) concretos
 c) verificables
 d) evaluables
@@ -1864,7 +1864,7 @@ e) posibles
 
 **Pregunta 164:** En el texto 6, Desarrollo sostenible ¿Qué caracteriza a los 17 Objetivos de Desarrollo Sostenible en comparación con los Objetivos del Milenio?
 
-a) Metas establecidas ✅
+a) **Metas establecidas** ✅
 b) Acuerdos voluntarios
 c) Objetivos regionales
 d) Principios económicos
@@ -1876,7 +1876,7 @@ e) Indicadores culturales
 
 a) Privadas
 b) Industriales
-c) Públicas ✅
+c) **Públicas** ✅
 d) Académicas
 e) Virtuales
 
@@ -1890,14 +1890,14 @@ e) Virtuales
 a) Curar
 b) Transmitir
 c) Erradicar
-d) Prevenir ✅
+d) **Prevenir** ✅
 e) Heredar
 
 > **Respuesta correcta:** Prevenir
 
 **Pregunta 167:** En el Texto 6. Desarrollo Sostenible en la primera etapa de la cumbre de las Naciones Unidas se comienza a entender a la _______ como sujeto de derecho y no como objeto de derecho.
 
-a) naturaleza ✅
+a) **naturaleza** ✅
 b) natura
 c) ecología
 d) atmósfera
@@ -1907,7 +1907,7 @@ e) biodiversidad
 
 **Pregunta 168:** Texto 6: La sostenibilidad como marco para la acción del Ingeniero. Noción, origen y debates. Cuál fue el resultado respecto a la paridad de género al finalizar el periodo de los Objetivos del Milenio?
 
-a) Saneamiento ✅
+a) **Saneamiento** ✅
 b) Deforestación
 c) Matriculación
 d) Preferencial
@@ -1921,7 +1921,7 @@ e) Prevenir
 **Pregunta 169:** El texto “La sostenibilidad como marco para la acción del ingeniero” dice que la Cumbre de Río+20 planteó que los debates debían orientarse hacia la construcción de una economía _____ para alcanzar el Desarrollo Sustentable
 
 a) inclusiva
-b) ecológica ✅
+b) **ecológica** ✅
 c) regional
 d) sostenible
 e) liberal
@@ -1931,7 +1931,7 @@ e) liberal
 **Pregunta 170:** Segun el texto 6:"LA SOSTENIBILIDAD COMO MARCO PARA LA ACCIÓN DEL INGENIERO Noción, origen y debates" ¿Qué tipo de economía se debatió en Río+20 para alcanzar el Desarrollo Sustentable?
 
 a) digital
-b) ecológica ✅
+b) **ecológica** ✅
 c) industrial
 d) financiera
 e) circular
@@ -1940,7 +1940,7 @@ e) circular
 
 **Pregunta 171:** En el texto 6, Desarrollo sostenible. Fue la primera vez que se asumió la necesidad de definir una política internacional de medio ambiente. En dicha oportunidad se instauró el Programa del Medio Ambiente de las Naciones Unidas. ¿En que cumbre se desarrolló?
 
-a) Cumbre de la Tierra Estocolmo ✅
+a) **Cumbre de la Tierra Estocolmo** ✅
 b) Cumbre de Río
 c) Cumbre de Johannesburgo
 d) Cumbre de Glasgow
@@ -1957,7 +1957,7 @@ a) Johannesburgo
 b) Estocolmo
 c) Río de Janeiro
 d) Milenio
-e) Glasgow ✅
+e) **Glasgow** ✅
 
 > **Respuesta correcta:** Glasgow
 
@@ -1965,7 +1965,7 @@ e) Glasgow ✅
 
 a) Naciones
 b) Pandemia
-c) Glasgow ✅
+c) **Glasgow** ✅
 d) Emisiones
 e) Objetivos
 
@@ -1975,7 +1975,7 @@ e) Objetivos
 
 a) Río
 b) Glasgow
-c) Estocolmo ✅
+c) **Estocolmo** ✅
 d) Johannesburgo
 e) Milenio
 
@@ -1987,7 +1987,7 @@ e) Milenio
 **Pregunta 175:** En el texto “Desarrollo sostenible”, las políticas neoliberales agudizaron el estancamiento, aumentaron la pobreza, la ______ y la exclusión social
 
 a) desigualdad
-b) marginalidad ✅
+b) **marginalidad** ✅
 c) dependencia
 d) brecha centro-periferia
 e) dominación
@@ -1997,7 +1997,7 @@ e) dominación
 **Pregunta 176:** El texto “Desarrollo Sostenible” sostiene que los desafíos ambientales, económicos y sociales demandan una nueva _______ que reemplace conceptos anteriores
 
 a) transformación
-b) revolución ✅
+b) **revolución** ✅
 c) estrategia
 d) política
 e) estructura
@@ -2006,7 +2006,7 @@ e) estructura
 
 **Pregunta 177:** Según el libro "La sostenibilidad como marco para la acción del ingeniero", en 1987 se publicó el informe de Brundtland, el cual presentó la definición mas conocida del concepto Desarrollo ______.
 
-a) Sustentable ✅
+a) **Sustentable** ✅
 b) Humano
 c) Económico
 d) Social
@@ -2019,7 +2019,7 @@ e) Integral
 
 **Pregunta 178:** En el apunte 6, "La sostenibilidad como marco para la acción del ingeniero" : la Cumbre de la Tierra de Johannesburgo (Sudáfrica), expone la preocupación por el decepcionante resultado obtenido en la búsqueda de Desarrollo ___________.
 
-a) Sustentable ✅
+a) **Sustentable** ✅
 b) Humano
 c) Económico
 d) Tecnológico
@@ -2029,7 +2029,7 @@ e) Ambiental
 
 **Pregunta 179:** Según el apunte “LA SOSTENIBILIDAD COMO MARCO PARA LA ACCIÓN DEL INGENIERO Noción, origen y debates”, el concepto que ayuda a definir la relación entre la ingeniería y el entorno es ________.
 
-a) Ecología industrial ✅
+a) **Ecología industrial** ✅
 b) Ciencia
 c) Ecoeficiencia
 d) Responsabilidad social
@@ -2039,7 +2039,7 @@ e) Revolución sustentable
 
 **Pregunta 180:** Según el texto "LA SOSTENIBILIDAD COMO MARCO PARA LA ACCIÓN DEL INGENIERO" El mundo está cada vez más poblado y nuestros modelos de producción y consumo hacen que el crecimiento sea _____________
 
-a) Insostenible ✅
+a) **Insostenible** ✅
 b) Sustentable
 c) Insustentable
 d) Sostenible
@@ -2052,7 +2052,7 @@ e) Viable
 
 **Pregunta 181:** Según el apunte “LA SOSTENIBILIDAD COMO MARCO PARA LA ACCIÓN DEL INGENIERO Noción, origen y debates”, las teorías del desarrollo surgieron para dar respuesta a ciertos interrogantes que surgen frente a las ________ de las sociedades.
 
-a) transformaciones ✅
+a) **transformaciones** ✅
 b) preguntas
 c) crisis
 d) culturas
@@ -2062,7 +2062,7 @@ e) economías
 
 **Pregunta 182:** Del texto 6 “LA SOSTENIBILIDAD COMO MARCO PARA LA ACCIÓN DEL INGENIERO: Noción, origen y debates”. Las teorías del _______ basan su elemento central en la búsqueda de la emergencia de una clase de empresarios capitalistas que transformen el estancamiento de la sociedad y la vuelvan dinámica. Aquí se distingue la línea de trabajo dual y lineal; por otro lado y en 1948 la teoría estructuralista del CEPAL, luego la idea socialista y a fines del ‘60 el modelo neoliberal.
 
-a) Desarrollo ✅
+a) **Desarrollo** ✅
 b) Patrimonio
 c) Mercado
 d) Cambio
@@ -2072,7 +2072,7 @@ e) Capitalismo
 
 **Pregunta 183:** En el punto 2.3 del Texto 6, Según Raúl Prebisch, ¿Qué dos sectores coexisten a nivel de relaciones macroeconómicas?
 
-a) Centro y Periferia ✅
+a) **Centro y Periferia** ✅
 b) Precapitalista y Capitalista
 c) Antiguo y Moderno
 d) Subdesarrollado y Emergente
@@ -2085,7 +2085,7 @@ e) Keynesianismo y Neoliberalismo
 
 **Pregunta 184:** Del apunte 6, La sostenibilidad como marco para la acción del ingeniero: una de las nociones principales que se discutieron en la cumbre Río +20 es la siguiente:
 
-a) El mundo está cada vez más poblado y nuestros modelos de producción y consumo hacen que el crecimiento sea insostenible a mediano y largo plazo. ✅
+a) **El mundo está cada vez más poblado y nuestros modelos de producción y consumo hacen que el crecimiento sea insostenible a mediano y largo plazo.** ✅
 b) Fomentar la obsolescencia programada de productos
 c) Eliminar la financiación estatal para la investigación científica
 d) Priorizar la ganancia inmediata sobre la sostenibilidad ambiental
@@ -2097,7 +2097,7 @@ e) Restringir la difusión del conocimiento a círculos privados
 
 a) Sonora
 b) Visual
-c) Industrial ✅
+c) **Industrial** ✅
 d) Marítima
 e) Radiactiva
 
@@ -2106,7 +2106,7 @@ e) Radiactiva
 **Pregunta 186:** Del texto 6 “LA SOSTENIBILIDAD COMO MARCO PARA LA ACCIÓN DEL INGENIERO: Noción, origen y debates”.  En el 2015 la ONU definió 17 nuevos objetivos de cara al 2030 poniendo foco en la sostenibilidad con la efectivización de forma _________ de lo económico, social y medioambiental. La ventaja actual es que existen metas establecidas, con las cuales las empresas y los Estados quedan comprometidos a través de iniciativas que se propongan y desarrollen.
 
 a) Industrial
-b) Holística ✅
+b) **Holística** ✅
 c) Unitaria
 d) Filosófica
 e) Armónica
