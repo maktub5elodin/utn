@@ -3,7 +3,7 @@
 **Fecha:** 23 de abril de 2026  
 **Profesor:** Abud  
 **Unidades:** UT III — La Ingeniería como Actividad Profesional / UT VII — Mantenimiento  
-**Nota:** La clase 2 (16/04) estuvo dedicada al proyecto de mecánica rotacional — no se toman apuntes de clase para esa sesión.
+**Nota:** Las presentaciones del proyecto de mecánica rotacional se realizaron en la Clase 4 (30/04).
 
 ---
 
@@ -78,8 +78,6 @@ Sistema térmico    ↔  Circuito RC          Temperatura ↔ Tensión
                                             Flujo de calor ↔ Corriente
 ```
 
-Analogía contable: usar la variación de caja como indicador adelantado de la rentabilidad futura — son variables de diferente naturaleza que guardan una relación analógica conocida.
-
 ---
 
 ### 1.2 Resolución de problemas
@@ -107,8 +105,6 @@ NECESIDAD SOCIAL NO SATISFECHA
    IMPLEMENTACIÓN DE LA SOLUCIÓN
 ```
 
-Analogía contable: detectar que una empresa no tiene sistema de control interno (problema existente no satisfecho) y proponer el diseño e implementación del mismo — es exactamente la misma estructura.
-
 ---
 
 ### 1.3 Optimización
@@ -134,8 +130,6 @@ Estructura de la matriz:
 Cada factor tiene un **peso** (importancia relativa) y cada solución recibe una **nota** por factor. La solución con mayor puntaje ponderado es la óptima.
 
 > En la práctica, esta herramienta es equivalente a un **scorecard ponderado**: se asigna peso relativo a cada criterio, se puntúan las alternativas, y se elige la de mayor score total. La terminología puede variar según el autor; lo relevante para la materia es el nombre "matriz de decisión" y la estructura de 15–20 factores que usa Abud.
-
-Analogía contable: el análisis multicriterio para seleccionar un sistema contable (ERP) — costo, soporte, integración, curva de aprendizaje, escalabilidad, etc. — es exactamente una matriz de decisión aplicada.
 
 ---
 
@@ -189,8 +183,6 @@ Costo total = Costo de mantenimiento + Costo de falla (lucro cesante + daños)
                       └─────── PUNTO ÓPTIMO ─────┘
                          (minimiza la suma total)
 ```
-
-Analogía contable: provisión para incobrables — gastar en auditoría y control (mantenimiento) reduce las pérdidas por deudas incobrables (fallas). Hay un punto óptimo donde el costo de control iguala el beneficio de la reducción de pérdidas.
 
 ---
 

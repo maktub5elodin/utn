@@ -35,6 +35,23 @@ Cuando se aplica una fuerza sobre una viga, esta se deforma: adopta una curva. E
                          ▼  deflexión δ (curva de deformación)
 ```
 
+### ¿Qué es una sección transversal?
+
+La **sección transversal** es el corte perpendicular al eje longitudinal de un sólido. Si tomás una barra y la cortás con una sierra en ángulo recto respecto a su longitud, la superficie que queda expuesta es la sección transversal.
+
+```
+      eje longitudinal de la barra →
+  ──────────────────────────────────────
+  ████████████████│██████████████████
+  ████████████████│██████████████████   ← corte transversal (perpendicular)
+  ████████████████│██████████████████
+  ──────────────────────────────────────
+                  └── sección transversal
+                      (la figura 2D que queda expuesta)
+```
+
+La forma de esa figura (circular, rectangular, en I, etc.) y su área son las propiedades geométricas más importantes del elemento estructural — determinan tanto su rigidez como su resistencia.
+
 ### Variables que afectan la deflexión
 
 Abud enumeró cuatro factores:
@@ -184,8 +201,6 @@ GDL = 3   →   4 o más restricciones → hiperestático
 **Consecuencia sobre el material:**  
 Isostático e hiperestático influyen en **cómo se va a deformar el material a través del tiempo**. En un sistema hiperestático, los vínculos redundantes generan esfuerzos internos adicionales incluso sin carga externa (por ejemplo, ante variaciones de temperatura o asientos diferenciales de los apoyos). Esta es una razón central para elegir uno u otro tipo de estructura según la aplicación.
 
-Analogía contable: un sistema isostático es como un asiento contable con exactamente un débito y un crédito — equilibrado y determinado. Uno hiperestático es como tener múltiples partidas que suman al mismo total — hay más de una forma de distribuirlas y hay que usar información adicional (ecuaciones de deformación) para resolver la distribución real.
-
 ---
 
 ## 6. Simbología y representación
@@ -284,8 +299,6 @@ En la zona inicial del diagrama, la relación entre tensión y deformación es *
 donde `E` es el **módulo de elasticidad** del material (constante propia de cada material).
 
 Abud destacó este concepto de proporcionalidad como el más importante de la clase: es el fundamento sobre el cual se construye toda la teoría matemática de la elasticidad.
-
-Analogía contable: la zona proporcional es como la relación lineal entre ventas e impuesto a las ventas — mientras la alícuota es constante, duplicar las ventas duplica el impuesto. La proporcionalidad es la condición que permite hacer proyecciones simples. Cuando la relación deja de ser lineal (zona plástica), ya no alcanza con saber la alícuota — hay que conocer la curva completa.
 
 ---
 

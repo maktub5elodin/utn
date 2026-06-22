@@ -183,17 +183,97 @@ Abud enumeró los **tres esfuerzos característicos fundamentales** que trabajan
 
 > Abud lo definió como **par de pares**: el momento flector es el resultado de dos conjuntos de fuerzas internas distribuidas que, integradas sobre la sección, producen un par resultante.
 
-### El momento de una fuerza
+### El momento de una fuerza — desde cero
 
-Abud aclaró el concepto en el pizarrón:
+Antes de la fórmula, hay que entender qué diferencia a un momento de una fuerza.
 
-> El momento de una fuerza es el **producto vectorial** entre dos vectores — el vector posición `r` y el vector fuerza `F` — y por lo tanto **su resultado es también un vector**.
+**Una fuerza produce traslación** — empuja o tira del cuerpo en una dirección. Si empujás una caja en el piso, la caja se desplaza: eso es el efecto de una fuerza.
+
+**Un momento produce rotación** — tiende a girar el cuerpo alrededor de un punto o eje. Si abrís una puerta empujando el manijón, la puerta gira alrededor de las bisagras: eso es el efecto de un momento.
+
+La misma fuerza puede producir distinto momento según **dónde** se aplica:
 
 ```
-  M = r × F   (producto vectorial)
+  Eje de giro (bisagra)
+        │
+        │──────────────────── puerta ────────────────[ manija ]
+        │
+        │   F₁ (cerca del eje)          F₂ (lejos del eje)
+        │   ↓                                         ↓
+        │───┼─────────────────────────────────────────┼──────
+        │   d₁ (pequeño)                     d₂ (grande)
+
+  M₁ = F × d₁   →  poco efecto rotacional (cuesta abrirla)
+  M₂ = F × d₂   →  mucho efecto rotacional (fácil de abrir)
 ```
 
-Esto explica por qué el momento flector M es un vector (tiene dirección y sentido), no solo un número.
+Con la misma fuerza F, el momento es mayor si se aplica más lejos del eje. Eso es el **brazo del momento** (distancia `d`): cuanto más largo, mayor el efecto giratorio.
+
+**Ejemplo cotidiano concreto:** una llave inglesa larga permite apretar un perno más que una corta. No porque la fuerza sea mayor, sino porque el brazo `d` es mayor → el momento es mayor.
+
+```
+  Momento = Fuerza × Brazo
+  M = F × d
+```
+
+donde `d` es la distancia **perpendicular** entre la línea de acción de la fuerza y el punto (o eje) de giro.
+
+---
+
+**¿Por qué el momento es un vector y no solo un número?**
+
+En dos dimensiones, el momento tiene sentido: puede ser horario (↻) o antihorario (↺). Eso ya son dos posibilidades distintas — un signo positivo o negativo.
+
+En tres dimensiones, el eje alrededor del cual se produce la rotación puede apuntar en cualquier dirección del espacio. Para representar eso hace falta un vector completo (con dirección, sentido y módulo).
+
+Por eso Abud lo definió así:
+
+> El momento de una fuerza es el **producto vectorial** entre el vector posición `r` y el vector fuerza `F`. El resultado es un vector.
+
+```
+  M = r × F
+```
+
+- `r` = vector desde el punto de referencia (eje de giro) hasta el punto donde actúa la fuerza
+- `F` = vector fuerza
+- `×` = producto vectorial (no es multiplicación ordinaria)
+
+El vector resultante `M` es **perpendicular** al plano que forman `r` y `F`. Su dirección indica el eje de rotación; su sentido (usando la regla de la mano derecha) indica si la rotación es horaria o antihoraria.
+
+```
+               F
+               ↑
+               │
+               │ θ (ángulo entre r y F)
+  ─────────────·──────────────►
+  punto de     r
+  referencia
+
+  |M| = |r| · |F| · sen(θ)
+
+  El vector M sale perpendicular a la pantalla:
+  ⊙ si la rotación es antihoraria
+  ⊗ si la rotación es horaria
+```
+
+**¿Cuándo una fuerza NO produce momento?** Cuando su línea de acción pasa exactamente por el punto de referencia (`d = 0`). Ejemplo: si empujás la puerta empujando exactamente desde la bisagra, no gira.
+
+---
+
+**Los dos tipos de momento en las estructuras:**
+
+```
+  M_flector (M) — dobla la viga
+  ═══════════════════════════════
+  La viga se curva como una regla que se dobla:
+  la parte superior se comprime, la inferior se estira.
+  El eje de rotación es perpendicular al eje de la barra.
+
+  M_torsor (T) — tuerce el eje
+  ════════════════════════════════
+  El eje gira sobre sí mismo, como cuando retorcés un trapo.
+  El eje de rotación coincide con el eje longitudinal de la barra.
+```
 
 ---
 

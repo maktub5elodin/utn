@@ -22,8 +22,6 @@ Laboratorio / papers   Diseño / producto / sistema
 Libre de restricciones Sujeta a costos y normas
 ```
 
-Analogía contable: la contabilidad pura (teoría contable) describe cómo debería registrarse la realidad económica; la contaduría en ejercicio profesional adapta esa teoría al marco normativo, al cliente y a las restricciones prácticas. Misma relación entre ciencia e ingeniería.
-
 ---
 
 ## 2. Formulación del modelo matemático de un sistema
@@ -138,8 +136,6 @@ El comportamiento depende de la relación entre el amortiguamiento real `c` y el
 | **Subamortiguado** | `c < c_c` | Oscila con amplitud decreciente — resorte de puerta que rebota |
 | **Críticamente amortiguado** | `c = c_c` | Retorno más rápido sin oscilación — amortiguador de puerta de hospital |
 | **Sobreamortiguado** | `c > c_c` | Retorno lento sin oscilación — puerta con pistón muy pesado |
-
-Analogía contable: los tres casos son como tres políticas de cobranza ante una deuda. El subamortiguado es el cliente que paga en cuotas con rebotes (oscila). El críticamente amortiguado es el que salda exactamente al vencimiento. El sobreamortiguado es el que paga, pero lleva mucho tiempo.
 
 ---
 
