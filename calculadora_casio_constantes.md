@@ -79,13 +79,20 @@ Propiedades de las partículas subatómicas fundamentales.
 
 Constantes que conectan el mundo microscópico (átomos) con el macroscópico (moles, temperatura).
 
+> **Nota — bar vs. atmósfera en condiciones estándar:**
+> Hasta 1982, la IUPAC definía las condiciones normales como 0 °C y **1 atm** (= 101 325 Pa) → `Vm = 22.414 × 10⁻³ m³/mol`.
+> Desde 1982, la presión estándar pasó a **1 bar** (= 100 000 Pa) → `Vm = 22.711 × 10⁻³ m³/mol`.
+> La calculadora Casio fx-991LA CW usa el estándar actual (1 bar). Muchos libros y tablas viejas todavía citan el valor de 1 atm — verificá cuál usa tu guía de ejercicios antes de calcular.
+> Conversión rápida: `1 atm = 1.01325 bar`.
+> **Truco unidades:** el factor `× 10⁻³` desaparece cuando expresás `Vm` en litros, porque `1 m³ = 1000 L` cancela exactamente el exponente: `22.711 × 10⁻³ m³/mol = 22.711 L/mol`. Los libros de química suelen dar `Vm` directamente en L/mol por eso.
+
 | Símbolo | Nombre completo | Valor (calculadora) | Unidad | Para qué se usa |
 |---------|----------------|---------------------|--------|-----------------|
 | `mu` | Unidad de masa atómica | `1.66053906660 × 10⁻²⁷` | kg | 1 u = 1/12 masa del ¹²C; convierte masa molar en masa por átomo |
 | `F` | Constante de Faraday | `96485.33212` | C/mol | Carga de 1 mol de electrones; electrólisis: `Q = n·F` |
 | `NA` | Número de Avogadro | `6.02214076 × 10²³` | mol⁻¹ | Número de entidades (átomos/moléculas) por mol |
 | `k` | Constante de Boltzmann | `1.380649 × 10⁻²³` | J/K | Energía térmica por partícula: `Ek = (3/2)·k·T`; `k = R / NA` |
-| `Vm` | Volumen molar del gas ideal (0 °C, 1 atm) | `22.41396954 × 10⁻³` | m³/mol | Volumen de 1 mol de gas ideal en condiciones normales |
+| `Vm` | Volumen molar del gas ideal (0 °C, 1 bar) | `0.02271095464` | m³/mol | Volumen de 1 mol de gas ideal a 0 °C; calculado con 1 bar (no 1 atm) |
 | `R` | Constante universal de los gases | `8.314462618` | J/(mol·K) | Ley del gas ideal: `PV = nRT` |
 | `c₁` | Primera constante de radiación | `3.741771852 × 10⁻¹⁶` | W·m² | Ley de Planck del cuerpo negro: `c₁ = 2πhc²` |
 | `c₂` | Segunda constante de radiación | `1.438776877 × 10⁻²` | m·K | Ley de Wien (pico de emisión): `c₂ = hc / k` |
@@ -123,7 +130,7 @@ Cuando no recordás el símbolo, buscá por el concepto:
 | Energía de un fotón | `h` o `ħ` | Universal |
 | Velocidad de la luz | `c` | Universal |
 | Fuerza entre cargas | `ε₀` | Universal |
-| Gravedad universal | `gn | Universal |
+| Gravedad universal | `G` | Universal |
 | Carga del electrón | `e` | Electromagnétic |
 | Metrología de resistencia | `RK` | Electromagnétic |
 | Masa de partículas nucleares | `mp`, `mn` | Atómica&Nuclear |
