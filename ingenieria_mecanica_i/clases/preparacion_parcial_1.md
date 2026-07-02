@@ -2,16 +2,27 @@
 
 **Profesor:** Abud  
 **Fecha del examen:** jueves 2 de julio de 2026  
-**Modalidad:** Multiple choice — las respuestas incorrectas restan puntos  
-**Estado de este documento:** Respuestas confirmadas contra el modelo oficial. 28/30 coinciden; P14 y P15 tienen discrepancia conceptual documentada (ver cada pregunta).
+**Modalidad:** Multiple choice — las respuestas incorrectas restan puntos; las **no respondidas valen 0** (confirmado por Abud)  
+**Fuentes:** Examen A (modelo anterior) · Examen B (segundo modelo) · S1021 (tercer modelo)  
+**Estado:** banco consolidado de ~52 preguntas únicas, organizadas temáticamente.
+
+---
+
+## Convención de identificadores
+
+| Marcador | Significado |
+|---|---|
+| `[★×2]` | Pregunta confirmada en **2 fuentes distintas** — alta probabilidad de repetición |
+| `[★×3]` | Pregunta confirmada en **3 fuentes distintas** — máxima prioridad de estudio |
+| `[★×3 — ⚠ RESPUESTAS PARCIALMENTE DIFIEREN]` | 3 fuentes, pero una da opción correcta distinta — leer nota |
+| `[⚠ DISCREPANCIA CONCEPTUAL]` | La respuesta de Abud difiere de la definición físico-técnica estricta |
+| `[⚠ SIN RESPUESTA CONFIRMADA]` | No hay respuesta marcada en ninguna fuente disponible |
 
 ---
 
 ## 1. Estrategia para el examen
 
 ### Regla del juego: incorrectas restan
-
-El examen es multiple choice con penalidad. El mecanismo es:
 
 ```
 Puntaje = (correctas × +1) + (incorrectas × −P) + (no respondidas × 0)
@@ -26,7 +37,7 @@ Donde `P` es la penalidad por respuesta incorrecta. Aunque Abud no especificó e
 | 5 opciones | −0,25 |
 | 6 opciones | −0,20 |
 
-Con esa fórmula, adivinar al azar entre **todas** las opciones da esperanza matemática = 0 (no gana ni pierde). El secreto está en **eliminar opciones**.
+Con esa fórmula, adivinar al azar da esperanza matemática = 0. El secreto está en **eliminar opciones**.
 
 ### Regla de oro: la eliminación es tu herramienta principal
 
@@ -36,24 +47,19 @@ Con esa fórmula, adivinar al azar entre **todas** las opciones da esperanza mat
 ```
 
 Ejemplo con 3 opciones y penalidad −0,5:
-- Adivinás al azar (1/3 chance): E = 1/3 × 1 + 2/3 × (−0,5) = 0     → neutro
+- Adivinás al azar (1/3 chance): E = 1/3 × 1 + 2/3 × (−0,5) = 0 → neutro
 - Eliminaste 1, elegís entre 2 (1/2 chance): E = 1/2 × 1 + 1/2 × (−0,5) = +0,25 → conveniente
-- Sabés la respuesta (certeza): E = +1                                → siempre respondé
+- Sabés la respuesta (certeza): E = +1 → siempre respondé
 
 ### Estadísticas de aprobación
 
-El examen tiene **30 preguntas** de 1 punto cada una. La nota final se convierte a la escala 1–10:
+El examen tiene **30 preguntas** de 1 punto cada una. La nota final:
 
 ```
-Nota = puntaje_bruto × (10 / 30)
+Nota = puntaje_bruto × (10 / 30)       Para aprobar con 6: puntaje_bruto ≥ 18
 ```
 
-Para aprobar con 6 (sobre 10):
-```
-puntaje_bruto ≥ 6 × (30/10) = 18 puntos
-```
-
-**Escenarios de aprobación con penalidad −0,5 por error (preguntas de 3 opciones):**
+**Escenarios con penalidad −0,5 (preguntas de 3 opciones):**
 
 | Correctas | Incorrectas | No respondidas | Puntaje bruto | Nota (/10) | ¿Aprueba? |
 |---|---|---|---|---|---|
@@ -62,590 +68,882 @@ puntaje_bruto ≥ 6 × (30/10) = 18 puntos
 | 20 | 4 | 6 | 18,0 | 6,0 | justo |
 | 18 | 0 | 12 | 18,0 | 6,0 | justo |
 | 18 | 1 | 11 | 17,5 | 5,8 | ✗ |
-| 15 | 6 | 9 | 12,0 | 4,0 | ✗ |
 | 20 | 8 | 2 | 16,0 | 5,3 | ✗ |
 
-**Conclusión práctica:** si respondés todas las que sabés con certeza (digamos ~20) y las demás en blanco, llegás cómodo. No vale la pena arriesgar las últimas si no tenés ni 50% de confianza en la opción.
+**Conclusión práctica:** respondé todo lo que sabés con certeza y dejá el resto en blanco.
 
 ---
 
-> **ADVERTENCIA — incertidumbre sobre el sistema de penalidades de Abud:**
+> **NOTA sobre el sistema de penalidades de Abud:**
 >
-> Todo el análisis anterior asume que **no responder = 0 puntos** y que la penalidad depende de la cantidad de opciones. Ambas cosas son convenciones estándar, pero **no están confirmadas para este examen**.
+> **Confirmado por Abud:** las preguntas no respondidas valen 0 — no restan.
 >
-> Dos incógnitas reales:
->
-> 1. **¿Las preguntas sin responder restan?** En algunos sistemas (especialmente con Abud), dejar en blanco puede equivaler a responder incorrectamente. Si ese fuera el caso, la estrategia de "dejar en blanco si no sé" se invalida completamente — y convendría siempre marcar algo.
->
-> 2. **¿Cuál es la penalidad exacta por error?** El sistema propuesto arriba (`P = 1 / (opciones − 1)`) es el más común en Argentina y tiene base matemática sólida (hace que adivinar sea neutral en esperanza). Pero Abud podría usar una penalidad fija (ej. −1 para toda pregunta incorrecta, independientemente de las opciones), o una fracción diferente.
->
-> **Recomendación ante la incertidumbre:** antes de empezar el examen, **preguntarle explícitamente a Abud** cuánto resta una incorrecta y si el blanco puntúa 0 o negativo. Es una pregunta completamente legítima y esa información cambia la estrategia óptima de manera significativa.
+> **No confirmado:** la penalidad exacta por error. Abud dice tener "su tablita" pero no la divulga. La fórmula `P = 1 / (opciones − 1)` es el estándar argentino con base matemática sólida. Es razonable asumirla, pero el puntaje exacto puede variar.
 
 ---
 
 ### Checklist antes de enviar
 
-- [ ] Releé el enunciado completo antes de marcar — muchas trampas están en "NO", "SOLO", "NUNCA"
-- [ ] Para preguntas de tratamientos térmicos: distinguí cementación (C) / nitruración (N) / cianuración (C+N) / temple (rapidez) / recocido (lentitud)
-- [ ] Para preguntas de aleaciones: latón = Cu+Zn, bronce = Cu+Sn — fácil de invertir bajo presión
-- [ ] Para preguntas de % C: acero < 2%, fundición 2–4% — el límite 2% es el más preguntado
-- [ ] Para SAE: los dos últimos dígitos son el % de C en centésimas (1045 → 0,45% C)
+- [ ] Releé el enunciado completo — muchas trampas están en "NO", "SOLO", "NUNCA"
+- [ ] Tratamientos térmicos: cementación (C) / nitruración (N) / cianuración (C+N) / temple (rápido) / recocido (lento)
+- [ ] Aleaciones: latón = Cu+Zn, bronce = Cu+Sn — fácil de invertir bajo presión
+- [ ] % C: acero < 2%, fundición 2–4% — el límite 2% es el más preguntado
+- [ ] SAE: los dos últimos dígitos son el % de C en centésimas (1045 → 0,45% C)
 
 ---
 
-## 2. Preguntas del modelo de examen
-
-> **ADVERTENCIA:** Las respuestas marcadas a continuación son una **primera revisión** hecha con criterio teórico. Deben ser confirmadas. Las preguntas con ⚠ tienen alguna ambigüedad o requieren confirmación especial.
+## 2. Banco de preguntas por bloque temático
 
 ---
 
-### P1 — La dureza de un material se define por:
-
-- ( ) La penetración superficial de una bolilla en una atmósfera rica en carbono.
-- **(✓) La penetración de una bolilla sobre la superficie del material, bajo una carga determinada.**
-- ( ) La penetración de una bolilla en una superficie debido a una alta temperatura.
-
-> La dureza se mide siempre en superficie. Los ensayos Brinell, Rockwell y Vickers consisten en presionar un indentador (bolilla o cono) bajo una carga conocida y medir la huella. La opción a describe la cementación (tratamiento termoquímico, no dureza). La c es incorrecta porque la temperatura no define la dureza sino que la altera.
+### Bloque A — Ingeniería: definición y metodología
 
 ---
 
-### P2 — En una estructura simple (viga apoyada) con carga en el centro: ⚠
+#### A1 — Dentro de la definición de la ingeniería encontramos:
 
-- ( ) La curva de deflexión es una constante que no depende de las dimensiones de la estructura.
-- ( ) No hay relación entre la fuerza y la curva de deflexión.
-- **(✓) La relación entre la fuerza y la curva de deflexión es un problema matemático.**
+- ( ) a. Buscar una solución sólo utilizando el conocimiento empírico.
+- ( ) b. Buscar una solución utilizando métodos científicos y empíricos.
+- ( ) c. Buscar una solución utilizando el sentido común y la investigación.
+  - I. A y b verdaderas, c falsa.
+  - II. A y c verdaderas, b falsa.
+  - III. A, b y c falsas.
+  - IV. A, b y c verdaderas.
+  - **(✓) V. B y c verdaderas, a falsa.**
 
-> Por eliminación: a es falsa (la deflexión sí depende de dimensiones, material, forma de sección — clase 2). b es falsa (hay relación directa). c es la única correcta, aunque la redacción sea vaga: lo que afirma es que la relación sí existe y tiene forma matemática (δ = F·L³ / 48·E·I para viga biapoyada con carga central). ⚠ Confirmar con Abud si hay una opción más precisa en el examen real.
-
----
-
-### P3 — Los materiales cerámicos (arcillas y derivados), sus propiedades tecnológicas son:
-
-- **(✓) Gran dureza y una alta resistencia al rozamiento y desgaste.**
-- ( ) Gran dureza y baja resistencia a la corrosión.
-- ( ) Alta dureza, pero soportan temperaturas no muy elevadas.
-
-> Los cerámicos son muy duros y resistentes al desgaste (por eso se usan en herramientas de corte, frenos, refractarios). También tienen alta resistencia a la corrosión y soportan temperaturas muy elevadas — por eso b y c son falsas.
+> La ingeniería combina métodos científicos (b) y empíricos/sentido común (c). La a es falsa porque dice "sólo empírico" — ese "sólo" la invalida.
 
 ---
 
-### P4 — Una fundición de Hierro es:
-
-- **(✓) Una aleación Fe-C con un contenido mayor al 2% de C.**
-- ( ) Una aleación Fe-C con un contenido mayor al 1,5% y menor al 2% de C.
-- ( ) Una aleación Fe-C con un contenido mayor al 4% de C.
-
-> El diagrama Fe-C establece el límite en 2% C: por debajo es acero, por encima es fundición (hasta ~4%). La opción c es incorrecta porque, si bien existen fundiciones con >4% C, el límite definitorio de "fundición" es >2%, no >4%.
-
----
-
-### P5 — El acero es:
-
-- ( ) a. Una aleación Fe-C con un contenido menor al 3% de C.
-- ( ) b. Una aleación Fe-C con cualquier % de C.
-- **(✓) c. Una aleación Fe-C con un contenido menor al 2% de C.**
-- ( ) d. Una aleación Fe-C con un contenido menor al 4% de C.
-
-> El límite 2% de carbono es la frontera técnica entre acero y fundición en el diagrama Fe-C. Es el dato más preguntado de toda la materia — memorizarlo es obligatorio.
-
----
-
-### P6 — SAE 1045:
-
-- **(✓) Un acero al carbono con un 0,45% de C.**
-- ( ) Un acero al Cr-Ni con un 0,45% de C.
-- ( ) Un acero con un contenido de 4,5% de C.
-
-> Sistema SAE de 4 dígitos: primer dígito = tipo de aleación (1 = acero al carbono), segundo dígito = subgrupo o aleante secundario (0 = sin aleante adicional), últimos dos dígitos = % de C en centésimas (45 → 0,45%). Cr-Ni correspondería a la serie 3XXX.
-
----
-
-### P7 — La resistencia de materiales tiene como fin:
+#### A2 — La resistencia de materiales tiene como fin: `[★×3]`
 
 - **(✓) Determinar y juzgar las características del sólido y su aplicación práctica.**
 - ( ) Elaborar métodos de cálculo exactos, complejos y voluminosos.
 - ( ) No considerar el fenómeno de los resultados prácticos.
 
-> La resistencia de materiales es una disciplina aplicada: busca evaluar el comportamiento de un sólido bajo cargas para decidir si es apto para su uso. Las opciones b y c describen lo opuesto a eso.
+> La ResistMat es una disciplina aplicada: evalúa el comportamiento de un sólido bajo cargas para decidir si es apto para su uso. Confirmada en Examen A, Examen B y S1021.
 
 ---
 
-### P8 — El momento flector resulta de reducir la resultante de las fuerzas que actúan a la izquierda de la sección considerada al:
+#### A3 — Dentro de las habilidades básicas de la ingeniería tenemos la optimización, que consiste en:
+
+- ( ) a. El ingeniero se debe ajustar a la solución más económica.
+- **(✓) b. El ingeniero debe buscar más de una solución y luego seleccionar la mejor.**
+- ( ) c. El ingeniero debe buscar la mejor solución técnico-funcional independientemente del análisis económico.
+
+> Optimización = generar múltiples alternativas → seleccionar la más adecuada según criterios técnicos y económicos. La a fija solo el criterio económico; la c ignora el económico. Ambas son incorrectas por excluyentes.
+
+---
+
+#### A4 — El proceso de modelado para la resolución de un problema en ingeniería, en el siguiente orden: `[★×3]`
+
+- ( ) a. Formulaciones matemáticas → hipótesis → comprobar predicciones → obtener soluciones.
+- **(✓) b. Hipótesis → formulaciones matemáticas → obtener soluciones → comprobar las predicciones con hechos conocidos.**
+- ( ) c. Hipótesis → comprobar predicciones → formulaciones matemáticas → obtener soluciones.
+
+> Secuencia de Abud: (1) hipótesis, (2) modelo matemático, (3) resolver, (4) verificar. La verificación siempre al final. Confirmada en Examen A, Examen B y S1021.
+
+---
+
+#### A5 — La formulación del modelo matemático de un sistema se inicia con: `[★×2]`
+
+- ( ) I) Identificación de **algunas** variables. II) Determinación de las variables restantes por hipótesis.
+- **(✓) I) Identificación de las variables que ocasionan el cambio del sistema. II) Se establecen un conjunto de hipótesis.**
+- ( ) Solo la aplicación de leyes empíricas que contienen algunas de las variables.
+
+> La diferencia entre a y b: la a dice "algunas variables" (incompleto), la b dice "las variables que ocasionan el cambio" (correcto). Confirmada en Examen A y S1021.
+
+---
+
+#### A6 — En una estructura simple (viga apoyada) con carga en el centro: `[★×3]`
+
+- ( ) a. No hay relación entre la fuerza y la curva de deflexión.
+- **(✓) b. La relación entre la fuerza y la curva de deflexión es un problema matemático.**
+- ( ) c. La curva de deflexión es una constante que no depende de las dimensiones de la estructura.
+
+> a es falsa (hay relación directa). c es falsa (la deflexión depende de dimensiones, material, sección). b es la única correcta: la relación existe y tiene forma matemática (`δ = F·L³ / 48·E·I`). Confirmada en Examen A, Examen B y S1021.
+
+---
+
+#### A7 — El propósito principal de los ensayos de tracción y compresión consiste en: `[★×3 — ⚠ RESPUESTAS PARCIALMENTE DIFIEREN]`
+
+> ════════════════════════════════════════════════════════════
+> ⚠  ESTA PREGUNTA APARECIÓ EN LAS 3 FUENTES. DOS DICEN "TENSIÓN", UNA DICE "FUERZA"
+> ════════════════════════════════════════════════════════════
+>
+> **Examen A → "tensión y alargamiento"** `[CORRECTA]`  
+> **S1021 → "tensión y alargamiento"** `[CORRECTA]`  
+> **Examen B → "fuerza y alargamiento"** `[CORRECTA]`
+>
+> **Qué significa:** 2 de 3 fuentes confirman "tensión y alargamiento" como respuesta estándar de Abud. El Examen B usó una versión alternativa con opciones de texto diferente ("fuerza" en lugar de "tensión"). Ambas describen el mismo fenómeno desde ángulos distintos: el diagrama `σ-ε` (tensión vs. deformación unitaria) es la versión normalizada; el diagrama `F-δ` (fuerza vs. alargamiento absoluto) es la versión bruta del mismo experimento.
+>
+> **Estrategia:** la respuesta por defecto de Abud es **"tensión y alargamiento"**. Descartá siempre "fuerza vs. tiempo de rotura" y "alargamiento vs. temperatura" — falsas en cualquier versión. Si aparece solo la opción "fuerza-alargamiento" (sin la de "tensión"), marcala.
+
+Opciones que circulan:
+- ( ) Determinar la relación entre la fuerza y el tiempo de rotura. ← **siempre falsa**
+- ( ) Construir un diagrama que relaciona alargamiento y temperatura. ← **siempre falsa**
+- **(✓ preferida) Determinar la dependencia entre la tensión y su alargamiento.** ← correcta en ExA y S1021
+- ( ) Determinar la dependencia entre la fuerza y alargamiento. ← correcta en ExB (si la otra no aparece)
+
+---
+
+### Bloque B — Sistemas mecánicos
+
+---
+
+#### B1 — El sistema resorte-masa en condiciones ideales es: `[★×2]`
+
+- ( ) Un sistema cuya posición no depende del tiempo una vez apartado del equilibrio.
+- ( ) Un sistema que al ser apartado del equilibrio vuelve a su condición inicial al cabo de un tiempo.
+- **(✓) Un sistema que oscila en el tiempo una vez apartado de su posición de equilibrio.**
+
+> Sin amortiguamiento, oscila indefinidamente con `ω_n = √(k/m)`. No vuelve a su posición inicial (requiere amortiguamiento) ni es independiente del tiempo (sería equilibrio estático). Confirmada en Examen A y S1021.
+
+---
+
+#### B2 — En un sistema mecánico resorte-masa con amortiguamiento viscoso: `[★×3]`
+
+- ( ) a. Las fuerzas de amortiguamiento no dependen de las velocidades instantáneas.
+- ( ) b. Las fuerzas de amortiguamiento son proporcionales a las velocidades instantáneas.
+- ( ) c. Las fuerzas de amortiguamiento dependen de las constantes del resorte y el medio viscoso.
+  - I. A y c son verdaderas.
+  - **(✓) II. B y c son verdaderas.**
+  - III. A, b y c son falsas.
+
+> b es inequívocamente correcta: `F_d = c · ẋ`. Abud considera c verdadera interpretando "constantes del medio viscoso" como el coeficiente `c` que depende del fluido. Nota: en rigor, la fuerza de amortiguamiento NO depende de `k` (rigidez del resorte). Pero para el examen de Abud: marcar II. Confirmada en Examen A, Examen B y S1021.
+
+---
+
+#### B3 — Según lo analizado en los sistemas resorte-masa con o sin amortiguamiento, ¿en qué casos se aplican?
+
+- ( ) a. Una viga empotrada con una carga fija en el tiempo.
+- **(✓) b. Una máquina con movimiento alternativo como un compresor o un motor.**
+- ( ) c. Un eje con movimiento de rotación pero con una carga fija en el tiempo.
+
+> El modelo resorte-masa aplica cuando hay fuerzas variables en el tiempo (dinámicas). Las máquinas con movimiento alternativo generan vibraciones cíclicas — es exactamente ese tipo de sistema. Las opciones a y c tienen cargas estáticas o constantes.
+
+---
+
+#### B4 — En la ingeniería, haciendo un estricto análisis de un sistema y utilizando los materiales adecuados:
+
+- **(✓) a. No existen los sistemas ideales.**
+- ( ) b. Existen los sistemas ideales pero con alto costo económico.
+- ( ) c. Existen los sistemas ideales siempre que contemos con el tiempo para desarrollarlos.
+
+> La ingeniería real siempre opera con tolerancias, variación de propiedades y cargas impredecibles. Ningún sistema puede ser "ideal" en sentido absoluto.
+
+---
+
+### Bloque C — Solicitaciones internas
+
+---
+
+#### C1 — El momento flector resulta de reducir la resultante de las fuerzas que actúan a la izquierda de la sección considerada al: `[★×2]`
 
 - **(✓) Baricentro de la sección.**
 - ( ) Al cuadrado de la distancia al baricentro de la misma.
 - ( ) A una distancia determinada del eje neutro.
 - ( ) A un eje paralelo al eje neutro.
 
-> El momento flector M se calcula respecto al baricentro (centroide) de la sección, que coincide con el eje neutro en secciones simétricas. Reducir al cuadrado (b) no tiene sentido dimensional; "a una distancia determinada" (c) es vago; "eje paralelo al eje neutro" (d) confunde con el teorema de Steiner.
+> M se calcula respecto al baricentro (centroide), que coincide con el eje neutro en secciones simétricas. Reducir "al cuadrado" no tiene sentido dimensional; las opciones c y d confunden con el teorema de Steiner. Confirmada en Examen A y S1021.
 
 ---
 
-### P9 — La cementación se logra:
-
-- ( ) Calentando el acero en una atmósfera rica en cemento.
-- **(✓) Calentando el acero en una atmósfera rica en carbono.**
-- ( ) Calentando el acero en una atmósfera rica en nitrógeno.
-- ( ) Calentando el acero en una atmósfera rica en silicio.
-
-> Cementación = carburización = introducir carbono en la superficie del acero calentándolo en atmósfera carbonífera. La opción c describe la nitruración. La a es un distractor con "cemento" (no tiene nada que ver).
-
----
-
-### P10 — El temple se realiza para: ⚠
-
-- ( ) Eliminar tensiones internas.
-- **(✓) Obtener una dureza superficial y una alta tenacidad en el núcleo.**
-- ( ) Obtener una dureza en el núcleo y una superficie dúctil.
-- ( ) Ninguna es correcta.
-
-> El temple (enfriamiento rápido desde la zona de austenita) produce martensita en la superficie, que es muy dura. En piezas de espesor considerable, el núcleo se enfría más lento y puede retener mayor tenacidad. La a describe el recocido. La c invierte superficie y núcleo. ⚠ Confirmar: si Abud enseñó que el temple produce dureza uniforme en toda la pieza, la respuesta podría ser d (ninguna).
-
----
-
-### P11 — El latón es una aleación:
-
-- ( ) Cu - Sn
-- **(✓) Cu - Zn**
-- ( ) Cu - Ni
-- ( ) Cu - Al
-
-> Latón = cobre + zinc. Bronce = cobre + estaño. Cuproníquel = Cu + Ni. Este par latón/bronce es el más confundible del examen — estudiar juntos y memorizarlos en pareja.
-
----
-
-### P12 — En la ingeniería de proyectos, el análisis económico financiero:
-
-- ( ) Se realiza en una etapa final del proyecto.
-- **(✓) Se realiza conjuntamente con el proyecto técnico funcional y de fabricación.**
-- ( ) No guarda relación alguna con los proyectos técnico funcional y de fabricación.
-
-> El análisis económico es transversal al proyecto: condiciona decisiones de diseño, materiales y fabricación desde el inicio. No se puede hacer al final porque cambiar una decisión de diseño tardía es muy costoso.
-
----
-
-### P13 — La ingeniería de producción se dedica a:
-
-- ( ) Mantenimiento de las máquinas afectadas a producción.
-- **(✓) Programación y control de los procesos de fabricación.**
-- ( ) Programación de los procesos industriales.
-
-> Ingeniería de producción = planificar, programar y controlar cómo se fabrican las piezas. El mantenimiento de máquinas corresponde a ingeniería de mantenimiento. La opción c es más vaga que b y omite el control.
-
----
-
-### P14 — En una pieza sometida al corte, las fuerzas actuantes:
-
-- **(✓ EXAMEN) Están contenidas en el mismo plano.**
-- ( ) Están contenidas en planos perpendiculares.
-- ( ) ~~Están contenidas en diferentes planos paralelos.~~ ← marcada inicialmente, **incorrecta según el examen**
-
-> **Respuesta del examen: a (mismo plano).**
->
-> **Discrepancia conceptual — leer con atención:**
->
-> La respuesta del examen es "mismo plano", pero la definición física del corte (cizalla) es debatible. Hay dos interpretaciones posibles:
->
-> - **Interpretación de Abud (examen):** En una pieza "sometida al corte" en el sentido de *falla por corte* (como un bulón cortado por dos chapas), las fuerzas externas que producen el corte son coplanares — actúan en el mismo plano. El corte ocurre *en* esa sección compartida.
->
-> - **Interpretación física alternativa:** El esfuerzo cortante interno se genera cuando fuerzas actúan en planos paralelos muy próximos (como en una guillotina: hoja superior e inferior en planos distintos pero cercanos). Desde este punto de vista, "planos paralelos" describe mejor el mecanismo.
->
-> **Para el examen de Abud: marcar "mismo plano".** La distinción entre ambas interpretaciones es sutil y depende de si la pregunta apunta a las fuerzas *externas* (mismo plano) o al mecanismo *interno* de la falla (planos paralelos). Abud elige la primera lectura.
-
----
-
-### P15 — Sistema resorte-masa con amortiguamiento viscoso:
-
-- ( ) a. Las fuerzas de amortiguamiento no dependen de la velocidad instantánea.
-- ( ) b. Las fuerzas de amortiguamiento son proporcionales a la velocidad instantánea. ← parcialmente correcta, pero no la respuesta
-- ( ) c. Las fuerzas de amortiguamiento dependen de las constantes del resorte y del medio.
-- ( ) d. a y c son verdaderas.
-- **(✓ EXAMEN) e. b y c son verdaderas.**
-- ( ) f. a, b y c son falsas.
-
-> **Respuesta del examen: e (b y c verdaderas).**
->
-> **Discrepancia conceptual — leer con atención:**
->
-> La opción b es inequívocamente correcta: `F_d = c · ẋ` (amortiguamiento viscoso = proporcional a la velocidad). Hasta ahí no hay discusión.
->
-> La controversia está en la opción c: *"Las fuerzas de amortiguamiento dependen de las constantes del resorte y del medio."*
->
-> - **Interpretación de Abud (examen):** c es verdadera. Abud lee "constantes del medio" como el coeficiente de amortiguamiento `c` (que efectivamente depende de las propiedades del medio viscoso — aceite, agua, aire), y "constantes del resorte" en sentido amplio como "las constantes del sistema mecánico". En ese marco, c agrega información válida: el amortiguamiento sí depende de propiedades del medio.
->
-> - **Interpretación estricta:** c es incorrecta porque mezcla "resorte" con "medio". La fuerza de amortiguamiento viscoso es `F_d = c · ẋ` — depende únicamente del coeficiente de amortiguamiento `c` (propiedad del fluido/medio) y de la velocidad `ẋ`. **No depende de `k` (rigidez del resorte)** en absoluto. Incluir "constantes del resorte" en la opción c la hace técnicamente falsa.
->
-> **Para el examen de Abud: marcar e (b y c).** Abud valida la c bajo su lectura de "constantes del sistema/medio". En un examen suyo, la lógica que importa es la suya.
-
----
-
-### P16 — El proceso de modelado para resolución de un problema en ingeniería, en orden correcto:
-
-- ( ) Formulaciones matemáticas → hipótesis → comprobar predicciones → obtener soluciones.
-- ( ) Hipótesis → comprobar predicciones → formulaciones matemáticas → obtener soluciones.
-- **(✓) Hipótesis → formulaciones matemáticas → obtener soluciones → comprobar las predicciones con hechos conocidos.**
-
-> Secuencia de Abud (clase 1): (1) identificar variables y establecer hipótesis, (2) plantear el modelo matemático, (3) resolver, (4) verificar contra la realidad. La verificación siempre va al final — es el paso que valida si el modelo es útil.
-
----
-
-### P17 — La resiliencia es una característica cuya energía absorbida se produce por:
-
-- ( ) Calentamiento.
-- **(✓) Deformación elástica.**
-- ( ) Deformación plástica.
-
-> Resiliencia = energía almacenada en la zona **elástica** del diagrama tensión-deformación (lo que el material puede devolver al soltar la carga). Tenacidad = energía total (elástica + plástica, hasta la rotura). La deformación plástica es la que caracteriza la tenacidad, no la resiliencia.
-
----
-
-### P18 — El bronce es:
-
-- **(✓) Una aleación Cu-Sn.**
-- ( ) Una aleación Cu-Mn.
-- ( ) Una aleación Cu-Zn.
-
-> Bronce = cobre + estaño (Sn). Recordar como par con la P11: latón (Zn) vs. bronce (Sn). Cu-Mn no es una aleación estándar de uso común.
-
----
-
-### P19 — La concentración de tensiones en una pieza sometida a esfuerzos se debe a:
-
-- ( ) Secciones rectangulares solamente.
-- ( ) Cambios suaves de una sección a otra.
-- **(✓) Cambios bruscos de sección.**
-
-> La concentración de tensiones ocurre donde la geometría cambia abruptamente (ranuras, taladros, filetes sin radio de curvatura, escalones bruscos). Los cambios suaves de sección la reducen — de hecho, los redondeos de filetes existen precisamente para evitarla. Las secciones rectangulares por sí solas no la causan.
-
----
-
-### P20 — En una barra biapoyada con carga central perpendicular al eje neutro, la mitad superior (desde el eje neutro hacia arriba) está sometida a:
-
-- **(✓) Compresión.**
-- ( ) Tracción.
-- ( ) Torsión.
-
-> Viga biapoyada con carga vertical hacia abajo en el centro: la fibra superior se acorta (compresión), la fibra inferior se alarga (tracción). El eje neutro es la línea sin deformación. La torsión no aparece en este esquema.
-
----
-
-### P21 — La tenacidad es:
-
-- **(✓) La energía de deformación total absorbida debido a la acción de una carga.**
-- ( ) La energía de deformación plástica.
-- ( ) La energía absorbida durante la deformación elástica.
-
-> Tenacidad = área total bajo la curva tensión-deformación (elástica + plástica, hasta la rotura). La opción b omite la parte elástica. La opción c es la definición de resiliencia, no de tenacidad.
-
----
-
-### P22 — La formulación del modelo matemático de un sistema se inicia con:
-
-- ( ) I) Identificación de **algunas** variables. II) Determinación de las variables restantes por hipótesis.
-- **(✓) I) Identificación de las variables que ocasionan el cambio del sistema. II) Se establecen un conjunto de hipótesis.**
-- ( ) Solo la aplicación de leyes empíricas que contienen algunas de las variables.
-
-> La clave es la diferencia entre a y b: la a dice "algunas variables" (incompleto), la b dice "las variables que ocasionan el cambio" (correcto — se identifican todas las variables relevantes y luego se establecen hipótesis para simplificar).
-
----
-
-### P23 — La ingeniería de manufactura se dedica a:
-
-- ( ) Mantenimiento de todas las maquinarias de planta.
-- ( ) Proyecto y desarrollo de la producción.
-- **(✓) Planificación de los procesos de fabricación.**
-
-> Manufactura = fabricar. La ingeniería de manufactura planifica cómo se fabrica cada pieza: secuencia de operaciones, máquinas, herramientas, tiempos. El mantenimiento es otra especialidad. "Proyecto y desarrollo de la producción" describe más bien la ingeniería de producción.
-
----
-
-### P24 — Una Tensión es una fuerza interna por:
+#### C2 — Una tensión es una fuerza interna por: `[★×2]`
 
 - **(✓) Unidad de área.**
 - ( ) Unidad de longitud.
 - ( ) Unidad de volumen.
 - ( ) Ninguna es correcta.
 
-> Definición directa: `σ = F / A` [N/m² = Pa]. La presión también es fuerza por unidad de área, pero en resistencia de materiales hablamos de tensión (normal o tangencial). Nunca longitud ni volumen.
+> `σ = F / A` [N/m² = Pa]. Nunca longitud ni volumen. Confirmada en Examen A y S1021.
 
 ---
 
-### P25 — El pandeo es un fenómeno de pérdida de la estabilidad, por lo tanto:
+#### C3 — En una barra biapoyada con carga central perpendicular al eje neutro, la mitad superior está sometida a: `[★×2]`
+
+- ( ) Ninguna es correcta.
+- **(✓) Compresión.**
+- ( ) Tracción.
+- ( ) Torsión.
+
+> Viga biapoyada, carga vertical hacia abajo: la fibra superior se acorta (compresión), la inferior se alarga (tracción). La torsión no aparece en este esquema. Confirmada en Examen A y S1021.
+
+---
+
+#### C4 — En una pieza sometida al corte, las fuerzas actuantes: `[★×2 | ⚠ DISCREPANCIA CONCEPTUAL]`
+
+- **(✓ EXAMEN) Están contenidas en el mismo plano.**
+- ( ) Están contenidas en planos perpendiculares.
+- ( ) Están contenidas en diferentes planos paralelos.
+
+> **Respuesta de Abud: "mismo plano"** — confirmada en Examen A y S1021.
+>
+> **Discrepancia con la física estricta:** el esfuerzo cortante interno se genera cuando fuerzas actúan en planos paralelos muy próximos (como en una guillotina). Sin embargo, Abud enfoca la pregunta en las **fuerzas externas** que producen el corte (ej. las dos fuerzas sobre un bulón), que sí son coplanares. La respuesta de Abud es consistente y está doblemente confirmada — marcar "mismo plano" sin dudar.
+
+---
+
+### Bloque D — Propiedades mecánicas y fenómenos de falla
+
+---
+
+#### D1 — La dureza de un material se define por: `[★×2]`
+
+- ( ) La penetración superficial de una bolilla en una atmósfera rica en carbono.
+- **(✓) La penetración de una bolilla sobre la superficie del material, bajo una carga determinada.**
+- ( ) La penetración de una bolilla en una superficie debido a una alta temperatura.
+
+> La dureza se mide en superficie. Ensayos Brinell, Rockwell y Vickers: indentador bajo carga conocida → medir la huella. La opción a describe la cementación; la c es incorrecta (la temperatura altera la dureza, no la define). Confirmada en Examen A y S1021.
+
+---
+
+#### D2 — La resiliencia es una característica cuya energía absorbida se produce por: `[★×2]`
+
+- ( ) Calentamiento.
+- **(✓) Deformación elástica.**
+- ( ) Deformación plástica.
+
+> Resiliencia = energía almacenada en la zona **elástica** del diagrama σ-ε (devuelve al soltar la carga). La deformación plástica caracteriza la tenacidad. Confirmada en Examen A y S1021.
+
+---
+
+#### D3 — La tenacidad es: `[★×2]`
+
+- **(✓) La energía de deformación total absorbida debido a la acción de una carga.**
+- ( ) La energía de deformación plástica.
+- ( ) La energía absorbida durante la deformación elástica.
+
+> Tenacidad = área total bajo la curva σ-ε (elástica + plástica, hasta la rotura). La opción b omite la parte elástica. La opción c es la definición de resiliencia. Confirmada en Examen A y S1021.
+
+---
+
+#### D4 — El pandeo es un fenómeno de pérdida de la estabilidad, por lo tanto: `[★×2]`
 
 - **(✓) La relación entre la altura y la sección es fundamental.**
 - ( ) La relación entre la altura y su distancia al cuadrado de su baricentro debe ser proporcional.
 - ( ) La relación entre la altura y la sección no es importante.
 
-> El pandeo depende de la **esbeltez** de la columna: a mayor relación altura/sección, más susceptible al pandeo. La fórmula de Euler relaciona la carga crítica con L², E e I (momento de inercia de la sección). La sección es fundamental — la opción c es directamente falsa.
+> El pandeo depende de la **esbeltez** de la columna: a mayor relación altura/sección, más susceptible. `P_cr = π²·E·I / L²` (Euler). La opción c es directamente falsa. Confirmada en Examen A y S1021.
 
 ---
 
-### P26 — El propósito principal de los ensayos de tracción y compresión consiste en:
-
-- ( ) Construir un diagrama que relaciona el alargamiento y la temperatura.
-- ( ) Determinar la relación existente entre la fuerza y el tiempo de rotura.
-- **(✓) Determinar la dependencia entre la tensión y su alargamiento.**
-
-> El ensayo de tracción produce el **diagrama tensión-deformación (σ-ε)**, que muestra la relación entre tensión aplicada y alargamiento proporcional. De ese diagrama se extraen E, límite elástico, resistencia a la rotura, ductilidad.
-
----
-
-### P27 — El fenómeno de fatiga de materiales se produce por:
+#### D5 — El fenómeno de fatiga de materiales se produce por: `[★×2]`
 
 - ( ) Cargas constantes y temperaturas bajo cero.
 - **(✓) Cargas cíclicas.**
 - ( ) Temperaturas muy extremas.
 
-> Fatiga = falla por acumulación de daño bajo cargas **repetidas/cíclicas**, incluso si cada ciclo está por debajo del límite elástico. El eje de tren es el ejemplo clásico (clase 9): rota indefinidamente, la fibra superior e inferior alternan entre compresión y tracción con cada vuelta.
+> Fatiga = falla por acumulación de daño bajo cargas **repetidas/cíclicas**, incluso si cada ciclo está por debajo del límite elástico. El eje de tren es el ejemplo canónico. Confirmada en Examen A y S1021.
 
 ---
 
-### P28 — La cianuración se logra: ⚠
+#### D6 — La concentración de tensiones en una pieza sometida a esfuerzos se debe a: `[★×2]`
+
+- ( ) Secciones rectangulares solamente.
+- ( ) Cambios suaves de una sección a otra.
+- **(✓) Cambios bruscos de sección.**
+
+> La concentración de tensiones ocurre donde la geometría cambia abruptamente (ranuras, taladros, escalones). Los cambios suaves la reducen — de ahí los redondeos de filetes. Confirmada en Examen A y S1021.
+
+---
+
+### Bloque E — Clasificación de materiales
+
+---
+
+#### E1 — El acero es: `[★×2]`
+
+- ( ) a. Una aleación Fe-C con un contenido menor al 3% de C.
+- ( ) b. Una aleación Fe-C con cualquier % de C.
+- **(✓) c. Una aleación Fe-C con un contenido menor al 2% de C.**
+- ( ) d. Una aleación Fe-C con un contenido menor al 4% de C.
+
+> El límite 2% de carbono es la frontera entre acero y fundición en el diagrama Fe-C. El dato más preguntado de la materia. Confirmada en Examen A y S1021.
+
+---
+
+#### E2 — Una fundición de hierro es: `[★×2]`
+
+- **(✓) Una aleación Fe-C con un contenido mayor al 2% de C.**
+- ( ) Una aleación Fe-C con un contenido mayor al 1,5% y menor al 2% de C.
+- ( ) Una aleación Fe-C con un contenido mayor al 4% de C.
+- ( ) Una aleación Fe-C con un % de C menor al 0,5.
+
+> Por encima del 2% C (hasta ~4%) es fundición. La opción c confunde el límite definitorio con el extremo superior del rango. Confirmada en Examen A y S1021.
+
+---
+
+#### E3 — SAE 1045: `[★×2]`
+
+- **(✓) Un acero al carbono con un 0,45% de C.**
+- ( ) Un acero al Cr-Ni con un 0,45% de C.
+- ( ) Un acero con un contenido de 4,5% de C.
+
+> SAE 4 dígitos: primer dígito = tipo (1 = carbono puro); últimos dos = % C en centésimas (45 → 0,45%). Cr-Ni sería serie 3XXX. Confirmada en Examen A y S1021.
+
+---
+
+#### E4 — Los materiales cerámicos (arcillas y derivados), sus propiedades para uso tecnológico son: `[★×2]`
+
+- **(✓) Gran dureza y una alta resistencia al rozamiento y desgaste.**
+- ( ) Gran dureza y baja resistencia a la corrosión.
+- ( ) Alta dureza, pero soportan temperaturas no muy elevadas.
+
+> Los cerámicos son muy duros, resistentes al desgaste, a la corrosión y a altas temperaturas — por eso b y c son falsas. Confirmada en Examen A y S1021.
+
+---
+
+#### E5 — El latón es una aleación: `[★×2]`
+
+- ( ) Cu - Sn
+- **(✓) Cu - Zn**
+- ( ) Cu - Ni
+- ( ) Cu - Al
+
+> Latón = cobre + zinc. Bronce = cobre + estaño. El par latón/bronce es el más confundible del examen — estudiarlo junto con E6. Confirmada en Examen A y S1021.
+
+---
+
+#### E6 — El bronce es: `[★×2]`
+
+- **(✓) Una aleación Cu-Sn.**
+- ( ) Una aleación Cu-Mn.
+- ( ) Una aleación Cu-Cr-Ni.
+- ( ) Una aleación Cu-Zn.
+
+> Bronce = cobre + estaño (Sn). Memorizar junto con E5: latón (Zn) vs. bronce (Sn). Confirmada en Examen A y S1021.
+
+---
+
+### Bloque F — Tratamientos térmicos y termoquímicos
+
+---
+
+#### F1 — La cementación se logra: `[★×2]`
+
+- ( ) Calentando el acero en una atmósfera rica en cemento.
+- **(✓) Calentando el acero en una atmósfera rica en carbono.**
+- ( ) Calentando el acero en una atmósfera rica en nitrógeno.
+- ( ) Calentando el acero en una atmósfera rica en silicio.
+- ( ) Calentando el acero y enfriándolo rápidamente en una sustancia líquida.
+
+> Cementación = carburización = introducir carbono en la superficie. La opción c describe la nitruración; la e describe el temple. Confirmada en Examen A y S1021.
+
+---
+
+#### F2 — El temple se realiza para: `[★×2 | ⚠ DISCREPANCIA CONCEPTUAL]`
+
+- ( ) Eliminar tensiones internas.
+- **(✓ EXAMEN) Obtener una dureza superficial y una alta tenacidad en el núcleo.**
+- ( ) Obtener una dureza en el núcleo y una superficie dúctil.
+- ( ) Ninguna es correcta.
+
+> **Respuesta de Abud: b)** — confirmada en Examen A y S1021.
+>
+> **Discrepancia con la física estricta:** el temple convencional produce martensita en toda la pieza (no solo en la superficie), siendo uniforme si el espesor es pequeño. La respuesta b describe más precisamente el **temple superficial** o lo que ocurre en piezas gruesas. Sin embargo, esta es la respuesta que Abud valida consistentemente. La opción a describe el recocido; la c invierte superficie y núcleo. Marcar b) sin dudar.
+
+---
+
+#### F3 — La cianuración se logra: `[★×2 | ⚠ DISCREPANCIA CONCEPTUAL]`
 
 - ( ) Calentando el acero en una atmósfera rica en azufre.
-- **(✓) Ninguna es correcta.**
+- **(✓ EXAMEN) Ninguna es correcta.**
 - ( ) Calentando el acero en una atmósfera rica en nitrógeno.
 - ( ) Calentando el acero en una atmósfera rica en carburo de hierro.
 
-> La cianuración (cyaniding) se realiza sumergiendo el acero en un **baño de sales de cianuro fundido** (no en "atmósfera") a alta temperatura. Introduce simultáneamente C y N en la superficie. Ninguna de las otras opciones describe esto: azufre (a) no tiene relación; nitrógeno (c) describe la nitruración; carburo de hierro (d) es incorrecto. ⚠ Confirmar — depende de cómo lo explicó Abud en clase.
+> La cianuración se realiza sumergiendo el acero en un **baño de sales de cianuro fundido** (no en "atmósfera"). Ninguna opción describe esto, de ahí la respuesta "ninguna". Nitrógeno (opción c) = nitruración. Confirmada en Examen A y S1021.
 
 ---
 
-### P29 — El recocido se utiliza para:
+#### F4 — El recocido se utiliza para: `[★×2]`
 
 - **(✓) Eliminar tensiones internas.**
 - ( ) Darle una dureza superficial.
 - ( ) Conferirle una dureza en toda la estructura.
 
-> El recocido (annealing) = enfriamiento muy lento desde la zona de austenita. Produce ferrita + perlita: estructura blanda y dúctil. Su propósito es **aliviar tensiones residuales** (de soldadura, mecanizado, conformado). La dureza superficial corresponde al temple superficial; la dureza en toda la estructura, al temple convencional.
+> Recocido = enfriamiento muy lento → ferrita + perlita → blando y dúctil. Sirve para aliviar tensiones residuales (de soldadura, mecanizado, conformado). Confirmada en Examen A y S1021.
 
 ---
 
-### P30 — El sistema resorte-masa en condiciones ideales es:
-
-- ( ) Un sistema cuya posición no depende del tiempo una vez apartado del equilibrio.
-- ( ) Un sistema que al ser apartado del equilibrio vuelve a su condición inicial al cabo de un tiempo.
-- **(✓) Un sistema que oscila en el tiempo una vez apartado de su posición de equilibrio.**
-
-> En condiciones ideales (sin amortiguamiento), el sistema resorte-masa oscila indefinidamente con frecuencia natural `ω_n = √(k/m)`. No vuelve a su posición inicial (eso requeriría amortiguamiento) ni su posición es independiente del tiempo (eso sería equilibrio estático permanente).
+### Bloque G — Ingenierías especializadas y producción
 
 ---
 
-## 3. Resumen de temas por bloque
+#### G1 — La ingeniería de producción se dedica a: `[★×2]`
 
-### Bloque A — Ingeniería, modelos y sistemas
+- ( ) Mantenimiento de las máquinas afectadas a producción.
+- **(✓) Programación y control de los procesos de fabricación.**
+- ( ) Programación de los procesos industriales.
 
-**La ingeniería vs. la ciencia pura:**  
-La ciencia describe la realidad; la ingeniería la transforma. La ingeniería usa la ciencia como base pero está sujeta a restricciones de costo, normas y fabricabilidad.
+> Ing. de producción = planificar, programar y controlar la fabricación. El mantenimiento corresponde a ing. de mantenimiento. La opción c es más vaga y omite el control. Confirmada en Examen A y S1021.
 
-**Proceso de modelado matemático (3 pasos):**
+---
 
+#### G2 — La ingeniería de manufactura se dedica a: `[★×2]`
+
+- ( ) Mantenimiento de todas las maquinarias de planta.
+- ( ) Proyecto y desarrollo de la producción.
+- **(✓) Planificación de los procesos de fabricación.**
+
+> Manufactura = fabricar. La ing. de manufactura planifica cómo se fabrica cada pieza: secuencia de operaciones, máquinas, herramientas, tiempos. Confirmada en Examen A y S1021.
+
+---
+
+#### G3 — En la ingeniería de proyectos, el análisis económico financiero: `[★×2]`
+
+- ( ) Se realiza en una etapa final del proyecto.
+- **(✓) Se realiza conjuntamente con el proyecto técnico funcional y de fabricación.**
+- ( ) No guarda relación alguna con los proyectos técnico funcional y de fabricación.
+
+> El análisis económico es transversal al proyecto: condiciona decisiones de diseño, materiales y fabricación desde el inicio. Confirmada en Examen A y S1021.
+
+---
+
+#### G4 — La ingeniería de procesos consiste en:
+
+- ( ) Un completo y detallado estudio de la metodología de fabricación.
+- ( ) Un completo y detallado estudio del sistema de mantenimiento.
+- **(✓) Un control sistemático del sistema de medición.**
+
+> Definición de Abud para ingeniería de procesos: control sistemático del sistema de medición. Distinto a manufactura (planificación de fabricación) y producción (programación y control).
+
+---
+
+#### G5 — La intercambiabilidad de piezas es de capital importancia para el sistema de maquinarias, debido a que:
+
+- ( ) Una pieza defectuosa puede ser intercambiada a alto costo, pero rápidamente.
+- **(✓) Una pieza defectuosa puede ser intercambiada a bajo costo.**
+- ( ) Una pieza defectuosa puede ser reemplazada, pero con un minucioso ajuste al lugar de montaje.
+
+> La intercambiabilidad elimina la necesidad de ajustes individuales — las piezas fabricadas dentro de tolerancias se montan directamente. Eso reduce el costo de reemplazo.
+
+---
+
+#### G6 — La importancia de la intercambiabilidad para el fabricante:
+
+- ( ) a. Exige fabricar piezas con exactitud perfecta (sin discrepancia ni tolerancia).
+- ( ) b. Excluye la necesidad de exactitud perfecta — admite tolerancias dentro de un rango.
+- ( ) c. Permite utilizar calibradores límites.
+  - I. A y b son correctas.
+  - II. A y c son verdaderas.
+  - **(✓) III. B y c son verdaderas.**
+  - IV. A, b y c son falsas.
+
+> La intercambiabilidad para el fabricante implica: (b) trabajar con tolerancias, no exactitud perfecta; (c) verificar con calibradores límites (pasa/no pasa). La opción a es falsa: exigir "sin tolerancia" contradice el concepto mismo.
+
+---
+
+### Bloque H — Mantenimiento
+
+---
+
+#### H1 — El mantenimiento se puede definir de la siguiente manera:
+
+- ( ) Programación adecuada de los procesos industriales.
+- ( ) Estado de conservación adecuada de los medios económicos y humanos de la industria.
+- **(✓) Estado de conservación adecuada de los medios físicos involucrados en los procesos industriales.**
+
+> El mantenimiento cuida los **medios físicos** (máquinas, equipos, instalaciones). La opción b habla de "medios económicos y humanos" — incorrecto. La a describe programación de producción.
+
+---
+
+#### H2 — El mantenimiento preventivo busca principalmente:
+
+- ( ) a. Reponer el material auxiliar y de consumo.
+- ( ) b. Conservar el estado real igual al estado teórico.
+- ( ) c. Adelantarse a la posibilidad de ocurrencia de una falla.
+- ( ) d. A, b, c son falsas.
+- **(✓) e. A, b y c son verdaderas.**
+
+> El mantenimiento preventivo incluye las tres acciones simultáneamente: reponer materiales de consumo (a), conservar el estado real = estado teórico (b), y anticiparse a las fallas (c).
+
+---
+
+#### H3 — El costo de una falla se divide en: debido a la propia falla y debido al lucro cesante. Las debidas a la falla se dividen en 3 partes. ¿Cuál es la correcta?
+
+- ( ) a. Costos fijos y costos de operación.
+- ( ) b. Amortización, seguros e impuestos.
+- **(✓) c. Rotura, material de producción y desgaste anormal de la máquina.**
+- ( ) d. Rotura, desgaste anormal de la máquina e interés sobre el capital.
+
+> Las 3 subcategorías del costo directo de una falla: (1) rotura del componente, (2) material de producción desperdiciado/dañado, (3) desgaste anormal de la máquina. La opción d casi coincide pero reemplaza "material de producción" por "interés sobre el capital" — ese es un costo financiero, no de falla directa.
+
+---
+
+### Bloque I — Transferencia tecnológica y gestión
+
+---
+
+#### I1 — En las empresas de tercera generación, la transferencia tecnológica en los países desarrollados se realiza desde:
+
+- **(✓) Los centros productivos hacia los centros de consumo.**
+- ( ) Los centros de investigación y desarrollo hacia los centros productivos.
+- ( ) Los centros de consumo hacia los centros de investigación.
+
+> En la tercera generación la tecnología está madura y se difunde: desde donde se produce hacia donde se consume.
+
+---
+
+#### I2 — En las empresas de tercera generación:
+
+- ( ) Los investigadores deciden qué deben investigar.
+- **(✓) Los gerentes de negocios indican qué investigar.**
+- ( ) Los gerentes de negocios y los investigadores deciden qué investigar conjuntamente.
+
+> En la tercera generación la I+D está orientada al mercado: los gerentes de negocios (no los científicos) marcan las prioridades según necesidades comerciales.
+
+---
+
+#### I3 — Las empresas que realizan una planeación tecnológica a profundidad:
+
+- **(✓) Alcanzan posiciones de costos competitivos.**
+- ( ) Los planes tecnológicos buscan corregir sólo problemas operativos.
+- ( ) Poseen consejos de administración que privilegian la minimización del rendimiento a corto plazo.
+
+> La planeación tecnológica profunda permite anticipar cambios y reducir costos a largo plazo. Las opciones b y c describen comportamientos reactivos o miopes.
+
+---
+
+#### I4 — Una de las tareas del gerente de tecnología es:
+
+- ( ) Análisis técnico de los productos fabricados.
+- ( ) Organizar políticas de mantenimiento.
+- **(✓) Análisis de la obsolescencia del departamento.**
+
+> El gerente de tecnología evalúa si los departamentos están tecnológicamente desactualizados. El análisis de productos corresponde a ingeniería de calidad; el mantenimiento es otro área.
+
+---
+
+#### I5 — Una de las tareas del gerente de tecnología es: (variante — pregunta distinta en el mismo examen)
+
+- ( ) Análisis técnico de los productos fabricados.
+- ( ) Organizar políticas de mantenimiento.
+- **(✓) Análisis de obsolescencia de las tecnologías actuales.**
+
+> Abud hizo dos preguntas sobre el gerente de tecnología en el mismo examen con respuestas levemente distintas. I4 apunta a la obsolescencia del **departamento** (la unidad organizacional); I5 apunta a la obsolescencia de las **tecnologías** en uso. Ambas son tareas reales del rol — memorizar como par.
+
+---
+
+#### I6 — En la transferencia de tecnología hablamos del paquete tecnológico, que puede contener:
+
+- ( ) a. Información técnica como manuales, planos, personas y máquinas.
+- ( ) b. Piezas de máquinas que deben ser ensayadas.
+- **(✓) c. Sólo información económica financiera de la tecnología a adoptar.**
+
+> Respuesta según el modelo de examen de Abud. Nota: en la literatura general, el "paquete tecnológico" incluye información técnica (manuales, planos, know-how). La respuesta de Abud puede corresponder a una definición específica usada en clase. Verificar con apuntes de clase si hay duda.
+
+---
+
+### Bloque J — Propiedad intelectual
+
+---
+
+#### J1 — Una patente tiene una duración de:
+
+- ( ) 20 años y renovable.
+- ( ) 10 años y renovable.
+- **(✓) 20 años y no renovable.**
+- ( ) 15 años y no renovable.
+
+> En Argentina (y bajo el Acuerdo TRIPS/ADPIC), las patentes duran **20 años desde la fecha de presentación** y no son renovables. Al vencer, la invención pasa al dominio público.
+
+---
+
+#### J2 — El derecho de autor tiene una duración de:
+
+- ( ) Por vida del autor.
+- ( ) 50 años desde su publicación.
+- **(✓) Por vida del autor y 50 años más.**
+- ( ) Por vida del autor y 25 años más.
+
+> En Argentina (Ley 11.723), los derechos de autor protegen la obra durante toda la vida del autor y un período adicional. Usar el valor que Abud enseñó: vida + 50 años.
+
+---
+
+#### J3 — Cuando se obtiene una patente por una maquinaria o dispositivo innovador, esta puede:
+
+- ( ) Sólo ser utilizada por el inventor sin posibilidad de que la utilice otro.
+- **(✓) Ser vendida o utilizada por el inventor.**
+- ( ) Ser utilizada por el inventor de por vida sin que nadie más pueda utilizarla.
+
+> La patente otorga derechos exclusivos temporales, pero el titular puede venderla (cesión), licenciarla o explotarla directamente. No es un derecho vitalicio ni exclusivo sine die.
+
+---
+
+### Bloque K — Metodología académica
+
+---
+
+#### K1 — Las partes del plan para la elaboración de una tesis son: definición del problema, confección del bosquejo y:
+
+- ( ) a. Elaboración de conclusiones.
+- **(✓) b. Elaboración de la agenda.**
+- ( ) c. Desarrollo del tema.
+
+> Las tres partes del plan de tesis: (1) definición del problema, (2) confección del bosquejo (estructura), (3) elaboración de la agenda (cronograma). Las conclusiones y el desarrollo son partes de la tesis en sí, no del plan previo.
+
+---
+
+#### K2 — Una de las razones de la necesidad de incluir referencias es: `[⚠ SIN RESPUESTA CONFIRMADA]`
+
+- ( ) a. Para elaborar conclusiones.
+- ( ) b. Para corroborar o respaldar las propias opiniones.
+- ( ) c. Para establecer hipótesis.
+
+> **Ninguna fuente disponible marca la respuesta correcta para esta pregunta.** La opción más lógica es b (respaldar las propias opiniones con evidencia de terceros), que es la función principal de las referencias académicas. Estudiar con cautela.
+
+---
+
+#### K3 — Las citas se pueden clasificar en 3 clases:
+
+- ( ) a. Directas, semi-directas y cita secundaria.
+- ( ) b. Indirectas, cita de cita y directas.
+- **(✓) c. Directas, citas primaria e indirectas.**
+
+> Clasificación de citas: (1) directas (textuales), (2) primaria (fuente original parafraseada), (3) indirectas (resumidas o reformuladas).
+
+---
+
+## 3. Resumen de contenidos por bloque
+
+### Bloque A — Ingeniería: definición y metodología
+
+**Ingeniería = métodos científicos + empíricos.** No solo uno de los dos.
+
+**Proceso de modelado:**
 ```
 1. Identificar variables que ocasionan el cambio
-        ↓
-2. Establecer hipótesis (incluye leyes empíricas aplicables)
-        ↓
+2. Establecer hipótesis
 3. Formular el modelo matemático
-        ↓
 4. Obtener soluciones
-        ↓
-5. Comprobar predicciones con hechos conocidos (validación)
+5. Comprobar predicciones con hechos conocidos (siempre al final)
 ```
 
-**Sistema resorte-masa:**
-- Parámetros fijos: masa `m`, rigidez `k`, amortiguamiento `c`
-- Variables dinámicas: posición `x(t)`, velocidad `ẋ(t)`, aceleración `ẍ(t)`
-- Sin amortiguamiento (ideal): oscila indefinidamente con `ω_n = √(k/m)`
-- Con amortiguamiento viscoso: `F_d = c · ẋ` (proporcional a la velocidad)
+**Optimización:** generar múltiples alternativas → seleccionar la mejor según criterios técnicos y económicos.
 
 ---
 
-### Bloque B — Estructuras simples y solicitaciones
+### Bloque B — Sistemas mecánicos
 
-**Viga biapoyada con carga central:**
-- La deflexión depende de: forma de sección, módulo E, punto de aplicación, tipo de apoyo
-- `δ_max = F·L³ / (48·E·I)` (fórmula de referencia — no es el foco del parcial, sí el concepto)
+**Sistema resorte-masa:**
+- Sin amortiguamiento (ideal): oscila indefinidamente, `ω_n = √(k/m)`
+- Con amortiguamiento viscoso: `F_d = c · ẋ` (proporcional a la velocidad)
+- Aplicación práctica: máquinas con movimiento alternativo (compresores, motores de pistones)
+- Los sistemas reales **no son ideales**: siempre hay pérdidas, tolerancias, desgaste
+
+---
+
+### Bloque C — Solicitaciones internas
 
 **Los cuatro esfuerzos característicos:**
 
-| Esfuerzo | Símbolo | Qué produce | Tensión generada |
-|---|---|---|---|
-| Axial (normal) | N | Tracción o compresión uniforme en la sección | σ = N/A |
-| Cortante | Q | Cizalladura — fuerzas en planos paralelos | τ = Q/A |
-| Momento flector | M | Flexión — compresión arriba, tracción abajo | σ = M·y / I |
-| Momento torsor | T | Torsión — giro de la sección | τ = G·ρ·θ |
+| Esfuerzo | Símbolo | Tensión generada |
+|---|---|---|
+| Axial (normal) | N | σ = N/A |
+| Cortante | Q | τ = Q/A |
+| Momento flector | M | σ = M·y / I |
+| Momento torsor | T | τ = G·ρ·θ |
 
-**Tensión — definición:**  
-`σ = F / A` [Pa = N/m²]. Es una fuerza interna por unidad de área. El material "siente" la tensión en cada punto, no la fuerza total.
-
-**Flexión pura — distribución de tensiones:**
+**Flexión pura — viga biapoyada con carga hacia abajo:**
 ```
   ─────────── fibra superior: COMPRESIÓN (−σ)
   ─── ─── ─── eje neutro: σ = 0
   ─────────── fibra inferior: TRACCIÓN (+σ)
 ```
-Para una viga biapoyada con carga vertical hacia abajo.
 
-**Momento flector M:** se calcula reduciendo la resultante de fuerzas al **baricentro** de la sección. `I` (momento de inercia de sección) mide cómo está distribuida el área respecto al eje neutro — unidades: mm⁴ o cm⁴.
-
----
-
-### Bloque C — Fenómenos de falla
-
-**Pandeo:**  
-Pérdida de **estabilidad** (no de resistencia). Una columna falla por pandeo antes de alcanzar el límite elástico. La relación altura/sección (esbeltez) es el parámetro crítico — columnas más altas y delgadas pandean antes. `P_cr = π²·E·I / L²` (Euler).
-
-**Fatiga:**  
-Falla por cargas **cíclicas** repetidas, aunque cada carga esté debajo del límite elástico. Mecanismo: nucleación y propagación de una microfisura hasta rotura súbita. El eje de ferrocarril es el ejemplo canónico.
-
-**Concentración de tensiones:**  
-En zonas de cambio **brusco** de sección (ranuras, taladros, escalones), las tensiones locales se amplifican respecto al valor nominal. Los redondeos de filetes existen para suavizar ese cambio y reducir la concentración.
-
-**Ensayos de tracción y compresión:**  
-Producen el diagrama `σ-ε` (tensión vs. deformación), del que se extraen:
-- Módulo de elasticidad E (pendiente zona elástica)
-- Límite elástico (punto donde deja de ser lineal)
-- Resistencia a la rotura
-- Ductilidad (alargamiento hasta fractura)
+**Momento flector M:** se calcula al baricentro de la sección.
 
 ---
 
-### Bloque D — Propiedades y clasificación de materiales
+### Bloque D — Propiedades mecánicas y fenómenos de falla
 
-**Propiedades mecánicas clave — diferencias cruciales:**
+| Propiedad | Definición |
+|---|---|
+| **Resiliencia** | Energía en zona **elástica** — se devuelve al soltar la carga |
+| **Tenacidad** | Energía total hasta la rotura (elástica + plástica) |
+| **Dureza** | Resistencia a la penetración superficial (Brinell / Rockwell / Vickers) |
 
-| Propiedad | Definición | Energía involucrada |
-|---|---|---|
-| **Resiliencia** | Capacidad de absorber energía en zona **elástica** y devolverla | Solo zona elástica |
-| **Tenacidad** | Energía total absorbida **hasta la rotura** (zona elástica + plástica) | Total |
-| **Dureza** | Resistencia a la **penetración superficial** | — |
-| **Ductilidad** | Capacidad de deformarse sin romperse | — |
-| **Maleabilidad** | Capacidad de extenderse en láminas | — |
-| **Plasticidad** | Deformación permanente al superar el límite elástico | — |
+**Ensayo de tracción:** produce el diagrama σ-ε → extrae E, límite elástico, resistencia a la rotura, ductilidad.
 
-**Metales ferrosos — clasificación por % de carbono:**
+**Pandeo:** pérdida de **estabilidad** antes de alcanzar el límite elástico. `P_cr = π²·E·I / L²`.
 
-```
-  % C
-  ────────────────────────────────────────────────
-  0,05          2%                   4%
-  │─────────────│────────────────────│
-  Acero         │                    Fundición
-  (dúctil,      │                    (dura, frágil,
-  soldable)     │                    no soldable)
-                └── límite Fe-C más preguntado
-```
+**Fatiga:** falla por cargas **cíclicas** repetidas aunque estén por debajo del límite elástico.
 
-| Material | % de C | Características |
-|---|---|---|
-| Hierro forjado | < 0,05% | Casi hierro puro, maleable |
-| Acero | 0,05 – 2% | Dúctil, soldable, se oxida |
-| Fundición | 2 – 4% | Dura, frágil, no soldable |
+**Concentración de tensiones:** en cambios **bruscos** de sección. Los redondeos de filetes la reducen.
 
-**Aceros al carbono por contenido:**
-- Bajo carbono (< 0,25% C): estructuras, chapas, soldadura
-- Medio carbono (0,25–0,55% C): ejes, engranajes, resortes
-- Alto carbono (> 0,55% C): herramientas, rieles, rodamientos
+---
 
-**Clasificación SAE — 4 dígitos:**
+### Bloque E — Clasificación de materiales
 
 ```
-  SAE  X  X  X  X
-       │  │  └──┘
-       │  │   └── % de C en centésimas
-       │  └─── aleante secundario
-       └─── tipo de aleante principal
-              1 = carbono puro
-              2 = níquel
-              3 = cromo-níquel
-              4 = molibdeno
-              5 = cromo
-              6 = cromo-vanadio
+  % C     0,05          2%                   4%
+          │─────────────│────────────────────│
+          Acero         │                    Fundición
+                        └── límite Fe-C más preguntado
 ```
 
-Ejemplos clave: SAE 1045 = acero al carbono con 0,45% C. SAE 4140 = acero Cr-Mo con 0,40% C.
-
-**Metales no ferrosos — aleaciones importantes:**
+**SAE:** primer dígito = tipo de aleante; últimos dos dígitos = % C en centésimas.
 
 | Aleación | Componentes | Mnemotecnia |
 |---|---|---|
 | Latón | Cu + Zn | **La**tón → **Za**patos (Zn) |
 | Bronce | Cu + Sn | **Br**once → e**St**año (Sn) |
-| Cuproníquel | Cu + Ni | Cu + Ni (directo) |
+
+**Cerámicos:** gran dureza, alta resistencia al desgaste, a la corrosión y a altas temperaturas.
 
 ---
 
-### Bloque E — Tratamientos térmicos y termoquímicos
+### Bloque F — Tratamientos térmicos y termoquímicos
 
-**Tratamientos térmicos** (solo calor, sin cambiar composición química):
-
-| Tratamiento | Velocidad de enfriamiento | Microestructura | Propiedades | Para qué sirve |
-|---|---|---|---|---|
-| **Recocido** | Muy lento (en horno) | Ferrita + perlita | Blando, dúctil | Eliminar tensiones internas |
-| **Normalizado** | Moderado (aire) | Perlita fina | Resistencia media | Homogeneizar estructura |
-| **Temple** | Rápido (agua/aceite) | Martensita | Muy duro, muy frágil | Aumentar dureza |
-| **Revenido** | — (calentamiento suave tras temple) | Martensita revenida | Duro + menos frágil | Reducir fragilidad del temple |
-
-**Tratamientos termoquímicos** (calor + difusión de elementos en la superficie):
-
-| Tratamiento | Elemento difundido | Cómo se logra | Efecto |
-|---|---|---|---|
-| **Cementación** | Carbono (C) | Atmósfera rica en C | Dureza superficial + núcleo tenaz |
-| **Nitruración** | Nitrógeno (N) | Atmósfera de amoníaco (N₂) | Dureza superficial muy alta, sin fragilidad |
-| **Cianuración** | C + N simultáneos | Baño de sales de cianuro fundido | Dureza superficial + resistencia al desgaste |
-
-> Regla mnemotécnica: **Ce**mentación → **C**arbono. **Ni**truración → **Ni**trógeno. **Ci**anuración → **C**+N (cianuro tiene C y N).
-
----
-
-### Bloque F — Ingenierías especializadas
-
-| Especialidad | Función principal |
-|---|---|
-| **Ingeniería de manufactura** | Planificación de los procesos de fabricación de piezas |
-| **Ingeniería de producción** | Programación y control de los procesos de fabricación |
-| **Ingeniería de mantenimiento** | Mantenimiento de las máquinas de planta |
-| **Ingeniería de proyectos** | Análisis técnico + económico-financiero integrado (no al final) |
-
----
-
-## 4. Resumen de respuestas (hoja de repaso rápido)
-
-> Confirmadas contra el modelo oficial. ⚠ = respuesta del examen difiere de la interpretación física estricta — ver la pregunta completa para el razonamiento.
-
-| # | Respuesta correcta | Concepto clave |
+| Tratamiento | Enfriamiento | Para qué sirve |
 |---|---|---|
-| 1 | b — penetración de bolilla bajo carga | Dureza = superficial, por indentación |
-| 2 ⚠ | c — es un problema matemático | Por eliminación |
-| 3 | a — gran dureza y resistencia al desgaste | Cerámicos: duros, resistentes |
-| 4 | a — mayor al 2% de C | Fundición: 2–4% C |
-| 5 | c — menor al 2% de C | Acero: < 2% C |
-| 6 | a — acero al carbono, 0,45% C | SAE 1045 |
-| 7 | a — determinar características y aplicación | Fin de la ResistMat |
-| 8 | a — baricentro de la sección | Momento flector al baricentro |
-| 9 | b — atmósfera rica en carbono | Cementación = C |
-| 10 ⚠ | b — dureza superficial + tenacidad en núcleo | Temple |
-| 11 | b — Cu-Zn | Latón (no confundir con bronce) |
-| 12 | b — conjuntamente con el proyecto técnico | Análisis econ. integrado |
-| 13 | b — programación y control de fabricación | Ing. producción |
-| 14 ⚠ | **a — mismo plano** (examen) / c — planos paralelos (física estricta) | Ver discrepancia en P14 |
-| 15 ⚠ | **e — b y c verdaderas** (examen) / b solo (física estricta) | Ver discrepancia en P15 |
-| 16 | c — hipótesis → math → solución → verificar | Orden de modelado |
-| 17 | b — deformación elástica | Resiliencia ≠ tenacidad |
-| 18 | a — Cu-Sn | Bronce (no confundir con latón) |
-| 19 | c — cambios bruscos de sección | Concentración de tensiones |
-| 20 | a — compresión | Fibra superior = comprimida |
-| 21 | a — energía total hasta la rotura | Tenacidad ≠ resiliencia |
-| 22 | b — identificar variables + hipótesis | Inicio del modelo |
-| 23 | c — planificación de procesos de fabricación | Ing. manufactura |
-| 24 | a — unidad de área | σ = F/A |
-| 25 | a — relación altura/sección es fundamental | Pandeo = esbeltez |
-| 26 | c — dependencia tensión-alargamiento | Diagrama σ-ε |
-| 27 | b — cargas cíclicas | Fatiga |
-| 28 ⚠ | b — ninguna es correcta | Cianuración = baño de cianuro |
-| 29 | a — eliminar tensiones internas | Recocido |
-| 30 | c — oscila en el tiempo | Sistema ideal sin amortiguación |
+| **Recocido** | Muy lento (horno) | Eliminar tensiones internas |
+| **Normalizado** | Moderado (aire) | Homogeneizar estructura |
+| **Temple** | Rápido (agua/aceite) | Aumentar dureza |
+| **Revenido** | Calentamiento suave post-temple | Reducir fragilidad del temple |
+
+| Tratamiento | Elemento difundido | Cómo |
+|---|---|---|
+| **Cementación** | C | Atmósfera rica en carbono |
+| **Nitruración** | N | Atmósfera de amoníaco |
+| **Cianuración** | C + N | Baño de sales de cianuro fundido |
+
+Regla: **Ce**mentación → **C**arbono. **Ni**truración → **Ni**trógeno. **Ci**anuración → **C+N**.
 
 ---
 
-*Fuente: apuntes clases 1–11, `abud.docx`, modelo de examen Abud 2026.*
+### Bloque G — Ingenierías especializadas
+
+| Especialidad | Función |
+|---|---|
+| **Ing. manufactura** | Planificación de los procesos de fabricación |
+| **Ing. producción** | Programación y control de los procesos de fabricación |
+| **Ing. mantenimiento** | Mantenimiento de máquinas de planta |
+| **Ing. proyectos** | Análisis técnico + económico-financiero integrado (no al final) |
+| **Ing. de procesos** | Control sistemático del sistema de medición (def. Abud) |
+
+**Intercambiabilidad:** fabricar con tolerancias → montaje directo sin ajuste → bajo costo de reemplazo. Verificación: calibradores límites (pasa/no pasa).
+
+---
+
+### Bloque H — Mantenimiento
+
+**Definición:** conservación adecuada de los **medios físicos** involucrados en los procesos industriales.
+
+**Mantenimiento preventivo:** reponer materiales de consumo + conservar estado real = estado teórico + adelantarse a fallas. Las tres son verdaderas simultáneamente.
+
+**Costos de la falla:**
+```
+Costo total
+├── Debidos a la propia falla
+│   ├── Rotura
+│   ├── Material de producción (desperdiciado/dañado)
+│   └── Desgaste anormal de la máquina
+└── Lucro cesante (producción perdida)
+```
+
+---
+
+### Bloque I — Transferencia tecnológica y gestión
+
+- **3ª generación:** gerentes de negocios deciden qué investigar; la tecnología fluye de centros productivos → centros de consumo.
+- **Planeación tecnológica profunda:** genera posiciones de costos competitivos.
+- **Gerente de tecnología:** analiza obsolescencia departamental y obsolescencia de tecnologías en uso. No hace análisis técnico de productos ni organiza mantenimiento.
+- **Paquete tecnológico (def. Abud):** contiene información económico-financiera de la tecnología a adoptar.
+
+---
+
+### Bloque J — Propiedad intelectual
+
+| Tipo | Duración | Renovable |
+|---|---|---|
+| **Patente** | 20 años desde la presentación | No |
+| **Derecho de autor** | Vida del autor + 50 años | — |
+
+La patente puede ser vendida, licenciada o explotada directamente por el titular.
+
+---
+
+### Bloque K — Metodología académica
+
+**Plan de tesis:** definición del problema + confección del bosquejo + elaboración de la agenda.
+
+**Citas:** directas (textuales) / primaria (fuente original indirecta) / indirectas (parafraseadas).
+
+**Función de las referencias:** corroborar o respaldar las propias opiniones con evidencia de terceros.
+
+---
+
+## 4. Hoja de repaso rápido
+
+> `[★×2]` = 2 fuentes. `[★×3]` = 3 fuentes — máxima prioridad. `[⚠]` = discrepancia — ver la pregunta completa.
+
+| Código | Respuesta correcta | Concepto clave | Fuentes |
+|---|---|---|---|
+| **Bloque A** | | | |
+| A1 | V — b y c verdaderas, a falsa | Ingeniería = científico + empírico | |
+| A2 | b — determinar y juzgar características | Fin de la ResistMat | ★×3 |
+| A3 | b — buscar más de una solución y seleccionar | Optimización = múltiples alternativas | |
+| A4 | b — hipótesis → math → solución → verificar | Orden de modelado | ★×3 |
+| A5 | b — identificar variables + hipótesis | Inicio del modelo matemático | ★×2 |
+| A6 | b — es un problema matemático | Viga apoyada: relación F-deflexión | ★×3 |
+| A7 | **tensión-alargamiento** (ExA+S1021) / fuerza-alargamiento (ExB) | Ensayo tracción → diagrama σ-ε | ★×3 ⚠ |
+| **Bloque B** | | | |
+| B1 | c — oscila en el tiempo | Resorte-masa ideal: sin amortiguamiento | ★×2 |
+| B2 | II — b y c verdaderas | Amortiguamiento viscoso: F = c·ẋ | ★×3 |
+| B3 | b — máquina con movimiento alternativo | Aplicación práctica del modelo | |
+| B4 | a — no existen sistemas ideales | Ingeniería real = siempre imperfecta | |
+| **Bloque C** | | | |
+| C1 | a — baricentro de la sección | Momento flector al baricentro | ★×2 |
+| C2 | a — unidad de área | σ = F/A | ★×2 |
+| C3 | b — compresión | Fibra superior en viga = comprimida | ★×2 |
+| C4 | a — mismo plano | Corte: fuerzas externas coplanares | ★×2 ⚠ |
+| **Bloque D** | | | |
+| D1 | b — penetración bajo carga determinada | Dureza = superficial, por indentación | ★×2 |
+| D2 | b — deformación elástica | Resiliencia ≠ tenacidad | ★×2 |
+| D3 | a — energía total hasta la rotura | Tenacidad ≠ resiliencia | ★×2 |
+| D4 | a — relación altura/sección es fundamental | Pandeo = esbeltez | ★×2 |
+| D5 | b — cargas cíclicas | Fatiga | ★×2 |
+| D6 | c — cambios bruscos de sección | Concentración de tensiones | ★×2 |
+| **Bloque E** | | | |
+| E1 | c — menor al 2% de C | Acero < 2% C | ★×2 |
+| E2 | a — mayor al 2% de C | Fundición: 2–4% C | ★×2 |
+| E3 | a — acero al carbono, 0,45% C | SAE 1045 | ★×2 |
+| E4 | a — gran dureza y resistencia al desgaste | Cerámicos | ★×2 |
+| E5 | b — Cu-Zn | Latón (no confundir con bronce) | ★×2 |
+| E6 | a — Cu-Sn | Bronce (no confundir con latón) | ★×2 |
+| **Bloque F** | | | |
+| F1 | b — atmósfera rica en carbono | Cementación = C | ★×2 |
+| F2 | b — dureza superficial + tenacidad núcleo | Temple | ★×2 ⚠ |
+| F3 | b — ninguna es correcta | Cianuración = baño de cianuro | ★×2 ⚠ |
+| F4 | a — eliminar tensiones internas | Recocido | ★×2 |
+| **Bloque G** | | | |
+| G1 | b — programación y control de fabricación | Ing. producción | ★×2 |
+| G2 | c — planificación de procesos de fabricación | Ing. manufactura | ★×2 |
+| G3 | b — conjuntamente con el proyecto técnico | Análisis econ. integrado | ★×2 |
+| G4 | c — control sistemático del sistema de medición | Ing. de procesos (def. Abud) | |
+| G5 | b — bajo costo | Intercambiabilidad → reemplazo económico | |
+| G6 | III — b y c verdaderas | Tolerancias + calibradores límites | |
+| **Bloque H** | | | |
+| H1 | c — medios físicos en procesos industriales | Definición de mantenimiento | |
+| H2 | e — a, b y c son verdaderas | Mantenimiento preventivo: todo incluido | |
+| H3 | c — rotura, material de producción, desgaste | Costos de falla directa | |
+| **Bloque I** | | | |
+| I1 | a — centros productivos → consumo | 3ª generación: difusión tecnológica | |
+| I2 | b — gerentes de negocios deciden | 3ª generación: mercado orienta I+D | |
+| I3 | a — costos competitivos | Planeación tecnológica profunda | |
+| I4 | c — obsolescencia del departamento | Gerente de tecnología | |
+| I5 | c — obsolescencia de tecnologías actuales | Gerente de tecnología (variante) | |
+| I6 | c — información económico-financiera | Paquete tecnológico (def. Abud) | |
+| **Bloque J** | | | |
+| J1 | c — 20 años, no renovable | Patente | |
+| J2 | c — vida del autor + 50 años | Derecho de autor | |
+| J3 | b — vendida o utilizada por el inventor | Derechos sobre la patente | |
+| **Bloque K** | | | |
+| K1 | b — elaboración de la agenda | Plan de tesis | |
+| K2 | b — corroborar/respaldar opiniones propias | Para qué sirve la referencia | ⚠ sin confirmar |
+| K3 | c — directas, primaria e indirectas | Tipos de citas | |
+
+---
+
+*Fuentes: apuntes clases 1–11 · Examen A (modelo anterior Abud) · Examen B (segundo modelo Abud) · S1021 (tercer modelo Abud).*
