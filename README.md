@@ -17,7 +17,7 @@ Escritas en Markdown, en español, con diagramas ASCII y analogías contables (e
 | [`quimica_general/`](quimica_general/) | Química General | Introducción · Estructura atómica · Gases (UT3) · Soluciones (UT7) | 02/may/2026 |
 | [`ingenieria_y_sociedad/`](ingenieria_y_sociedad/) | Ingeniería y Sociedad | Arocena · 4 textos con preguntas MC (§1–§56) | 31/may/2026 |
 | [`ingenieria_mecanica_i/`](ingenieria_mecanica_i/) | Ingeniería Mecánica I | Introducción · UT I–XI (11 unidades: ingeniería, diseño, manufactura, producción, mantenimiento, gestión, seguridad, ética, economía) · Preparación parcial 1 (banco ~52 preguntas, 3 fuentes) | 02/jul/2026 |
-| [`sistemas_de_representacion/`](sistemas_de_representacion/) | Sistemas de Representación | Expectativas · Normas IRAM · LibreCAD/DXF | 21/jun/2026 |
+| [`sistemas_de_representacion/`](sistemas_de_representacion/) | Sistemas de Representación | Expectativas · Normas IRAM · LibreCAD/DXF | 02/ago/2026 |
 
 ---
 
