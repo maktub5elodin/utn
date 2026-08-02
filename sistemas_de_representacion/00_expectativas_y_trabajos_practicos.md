@@ -128,8 +128,13 @@ Durante las clases, el docente usa colores para distinguir el propósito de cada
 | 20 | LÁMINA (CAD) | Enlaces 2 | Variante del TP 19 con otra geometría de enlace |
 | 21 | LÁMINA (CAD) | Enlaces — rótulo "ISO E" | Mismo esqueleto de líneas que TP 19-20; título abreviado en el rótulo, confirmar consigna exacta con el docente |
 | 22 | LÁMINA (CAD) | Enlaces — rótulo "ISO A" | Ídem TP 21, variante con otra dimensión de enlace |
+| 23-24, 26-27 | — | *(sin registro)* | Sin archivo `tpnXX.dxf` — no confirmado si se saltearon en la numeración o están pendientes de entrega |
+| 25 | LÁMINA (CAD) | Isometría | Circunferencia inscripta en las 3 caras vistas de un cubo, resuelta en proyección isométrica |
+| 28 | LÁMINA (CAD) | Perspectiva Caballera Reducida | Mismo sólido que TP 25 (cubo con circunferencia inscripta), resuelto en perspectiva caballera con coeficiente de reducción |
 
 > **Nota sobre TP 11-22:** a diferencia de TP 01-10, estos no tienen enunciado en Markdown propio — esta sección fue reconstruida a partir de los archivos `tpnXX.dxf` (y sus `.png`/`.pdf` cuando existen) entregados el 21/abr y el 21/jun/2026. Los títulos entre comillas son literales del rótulo del plano; donde no hay certeza de la consigna original se indica explícitamente.
+
+> **Nota sobre TP 25 y TP 28:** ambos corresponden a la **Clase 11**, con fecha de entrega **08/jun/2026** (fecha de rótulo `080626`) — son dos ejercicios comparativos de la misma clase: la misma pieza (cubo con circunferencia inscripta en sus 3 caras) resuelta en dos sistemas de representación axonométrica distintos (isométrico vs. caballera reducida). TP 25 se subió primero como punto de retoma de la materia tras un paréntesis desde TP 19-22 (última entrega 21/jun/2026); TP 28 se completó y documentó junto con él. El archivo fuente de TP 28 estaba nombrado `tpn26.dxf` en el disco pero su rótulo interno decía "TP N° 28"; se renombró a `tpn28.dxf` para que coincida con la numeración real — el rótulo del plano es la fuente de verdad, no el nombre de archivo. TP 23-24 y TP 26-27 siguen sin archivo (mismo caso que TP 14).
 
 ---
 
@@ -306,6 +311,32 @@ No hay `tpn14.dxf` ni mención en otros archivos. Puede ser un TP salteado en la
 
 - **Soporte:** Lámina digital (CAD) — ídem TP 21, título en el plano: *"ISO A"*
 - **A confirmar:** mismo caso que TP 21
+
+---
+
+### TP 25 — Lámina CAD: Isometría
+
+- **Soporte:** Lámina digital (CAD) — título en el plano: *"ISOMETRIA"*, Clase 11, fecha de rótulo `080626` (08/jun/2026)
+- **Contenido:** circunferencia inscripta en las 3 caras vistas de un cubo, proyectada en isométrico — figura de trébol con tres pétalos que se cruzan en el vértice compartido del cubo, más una elipse completa en la cara superior
+- **Análisis del `.dxf`:**
+  - 3 entidades `ELLIPSE` (no arcos ni método aproximado de 4 centros), cada una completa (0→2π)
+  - Relación eje menor/eje mayor = **0,57735... = 1/√3 exacto** en las tres — la proporción isométrica correcta para representar una circunferencia (ángulo de escorzo de 30° respecto al eje de proyección)
+  - Centros coincidentes con el centro de cada rombo (cara del cubo), elipses rotadas 120° entre sí — consistente con las tres orientaciones de los ejes isométricos
+  - Capas: construcción en `2H`/`GEOMETRIA`, trazado final en `2B` — mismo esquema de calibres que TP 11-22
+- **Objetivo:** aplicar la proyección isométrica (los 3 ejes a 120°, sin escorzo real porque se dibuja a escala natural) a un sólido con una perforación circular en sus tres caras vistas
+
+---
+
+### TP 28 — Lámina CAD: Perspectiva Caballera Reducida
+
+- **Soporte:** Lámina digital (CAD) — título en el plano: *"PERSP. CABALLERA RED."*, Clase 11, fecha de rótulo `080626` (08/jun/2026)
+- **Contenido:** el mismo sólido que TP 25 (cubo con circunferencia inscripta en sus 3 caras), esta vez resuelto en perspectiva caballera con coeficiente de reducción sobre el eje de fuga
+- **Análisis del `.dxf`:**
+  - 3 entidades `ELLIPSE`: la de la cara frontal tiene ratio **≈ 1,0** (círculo verdadero) — correcto, porque en caballera el plano frontal se dibuja sin deformación
+  - Las otras dos (cara superior y cara lateral, ambas paralelas al eje de fuga) tienen ratio **≈ 0,310** idéntico entre sí — consistente con la simetría del cubo, y con el efecto combinado del ángulo de fuga (45°) y el coeficiente de reducción de profundidad
+  - Mismo esquema de capas `2H`/`2B` que el resto de las láminas CAD
+- **Objetivo:** contrastar, sobre la misma pieza, dos sistemas axonométricos distintos: isométrico (TP 25, escorzo igual en los 3 ejes) vs. caballera reducida (TP 28, un eje sin escorzo + eje de fuga reducido)
+- **Nota:** el archivo fuente estaba nombrado `tpn26.dxf` en el disco pero el rótulo interno decía "TP N° 28"; se renombró a `tpn28.dxf` — ver nota general más arriba
 
 ---
 
