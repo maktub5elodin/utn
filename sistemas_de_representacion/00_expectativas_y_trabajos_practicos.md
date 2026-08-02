@@ -116,6 +116,20 @@ Durante las clases, el docente usa colores para distinguir el propósito de cada
 | 08 | CROQUIS | Ondas | Ídem TP 07 a mano alzada |
 | 09 | LÁMINA | Mayúsculas | Caligrafía IRAM tipo A — letras mayúsculas, h = 5 mm |
 | 10 | CROQUIS | Minúsculas | Caligrafía IRAM tipo A — letras minúsculas, h = 5 mm |
+| 11 | LÁMINA | Construcciones geométricas fundamentales | Mediatriz, bisectriz y división de un ángulo en partes iguales |
+| 12 | LÁMINA | Polígonos regulares inscriptos | Construir de triángulo a octógono inscriptos en una circunferencia |
+| 13 | LÁMINA | Polígonos estrellados | Construir figuras estrelladas (6 a 9 puntas) a partir de polígonos regulares |
+| 14 | — | *(sin registro)* | No existe archivo `tpn14.*` — salto en la numeración, a confirmar con el docente |
+| 15 | LÁMINA (CAD) | Trazos AutoCAD/LibreCAD | Repetir trazos rectos y curvos (ondas) ya vistos, ahora con software CAD |
+| 16 | LÁMINA (CAD) | Elipse y óvalo | Construir elipse (método de los círculos) y óvalo (método del haz de rectas) |
+| 17 | LÁMINA (CAD) | Parábola e hipérbola | Construir parábola por foco-directriz e hipérbola por focos y asíntotas |
+| 18 | LÁMINA (CAD) | Espiral | Construir espiral por radios crecientes en sistema de coordenadas polares |
+| 19 | LÁMINA (CAD) | Enlaces 1 | Construir enlaces tangentes entre rectas y arcos |
+| 20 | LÁMINA (CAD) | Enlaces 2 | Variante del TP 19 con otra geometría de enlace |
+| 21 | LÁMINA (CAD) | Enlaces — rótulo "ISO E" | Mismo esqueleto de líneas que TP 19-20; título abreviado en el rótulo, confirmar consigna exacta con el docente |
+| 22 | LÁMINA (CAD) | Enlaces — rótulo "ISO A" | Ídem TP 21, variante con otra dimensión de enlace |
+
+> **Nota sobre TP 11-22:** a diferencia de TP 01-10, estos no tienen enunciado en Markdown propio — esta sección fue reconstruida a partir de los archivos `tpnXX.dxf` (y sus `.png`/`.pdf` cuando existen) entregados el 21/abr y el 21/jun/2026. Los títulos entre comillas son literales del rótulo del plano; donde no hay certeza de la consigna original se indica explícitamente.
 
 ---
 
@@ -200,6 +214,101 @@ Durante las clases, el docente usa colores para distinguir el propósito de cada
 
 ---
 
+### TP 11 — Lámina: Construcciones geométricas fundamentales
+
+- **Soporte:** Hoja lisa A4 con marco y rótulo (rótulo sin completar en el archivo fuente)
+- **Contenido (según `tpn11.dxf`):** cuatro construcciones con regla y compás:
+  1. Mediatriz de un segmento (arcos cruzados desde ambos extremos)
+  2. Bisectriz de un ángulo (arco desde el vértice + arcos cruzados)
+  3. Copia de un ángulo sobre una nueva semirrecta
+  4. División de un ángulo en varias partes iguales (haz de bisectrices sucesivas)
+- **Objetivo:** Dominar las construcciones base que sostienen a los polígonos y enlaces de los TP siguientes
+
+---
+
+### TP 12 — Lámina: Polígonos regulares inscriptos
+
+- **Soporte:** Hoja lisa A4 con marco y rótulo
+- **Contenido (según `tpn12.dxf`):** seis circunferencias, cada una con un polígono regular inscripto: triángulo, cuadrado, pentágono, hexágono, heptágono y octógono, con las líneas auxiliares de construcción visibles
+- **Objetivo:** Aplicar división de circunferencia en n partes iguales para construir polígonos regulares
+
+---
+
+### TP 13 — Lámina: Polígonos estrellados
+
+- **Soporte:** Hoja lisa A4 con marco y rótulo
+- **Contenido (según `tpn13.dxf`):** seis circunferencias con figuras estrelladas construidas por unión de vértices no consecutivos de polígonos regulares (hexagrama, cuadrado+rombo, pentagrama, hexagrama sobre hexágono, y dos estrellas de 7-8 puntas)
+- **Objetivo:** Extender la construcción de polígonos regulares a figuras estrelladas, base de rosetas y ornamentación técnica
+
+---
+
+### TP 14 — *(sin registro en el repositorio)*
+
+No hay `tpn14.dxf` ni mención en otros archivos. Puede ser un TP salteado en la numeración del docente, o un archivo que falta subir/entregar. **A confirmar.**
+
+---
+
+### TP 15 — Lámina CAD: Trazos AutoCAD/LibreCAD
+
+- **Soporte:** Lámina digital (CAD), rótulo completado — título en el plano: *"TRAZOS AUTOCAD"*, entregado 11/06 (fecha de rótulo `110526`)
+- **Contenido:** repetición de los ejercicios de trazo recto (escalonado) y trazo curvo (ondas superpuestas) de los TP 01-08, ahora dibujados con software CAD en lugar de instrumentos manuales
+- **Objetivo:** Transferir a LibreCAD/AutoCAD el control de trazo grueso/fino ya entrenado a mano
+
+---
+
+### TP 16 — Lámina CAD: Elipse y óvalo
+
+- **Soporte:** Lámina digital (CAD) — título en el plano: *"ELIPSE Y OVALO"*, fecha de rótulo `180526`
+- **Contenido:** elipse construida por el método de los dos círculos concéntricos (círculo mayor y menor con radios auxiliares a 30°), y óvalo construido por el método del haz de rectas (aproximación de la elipse con arcos de circunferencia)
+- **Objetivo:** Distinguir la curva elíptica exacta (por puntos) de su aproximación práctica con compás (óvalo)
+
+---
+
+### TP 17 — Lámina CAD: Parábola e hipérbola
+
+- **Soporte:** Lámina digital (CAD) — título en el plano: *"PARABOLA E HIPERBOLA"*, fecha de rótulo `180526`
+- **Contenido:** parábola construida por el método de la directriz y el foco (puntos equidistantes marcados con arcos numerados 1-7), e hipérbola de dos ramas construida por el método de los focos (arcos concéntricos desde cada foco)
+- **Objetivo:** Construir cónicas por puntos usando los elementos característicos (foco, directriz, asíntotas)
+
+---
+
+### TP 18 — Lámina CAD: Espiral
+
+- **Soporte:** Lámina digital (CAD) — título en el plano: *"ESPIRAL"*, fecha de rótulo `180526`
+- **Contenido:** espiral (tipo Arquímedes) trazada en sistema de coordenadas polares, con radios crecientes a intervalos angulares regulares (8 direcciones marcadas)
+- **Objetivo:** Construir una curva de radio variable por puntos, usando un sistema de referencia polar en vez de cartesiano
+
+---
+
+### TP 19 — Lámina CAD: Enlaces 1
+
+- **Soporte:** Lámina digital (CAD) — título en el plano: *"ENLACES 1"*, fecha de rótulo `010626`
+- **Contenido:** construcción de enlaces (empalmes tangentes) entre rectas y arcos de circunferencia
+- **Objetivo:** Practicar la continuidad tangente entre segmentos rectos y curvos, base de perfiles y piezas mecánicas reales
+
+---
+
+### TP 20 — Lámina CAD: Enlaces 2
+
+- **Soporte:** Lámina digital (CAD) — mismo esqueleto que TP 19 con otra geometría de enlace, título en el plano: *"ENLACES 2"*
+- **Consigna:** Ídem TP 19 con un caso de enlace distinto
+
+---
+
+### TP 21 — Lámina CAD: rótulo "ISO E"
+
+- **Soporte:** Lámina digital (CAD) — mismo esqueleto de líneas que TP 19-20 (21 líneas + 3 polilíneas), pero el campo de título del rótulo dice *"ISO E"* en vez de un nombre de ejercicio
+- **A confirmar:** no está claro si "ISO E" es la consigna real (por ejemplo, un grupo de líneas normalizado ISO 128) o un título mal cargado. Revisar con el docente o con el enunciado original antes de dar este TP por documentado
+
+---
+
+### TP 22 — Lámina CAD: rótulo "ISO A"
+
+- **Soporte:** Lámina digital (CAD) — ídem TP 21, título en el plano: *"ISO A"*
+- **A confirmar:** mismo caso que TP 21
+
+---
+
 ## 8. Errores comunes
 
 | Error | Consecuencia | Corrección |
@@ -229,10 +338,19 @@ SISTEMAS DE REPRESENTACIÓN
 │   ├── Marco A4 (márgenes: izq 25mm, resto 10mm)
 │   └── Rótulo (175mm, 2 filas de 10mm)
 │
-└── TPs (1 al 10)
+└── TPs (1 al 22, instrumentos manuales → CAD)
     ├── 01-02: Diferencia de trazos (grueso/fino)
     ├── 03-04: Tipos de trazos IRAM (01, 02, 04)
     ├── 05-06: Figuras geométricas
     ├── 07-08: Ondas (trazos curvos)
-    └── 09-10: Caligrafía (mayúsculas / minúsculas)
+    ├── 09-10: Caligrafía (mayúsculas / minúsculas)
+    ├── 11: Construcciones fundamentales (mediatriz, bisectriz)
+    ├── 12-13: Polígonos regulares y estrellados
+    ├── 14: sin registro (a confirmar)
+    └── 15-22: LibreCAD/AutoCAD
+        ├── 15: Trazos CAD
+        ├── 16: Elipse y óvalo
+        ├── 17: Parábola e hipérbola
+        ├── 18: Espiral
+        └── 19-22: Enlaces (19-20 confirmados, 21-22 a confirmar título)
 ```

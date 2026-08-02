@@ -17,7 +17,7 @@ Study notes for **UTN FRBA — Ingeniería Mecánica**, written in Markdown. The
 | `ingenieria_mecanica_i/` | Ingeniería Mecánica I | intro + UT I al XI (12 docs: ingeniería y tecnología, diseño, actividad profesional, proyecto, manufactura, producción, mantenimiento, gestión, seguridad, ética, economía) |
 | `ingenieria_y_sociedad/` | Ingeniería y Sociedad | Arocena (1 doc) + 4 textos con preguntas MC (§1–§56) |
 | `quimica_general/` | Química General (R1091) | intro + estructura atómica + gases + soluciones |
-| `sistemas_de_representacion/` | Sistemas de Representación | expectativas + TPs + normas IRAM + LibreCAD/DXF (3 docs) |
+| `sistemas_de_representacion/` | Sistemas de Representación | TP 01-22 documentados (falta TP14; TP21-22 consigna a confirmar) — ver nota abajo |
 | `su_myf/` | (excluido de git) | — |
 
 ## Writing conventions
@@ -48,7 +48,10 @@ Key sources per subject:
 - **AM1:** `Cronograma A1191 2026.pdf` (schedule)
 - **AyGA:** `Programa ALGEBRA Y GEOMETRIA ANALITICA.pdf` (syllabus), `Nociones de geometría analitica y algebra lineal - KOZAK.pdf` (738-page textbook — always use `pages:` parameter); cátedra site: `https://aga.frba.utn.edu.ar/`
 - **Física I:** `Programa- Bibliografia.pdf`
-- **Sistemas de Representación:** `CLASE 1.pdf` (condiciones, materiales, A4, rótulo, TP 1-2), `CLASE 2.pdf` (tipos de línea IRAM, aplicaciones, TP 3-6), `CLASE 3.pdf` (caligrafía tipo A tabla completa, acotación, TP 7-10). Nota: no tiene parciales — aprobación por carpeta completa.
+- **Sistemas de Representación:** `CLASE 1.pdf` (condiciones, materiales, A4, rótulo, TP 1-2), `CLASE 2.pdf` (tipos de línea IRAM, aplicaciones, TP 3-6), `CLASE 3.pdf` (caligrafía tipo A tabla completa, acotación, TP 7-10). Nota: no tiene parciales — aprobación por carpeta completa. TP 11-22 existen como `.dxf` (LibreCAD, sí se versionan) sin enunciado en PDF propio — su consigna en `00_expectativas_y_trabajos_practicos.md` está reconstruida a partir del dibujo, no transcripta de un enunciado oficial. **Pendientes conocidos (revisar antes de seguir):**
+  - TP14 no tiene archivo — falta subirlo o confirmar con el docente que no existe.
+  - TP21 y TP22 tienen el mismo esqueleto de líneas que los enlaces de TP19-20, pero el rótulo dice "ISO E" / "ISO A" en vez de un título de ejercicio — consigna real sin confirmar.
+  - Nombre y legajo del alumno en el rótulo: **Paredes Sergio, Leg. 260.861-3** (dato correcto, usado en TP15-18; TP11-13 lo tienen sin completar).
 - **Ingeniería Mecánica I:** `Ing. Mec. I - Plan de Estudio.pdf` (programa y cronograma 32 clases), `1.El Ing y su Profesión.pdf`, `1.LA ING. ACTUAL UNIDAD I Y UNIDAD III.pdf`, `HABILIDADES BÁSICAS DE LA INGENIERÍA.pdf`, `1.unidad I Ingeniería y Sociedad.pdf` (37 págs — perfil, ética, patentes, Revolución Industrial), `Mantenimiento[1].pdf` (UT VII completa), `ING MEC POWER 1.pdf` y `ING MEC POWER 2.pdf` (slides de cátedra).
 - **Ingeniería y Sociedad:** 4 textos del parcial, cada uno con archivo `textoN_preguntas_mc.md`. Los textos son: Bitocchi "Ciencia. Noción, origen, paradigmas y encuadre social" (§1–§27), "Estado - Nación" (§28–§36), Ramallo y Repetto "Ciencia y Tecnología en interacción. Cambio tecnológico e innovación" (§37–§47), Gottardo et al. "Globalización: noción, múltiples sentidos y perspectivas" (§48–§56).
 
