@@ -12,7 +12,7 @@ Study notes for **UTN FRBA — Ingeniería Mecánica**, written in Markdown. The
 |---|---|---|
 | `analisis_matematico_i/` | Análisis Matemático I (A1191) | 4 unidades documentadas |
 | `ayga/` | Álgebra y Geometría Analítica | intro + Unidad I |
-| `fisica_i/` | Física I | intro + óptica + cinemática + laboratorio (TPN1 + TPN2) |
+| `fisica_i/` | Física I | intro + óptica + cinemática + laboratorio (TPN1 + TPN2) + `energia_casos_limite/` (estudio personal, no resumen — ver nota abajo) |
 | `griego/` | Griego Científico | alfabeto griego completo con pronunciación |
 | `ingenieria_mecanica_i/` | Ingeniería Mecánica I | intro + UT I al XI (12 docs: ingeniería y tecnología, diseño, actividad profesional, proyecto, manufactura, producción, mantenimiento, gestión, seguridad, ética, economía) |
 | `ingenieria_y_sociedad/` | Ingeniería y Sociedad | Arocena (1 doc) + 4 textos con preguntas MC (§1–§56) |
@@ -47,7 +47,7 @@ Key sources per subject:
 - **Química General:** `PLANIFICACIÓN R1091 TN 1ER CUAT Ricotti-Cruz_v2.pdf` (syllabus), `Guia QUIMICA GENERAL 2020 FINAL.pdf` (exercises), `La Química.pdf` (theory), professor slides as PDFs
 - **AM1:** `Cronograma A1191 2026.pdf` (schedule)
 - **AyGA:** `Programa ALGEBRA Y GEOMETRIA ANALITICA.pdf` (syllabus), `Nociones de geometría analitica y algebra lineal - KOZAK.pdf` (738-page textbook — always use `pages:` parameter); cátedra site: `https://aga.frba.utn.edu.ar/`
-- **Física I:** `Programa- Bibliografia.pdf`
+- **Física I:** `Programa- Bibliografia.pdf`; libro de cátedra `Physics — Sears, Young, Freedman, Zemansky` (12ª/13ª ed., en `fisica_i/libros/`, en inglés). Nota sobre `fisica_i/energia_casos_limite/`: a diferencia del resto de la carpeta (resúmenes de clase), es un espacio de estudio personal — parte de una derivación propia (cinemática → trabajo-energía) y la extiende a casos límite reales (lanzamiento de bala y jabalina de alto rendimiento) con datos de récords mundiales y comparativa de potencia humana. No sigue la estructura estándar de "tema" del resto del repo a propósito. Usa notación con referencia en inglés junto al símbolo (`h`=height, `w`=weight, `W`=Work, `μs`/`μk`=static/kinetic friction) — preferencia explícita del usuario, ver memoria `user_fisica_ingles_vocabulario`.
 - **Sistemas de Representación:** `CLASE 1.pdf` (condiciones, materiales, A4, rótulo, TP 1-2), `CLASE 2.pdf` (tipos de línea IRAM, aplicaciones, TP 3-6), `CLASE 3.pdf` (caligrafía tipo A tabla completa, acotación, TP 7-10). Nota: no tiene parciales — aprobación por carpeta completa. TP 11-22 existen como `.dxf` (LibreCAD, sí se versionan) sin enunciado en PDF propio — su consigna en `00_expectativas_y_trabajos_practicos.md` está reconstruida a partir del dibujo, no transcripta de un enunciado oficial. **Pendientes conocidos (revisar antes de seguir):**
   - TP14 no tiene archivo — falta subirlo o confirmar con el docente que no existe.
   - TP21 y TP22 tienen el mismo esqueleto de líneas que los enlaces de TP19-20, pero el rótulo dice "ISO E" / "ISO A" en vez de un título de ejercicio — consigna real sin confirmar.

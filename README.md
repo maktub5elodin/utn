@@ -12,7 +12,7 @@ Escritas en Markdown, en español, con diagramas ASCII y analogías contables (e
 |---|---|---|---|
 | [`analisis_matematico_i/`](analisis_matematico_i/) | Análisis Matemático I | Introducción · Funciones · Topología · Límites | 14/abr/2026 |
 | [`ayga/`](ayga/) | Álgebra y Geometría Analítica | Introducción · Vectores, recta y plano | 02/may/2026 |
-| [`fisica_i/`](fisica_i/) | Física I | Introducción · Óptica · Cinemática · Laboratorio TPN1 + TPN2 | 31/may/2026 |
+| [`fisica_i/`](fisica_i/) | Física I | Introducción · Óptica · Cinemática · Laboratorio TPN1 + TPN2 · Energía en casos límite (lanzamiento de bala y jabalina) | 31/ago/2026 |
 | [`griego/`](griego/) | Griego Científico | Alfabeto griego con pronunciación y uso científico | 16/abr/2026 |
 | [`quimica_general/`](quimica_general/) | Química General | Introducción · Estructura atómica · Gases (UT3) · Soluciones (UT7) | 02/may/2026 |
 | [`ingenieria_y_sociedad/`](ingenieria_y_sociedad/) | Ingeniería y Sociedad | Arocena · 4 textos con preguntas MC (§1–§56) | 31/may/2026 |
