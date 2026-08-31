@@ -44,7 +44,7 @@ Para tener una referencia: son casi 724 julios entregados a un objeto en una fra
 
 ## ¿Por qué el ángulo óptimo NO es 45°?
 
-Cap. 3 (*Motion in Two or Three Dimensions*) da el alcance de un proyectil lanzado y aterrizado **al mismo nivel**: ahí sí, 45° maximiza el alcance. Pero acá la bala sale de una altura `h = 2.11 m` y cae al nivel del piso — no es el mismo problema. Hay que rehacer el cálculo con esa altura de salida, que es álgebra directa sobre las ecuaciones de posición de cap. 3:
+Cap. 3 (*Motion in Two or Three Dimensions*) da el alcance de un proyectil lanzado y aterrizado **al mismo nivel**: ahí sí, 45° maximiza el alcance. Pero acá la bala sale de una altura `h = 2.11 m` y cae al nivel del piso — no es el mismo problema. Hay que rehacer el cálculo con esa altura de salida, que es álgebra directa sobre las ecuaciones de posición de cap. 3 — que no son dos fórmulas sueltas, sino las dos componentes del vector posición `r⃗(t) = (x(t), y(t))`, cada una viniendo de descomponer la velocidad de salida `v⃗` en sus componentes `vx = v·cos θ` y `vy = v·sin θ` con `θ` medido desde el eje `+x`:
 
 ```
    x(t) = v·cos θ · t

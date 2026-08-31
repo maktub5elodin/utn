@@ -4,7 +4,7 @@
 
 `00_introduccion.md`, `01_optica.md` y `02_cinematica.md` en la carpeta padre son **resúmenes de clase**: condensan lo que la cátedra dio, en el orden en que lo dio. Esta carpeta es otra cosa. Es lunes 31 de agosto de 2026, y el parcial es pasado mañana, **miércoles 2 de septiembre**. Para esta instancia ya leí — por mi cuenta, del *Physics* de Sears, Young, Freedman y Zemansky (ediciones 12ª y 13ª) — los capítulos 1 a 6. No necesito otro resumen de esos capítulos: los tengo. Lo que quiero es *usarlos* para pensar algo que no está en el libro: cuánta potencia puede generar realmente un cuerpo humano, llevado a sus casos límite — el lanzamiento de bala y el lanzamiento de jabalina en el deporte de alto rendimiento.
 
-Esto es **compound knowledge**: cada capítulo nuevo no reemplaza al anterior, se apoya en él. Es la misma lógica que el interés compuesto en contabilidad — el capital de este período incluye los intereses ya devengados del período anterior, no arranca de cero. Acá, la ecuación de trabajo-energía del capítulo 6 no es un tema nuevo aislado: es álgebra directa sobre las dos ecuaciones de cinemática del capítulo 2 que ya tenías incorporadas. Esa derivación la hiciste vos solo, sin que el libro te la señalara explícitamente, y es el punto de partida del archivo `01`.
+Esto es **compound knowledge**: cada capítulo nuevo no reemplaza al anterior, se apoya en él. Es la misma lógica que el interés compuesto en contabilidad — el capital de este período incluye los intereses ya devengados del período anterior, no arranca de cero. Acá, la ecuación de trabajo-energía del capítulo 6 no es un tema nuevo aislado: es álgebra directa sobre las dos ecuaciones de cinemática del capítulo 2 que ya tenías incorporadas. Esa derivación te la enseñó el libro — no la inventaste vos, y vale la pena tenerlo claro para no engañarte con la propia curva de aprendizaje —, pero la hiciste tuya al punto de encontrarle un uso concreto y disfrutarla, y es el punto de partida del archivo `01`.
 
 ## Dónde estoy parado en el temario (Mecánica, Sears caps. 1–9)
 
@@ -45,11 +45,17 @@ Vengo notando que aprendo física mejor en inglés que en español — probablem
 
 La distinción `w` vs `W` es la que más vale la pena tener clavada: el libro las usa una al lado de la otra todo el tiempo (`w = mg` es una fuerza vertical; `W = F·d·cosθ` es un escalar que puede valer cero aunque haya fuerza, si no hay desplazamiento, o aunque haya desplazamiento, si la fuerza es perpendicular a él).
 
+## Convención de método: vectores primero
+
+Cuando un problema admite resolverse por descomposición vectorial (componentes, vector resultante, producto escalar o producto vectorial, matrices/determinantes) y también por un atajo trigonométrico "de memoria" (ángulos de referencia, simetrías), en esta carpeta priorizo la vía vectorial. No es purismo: el atajo es más rápido una vez que se domina, pero abre la puerta a errores de signo silenciosos — el ejemplo real es descomponer una fuerza en el 4to cuadrante usando `cos 300°` en vez de `sin 30°` (o viceversa) sin ajustar el signo según el cuadrante en el que realmente cae el ángulo. El método de componentes, con el ángulo medido siempre desde el eje `+x` en sentido antihorario (la convención estándar), no tiene esa ambigüedad: los signos de `cos θ` y `sin θ` salen solos al evaluarlos en el ángulo real — no hace falta "recordarlos" caso por caso.
+
+Por eso en `01` el trabajo (*Work*) no se presenta solo como la fórmula memorizada `W = F·d·cosθ`, sino primero como el producto escalar entre el vector fuerza y el vector desplazamiento, `W = F⃗ · Δr⃗`, del cual `cos θ` sale como consecuencia de la definición geométrica del producto escalar, no como un factor aparte para memorizar. A medida que aparezcan fuerzas no colineales con el desplazamiento (por ejemplo, en una trayectoria curva) se van a descomponer en componentes `x`/`y` en vez de tirar de un ángulo de referencia memorizado — y cuando el capítulo 9 (rotación) entre en juego, el producto vectorial (`×`) va a tener su lugar para torque y momento angular.
+
 ## Mapa de esta carpeta
 
 ```
 00_introduccion.md                         → este archivo: por qué, dónde estoy, vocabulario
-01_de_la_cinematica_al_trabajo_energia.md  → tu propia derivación, formalizada
+01_de_la_cinematica_al_trabajo_energia.md  → la derivación del libro (cap. 2→6), formalizada + Work como producto escalar
 02_calibracion_personal_el_joule_humano.md → "¿puedo mover 1 kg, 1 m, en 1 s?" — con números
 03_lanzamiento_de_bala_shot_put.md         → primer caso límite: masa grande, velocidad menor
 04_lanzamiento_de_jabalina_javelin.md      → segundo caso límite: masa chica, velocidad enorme

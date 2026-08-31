@@ -50,7 +50,7 @@ El numerador es `(v - v₀)·[2v₀ + (v - v₀)] = (v - v₀)·(v + v₀) = v²
   →      v² = v₀² + 2·a·Δx
 ```
 
-Esta es la ecuación a la que llegaste vos solo, y es la tercera ecuación clásica de cinemática — la que no tiene `t`. Hasta acá, cero física nueva: es álgebra sobre lo que ya sabías.
+Esta es la tercera ecuación clásica de cinemática — la que no tiene `t` — tal como la presenta el libro; el camino de despejar y sustituir para llegar a ella (en vez de memorizarla directo) es el que fui practicando hasta encontrarle el gusto. Hasta acá, cero física nueva: es álgebra sobre lo que ya sabías del capítulo 2.
 
 ## Paso 3 — el salto: multiplicar por m/2
 
@@ -80,15 +80,26 @@ Este es el **teorema trabajo-energía** (*work-energy theorem*), cap. 6. No es u
 
 ## Definiciones formales, ahora que ya se entiende de dónde salen
 
+Todo lo anterior se hizo en una sola dimensión (cap. 2: movimiento sobre una recta), así que `F` y `Δx` eran escalares con signo — no hizo falta hablar de vectores porque en una recta solo hay dos direcciones posibles. Pero la definición real de trabajo (cap. 6, y cap. 1.10 para el producto de vectores) es vectorial, y vale la pena escribirla así desde el principio en vez de memorizar directamente la versión escalar:
+
 ```
-  Work            W = F · d · cos θ         [N·m = J]
-  Kinetic Energy  K = ½ · m · v²            [kg·m²/s² = J]
-  Work-Energy Th. W_net = ΔK = K_f - K_i    [J]
-  Power           P = W / t   (promedio)    [J/s = W]
-                  P = F · v   (instantánea) [W]
+  Work (vectorial)     W = F⃗ · Δr⃗                          [J]
+  Kinetic Energy       K = ½ · m · v²    (v = |v⃗|, rapidez)  [J]
+  Work-Energy Th.       W_net = ΔK = K_f - K_i                [J]
+  Power                 P = F⃗ · v⃗   (instantánea)            [W]
 ```
 
-`θ` es el ángulo entre la fuerza y el desplazamiento — si empujás algo perpendicular a cómo se mueve (por ejemplo, cargar una valija caminando horizontal mientras la sostenés hacia arriba), el trabajo de esa fuerza es cero aunque haya fuerza y haya movimiento. Es una trampa clásica de examen.
+El símbolo `·` entre dos vectores es el **producto escalar** (*dot product*, cap. 1.10): toma dos vectores y devuelve un número (sin dirección), definido como
+
+```
+   F⃗ · Δr⃗  =  |F|·|Δr|·cos θ        (forma "por módulos y ángulo")
+
+   F⃗ · Δr⃗  =  Fx·Δx + Fy·Δy + Fz·Δz  (forma "por componentes" — la que prefiero usar)
+```
+
+Las dos formas son la misma cosa. La ventaja de la forma por componentes es que `cos θ` deja de ser un factor que hay que "traer de afuera" (y del que hay que acordarse el signo según el cuadrante) — sale solo, escondido dentro de `Fx` y `Δx` una vez que la fuerza y el desplazamiento están descompuestos en sus componentes `x`/`y` con el ángulo medido desde el eje `+x`. Por eso el trabajo "sabe" cancelarse cuando la fuerza es perpendicular al desplazamiento (por ejemplo, cargar una valija caminando horizontal mientras la sostenés hacia arriba: `Fx·Δx` con `Fx = 0` porque toda la fuerza está en `y`) sin que haga falta memorizar la regla "si es perpendicular, da cero" aparte — es una consecuencia directa de la definición, no una excepción a recordar. Es una trampa clásica de examen justamente para quien memorizó la regla en vez de la definición.
+
+Cuando llegue el capítulo 9 (rotación), el otro producto de vectores del cap. 1.10 — el **producto vectorial** (*cross product*, `×`, que da como resultado otro vector, perpendicular al plano de los dos originales) — va a tener su lugar para torque y momento angular. Acá todavía no hace falta.
 
 ## Chequeo de unidades (porque recién te estás acostumbrando a N, J y W)
 
