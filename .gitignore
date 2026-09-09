@@ -9,6 +9,8 @@
 *.png
 *.ods
 *.txt
+*.xlsx
+*.odt
 
 # Sistema operativo
 .DS_Store
