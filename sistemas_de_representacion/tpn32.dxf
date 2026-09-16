@@ -1115,9 +1115,9 @@ AcDbViewportTableRecord
  21
 1
  12
-194.1176470588235
+192.8666666666667
  22
-150.4411764705882
+150.3333333333333
  13
 0
  23
@@ -1143,9 +1143,9 @@ AcDbViewportTableRecord
  37
 0
  40
-304.7647058823529
+304.3333333333334
  41
-1.85859872611465
+1.844578313253012
  42
 50
  43
@@ -2235,7 +2235,7 @@ AcDbLayerTableRecord
   2
 0
  70
-    1
+    0
  62
     7
   6
@@ -2303,11 +2303,13 @@ AcDbLayerTableRecord
   2
 GEOMETRIA
  70
-    1
+    0
  62
     7
   6
 CONTINUOUS
+290
+0
 370
   200
 390
@@ -2635,7 +2637,13 @@ Standard
 289
     3
 340
-50
+STANDARD
+341
+
+371
+   -2
+372
+   -2
   0
 ENDTAB
   0
@@ -3511,7 +3519,7 @@ AcDbMText
  40
 5
  41
-101.2519038001156
+101.2500015114269
  71
     5
  72
@@ -3719,55 +3727,9 @@ standard
  44
 1
   0
-MTEXT
-  5
-73
-100
-AcDbEntity
-  8
-ROTULO_2B
-  6
-ByLayer
- 62
-  256
-370
-   -1
-100
-AcDbMText
- 10
-112.5
- 20
-272
- 30
-0
- 40
-5
- 41
-123.8926986091398
- 71
-    5
- 72
-    1
-  1
-Dada la siguiente perspectiva hallar \P         las vistas fundamentales
-  7
-standard
-210
-0
-220
-0
-230
-1
- 50
-0
- 73
-    2
- 44
-1
-  0
 LINE
   5
-74
+73
 100
 AcDbEntity
   8
@@ -3791,7 +3753,7 @@ AcDbLine
   0
 LINE
   5
-75
+74
 100
 AcDbEntity
   8
@@ -3815,7 +3777,7 @@ AcDbLine
   0
 LINE
   5
-76
+75
 100
 AcDbEntity
   8
@@ -3839,7 +3801,7 @@ AcDbLine
   0
 LINE
   5
-77
+76
 100
 AcDbEntity
   8
@@ -3863,7 +3825,7 @@ AcDbLine
   0
 LINE
   5
-78
+77
 100
 AcDbEntity
   8
@@ -3884,6 +3846,30 @@ AcDbLine
 73.52877577293367
  21
 242
+  0
+LINE
+  5
+78
+100
+AcDbEntity
+  8
+2B
+  6
+ByLayer
+ 62
+  256
+370
+   -1
+100
+AcDbLine
+ 10
+73.52877577293367
+ 20
+242
+ 11
+99.50953788646683
+ 21
+227
   0
 LINE
   5
@@ -3907,7 +3893,7 @@ AcDbLine
  11
 99.50953788646683
  21
-227
+257
   0
 LINE
   5
@@ -3925,13 +3911,13 @@ ByLayer
 100
 AcDbLine
  10
-73.52877577293367
- 20
-242
- 11
 99.50953788646683
- 21
+ 20
 257
+ 11
+125.4903
+ 21
+242
   0
 LINE
   5
@@ -3951,7 +3937,7 @@ AcDbLine
  10
 99.50953788646683
  20
-257
+227
  11
 125.4903
  21
@@ -3973,13 +3959,13 @@ ByLayer
 100
 AcDbLine
  10
-99.50953788646683
- 20
-227
- 11
 125.4903
+ 20
+192
+ 11
+151.4710621135332
  21
-242
+217
   0
 LINE
   5
@@ -3999,30 +3985,6 @@ AcDbLine
  10
 125.4903
  20
-192
- 11
-151.4710621135332
- 21
-217
-  0
-LINE
-  5
-7E
-100
-AcDbEntity
-  8
-2B
-  6
-ByLayer
- 62
-  256
-370
-   -1
-100
-AcDbLine
- 10
-125.4903
- 20
 242
  11
 125.4903
@@ -4031,7 +3993,7 @@ AcDbLine
   0
 LINE
   5
-7F
+7E
 100
 AcDbEntity
   8
@@ -4055,7 +4017,7 @@ AcDbLine
   0
 LINE
   5
-80
+7F
 100
 AcDbEntity
   8
@@ -4079,7 +4041,7 @@ AcDbLine
   0
 LINE
   5
-81
+80
 100
 AcDbEntity
   8
@@ -4103,7 +4065,7 @@ AcDbLine
   0
 LINE
   5
-82
+81
 100
 AcDbEntity
   8
@@ -4127,7 +4089,7 @@ AcDbLine
   0
 CIRCLE
   5
-83
+82
 100
 AcDbEntity
   8
@@ -4149,7 +4111,7 @@ AcDbCircle
   0
 CIRCLE
   5
-84
+83
 100
 AcDbEntity
   8
@@ -4171,7 +4133,7 @@ AcDbCircle
   0
 LINE
   5
-85
+84
 100
 AcDbEntity
   8
@@ -4195,7 +4157,7 @@ AcDbLine
   0
 LINE
   5
-86
+85
 100
 AcDbEntity
   8
@@ -4219,7 +4181,7 @@ AcDbLine
   0
 LINE
   5
-87
+86
 100
 AcDbEntity
   8
@@ -4236,6 +4198,30 @@ AcDbLine
 163
  20
 55
+ 11
+163
+ 21
+65
+  0
+LINE
+  5
+87
+100
+AcDbEntity
+  8
+2B
+  6
+ByLayer
+ 62
+  256
+370
+   -1
+100
+AcDbLine
+ 10
+153
+ 20
+62.5
  11
 163
  21
@@ -4257,13 +4243,13 @@ ByLayer
 100
 AcDbLine
  10
-153
- 20
 62.5
+ 20
+126
  11
-163
+62.5
  21
-65
+136
   0
 LINE
   5
@@ -4285,37 +4271,13 @@ AcDbLine
  20
 126
  11
-62.5
- 21
-136
-  0
-LINE
-  5
-8A
-100
-AcDbEntity
-  8
-2B
-  6
-ByLayer
- 62
-  256
-370
-   -1
-100
-AcDbLine
- 10
-62.5
- 20
-126
- 11
 92.5
  21
 126
   0
 LINE
   5
-8B
+8A
 100
 AcDbEntity
   8
@@ -4336,6 +4298,30 @@ AcDbLine
 92.5
  21
 146
+  0
+LINE
+  5
+8B
+100
+AcDbEntity
+  8
+2B
+  6
+ByLayer
+ 62
+  256
+370
+   -1
+100
+AcDbLine
+ 10
+92.5
+ 20
+146
+ 11
+92.5
+ 21
+156
   0
 LINE
   5
@@ -4357,9 +4343,9 @@ AcDbLine
  20
 146
  11
-92.5
+62.5
  21
-156
+136
   0
 LINE
   5
@@ -4377,13 +4363,13 @@ ByLayer
 100
 AcDbLine
  10
-92.5
+62.5
  20
-146
+136
  11
 62.5
  21
-136
+156
   0
 LINE
   5
@@ -4403,9 +4389,9 @@ AcDbLine
  10
 62.5
  20
-136
+156
  11
-62.5
+92.5
  21
 156
   0
@@ -4425,13 +4411,13 @@ ByLayer
 100
 AcDbLine
  10
-62.5
+102.5
  20
-156
+126
  11
-92.5
+162.5
  21
-156
+126
   0
 LINE
   5
@@ -4449,13 +4435,13 @@ ByLayer
 100
 AcDbLine
  10
-102.5
+162.5
  20
 126
  11
 162.5
  21
-126
+136
   0
 LINE
   5
@@ -4475,9 +4461,9 @@ AcDbLine
  10
 162.5
  20
-126
+136
  11
-162.5
+132.5
  21
 136
   0
@@ -4497,30 +4483,6 @@ ByLayer
 100
 AcDbLine
  10
-162.5
- 20
-136
- 11
-132.5
- 21
-136
-  0
-LINE
-  5
-93
-100
-AcDbEntity
-  8
-2B
-  6
-ByLayer
- 62
-  256
-370
-   -1
-100
-AcDbLine
- 10
 132.5
  20
 136
@@ -4531,7 +4493,7 @@ AcDbLine
   0
 LINE
   5
-94
+93
 100
 AcDbEntity
   8
@@ -4555,7 +4517,7 @@ AcDbLine
   0
 LINE
   5
-95
+94
 100
 AcDbEntity
   8
@@ -4579,7 +4541,7 @@ AcDbLine
   0
 LINE
   5
-96
+95
 100
 AcDbEntity
   8
@@ -4603,7 +4565,7 @@ AcDbLine
   0
 LINE
   5
-97
+96
 100
 AcDbEntity
   8
@@ -4627,7 +4589,7 @@ AcDbLine
   0
 LINE
   5
-98
+97
 100
 AcDbEntity
   8
@@ -4646,6 +4608,30 @@ AcDbLine
 116
  11
 62.5
+ 21
+56
+  0
+LINE
+  5
+98
+100
+AcDbEntity
+  8
+2B
+  6
+ByLayer
+ 62
+  256
+370
+   -1
+100
+AcDbLine
+ 10
+62.5
+ 20
+56
+ 11
+92.5
  21
 56
   0
@@ -4665,13 +4651,13 @@ ByLayer
 100
 AcDbLine
  10
-62.5
+92.5
  20
 56
  11
 92.5
  21
-56
+116
   0
 LINE
   5
@@ -4691,9 +4677,9 @@ AcDbLine
  10
 92.5
  20
-56
+116
  11
-92.5
+62.5
  21
 116
   0
@@ -4713,17 +4699,65 @@ ByLayer
 100
 AcDbLine
  10
-92.5
- 20
-116
- 11
 62.5
+ 20
+86
+ 11
+92.5
  21
-116
+86
   0
 LINE
   5
 9C
+100
+AcDbEntity
+  8
+2H
+  6
+DASHDOT2
+ 62
+  256
+370
+   -1
+100
+AcDbLine
+ 10
+177.5
+ 20
+60
+ 11
+147.5
+ 21
+60
+  0
+LINE
+  5
+9D
+100
+AcDbEntity
+  8
+2H
+  6
+DASHDOT2
+ 62
+  256
+370
+   -1
+100
+AcDbLine
+ 10
+170
+ 20
+52.5
+ 11
+170
+ 21
+67.5
+  0
+MTEXT
+  5
+9E
 100
 AcDbEntity
   8
@@ -4735,15 +4769,37 @@ ByLayer
 370
    -1
 100
-AcDbLine
+AcDbMText
  10
-62.5
+112.4999999999998
  20
-86
- 11
-92.5
- 21
-86
+272
+ 30
+0
+ 40
+5
+ 41
+123.8888940317633
+ 71
+    5
+ 72
+    1
+  1
+Dada la siguiente perspectiva hallar\Plas vistas fundamentales
+  7
+standard
+210
+0
+220
+0
+230
+1
+ 50
+0
+ 73
+    2
+ 44
+1
   0
 ENDSEC
   0
@@ -4777,7 +4833,7 @@ AcDbDictionary
   0
 PLOTSETTINGS
   5
-9D
+9F
 100
 AcDbPlotSettings
   6
