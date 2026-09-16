@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagramación Estructurada — Fundamentos de Informática</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF2F6;
+    --paper-card:#FFFFFF;
+    --grid-line:rgba(30,42,51,0.08);
+    --ink:#1E2A33;
+    --ink-soft:#52626C;
+    --ink-faint:#8B9AA4;
+    --blue:#2B5A8C;
+    --blue-soft:#DCE7F0;
+    --blue-line:#9FB9CE;
+    --red:#C23B22;
+    --red-soft:#F7DED6;
+    --border:#C7D3DE;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background-color:var(--paper);
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size:28px 28px;
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16.5px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.mono{font-family:'IBM Plex Mono', monospace;}
+  .wrap{max-width:760px; margin:0 auto; padding:0 24px 100px;}
+  a{color:var(--blue);}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:56px 0 28px; border-bottom:2px solid var(--ink);}
+  .hero .kicker{
+    font-size:14px; color:var(--ink-soft); margin:0 0 6px;
+  }
+  .hero h1{
+    font-size:clamp(30px,5vw,44px);
+    font-weight:600;
+    margin:0 0 14px;
+    letter-spacing:-0.01em;
+    line-height:1.1;
+  }
+  .hero p.lead{
+    font-size:18px; color:var(--ink-soft); max-width:56ch; margin:0 0 28px;
+  }
+  .hero-meta{
+    display:flex; flex-wrap:wrap; gap:6px 22px;
+    font-size:13.5px; color:var(--ink-soft);
+    border-top:1px dashed var(--border); padding-top:14px;
+  }
+  .hero-meta strong{color:var(--ink); font-weight:600;}
+
+  /* ---------- TOC ---------- */
+  .toc{padding:26px 0; border-bottom:1px solid var(--border);}
+  .toc ol{list-style:none; margin:0; padding:0; columns:2; column-gap:32px;}
+  .toc li{margin-bottom:9px; break-inside:avoid;}
+  .toc a{
+    display:flex; align-items:baseline; gap:6px;
+    text-decoration:none; color:var(--ink); font-size:15px;
+  }
+  .toc a::after{
+    content:""; flex:1; border-bottom:1px dotted var(--ink-faint); margin:0 2px 3px;
+  }
+  .toc a span.n{color:var(--blue); font-family:'IBM Plex Mono',monospace; font-size:13px;}
+  .toc a:hover{color:var(--blue);}
+
+  /* ---------- Sections ---------- */
+  section{padding:52px 0; border-bottom:1px solid var(--border);}
+  section:last-of-type{border-bottom:none;}
+  h2{
+    font-size:24px; font-weight:600; margin:0 0 6px; letter-spacing:-0.005em;
+  }
+  h2 .num{color:var(--blue); margin-right:10px;}
+  .section-intro{color:var(--ink-soft); max-width:64ch; margin:0 0 28px; font-size:15.5px;}
+  h3{font-size:16.5px; font-weight:600; margin:30px 0 10px;}
+  p{margin:0 0 14px;}
+  ul,ol{padding-left:22px; margin:0 0 16px;}
+  li{margin-bottom:6px;}
+  code{
+    font-family:'IBM Plex Mono', monospace; background:var(--blue-soft);
+    padding:1px 5px; border-radius:3px; font-size:14px; color:var(--blue);
+  }
+
+  /* ---------- Figures ---------- */
+  figure{margin:26px 0; padding:18px 18px 14px; background:var(--paper-card);
+    border:1px solid var(--border); border-radius:8px;}
+  figure svg{width:100%; height:auto; display:block;}
+  figcaption{
+    font-size:13.5px; color:var(--ink-soft); margin-top:10px;
+    border-top:1px dashed var(--border); padding-top:9px;
+  }
+  figcaption strong{color:var(--ink);}
+
+  /* ---------- Rules list ---------- */
+  .rules{counter-reset:rule; list-style:none; padding:0; margin:0;}
+  .rules li{
+    counter-increment:rule; position:relative; padding:10px 0 10px 40px;
+    border-bottom:1px solid var(--border);
+  }
+  .rules li:last-child{border-bottom:none;}
+  .rules li::before{
+    content:counter(rule); position:absolute; left:0; top:10px;
+    font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--blue);
+    font-size:14px; width:26px; height:26px; border:1.5px solid var(--blue);
+    border-radius:50%; display:flex; align-items:center; justify-content:center;
+  }
+
+  /* ---------- Stamp / checklist ---------- */
+  .stamp{
+    border:2.5px solid var(--ink); border-radius:10px; padding:22px 26px;
+    transform:rotate(-0.6deg); background:var(--paper-card); max-width:520px;
+  }
+  .stamp h3{margin-top:0; font-size:15px; text-transform:none;}
+  .stamp ol{margin:0; padding-left:20px;}
+  .stamp li{margin-bottom:8px; font-size:15px;}
+
+  /* ---------- Problem table ---------- */
+  .problems{border-collapse:collapse; width:100%; font-size:14.5px; margin:0 0 8px;}
+  .problems th,.problems td{
+    text-align:left; padding:10px 12px; border-bottom:1px solid var(--border);
+    vertical-align:top;
+  }
+  .problems th{
+    font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:12.5px;
+    color:var(--ink-soft); border-bottom:1.5px solid var(--ink);
+  }
+  .problems td.pid{font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--blue); white-space:nowrap;}
+  .tag{
+    display:inline-block; font-size:11.5px; padding:2px 8px; border-radius:20px;
+    border:1px solid currentColor; margin-top:4px;
+  }
+  .tag.hi{color:var(--red); background:var(--red-soft); border-color:var(--red);}
+  .tag.mid{color:var(--blue); background:var(--blue-soft); border-color:var(--blue);}
+  .tag.lo{color:var(--ink-soft); background:transparent;}
+
+  /* ---------- Golden example callout ---------- */
+  .golden{
+    background:linear-gradient(180deg,#fff, #fff 60%, var(--red-soft));
+    border:2px solid var(--red); border-radius:10px; padding:22px 24px; margin:0 0 30px;
+  }
+  .golden .eyebrow{
+    display:inline-flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace;
+    font-size:13px; color:var(--red); font-weight:600; margin-bottom:8px;
+  }
+  .golden .eyebrow .dot{width:8px;height:8px;border-radius:50%;background:var(--red);}
+  .golden p{margin-bottom:0; font-size:15.5px;}
+
+  /* ---------- Note bubble ---------- */
+  .note{
+    display:inline-block; max-width:280px; padding:12px 14px; font-size:13.5px;
+    background:#FFFDF2; border:1.5px dashed var(--ink-faint); border-radius:6px;
+    transform:rotate(1.1deg); color:var(--ink-soft); margin:14px 10px 14px 0;
+    box-shadow:2px 3px 0 rgba(30,42,51,0.05);
+  }
+  .note strong{color:var(--ink); display:block; margin-bottom:3px; font-family:'IBM Plex Mono',monospace; font-size:12px;}
+
+  /* ---------- Mapping table ---------- */
+  .mapping{width:100%; border-collapse:collapse; font-size:14.5px; margin:20px 0;}
+  .mapping th,.mapping td{padding:9px 10px; border:1px solid var(--border);}
+  .mapping th{background:var(--blue-soft); font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:12.5px; text-align:left;}
+  .mapping td.badge{
+    font-family:'IBM Plex Mono',monospace; font-weight:700; color:#fff; background:var(--blue);
+    text-align:center; border-radius:50%; width:28px; height:28px; padding:0;
+    display:table-cell; vertical-align:middle;
+  }
+
+  pre{
+    background:var(--ink); color:#DCE7F0; padding:16px 18px; border-radius:8px;
+    overflow-x:auto; font-family:'IBM Plex Mono',monospace; font-size:12.8px; line-height:1.6;
+    margin:18px 0;
+  }
+  pre .kw{color:#7FB3E0;}
+  pre .rd{color:#F0A08D;}
+  pre .cm{color:#7A8A94; font-style:italic;}
+
+  /* ---------- Style notes ---------- */
+  .style-notes{list-style:none; margin:0; padding:0;}
+  .style-notes li{
+    padding:14px 0 14px 0; border-bottom:1px dashed var(--border);
+    display:grid; grid-template-columns:120px 1fr; gap:16px;
+  }
+  .style-notes li:last-child{border-bottom:none;}
+  .style-notes .k{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--blue); font-weight:600;
+    padding-top:2px;
+  }
+  @media (max-width:560px){
+    .style-notes li{grid-template-columns:1fr;}
+  }
+
+  /* ---------- Study plan ---------- */
+  .plan{list-style:none; margin:0; padding:0; counter-reset:plan;}
+  .plan li{
+    counter-increment:plan; display:flex; gap:16px; padding:16px 0;
+    border-bottom:1px solid var(--border); align-items:flex-start;
+  }
+  .plan li:last-child{border-bottom:none;}
+  .plan .rank{
+    font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:20px; color:var(--border);
+    -webkit-text-stroke:1px var(--ink); width:34px; flex-shrink:0;
+  }
+  .plan li:nth-child(1) .rank{color:var(--red); -webkit-text-stroke:0;}
+  .plan h4{margin:0 0 4px; font-size:15.5px;}
+  .plan p{margin:0; font-size:14px; color:var(--ink-soft);}
+
+  /* ---------- Footer stamp ---------- */
+  footer{padding:50px 0 10px;}
+  .req-stamp{
+    border:2px dashed var(--ink); border-radius:12px; padding:22px 26px;
+    display:flex; flex-wrap:wrap; gap:22px; justify-content:space-between; align-items:center;
+  }
+  .req-stamp ol{margin:0; padding-left:18px; font-size:14px; flex:1 1 320px;}
+  .req-stamp .to{
+    font-family:'IBM Plex Mono',monospace; font-size:13px; text-align:center;
+    border-left:1.5px dashed var(--border); padding-left:22px; flex:0 0 auto;
+  }
+  .req-stamp .to a{display:block; margin-top:4px; font-weight:600;}
+  .colophon{text-align:center; color:var(--ink-faint); font-size:12.5px; margin-top:36px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <p class="kicker">Apuntes de cátedra — resumen para el TP/parcial</p>
+    <h1>Diagramación Estructurada</h1>
+    <p class="lead">Cómo diagrama la cátedra, qué pide realmente la guía de ejercicios, y la resolución completa del ejemplo que el profesor ya mostró en el pizarrón como modelo a seguir.</p>
+    <div class="hero-meta">
+      <span><strong>Materia:</strong> Fundamentos de Informática</span>
+      <span><strong>Docente:</strong> Ing. Aldo J. Alaniz</span>
+      <span><strong>Departamento:</strong> Ingeniería Mecánica</span>
+      <span><strong>Notación:</strong> Diagramas de Chapin / Nassi-Shneiderman</span>
+    </div>
+  </header>
+
+  <nav class="toc">
+    <ol>
+      <li><a href="#reglas"><span class="n">01</span> Las reglas del diagrama</a></li>
+      <li><a href="#requisitos"><span class="n">02</span> Requisitos del TP</a></li>
+      <li><a href="#guia"><span class="n">03</span> Los problemas de la guía</a></li>
+      <li><a href="#modelo"><span class="n">04</span> El ejemplo modelo</a></li>
+      <li><a href="#estilo"><span class="n">05</span> Cómo piensa el profesor</a></li>
+      <li><a href="#plan"><span class="n">06</span> Plan de estudio</a></li>
+    </ol>
+  </nav>
+
+  <!-- ============ 01 REGLAS ============ -->
+  <section id="reglas">
+    <h2><span class="num">01</span>Las reglas del diagrama</h2>
+    <p class="section-intro">Todo lo que dibuja el profesor vive dentro de un único rectángulo grande, sin flechas ni saltos: se lee de arriba hacia abajo, y solo existen tres formas de estructurar el flujo.</p>
+
+    <figure>
+      <svg viewBox="0 0 700 300" role="img">
+        <title>Las tres estructuras básicas: secuencia, selección e iteración</title>
+        <rect x="20" y="20" width="200" height="120" rx="6" fill="var(--paper-card)" stroke="var(--ink)" stroke-width="1.4"/>
+        <text x="34" y="42" font-family="IBM Plex Mono" font-size="12.5" font-weight="600" fill="var(--ink)">secuencia</text>
+        <line x1="20" y1="54" x2="220" y2="54" stroke="var(--border)"/>
+        <text x="120" y="80" text-anchor="middle" font-size="12.5" fill="var(--ink-soft)">Leer un dato</text>
+        <line x1="20" y1="96" x2="220" y2="96" stroke="var(--border)"/>
+        <text x="120" y="118" text-anchor="middle" font-size="12.5" fill="var(--ink-soft)">Acumular / procesar</text>
+
+        <rect x="250" y="20" width="220" height="120" rx="6" fill="var(--paper-card)" stroke="var(--blue)" stroke-width="1.4"/>
+        <text x="264" y="42" font-family="IBM Plex Mono" font-size="12.5" font-weight="600" fill="var(--blue)">selección</text>
+        <line x1="250" y1="54" x2="470" y2="54" stroke="var(--border)"/>
+        <text x="360" y="72" text-anchor="middle" font-size="12" fill="var(--ink-soft)">¿condición?</text>
+        <line x1="250" y1="82" x2="470" y2="82" stroke="var(--border)"/>
+        <line x1="360" y1="82" x2="360" y2="140" stroke="var(--border)"/>
+        <text x="305" y="100" text-anchor="middle" font-size="12" fill="var(--ink)">V</text>
+        <text x="305" y="120" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">acción A</text>
+        <text x="415" y="100" text-anchor="middle" font-size="12" fill="var(--ink)">F</text>
+        <text x="415" y="120" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">acción B</text>
+
+        <rect x="500" y="20" width="180" height="260" rx="6" fill="var(--paper-card)" stroke="var(--blue)" stroke-width="1.4"/>
+        <text x="514" y="42" font-family="IBM Plex Mono" font-size="12.5" font-weight="600" fill="var(--blue)">iteración</text>
+        <line x1="500" y1="54" x2="680" y2="54" stroke="var(--border)"/>
+        <text x="590" y="72" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">Para / Mientras</text>
+        <rect x="512" y="82" width="14" height="185" fill="var(--blue-soft)"/>
+        <line x1="500" y1="82" x2="680" y2="82" stroke="var(--border)"/>
+        <text x="600" y="120" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">Leer dato</text>
+        <line x1="526" y1="140" x2="680" y2="140" stroke="var(--border)"/>
+        <text x="600" y="175" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">Procesar</text>
+        <line x1="526" y1="195" x2="680" y2="195" stroke="var(--border)"/>
+        <text x="600" y="230" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">(cuerpo que</text>
+        <text x="600" y="248" text-anchor="middle" font-size="11.5" fill="var(--ink-soft)">se repite)</text>
+      </svg>
+      <figcaption><strong>Sin GOTO, sin flechas cruzadas.</strong> Si un algoritmo necesita una flecha para explicarse, no está bien estructurado — hay que rearmarlo con estas tres piezas, anidando cajas dentro de cajas.</figcaption>
+    </figure>
+
+    <ol class="rules">
+      <li>Todo el algoritmo cabe dentro de un rectángulo grande; ese rectángulo es la función completa.</li>
+      <li><strong>Secuencia:</strong> cajas apiladas una debajo de otra, separadas por una línea horizontal.</li>
+      <li><strong>Selección:</strong> la condición va arriba; abajo el bloque se parte en rama V (verdadera) y rama F (falsa).</li>
+      <li><strong>Iteración:</strong> arriba el rango o la condición del bucle (<code>Para</code> / <code>Mientras</code>); abajo, anidado, el cuerpo que se repite.</li>
+      <li>Cualquier nivel de anidamiento se resuelve dibujando la estructura completa dentro de la celda que le corresponde — nunca se sale del contorno del padre.</li>
+      <li>Cuando una condición combina varios criterios con "y" lógico, se descompone en varias selecciones anidadas, una por criterio — nunca una sola caja con una condición compuesta.</li>
+    </ol>
+  </section>
+
+  <!-- ============ 02 REQUISITOS ============ -->
+  <section id="requisitos">
+    <h2><span class="num">02</span>Requisitos del TP</h2>
+    <p class="section-intro">Esto no es parte del algoritmo — es lo administrativo que el profesor pidió en la pizarra, y que también suma o resta.</p>
+    <div class="stamp">
+      <h3>Entrega — 17 de septiembre</h3>
+      <ol>
+        <li>Un ejercicio en papel, con letra clara, en diagramación estructurada.</li>
+        <li>Datos del alumno en el ángulo superior derecho de la hoja.</li>
+        <li>Subir la hoja a una nube.</li>
+        <li>Compartir a <code>amadeoruben@yahoo.com.ar</code>.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 03 GUÍA ============ -->
+  <section id="guia">
+    <h2><span class="num">03</span>Los problemas de la guía</h2>
+    <p class="section-intro">Estos son los cinco ejercicios que el profesor marcó como de dificultad aceptable para el parcial — todos con lectura centinela y cada uno con una estructura de fondo distinta.</p>
+
+    <table class="problems">
+      <thead>
+        <tr><th>Problema</th><th>Qué pide</th><th>Estructura de fondo</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="pid">12</td>
+          <td>Ventas de una ferretería: contar cuántas caen en tres rangos de importe ($20–30, $50–70, &gt;$100). Centinela: importe = 0.</td>
+          <td>Cascada <code>Si/Sino-Si</code> de rangos mutuamente excluyentes.<br><span class="tag mid">mismo patrón que el 13</span></td>
+        </tr>
+        <tr>
+          <td class="pid">13</td>
+          <td>Selección de personal para tres puestos (IM/100, A/200, TM/300), cada uno con sus propios filtros de sexo, edad y experiencia. Centinela: nombre = "ZZZZ ZZZZZ".</td>
+          <td>Cascada de 3 vías + selección anidada por criterio dentro de cada rama.<br><span class="tag hi">resuelto en el pizarrón — ver sección 04</span></td>
+        </tr>
+        <tr>
+          <td class="pid">14</td>
+          <td>Pedidos de piezas a un depósito: determinar si hay existencia suficiente para cada solicitud. Centinela: código de pieza = 0.</td>
+          <td>Correlación entre dos tipos de registro (existencia y pedidos).<br><span class="tag lo">sin precedente en clase</span></td>
+        </tr>
+        <tr>
+          <td class="pid">15</td>
+          <td>Lluvias del año 2000 agrupadas por mes: promedio por mes, días sin lluvia, mes de mayor promedio, días de lluvia en julio/agosto. Centinela: mes = "ZZZZ".</td>
+          <td>Agrupamiento + acumuladores + seguimiento de un extremo.<br><span class="tag mid">mismo esqueleto que el ejemplo de temperatura</span></td>
+        </tr>
+        <tr>
+          <td class="pid">16</td>
+          <td>Ventas de supermercado: total vendido por rubro (4 categorías). Centinela: artículo = "Nafta".</td>
+          <td>Cascada de clasificación en 4 ramas.<br><span class="tag lo">versión extendida del problema 7</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ============ 04 EJEMPLO MODELO ============ -->
+  <section id="modelo">
+    <h2><span class="num">04</span>El ejemplo modelo — Problema 13</h2>
+
+    <div class="golden">
+      <span class="eyebrow"><span class="dot"></span>por qué este es el ejercicio a memorizar</span>
+      <p>El profesor resolvió este problema de punta a punta en el pizarrón — inicialización, cascada de clasificación, y los seis <code>Informar</code>/<code>Si</code> finales — y marcó con círculos numerados (1a, 1b, 1c, 2a, 2b, 3) exactamente qué línea del diagrama contesta cada inciso del enunciado. No hay que adivinar su criterio acá: preparar este ejercicio es reproducir la solución que él mismo mostró como válida.</p>
+    </div>
+
+    <p>La estructura general: se inicializan los contadores, se lee un postulante, y mientras no llegue el registro centinela, se clasifica cada uno según su cargo. Solo puede pertenecer a un cargo a la vez, así que la clasificación es una cascada <code>Si/Sino-Si</code> — no selecciones en paralelo.</p>
+
+    <h3>La cascada de cargos (vista general)</h3>
+    <figure>
+      <svg viewBox="0 0 700 280" role="img">
+        <title>Cascada de clasificación por cargo: IM/100, A/200, TM/300</title>
+        <rect x="20" y="16" width="660" height="46" rx="6" fill="var(--paper-card)" stroke="var(--ink)" stroke-width="1.4"/>
+        <text x="36" y="44" font-size="13" fill="var(--ink)">¿cargo == "IM/100"?</text>
+        <text x="590" y="36" font-size="11" fill="var(--ink-soft)">V ↓ CONTGI++, detalle en Figura B</text>
+        <line x1="680" y1="39" x2="720" y2="39" stroke="var(--ink-faint)"/>
+
+        <line x1="30" y1="62" x2="30" y2="90" stroke="var(--ink-soft)" stroke-width="1.2"/>
+        <text x="38" y="80" font-size="11" fill="var(--ink-soft)">Sino</text>
+
+        <rect x="20" y="90" width="660" height="46" rx="6" fill="var(--paper-card)" stroke="var(--ink)" stroke-width="1.4"/>
+        <text x="36" y="118" font-size="13" fill="var(--ink)">¿cargo == "A/200"?</text>
+        <text x="590" y="110" font-size="11" fill="var(--ink-soft)">V ↓ CONTGA++, misma lógica</text>
+
+        <line x1="30" y1="136" x2="30" y2="164" stroke="var(--ink-soft)" stroke-width="1.2"/>
+        <text x="38" y="154" font-size="11" fill="var(--ink-soft)">Sino</text>
+
+        <rect x="20" y="164" width="660" height="46" rx="6" fill="var(--paper-card)" stroke="var(--ink)" stroke-width="1.4"/>
+        <text x="36" y="192" font-size="13" fill="var(--ink)">¿cargo == "TM/300"?</text>
+        <text x="590" y="184" font-size="11" fill="var(--ink-soft)">V ↓ un solo contador (CONTATM)</text>
+
+        <line x1="30" y1="210" x2="30" y2="238" stroke="var(--ink-soft)" stroke-width="1.2"/>
+        <text x="38" y="228" font-size="11" fill="var(--ink-soft)">Sino</text>
+        <rect x="20" y="238" width="660" height="34" rx="6" fill="var(--red-soft)" stroke="var(--red)" stroke-width="1"/>
+        <text x="36" y="260" font-size="12.5" fill="var(--red)">no corresponde a ninguna referencia → Informar "Error de tipeo"</text>
+      </svg>
+      <figcaption>Representación simplificada de la cascada como escalera. En el diagrama real, cada "Sino" contiene <em>anidada</em> la selección siguiente completa, tal como se ve en la Figura B para el detalle interno. El manejo del cargo inválido (en rojo) es un aporte de la resolución de un compañero — no está en la foto original del pizarrón, pero es una interpretación razonable del enunciado.</figcaption>
+    </figure>
+
+    <h3>El detalle interno de una rama (ejemplo IM/100)</h3>
+    <figure>
+      <svg viewBox="0 0 700 340" role="img">
+        <title>Detalle de la selección anidada dentro de la rama IM/100: sexo, edad y condición</title>
+        <rect x="40" y="40" width="520" height="50" rx="5" fill="var(--paper-card)" stroke="var(--ink)" stroke-width="1.3"/>
+        <text x="56" y="70" font-size="13" fill="var(--ink)">¿sexo == "M"?</text>
+        <text x="90" y="105" font-size="11.5" fill="var(--ink-soft)">V ↓</text>
+        <line x1="560" y1="65" x2="620" y2="65" stroke="var(--ink-faint)"/>
+        <text x="628" y="69" font-size="11" fill="var(--ink-faint)">F</text>
+        <line x1="620" y1="65" x2="620" y2="305" stroke="var(--ink-faint)" stroke-dasharray="3,3"/>
+
+        <rect x="60" y="110" width="500" height="50" rx="5" fill="var(--paper-card)" stroke="var(--ink)" stroke-width="1.3"/>
+        <text x="76" y="140" font-size="13" fill="var(--ink)">¿25 ≤ edad ≤ 30?</text>
+        <text x="110" y="175" font-size="11.5" fill="var(--ink-soft)">V ↓</text>
+        <line x1="560" y1="135" x2="620" y2="135" stroke="var(--ink-faint)"/>
+        <text x="628" y="139" font-size="11" fill="var(--ink-faint)">F</text>
+
+        <rect x="80" y="180" width="480" height="50" rx="5" fill="var(--paper-card)" stroke="var(--ink)" stroke-width="1.3"/>
+        <text x="96" y="210" font-size="13" fill="var(--ink)">¿cond == 1?</text>
+        <text x="130" y="245" font-size="11.5" fill="var(--ink-soft)">V ↓</text>
+        <line x1="560" y1="205" x2="620" y2="205" stroke="var(--ink-faint)"/>
+        <text x="628" y="209" font-size="11" fill="var(--ink-faint)">F</text>
+
+        <rect x="100" y="250" width="460" height="46" rx="5" fill="var(--blue-soft)" stroke="var(--blue)" stroke-width="1.3"/>
+        <text x="116" y="278" font-size="13" fill="var(--blue)" font-family="IBM Plex Mono">CONTAI ← CONTAI + 1</text>
+
+        <text x="500" y="320" font-size="11.5" fill="var(--ink-faint)" text-anchor="end">F en cualquier nivel: no suma, sigue el flujo</text>
+      </svg>
+      <figcaption>Tres criterios, tres selecciones anidadas — nunca una condición compuesta con "y". Las ramas F no hacen nada: si el postulante no cumple algún filtro, el contador <code>CONTAI</code> simplemente no avanza. A/200 repite esta misma lógica con su propio rango de edad; TM/300 también, pero sin contador de "presentados" separado — ver nota más abajo.</figcaption>
+    </figure>
+
+    <h3>El cierre: los <code>Informar</code> que definen la nota</h3>
+    <figure>
+      <svg viewBox="0 0 700 410" role="img">
+        <title>Bloque final de informes, con los umbrales que determinan si se cubren los cargos, incluyendo ahora el caso negativo</title>
+        <rect x="20" y="16" width="660" height="52" rx="5" fill="var(--paper-card)" stroke="var(--ink)" stroke-width="1.3"/>
+        <text x="36" y="38" font-size="12" fill="var(--ink-soft)">Informar "Se presentaron:", CONTGI, "postulantes para IM/100,"</text>
+        <text x="36" y="58" font-size="12" fill="var(--ink-soft)">"de los cuales", CONTAI, "cumplen las condiciones"</text>
+
+        <rect x="20" y="76" width="660" height="92" rx="5" fill="var(--red-soft)" stroke="var(--red)" stroke-width="1.4"/>
+        <text x="36" y="98" font-size="13" fill="var(--red)" font-family="IBM Plex Mono" font-weight="600">¿CONTAI ≥ 3?</text>
+        <line x1="20" y1="112" x2="680" y2="112" stroke="var(--red)" stroke-width="0.7"/>
+        <text x="36" y="128" font-size="12" fill="var(--red)">V → Informar "Se cubren los cargos solicitados de IM/100"</text>
+        <line x1="20" y1="140" x2="680" y2="140" stroke="var(--red)" stroke-width="0.7"/>
+        <text x="36" y="156" font-size="12" fill="var(--red)">F → Informar "No se cubren los cargos solicitados de IM/100"</text>
+
+        <rect x="20" y="176" width="660" height="36" rx="5" fill="var(--paper-card)" stroke="var(--ink)" stroke-width="1.3"/>
+        <text x="36" y="198" font-size="12" fill="var(--ink-soft)">Informar "Se presentaron:", CONTGA, "postulantes para el cargo A/200"</text>
+
+        <rect x="20" y="220" width="660" height="92" rx="5" fill="var(--red-soft)" stroke="var(--red)" stroke-width="1.4"/>
+        <text x="36" y="242" font-size="13" fill="var(--red)" font-family="IBM Plex Mono" font-weight="600">¿CONTAA ≥ 2?</text>
+        <line x1="20" y1="256" x2="680" y2="256" stroke="var(--red)" stroke-width="0.7"/>
+        <text x="36" y="272" font-size="12" fill="var(--red)">V → Informar "Se cubren los cargos solicitados de A/200"</text>
+        <line x1="20" y1="284" x2="680" y2="284" stroke="var(--red)" stroke-width="0.7"/>
+        <text x="36" y="300" font-size="12" fill="var(--red)">F → Informar "No se cubren los cargos solicitados de A/200"</text>
+
+        <rect x="20" y="320" width="660" height="36" rx="5" fill="var(--paper-card)" stroke="var(--ink)" stroke-width="1.3"/>
+        <text x="36" y="342" font-size="12" fill="var(--ink-soft)">Informar "Los aspirantes en condiciones para TM/300 son:", CONTATM</text>
+
+        <text x="350" y="384" font-size="11.5" fill="var(--ink-faint)" text-anchor="middle">Los umbrales resaltados no son arbitrarios: son los cupos del enunciado — (IM/100) (3) y (A/200) (2).</text>
+      </svg>
+      <figcaption>Esta es la parte que un algoritmo "casi correcto" suele resolver mal: comparar el contador contra el cupo real del puesto, no contra un número inventado — y contestar también el caso negativo, porque "¿se cubren los cargos?" es una pregunta de sí/no. TM/300 no tiene este chequeo porque el enunciado no lo pide — solo pregunta la cantidad.</figcaption>
+    </figure>
+
+    <table class="mapping">
+      <thead><tr><th style="width:44px"></th><th>Inciso del enunciado</th><th>Dónde se resuelve</th></tr></thead>
+      <tbody>
+        <tr><td class="badge">1a</td><td>¿Se cubren los cargos IM/100?</td><td><code>Si CONTAI ≥ 3</code> → informa el resultado en ambas ramas</td></tr>
+        <tr><td class="badge">1b</td><td>¿Cuántos postulantes se presentaron?</td><td><code>CONTGI</code> en el primer <code>Informar</code></td></tr>
+        <tr><td class="badge">1c</td><td>¿Cuántos cumplen la condición?</td><td><code>CONTAI</code> en ese mismo <code>Informar</code></td></tr>
+        <tr><td class="badge">2a</td><td>¿Cuántos se presentaron en general (A/200)?</td><td><code>CONTGA</code></td></tr>
+        <tr><td class="badge">2b</td><td>¿Se cubren los cargos A/200?</td><td><code>Si CONTAA ≥ 2</code> → informa el resultado en ambas ramas</td></tr>
+        <tr><td class="badge">3</td><td>¿Cuántos postulantes en condiciones (TM/300)?</td><td><code>CONTATM</code> en el último <code>Informar</code></td></tr>
+      </tbody>
+    </table>
+
+    <div class="note"><strong>de dónde sale esta versión</strong>Es la fusión de lo que el profesor mostró en el pizarrón con tres ajustes que aclaró la resolución de un compañero (Francisco Sticotti): un solo contador para TM/300, la rama F también informa, y el cargo inválido se informa como error de tipeo en vez de descartarse en silencio.</div>
+    <div class="note"><strong>simplificación</strong>El punto 2a pide "hombres y mujeres" por separado, pero ambas resoluciones usan un solo contador total. Conviene seguir eso, no la letra literal del enunciado.</div>
+
+    <h3>Pseudocódigo completo</h3>
+    <pre><span class="cm">// inicialización</span>
+CONTGI &lt;- 0 ; CONTAI &lt;- 0
+CONTGA &lt;- 0 ; CONTAA &lt;- 0
+CONTATM &lt;- 0
+Leer ApyN
+<span class="kw">Mientras</span> (ApyN &lt;&gt; "ZZZZ ZZZZZ")
+  Leer cargo, sexo, edad, cond
+  <span class="kw">Si</span> cargo == "IM/100"
+    V: CONTGI++
+       <span class="kw">Si</span> sexo == "M"
+         V: <span class="kw">Si</span> 25&lt;=edad&lt;=30
+              V: <span class="kw">Si</span> cond==1
+                   V: CONTAI++
+                   F: <span class="cm">(nada)</span>
+              F: <span class="cm">(nada)</span>
+         F: <span class="cm">(nada)</span>
+    F: <span class="kw">Si</span> cargo == "A/200"
+         V: CONTGA++
+            <span class="kw">Si</span> 25&lt;=edad&lt;=30
+              V: CONTAA++
+              F: <span class="cm">(nada)</span>
+         F: <span class="kw">Si</span> cargo == "TM/300"
+              V: <span class="kw">Si</span> 20&lt;=edad&lt;=30
+                   V: CONTATM++
+                   F: <span class="cm">(nada)</span>
+              F: Informar <span class="rd">"Error de tipeo: el cargo no corresponde a ninguna referencia"</span>
+  Leer ApyN
+<span class="cm">// fuera del Mientras</span>
+Informar "Se presentaron:", CONTGI, "postulantes para IM/100, de los cuales", CONTAI, "cumplen las condiciones"
+<span class="kw">Si</span> CONTAI &gt;= <span class="rd">3</span>
+  V: Informar "Se cubren los cargos solicitados de IM/100"
+  F: Informar "No se cubren los cargos solicitados de IM/100"
+Informar "Se presentaron:", CONTGA, "postulantes para el cargo A/200"
+<span class="kw">Si</span> CONTAA &gt;= <span class="rd">2</span>
+  V: Informar "Se cubren los cargos solicitados de A/200"
+  F: Informar "No se cubren los cargos solicitados de A/200"
+Informar "Los aspirantes en condiciones para TM/300 son:", CONTATM</pre>
+  </section>
+
+  <!-- ============ 05 ESTILO ============ -->
+  <section id="estilo">
+    <h2><span class="num">05</span>Cómo piensa el profesor</h2>
+    <p class="section-intro">Patrones que se repiten en todas sus resoluciones de pizarrón — vale la pena replicarlos aunque el ejercicio del parcial termine siendo otro.</p>
+    <ul class="style-notes">
+      <li><span class="k">bucle</span><span><code>For</code> cuando el enunciado da un rango fijo (<code>Para hora=0 hasta 23</code>); <code>Mientras</code> con centinela cuando dice "hasta ingresar un registro cuyo valor es X" — que es el caso de casi toda la guía.</span></li>
+      <li><span class="k">inicialización</span><span>Todos los acumuladores y contadores en una sola línea, antes del bucle, separados por comas.</span></li>
+      <li><span class="k">paralelo vs. cascada</span><span>Selecciones independientes en paralelo cuando un mismo registro puede activar más de una actualización a la vez (mínimo y máximo de una misma lectura). Cascada <code>Si/Sino-Si</code> cuando el registro solo puede pertenecer a una categoría de un conjunto cerrado (un cargo, un rubro, un rango de importe).</span></li>
+      <li><span class="k">condiciones</span><span>Descompone cualquier condición con "y" lógico en varias selecciones anidadas, una por criterio simple — nunca una sola caja con una condición compuesta.</span></li>
+      <li><span class="k">nombres</span><span>Minúsculas para variables auxiliares dentro del bucle (<code>num</code>, <code>temp</code>, <code>tmin</code>); mayúsculas para los acumuladores finales que se informan (<code>SUMPOS</code>, <code>TMAX</code>, <code>HMAX</code>).</span></li>
+      <li><span class="k">asignación</span><span>Usa <code>&lt;-</code> dentro del cuerpo del algoritmo, no <code>=</code>.</span></li>
+      <li><span class="k">salida</span><span>Todos los <code>Informar</code> van juntos al final, fuera de cualquier bucle, con texto literal entre comillas intercalado con las variables.</span></li>
+      <li><span class="k">bucles anidados</span><span>Marca el alcance de cada <code>for</code> anidado con una flecha vertical a la izquierda del diagrama — un refuerzo visual propio, no parte estricta de la notación, pero es lo que reconoce de un vistazo al corregir.</span></li>
+    </ul>
+  </section>
+
+  <!-- ============ 06 PLAN ============ -->
+  <section id="plan">
+    <h2><span class="num">06</span>Plan de estudio</h2>
+    <p class="section-intro">Orden de prioridad para las horas que quedan antes del parcial.</p>
+    <ol class="plan">
+      <li>
+        <span class="rank">13</span>
+        <div>
+          <h4>Memorizar y poder reproducir esta resolución completa</h4>
+          <p>Es la apuesta más segura de toda la guía: ya no es "aplicar su estilo", es reproducir lo que él mismo dibujó, con los mismos nombres y los mismos umbrales.</p>
+        </div>
+      </li>
+      <li>
+        <span class="rank">15</span>
+        <div>
+          <h4>Plan B — lluvias</h4>
+          <p>Cubre el otro patrón fuerte de la cátedra: agrupamiento + acumuladores + seguimiento de un extremo, visto en el ejemplo de temperatura máxima/mínima.</p>
+        </div>
+      </li>
+      <li>
+        <span class="rank">16</span>
+        <div>
+          <h4>As bajo la manga si el tiempo apremia</h4>
+          <p>Misma cascada <code>Si/Sino-Si</code> que el 13, pero en 4 ramas y sin los niveles anidados de sexo/edad/condición — mucho más rápido de dibujar.</p>
+        </div>
+      </li>
+      <li>
+        <span class="rank">12</span>
+        <div>
+          <h4>Práctica adicional</h4>
+          <p>Misma lógica de cascada de rangos mutuamente excluyentes que el 13, con montos en vez de cargos.</p>
+        </div>
+      </li>
+      <li>
+        <span class="rank">14</span>
+        <div>
+          <h4>Dejar para el final</h4>
+          <p>El único sin evidencia de cómo lo resolvería el profesor — requiere correlacionar dos tipos de registro distintos.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <footer>
+    <div class="req-stamp">
+      <ol>
+        <li>Papel, letra clara, diagramación estructurada.</li>
+        <li>Datos del alumno arriba a la derecha.</li>
+        <li>Subir la hoja a una nube.</li>
+      </ol>
+      <div class="to">
+        enviar a
+        <a href="mailto:amadeoruben@yahoo.com.ar">amadeoruben@<br>yahoo.com.ar</a>
+      </div>
+    </div>
+    <p class="colophon">Fundamentos de Informática · Dto. Ingeniería Mecánica · Ing. Aldo J. Alaniz</p>
+  </footer>
+
+</div>
+</body>
+</html>
