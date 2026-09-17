@@ -1,224 +1,192 @@
-# Guía de construcción — Diagrama Chapin Ejercicio 13 (`parcial_1.dxf`)
+# Diagrama Chapin Ejercicio 13 (`parcial_1.dxf`) — documentación as-built
 
-> Guía de **medidas y coordenadas en milímetros** para dibujar en LibreCAD, a mano, el diagrama estructurado (Chapin/Nassi-Shneiderman) del Problema 13, dentro del área de trabajo que ya existe en `parcial_1.dxf`. Esto **no reemplaza** el `.dxf` — es la hoja de ruta para completarlo vos mismo.
+> Este archivo documenta **cómo quedó realmente armado** el diagrama estructurado (Chapin/Nassi-Shneiderman) del Problema 13 dentro de `parcial_1.dxf`, que es la **versión final** entregada. No es una guía de construcción a futuro (esa fue su versión anterior) — es la referencia de coordenadas y contenido tal como está, por si hay que corregir algo puntual, revisar una celda, o entender la técnica usada para reproducirla en otro ejercicio.
 >
-> Alcance: **solo el diagrama estructurado**. La parte escrita (los 3 párrafos de justificación tipo "las variables que uso son contadoras...", equivalentes a las notas (4)(5)(6) de Francisco) va aparte, en una hoja rayada — no está contemplada acá.
+> Alcance: solo el diagrama estructurado (capas `2H`/`2B`/`0`, dentro del marco). La parte escrita de justificación (los 3 párrafos tipo "las variables que uso son contadoras...") va aparte, en hoja rayada — no está en este `.dxf`.
 
 ## 0. De dónde sale esta versión
 
-Se reconstruyó a partir de tres fuentes, en este orden de prioridad:
+Se partió de tres fuentes, en este orden de prioridad:
 
-1. **Fotos reales del pizarrón** (`ejercicio_13_1.jpeg`, `ejercicio_13_2.jpeg`) — la resolución del Ing. Alaniz tal cual la dibujó, con los círculos de incisos (1a,1b,1c,2a,2b,3) marcados a mano en `ejercicio_13_2.jpeg`.
-2. **Resolución de Francisco Sticotti** (`ejercicio_13_0.jpeg`) — mismo esqueleto, letra e higiene de diagrama superiores, con las 3 correcciones ya incorporadas (contador único en TM/300, ramas F que también informan, "Error de tipeo" para cargo inválido).
+1. **Fotos reales del pizarrón** (`ejercicio_13_1.jpeg`, `ejercicio_13_2.jpeg`) — la resolución del Ing. Alaniz, con los círculos de incisos (1a,1b,1c,2a,2b,3) marcados a mano en `ejercicio_13_2.jpeg`.
+2. **Resolución de Francisco Sticotti** (`ejercicio_13_0.jpeg`) — mismo esqueleto, con las 3 correcciones ya incorporadas (contador único en TM/300, ramas F que también informan, "Error de tipeo" para cargo inválido).
 3. `candidatos_parcial_chapin.md` y `diagramacion_estructurada.html` — que documentan por qué esa es la versión a reproducir.
 
-La técnica de trazado que uso abajo (la cascada de cargos dibujada como **columnas paralelas una al lado de la otra**, no anidadas cada vez más angostas hacia adentro) es la que **realmente usan ambos** en las fotos — no una simplificación mía. Es la clave que hace que todo entre cómodo en la hoja.
+**La técnica finalmente usada para dibujar la cascada de cargos no fue la de "columnas paralelas" que planeaba la primera versión de esta guía.** Al armarlo en LibreCAD terminó saliendo el símbolo de selección Chapin clásico — un **trapecio con vértice** (el rectángulo se angosta hacia un punto, con la condición arriba y las ramas Verdadero/Falso saliendo de las esquinas inferiores) — y esos trapecios se anidan igual que en las fotos, pero mediante esta forma en vez de columnas rectas con divisores verticales. Ver §4.3.
 
-## 1. Área de trabajo disponible (ya existe en el .dxf, no la toques)
-
-Confirmado leyendo `parcial_1.dxf`:
+## 1. Área de trabajo y capas (confirmado leyendo el `.dxf` final)
 
 | Elemento | Coordenadas (mm) | Capa |
 |---|---|---|
 | Marco exterior de hoja (A4) | (0,0) – (210,297) | `MARCO` |
 | Marco interior | (25,10) – (200,287) | `MARCO` |
 | Rótulo (franja superior) | (25,267) – (200,287) | `ROTULO_2B` / `ROTULO_2H` |
+| Diagrama (contorno general) | (30,38) – (195,260) | `2H` |
 
-El rótulo ya tiene tus datos (Paredes Sergio, Leg. 260.861-3), "Ej. 13", fecha y materia. **No lo toques.**
+El rótulo tiene los datos: **Paredes Sergio, Leg. 260.861-3**, materia "Fundamentos de Informatica", "S1554", "Ej. 13", fecha "17-09-26".
 
-Eso deja libre, por debajo del rótulo, el área donde va el diagrama:
+**Capas realmente usadas para el diagrama** (distinto de lo que planeaba la versión anterior de esta guía, que preveía una única capa `GEOMETRIA` para todo):
 
-- **X: 25 a 200** (175 mm de ancho)
-- **Y: 10 a 267** (257 mm de alto)
+| Capa | Contenido real |
+|---|---|
+| `2H` | Toda la geometría estructural: rectángulos de bloque, los trapecios de decisión (líneas diagonales + verticales), divisores. Nombre por convención de dureza de lápiz (2H = trazo fino de construcción), igual criterio que `ROTULO_2H`. |
+| `2B` | Todo el texto (`MTEXT`) — instrucciones, condiciones, `True`/`False`. Mismo criterio que `ROTULO_2B` (2B = trazo grueso, para lo que se lee). |
+| `0` | Líneas finas auxiliares: reglas de margen a la izquierda del cuerpo del bucle y pequeñas marcas ("banderines") junto a las etiquetas `True`/`False` de cada decisión. |
+| `GEOMETRIA` | Casi sin uso: quedaron solo 4 segmentos horizontales cortos, de conexión entre celdas vecinas de la cascada (ver §4.3). La capa vacía que preveía la guía original para "todo el diagrama" no terminó siendo el contenedor principal. |
 
-Todo lo que sigue va en una **capa nueva `GEOMETRIA`** (ya existe en el archivo, vacía — está pensada para esto). Cambiá a esa capa antes de dibujar.
+No se dibujó ningún texto de título por encima de B1 (la línea "DIAGRAMA CHAPIN — EJERCICIO 13" que planeaba la versión anterior de esta guía **no está** en el `.dxf` final) — el diagrama arranca directo en el bloque de inicialización, a Y=260.
 
-## 2. El algoritmo a reproducir (versión recomendada)
+## 2. El algoritmo tal como quedó escrito en el diagrama
 
-Igual a la que ya está en `candidatos_parcial_chapin.md` (líneas 120-163) y en `diagramacion_estructurada.html` — pizarrón del profesor + las 3 correcciones de Francisco:
+Texto literal extraído del `.dxf` (los saltos de línea `\P` son los que usa LibreCAD dentro de un mismo `MTEXT`):
 
 ```
-CONTGI<-0, CONTAI<-0, CONTGA<-0, CONTAA<-0, CONTATM<-0
+CONTGI->0;    CONTGA->0;    CONTATM->0;
+CONTAI->0;    CONTAA->0;
 Leer ApyN
-Mientras (ApyN <> "ZZZZ ZZZZZ")
+While (ApyN <> "ZZZZ ZZZZZ")
   Leer cargo, sexo, edad, cond
-  Si cargo=="IM/100"        Si cargo=="A/200"         Si cargo=="TM/300"        (ninguna)
-    V: CONTGI++               V: CONTGA++                V: Si 20<=edad<=30        F: Informar "Error de
-       Si sexo=="M"              Si 25<=edad<=30              V: CONTATM++             tipeo: el cargo no
-         V: Si 25<=edad<=30        V: CONTAA++                F: (nada)                corresponde a ninguna
-              V: Si cond==1        F: (nada)                                           referencia"
-                   V: CONTAI++
-                   F: (nada)
-              F: (nada)
-         F: (nada)
+  cargo == "IM/100"      cargo == "A/200"       cargo == "TM/300"      (False final)
+    True: CONTGI++          True: CONTGA++          True: 20 < edad < 30   → Informar "Error de Tipeo"
+      sexo == "M"              25 < edad < 30           True: CONTATM++
+        True: 25<edad<30          True: CONTAA++          False: (nada)
+          True: cond == 1          False: (nada)
+            True: CONTAI++
+            False: (nada)
+          False: (nada)
+        False: (nada)
   Leer ApyN
-Informar "Se presentaron:", CONTGI, "postulantes para IM/100, de los cuales", CONTAI, "cumplen las condiciones"
-Si CONTAI>=3   V: Informar "Se cubren los cargos solicitados de IM/100"     F: Informar "No se cubren..."
-Informar "Se presentaron:", CONTGA, "postulantes para el cargo A/200"
-Si CONTAA>=2   V: Informar "Se cubren los cargos solicitados de A/200"     F: Informar "No se cubren..."
-Informar "Los aspirantes en condiciones para TM/300 son:", CONTATM
+Informar "Se presentaron " CONTGI " postulantes para el cargo IM/100, de los cuales " CONTAI " cumplen las condiciones solicitadas."
+CONTAI > 3   True: Informar "Sí se cubren los cargos solicitados de IM/100."   False: Informar "No se cubren los cargos solicitados de IM/100."
+Informar "Se presentaron " CONTGA " postulantes para el cargo A/200."
+CONTAA > 2   True: Informar "Sí se cubren los cargos solicitados de A/200."   False: Informar "No se cubren los cargos solicitados de A/200."
+Informar "Se presentaron " CONTATM " postulantes que cumplen las condiciones para el cargo TM/300."
 ```
 
-(La tabla de arriba ya "aplana" la cascada de cargos en 4 columnas — así es como se dibuja, ver §4.)
+Diferencias respecto a la versión de pizarrón/`candidatos_parcial_chapin.md` que quedaron fijadas al pasarlo a CAD (elección propia, consistente en todo el archivo):
 
-## 3. Método: unidades del grillado
+- **Asignación**: `->` en vez de `<-` (ej. `CONTGI->0;`), con punto y coma al final.
+- **Comparación**: `==` (estilo lenguaje de programación) en vez de `=`.
+- **Bucle**: `While (...)` en inglés, no `Mientras (...)`.
+- **Ramas**: etiquetadas `True` / `False`, no `V` / `F`.
+- Los mensajes finales dicen **"Se presentaron"** (no "Se presentaron:") y las respuestas de cobertura dicen **"Sí se cubren..." / "No se cubren..."** (con tilde en "Sí").
 
-| Constante | Valor | Uso |
-|---|---|---|
-| `ROW_H` | 12 mm | alto de una fila simple (una condición, una acción, una lectura) |
-| `ROW_H_2L` | 18 mm | alto de una fila con texto largo que ocupa 2 renglones (los `Informar` finales con varias variables) |
-| `INDENT` | 3 mm | cuánto se corre el borde izquierdo al entrar un nivel más adentro en una selección anidada |
-| `F_FINO` | 5 mm | ancho de una columna "F" que solo dice "(nada)" — se dibuja como una rayita diagonal, **sin escribir texto**, igual que en las fotos de Francisco y del pizarrón |
+## 3. Tamaños de letra realmente usados
 
-**Altura de texto según profundidad** (para que todo entre legible):
+No se siguió una tabla fija por nivel de anidamiento como preveía la versión anterior de esta guía — la altura de cada `MTEXT` se ajustó a mano según el ancho disponible en esa celda puntual (los trapecios angostan de forma no uniforme). A modo de referencia, así quedó agrupado:
 
-| Nivel | Dónde | Altura de texto sugerida |
-|---|---|---|
-| 0 | Inicialización, lecturas, `Mientras`, `Informar` finales | 3.5 mm |
-| 1 | Encabezados de la cascada de cargos (`Si cargo==...`) | 3 mm |
-| 2 | `CONTGI++`, `CONTGA++`, encabezados `Si sexo`/`Si edad` | 2.8 mm |
-| 3 | `Si edad` (rama IM/100), `Si cond==1` | 2.4 mm |
-| 4 | `CONTAI++`, `CONTAA++`, `CONTATM++`, "(nada)" | 2.2 mm |
-| — | Mensaje "Error de tipeo..." | 2.5 mm (ancho generoso, ver §4.4) |
+| Elemento | Altura de texto |
+|---|---|
+| `While(...)`, `Leer ApyN`, `Leer cargo, sexo, edad, cond` (nivel 0 del cuerpo) | 7 mm |
+| Inicialización (`CONTxx->0;`) | 4 mm |
+| Decisión `cargo=="IM/100"`, sus `True`/`False`, `CONTGI++`, `CONTGA++`, `CONTAA++`, decisión `sexo=="M"` | 5 mm |
+| Decisión `cargo=="A/200"` y su `True`/`False` de esa fila | 4 mm |
+| Decisiones anidadas de edad/cond (IM/100 y A/200) y sus `True`/`False` | 3–4 mm |
+| Decisión `cargo=="TM/300"`, su anidada `20<edad<30`, y el mensaje de error | 2 mm (la zona más angosta de todo el diagrama) |
+| `CONTAI++`, `CONTATM++` | 2.2–2.5 mm |
+| Bloques finales (`CONTAI>3`, `CONTAA>2`, mensajes `Sí`/`No`, los 3 `Informar` de cierre) | 3 mm |
 
-Todo el diagrama mide **222 mm de alto** con estas medidas, contra 257 mm disponibles — hay margen de sobra (~35 mm) para ajustar cualquier fila un poco si al dibujar te queda justo.
+Altura total del diagrama: **222 mm** (Y=38 a Y=260), dentro de los 257 mm disponibles bajo el rótulo.
 
-## 4. Tabla de coordenadas
+## 4. Coordenadas tal como están en el `.dxf`
 
-Sistema: **X crece hacia la derecha, Y crece hacia arriba** (como ya está el .dxf). Todas las coordenadas son absolutas, en mm, para usar directo en LibreCAD (`Línea`, `Rectángulo`, `Texto múltiple`).
+Sistema: **X crece hacia la derecha, Y crece hacia arriba**. Coordenadas absolutas en mm.
 
-### 4.1 Rectángulo exterior y secuencia de nivel superior
+### 4.1 Bloques de nivel superior
 
-Ancho fijo para todo lo de nivel 0: **X: 30 a 195** (dejás 5 mm de aire contra el marco interior a cada lado).
+Ancho de nivel 0: **X: 30 a 195**.
 
 | Bloque | Y superior | Y inferior | Contenido |
 |---|---|---|---|
-| Rectángulo exterior | 260 | 38 | — (dibujalo primero, es el contorno de todo el algoritmo) |
-| Título (fuera del rectángulo, en el hueco bajo el rótulo) | 267 | 260 | Texto centrado ~(112,263): `DIAGRAMA CHAPIN — EJERCICIO 13` |
-| **B1** Inicialización | 260 | 248 | `CONTGI←0, CONTAI←0, CONTGA←0, CONTAA←0, CONTATM←0` |
-| **B2** Lectura previa | 248 | 236 | `Leer ApyN` |
+| **B1** Inicialización | 260 | 248 | 3 celdas lado a lado (ver abajo) |
+| **B2** Lectura previa | 248 | 236 | `Leer ApyN` en (31,242), h=7 |
 | **B3** Mientras (bloque completo) | 236 | 128 | ver §4.2 |
-| **B4** Informar final 1 (2 líneas) | 128 | 110 | `Informar "Se presentaron:", CONTGI, "postulantes para IM/100, de los cuales", CONTAI, "cumplen las condiciones"` |
-| **B5** Si CONTAI≥3 | 110 | 86 | ver desglose abajo |
-| **B6** Informar final 2 | 86 | 74 | `Informar "Se presentaron:", CONTGA, "postulantes para el cargo A/200"` |
-| **B7** Si CONTAA≥2 | 74 | 50 | ver desglose abajo |
-| **B8** Informar final 3 | 50 | 38 | `Informar "Los aspirantes en condiciones para TM/300 son:", CONTATM` |
+| **B4** Informar final 1 | 128 | 110 | `Informar "Se presentaron " CONTGI " postulantes para el cargo IM/100, de\Plos cuales " CONTAI " cumplen las condiciones solicitadas."` en (31,119), h=3 |
+| **B5** Decisión `CONTAI > 3` | 110 | 86 | trapecio de decisión, ver desglose abajo |
+| **B6** Informar final 2 | 86 | 74 | `Informar "Se presentaron " CONTGA " postulantes para el cargo A/200."` en (31,79), h=3 |
+| **B7** Decisión `CONTAA > 2` | 74 | 50 | trapecio de decisión, ver desglose abajo |
+| **B8** Informar final 3 | 50 | 38 | `Informar "Se presentaron " CONTATM " postulantes que cumplen las\Pcondiciones para el cargo TM/300."` en (31,44), h=3 |
 
-**B5** (X30-195, Y110-86): encabezado en 110→98 con texto `CONTAI>=3` centrado; debajo, fila 98→86 partida en X≈113: **V** (30-113) `Informar "Se cubren los cargos solicitados de IM/100"`, **F** (113-195) `Informar "No se cubren los cargos solicitados de IM/100"`.
+**B1** (X30-195, Y260-248) — tres celdas de inicialización lado a lado, separadas por líneas verticales en X=31, X=66 y X=101 (estas verticales continúan hacia abajo hasta Y=236, atravesando también B2):
 
-**B7** (X30-195, Y74-50): mismo esquema — encabezado 74→62 `CONTAA>=2`; fila 62→50 partida en X≈113: **V** `Informar "Se cubren los cargos solicitados de A/200"`, **F** `Informar "No se cubren los cargos solicitados de A/200"`.
+| Celda | X | Contenido |
+|---|---|---|
+| 1 | 31 | `CONTGI->0;` / `CONTAI->0;` (2 líneas, un solo `MTEXT`, h=4) |
+| 2 | 66 | `CONTGA->0;` / `CONTAA->0;` (2 líneas, un solo `MTEXT`, h=4) |
+| 3 | 101 | `CONTATM->0;` (h=4, en Y=257 en vez de 254 — centrado más arriba por ser una sola línea) |
+
+**B5** (X30-195, Y110-86): trapecio de decisión — rectángulo (30,98)-(195,110) con vértice en (112.5,98); condición `CONTAI > 3` en (112.5,109) h=3; `True` en (31,103), `False` en (194,103), ambos h=3. Debajo, fila (30,86)-(195,98) partida en X=112.5: **True** → `Informar "Sí se cubren los\Pcargos solicitados de IM/100."` en (31,92); **False** → `Informar "No se cubren los\Pcargos solicitados de IM/100."` en (194,92), ambos h=3.
+
+**B7** (X30-195, Y74-50): mismo esquema — trapecio (30,62)-(195,74), vértice (112.5,62); condición `CONTAA > 2` en (112.5,73); `True` (31,67), `False` (194,67). Debajo, fila (30,50)-(195,62) partida en X=112.5: **True** → `Informar "Sí se cubren los\Pcargos solicitados de A/200."` (31,56); **False** → `Informar "No se cubren los\Pcargos solicitados de A/200."` (194,56).
 
 ### 4.2 Interior del `Mientras` (bloque B3, Y236→128)
 
-- **Encabezado del bucle**: fila 236→224, ancho completo X30-195. Texto: `Mientras (ApyN <> "ZZZZ ZZZZZ")`.
-- **Cuerpo del bucle**: indentado, arranca en **X=36** (dejás 6 mm de margen a la izquierda contra el borde del rectángulo — ahí va la flecha de alcance del bucle, ver §5).
-  - Fila 224→212 (X36-195): `Leer cargo, sexo, edad, cond`
-  - Fila 212→200 (X36-195): **banda de la cascada de cargos** — acá van los 3 chequeos de `cargo` como una selección en cascada dibujada en columnas paralelas (§4.3), no anidada hacia adentro.
-  - Zona de contenido: Y200→140, dividida en 4 columnas paralelas (§4.3)
-  - Fila 140→128 (X36-195): `Leer ApyN`
+- **Encabezado del bucle**: fila (30,224)-(195,236). Texto `While (ApyN <> "ZZZZ ZZZZZ")` en (31,230), h=7.
+- **Cuerpo del bucle**, indentado a X=36-37:
+  - Fila (36,212)-(195,224): `Leer cargo, sexo, edad, cond` en (37,218), h=7.
+  - Fila (36,140)-(195,212): **cascada de decisiones de cargo**, ver §4.3.
+  - Fila (36,128)-(195,140): `Leer ApyN` en (37,134), h=7.
+- Sobre el margen izquierdo del cuerpo (X≈31-37) hay una regla vertical fina en capa `0` que corre a lo largo de cada tramo del cuerpo, con pequeñas marcas ("banderines") de ~3mm junto a cada etiqueta `True`/`False` — es el equivalente real a lo que la versión anterior de esta guía planeaba como una única "flecha de alcance del bucle" en X=33: en la práctica quedó repartida en varios segmentos cortos en vez de una sola línea continua.
 
-### 4.3 La cascada de cargos — 4 columnas paralelas
+### 4.3 La cascada de cargos — trapecios anidados (símbolo de selección Chapin)
 
-Esta es la parte que copia literal la técnica de las fotos: en vez de anidar el `Sino` cada vez más angosto hacia la derecha (que te deja sin espacio abajo), las 3 condiciones de cargo se dibujan **una al lado de la otra**, todas arrancando a la misma altura. Girá 90° la cabeza al mirar `ejercicio_13_0.jpeg` si hace falta para verlo — es exactamente este patrón.
+Cada decisión se dibuja como un **rectángulo que se angosta hasta un punto** (el vértice), con la condición escrita arriba, `True` en la esquina inferior izquierda y `False` en la inferior derecha. Debajo del vértice, una línea vertical separa la rama Verdadero (izquierda) de la Falso (derecha), y cada rama sigue bajando con ese mismo ancho hasta que se resuelve (una acción, otra decisión anidada, o queda vacía = "(nada)").
 
-Divisiones verticales de **X36 a X195** en la banda Y212→140 (dibujalas primero, de punta a punta, antes de rellenar el contenido de cada columna):
+La cascada de los 3 cargos avanza **hacia la derecha por la rama Falso**: si `cargo != "IM/100"`, la zona Falso de esa decisión contiene directamente la siguiente decisión (`cargo == "A/200"`), y así con `TM/300`; si ninguna matchea, la Falso final cae en el mensaje de error. Dentro de la rama Verdadero de `IM/100` es donde se anida en profundidad (sexo → edad → cond), igual que en las fotos.
 
-| Línea vertical en X= | Desde Y | Hasta Y |
-|---|---|---|
-| 82 | 212 | 140 |
-| 118 | 212 | 140 |
-| 154 | 212 | 140 |
+**Fila 1 (Y212→200)** — decisión `cargo == "IM/100"`: rectángulo (36,200)-(195,212), vértice (115.5,200). Condición en (115.5,211) h=5. `True` en (37,206), `False` en (194,206), h=5.
 
-Esto te da 4 columnas: **IM/100** (36-82, 46mm), **A/200** (82-118, 36mm), **TM/300** (118-154, 36mm), **Error** (154-195, 41mm).
+- **Zona Verdadero** (X36-115.5): sigue en la Fila 2A.
+- **Zona Falso** (X115.5-195): sigue en la Fila 2B con la decisión `A/200`.
 
-**Banda de encabezado (Y212→200)**, dentro de cada columna:
+**Fila 2A (Y200→188), rama IM/100 verdadera** — `CONTGI++` en (37,194), h=5. Rectángulo (36,188)-(115.5,200).
 
-| Columna | Texto | Marca V/F |
-|---|---|---|
-| IM/100 (36-82) | `Si cargo=="IM/100"` | `V` abajo-izquierda (sigue en esta columna); `F` abajo-derecha, junto a X=82 (si falso, pasa a la próxima) |
-| A/200 (82-118) | `Si cargo=="A/200"` | igual esquema, `F` junto a X=118 |
-| TM/300 (118-154) | `Si cargo=="TM/300"` | igual esquema, `F` junto a X=154 |
-| Error (154-195) | *(sin texto — es el F final de la cascada, cae directo al mensaje de error)* | — |
+**Fila 2B (Y200→188), rama IM/100 falsa** — decisión `cargo == "A/200"`: rectángulo (115.5,188)-(195,200), vértice (155.25,188). Condición en (155.25,199) h=4. `True` en (116.5,192), `False` en (194,192), h=4.
 
-**Contenido de cada columna (Y200 hacia abajo):**
+- **Zona Verdadero** (X115.5-155.25): sigue en Fila 3B.
+- **Zona Falso** (X155.25-195): sigue en Fila 3C con la decisión `TM/300`.
 
-**Columna IM/100 (X36-82)** — la más profunda, 3 niveles anidados:
+**Fila 3A (Y188→176)** — decisión `sexo == "M"` (rama Verdadero de IM/100 continuada): rectángulo (36,176)-(115.5,188), vértice (105.5625,176). Condición en (110.75,187) h=4. `True` en (37,182) h=5, `False` en (114.5,181) h=5. La rama Falso de `sexo` no sigue a ninguna fila más (queda "(nada)").
 
-| Elemento | X1 | Y1 | X2 | Y2 | Contenido |
-|---|---|---|---|---|---|
-| Acción | 36 | 200 | 82 | 188 | `CONTGI++` |
-| Encabezado sexo | 36 | 188 | 82 | 176 | `Si sexo=="M"` |
-| — división V/F sexo | vertical en X=77, de Y176 a Y140 | | | | |
-| Encabezado edad | 39 | 176 | 77 | 164 | `Si 25<=edad<=30` |
-| sexo-F (rayita, sin texto) | 77 | 176 | 82 | 140 | `/` |
-| — división V/F edad | vertical en X=72, de Y164 a Y140 | | | | |
-| Encabezado cond | 42 | 164 | 72 | 152 | `Si cond==1` |
-| edad-F (rayita) | 72 | 164 | 77 | 140 | `/` |
-| — división V/F cond | vertical en X=67, de Y152 a Y140 | | | | |
-| cond-V | 42 | 152 | 67 | 140 | `CONTAI++` |
-| cond-F (rayita) | 67 | 152 | 72 | 140 | `/` |
+**Fila 3B (Y188→176)** — `CONTGA++` (rama A/200 verdadera) en (116.5,182), h=5. Esta celda comparte el mismo rectángulo ancho (115.5,176)-(195,188) con la Fila 3C de al lado; están separadas por una línea vertical en X=155.25 dibujada aparte (no por dos rectángulos distintos).
 
-**Columna A/200 (X82-118)** — 1 nivel anidado, termina en Y164 (queda un espacio en blanco entre 164 y 140, es normal — la fila comparte el mismo piso que la columna IM/100 pero acá el contenido es más corto):
+**Fila 3C (Y188→176)** — decisión `cargo == "TM/300"` (rama A/200 falsa): dentro del mismo rectángulo (115.5,176)-(195,188), vértice en (180.09375,176). Condición en (175.125,187) h=2. `True` en (156,177) h=5, `False` en (194,177) h=5.
 
-| Elemento | X1 | Y1 | X2 | Y2 | Contenido |
-|---|---|---|---|---|---|
-| Acción | 82 | 200 | 118 | 188 | `CONTGA++` |
-| Encabezado edad | 82 | 188 | 118 | 176 | `Si 25<=edad<=30` |
-| — división V/F | vertical en X=113, de Y176 a Y164 | | | | |
-| edad-V | 82 | 176 | 113 | 164 | `CONTAA++` |
-| edad-F (rayita) | 113 | 176 | 118 | 164 | `/` |
+- **Zona Verdadero** (X155.25-180.094): sigue en Fila 4B.
+- **Zona Falso** (X180.094-195): mensaje de error, sin más filas (ver abajo).
 
-**Columna TM/300 (X118-154)** — 1 nivel anidado, sin acción previa (por eso el contador es único, corrección de Francisco), termina en Y176:
+**Fila 4A (Y176→164)** — decisión `25 < edad < 30` (rama sexo=="M" verdadera, IM/100): rectángulo (36,164)-(105.5625,176), vértice (96.8671875,164). Condición en (100.5625,175) h=3. `True` en (37,170) h=5, `False` en (104.5625,168) h=5.
 
-| Elemento | X1 | Y1 | X2 | Y2 | Contenido |
-|---|---|---|---|---|---|
-| Encabezado edad | 118 | 200 | 154 | 188 | `Si 20<=edad<=30` |
-| — división V/F | vertical en X=149, de Y188 a Y176 | | | | |
-| edad-V | 118 | 188 | 149 | 176 | `CONTATM++` |
-| edad-F (rayita) | 149 | 188 | 154 | 176 | `/` |
+**Fila 4B (Y176→164)** — decisión `25 < edad < 30` (rama A/200 verdadera, anidada bajo `CONTGA++`): rectángulo con vértice (151,164), dentro del ancho 115.5-155.25. Condición en (152,175) h=2. `True` en (116.5,165) h=4, `False` en (154.25,165) h=2.
 
-**Columna Error (X154-195)** — sin encabezado propio (cae acá directo cuando ninguna de las 3 referencias matchea):
+**Fila 4C (Y176→140)** — decisión `20 < edad < 30` (rama TM/300 verdadera): vértice (176,164), dentro del ancho 155.25-180.094. Condición en (167.671875,175) h=2. `True` en (156,165) h=3, `False` en (179,165) h=2.
 
-| Elemento | X1 | Y1 | X2 | Y2 | Contenido |
-|---|---|---|---|---|---|
-| Mensaje | 154 | 200 | 195 | 176 | `Informar "Error de tipeo: el cargo ingresado no corresponde a ninguna referencia"` — MTEXT con ese ancho (41mm), LibreCAD ajusta el salto de línea solo (te va a quedar en 3-4 renglones) |
+**Zona Error** (X180.094-195, Y176 hacia abajo): mensaje `Informar\P"Error\Pde\PTipeo"` en (181,175), h=2 — sin decisión propia, es la caída final de la cascada.
 
-### 4.4 Por qué esto entra cómodo
+**Fila 5A (Y164→152)** — decisión `cond == 1` (rama edad verdadera, IM/100): rectángulo (36,152)-(96.8671875,164), vértice (89.2587890625,152). Condición en (92.8671875,163) h=3. `True` en (37,158) h=5, `False` en (95.8671875,156) h=5.
 
-Con este esquema el punto más angosto de todo el diagrama es `cond-V` (25mm) — sobra para escribir `CONTAI++` con letra de 2.2mm sin apretar. Compará con lo que pasaría si anidaras la cascada de cargos hacia adentro en vez de en paralelo: el ancho se te iba angostando a la mitad en cada nivel y llegabas al mensaje de error con ~14mm disponibles — por eso ni el pizarrón ni Francisco lo dibujan así.
+**Fila 5B (Y164→140)** — `CONTAA++` (rama edad verdadera, A/200; no tiene más anidamiento, la celda ocupa todo el resto de la profundidad) en (116.5,158), h=5.
 
-## 5. Toques de fidelidad al estilo del profesor (opcionales pero recomendados)
+**Fila 5C (Y164→140)** — `CONTATM++` (rama edad verdadera, TM/300; tampoco anida más) en (156,163), h=2.5.
 
-Según las notas de `candidatos_parcial_chapin.md` (sección "estilo del profesor") y visibles en las fotos:
+**Fila 6 (Y152→140)** — `CONTAI++` (rama cond verdadera, el punto más profundo de toda la cascada) en (37,146), h=2.2 aprox. Todas las demás ramas Falso de esta zona (sexo-F, edad-F de IM/100, cond-F) quedan vacías — "(nada)", sin texto, tal como en las fotos.
 
-1. **Flecha de alcance del bucle**: una línea vertical fina en **X=33**, de **Y=224 a Y=128** (en el margen de 6mm que dejaste a la izquierda del cuerpo del `Mientras`). Marca visualmente hasta dónde llega el `Mientras` — es un agregado propio del profesor, no notación estricta de Chapin, pero es lo que reconoce de un vistazo.
-2. **Círculos de inciso**, como los marcó el profesor a mano en `ejercicio_13_2.jpeg`: círculos chicos (~4mm de diámetro) en el margen izquierdo, **X≈27** (en el hueco de 5mm entre el marco interior y tu rectángulo):
+Las cuatro líneas horizontales cortas en capa `GEOMETRIA` — (95.625,176)-(115.5,176), (88.171875,164)-(105.5625,164), (81.650390625,152)-(96.8671875,152) y (175.125,176)-(195,176) — son los conectores que cierran visualmente el borde de cada celda "(nada)" contra la celda vecina.
 
-   | Círculo | Y aproximado | Junto a |
-   |---|---|---|
-   | `1b` | 122 | mitad superior de B4 (CONTGI) |
-   | `1c` | 114 | mitad inferior de B4 (CONTAI) |
-   | `1a` | 98 | encabezado de B5 |
-   | `2a` | 80 | B6 |
-   | `2b` | 62 | encabezado de B7 |
-   | `3` | 44 | B8 |
+### 4.4 Por qué terminó siendo así
 
-3. **Convención de nombres**: minúsculas no aplican acá (no hay variables auxiliares tipo `tmin`) — todo son contadores, así que todo va en **mayúsculas** (`CONTGI`, `CONTAI`, etc.), consistente con cómo los usa el profesor.
-4. **Asignación**: usá `<-` (o la flecha `←` si tu fuente la tiene) en la inicialización, no `=`.
+El trapecio con vértice es la forma estándar de la selección Chapin/Nassi-Shneiderman (la misma que usan el profesor y Francisco en las fotos si se las mira con atención) — no una simplificación. Al construirlo en LibreCAD con líneas y no con el bloque predefinido de un software de diagramación, salió natural resolverlo como "rectángulo + 2 diagonales + 1 vertical" en cascada, que es exactamente este patrón. El punto más angosto de todo el diagrama termina siendo la franja `TM/300`/Error (h=2mm), consistente con que ahí conviven 2 niveles de anidamiento (cargo→edad) en el tramo más a la derecha, con menos ancho disponible que en la rama IM/100.
 
-## 6. Orden de dibujo sugerido en LibreCAD
+## 5. Toques de fidelidad al estilo del profesor — qué quedó y qué no
 
-1. Cambiá a la capa `GEOMETRIA`.
-2. Rectángulo exterior (30,260)-(195,38).
-3. Las 7 líneas horizontales de ancho completo que separan B1...B8 (Y=248,236,224,128,110,98,86,74,62,50 — todas de X30 a X195, salvo 224 que ya es el techo del cuerpo del bucle).
-4. Dentro del `Mientras`: la línea de Y=212 y Y=200 (ancho X36-195), después las 3 verticales de la cascada (X=82,118,154, de Y212 a Y140).
-5. Subdivisiones internas de cada columna (sexo/edad/cond en IM/100; edad en A/200 y TM/300) — de afuera hacia adentro.
-6. Divisores V/F de B5 y B7 (verticales en X≈113).
-7. Todos los textos (`MTEXT`), de arriba hacia abajo — así controlás que cada uno entre en su celda antes de seguir.
-8. Los toques opcionales de §5 al final.
+Repasando contra lo que preveía la versión anterior de esta guía (basada en `candidatos_parcial_chapin.md` y las fotos):
 
-Guardá seguido — LibreCAD no autoguarda.
+- **Círculos de inciso** (1a,1b,1c,2a,2b,3) marcados a mano por el profesor en `ejercicio_13_2.jpeg`: **no se dibujaron** en el `.dxf` final (no hay ninguna entidad `CIRCLE` en todo el archivo). Si se quieren agregar, van en el margen izquierdo, X≈27, junto a cada bloque (B4, B5, B6, B7, B8).
+- **Flecha de alcance del bucle** en una única línea X=33: no quedó así — en su lugar hay varios tramos de regla + banderines cortos en capa `0`, descriptos en §4.2.
+- **Convención de mayúsculas** para contadores (`CONTGI`, `CONTAI`, etc.): sí se respetó, consistente en todo el archivo.
+- **Asignación** con flecha: se usó `->` (no `<-` ni `←`), con punto y coma final — una decisión propia al tipear en CAD, no la notación exacta de Chapin, pero consistente en todas las inicializaciones.
+- **Comparación**: se usó `==` en vez de `=` — mismo criterio, elección propia consistente.
 
----
+## Fuentes
 
-**Fuentes:** `candidatos_parcial_chapin.md`, `diagramacion_estructurada.html`, fotos del pizarrón (`ejercicio_13_1.jpeg`, `ejercicio_13_2.jpeg`) y resolución de Francisco Sticotti (`ejercicio_13_0.jpeg`), enunciado (`consignas.jpeg`), y la geometría existente de `parcial_1.dxf` (marco y rótulo). Cátedra: Fundamentos de Informática, Ing. Aldo J. Alaniz, Dto. Ingeniería Mecánica, UTN FRBA.
+`candidatos_parcial_chapin.md`, `diagramacion_estructurada.html`, fotos del pizarrón (`ejercicio_13_1.jpeg`, `ejercicio_13_2.jpeg`), resolución de Francisco Sticotti (`ejercicio_13_0.jpeg`), enunciado (`consignas.jpeg`), y la geometría real del `parcial_1.dxf` final (marco, rótulo y diagrama — coordenadas y textos extraídos directamente del archivo). Cátedra: Fundamentos de Informática, Ing. Aldo J. Alaniz, Dto. Ingeniería Mecánica, UTN FRBA.
