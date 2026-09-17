@@ -13,7 +13,7 @@ Escritas en Markdown, en español, con diagramas ASCII y analogías contables (e
 | [`analisis_matematico_i/`](analisis_matematico_i/) | Análisis Matemático I | Introducción · Funciones · Topología · Límites | 14/abr/2026 |
 | [`ayga/`](ayga/) | Álgebra y Geometría Analítica | Introducción · Vectores, recta y plano | 02/may/2026 |
 | [`fisica_i/`](fisica_i/) | Física I | Introducción · Óptica · Cinemática · Laboratorio — 1ª concurrencia (TPN1 mediciones · TPN2 óptica), 3ª concurrencia (TP5 resorte · TP6 Arquímedes) · Energía en casos límite (lanzamiento de bala y jabalina) | 09/sep/2026 |
-| [`fundamentos_informatica/`](fundamentos_informatica/) | Fundamentos de Informática | Preparación parcial de diagramación estructurada (Chapin/Nassi-Shneiderman) — relevamiento de candidatos, resolución de referencia y diagrama final del Problema 13 en LibreCAD (`parcial_1.dxf`) con su documentación as-built | 17/sep/2026 |
+| [`fundamentos_informatica/`](fundamentos_informatica/) | Fundamentos de Informática | Preparación parcial de diagramación estructurada (Chapin/Nassi-Shneiderman) — relevamiento de candidatos, resolución de referencia y diagrama final del Problema 13 en LibreCAD (`parcial_1.dxf`) con su documentación as-built y visualización vectorial descargable en PNG/PDF | 17/sep/2026 |
 | [`griego/`](griego/) | Griego Científico | Alfabeto griego con pronunciación y uso científico | 16/abr/2026 |
 | [`quimica_general/`](quimica_general/) | Química General | Introducción · Estructura atómica · Gases (UT3) · Soluciones (UT7) | 02/may/2026 |
 | [`ingenieria_y_sociedad/`](ingenieria_y_sociedad/) | Ingeniería y Sociedad | Arocena · 4 textos con preguntas MC (§1–§56) | 31/may/2026 |
