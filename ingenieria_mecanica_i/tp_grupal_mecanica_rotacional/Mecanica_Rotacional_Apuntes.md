@@ -332,16 +332,16 @@ $$\delta_{Al} = 2{,}708 \text{ g/cm}^3 \qquad \delta_{Acero} = 7{,}85 \text{ g/c
 > - Por diámetro de **eje**: eje 1 = 25 mm (el más chico), eje 2 = 35 mm (el más grande).
 > - Por diámetro de **engranaje**: engranaje del eje 1 = 250 mm (el más grande de los dos), engranaje del eje 2 = 200 mm (el más chico de los dos).
 >
-> Es decir, el eje **chico** (eje 1) lleva el engranaje **grande**, y el eje **grande** (eje 2) lleva el engranaje **chico** — el orden se invierte. Los calificativos "chico"/"grande" que se usan más abajo para los **rodamientos** siguen el criterio del diámetro de **eje** (bore), no el de engranaje, y no deben confundirse entre sí. Por eso, en este documento los engranajes se identifican siempre por su eje ($R_1$ = radio del engranaje del eje 1 = 125 mm; $R_2$ = radio del engranaje del eje 2 = 100 mm), nunca como "chico"/"grande".
+> Es decir, el eje **chico** (eje 1) lleva el engranaje **grande**, y el eje **grande** (eje 2) lleva el engranaje **chico** — el orden se invierte. Los calificativos "chico"/"grande" que se usan más abajo para los **rodamientos** siguen el criterio del diámetro de **eje** (diámetro interior del rodamiento = diámetro del eje), no el de engranaje, y no deben confundirse entre sí. Por eso, en este documento los engranajes se identifican siempre por su eje ($R_1$ = radio del engranaje del eje 1 = 125 mm; $R_2$ = radio del engranaje del eje 2 = 100 mm), nunca como "chico"/"grande".
 
 **Rodamientos (según tabla SKF, serie 62 — rígidos de una hilera de bolas):**
 
-| Rodamiento | Bore (d) | Diámetro exterior (D) | Ancho axial (B) | Masa |
+| Rodamiento | Diámetro interior (d) | Diámetro exterior (D) | Ancho axial (B) | Masa |
 |---|---|---|---|---|
 | Chico (eje 1) | 25 mm | 52 mm | 15 mm | 0,128 kg |
 | Grande (eje 2) | 35 mm | 72 mm | 17 mm | 0,288 kg |
 
-*(Corresponden a los rodamientos 6205 y 6207 de la serie 62 SKF. **Bore** = diámetro interior del rodamiento, es decir el diámetro del agujero central por donde pasa el eje — por eso coincide con el "Diámetro del eje" de cada geometría.)*
+*(Corresponden a los rodamientos 6205 y 6207 de la serie 62 SKF. **Diámetro interior** (`d`) = diámetro del agujero central del rodamiento, por donde pasa el eje — por eso coincide con el "Diámetro del eje" de cada geometría.)*
 
 ### 11.2 Datos del problema
 
@@ -416,7 +416,7 @@ Modelo: corona circular (anillo), usando la **masa real de catálogo** (no masa 
 
 $$I = \frac{1}{2}m\left(R_{ext}^2 + R_{int}^2\right)$$
 
-**Rodamiento chico (eje 1 — bore 25 mm)**
+**Rodamiento chico (eje 1 — diámetro interior 25 mm)**
 
 - $m = 0{,}128$ kg (dato de tabla SKF)
 - $R_{ext} = 52/2 = 26$ mm $= 0{,}026$ m $\Rightarrow R_{ext}^2 = 6{,}76\times10^{-4}$ m² *(D = 52 mm: dato de tabla SKF)*
@@ -430,7 +430,7 @@ Total eje 1 (×2 rodamientos):
 
 $$I_{1,rodamientos} \approx 1{,}065\times10^{-4} \text{ kg}\cdot\text{m}^2$$
 
-**Rodamiento grande (eje 2 — bore 35 mm)**
+**Rodamiento grande (eje 2 — diámetro interior 35 mm)**
 
 - $m = 0{,}288$ kg (dato de tabla SKF)
 - $R_{ext} = 72/2 = 36$ mm $= 0{,}036$ m $\Rightarrow R_{ext}^2 = 1{,}296\times10^{-3}$ m² *(D = 72 mm: dato de tabla SKF)*
@@ -446,7 +446,7 @@ $$I_{2,rodamientos} \approx 4{,}614\times10^{-4} \text{ kg}\cdot\text{m}^2$$
 
 ### Punto 3: Momento de inercia de los ejes
 
-**Alcance:** este punto calcula **solo el eje** (acero al carbono). El momento de inercia de los engranajes (aluminio) se calcula aparte, a continuación, como cilindro anular con bore igual al diámetro del eje (caso (b) de la tabla), para no contar dos veces el núcleo que el eje ocupa dentro del engranaje. Los momentos de inercia totales de cada conjunto ($I_1$, $I_2$ para los Puntos 4 y 5) se arman después sumando eje + engranaje + rodamientos.
+**Alcance:** este punto calcula **solo el eje** (acero al carbono). El momento de inercia de los engranajes (aluminio) se calcula aparte, a continuación, como cilindro anular con diámetro interior igual al diámetro del eje (caso (b) de la tabla), para no contar dos veces el núcleo que el eje ocupa dentro del engranaje. Los momentos de inercia totales de cada conjunto ($I_1$, $I_2$ para los Puntos 4 y 5) se arman después sumando eje + engranaje + rodamientos.
 
 Modelo: cilindro sólido respecto de su propio eje (caso (c) de la tabla, sección 4):
 
@@ -540,12 +540,11 @@ $$I_{2,eng} = \frac{1}{2}(2{,}474)\left(1{,}0\times10^{-2} + 3{,}0625\times10^{-
 
 Ambos puntos son el mismo cálculo aplicado a cada eje: $L = I\,\omega$ (sección 6), con $I$ total del conjunto y $\omega$ del Punto 1 (en rad/s, nunca en RPM).
 
-**Qué entra en $I_1$ e $I_2$ — se calculan dos variantes:**
+**Qué entra en $I_1$ e $I_2$:** la consigna no lo define para los Puntos 4 y 5. Se adopta el **conjunto rotante completo** de cada eje, es decir eje + engranaje + rodamientos:
 
-- **Variante A — PRINCIPAL (eje + engranaje + rodamientos):** usa todo lo calculado en los Puntos 2, 3 y 3b. Es la lectura que justifica que la consigna pida el momento de inercia de los rodamientos como ítem propio (Punto 2), ya que solo los Puntos 4, 5 y 7 podrían usarlo.
-- **Variante B — alternativa (eje + engranaje):** deja afuera los rodamientos. Es la lectura literal del Punto 8, que aclara "considerar el momento de inercia del conjunto engranaje y eje" — aclaración que sería innecesaria si los rodamientos no estuvieran en el resto de los puntos.
+$$I = I_{eje} + I_{engranaje} + I_{rodamientos}$$
 
-La consigna no lo define para los Puntos 4 y 5: se adopta la **variante A como respuesta principal** y se presenta la **B como alternativa**, declarando el supuesto. La diferencia es de ≈ 0,3 % (eje 1) y ≈ 3,5 % (eje 2). Lo ideal es confirmar el criterio con los ayudantes (Costucica, Gallo). El Punto 8 (potencia) da el mismo resultado con ambas.
+Usa todo lo calculado en los Puntos 2, 3 y 3b. Es la lectura que justifica que la consigna pida el momento de inercia de los rodamientos como ítem propio (Punto 2), ya que solo los Puntos 4, 5, 6 y 7 podrían usarlo. La aclaración del Punto 8 ("considerar el momento de inercia del conjunto engranaje y eje") no la contradice: allí $P = T\,\omega$ y el $I$ se cancela, así que el resultado de ese punto no depende de qué componentes se incluyan.
 
 **Componentes de $I$ (de los Puntos 2, 3 y 3b), en kg·m²:**
 
@@ -556,36 +555,28 @@ La consigna no lo define para los Puntos 4 y 5: se adopta la **variante A como r
 
 **Eje 1**
 
-$$I_1^{(B)} = I_{eje} + I_{eng} = 9{,}03\times10^{-5} + 3{,}115\times10^{-2} \approx 3{,}124\times10^{-2} \text{ kg}\cdot\text{m}^2$$
+$$I_1 = I_{eje} + I_{eng} + I_{rod} = 9{,}03\times10^{-5} + 3{,}115\times10^{-2} + 1{,}065\times10^{-4} \approx 3{,}135\times10^{-2} \text{ kg}\cdot\text{m}^2$$
 
-$$I_1^{(A)} = I_1^{(B)} + I_{rod} = 3{,}124\times10^{-2} + 1{,}065\times10^{-4} \approx 3{,}135\times10^{-2} \text{ kg}\cdot\text{m}^2$$
-
-$$L_1^{(B)} = I_1^{(B)}\,\omega_1 = (3{,}124\times10^{-2})(293{,}2) \approx 9{,}16 \text{ kg}\cdot\text{m}^2/\text{s}$$
-
-$$L_1^{(A)} = I_1^{(A)}\,\omega_1 = (3{,}135\times10^{-2})(293{,}2) \approx 9{,}19 \text{ kg}\cdot\text{m}^2/\text{s}$$
+$$L_1 = I_1\,\omega_1 = (3{,}135\times10^{-2})(293{,}2) \approx 9{,}19 \text{ kg}\cdot\text{m}^2/\text{s}$$
 
 **Eje 2**
 
-$$I_2^{(B)} = 3{,}47\times10^{-4} + 1{,}275\times10^{-2} \approx 1{,}310\times10^{-2} \text{ kg}\cdot\text{m}^2$$
+$$I_2 = 3{,}47\times10^{-4} + 1{,}275\times10^{-2} + 4{,}614\times10^{-4} \approx 1{,}356\times10^{-2} \text{ kg}\cdot\text{m}^2$$
 
-$$I_2^{(A)} = 1{,}310\times10^{-2} + 4{,}614\times10^{-4} \approx 1{,}356\times10^{-2} \text{ kg}\cdot\text{m}^2$$
-
-$$L_2^{(B)} = I_2^{(B)}\,\omega_2 = (1{,}310\times10^{-2})(366{,}5) \approx 4{,}80 \text{ kg}\cdot\text{m}^2/\text{s}$$
-
-$$L_2^{(A)} = I_2^{(A)}\,\omega_2 = (1{,}356\times10^{-2})(366{,}5) \approx 4{,}97 \text{ kg}\cdot\text{m}^2/\text{s}$$
+$$L_2 = I_2\,\omega_2 = (1{,}356\times10^{-2})(366{,}5) \approx 4{,}97 \text{ kg}\cdot\text{m}^2/\text{s}$$
 
 *(Unidad: $\text{kg}\cdot\text{m}^2/\text{s}$, equivalente a $\text{N}\cdot\text{m}\cdot\text{s}$ o $\text{J}\cdot\text{s}$.)*
 
 **Resultados de estos puntos:**
 
-| Eje | $\omega$ (rad/s) | $I^{(A)}$ principal (kg·m²) | $L^{(A)}$ principal (kg·m²/s) | $I^{(B)}$ alternativa (kg·m²) | $L^{(B)}$ alternativa (kg·m²/s) | Diferencia A vs B |
-|---|---|---|---|---|---|---|
-| 1 | ≈ 293,2 | ≈ 3,135×10⁻² | ≈ 9,19 | ≈ 3,124×10⁻² | ≈ 9,16 | ≈ 0,3 % |
-| 2 | ≈ 366,5 | ≈ 1,356×10⁻² | ≈ 4,97 | ≈ 1,310×10⁻² | ≈ 4,80 | ≈ 3,5 % |
+| Eje | $\omega$ (rad/s) | $I$ (kg·m²) | $L$ (kg·m²/s) |
+|---|---|---|---|
+| 1 | ≈ 293,2 | ≈ 3,135×10⁻² | ≈ 9,19 |
+| 2 | ≈ 366,5 | ≈ 1,356×10⁻² | ≈ 4,97 |
 
 *Los engranajes están engranados, por lo que giran en **sentidos opuestos**: los valores de arriba son módulos. El signo relativo importa en el Punto 7.*
 
-*Salvedad física: en un rodamiento real solo el aro interior (y parte de las bolas) gira con el eje; el aro exterior queda fijo a la carcasa. Modelar el rodamiento completo girando (Punto 2) sobreestima su aporte, por eso la variante A es una cota superior.*
+*Limitación del modelo: en un rodamiento real solo el aro interior (y parte de las bolas) gira con el eje; el aro exterior queda fijo a la carcasa. Modelar el rodamiento completo girando (Punto 2) sobreestima su aporte, por lo que el $I$ calculado es una cota superior del real. Su aporte al $I$ del conjunto es pequeño, de modo que el efecto sobre $L$ es menor.*
 
 ### Punto 6: $I_1$ e $I_2$ se reducen a la mitad — ¿cuánto valen $\omega_1$ y $\omega_2$?
 
@@ -599,7 +590,7 @@ Con $I_1' = I_1/2$ e $I_2' = I_2/2$:
 
 $$\omega_1' = \frac{I_1}{I_1'}\,\omega_1 = \frac{I_1}{I_1/2}\,\omega_1 = 2\,\omega_1 \qquad\qquad \omega_2' = 2\,\omega_2$$
 
-*(El resultado no depende de cuánto valga $I$, solo de la relación $I/I'=2$: es idéntico en las variantes A y B del Punto 4, y también vale como resultado general de la conservación de $L$.)*
+*(El resultado no depende de cuánto valga $I$, solo de la relación $I/I'=2$: vale como resultado general de la conservación de $L$.)*
 
 **Valores** (con $\omega_1 \approx 293{,}2$ rad/s y $\omega_2 \approx 366{,}5$ rad/s del Punto 1):
 
@@ -613,7 +604,7 @@ $$n_1' = \frac{60 \cdot 586{,}4}{2\pi} \approx 5600 \text{ RPM} \qquad\qquad n_2
 
 $$\omega_1' R_1 = 586{,}4 \times 0{,}125 \approx 73{,}3 \text{ m/s} \qquad \omega_2' R_2 = 733{,}0 \times 0{,}1 \approx 73{,}3 \text{ m/s} \quad \checkmark$$
 
-**Qué se conserva y qué no:** $L$ se conserva (es el dato de partida), pero la energía cinética de rotación $K = \tfrac{1}{2}I\omega^2$ **no**: $K' = \tfrac{1}{2}\left(\tfrac{I}{2}\right)(2\omega)^2 = 2K$. Por ejemplo, en el eje 1 (variante A) pasa de $K_1 \approx 1{,}35\times10^{3}$ J a $K_1' \approx 2{,}70\times10^{3}$ J. Ese incremento de energía debe provenir del trabajo realizado por lo que produce la reducción de $I$ (análogo a una patinadora que cierra los brazos).
+**Qué se conserva y qué no:** $L$ se conserva (es el dato de partida), pero la energía cinética de rotación $K = \tfrac{1}{2}I\omega^2$ **no**: $K' = \tfrac{1}{2}\left(\tfrac{I}{2}\right)(2\omega)^2 = 2K$. Por ejemplo, en el eje 1 pasa de $K_1 \approx 1{,}35\times10^{3}$ J a $K_1' \approx 2{,}70\times10^{3}$ J. Ese incremento de energía debe provenir del trabajo realizado por lo que produce la reducción de $I$ (análogo a una patinadora que cierra los brazos).
 
 **Resultados de este punto:**
 
@@ -643,11 +634,11 @@ $$\vec{L}_{O,\,eje\,1} = I_1\,\omega_1 \qquad\qquad \vec{L}_{O,\,eje\,2} = I_2\,
 
 $$L_{total} = L_1 - L_2$$
 
-*(Error a evitar: sumar los módulos, $L_1 + L_2$. Con la variante A daría ≈ 14,16 en vez de ≈ 4,22 kg·m²/s.)*
+*(Error a evitar: sumar los módulos, $L_1 + L_2$. Daría ≈ 14,16 en vez de ≈ 4,22 kg·m²/s.)*
 
-**Valores** (de los Puntos 4 y 5, en kg·m²/s; variante A principal, B alternativa):
+**Valores** (de los Puntos 4 y 5, en kg·m²/s):
 
-$$L_{total}^{(A)} = 9{,}19 - 4{,}97 \approx 4{,}22 \text{ kg}\cdot\text{m}^2/\text{s} \qquad\qquad L_{total}^{(B)} = 9{,}16 - 4{,}80 \approx 4{,}36 \text{ kg}\cdot\text{m}^2/\text{s}$$
+$$L_{total} = 9{,}19 - 4{,}97 \approx 4{,}22 \text{ kg}\cdot\text{m}^2/\text{s}$$
 
 **Qué sucede con $L_{total}$:**
 
@@ -657,42 +648,33 @@ $$L_{total}^{(A)} = 9{,}19 - 4{,}97 \approx 4{,}22 \text{ kg}\cdot\text{m}^2/\te
 
 **Resultados de este punto:**
 
-| Variante | $L_1$ (kg·m²/s) | $L_2$ (kg·m²/s) | $L_{total} = L_1 - L_2$ (kg·m²/s) |
-|---|---|---|---|
-| **A — principal** (con rodamientos) | ≈ 9,19 | ≈ 4,97 | **≈ 4,22** |
-| B — alternativa (eje + engranaje) | ≈ 9,16 | ≈ 4,80 | ≈ 4,36 |
+| $L_1$ (kg·m²/s) | $L_2$ (kg·m²/s) | $L_{total} = L_1 - L_2$ (kg·m²/s) |
+|---|---|---|
+| ≈ 9,19 | ≈ 4,97 | **≈ 4,22** |
 
 ### Punto 8: Potencia del mecanismo en HP
 
-**Planteo:** la potencia de rotación es $P = T\cdot\omega$ (sección 5) o, usando $T = I\alpha$, $P = I\,\omega\,\alpha$ (sección 6). La consigna pide considerar el momento de inercia del "conjunto engranaje y eje" (variante B: sin rodamientos; es la única aclaración explícita de la consigna sobre qué entra en $I$). El torque sale de la fuerza tangencial $F = 200$ N aplicada en el punto de contacto entre engranajes (pág. 15 del apunte de Abud). Las velocidades son las del estado inicial (Punto 1, $n_1 = 2800$ RPM), no las del Punto 6.
+**Planteo:** la potencia de rotación es $P = T\cdot\omega$ (sección 5). La consigna pide considerar el momento de inercia del "conjunto engranaje y eje", pero en esa fórmula el $I$ no interviene (ver más abajo), así que el resultado no depende de qué componentes se incluyan. El torque sale de la fuerza tangencial $F = 200$ N aplicada en el punto de contacto entre engranajes (pág. 15 del apunte de Abud). Las velocidades son las del estado inicial (Punto 1, $n_1 = 2800$ RPM), no las del Punto 6.
 
 **Paso 1 — torque en cada eje** ($F$ es tangencial, perpendicular al radio: $\sin\theta = 1$, sección 1):
 
 $$T_1 = F\,R_1 = 200 \cdot 0{,}125 = 25 \text{ N}\cdot\text{m} \qquad\qquad T_2 = F\,R_2 = 200 \cdot 0{,}1 = 20 \text{ N}\cdot\text{m}$$
 
-**Paso 2 — aceleración angular** ($\alpha = T/I$, con $I^{(B)}$ del Punto 4):
+**Paso 2 — potencia** ($P = T\,\omega$, con $\omega$ en rad/s del Punto 1):
 
-$$\alpha_1 = \frac{25}{3{,}124\times10^{-2}} \approx 800 \text{ rad/s}^2 \qquad\qquad \alpha_2 = \frac{20}{1{,}310\times10^{-2}} \approx 1527 \text{ rad/s}^2$$
+$$P_1 = T_1\,\omega_1 = 25 \cdot 293{,}2 \approx 7330 \text{ W} \qquad\qquad P_2 = T_2\,\omega_2 = 20 \cdot 366{,}5 \approx 7330 \text{ W}$$
 
-**Paso 3 — potencia** ($P = I\,\omega\,\alpha$, con $\omega$ en rad/s del Punto 1):
+**El momento de inercia se cancela:** si se escribe la potencia como $P = I\,\omega\,\alpha$ (sección 6), como $I\,\alpha = T$ resulta $P = T\,\omega$. Por eso el $I$ **no modifica $P$**.
 
-$$P_1 = (3{,}124\times10^{-2})(293{,}2)(800{,}2) \approx 7330 \text{ W} \qquad\qquad P_2 = (1{,}310\times10^{-2})(366{,}5)(1527) \approx 7330 \text{ W}$$
+**Verificación cruzada** ($P = F\cdot v_{contacto}$, con $v_{contacto} \approx 36{,}6$ m/s del Punto 1):
 
-*(Unidad: $\text{kg}\cdot\text{m}^2 \cdot \text{rad/s} \cdot \text{rad/s}^2 = \text{N}\cdot\text{m}/\text{s} = \text{W} = \text{J/s}$; el radián es adimensional.)*
-
-**El momento de inercia se cancela:** como $I\,\alpha = T$, resulta $P = I\,\omega\,\alpha = T\,\omega$. Considerar $I$ sirve para obtener $\alpha$, pero **no modifica $P$**: el resultado es el mismo con las variantes A o B.
-
-**Verificación cruzada** ($P = F\cdot v_{contacto}$, con $v_{contacto} \approx 36{,}65$ m/s del Punto 1):
-
-$$P = 200 \cdot 36{,}65 \approx 7330 \text{ W} \qquad T_1\omega_1 = 25 \cdot 293{,}2 \approx 7330 \text{ W} \qquad T_2\omega_2 = 20 \cdot 366{,}5 \approx 7330 \text{ W} \quad \checkmark$$
+$$P = 200 \cdot 36{,}6 \approx 7330 \text{ W} \qquad T_1\omega_1 = 25 \cdot 293{,}2 \approx 7330 \text{ W} \qquad T_2\omega_2 = 20 \cdot 366{,}5 \approx 7330 \text{ W} \quad \checkmark$$
 
 Ambos ejes transmiten la misma potencia (engrane ideal, sin pérdidas), como corresponde.
 
 **Conversión a HP** (con $1\text{ HP} = 745{,}8$ J/s del enunciado):
 
 $$P = \frac{7330 \text{ J/s}}{745{,}8 \text{ J/s por HP}} \approx \boxed{9{,}83 \text{ HP}}$$
-
-*Salvedad sobre $\alpha$:* $\alpha_1 R_1 \neq \alpha_2 R_2$ (≈ 100 vs ≈ 153 m/s²), es decir, esas aceleraciones no cumplen la condición de engrane. Tomar $F$ como único torque sobre cada eje de forma independiente es la lectura simple de la consigna; por eso los valores de $\alpha$ son orientativos. La potencia, en cambio, no depende de $\alpha$ y queda bien determinada por $P = F\cdot v_{contacto}$.
 
 **Resultados de este punto:**
 
