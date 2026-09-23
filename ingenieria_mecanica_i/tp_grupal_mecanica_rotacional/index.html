@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mecánica Rotacional — Ficha técnica y visualización</title>
+<meta name="description" content="Sistema de dos ejes con engranajes y rodamientos SKF serie 62 (visualización 3D interactiva), catálogo de rodamientos y momentos de inercia de cuerpos rígidos. TP grupal, Ingeniería Mecánica I, UTN FRBA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #eef1f5;
+    --surface: #ffffff;
+    --surface-alt: #f4f7fa;
+    --border: #d7dee5;
+    --border-strong: #b7c2cd;
+    --ink: #16212e;
+    --ink-soft: #55677a;
+    --accent: #2a6ca6;
+    --accent-strong: #1a4a70;
+    --warn: #a35a1f;
+    --warn-bg: rgba(163,90,31,0.08);
+    --r1: #2a6ca6;
+    --r1-bg: rgba(42,108,166,0.10);
+    --r2: #c2670f;
+    --r2-bg: rgba(194,103,15,0.11);
+    --force: #b3261e;
+    --thead: #1a4a70;
+    --thead-ink: #f2f6fa;
+    --scene-bg: #e6ecf3;
+    --grid: #b9c4d0;
+    --shadow: 0 1px 3px rgba(22,33,46,0.07);
+    --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #0e141b; --surface: #151d27; --surface-alt: #1a2430;
+      --border: #263443; --border-strong: #37485a;
+      --ink: #e4ebf3; --ink-soft: #8fa1b4;
+      --accent: #5da5e0; --accent-strong: #9cc8ee;
+      --warn: #e0a15c; --warn-bg: rgba(224,161,92,0.10);
+      --r1: #5da5e0; --r1-bg: rgba(93,165,224,0.13);
+      --r2: #f0a04b; --r2-bg: rgba(240,160,75,0.13);
+      --force: #ff7b72;
+      --thead: #1d3c58; --thead-ink: #e4ebf3;
+      --scene-bg: #0b1118; --grid: #26384a;
+      --shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0e141b; --surface: #151d27; --surface-alt: #1a2430;
+    --border: #263443; --border-strong: #37485a;
+    --ink: #e4ebf3; --ink-soft: #8fa1b4;
+    --accent: #5da5e0; --accent-strong: #9cc8ee;
+    --warn: #e0a15c; --warn-bg: rgba(224,161,92,0.10);
+    --r1: #5da5e0; --r1-bg: rgba(93,165,224,0.13);
+    --r2: #f0a04b; --r2-bg: rgba(240,160,75,0.13);
+    --force: #ff7b72;
+    --thead: #1d3c58; --thead-ink: #e4ebf3;
+    --scene-bg: #0b1118; --grid: #26384a;
+    --shadow: 0 1px 3px rgba(0,0,0,0.4);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  .sheet { max-width: 1180px; margin: 0 auto; padding: 0 24px 80px; }
+  button, input, select { font: inherit; color: inherit; }
+  a { color: var(--accent-strong); }
+  .mono { font-family: var(--mono); }
+  sub, sup { line-height: 0; }
+
+  /* --- Barra de navegación --- */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border-strong);
+  }
+  .topbar-inner {
+    max-width: 1180px; margin: 0 auto; padding: 0 24px;
+    display: flex; align-items: center; gap: 22px; height: 52px;
+  }
+  .brand { font-weight: 700; font-size: 0.95rem; letter-spacing: -0.01em; white-space: nowrap; }
+  .brand span { color: var(--ink-soft); font-weight: 500; }
+  .topnav { display: flex; gap: 4px; margin-left: auto; overflow-x: auto; }
+  .topnav a {
+    text-decoration: none; color: var(--ink-soft); font-size: 0.83rem; font-weight: 500;
+    padding: 6px 12px; border-radius: 6px; white-space: nowrap;
+  }
+  .topnav a .n { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); margin-right: 6px; }
+  .topnav a:hover { background: var(--surface-alt); color: var(--ink); }
+  .topnav a.active { background: var(--r1-bg); color: var(--ink); }
+  .theme-btn {
+    border: 1px solid var(--border-strong); background: var(--surface); border-radius: 6px;
+    width: 34px; height: 30px; cursor: pointer; flex: 0 0 auto;
+  }
+  .theme-btn:hover { background: var(--surface-alt); }
+
+  /* --- Encabezado de documento (rótulo) --- */
+  .doc-header {
+    margin-top: 32px;
+    border: 1px solid var(--border-strong);
+    border-radius: 8px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .doc-header-top { display: grid; grid-template-columns: 1fr auto; border-bottom: 1px solid var(--border); }
+  .doc-header-main { padding: 28px 30px 24px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+  }
+  .doc-header-main h1 { font-weight: 700; font-size: 1.95rem; line-height: 1.2; margin: 0 0 8px; letter-spacing: -0.015em; }
+  .doc-header-main p { margin: 0; color: var(--ink-soft); font-size: 0.96rem; max-width: 62ch; }
+  .doc-header-meta {
+    border-left: 1px solid var(--border); padding: 22px 26px;
+    display: flex; flex-direction: column; justify-content: center; gap: 5px; min-width: 220px;
+    font-family: var(--mono); font-size: 0.76rem; color: var(--ink-soft); text-align: right;
+    background: var(--surface-alt);
+  }
+  .doc-header-meta strong { color: var(--ink); font-size: 0.82rem; }
+  .doc-header-grid { display: grid; grid-template-columns: repeat(4, 1fr); font-size: 0.78rem; }
+  .doc-header-grid div { padding: 12px 18px; border-right: 1px solid var(--border); color: var(--ink-soft); }
+  .doc-header-grid div:last-child { border-right: none; }
+  .doc-header-grid span {
+    display: block; color: var(--accent-strong); font-weight: 600; margin-bottom: 3px;
+    font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.68rem;
+  }
+
+  /* --- Secciones --- */
+  section { margin-top: 56px; }
+  .section-head {
+    display: flex; align-items: baseline; gap: 14px;
+    border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin-bottom: 18px;
+  }
+  .section-head .num {
+    font-family: var(--mono); font-size: 0.82rem; color: var(--accent);
+    border: 1px solid var(--accent); border-radius: 3px; padding: 2px 8px;
+  }
+  .section-head h2 { font-weight: 700; font-size: 1.34rem; margin: 0; letter-spacing: -0.01em; }
+  .section-intro { color: var(--ink-soft); max-width: 78ch; margin: 0 0 20px; font-size: 0.94rem; }
+
+  .note {
+    border-left: 3px solid var(--warn); background: var(--warn-bg);
+    border-radius: 0 6px 6px 0; padding: 11px 15px; font-size: 0.84rem; margin: 14px 0 0;
+  }
+  .note strong { color: var(--warn); }
+  .note.ok { border-left-color: var(--accent); background: var(--r1-bg); }
+  .note.ok strong { color: var(--accent-strong); }
+  .note ul { margin: 6px 0 0; padding-left: 18px; }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border-strong);
+    border-radius: 8px; box-shadow: var(--shadow);
+  }
+  .card-title {
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--ink-soft); padding: 11px 16px; border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  }
+  .card-body { padding: 14px 16px; }
+
+  /* --- 01 Sistema --- */
+  .sys { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(320px, 1fr); gap: 20px; align-items: start; }
+  .viewer-col { position: sticky; top: 64px; }
+  .viewer {
+    position: relative; border: 1px solid var(--border-strong); border-radius: 8px 8px 0 0;
+    background: var(--scene-bg); overflow: hidden; box-shadow: var(--shadow);
+  }
+  #gl { width: 100%; height: clamp(340px, 58vh, 560px); touch-action: none; cursor: grab; }
+  #gl.dragging { cursor: grabbing; }
+  #gl canvas { display: block; width: 100%; height: 100%; }
+  .labels { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .lbl {
+    position: absolute; left: 0; top: 0; will-change: transform;
+    font-family: var(--mono); font-size: 0.68rem; line-height: 1.25; white-space: nowrap;
+    background: color-mix(in srgb, var(--surface) 88%, transparent);
+    border: 1px solid var(--border-strong); border-left-width: 3px;
+    border-radius: 3px; padding: 2px 6px; color: var(--ink);
+  }
+  .lbl.r1 { border-left-color: var(--r1); }
+  .lbl.r2 { border-left-color: var(--r2); }
+  .lbl.f { border-left-color: var(--force); color: var(--force); font-weight: 600; }
+  .lbl.ref { border-left-color: var(--ink-soft); color: var(--ink-soft); }
+  .lbl.lt { border-left-color: #8a4fd0; color: #8a4fd0; font-weight: 600; }
+  .lbl.tag { font-weight: 600; font-size: 0.72rem; }
+  .viewer-hint {
+    position: absolute; left: 10px; bottom: 8px; font-size: 0.7rem; color: var(--ink-soft);
+    background: color-mix(in srgb, var(--surface) 80%, transparent); padding: 2px 8px; border-radius: 4px;
+    pointer-events: none;
+  }
+  .viewer-badges { position: absolute; right: 10px; top: 10px; display: flex; flex-direction: column; gap: 5px; align-items: flex-end; pointer-events: none; }
+  .badge {
+    font-family: var(--mono); font-size: 0.68rem; padding: 3px 8px; border-radius: 4px;
+    background: color-mix(in srgb, var(--surface) 88%, transparent); border: 1px solid var(--border-strong); color: var(--ink);
+  }
+  .badge.hot { border-color: var(--r2); color: var(--r2); font-weight: 600; }
+  .viewer-fallback[hidden] { display: none; }
+  .viewer-fallback { position: absolute; inset: 0; display: grid; place-items: center; padding: 24px; text-align: center; color: var(--ink-soft); font-size: 0.9rem; }
+
+  .controls {
+    border: 1px solid var(--border-strong); border-top: none; border-radius: 0 0 8px 8px;
+    background: var(--surface); padding: 12px 14px; display: grid; gap: 11px;
+  }
+  .ctl-row { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; }
+  .ctl-label { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); min-width: 88px; }
+  .seg { display: inline-flex; border: 1px solid var(--border-strong); border-radius: 6px; overflow: hidden; }
+  .seg button {
+    background: var(--surface); border: none; border-right: 1px solid var(--border);
+    padding: 5px 11px; font-size: 0.78rem; cursor: pointer; color: var(--ink-soft);
+  }
+  .seg button:last-child { border-right: none; }
+  .seg button:hover { background: var(--surface-alt); color: var(--ink); }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+  .chip {
+    border: 1px solid var(--border-strong); background: var(--surface); border-radius: 999px;
+    padding: 4px 12px; font-size: 0.78rem; cursor: pointer; color: var(--ink-soft);
+  }
+  .chip:hover { background: var(--surface-alt); color: var(--ink); }
+  .chip[aria-pressed="true"] { background: var(--r1-bg); border-color: var(--accent); color: var(--ink); font-weight: 600; }
+  .btn {
+    border: 1px solid var(--border-strong); background: var(--surface-alt); border-radius: 6px;
+    padding: 6px 13px; font-size: 0.8rem; cursor: pointer; font-weight: 500;
+  }
+  .btn:hover { border-color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.p6[aria-pressed="true"] { background: var(--r2); border-color: var(--r2); color: #fff; }
+  .slider { display: flex; align-items: center; gap: 10px; flex: 1 1 240px; min-width: 0; }
+  .slider input[type=range] { flex: 1; min-width: 0; accent-color: var(--accent); }
+  .slider output { font-family: var(--mono); font-size: 0.8rem; min-width: 74px; text-align: right; }
+  select {
+    border: 1px solid var(--border-strong); background: var(--surface); border-radius: 6px;
+    padding: 4px 8px; font-size: 0.8rem;
+  }
+  button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .panel-col { display: grid; gap: 14px; }
+  table.live { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+  table.live th, table.live td { padding: 6px 8px; border-bottom: 1px solid var(--border); text-align: right; font-family: var(--mono); }
+  table.live th:first-child, table.live td:first-child { text-align: left; font-family: var(--sans); color: var(--ink-soft); }
+  table.live thead th { font-weight: 600; font-size: 0.74rem; border-bottom: 2px solid var(--border-strong); }
+  table.live thead th.r1 { color: var(--r1); }
+  table.live thead th.r2 { color: var(--r2); }
+  table.live tbody tr:last-child td { border-bottom: none; }
+  table.live .dim { color: var(--ink-soft); font-size: 0.72rem; }
+  .kv { display: grid; gap: 6px; margin-top: 12px; font-size: 0.82rem; }
+  .kv div { display: flex; justify-content: space-between; gap: 12px; padding: 6px 10px; background: var(--surface-alt); border-radius: 5px; }
+  .kv b { font-family: var(--mono); font-weight: 600; text-align: right; }
+  .kv .ok { color: var(--accent-strong); }
+  .bar { display: flex; height: 22px; border-radius: 4px; overflow: hidden; border: 1px solid var(--border-strong); margin: 4px 0 8px; }
+  .bar span { display: block; height: 100%; }
+  .bar .s-shaft { background: #8496a8; }
+  .bar .s-gear { background: #c7d0da; }
+  .bar .s-brg { background: #3d5064; }
+  :root[data-theme="dark"] .bar .s-gear { background: #9db0c3; }
+  .barlbl { font-size: 0.74rem; color: var(--ink-soft); display: flex; flex-wrap: wrap; gap: 4px 14px; margin-bottom: 12px; }
+  .barlbl i { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 5px; vertical-align: middle; }
+  .parts { display: grid; gap: 8px; }
+  .part-group { border-left: 3px solid var(--border-strong); padding-left: 10px; }
+  .part-group.r1 { border-left-color: var(--r1); }
+  .part-group.r2 { border-left-color: var(--r2); }
+  .part-group h4 { margin: 0 0 6px; font-size: 0.78rem; font-weight: 600; }
+  .part-group .row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .detail { font-size: 0.82rem; min-height: 96px; }
+  .detail h3 { margin: 0 0 2px; font-size: 1rem; }
+  .detail .sub { color: var(--ink-soft); font-size: 0.78rem; margin-bottom: 8px; }
+  .detail dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0; }
+  .detail dt { color: var(--ink-soft); }
+  .detail dd { margin: 0; font-family: var(--mono); text-align: right; }
+  .detail .hint { color: var(--ink-soft); }
+  .detail .caveat { margin-top: 10px; padding: 8px 10px; border-left: 3px solid var(--warn); background: var(--warn-bg); border-radius: 0 5px 5px 0; font-size: 0.78rem; }
+
+  /* --- Tablas de catálogo --- */
+  .brg-tools { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-bottom: 14px; }
+  .brg-tools input[type=search] {
+    border: 1px solid var(--border-strong); background: var(--surface); border-radius: 6px;
+    padding: 6px 11px; font-size: 0.85rem; min-width: 230px;
+  }
+  .brg-tools label { font-size: 0.83rem; color: var(--ink-soft); display: inline-flex; gap: 7px; align-items: center; cursor: pointer; }
+  .brg-tools .count { margin-left: auto; font-family: var(--mono); font-size: 0.75rem; color: var(--ink-soft); }
+  .dim-ref { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(220px, 1fr); gap: 20px; align-items: center; padding: 16px 20px; margin-bottom: 18px; }
+  .dim-ref svg { width: 100%; height: auto; max-height: 250px; }
+  .dim-ref h3 { margin: 0 0 4px; font-size: 1.05rem; }
+  .dim-ref .sub { color: var(--ink-soft); font-size: 0.82rem; margin-bottom: 10px; }
+  .dim-list { display: grid; gap: 6px; font-size: 0.84rem; }
+  .dim-list div { display: flex; gap: 8px; align-items: baseline; }
+  .dim-list b { font-family: var(--mono); min-width: 34px; color: var(--accent-strong); }
+  .dim-pick { display: flex; gap: 8px; align-items: center; margin-top: 12px; font-size: 0.82rem; color: var(--ink-soft); }
+  .used { display: inline-block; margin-top: 10px; font-size: 0.76rem; font-family: var(--mono); padding: 3px 9px; border-radius: 4px; }
+  .used.r1 { background: var(--r1-bg); color: var(--r1); }
+  .used.r2 { background: var(--r2-bg); color: var(--r2); }
+
+  .table-wrap { overflow: auto; max-height: 560px; border: 1px solid var(--border-strong); border-radius: 8px; background: var(--surface); box-shadow: var(--shadow); }
+  table.cat { border-collapse: collapse; width: 100%; font-family: var(--mono); font-size: 0.78rem; white-space: nowrap; }
+  table.cat th, table.cat td { padding: 7px 11px; text-align: right; border-bottom: 1px solid var(--border); }
+  table.cat th:first-child, table.cat td:first-child, table.cat th:nth-child(2), table.cat td:nth-child(2) { text-align: left; }
+  table.cat thead th {
+    background: var(--thead); color: var(--thead-ink); font-weight: 500; position: sticky; top: 0; z-index: 2;
+    font-size: 0.72rem; line-height: 1.25;
+  }
+  table.cat thead th small { display: block; opacity: 0.75; font-weight: 400; }
+  table.cat thead th:first-child { left: 0; z-index: 3; }
+  table.cat tbody td:first-child { position: sticky; left: 0; background: var(--surface); z-index: 1; box-shadow: 1px 0 0 var(--border); font-weight: 600; }
+  table.cat tbody tr:nth-child(even) td { background: var(--surface-alt); }
+  table.cat tbody tr { cursor: pointer; }
+  table.cat tbody tr:hover td { background: var(--r1-bg); }
+  table.cat tbody tr.sel td { box-shadow: inset 0 -2px 0 var(--accent); }
+  table.cat tbody tr.f1 td { background: var(--r1-bg); font-weight: 600; }
+  table.cat tbody tr.f2 td { background: var(--r2-bg); font-weight: 600; }
+  table.cat tbody tr.f1 td:first-child { box-shadow: inset 4px 0 0 var(--r1), 1px 0 0 var(--border); }
+  table.cat tbody tr.f2 td:first-child { box-shadow: inset 4px 0 0 var(--r2), 1px 0 0 var(--border); }
+  table.cat td.key { color: var(--ink); font-weight: 700; }
+  .unclear { color: var(--warn); border-bottom: 1px dashed var(--warn); cursor: help; }
+  .approx { color: var(--warn); font-style: italic; }
+  .yes { color: var(--accent-strong); font-weight: 600; }
+  .no { color: var(--ink-soft); }
+  .legend { font-size: 0.8rem; color: var(--ink-soft); margin-top: 12px; display: grid; gap: 5px; }
+  .legend .sw { display: inline-block; width: 11px; height: 11px; border-radius: 2px; margin-right: 7px; vertical-align: middle; }
+
+  /* --- 03 Momentos de inercia --- */
+  .inertia-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border-strong); border-radius: 8px; overflow: hidden; box-shadow: var(--shadow); }
+  .inertia-card { background: var(--surface); padding: 16px 18px; display: flex; gap: 16px; align-items: center; }
+  .inertia-card.used-tp { background: linear-gradient(90deg, var(--r1-bg), var(--surface) 60%); }
+  .inertia-card .icon { flex: 0 0 auto; width: 58px; height: 58px; }
+  .inertia-card .icon svg { width: 100%; height: 100%; }
+  .inertia-card .body-text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .inertia-card .tag { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); }
+  .inertia-card .body-name { font-weight: 600; font-size: 0.95rem; }
+  .inertia-card .axis { color: var(--ink-soft); font-size: 0.82rem; }
+  .formula { font-family: var(--mono); font-size: 1.02rem; margin-top: 4px; display: block; }
+  .fr { margin: 0 3px; }
+  .formula i { font-style: italic; font-family: var(--sans); }
+  .fr { display: inline-flex; flex-direction: column; text-align: center; line-height: 1.2; vertical-align: middle; }
+  .fr > span:first-child { border-bottom: 1px solid currentColor; padding: 0 3px 1px; }
+  .fr > span:last-child { padding: 1px 3px 0; }
+  .use-link {
+    display: inline-block; margin-top: 7px; font-size: 0.74rem; font-family: var(--mono);
+    background: var(--r1-bg); color: var(--r1); border: 1px solid var(--r1); border-radius: 4px; padding: 2px 8px; cursor: pointer; text-decoration: none;
+  }
+  .use-link:hover { background: var(--r1); color: #fff; }
+  .use-link.r2 { background: var(--r2-bg); color: var(--r2); border-color: var(--r2); }
+  .use-link.r2:hover { background: var(--r2); color: #fff; }
+
+  footer {
+    margin-top: 64px; padding-top: 18px; border-top: 1px solid var(--border-strong);
+    font-family: var(--mono); font-size: 0.74rem; color: var(--ink-soft);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+  }
+
+  @media (max-width: 980px) {
+    .sys { grid-template-columns: 1fr; }
+    .viewer-col { position: static; }
+    .dim-ref { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .sheet, .topbar-inner { padding-left: 14px; padding-right: 14px; }
+    .brand span { display: none; }
+    .doc-header-top { grid-template-columns: 1fr; }
+    .doc-header-meta { border-left: none; border-top: 1px solid var(--border); align-items: flex-start; text-align: left; }
+    .doc-header-grid { grid-template-columns: 1fr; }
+    .doc-header-grid div { border-right: none; border-bottom: 1px solid var(--border); }
+    .doc-header-main h1 { font-size: 1.55rem; }
+    .inertia-grid { grid-template-columns: 1fr; }
+    .ctl-label { min-width: 100%; }
+    .lbl.ref { display: none !important; }
+  }
+  @media print {
+    .topbar, .controls, .viewer-hint, .theme-btn, .brg-tools { display: none !important; }
+    .viewer-col { position: static; }
+    body { background: #fff; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">Mecánica Rotacional <span>· TP grupal</span></div>
+    <nav class="topnav" aria-label="Secciones">
+      <a href="#sistema" data-sec="sistema"><span class="n">01</span>Sistema</a>
+      <a href="#rodamientos" data-sec="rodamientos"><span class="n">02</span>Rodamientos SKF</a>
+      <a href="#inercia" data-sec="inercia"><span class="n">03</span>Momentos de inercia</a>
+    </nav>
+    <button class="theme-btn" id="themeBtn" type="button" aria-label="Cambiar entre tema claro y oscuro" title="Tema claro / oscuro">◐</button>
+  </div>
+</header>
+
+<div class="sheet">
+
+  <div class="doc-header">
+    <div class="doc-header-top">
+      <div class="doc-header-main">
+        <div class="eyebrow">Ficha técnica de referencia</div>
+        <h1>Mecánica Rotacional</h1>
+        <p>Tren de engranajes de dos ejes con rodamientos: visualización interactiva del sistema analizado, catálogo de rodamientos rígidos de bolas SKF (serie 62) y momentos de inercia de cuerpos rígidos.</p>
+      </div>
+      <div class="doc-header-meta">
+        <div><strong>TP Grupal</strong></div>
+        <div>Ingeniería Mecánica I</div>
+        <div>UTN — FRBA</div>
+        <div>Rev. 3 · visualización 3D</div>
+      </div>
+    </div>
+    <div class="doc-header-grid">
+      <div><span>Fuente</span>Enunciado (apunte Abud, págs. 14–15) · catálogo SKF serie 62 · bibliografía de mecánica racional</div>
+      <div><span>Estado</span>Ejercicio resuelto, puntos 1 a 8 · cifras idénticas a las del informe</div>
+      <div><span>Uso</span>Referencia y verificación; contrastar con el catálogo oficial en diseño crítico</div>
+      <div><span>Unidades</span>Análisis en SI (kg, m, s) · catálogo en mm y kg</div>
+    </div>
+  </div>
+
+  <!-- ===================== 01 SISTEMA ===================== -->
+  <section id="sistema">
+    <div class="section-head"><span class="num">01</span><h2>Sistema analizado — tren de engranajes</h2></div>
+    <p class="section-intro">Dos ejes paralelos con un engranaje cada uno, engranados por el exterior, y dos rodamientos por eje. Cada eje con su engranaje y sus dos rodamientos forma un <strong>conjunto rotante</strong> (rotor 1 y rotor 2). Todas las cifras del panel se calculan en el navegador con los datos del enunciado y del catálogo, con el mismo modelo del informe.</p>
+
+    <div class="sys">
+      <div class="viewer-col">
+        <div class="viewer" id="viewer">
+          <div id="gl" role="img" aria-label="Escena 3D del tren de engranajes: dos ejes, dos engranajes y cuatro rodamientos"></div>
+          <div class="labels" id="labels"></div>
+          <div class="viewer-fallback" id="fallback" hidden></div>
+          <div class="viewer-badges">
+            <span class="badge" id="badgeState">Estado inicial</span>
+            <span class="badge" id="badgeSpeed">Cámara lenta ×1/100</span>
+          </div>
+          <div class="viewer-hint">Arrastrá para orbitar · rueda para acercar · clic en una pieza para ver su detalle</div>
+        </div>
+
+        <div class="controls">
+          <div class="ctl-row">
+            <span class="ctl-label">Vista</span>
+            <div class="seg" id="segView" role="group" aria-label="Vista de cámara">
+              <button type="button" data-v="iso" aria-pressed="true">Isométrica</button>
+              <button type="button" data-v="front" aria-pressed="false">Frontal</button>
+              <button type="button" data-v="side" aria-pressed="false">Lateral</button>
+            </div>
+            <span class="ctl-label" style="min-width:auto">Modelo</span>
+            <div class="seg" id="segMode" role="group" aria-label="Representación">
+              <button type="button" data-m="real" aria-pressed="true" title="Dentado y rodamientos con aros, bolas y jaula (ilustrativo)">Ilustrativo</button>
+              <button type="button" data-m="calc" aria-pressed="false" title="Cilindros lisos, tal como se calcularon los momentos de inercia">Modelo de cálculo</button>
+            </div>
+          </div>
+          <div class="ctl-row">
+            <span class="ctl-label">Mostrar</span>
+            <button class="chip" type="button" id="tgLabels" aria-pressed="true">Etiquetas</button>
+            <button class="chip" type="button" id="tgParts" aria-pressed="false" title="Nombre, diámetro y material de cada pieza">Nombres de piezas</button>
+            <button class="chip" type="button" id="tgL" aria-pressed="false" title="Puntos 4, 5 y 7">Momento angular L</button>
+            <button class="chip" type="button" id="tgF" aria-pressed="true" title="Punto 8">Fuerza F = 200 N</button>
+          </div>
+          <div class="ctl-row">
+            <span class="ctl-label">Eje 1</span>
+            <label class="slider"><input type="range" id="rngN" min="0" max="6000" step="10" value="2800" aria-label="Velocidad del eje 1 en RPM"><output id="outN">2800 RPM</output></label>
+            <button class="btn" type="button" id="btnN0" title="Volver al dato del enunciado">n₁ = 2800</button>
+          </div>
+          <div class="ctl-row">
+            <span class="ctl-label">Explosión</span>
+            <label class="slider"><input type="range" id="rngX" min="0" max="100" step="1" value="0" aria-label="Separar conjuntos y piezas"><output id="outX">0 %</output></label>
+          </div>
+          <div class="ctl-row">
+            <span class="ctl-label">Animación</span>
+            <button class="btn primary" type="button" id="btnPlay">Pausar</button>
+            <select id="selTime" aria-label="Escala de tiempo">
+              <option value="0.001">Cámara lenta ×1/1000</option>
+              <option value="0.01" selected>Cámara lenta ×1/100</option>
+              <option value="0.1">Cámara lenta ×1/10</option>
+            </select>
+            <button class="btn p6" type="button" id="btnP6" aria-pressed="false" title="Punto 6: I₁ e I₂ se reducen repentinamente a la mitad">Punto 6 · I → I/2</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-col">
+        <div class="card">
+          <div class="card-title"><span>Datos en vivo</span><span id="stateTag" class="mono">estado inicial</span></div>
+          <div class="card-body">
+            <table class="live">
+              <thead><tr><th></th><th class="r1">Rotor 1</th><th class="r2">Rotor 2</th></tr></thead>
+              <tbody id="liveBody"></tbody>
+            </table>
+            <div class="kv" id="kv"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span>Composición del momento de inercia</span></div>
+          <div class="card-body">
+            <div class="barlbl"><span><i style="background:#8496a8"></i>Eje</span><span><i style="background:#c7d0da"></i>Engranaje</span><span><i style="background:#3d5064"></i>Rodamientos (×2)</span></div>
+            <div class="mono" style="font-size:.72rem;color:var(--r1)">Rotor 1</div>
+            <div class="bar" id="bar1"></div>
+            <div class="mono" style="font-size:.72rem;color:var(--r2)">Rotor 2</div>
+            <div class="bar" id="bar2"></div>
+            <div class="mono" id="barTxt" style="font-size:.74rem;color:var(--ink-soft)"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span>Piezas</span><span class="mono">8 elementos · 2 rotores</span></div>
+          <div class="card-body">
+            <div class="parts" id="parts"></div>
+            <hr style="border:none;border-top:1px solid var(--border);margin:14px 0">
+            <div class="detail" id="detail"><span class="hint">Elegí una pieza de la lista o hacé clic sobre ella en la escena.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note ok"><strong>Qué es dato y qué es ilustrativo.</strong> Vienen del enunciado y del informe: diámetros y largo de los ejes, diámetros de los engranajes, anchos, materiales, rodamientos 6205 y 6207, <span class="mono">n₁</span>, <span class="mono">F</span> y las cifras del panel. Son ilustrativos y no intervienen en ningún cálculo:
+      <ul>
+        <li>el dentado (25 y 20 dientes, módulo 10 mm): el análisis modela los engranajes como cilindros anulares lisos (botón «Modelo de cálculo»);</li>
+        <li>la posición axial de los rodamientos sobre cada eje;</li>
+        <li>la altura <span class="mono">H₂</span> (el enunciado no la da y no hace falta), y la escala de <span class="mono">H₁</span> = 1500 mm, dibujada cortada;</li>
+        <li>la cámara lenta: a 2800 RPM reales el giro no se distingue a simple vista.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== 02 RODAMIENTOS ===================== -->
+  <section id="rodamientos">
+    <div class="section-head"><span class="num">02</span><h2>Rodamientos SKF — serie 62, dimensiones, capacidad y peso</h2></div>
+    <p class="section-intro">Rodamientos rígidos de una hilera de bolas. Designación = 62 + Tamaño (ej. Tamaño 04 → 6204). Los tamaños 05 y 07 corresponden a las piezas de este TP (d = 25 mm en el rotor 1 y d = 35 mm en el rotor 2). Hacé clic en una fila para ver su geometría.</p>
+
+    <div class="card dim-ref">
+      <svg id="brgSvg" viewBox="0 0 440 236" role="img" aria-label="Vista frontal y corte de un rodamiento con sus cotas d, D, B"></svg>
+      <div>
+        <h3 id="brgTitle">6205</h3>
+        <div class="sub" id="brgSub"></div>
+        <div class="dim-list" id="brgDims"></div>
+        <div class="dim-pick"><label for="brgSel">Rodamiento:</label><select id="brgSel"></select></div>
+        <div id="brgUsed"></div>
+      </div>
+    </div>
+
+    <div class="brg-tools">
+      <input type="search" id="brgFilter" placeholder="Filtrar por designación o diámetro (ej. 6205, 35)" aria-label="Filtrar rodamientos">
+      <label><input type="checkbox" id="brgOnly"> Solo piezas del TP</label>
+      <span class="count" id="brgCount"></span>
+    </div>
+
+    <div class="table-wrap">
+      <table class="cat">
+        <thead>
+          <tr>
+            <th>Tamaño</th><th>Designación</th>
+            <th>d<small>mm</small></th><th>D<small>mm</small></th><th>B<small>mm</small></th><th>d₁<small>mm</small></th><th>r<small>mm</small></th>
+            <th>C dinám.<small>kg</small></th><th>C₀ estát.<small>kg</small></th><th>n máx<small>rpm</small></th><th>Peso<small>kg</small></th>
+            <th>Z/2Z</th><th>RS/2RS</th><th>N/ZN</th>
+          </tr>
+        </thead>
+        <tbody id="brgBody"></tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <div><span class="sw" style="background:var(--r1-bg);border:1px solid var(--r1)"></span>Tamaño 05 (6205): rodamientos del rotor 1 — d = 25 mm, 0,128 kg.</div>
+      <div><span class="sw" style="background:var(--r2-bg);border:1px solid var(--r2)"></span>Tamaño 07 (6207): rodamientos del rotor 2 — d = 35 mm, 0,288 kg.</div>
+      <div><span class="sw" style="background:var(--warn-bg);border:1px solid var(--warn)"></span><span class="approx">Peso en cursiva</span> (Tamaño 15 y 24–40): la copia de la foto original es borrosa en esa zona; verificar contra el catálogo SKF antes de un cálculo que dependa de precisión.</div>
+      <div><span class="unclear">—</span> Celda con línea punteada: valor puntual no legible en la fuente (pasar el cursor para el detalle).</div>
+    </div>
+    <div class="note"><strong>Nota general.</strong> Los rodamientos con ejecución 2Z y 2RS vienen lubricados de fábrica y no deben desarmarse ni relubricarse. Los de ejecución RS/2RS admiten como velocidad máxima solo 2/3 de la indicada en la columna «n máx».</div>
+  </section>
+
+  <!-- ===================== 03 INERCIA ===================== -->
+  <section id="inercia">
+    <div class="section-head"><span class="num">03</span><h2>Momentos de inercia de cuerpos rígidos</h2></div>
+    <p class="section-intro"><span class="mono">M</span> = masa del cuerpo · <span class="mono">R</span> = radio (<span class="mono">R₁</span> y <span class="mono">R₂</span>, interior y exterior, en cuerpos huecos) · <span class="mono">l</span> = longitud. El pictograma muestra el cuerpo y el eje de rotación de cada ficha. Las dos fichas resaltadas son las que usa el TP: ejes (cilindro sólido) y engranajes y rodamientos (cilindro anular).</p>
+    <div class="inertia-grid" id="inertiaGrid"></div>
+    <div class="note ok"><strong>Confianza alta.</strong> Fórmulas estándar, consistentes con la bibliografía de mecánica racional.</div>
+  </section>
+
+  <footer>
+    <span>Fuentes: enunciado del TP (apunte de Mecánica Rotacional, Ing. Abud) · catálogo SKF serie 62 · bibliografía de mecánica racional</span>
+    <span>Documento de referencia — verificar contra el catálogo oficial para diseño crítico</span>
+  </footer>
+</div>
+
+<noscript><p style="text-align:center;padding:20px">Esta página necesita JavaScript para mostrar la visualización, la tabla de rodamientos y las fichas de inercia.</p></noscript>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ============================================================
+   MODELO FÍSICO — mismos datos y fórmulas del informe (sin DOM)
+   Unidades: SI (m, kg, s). Los diámetros del catálogo vienen en mm.
+   ============================================================ */
+/*MODEL-START*/
+const BEARINGS = (function () {
+  // [tamaño, d, D, B, d1, r, C, C0, nmax, peso, pesoAprox, cUnclear, c0Unclear]
+  const R = [
+    ['00',10,30,9,15,1,400,224,20000,0.032],
+    ['01',12,32,10,16.3,1,540,300,20000,0.037],
+    ['02',15,35,11,19.2,1,610,355,16000,0.045],
+    ['03',17,40,12,21.5,1,750,440,16000,0.065],
+    ['04',20,47,14,26,1.5,1000,655,16000,0.106],
+    ['05',25,52,15,31.4,1.5,1100,710,13000,0.128],
+    ['06',30,62,16,37.5,1.5,1530,1000,13000,0.199],
+    ['07',35,72,17,43.9,2,2000,1370,10000,0.288],
+    ['08',40,80,18,49.8,2,2280,1600,10000,0.366],
+    ['09',45,85,19,54.4,2,2550,1830,8000,0.407],
+    ['10',50,90,20,57.4,2,2750,2120,8000,0.463],
+    ['11',55,100,21,63.8,2.5,3400,2600,8000,0.607],
+    ['12',60,110,22,70.9,2.5,4050,3200,6000,0.783],
+    ['13',65,120,23,77.9,2.5,4400,3550,6000,0.990],
+    ['14',70,125,24,81.6,2.5,4800,3700,5000,1.27],
+    ['15',75,130,25,87,2.5,5200,4250,5000,1.48,1],
+    ['16',80,140,26,93.4,3,5700,4550,5000,1.40],
+    ['17',85,150,28,102.8,3,6550,5500,4000,1.79],
+    ['18',90,160,30,null,3,7500,6300,4000,2.15],
+    ['19',95,170,32,null,3.5,8500,7200,4000,2.42],
+    ['20',100,180,34,null,3.5,9650,8150,3000,3.14],
+    ['21',105,190,36,null,3.5,10400,9150,3000,3.79],
+    ['22',110,200,38,null,3.5,11200,10400,3000,4.36],
+    ['24',120,215,40,null,3.5,11400,10400,3000,5.15,1],
+    ['26',130,230,40,null,4,12200,11600,2500,5.82,1],
+    ['28',140,250,42,null,4,12900,12900,2500,7.47,1],
+    ['30',150,270,45,null,4,13700,14300,2500,9.41,1],
+    ['32',160,290,48,null,4,14300,15600,2000,14.3,1],
+    ['34',170,310,52,null,5,14600,null,2000,17.5,1],
+    ['36',180,320,52,null,5,null,19000,2000,18.3,1],
+    ['38',190,340,55,null,5,17600,20400,1600,23.0,1],
+    ['40',200,360,58,null,5,20000,24400,1600,28.2,1]
+  ];
+  return R.map(function (a) {
+    const s = parseInt(a[0], 10);
+    return {
+      size: a[0], des: '62' + a[0], d: a[1], D: a[2], B: a[3], d1: a[4], r: a[5],
+      C: a[6], C0: a[7], nmax: a[8], m: a[9], mApprox: !!a[10],
+      zz: s <= 17, rs: s <= 16, nz: s >= 4 && s <= 17
+    };
+  });
+})();
+
+const Model = (function () {
+  const G = {
+    n1: 2800, F: 200, HP: 745.8, b: 0.030, Lshaft: 0.300,
+    rhoSteel: 7850, rhoAl: 2708,
+    R1: 0.125, R2: 0.100,                 // radios de los engranajes (eje 1 y eje 2)
+    rotors: [
+      { id: 1, shaftD: 0.025, gearD: 0.250, brg: '6205' },
+      { id: 2, shaftD: 0.035, gearD: 0.200, brg: '6207' }
+    ]
+  };
+  const byDes = function (des) { return BEARINGS.filter(function (x) { return x.des === des; })[0]; };
+
+  function rotor(i) {
+    const r = G.rotors[i], br = byDes(r.brg);
+    const Rs = r.shaftD / 2;
+    const shaft = { R: Rs, L: G.Lshaft };
+    shaft.M = G.rhoSteel * Math.PI * Rs * Rs * G.Lshaft;
+    shaft.I = 0.5 * shaft.M * Rs * Rs;
+    const gear = { Rext: r.gearD / 2, Rint: Rs, b: G.b };
+    gear.V = Math.PI * (gear.Rext * gear.Rext - gear.Rint * gear.Rint) * G.b;
+    gear.M = G.rhoAl * gear.V;
+    gear.I = 0.5 * gear.M * (gear.Rext * gear.Rext + gear.Rint * gear.Rint);
+    const bearing = { des: br.des, Rext: br.D / 2000, Rint: br.d / 2000, m: br.m, data: br };
+    bearing.I1 = 0.5 * br.m * (bearing.Rext * bearing.Rext + bearing.Rint * bearing.Rint);
+    bearing.I = 2 * bearing.I1;
+    const I = shaft.I + gear.I + bearing.I;
+    return { shaft: shaft, gear: gear, bearing: bearing, I: I, Rg: gear.Rext };
+  }
+  const rotors = [rotor(0), rotor(1)];
+
+  // estado cinemático para una velocidad n1 (RPM) y un factor de inercia (1 o 1/2)
+  function state(n1, inertiaFactor) {
+    const k = inertiaFactor === undefined ? 1 : inertiaFactor;
+    const w1i = 2 * Math.PI * n1 / 60;
+    const w2i = w1i * G.R1 / G.R2;
+    const mult = 1 / k;                 // conservación de L: I·w = I'·w'  =>  w' = w / k
+    const out = { k: k, w: [w1i * mult, w2i * mult], wi: [w1i, w2i] };
+    out.n = [out.w[0] * 60 / (2 * Math.PI), out.w[1] * 60 / (2 * Math.PI)];
+    out.I = [rotors[0].I * k, rotors[1].I * k];
+    out.L = [out.I[0] * out.w[0], out.I[1] * out.w[1]];          // módulos
+    out.K = [0.5 * out.I[0] * out.w[0] * out.w[0], 0.5 * out.I[1] * out.w[1] * out.w[1]];
+    out.Ltotal = out.L[0] - out.L[1];                             // giran en sentidos opuestos
+    out.T = [G.F * G.R1, G.F * G.R2];                             // Punto 8: fuerza tangencial
+    out.P = [out.T[0] * w1i, out.T[1] * w2i];                     // con las velocidades iniciales
+    out.HP = out.P[0] / G.HP;
+    out.v = w1i * G.R1;                                           // velocidad de contacto
+    return out;
+  }
+  return { G: G, rotors: rotors, state: state, byDes: byDes };
+})();
+/*MODEL-END*/
+
+/* ============================================================
+   FORMATO
+   ============================================================ */
+const nf = function (x, d) { return x.toLocaleString('es-AR', { minimumFractionDigits: d, maximumFractionDigits: d }); };
+const SUP = { '0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','-':'⁻' };
+function sci(x, d) {
+  if (!x) return '0';
+  const e = Math.floor(Math.log10(Math.abs(x)));
+  const m = x / Math.pow(10, e);
+  return nf(m, d === undefined ? 3 : d) + '×10' + String(e).split('').map(function (c) { return SUP[c]; }).join('');
+}
+// I interno del modelo está en kg·m² (escala natural para la escena 3D); para mostrarlo
+// se convierte a kg·mm² (×10⁶) porque en piezas de este tamaño se lee mejor (ver Mecanica_Rotacional_Apuntes.md, Punto 2/3/3b).
+// Cifra con separador de millares (es-AR), no notación científica: 0 decimales si ya es ≥1000, 1 decimal si es más chico.
+function mmI(x) {
+  const v = x * 1e6;
+  return nf(v, Math.abs(v) >= 1000 ? 0 : 1);
+}
+const $ = function (id) { return document.getElementById(id); };
+function esc(s) { return String(s).replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }); }
+function tryStore(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) {} return null; }
+
+/* ============================================================
+   ESTADO GENERAL DE LA UI
+   ============================================================ */
+const UI = {
+  n1: 2800, p6: false, explode: 0, view: 'iso', mode: 'real',
+  labels: true, partLabels: false, showL: false, showF: true, playing: true, timeScale: 0.01,
+  selected: null
+};
+(function readHash() {
+  const h = (location.hash || '').replace(/^#/, '');
+  if (h.indexOf('=') < 0) return;
+  h.split('&').forEach(function (kv) {
+    const p = kv.split('='), k = p[0], v = decodeURIComponent(p[1] || '');
+    if (k === 'vista' && /^(iso|front|side)$/.test(v)) UI.view = v;
+    if (k === 'modelo' && /^(real|calc)$/.test(v)) UI.mode = v;
+    if (k === 'expl') UI.explode = Math.max(0, Math.min(100, +v || 0)) / 100;
+    if (k === 'p6') UI.p6 = v === '1';
+    if (k === 'n') UI.n1 = Math.max(0, Math.min(6000, +v || 2800));
+    if (k === 'L') UI.showL = v === '1';
+    if (k === 'piezas') UI.partLabels = v === '1';
+    if (k === 'tema' && /^(light|dark)$/.test(v)) document.documentElement.setAttribute('data-theme', v);
+    if (k === 'sel') UI.selected = v;
+    if (k === 'pausa' && v === '1') UI.playing = false;
+    if (k === 'etq' && v === '0') UI.labels = false;
+  });
+})();
+if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) UI.playing = false;
+
+const PARTS = [
+  { id: 'shaft1', rotor: 1, name: 'Eje 1', kind: 'shaft' },
+  { id: 'gear1', rotor: 1, name: 'Engranaje 1', kind: 'gear' },
+  { id: 'brg1', rotor: 1, name: 'Rodamientos 6205 (×2)', kind: 'brg' },
+  { id: 'shaft2', rotor: 2, name: 'Eje 2', kind: 'shaft' },
+  { id: 'gear2', rotor: 2, name: 'Engranaje 2', kind: 'gear' },
+  { id: 'brg2', rotor: 2, name: 'Rodamientos 6207 (×2)', kind: 'brg' }
+];
+let sceneApi = null;   // se completa si WebGL está disponible
+
+function currentState() { return Model.state(UI.n1, UI.p6 ? 0.5 : 1); }
+
+/* ============================================================
+   PANEL: datos en vivo, composición, piezas, detalle
+   ============================================================ */
+function renderLive() {
+  const s = currentState(), R = Model.rotors, base = Model.state(UI.n1, 1);
+  const rows = [
+    ['n', 'RPM', nf(s.n[0], 0), nf(s.n[1], 0)],
+    ['ω', 'rad/s', nf(s.w[0], 1), nf(s.w[1], 1)],
+    ['I', 'kg·mm²', mmI(s.I[0]), mmI(s.I[1])],
+    ['L = I·ω', 'kg·m²/s', nf(s.L[0], 2), nf(s.L[1], 2)],
+    ['K = ½·I·ω²', 'kJ', nf(s.K[0] / 1000, 2), nf(s.K[1] / 1000, 2)],
+    ['T = F·R', 'N·m', nf(s.T[0], 1), nf(s.T[1], 1)],
+    ['P = T·ω', 'W', nf(base.P[0], 0), nf(base.P[1], 0)]
+  ];
+  $('liveBody').innerHTML = rows.map(function (r) {
+    return '<tr><td>' + esc(r[0]) + ' <span class="dim">' + r[1] + '</span></td><td>' + r[2] + '</td><td>' + r[3] + '</td></tr>';
+  }).join('');
+  const eq = Math.abs(base.w[0] * Model.G.R1 - base.w[1] * Model.G.R2) < 1e-9;
+  $('kv').innerHTML =
+    '<div><span>L<sub>total</sub> = L₁ − L₂ <span class="dim">(giran en sentidos opuestos)</span></span><b>' + nf(s.Ltotal, 2) + ' kg·m²/s</b></div>' +
+    '<div><span>v<sub>contacto</sub> = ω₁R₁ = ω₂R₂</span><b class="ok">' + nf(s.wi[0] * Model.G.R1, 2) + ' m/s ' + (eq ? '✓' : '') + '</b></div>' +
+    '<div><span>Potencia <span class="dim">(estado inicial, Punto 8)</span></span><b>' + nf(base.P[0], 0) + ' W = ' + nf(base.HP, 2) + ' HP</b></div>' +
+    (UI.p6 ? '<div><span>Punto 6: L se conserva, K se duplica</span><b class="ok">L: ' + nf(s.L[0], 2) + ' / ' + nf(s.L[1], 2) + ' · K ×2</b></div>' : '');
+  $('stateTag').textContent = UI.p6 ? 'después del Punto 6 (I/2)' : 'estado inicial';
+  $('badgeState').textContent = UI.p6 ? 'Punto 6 · I → I/2' : 'Estado inicial';
+  $('badgeState').className = 'badge' + (UI.p6 ? ' hot' : '');
+  $('btnP6').setAttribute('aria-pressed', UI.p6 ? 'true' : 'false');
+  if (sceneApi) sceneApi.refreshLabels(s);
+}
+
+function renderBars() {
+  const R = Model.rotors;
+  [0, 1].forEach(function (i) {
+    const r = R[i], t = r.I;
+    const p = [r.shaft.I / t * 100, r.gear.I / t * 100, r.bearing.I / t * 100];
+    $('bar' + (i + 1)).innerHTML =
+      '<span class="s-shaft" style="width:' + p[0] + '%" title="Eje: ' + nf(p[0], 2) + ' %"></span>' +
+      '<span class="s-gear" style="width:' + p[1] + '%" title="Engranaje: ' + nf(p[1], 1) + ' %"></span>' +
+      '<span class="s-brg" style="width:' + p[2] + '%" title="Rodamientos: ' + nf(p[2], 2) + ' %"></span>';
+  });
+  const a = R[0], b = R[1];
+  $('barTxt').innerHTML =
+    'Rotor 1: engranaje ' + nf(a.gear.I / a.I * 100, 1) + ' % · eje ' + nf(a.shaft.I / a.I * 100, 2) + ' % · rodamientos ' + nf(a.bearing.I / a.I * 100, 2) + ' %<br>' +
+    'Rotor 2: engranaje ' + nf(b.gear.I / b.I * 100, 1) + ' % · eje ' + nf(b.shaft.I / b.I * 100, 2) + ' % · rodamientos ' + nf(b.bearing.I / b.I * 100, 2) + ' %<br>' +
+    'El <i>I</i> crece con <i>R</i>², por eso el engranaje domina.';
+}
+
+function renderParts() {
+  const groups = [1, 2].map(function (n) {
+    const btns = PARTS.filter(function (p) { return p.rotor === n; }).map(function (p) {
+      return '<button class="chip" type="button" data-part="' + p.id + '" aria-pressed="' + (UI.selected === p.id) + '">' + esc(p.name) + '</button>';
+    }).join('');
+    return '<div class="part-group r' + n + '"><h4>Conjunto rotante ' + n + ' <span class="mono" style="color:var(--ink-soft);font-weight:400">· I = ' + mmI(Model.rotors[n - 1].I) + ' kg·mm²</span></h4><div class="row">' + btns + '</div></div>';
+  });
+  $('parts').innerHTML = groups.join('');
+}
+
+function renderDetail() {
+  const el = $('detail'), id = UI.selected;
+  if (!id) { el.innerHTML = '<span class="hint">Elegí una pieza de la lista o hacé clic sobre ella en la escena.</span>'; return; }
+  const p = PARTS.filter(function (x) { return x.id === id; })[0];
+  if (!p) { el.innerHTML = ''; return; }
+  const r = Model.rotors[p.rotor - 1], G = Model.G;
+  let sub = '', rows = [], caveat = '', link = '';
+  if (p.kind === 'shaft') {
+    const s = r.shaft;
+    sub = 'Acero al carbono · cilindro sólido · δ = 7850 kg/m³';
+    rows = [['Diámetro', nf(s.R * 2000, 0) + ' mm'], ['Largo', nf(s.L * 1000, 0) + ' mm'], ['Masa  M = δ·π·R²·L', nf(s.M, 3) + ' kg'], ['I = ½·M·R²', mmI(s.I) + ' kg·mm²'], ['% del I del rotor', nf(s.I / r.I * 100, 2) + ' %']];
+    link = 'c';
+  } else if (p.kind === 'gear') {
+    const g = r.gear;
+    sub = 'Aluminio · cilindro anular liso · δ = 2708 kg/m³';
+    rows = [['Diámetro exterior', nf(g.Rext * 2000, 0) + ' mm'], ['Radio interior (= radio del eje)', nf(g.Rint * 1000, 1) + ' mm'], ['Ancho de cara', nf(g.b * 1000, 0) + ' mm'], ['Masa  M = δ·π·(Rₑ²−Rᵢ²)·b', nf(g.M, 3) + ' kg'], ['I = ½·M·(Rₑ²+Rᵢ²)', mmI(g.I) + ' kg·mm²'], ['% del I del rotor', nf(g.I / r.I * 100, 1) + ' %']];
+    link = 'b';
+  } else {
+    const b = r.bearing, d = b.data;
+    sub = 'SKF ' + b.des + ' · acero · 2 por eje · masa de catálogo';
+    rows = [['d × D × B', d.d + ' × ' + d.D + ' × ' + d.B + ' mm'], ['Masa por rodamiento', nf(b.m, 3) + ' kg'], ['I por rodamiento', mmI(b.I1) + ' kg·mm²'], ['I de los dos', mmI(b.I) + ' kg·mm²'], ['% del I del rotor', nf(b.I / r.I * 100, 2) + ' %']];
+    caveat = 'En un rodamiento real solo gira con el eje el aro interior (y parte de las bolas); el aro exterior queda fijo a la carcasa. Modelarlo como cilindro anular completo girando da una <strong>cota superior</strong> de su <i>I</i>, con aporte pequeño al del conjunto.';
+    link = 'b';
+  }
+  el.innerHTML =
+    '<h3 style="color:var(--r' + p.rotor + ')">' + esc(p.name) + '</h3><div class="sub">' + sub + ' · rotor ' + p.rotor + '</div>' +
+    '<dl>' + rows.map(function (x) { return '<dt>' + x[0] + '</dt><dd>' + x[1] + '</dd>'; }).join('') + '</dl>' +
+    (caveat ? '<div class="caveat">' + caveat + '</div>' : '') +
+    '<div style="margin-top:10px"><a href="#card-' + link + '" data-goto="card-' + link + '">Ver fórmula en la sección 03 →</a></div>';
+}
+
+function selectPart(id) {
+  UI.selected = (UI.selected === id) ? null : id;
+  renderParts(); renderDetail();
+  if (sceneApi) sceneApi.highlight(UI.selected);
+}
+function selectGroup(ids) { UI.selected = ids[0]; renderParts(); renderDetail(); if (sceneApi) sceneApi.highlight(ids); }
+
+/* ============================================================
+   CONTROLES
+   ============================================================ */
+function bindControls() {
+  function segBind(segId, attr, cb) {
+    $(segId).addEventListener('click', function (e) {
+      const b = e.target.closest('button'); if (!b) return;
+      Array.prototype.forEach.call($(segId).children, function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      cb(b.getAttribute(attr));
+    });
+  }
+  segBind('segView', 'data-v', function (v) { UI.view = v; if (sceneApi) sceneApi.setView(v); });
+  segBind('segMode', 'data-m', function (m) { UI.mode = m; if (sceneApi) sceneApi.setMode(m); });
+  function chip(id, key, cb) {
+    $(id).addEventListener('click', function () { UI[key] = !UI[key]; $(id).setAttribute('aria-pressed', UI[key]); if (cb) cb(); });
+  }
+  chip('tgLabels', 'labels', function () { if (sceneApi) sceneApi.applyToggles(); });
+  chip('tgParts', 'partLabels', function () { if (sceneApi) sceneApi.applyToggles(); });
+  chip('tgL', 'showL', function () { if (sceneApi) sceneApi.applyToggles(); });
+  chip('tgF', 'showF', function () { if (sceneApi) sceneApi.applyToggles(); });
+  $('rngN').addEventListener('input', function (e) { UI.n1 = +e.target.value; $('outN').textContent = UI.n1 + ' RPM'; renderLive(); });
+  $('btnN0').addEventListener('click', function () { UI.n1 = 2800; $('rngN').value = 2800; $('outN').textContent = '2800 RPM'; renderLive(); });
+  $('rngX').addEventListener('input', function (e) { UI.explode = +e.target.value / 100; $('outX').textContent = e.target.value + ' %'; });
+  $('btnPlay').addEventListener('click', function () { UI.playing = !UI.playing; $('btnPlay').textContent = UI.playing ? 'Pausar' : 'Reanudar'; });
+  $('selTime').addEventListener('change', function (e) {
+    UI.timeScale = +e.target.value;
+    $('badgeSpeed').textContent = 'Cámara lenta ×1/' + Math.round(1 / UI.timeScale);
+  });
+  $('btnP6').addEventListener('click', function () { UI.p6 = !UI.p6; renderLive(); });
+  $('parts').addEventListener('click', function (e) { const b = e.target.closest('[data-part]'); if (b) selectPart(b.getAttribute('data-part')); });
+  document.addEventListener('click', function (e) {
+    const a = e.target.closest('[data-goto]'); if (!a) return;
+    e.preventDefault(); const t = $(a.getAttribute('data-goto')); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+  document.addEventListener('click', function (e) {
+    const a = e.target.closest('[data-select]'); if (!a) return;
+    e.preventDefault();
+    const ids = a.getAttribute('data-select').split(',');
+    selectGroup(ids);
+    $('sistema').scrollIntoView({ behavior: 'smooth' });
+  });
+}
+
+function syncControlsFromState() {
+  $('rngN').value = UI.n1; $('outN').textContent = UI.n1 + ' RPM';
+  $('rngX').value = Math.round(UI.explode * 100); $('outX').textContent = Math.round(UI.explode * 100) + ' %';
+  Array.prototype.forEach.call($('segView').children, function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-v') === UI.view); });
+  Array.prototype.forEach.call($('segMode').children, function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-m') === UI.mode); });
+  $('tgLabels').setAttribute('aria-pressed', UI.labels); $('tgParts').setAttribute('aria-pressed', UI.partLabels); $('tgL').setAttribute('aria-pressed', UI.showL); $('tgF').setAttribute('aria-pressed', UI.showF);
+  $('btnPlay').textContent = UI.playing ? 'Pausar' : 'Reanudar';
+}
+
+/* ============================================================
+   ESCENA 3D (Three.js) — unidad de escena = 100 mm
+   ============================================================ */
+function buildScene() {
+  const wrap = $('gl'), labelsEl = $('labels');
+  const cssv = function (n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); };
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 200);
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  wrap.appendChild(renderer.domElement);
+
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x8899aa, 0.85));
+  const sun = new THREE.DirectionalLight(0xffffff, 0.85); sun.position.set(5, 8, 9); scene.add(sun);
+  const fill = new THREE.DirectionalLight(0xffffff, 0.35); fill.position.set(-6, -3, -5); scene.add(fill);
+
+  const FLOOR = -3.0;
+  const pos1 = new THREE.Vector3(0, Model.G.R1 * 10, 0);     // eje 1 sobre el punto de contacto (radio del engranaje 1)
+  const pos2 = new THREE.Vector3(0, -Model.G.R2 * 10, 0);    // eje 2 debajo (radio del engranaje 2)
+  const ZB = 1.0, EXP_Y = 0.9, EXP_Z = 0.9;
+  const COL1 = new THREE.Color(0x2f7fc4), COL2 = new THREE.Color(0xd9822b);
+  const rotorCols = [COL1, COL2];
+
+  // ---------- geometrías ----------
+  function annulus(rin, rout, w, seg) {
+    const sh = new THREE.Shape(); sh.absarc(0, 0, rout, 0, Math.PI * 2, false);
+    if (rin > 0) { const h = new THREE.Path(); h.absarc(0, 0, rin, 0, Math.PI * 2, true); sh.holes.push(h); }
+    const g = new THREE.ExtrudeGeometry(sh, { depth: w, bevelEnabled: false, curveSegments: seg || 48 });
+    g.translate(0, 0, -w / 2); return g;
+  }
+  function gearGeom(Rp, N, holeR, w) {
+    const add = 0.05, ded = 0.06, Ro = Rp + add, Rr = Rp - ded, p = 2 * Math.PI / N;
+    const P = function (r, a) { return [r * Math.cos(a), r * Math.sin(a)]; };
+    const pts = [];
+    for (let i = 0; i < N; i++) {
+      const c = i * p;
+      pts.push(P(Rr, c - 0.30 * p), P(Ro, c - 0.14 * p), P(Ro, c + 0.14 * p), P(Rr, c + 0.30 * p), P(Rr, c + 0.5 * p));
+    }
+    const sh = new THREE.Shape(); sh.moveTo(pts[0][0], pts[0][1]);
+    for (let k = 1; k < pts.length; k++) sh.lineTo(pts[k][0], pts[k][1]);
+    const h = new THREE.Path(); h.absarc(0, 0, holeR, 0, Math.PI * 2, true); sh.holes.push(h);
+    const g = new THREE.ExtrudeGeometry(sh, { depth: w, bevelEnabled: false });
+    g.translate(0, 0, -w / 2); return g;
+  }
+  function cylZ(r, len, seg) { const g = new THREE.CylinderGeometry(r, r, len, seg || 40); g.rotateX(Math.PI / 2); return g; }
+
+  // ---------- materiales por pieza (para resaltar) ----------
+  const partMats = {}, partMeshes = {};
+  function mat(part, hex, metal, rough) {
+    const m = new THREE.MeshStandardMaterial({ color: hex, metalness: metal === undefined ? 0.35 : metal, roughness: rough === undefined ? 0.5 : rough });
+    m.userData.baseEmissive = 0;
+    (partMats[part] = partMats[part] || []).push(m); return m;
+  }
+  function mesh(part, geom, m) {
+    const me = new THREE.Mesh(geom, m); me.userData.part = part;
+    (partMeshes[part] = partMeshes[part] || []).push(me); return me;
+  }
+  const markMat = function (i) { return new THREE.MeshBasicMaterial({ color: rotorCols[i] }); };
+  const gearPhase = [-Math.PI / 2, Math.PI / 2 + Math.PI / 20];   // dientes que engranan en el punto de contacto (N = 25 y 20)
+  const NT = [25, 20];
+
+  // ---------- rotores ----------
+  const rotors = [0, 1].map(function (i) {
+    const R = Model.rotors[i], part = String(i + 1);
+    const sr = R.shaft.R * 10;                             // m → u de escena (1 u = 100 mm)
+    const gRe = R.gear.Rext * 10, gRi = R.gear.Rint * 10, gW = R.gear.b * 10;
+    const len = R.shaft.L * 10;
+    const root = new THREE.Group();
+    const spin = new THREE.Group(); root.add(spin);
+    const fixed = new THREE.Group(); root.add(fixed);
+    const sign = i === 0 ? 1 : -1;
+
+    // eje
+    const shaftM = mat('shaft' + part, 0x8797a8, 0.5, 0.4);
+    spin.add(mesh('shaft' + part, cylZ(sr, len, 48), shaftM));
+    const key = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.06, len * 0.97), markMat(i)); key.position.set(sr, 0, 0); spin.add(key);
+
+    // engranaje: ilustrativo (dientes) y modelo (cilindro anular liso)
+    const gearM = mat('gear' + part, 0xd4dbe3, 0.5, 0.38);
+    const gearReal = mesh('gear' + part, gearGeom(gRe, NT[i], gRi, gW), gearM); gearReal.rotation.z = gearPhase[i];
+    const gearCalc = mesh('gear' + part, annulus(gRi, gRe, gW, 96), gearM);
+    spin.add(gearReal, gearCalc);
+    const spoke = new THREE.Mesh(new THREE.BoxGeometry(gRe - gRi - 0.35, 0.07, 0.012), markMat(i));
+    spoke.position.set((gRe + gRi) / 2 - 0.02, 0, gW / 2 + 0.008); spin.add(spoke);
+
+    // rodamientos (2 por eje)
+    const br = R.bearing.data, bB = br.B * 0.01, bd = br.d * 0.01 / 2 * 1, bD = br.D * 0.01 / 2;
+    const dBall = 0.29 * (br.D - br.d) * 0.01, rBall = dBall / 2, rPitch = (br.D + br.d) * 0.01 / 4;
+    const rInOut = rPitch - rBall * 0.8, rOutIn = rPitch + rBall * 0.8;
+    const innerM = mat('brg' + part, 0x5b6b7c, 0.55, 0.35);
+    const outerM = mat('brg' + part, 0x9aa8b7, 0.55, 0.35);
+    const ballM = mat('brg' + part, 0xe8edf2, 0.7, 0.2);
+    const calcM = mat('brg' + part, 0x62778c, 0.45, 0.45);
+    const cageRatio = 0.5 * (1 - dBall / (2 * rPitch));
+    const NB = 9, ballGeom = new THREE.SphereGeometry(rBall, 16, 12);
+    const bearings = [1, -1].map(function (side) {
+      const inner = new THREE.Group(), outer = new THREE.Group(), cage = new THREE.Group();
+      inner.add(mesh('brg' + part, annulus(bd, rInOut, bB, 40), innerM));
+      const mk = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.05, bB * 1.02), markMat(i)); mk.position.set((bd + rInOut) / 2, 0, 0); inner.add(mk);
+      const calc = mesh('brg' + part, annulus(bd, bD, bB, 48), calcM); inner.add(calc);
+      outer.add(mesh('brg' + part, annulus(rOutIn, bD, bB, 48), outerM));
+      for (let k = 0; k < NB; k++) {
+        const a = k / NB * Math.PI * 2, b = mesh('brg' + part, ballGeom, ballM);
+        b.position.set(rPitch * Math.cos(a), rPitch * Math.sin(a), 0); cage.add(b);
+      }
+      spin.add(inner); fixed.add(outer); root.add(cage);
+      return { side: side, inner: inner, outer: outer, cage: cage, calc: calc, mk: mk };
+    });
+
+    // anclas de etiquetas (no giran)
+    const mkA = function (x, y, z) { const o = new THREE.Object3D(); o.position.set(x, y, z); root.add(o); return o; };
+    const anchors = {
+      top: mkA(0, gRe + 0.12, 0),               // sobre el engranaje
+      bottom: mkA(0, -gRe - 0.12, 0),           // bajo el engranaje
+      right: mkA(gRe + 0.03, 0, gW / 2),        // borde derecho del engranaje
+      shaftEnd: mkA(0, sr, len / 2),            // punta del eje (lado +z)
+      brg: mkA(0, -bD, ZB)                      // rodamiento del lado +z (borde inferior)
+    };
+    return { root: root, spin: spin, fixed: fixed, bearings: bearings, gearReal: gearReal, gearCalc: gearCalc, spoke: spoke,
+             cageRatio: cageRatio, sign: sign, anchors: anchors, gRe: gRe, len: len, angle: 0, cageAngle: 0, y0: i === 0 ? pos1.y : pos2.y };
+  });
+  rotors.forEach(function (r) { scene.add(r.root); });
+
+  // ---------- piso, origen y alturas ----------
+  const grid = new THREE.GridHelper(14, 14, 0x000000, 0x000000); grid.position.y = FLOOR; scene.add(grid);
+  const floorMat = grid.material; floorMat.transparent = true; floorMat.opacity = 0.55;
+  const origin = new THREE.Group(); origin.position.set(0, FLOOR, 0); scene.add(origin);
+  [[1, 0, 0, 0xd0453a], [0, 1, 0, 0x3aa35b], [0, 0, 1, 0x3a78d0]].forEach(function (a) {
+    const g = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), new THREE.Vector3(a[0] * 0.7, a[1] * 0.7, a[2] * 0.7)]);
+    origin.add(new THREE.Line(g, new THREE.LineBasicMaterial({ color: a[3] })));
+  });
+  const hLines = [0, 1].map(function (i) {
+    const g = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 0, 0), new THREE.Vector3(0, 1, 0)]);
+    const l = new THREE.Line(g, new THREE.LineBasicMaterial({ color: 0x7d8ea0, transparent: true, opacity: 0.7 }));
+    scene.add(l); return l;
+  });
+
+  // ---------- flechas: F, L1, L2, Ltotal ----------
+  function makeArrow(hex) {
+    const g = new THREE.Group(), m = new THREE.MeshBasicMaterial({ color: hex });
+    const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 1, 12), m);
+    const head = new THREE.Mesh(new THREE.ConeGeometry(0.13, 0.34, 18), m);
+    g.add(shaft, head); g.userData = { shaft: shaft, head: head }; return g;
+  }
+  function setArrow(g, origin, dir, len) {
+    const hl = Math.min(0.34, len * 0.45), sl = Math.max(len - hl, 0.001), u = g.userData;
+    g.position.copy(origin); g.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir.clone().normalize());
+    u.shaft.scale.y = sl; u.shaft.position.y = sl / 2;
+    u.head.scale.y = hl / 0.34; u.head.position.y = sl + hl / 2;
+  }
+  const aF = makeArrow(0xc0392b), aL1 = makeArrow(0x2f7fc4), aL2 = makeArrow(0xd9822b), aLt = makeArrow(0x8a4fd0);
+  [aF, aL1, aL2, aLt].forEach(function (a) { scene.add(a); });
+
+  // ---------- etiquetas HTML ancladas a puntos 3D ----------
+  // a = [ax, ay]: fracción de la etiqueta que queda sobre el punto (0 = borde izq./sup., 1 = borde der./inf.)
+  const labelDefs = [];
+  function addLabel(html, cls, fn, a, grp) {
+    const el = document.createElement('div'); el.className = 'lbl ' + cls; el.innerHTML = html;
+    labelsEl.appendChild(el); labelDefs.push({ el: el, fn: fn, a: a || [0, 0.5], grp: grp || 'main' }); return el;
+  }
+  const wpos = function (o) { return function (v) { return o.getWorldPosition(v); }; };
+  const lTag1 = addLabel('Rotor 1', 'r1 tag', wpos(rotors[0].anchors.top), [0.5, 1]);
+  const lTag2 = addLabel('Rotor 2', 'r2 tag', wpos(rotors[1].anchors.bottom), [0.5, 0]);
+  addLabel('Engranaje 1 · Ø250 · aluminio', 'r1', wpos(rotors[0].anchors.right), [0, 0.5], 'parts');
+  addLabel('Engranaje 2 · Ø200 · aluminio', 'r2', wpos(rotors[1].anchors.right), [0, 0.5], 'parts');
+  addLabel('Eje 1 · Ø25 · acero', 'r1', wpos(rotors[0].anchors.shaftEnd), [1, 1], 'parts');
+  addLabel('Eje 2 · Ø35 · acero', 'r2', wpos(rotors[1].anchors.shaftEnd), [1, 1], 'parts');
+  addLabel('2 × 6205', 'r1', function (v) { return rotors[0].anchors.brg.getWorldPosition(v).add(new THREE.Vector3(0, 0, EXP_Z * UI.explode)); }, [1, 0], 'parts');
+  addLabel('2 × 6207', 'r2', function (v) { return rotors[1].anchors.brg.getWorldPosition(v).add(new THREE.Vector3(0, 0, EXP_Z * UI.explode)); }, [1, 0], 'parts');
+  const lF = addLabel('F = 200 N', 'f', function (v) { return v.set(1.18, 0.1, 0); }, [0, 0.5]);
+  addLabel('O · base fija (piso)', 'ref', function (v) { return v.set(-0.1, FLOOR, 0); }, [1, 0.5]);
+  addLabel('H₁ = 1500 mm (cota cortada, fuera de escala)', 'ref', function (v) { return v.set(0, (rotors[0].root.position.y + FLOOR) / 2 + 0.55, 0); }, [1, 0.5]);
+  addLabel('H₂ (sin valor en el enunciado)', 'ref', function (v) { return v.set(0.4, FLOOR + 0.35, 0); }, [0, 0.5]);
+  const lastLen = [1, 1, 1];      // largo actual de las flechas L₁, L₂ y L total (unidades de escena)
+  const lLt = addLabel('L<sub>total</sub>', 'lt', function (v) { return v.set(0, 0, 1.6 + lastLen[2] + 0.1); }, [1, 0.5]);
+  const lL1 = addLabel('L₁', 'r1', function (v) { return v.set(0, rotors[0].root.position.y, 1.55 + lastLen[0] + 0.1); }, [1, 0.5]);
+  const lL2 = addLabel('L₂', 'r2', function (v) { return v.set(0, rotors[1].root.position.y, -(1.55 + lastLen[1] + 0.1)); }, [0, 0.5]);
+  const labelGroupsL = [lLt, lL1, lL2];
+
+  // ---------- cámara (órbita propia, como en el cubo de AyGA) ----------
+  const target = new THREE.Vector3(0, -0.15, 0);
+  const VIEWS = { iso: { th: 0.75, ph: 1.12, r: 11.2 }, front: { th: 0, ph: Math.PI / 2, r: 9.6 }, side: { th: Math.PI / 2, ph: Math.PI / 2, r: 10.6 } };
+  const cam = { th: VIEWS.iso.th, ph: VIEWS.iso.ph, r: VIEWS.iso.r };
+  let tgt = { th: cam.th, ph: cam.ph, r: cam.r };
+  function placeCam() {
+    camera.position.set(target.x + cam.r * Math.sin(cam.ph) * Math.sin(cam.th), target.y + cam.r * Math.cos(cam.ph), target.z + cam.r * Math.sin(cam.ph) * Math.cos(cam.th));
+    camera.lookAt(target);
+  }
+  function setView(v) { tgt = { th: VIEWS[v].th, ph: VIEWS[v].ph, r: VIEWS[v].r }; }
+  const ptrs = new Map(); let moved = 0, downAt = null, pinch0 = 0;
+  const el = renderer.domElement;
+  el.addEventListener('pointerdown', function (e) {
+    el.setPointerCapture(e.pointerId); ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    moved = 0; downAt = { x: e.clientX, y: e.clientY }; wrap.classList.add('dragging');
+    if (ptrs.size === 2) { const a = Array.from(ptrs.values()); pinch0 = Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y); }
+  });
+  el.addEventListener('pointermove', function (e) {
+    const p = ptrs.get(e.pointerId); if (!p) return;
+    if (ptrs.size === 1) {
+      const dx = e.clientX - p.x, dy = e.clientY - p.y; moved += Math.abs(dx) + Math.abs(dy);
+      tgt.th -= dx * 0.007; tgt.ph = Math.min(Math.max(tgt.ph - dy * 0.007, 0.15), Math.PI - 0.15);
+      cam.th = tgt.th; cam.ph = tgt.ph;
+    } else if (ptrs.size === 2) {
+      ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      const a = Array.from(ptrs.values()), d = Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y);
+      if (pinch0) { tgt.r = Math.min(Math.max(tgt.r * pinch0 / d, 6), 30); cam.r = tgt.r; } pinch0 = d; moved += 10;
+    }
+    if (ptrs.size === 1) ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  });
+  const up = function (e) {
+    if (ptrs.has(e.pointerId)) {
+      ptrs.delete(e.pointerId); wrap.classList.remove('dragging');
+      if (moved < 5 && downAt && ptrs.size === 0) pick(e.clientX, e.clientY);
+    }
+  };
+  el.addEventListener('pointerup', up); el.addEventListener('pointercancel', function (e) { ptrs.delete(e.pointerId); wrap.classList.remove('dragging'); });
+  el.addEventListener('wheel', function (e) { e.preventDefault(); tgt.r = Math.min(Math.max(tgt.r * (1 + e.deltaY * 0.0012), 6), 30); cam.r = tgt.r; }, { passive: false });
+
+  // ---------- selección ----------
+  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+  function visibleDeep(o) { for (; o; o = o.parent) if (!o.visible) return false; return true; }
+  function pick(cx, cy) {
+    const r = el.getBoundingClientRect(); ndc.set(((cx - r.left) / r.width) * 2 - 1, -((cy - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(ndc, camera);
+    const list = []; Object.keys(partMeshes).forEach(function (k) { partMeshes[k].forEach(function (m) { if (visibleDeep(m)) list.push(m); }); });
+    const hit = ray.intersectObjects(list, false)[0];
+    if (hit) selectPart(hit.object.userData.part);
+  }
+  function highlight(ids) {
+    const set = ids ? (Array.isArray(ids) ? ids : [ids]) : [];
+    Object.keys(partMats).forEach(function (k) {
+      const on = set.indexOf(k) >= 0;
+      partMats[k].forEach(function (m) { m.emissive.setHex(on ? 0x2a5f92 : 0x000000); m.emissiveIntensity = on ? 1 : 0; });
+    });
+  }
+
+  // ---------- modo, toggles y tema ----------
+  function setMode(m) {
+    const real = m === 'real';
+    rotors.forEach(function (r) {
+      r.gearReal.visible = real; r.gearCalc.visible = !real;
+      r.bearings.forEach(function (b) {
+        b.calc.visible = !real;               // b.mk (marca de giro) queda visible en ambos modos
+        b.outer.visible = real; b.cage.visible = real;
+        b.inner.children.forEach(function (c) { if (c !== b.calc && c !== b.mk) c.visible = real; });
+      });
+    });
+  }
+  function applyToggles() {
+    labelDefs.forEach(function (d) {
+      const isL = labelGroupsL.indexOf(d.el) >= 0, isF = d.el === lF;
+      d.on = (d.grp === 'parts' ? UI.partLabels : UI.labels) && (!isL || UI.showL) && (!isF || UI.showF);
+      d.el.style.display = d.on ? '' : 'none';
+    });
+    aF.visible = UI.showF; aL1.visible = aL2.visible = aLt.visible = UI.showL;
+  }
+  function applyTheme() {
+    const bg = cssv('--scene-bg') || '#e6ecf3', gc = cssv('--grid') || '#b9c4d0';
+    scene.background = new THREE.Color(bg);
+    const c = new THREE.Color(gc); const colors = grid.geometry.attributes.color;
+    for (let i = 0; i < colors.count; i++) colors.setXYZ(i, c.r, c.g, c.b); colors.needsUpdate = true;
+  }
+  new MutationObserver(applyTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  if (window.matchMedia) matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
+
+  // ---------- tamaño ----------
+  function resize() {
+    const w = wrap.clientWidth, h = wrap.clientHeight; if (!w || !h) return;
+    renderer.setSize(w, h, false); camera.aspect = w / h;
+    // en pantallas angostas se aleja un poco para que entre el conjunto
+    camera.fov = w / h < 1.1 ? 46 : 38; camera.updateProjectionMatrix();
+  }
+  new ResizeObserver(resize).observe(wrap); resize();
+
+  // ---------- animación ----------
+  const v3 = new THREE.Vector3(), Z = new THREE.Vector3(0, 0, 1), NZ = new THREE.Vector3(0, 0, -1), XX = new THREE.Vector3(1, 0, 0);
+  let mult = 1, last = performance.now(), ex = UI.explode;
+  function refreshLabels(s) {
+    lTag1.innerHTML = 'Rotor 1 · ' + nf(s.n[0], 0) + ' RPM';
+    lTag2.innerHTML = 'Rotor 2 · ' + nf(s.n[1], 0) + ' RPM';
+    lL1.innerHTML = 'L₁ = ' + nf(s.L[0], 2); lL2.innerHTML = 'L₂ = ' + nf(s.L[1], 2);
+    lLt.innerHTML = 'L<sub>total</sub> = ' + nf(s.Ltotal, 2);
+  }
+  function frame(now) {
+    requestAnimationFrame(frame);
+    const dt = Math.min((now - last) / 1000, 0.05); last = now;
+    // cámara suave hacia el objetivo de la vista
+    cam.th += (tgt.th - cam.th) * Math.min(1, dt * 6); cam.ph += (tgt.ph - cam.ph) * Math.min(1, dt * 6); cam.r += (tgt.r - cam.r) * Math.min(1, dt * 6);
+    placeCam();
+    // explosión y posiciones
+    ex += (UI.explode - ex) * Math.min(1, dt * 8);
+    rotors[0].root.position.set(0, pos1.y + EXP_Y * ex, 0); rotors[1].root.position.set(0, pos2.y - EXP_Y * ex, 0);
+    rotors.forEach(function (r) {
+      r.bearings.forEach(function (b) {
+        const z = b.side * (ZB + EXP_Z * ex); b.inner.position.z = z; b.outer.position.z = z; b.cage.position.z = z;
+      });
+    });
+    // cinemática: ω1 y ω2 = ω1·R1/R2 en sentidos opuestos; Punto 6 duplica ω con suavizado
+    mult += ((UI.p6 ? 2 : 1) - mult) * Math.min(1, dt / 0.35);
+    if (UI.playing) {
+      const w1 = 2 * Math.PI * UI.n1 / 60 * mult, w2 = w1 * Model.G.R1 / Model.G.R2, k = UI.timeScale;
+      rotors[0].angle += w1 * dt * k; rotors[1].angle += w2 * dt * k;
+    }
+    rotors.forEach(function (r) {
+      r.spin.rotation.z = r.sign * r.angle;
+      r.bearings.forEach(function (b) { b.cage.rotation.z = r.sign * r.angle * r.cageRatio; });
+    });
+    // flechas
+    const s = currentState(), y1 = rotors[0].root.position.y, y2 = rotors[1].root.position.y;
+    if (UI.showF) setArrow(aF, v3.set(0, 0, 0.0), XX, 1.0);
+    if (UI.showL) {
+      const k = 0.26, l1 = Math.min(5, s.L[0] * k), l2 = Math.min(5, s.L[1] * k), lt = Math.min(5, Math.abs(s.Ltotal) * k);
+      lastLen[0] = l1; lastLen[1] = l2; lastLen[2] = lt;
+      setArrow(aL1, new THREE.Vector3(0, y1, 1.55), Z, Math.max(l1, 0.02));
+      setArrow(aL2, new THREE.Vector3(0, y2, -1.55), NZ, Math.max(l2, 0.02));
+      setArrow(aLt, new THREE.Vector3(0, 0, 1.6), Z, Math.max(lt, 0.02));
+    }
+    // líneas de altura
+    hLines[0].position.set(0, FLOOR, 0); hLines[0].scale.y = y1 - FLOOR;
+    hLines[1].position.set(0.35, FLOOR, 0); hLines[1].scale.y = y2 - FLOOR;
+    // etiquetas
+    const cw = renderer.domElement.clientWidth, ch = renderer.domElement.clientHeight;
+    labelDefs.forEach(function (d) {
+      if (!d.on) return;
+      d.fn(v3); v3.project(camera);
+      if (v3.z > 1) { d.el.style.visibility = 'hidden'; return; }
+      d.el.style.visibility = 'visible';
+      d.el.style.transform = 'translate(' + Math.round((v3.x * 0.5 + 0.5) * cw + (d.a[0] === 0 ? 6 : d.a[0] === 1 ? -6 : 0)) + 'px,' +
+        Math.round((-v3.y * 0.5 + 0.5) * ch + (d.a[1] === 0 ? 6 : d.a[1] === 1 ? -6 : 0)) + 'px) translate(' + (-d.a[0] * 100) + '%,' + (-d.a[1] * 100) + '%)';
+    });
+    renderer.render(scene, camera);
+  }
+  applyTheme(); setMode(UI.mode); applyToggles(); placeCam(); setView(UI.view); cam.th = tgt.th; cam.ph = tgt.ph; cam.r = tgt.r;
+  requestAnimationFrame(frame);
+
+  return { setView: setView, setMode: setMode, highlight: highlight, applyToggles: applyToggles, refreshLabels: refreshLabels };
+}
+
+/* ============================================================
+   02 RODAMIENTOS: tabla, filtro y esquema acotado
+   ============================================================ */
+const TP_ROWS = { '6205': 1, '6207': 2 };
+let brgSelected = '6205';
+
+function cell(v, cls, unclear) {
+  if (unclear) return '<td><span class="unclear" title="Dato no legible en la copia original">—</span></td>';
+  return '<td' + (cls ? ' class="' + cls + '"' : '') + '>' + v + '</td>';
+}
+function renderBearingTable() {
+  const q = $('brgFilter').value.trim().toLowerCase(), only = $('brgOnly').checked;
+  const rows = BEARINGS.filter(function (b) {
+    if (only && !TP_ROWS[b.des]) return false;
+    if (!q) return true;
+    return (b.des + ' ' + b.d + ' ' + b.D + ' ' + b.B + ' ' + b.size).toLowerCase().indexOf(q) >= 0;
+  });
+  $('brgBody').innerHTML = rows.map(function (b) {
+    const tp = TP_ROWS[b.des], f = tp ? ' f' + tp : '', sel = b.des === brgSelected ? ' sel' : '';
+    const yn = function (x) { return x ? '<td class="yes">✓</td>' : '<td class="no">–</td>'; };
+    return '<tr data-des="' + b.des + '" class="' + (f + sel).trim() + '">' +
+      '<td>' + b.size + '</td><td>' + b.des + '</td>' +
+      '<td class="key">' + b.d + '</td><td>' + b.D + '</td><td>' + b.B + '</td>' +
+      '<td>' + (b.d1 === null ? '—' : nf(b.d1, 1)) + '</td><td>' + nf(b.r, b.r % 1 ? 1 : 0) + '</td>' +
+      (b.C === null ? cell('', '', true) : '<td>' + nf(b.C, 0) + '</td>') +
+      (b.C0 === null ? cell('', '', true) : '<td>' + nf(b.C0, 0) + '</td>') +
+      '<td>' + nf(b.nmax, 0) + '</td>' +
+      '<td class="key' + (b.mApprox ? ' approx' : '') + '">' + (b.mApprox ? '≈' : '') + nf(b.m, b.m < 1 ? 3 : 2) + '</td>' +
+      yn(b.zz) + yn(b.rs) + yn(b.nz) + '</tr>';
+  }).join('') || '<tr><td colspan="14" style="text-align:center;padding:18px;color:var(--ink-soft)">Sin resultados para ese filtro.</td></tr>';
+  $('brgCount').textContent = rows.length + ' de ' + BEARINGS.length + ' tamaños';
+}
+
+function renderBearingDiagram() {
+  const b = Model.byDes(brgSelected);
+  const cy = 108, RD = 88, k = RD / (b.D / 2);
+  const rd = b.d / 2 * k;
+  const dBall = 0.29 * (b.D - b.d), rBall = dBall / 2 * k, rP = (b.D + b.d) / 4 * k;
+  const rIO = rP - rBall * 0.8, rOI = rP + rBall * 0.8;
+  const C = { out: 'var(--r2)', inn: 'var(--r1)', ink: 'var(--ink)', soft: 'var(--ink-soft)' };
+  const fx = 104;
+  let s = '';
+  // vista frontal
+  s += '<text x="' + fx + '" y="14" text-anchor="middle" font-size="9" fill="' + C.soft + '" font-family="var(--mono)">VISTA FRONTAL</text>';
+  s += '<circle cx="' + fx + '" cy="' + cy + '" r="' + RD + '" fill="var(--surface-alt)" stroke="' + C.out + '" stroke-width="2.2"/>';
+  s += '<circle cx="' + fx + '" cy="' + cy + '" r="' + rOI + '" fill="var(--surface)" stroke="' + C.soft + '" stroke-width="1"/>';
+  s += '<circle cx="' + fx + '" cy="' + cy + '" r="' + rIO + '" fill="var(--r1-bg)" stroke="' + C.inn + '" stroke-width="1"/>';
+  for (let i = 0; i < 9; i++) { const a = i / 9 * Math.PI * 2 - Math.PI / 2; s += '<circle cx="' + (fx + rP * Math.cos(a)).toFixed(1) + '" cy="' + (cy + rP * Math.sin(a)).toFixed(1) + '" r="' + rBall.toFixed(1) + '" fill="var(--surface)" stroke="' + C.soft + '" stroke-width="1"/>'; }
+  s += '<circle cx="' + fx + '" cy="' + cy + '" r="' + rd + '" fill="var(--bg)" stroke="' + C.inn + '" stroke-width="2.2"/>';
+  s += '<line x1="' + fx + '" y1="' + cy + '" x2="' + (fx + RD * 0.7071) + '" y2="' + (cy - RD * 0.7071) + '" stroke="' + C.out + '" stroke-width="1.2" stroke-dasharray="3 2"/>';
+  s += '<text x="' + (fx + RD * 0.42) + '" y="' + (cy - RD * 0.62) + '" font-size="11" font-family="var(--mono)" fill="' + C.out + '" font-weight="600">D</text>';
+  s += '<line x1="' + fx + '" y1="' + cy + '" x2="' + (fx - rd * 0.7071) + '" y2="' + (cy + rd * 0.7071) + '" stroke="' + C.inn + '" stroke-width="1.2" stroke-dasharray="3 2"/>';
+  s += '<text x="' + (fx - rd * 0.95 - 8) + '" y="' + (cy + rd * 0.7 + 12) + '" font-size="11" font-family="var(--mono)" fill="' + C.inn + '" font-weight="600">d</text>';
+  s += '<text x="' + fx + '" y="' + (cy + 3) + '" text-anchor="middle" font-size="8" fill="' + C.soft + '" font-family="var(--mono)">eje</text>';
+  // corte (mitad superior e inferior)
+  const cx = 308, hw = Math.max(b.B * k / 2, 14);
+  s += '<text x="' + cx + '" y="14" text-anchor="middle" font-size="9" fill="' + C.soft + '" font-family="var(--mono)">CORTE POR EL EJE</text>';
+  s += '<line x1="' + (cx - hw - 22) + '" y1="' + cy + '" x2="' + (cx + hw + 22) + '" y2="' + cy + '" stroke="' + C.soft + '" stroke-width="1" stroke-dasharray="8 3 2 3"/>';
+  [-1, 1].forEach(function (sg) {
+    const yo = function (r) { return cy + sg * r; };
+    s += '<rect x="' + (cx - hw) + '" y="' + Math.min(yo(RD), yo(rOI)) + '" width="' + (2 * hw) + '" height="' + (RD - rOI) + '" fill="var(--r2-bg)" stroke="' + C.out + '" stroke-width="2"/>';
+    s += '<rect x="' + (cx - hw) + '" y="' + Math.min(yo(rIO), yo(rd)) + '" width="' + (2 * hw) + '" height="' + (rIO - rd) + '" fill="var(--r1-bg)" stroke="' + C.inn + '" stroke-width="2"/>';
+    s += '<circle cx="' + cx + '" cy="' + yo(rP) + '" r="' + rBall.toFixed(1) + '" fill="var(--surface)" stroke="' + C.soft + '" stroke-width="1.2"/>';
+  });
+  // cotas
+  const MK = {}; MK[C.out] = 'ahO'; MK[C.inn] = 'ahI'; MK[C.ink] = 'ahK';
+  const arrow = function (x1, y1, x2, y2, col) {
+    return '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="' + col + '" stroke-width="1.2" marker-start="url(#' + MK[col] + ')" marker-end="url(#' + MK[col] + ')"/>';
+  };
+  s += '<defs>' + [[C.out, 'ahO'], [C.inn, 'ahI'], [C.ink, 'ahK']].map(function (m) {
+    return '<marker id="' + m[1] + '" viewBox="0 0 8 8" refX="4" refY="4" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1 L8 4 L0 7 z" fill="' + m[0] + '"/></marker>';
+  }).join('') + '</defs>';
+  const xD = cx + hw + 40, xd = cx - hw - 40;
+  s += '<line x1="' + (cx + hw) + '" y1="' + (cy - RD) + '" x2="' + (xD + 6) + '" y2="' + (cy - RD) + '" stroke="' + C.out + '" stroke-width="0.8"/><line x1="' + (cx + hw) + '" y1="' + (cy + RD) + '" x2="' + (xD + 6) + '" y2="' + (cy + RD) + '" stroke="' + C.out + '" stroke-width="0.8"/>';
+  s += arrow(xD, cy - RD, xD, cy + RD, C.out) + '<text x="' + (xD + 6) + '" y="' + (cy + 4) + '" font-size="11" font-family="var(--mono)" font-weight="600" fill="' + C.out + '">D = ' + b.D + '</text>';
+  s += '<line x1="' + (cx - hw) + '" y1="' + (cy - rd) + '" x2="' + (xd - 6) + '" y2="' + (cy - rd) + '" stroke="' + C.inn + '" stroke-width="0.8"/><line x1="' + (cx - hw) + '" y1="' + (cy + rd) + '" x2="' + (xd - 6) + '" y2="' + (cy + rd) + '" stroke="' + C.inn + '" stroke-width="0.8"/>';
+  s += arrow(xd, cy - rd, xd, cy + rd, C.inn) + '<text x="' + (xd - 6) + '" y="' + (cy + 4) + '" text-anchor="end" font-size="11" font-family="var(--mono)" font-weight="600" fill="' + C.inn + '">d = ' + b.d + '</text>';
+  const yB = cy + RD + 20;
+  s += '<line x1="' + (cx - hw) + '" y1="' + (cy + RD) + '" x2="' + (cx - hw) + '" y2="' + (yB + 5) + '" stroke="' + C.ink + '" stroke-width="0.8"/><line x1="' + (cx + hw) + '" y1="' + (cy + RD) + '" x2="' + (cx + hw) + '" y2="' + (yB + 5) + '" stroke="' + C.ink + '" stroke-width="0.8"/>';
+  s += arrow(cx - hw, yB, cx + hw, yB, C.ink) + '<text x="' + cx + '" y="' + (yB + 13) + '" text-anchor="middle" font-size="11" font-family="var(--mono)" font-weight="600" fill="' + C.ink + '">B = ' + b.B + '</text>';
+  $('brgSvg').innerHTML = s;
+
+  $('brgTitle').textContent = 'SKF ' + b.des;
+  $('brgSub').textContent = 'Rodamiento rígido de una hilera de bolas · serie 62 · tamaño ' + b.size;
+  $('brgDims').innerHTML =
+    '<div><b style="color:var(--r1)">d</b><span>' + b.d + ' mm — diámetro interior (el que abraza al eje)</span></div>' +
+    '<div><b style="color:var(--r2)">D</b><span>' + b.D + ' mm — diámetro exterior del rodamiento</span></div>' +
+    '<div><b>B</b><span>' + b.B + ' mm — ancho axial (espesor)</span></div>' +
+    '<div><b>d₁</b><span>' + (b.d1 === null ? 'sin dato en la fuente' : nf(b.d1, 1) + ' mm — resalte del aro interior') + '</span></div>' +
+    '<div><b>Peso</b><span>' + (b.mApprox ? '≈' : '') + nf(b.m, b.m < 1 ? 3 : 2) + ' kg' + (b.mApprox ? ' <span class="approx">(verificar)</span>' : '') + '</span></div>';
+  const tp = TP_ROWS[b.des];
+  $('brgUsed').innerHTML = tp ? '<span class="used r' + tp + '">Usado en este TP: rotor ' + tp + ' (×2)</span>' : '';
+  $('brgSel').value = brgSelected;
+}
+
+function bindBearings() {
+  $('brgSel').innerHTML = BEARINGS.map(function (b) { return '<option value="' + b.des + '">' + b.des + ' (d ' + b.d + ' mm)</option>'; }).join('');
+  $('brgFilter').addEventListener('input', renderBearingTable);
+  $('brgOnly').addEventListener('change', renderBearingTable);
+  $('brgSel').addEventListener('change', function (e) { brgSelected = e.target.value; renderBearingTable(); renderBearingDiagram(); });
+  $('brgBody').addEventListener('click', function (e) {
+    const tr = e.target.closest('tr[data-des]'); if (!tr) return;
+    brgSelected = tr.getAttribute('data-des'); renderBearingTable(); renderBearingDiagram();
+  });
+  renderBearingTable(); renderBearingDiagram();
+}
+
+/* ============================================================
+   03 MOMENTOS DE INERCIA
+   ============================================================ */
+const fr = function (n, d) { return '<span class="fr"><span>' + n + '</span><span>' + d + '</span></span>'; };
+const ICON = {
+  ring: '<ellipse cx="32" cy="34" rx="20" ry="9" stroke="var(--accent)" stroke-width="2.5"/>',
+  axisV: '<line x1="32" y1="6" x2="32" y2="16" stroke="var(--ink-soft)" stroke-width="2"/><line x1="32" y1="52" x2="32" y2="60" stroke="var(--ink-soft)" stroke-width="2"/><line x1="32" y1="16" x2="32" y2="52" stroke="var(--ink-soft)" stroke-width="1.5" stroke-dasharray="2 3"/>'
+};
+const INERTIA = [
+  { id: 'a', name: 'Aro delgado', axis: 'Eje del cilindro, por el centro', f: '<i>I</i> = <i>M</i>·<i>R</i>²',
+    svg: ICON.ring + ICON.axisV },
+  { id: 'b', name: 'Cilindro anular (tubo)', axis: 'Eje del cilindro', f: '<i>I</i> = ' + fr('<i>M</i>', '2') + ' (<i>R</i>₁² + <i>R</i>₂²)',
+    svg: ICON.ring + '<ellipse cx="32" cy="34" rx="11" ry="5" stroke="var(--accent)" stroke-width="2"/>' + ICON.axisV,
+    use: { text: 'Engranajes y rodamientos del TP', sel: 'gear1,gear2,brg1,brg2', cls: '' } },
+  { id: 'c', name: 'Cilindro sólido / disco', axis: 'Eje del cilindro', f: '<i>I</i> = ' + fr('<i>M</i>·<i>R</i>²', '2'),
+    svg: '<ellipse cx="32" cy="34" rx="20" ry="9" fill="var(--accent)" fill-opacity="0.15" stroke="var(--accent)" stroke-width="2.5"/>' + ICON.axisV,
+    use: { text: 'Ejes del TP', sel: 'shaft1,shaft2', cls: '' } },
+  { id: 'd', name: 'Cilindro sólido / disco', axis: 'Diámetro central (perpendicular al eje)', f: '<i>I</i> = ' + fr('<i>M</i>·<i>R</i>²', '4') + ' + ' + fr('<i>M</i>·<i>l</i>²', '12'),
+    svg: '<path d="M14 24 A6 10 0 0 0 14 44" stroke="var(--accent)" stroke-width="2.5"/><path d="M50 24 A6 10 0 0 1 50 44" stroke="var(--accent)" stroke-width="2.5"/><line x1="14" y1="24" x2="50" y2="24" stroke="var(--accent)" stroke-width="2.5"/><line x1="14" y1="44" x2="50" y2="44" stroke="var(--accent)" stroke-width="2.5"/><line x1="32" y1="10" x2="32" y2="58" stroke="var(--ink-soft)" stroke-width="1.5" stroke-dasharray="2 3"/><line x1="32" y1="4" x2="32" y2="10" stroke="var(--ink-soft)" stroke-width="2"/><line x1="32" y1="58" x2="32" y2="64" stroke="var(--ink-soft)" stroke-width="2"/>' },
+  { id: 'e', name: 'Varilla delgada', axis: 'Eje perpendicular, por el centro', f: '<i>I</i> = ' + fr('<i>M</i>·<i>l</i>²', '12'),
+    svg: '<line x1="8" y1="34" x2="56" y2="34" stroke="var(--accent)" stroke-width="3"/><line x1="32" y1="14" x2="32" y2="54" stroke="var(--ink-soft)" stroke-width="1.5" stroke-dasharray="2 3"/><line x1="32" y1="8" x2="32" y2="14" stroke="var(--ink-soft)" stroke-width="2"/><line x1="32" y1="54" x2="32" y2="60" stroke="var(--ink-soft)" stroke-width="2"/>' },
+  { id: 'f', name: 'Varilla delgada', axis: 'Eje perpendicular, por un extremo', f: '<i>I</i> = ' + fr('<i>M</i>·<i>l</i>²', '3'),
+    svg: '<line x1="8" y1="34" x2="56" y2="34" stroke="var(--accent)" stroke-width="3"/><line x1="8" y1="14" x2="8" y2="54" stroke="var(--ink-soft)" stroke-width="1.5" stroke-dasharray="2 3"/><line x1="8" y1="8" x2="8" y2="14" stroke="var(--ink-soft)" stroke-width="2"/><line x1="8" y1="54" x2="8" y2="60" stroke="var(--ink-soft)" stroke-width="2"/>' },
+  { id: 'g', name: 'Esfera sólida', axis: 'Diámetro cualquiera', f: '<i>I</i> = ' + fr('2<i>M</i>·<i>R</i>²', '5'),
+    svg: '<circle cx="32" cy="32" r="20" fill="var(--accent)" fill-opacity="0.15" stroke="var(--accent)" stroke-width="2.5"/><line x1="10" y1="32" x2="54" y2="32" stroke="var(--ink-soft)" stroke-width="1.5" stroke-dasharray="2 3"/>' },
+  { id: 'h', name: 'Cascarón esférico delgado', axis: 'Diámetro cualquiera', f: '<i>I</i> = ' + fr('2<i>M</i>·<i>R</i>²', '3'),
+    svg: '<circle cx="32" cy="32" r="20" fill="none" stroke="var(--accent)" stroke-width="2.5"/><line x1="10" y1="32" x2="54" y2="32" stroke="var(--ink-soft)" stroke-width="1.5" stroke-dasharray="2 3"/>' },
+  { id: 'i', name: 'Aro delgado', axis: 'Diámetro cualquiera (en el plano del aro)', f: '<i>I</i> = ' + fr('<i>M</i>·<i>R</i>²', '2'),
+    svg: '<circle cx="32" cy="32" r="18" fill="none" stroke="var(--accent)" stroke-width="2.5"/><circle cx="32" cy="32" r="16" fill="none" stroke="var(--accent)" stroke-width="1"/><line x1="10" y1="32" x2="54" y2="32" stroke="var(--ink-soft)" stroke-width="1.5" stroke-dasharray="2 3"/>' },
+  { id: 'j', name: 'Aro delgado', axis: 'Línea tangente cualquiera', f: '<i>I</i> = ' + fr('3<i>M</i>·<i>R</i>²', '2'),
+    svg: '<circle cx="28" cy="32" r="18" fill="none" stroke="var(--accent)" stroke-width="2.5"/><circle cx="28" cy="32" r="16" fill="none" stroke="var(--accent)" stroke-width="1"/><line x1="46" y1="10" x2="46" y2="54" stroke="var(--ink-soft)" stroke-width="1.5" stroke-dasharray="2 3"/>' }
+];
+function renderInertia() {
+  $('inertiaGrid').innerHTML = INERTIA.map(function (c) {
+    return '<div class="inertia-card' + (c.use ? ' used-tp' : '') + '" id="card-' + c.id + '">' +
+      '<span class="icon"><svg viewBox="0 0 64 64" fill="none" aria-hidden="true">' + c.svg + '</svg></span>' +
+      '<span class="body-text"><span class="tag">' + c.id.toUpperCase() + '</span><span class="body-name">' + c.name + '</span>' +
+      '<span class="axis">' + c.axis + '</span><span class="formula">' + c.f + '</span>' +
+      (c.use ? '<a class="use-link ' + c.use.cls + '" href="#sistema" data-select="' + c.use.sel + '">' + c.use.text + ' → ver en el sistema</a>' : '') +
+      '</span></div>';
+  }).join('');
+}
+
+/* ============================================================
+   NAVEGACIÓN, TEMA E INICIO
+   ============================================================ */
+function bindNav() {
+  const links = Array.prototype.slice.call(document.querySelectorAll('.topnav a'));
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(function (ents) {
+      ents.forEach(function (e) {
+        if (e.isIntersecting) links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('data-sec') === e.target.id); });
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    ['sistema', 'rodamientos', 'inercia'].forEach(function (id) { io.observe($(id)); });
+  }
+  const saved = tryStore('mr-theme');
+  if (saved === 'light' || saved === 'dark') document.documentElement.setAttribute('data-theme', saved);
+  $('themeBtn').addEventListener('click', function () {
+    const cur = document.documentElement.getAttribute('data-theme') ||
+      (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next); tryStore('mr-theme', next);
+  });
+}
+
+(function init() {
+  bindNav(); renderInertia(); bindBearings();
+  renderBars(); renderParts(); renderDetail(); bindControls(); syncControlsFromState();
+  try {
+    if (typeof THREE === 'undefined') throw new Error('No se pudo cargar Three.js (¿sin conexión?).');
+    sceneApi = buildScene();
+    if (UI.selected) sceneApi.highlight(UI.selected);
+  } catch (err) {
+    const fb = $('fallback'); fb.hidden = false;
+    fb.textContent = 'No se pudo iniciar la visualización 3D: ' + (err && err.message ? err.message : err) + ' El panel de datos y las secciones siguientes funcionan igual.';
+  }
+  renderLive();
+  renderParts(); renderDetail();
+})();
+</script>
+</body>
+</html>

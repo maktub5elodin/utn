@@ -2,6 +2,8 @@
 
 > **Uso de este archivo:** está pensado para pasárselo completo a Claude (web) junto con la orden "armá el informe siguiendo este brief". Contiene todo lo necesario: datos, marco teórico mínimo, supuestos, resultados ya calculados y la estructura pedida. No hace falta ningún otro archivo.
 
+> **⚠ Nota de divergencia de unidades (22/sep/2026):** esta versión trabaja con longitudes en milímetros y momento de inercia en **kg·mm²** (ver sección 3 y el Punto 2/3/3b), en línea con `Mecanica_Rotacional_Apuntes.md` e `index.html`. El informe final ya entregado (`tp_mecanica_rotacional.odt`/`.pdf`, local, no versionado) se generó **antes** de este cambio y quedó en kg·m² (Sistema Internacional puro); no se regeneró para mantenerlo tal cual fue entregado. Si se vuelve a armar el informe desde este brief, el documento resultante usará kg·mm² y por lo tanto **no coincidirá numéricamente en esa columna** con el `.odt`/`.pdf` ya entregado (los resultados físicos — L, T, P — son los mismos; solo cambia cómo se expresa `I`).
+
 ---
 
 ## 0. Instrucciones para quien arma el informe
@@ -73,16 +75,18 @@ f) Calcular la potencia transmitida por el mecanismo.
 
 **Engrane sin deslizamiento.** Los puntos de contacto de dos engranajes tienen la misma velocidad tangencial: `v = ω₁·R₁ = ω₂·R₂`, de donde `n₂ = n₁·R₁/R₂`.
 
-**Momento de inercia** (`I = Σ m·r²`, en kg·m²). Mide la resistencia a cambiar la velocidad de giro; depende de cómo se distribuye la masa respecto del eje. Se usan dos casos, ambos respecto del eje del cuerpo:
+**Momento de inercia** (`I = Σ m·r²`). Mide la resistencia a cambiar la velocidad de giro; depende de cómo se distribuye la masa respecto del eje. Se usan dos casos, ambos respecto del eje del cuerpo:
 
 | Cuerpo | Fórmula | Se usa en |
 |---|---|---|
 | Cilindro sólido | `I = M·R²/2` | Ejes |
 | Cilindro anular (radios interior `R₁`, exterior `R₂`) | `I = M·(R₁² + R₂²)/2` | Engranajes y rodamientos |
 
-Masa a partir de la densidad: `M = δ·V`; con `V = π·R²·L` (cilindro sólido) o `V = π·(R_ext² − R_int²)·b` (cilindro anular).
+**Convención de unidades de `I` en este informe:** las longitudes del enunciado (diámetros, radios, largos, alturas) ya vienen en milímetros, así que `I` se calcula y se reporta directamente en **kg·mm²** en vez de kg·m² (números más legibles para piezas de este tamaño: decenas a decenas de miles, en vez de `10⁻⁴`–`10⁻²`). La masa a partir de la densidad usa `δ` en kg/mm³ (`δ_acero = 7850 kg/m³ = 7,85×10⁻⁶ kg/mm³`; `δ_Al = 2708 kg/m³ = 2,708×10⁻⁶ kg/mm³`), de modo que `V` en mm³ × `δ` en kg/mm³ da la masa directo en kg: `M = δ·V`; con `V = π·R²·L` (cilindro sólido) o `V = π·(R_ext² − R_int²)·b` (cilindro anular).
 
-**Cantidad de movimiento angular** de un cuerpo que gira en torno a un eje de simetría: `L = I·ω` [kg·m²/s].
+**Dónde convertir de vuelta a SI:** `kg·mm² = 10⁻⁶ kg·m²`. Cada vez que `I` se combina con `ω` para dar `L` (que sí se reporta en SI, kg·m²/s), se multiplica `I` por `10⁻⁶` antes de operar — paso explícito en el Punto 4/5. Para el torque (`T = F·R`, Punto 8) el ajuste es distinto: `R` en mm da `T` en N·mm, y se divide por 1000 para pasar a N·m (no interviene el `10⁻⁶` de `I`, porque en `P=T·ω` el momento de inercia se cancela).
+
+**Cantidad de movimiento angular** de un cuerpo que gira en torno a un eje de simetría: `L = I·ω` [kg·m²/s] (con `I` ya convertido a kg·m²).
 
 **Conservación de `L`.** Si el momento externo es nulo, `dL/dt = 0` y `L = cte`: `I·ω = I'·ω'`.
 
@@ -108,12 +112,12 @@ Dos ejes paralelos, cada uno con un engranaje, engranados entre sí; cada eje ap
 |---|---|---|
 | Diámetro del eje | 25 mm | 35 mm |
 | Largo del eje | 300 mm | 300 mm |
-| Diámetro del engranaje (`R` = radio) | 250 mm (`R₁ = 0,125 m`) | 200 mm (`R₂ = 0,100 m`) |
+| Diámetro del engranaje (`R` = radio) | 250 mm (`R₁ = 125 mm`) | 200 mm (`R₂ = 100 mm`) |
 | Ancho de cara del engranaje | 30 mm | 30 mm |
 | Rodamiento SKF serie 62 (2 por eje) | 6205: d = 25, D = 52, B = 15 mm; m = 0,128 kg | 6207: d = 35, D = 72, B = 17 mm; m = 0,288 kg |
 | Altura del eje respecto de la base | `H₁ = 1500 mm` | `H₂` sin valor en el enunciado |
 
-Materiales y densidades: ejes de acero al carbono (`δ = 7850 kg/m³`); engranajes de aluminio (`δ = 2708 kg/m³`); rodamientos de acero (se usa la masa de catálogo).
+Materiales y densidades: ejes de acero al carbono (`δ = 7850 kg/m³ = 7,85×10⁻⁶ kg/mm³`); engranajes de aluminio (`δ = 2708 kg/m³ = 2,708×10⁻⁶ kg/mm³`); rodamientos de acero (se usa la masa de catálogo).
 Datos de operación: `n₁ = 2800 RPM`; fuerza tangencial entre engranajes `F = 200 N`; `1 HP = 745,8 J/s`.
 
 *Pie de tabla sugerido: "Datos del enunciado (págs. 14–15 del apunte de Abud) y del catálogo SKF. `H₂` no se informa porque no interviene en la resolución (Punto 7)."*
@@ -127,13 +131,14 @@ Datos de operación: `n₁ = 2800 RPM`; fuerza tangencial entre engranajes `F = 
 3. **Rodamientos:** cilindro anular con `R_int = d/2` (diámetro del eje) y `R_ext = D/2` (catálogo SKF), usando la **masa de catálogo** (el rodamiento real tiene huecos: bolas y jaula, por lo que `δ·V` sobreestimaría la masa).
 4. **Engrane ideal:** sin deslizamiento ni pérdidas.
 5. **Momento de inercia del conjunto (Puntos 4, 5, 6 y 7):** el enunciado no lo define. **Decisión del grupo:** se adopta el **conjunto rotante completo** de cada eje, es decir eje + engranaje + rodamientos: `I = I_eje + I_engranaje + I_rodamientos`. Se justifica porque el Punto 2 pide el `I` de los rodamientos como ítem propio, lo que solo tiene uso si luego se suman al del conjunto. La aclaración del Punto 8 ("conjunto engranaje y eje") no lo contradice: allí `P = T·ω` y el `I` se cancela, de modo que el resultado de ese punto no depende de qué componentes se incluyan.
+6. **Unidades de trabajo:** longitudes en mm e `I` en kg·mm² (ver sección 3); se convierte a SI explícitamente donde hace falta (`L` en kg·m²/s, `T` en N·m).
 
 ### 4.4 Resultados punto por punto (sección 3 del informe; cálculos intermedios → Anexo)
 
 **Punto 1 — Velocidad del eje 2 (Tabla 2)**
 
-Conversión: `ω₁ = 2π·2800/60 ≈ 293,2 rad/s`. Engrane: `ω₂ = ω₁·R₁/R₂ = 293,2·0,125/0,100 ≈ 366,5 rad/s`.
-Verificación: `v_contacto = ω₁R₁ = 293,2·0,125 ≈ 36,6 m/s` y `ω₂R₂ = 366,5·0,100 ≈ 36,6 m/s` ✓.
+Conversión: `ω₁ = 2π·2800/60 ≈ 293,2 rad/s`. Engrane: `ω₂ = ω₁·R₁/R₂ = 293,2·125/100 ≈ 366,5 rad/s`.
+Verificación: `v_contacto = ω₁R₁ = 293,2·125 ≈ 36.652 mm/s ≈ 36,65 m/s` y `ω₂R₂ = 366,5·100 ≈ 36.652 mm/s ≈ 36,65 m/s` ✓.
 Atajo: `n₂ = n₁·R₁/R₂ = 2800·125/100 = 3500 RPM`.
 
 | Eje | n (RPM) | ω (rad/s) |
@@ -145,68 +150,68 @@ Atajo: `n₂ = n₁·R₁/R₂ = 2800·125/100 = 3500 RPM`.
 
 **Punto 2 — Momento de inercia de los rodamientos (Tabla 3)**
 
-`I = ½·m·(R_ext² + R_int²)`.
+`I = ½·m·(R_ext² + R_int²)`, con `R` en mm → `I` en kg·mm².
 
-| Eje | Rodamiento | m (kg) | R_ext (m) | R_int (m) | I por rodamiento (kg·m²) | I total ×2 (kg·m²) |
+| Eje | Rodamiento | m (kg) | R_ext (mm) | R_int (mm) | I por rodamiento (kg·mm²) | I total ×2 (kg·mm²) |
 |---|---|---|---|---|---|---|
-| 1 | 6205 | 0,128 | 0,026 | 0,0125 | 5,33×10⁻⁵ | **1,065×10⁻⁴** |
-| 2 | 6207 | 0,288 | 0,036 | 0,0175 | 2,307×10⁻⁴ | **4,614×10⁻⁴** |
+| 1 | 6205 | 0,128 | 26 | 12,5 | 53,26 | **106,5** |
+| 2 | 6207 | 0,288 | 36 | 17,5 | 230,7 | **461,4** |
 
-Cálculo ejemplo eje 1: `½·0,128·(6,76×10⁻⁴ + 1,5625×10⁻⁴) = ½·0,128·8,3225×10⁻⁴ ≈ 5,33×10⁻⁵ kg·m²`.
+Cálculo ejemplo eje 1: `½·0,128·(676 + 156,25) = ½·0,128·832,25 ≈ 53,26 kg·mm²`.
 
 **Punto 3 — Momento de inercia de los ejes (Tabla 4)**
 
-`M = δ_acero·π·R²·L`; `I = ½·M·R²` (verificación: `I = ½·δ·π·L·R⁴`).
+`M = δ_acero·π·R²·L` (con `R`, `L` en mm y `δ` en kg/mm³, `V` sale en mm³); `I = ½·M·R²` (verificación: `I = ½·δ·π·L·R⁴`).
 
-| Eje | R (m) | V (m³) | M (kg) | I (kg·m²) |
+| Eje | R (mm) | V (mm³) | M (kg) | I (kg·mm²) |
 |---|---|---|---|---|
-| 1 | 0,0125 | 1,473×10⁻⁴ | 1,156 | **9,03×10⁻⁵** |
-| 2 | 0,0175 | 2,886×10⁻⁴ | 2,266 | **3,47×10⁻⁴** |
+| 1 | 12,5 | 147.263 | 1,156 | **90,3** |
+| 2 | 17,5 | 288.634 | 2,266 | **346,9** |
 
 **Punto 3b — Momento de inercia de los engranajes** *(no figura como ítem de la consigna pero es insumo de los Puntos 4 a 7; incluir en la misma Tabla 4 o en una Tabla 4b)*
 
 `M = δ_Al·π·(R_ext² − R_int²)·b`; `I = ½·M·(R_ext² + R_int²)`.
 
-| Engranaje | R_ext (m) | R_int (m) | V (m³) | M (kg) | I (kg·m²) |
+| Engranaje | R_ext (mm) | R_int (mm) | V (mm³) | M (kg) | I (kg·mm²) |
 |---|---|---|---|---|---|
-| Eje 1 | 0,125 | 0,0125 | 1,458×10⁻³ | 3,948 | **3,115×10⁻²** |
-| Eje 2 | 0,100 | 0,0175 | 9,136×10⁻⁴ | 2,474 | **1,275×10⁻²** |
+| Eje 1 | 125 | 12,5 | 1.457.864 | 3,948 | **31.152** |
+| Eje 2 | 100 | 17,5 | 913.614 | 2,474 | **12.749** |
 
 *Análisis:* aunque el eje 2 es el de mayor diámetro de eje, su engranaje tiene menor `I` (menor radio, menor masa): `I` crece con `R²`, por eso domina el engranaje sobre eje y rodamientos (ver componentes en la Tabla 5).
 
 **Puntos 4 y 5 — Cantidad de movimiento angular `L₁` y `L₂` (Tablas 5 y 6)**
 
-`I = I_eje + I_engranaje + I_rodamientos`; `L = I·ω` con `ω` en rad/s.
+`I = I_eje + I_engranaje + I_rodamientos` (kg·mm²); se convierte a SI (`×10⁻⁶`) antes de aplicar `L = I·ω` con `ω` en rad/s.
 
-Tabla 5 — Componentes de `I` (kg·m²):
+Tabla 5 — Componentes de `I` (kg·mm²):
 
 | Eje | I_eje | I_engranaje | I_rodamientos (×2) |
 |---|---|---|---|
-| 1 | 9,03×10⁻⁵ | 3,115×10⁻² | 1,065×10⁻⁴ |
-| 2 | 3,47×10⁻⁴ | 1,275×10⁻² | 4,614×10⁻⁴ |
+| 1 | 90,3 | 31.152 | 106,5 |
+| 2 | 346,9 | 12.749 | 461,4 |
 
-Tabla 6 — `I` total y `L`:
+Tabla 6 — `I` total (kg·mm² y su conversión a SI) y `L`:
 
-| Eje | ω (rad/s) | I (kg·m²) | L (kg·m²/s) |
-|---|---|---|---|
-| 1 | 293,2 | 3,135×10⁻² | **9,19** |
-| 2 | 366,5 | 1,356×10⁻² | **4,97** |
+| Eje | ω (rad/s) | I (kg·mm²) | I (kg·m²) | L (kg·m²/s) |
+|---|---|---|---|---|
+| 1 | 293,2 | 31.349 | 3,135×10⁻² | **9,19** |
+| 2 | 366,5 | 13.558 | 1,356×10⁻² | **4,97** |
 
-Unidad de `L`: kg·m²/s = N·m·s = J·s. Los valores son módulos (los engranajes giran en sentidos opuestos).
+Unidad de `L`: kg·m²/s = N·m·s = J·s (por eso se reporta en SI, a diferencia de `I`). Los valores son módulos (los engranajes giran en sentidos opuestos).
 
 **Punto 6 — `I₁` e `I₂` se reducen a la mitad (Tabla 7)**
 
 El cambio es brusco y no se indica momento externo ⇒ `L` se conserva. Notación: prima (`'`) = estado final (los subíndices 1 y 2 identifican al eje, no al estado).
-`I·ω = I'·ω'` con `I' = I/2` ⇒ `ω' = 2·ω`. El resultado **no depende del valor de `I`**.
+`I·ω = I'·ω'` con `I' = I/2` ⇒ `ω' = 2·ω`. El resultado **no depende del valor de `I` ni de en qué unidad esté expresado** (kg·mm² o kg·m² dan la misma relación `I/I' = 2`).
 
 | Eje | ω antes (rad/s) | ω' después (rad/s) | n antes (RPM) | n' después (RPM) |
 |---|---|---|---|---|
 | 1 | 293,2 | **586,4** | 2800 | **5600** |
 | 2 | 366,5 | **733,0** | 3500 | **7000** |
 
-Verificación de engrane: `ω₁'R₁ = 586,4·0,125 ≈ 73,3 m/s = ω₂'R₂ = 733,0·0,100 ≈ 73,3 m/s` ✓ (la relación entre velocidades no cambia).
+Verificación de engrane: `ω₁'R₁ = 586,4·125 ≈ 73.304 mm/s ≈ 73,30 m/s = ω₂'R₂ = 733,0·100 ≈ 73.304 mm/s ≈ 73,30 m/s` ✓ (la relación entre velocidades no cambia).
 
-*Análisis (qué se conserva y qué no):* `L` se conserva pero la energía cinética `K = ½·I·ω²` **se duplica** (`K' = ½·(I/2)·(2ω)² = 2K`); p. ej. eje 1: de ≈ 1,35×10³ J a ≈ 2,70×10³ J. Esa energía adicional la aporta el trabajo de lo que reduce `I` (análogo a una patinadora que cierra los brazos).
+*Análisis (qué se conserva y qué no):* `L` se conserva pero la energía cinética `K = ½·I·ω²` **se duplica** (`K' = ½·(I/2)·(2ω)² = 2K`, con `I` en kg·m² para que `K` salga en joules); p. ej. eje 1: de ≈ 1,35×10³ J a ≈ 2,70×10³ J. Esa energía adicional la aporta el trabajo de lo que reduce `I` (análogo a una patinadora que cierra los brazos).
 
 **Punto 7 — `L` total respecto de un sistema fijo a la base**
 
@@ -224,9 +229,9 @@ Sentidos: engranajes engranados por fuera ⇒ giran en sentidos opuestos ⇒ `L�
 
 Se usan las velocidades iniciales (Punto 1). La consigna pide considerar el `I` del conjunto engranaje y eje, pero en `P = T·ω` el `I` no interviene, así que el resultado no depende de qué componentes se incluyan.
 
-1. Torques (fuerza tangencial, `sen θ = 1`): `T₁ = F·R₁ = 200·0,125 = 25 N·m`; `T₂ = F·R₂ = 200·0,100 = 20 N·m`.
-2. `P = T·ω`: `P₁ = 25·293,2 ≈ 7330 W`; `P₂ = 20·366,5 ≈ 7330 W`. El momento de inercia se cancela (si se escribe `P = I·ω·α`, como `I·α = T` resulta `P = T·ω`) y no modifica `P`.
-3. Verificación: `P = F·v_contacto = 200·36,6 ≈ 7330 W` ✓.
+1. Torques (fuerza tangencial, `sen θ = 1`, `R` en mm): `T₁ = F·R₁ = 200·125 = 25.000 N·mm = 25 N·m`; `T₂ = F·R₂ = 200·100 = 20.000 N·mm = 20 N·m`.
+2. `P = T·ω` (con `T` ya en N·m): `P₁ = 25·293,2 ≈ 7330 W`; `P₂ = 20·366,5 ≈ 7330 W`. El momento de inercia se cancela (si se escribe `P = I·ω·α`, como `I·α = T` resulta `P = T·ω`) y no modifica `P`.
+3. Verificación: `P = F·v_contacto = 200·36,65 ≈ 7330 W` ✓.
 4. Conversión: `P = 7330 / 745,8 ≈ 9,83 HP`.
 
 | Eje | T (N·m) | ω (rad/s) | P = T·ω (W) | P (HP) |
@@ -241,7 +246,7 @@ Se usan las velocidades iniciales (Punto 1). La consigna pide considerar el `I` 
 ## 5. Conclusiones sugeridas (una por objetivo — reformular, no copiar)
 
 a) `n₂ = 3500 RPM` (`ω₂ ≈ 366,5 rad/s`), mayor que `n₁` en la relación `R₁/R₂ = 1,25`.
-b) Los engranajes de aluminio concentran casi todo el `I` (≈ 3,1×10⁻² y 1,3×10⁻² kg·m²); ejes y rodamientos aportan ≈ 0,6 % del `I` total en el eje 1 y ≈ 6 % en el eje 2 (`I` crece con `R²`).
+b) Los engranajes de aluminio concentran casi todo el `I` (≈ 31.150 y 12.750 kg·mm²); ejes y rodamientos aportan ≈ 0,6 % del `I` total en el eje 1 y ≈ 6 % en el eje 2 (`I` crece con `R²`).
 c) `L₁ ≈ 9,19` y `L₂ ≈ 4,97 kg·m²/s`.
 d) Al reducirse `I` a la mitad con `L` constante, las velocidades se duplican (5600 y 7000 RPM); la energía cinética también se duplica, por lo que el proceso requiere aporte de trabajo.
 e) `L_total ≈ 4,22 kg·m²/s` por giro en sentidos opuestos; constante, no nulo y independiente de la altura del sistema de referencia.
@@ -256,7 +261,7 @@ Cerrar con la **limitación del modelo**: (i) dentado despreciado; (ii) rodamien
 - [ ] Carátula completa (integrantes, curso S1091, turno Noche, entrega 24/sep/2026).
 - [ ] Figura 1 (esquema del mecanismo) insertada, con pie.
 - [ ] Todas las tablas numeradas y con pie autoexplicativo.
-- [ ] Todos los resultados con unidades; `ω` en rad/s en toda fórmula.
+- [ ] Todos los resultados con unidades; `ω` en rad/s en toda fórmula; `I` en kg·mm², convertido a SI donde se combina con `ω` para dar `L`.
 - [ ] Criterio de `I` del conjunto (eje + engranaje + rodamientos) declarado en 2.3.
 - [ ] Una conclusión por objetivo.
 - [ ] Nota al pie del factor HP·hora (no interviene) presente una sola vez.
@@ -264,4 +269,4 @@ Cerrar con la **limitación del modelo**: (i) dentado despreciado; (ii) rodamien
 
 ---
 
-*Brief generado a partir de `Mecanica_Rotacional_Apuntes.md` (sección 11 y resolución de los puntos 1–8) y de la estructura de informes de laboratorio de Física I (`fisica_i/laboratorio/propuesta de estructura de informe.pdf`, informes TP5 y TP6). Fuente original: "UTN – FRBA – Apunte Teórico – Mecánica Rotacional" (Ing. Abud, Ing. Mecánica I) y catálogo SKF serie 62.*
+*Brief generado a partir de `Mecanica_Rotacional_Apuntes.md` (sección 11 y resolución de los puntos 1–8) y de la estructura de informes de laboratorio de Física I (`fisica_i/laboratorio/propuesta de estructura de informe.pdf`, informes TP5 y TP6). Fuente original: "UTN – FRBA – Apunte Teórico – Mecánica Rotacional" (Ing. Abud, Ing. Mecánica I) y catálogo SKF serie 62. Convención de unidades (mm / kg·mm²) actualizada el 22/sep/2026; ver nota de divergencia con el informe ya entregado al inicio de este archivo.*

@@ -69,6 +69,8 @@ $$I = \sum m\, r_C^2 \quad [\text{Kg}\cdot\text{m}^2]$$
 - Es función del eje con respecto al cual se está rotando
 - Es función de cómo está distribuida la masa respecto al eje de rotación
 
+> **Nota de convención (aplica solo a la resolución del ejercicio, sección 11):** el ejercicio aplicado más abajo trabaja con longitudes en **milímetros** y momento de inercia en **kg·mm²** en vez de kg·m², porque para piezas de este tamaño (ejes/engranajes/rodamientos de mm) el resultado se lee mejor así: decenas a decenas de miles, en vez de potencias de 10⁻⁴ a 10⁻². Cuando ese `I` en kg·mm² se combina con `ω` o `α` para obtener una magnitud que tradicionalmente se reporta en el Sistema Internacional (`L`, `T`, `P`), se aplica el factor `kg·mm² = 10⁻⁶ kg·m²` de forma explícita en cada paso — se detalla en la sección "Convención de unidades" al inicio de la Resolución.
+
 ### 3.2 Energía cinética de rotación
 
 $$k = \frac{1}{2} I \omega^2$$
@@ -366,6 +368,18 @@ $$\delta_{Al} = 2{,}708 \text{ g/cm}^3 \qquad \delta_{Acero} = 7{,}85 \text{ g/c
 
 ## Resolución — avance registrado en esta sesión
 
+### Convención de unidades usada en esta resolución
+
+Las longitudes del enunciado (diámetros, radios, largos, alturas) ya están dadas en milímetros (sección 11.1); acá se trabaja directamente en mm en vez de convertir a metros como paso intermedio, porque para piezas de este tamaño el momento de inercia en kg·m² da números incómodos de leer (p. ej. `9,03×10⁻⁵`), mientras que en **kg·mm²** queda como una magnitud de lectura directa (`90,3`).
+
+Para que la cadena de cálculo `V → M → I` cierre sin pasar por metros, las densidades se expresan en kg/mm³ (`1 m³ = 10⁹ mm³`):
+
+$$\delta_{Acero} = 7850\ \text{kg/m}^3 = 7{,}85\times10^{-6}\ \text{kg/mm}^3 \qquad \delta_{Al} = 2708\ \text{kg/m}^3 = 2{,}708\times10^{-6}\ \text{kg/mm}^3$$
+
+Con esto, `V` en mm³ multiplicado por `δ` en kg/mm³ da la masa directamente en kg (la masa **no** cambia de unidad, sigue en kg), y `I = ½M·R²` con `R` en mm da directamente kg·mm².
+
+**Dónde hace falta convertir:** `kg·mm² = 10⁻⁶ kg·m²` (porque `mm² = 10⁻⁶ m²`). Las magnitudes que combinan `I` con `ω` o `α` y que tradicionalmente se reportan en el Sistema Internacional (`L` en kg·m²/s, `T` en N·m, `P` en W) necesitan ese factor `×10⁻⁶` aplicado sobre `I` antes de operar; se muestra explícitamente cada vez que aparece, marcado como "conversión a SI". Los torques por `T = F·R` (Punto 8) no involucran `I`: ahí el único ajuste es que `R` en mm da `T` en N·mm, y se convierte a N·m dividiendo por 1000 (factor de longitud simple, no el `10⁻⁶` de área).
+
 ### Punto 1: n₂ (y ω₁, ω₂)
 
 **Dato de partida:** $n_1 = 2800$ RPM (revoluciones por minuto — dato del enunciado, pág. 15 del apunte de Abud).
@@ -389,13 +403,15 @@ $$\omega_1 = \frac{2\pi \cdot 2800}{60} \approx 293{,}2 \text{ rad/s}$$
 
 $$v_{contacto} = \omega_1 R_1 = \omega_2 R_2$$
 
-Con $R_1 = 0{,}125$ m (radio del engranaje del eje 1) y $R_2 = 0{,}1$ m (radio del engranaje del eje 2) — ver aclaración de nomenclatura en 11.1:
+Con $R_1 = 125$ mm (radio del engranaje del eje 1) y $R_2 = 100$ mm (radio del engranaje del eje 2) — ver aclaración de nomenclatura en 11.1 — y trabajando directamente en mm (sin pasar por metros):
 
-$$\omega_2 = \omega_1\cdot\frac{R_1}{R_2} = 293{,}2 \cdot \frac{0{,}125}{0{,}1} \approx 366{,}5 \text{ rad/s}$$
+$$\omega_2 = \omega_1\cdot\frac{R_1}{R_2} = 293{,}2 \cdot \frac{125}{100} \approx 366{,}5 \text{ rad/s}$$
 
 *Verificación de $v_{contacto}$ (debe dar el mismo valor por los dos lados):*
 
-$$v_{contacto} = \omega_1 R_1 = 293{,}2 \times 0{,}125 \approx 36{,}6 \text{ m/s} \qquad v_{contacto} = \omega_2 R_2 = 366{,}5 \times 0{,}1 \approx 36{,}6 \text{ m/s} \quad \checkmark$$
+$$v_{contacto} = \omega_1 R_1 = 293{,}2 \times 125 \approx 36.652 \text{ mm/s} = 36{,}65 \text{ m/s} \qquad v_{contacto} = \omega_2 R_2 = 366{,}5 \times 100 \approx 36.652 \text{ mm/s} = 36{,}65 \text{ m/s} \quad \checkmark$$
+
+*(Como $R$ ya está en mm, $\omega\cdot R$ da directamente mm/s; se expresa también en m/s —dividiendo por 1000— porque es la unidad habitual para reportar una velocidad de este orden, aunque el momento de inercia no esté involucrado en este cálculo.)*
 
 **Volviendo a RPM** (despejando n de la misma fórmula de conversión, $n = 60\,\omega/2\pi$):
 
@@ -419,30 +435,30 @@ $$I = \frac{1}{2}m\left(R_{ext}^2 + R_{int}^2\right)$$
 **Rodamiento chico (eje 1 — diámetro interior 25 mm)**
 
 - $m = 0{,}128$ kg (dato de tabla SKF)
-- $R_{ext} = 52/2 = 26$ mm $= 0{,}026$ m $\Rightarrow R_{ext}^2 = 6{,}76\times10^{-4}$ m² *(D = 52 mm: dato de tabla SKF)*
-- $R_{int} = 25/2 = 12{,}5$ mm $= 0{,}0125$ m $\Rightarrow R_{int}^2 = 1{,}5625\times10^{-4}$ m² *(d = 25 mm: diámetro del eje 1, dato del esquema del mecanismo — apunte de Abud, pág. 14; no de la tabla SKF)*
+- $R_{ext} = 52/2 = 26$ mm $\Rightarrow R_{ext}^2 = 676$ mm² *(D = 52 mm: dato de tabla SKF)*
+- $R_{int} = 25/2 = 12{,}5$ mm $\Rightarrow R_{int}^2 = 156{,}25$ mm² *(d = 25 mm: diámetro del eje 1, dato del esquema del mecanismo — apunte de Abud, pág. 14; no de la tabla SKF)*
 
-$$I_{1,rod} = \frac{1}{2}(0{,}128)\left(6{,}76\times10^{-4} + 1{,}5625\times10^{-4}\right) = \frac{1}{2}(0{,}128)\left(8{,}3225\times10^{-4}\right)$$
+$$I_{1,rod} = \frac{1}{2}(0{,}128)\left(676 + 156{,}25\right) = \frac{1}{2}(0{,}128)\left(832{,}25\right)$$
 
-$$I_{1,rod} \approx 5{,}33\times10^{-5} \text{ kg}\cdot\text{m}^2 \quad \text{(por rodamiento)}$$
+$$I_{1,rod} \approx 53{,}26 \text{ kg}\cdot\text{mm}^2 \quad \text{(por rodamiento)}$$
 
 Total eje 1 (×2 rodamientos):
 
-$$I_{1,rodamientos} \approx 1{,}065\times10^{-4} \text{ kg}\cdot\text{m}^2$$
+$$I_{1,rodamientos} \approx 106{,}5 \text{ kg}\cdot\text{mm}^2$$
 
 **Rodamiento grande (eje 2 — diámetro interior 35 mm)**
 
 - $m = 0{,}288$ kg (dato de tabla SKF)
-- $R_{ext} = 72/2 = 36$ mm $= 0{,}036$ m $\Rightarrow R_{ext}^2 = 1{,}296\times10^{-3}$ m² *(D = 72 mm: dato de tabla SKF)*
-- $R_{int} = 35/2 = 17{,}5$ mm $= 0{,}0175$ m $\Rightarrow R_{int}^2 = 3{,}0625\times10^{-4}$ m² *(d = 35 mm: diámetro del eje 2, dato del esquema del mecanismo — apunte de Abud, pág. 14; no de la tabla SKF)*
+- $R_{ext} = 72/2 = 36$ mm $\Rightarrow R_{ext}^2 = 1296$ mm² *(D = 72 mm: dato de tabla SKF)*
+- $R_{int} = 35/2 = 17{,}5$ mm $\Rightarrow R_{int}^2 = 306{,}25$ mm² *(d = 35 mm: diámetro del eje 2, dato del esquema del mecanismo — apunte de Abud, pág. 14; no de la tabla SKF)*
 
-$$I_{2,rod} = \frac{1}{2}(0{,}288)\left(1{,}296\times10^{-3} + 3{,}0625\times10^{-4}\right) = \frac{1}{2}(0{,}288)\left(1{,}60225\times10^{-3}\right)$$
+$$I_{2,rod} = \frac{1}{2}(0{,}288)\left(1296 + 306{,}25\right) = \frac{1}{2}(0{,}288)\left(1602{,}25\right)$$
 
-$$I_{2,rod} \approx 2{,}307\times10^{-4} \text{ kg}\cdot\text{m}^2 \quad \text{(por rodamiento)}$$
+$$I_{2,rod} \approx 230{,}7 \text{ kg}\cdot\text{mm}^2 \quad \text{(por rodamiento)}$$
 
 Total eje 2 (×2 rodamientos):
 
-$$I_{2,rodamientos} \approx 4{,}614\times10^{-4} \text{ kg}\cdot\text{m}^2$$
+$$I_{2,rodamientos} \approx 461{,}4 \text{ kg}\cdot\text{mm}^2$$
 
 ### Punto 3: Momento de inercia de los ejes
 
@@ -458,37 +474,37 @@ $$M = \delta_{Acero}\cdot V = \delta_{Acero}\cdot\pi R^2 L$$
 
 **Datos comunes a ambos ejes:**
 
-- $\delta_{Acero} = 7{,}85$ g/cm³ $= 7850$ kg/m³ *(dato del esquema, apunte de Abud, pág. 14; conversión: $7{,}85\ \text{g/cm}^3 = 7{,}85\times10^{-3}\ \text{kg} \,/\, 10^{-6}\ \text{m}^3$)*
-- $L = 300$ mm $= 0{,}3$ m *(dato del enunciado, pág. 15; se da una sola vez, por lo que se asume el mismo largo para ambos ejes)*
+- $\delta_{Acero} = 7{,}85$ g/cm³ $= 7850$ kg/m³ $= 7{,}85\times10^{-6}$ kg/mm³ *(dato del esquema, apunte de Abud, pág. 14; conversión: $1\ \text{m}^3 = 10^9\ \text{mm}^3$)*
+- $L = 300$ mm *(dato del enunciado, pág. 15; se da una sola vez, por lo que se asume el mismo largo para ambos ejes)*
 
 **Eje 1 (diámetro 25 mm)**
 
-- $R_1 = 25/2 = 12{,}5$ mm $= 0{,}0125$ m $\Rightarrow R_1^2 = 1{,}5625\times10^{-4}$ m² *(diámetro: dato del esquema, apunte de Abud, pág. 14)*
+- $R_1 = 25/2 = 12{,}5$ mm $\Rightarrow R_1^2 = 156{,}25$ mm² *(diámetro: dato del esquema, apunte de Abud, pág. 14)*
 
-$$V_1 = \pi R_1^2 L = \pi\,(1{,}5625\times10^{-4})(0{,}3) \approx 1{,}473\times10^{-4} \text{ m}^3$$
+$$V_1 = \pi R_1^2 L = \pi\,(156{,}25)(300) \approx 147.263 \text{ mm}^3$$
 
-$$M_1 = 7850 \cdot 1{,}473\times10^{-4} \approx 1{,}156 \text{ kg}$$
+$$M_1 = 7{,}85\times10^{-6} \cdot 147.263 \approx 1{,}156 \text{ kg}$$
 
-$$I_{1,eje} = \frac{1}{2}(1{,}156)(1{,}5625\times10^{-4}) \approx 9{,}03\times10^{-5} \text{ kg}\cdot\text{m}^2$$
+$$I_{1,eje} = \frac{1}{2}(1{,}156)(156{,}25) \approx 90{,}3 \text{ kg}\cdot\text{mm}^2$$
 
 **Eje 2 (diámetro 35 mm)**
 
-- $R_2 = 35/2 = 17{,}5$ mm $= 0{,}0175$ m $\Rightarrow R_2^2 = 3{,}0625\times10^{-4}$ m² *(diámetro: dato del esquema, apunte de Abud, pág. 14)*
+- $R_2 = 35/2 = 17{,}5$ mm $\Rightarrow R_2^2 = 306{,}25$ mm² *(diámetro: dato del esquema, apunte de Abud, pág. 14)*
 
-$$V_2 = \pi R_2^2 L = \pi\,(3{,}0625\times10^{-4})(0{,}3) \approx 2{,}886\times10^{-4} \text{ m}^3$$
+$$V_2 = \pi R_2^2 L = \pi\,(306{,}25)(300) \approx 288.634 \text{ mm}^3$$
 
-$$M_2 = 7850 \cdot 2{,}886\times10^{-4} \approx 2{,}266 \text{ kg}$$
+$$M_2 = 7{,}85\times10^{-6} \cdot 288.634 \approx 2{,}266 \text{ kg}$$
 
-$$I_{2,eje} = \frac{1}{2}(2{,}266)(3{,}0625\times10^{-4}) \approx 3{,}47\times10^{-4} \text{ kg}\cdot\text{m}^2$$
+$$I_{2,eje} = \frac{1}{2}(2{,}266)(306{,}25) \approx 346{,}9 \text{ kg}\cdot\text{mm}^2$$
 
-*Verificación cruzada con la forma simplificada* $I = \tfrac{1}{2}\,\delta\,\pi\,L\,R^4$ *(elimina el paso intermedio de la masa):* $I_{1,eje} \approx 9{,}03\times10^{-5}$ y $I_{2,eje} \approx 3{,}47\times10^{-4}$ kg·m² — coinciden con lo calculado arriba.
+*Verificación cruzada con la forma simplificada* $I = \tfrac{1}{2}\,\delta\,\pi\,L\,R^4$ *(elimina el paso intermedio de la masa, ahora con $R$ y $L$ en mm y $\delta$ en kg/mm³):* $I_{1,eje} \approx 90{,}3$ y $I_{2,eje} \approx 346{,}9$ kg·mm² — coinciden con lo calculado arriba.
 
 **Resultados de este punto (para reutilizar más adelante):**
 
-| Eje | Diámetro (mm) | M (kg) | I (kg·m²) |
+| Eje | Diámetro (mm) | M (kg) | I (kg·mm²) |
 |---|---|---|---|
-| 1 | 25 | ≈ 1,156 | ≈ 9,03×10⁻⁵ |
-| 2 | 35 | ≈ 2,266 | ≈ 3,47×10⁻⁴ |
+| 1 | 25 | ≈ 1,156 | ≈ 90,3 |
+| 2 | 35 | ≈ 2,266 | ≈ 346,9 |
 
 ### Punto 3b: Momento de inercia de los engranajes
 
@@ -500,39 +516,39 @@ $$I = \frac{1}{2}M\left(R_{ext}^2 + R_{int}^2\right) \qquad M = \delta_{Al}\cdot
 
 **Datos comunes a ambos engranajes:**
 
-- $\delta_{Al} = 2{,}708$ g/cm³ $= 2708$ kg/m³ *(dato del esquema, apunte de Abud, pág. 14; misma conversión que para el acero)*
-- $b = 30$ mm $= 0{,}03$ m *(ancho de cara, dato del esquema, apunte de Abud, pág. 14)*
+- $\delta_{Al} = 2{,}708$ g/cm³ $= 2708$ kg/m³ $= 2{,}708\times10^{-6}$ kg/mm³ *(dato del esquema, apunte de Abud, pág. 14; misma conversión que para el acero)*
+- $b = 30$ mm *(ancho de cara, dato del esquema, apunte de Abud, pág. 14)*
 
 **Engranaje del eje 1 (diámetro 250 mm)**
 
-- $R_{ext} = 250/2 = 125$ mm $= 0{,}125$ m $\Rightarrow R_{ext}^2 = 1{,}5625\times10^{-2}$ m² *(diámetro: dato del esquema)*
-- $R_{int} = 25/2 = 12{,}5$ mm $= 0{,}0125$ m $\Rightarrow R_{int}^2 = 1{,}5625\times10^{-4}$ m² *(radio del eje 1, Punto 3)*
+- $R_{ext} = 250/2 = 125$ mm $\Rightarrow R_{ext}^2 = 15.625$ mm² *(diámetro: dato del esquema)*
+- $R_{int} = 25/2 = 12{,}5$ mm $\Rightarrow R_{int}^2 = 156{,}25$ mm² *(radio del eje 1, Punto 3)*
 
-$$V = \pi\left(R_{ext}^2 - R_{int}^2\right)b = \pi\,(1{,}5625\times10^{-2} - 1{,}5625\times10^{-4})(0{,}03) \approx 1{,}458\times10^{-3} \text{ m}^3$$
+$$V = \pi\left(R_{ext}^2 - R_{int}^2\right)b = \pi\,(15.625 - 156{,}25)(30) \approx 1.457.864 \text{ mm}^3$$
 
-$$M = 2708 \cdot 1{,}458\times10^{-3} \approx 3{,}948 \text{ kg}$$
+$$M = 2{,}708\times10^{-6} \cdot 1.457.864 \approx 3{,}948 \text{ kg}$$
 
-$$I_{1,eng} = \frac{1}{2}(3{,}948)\left(1{,}5625\times10^{-2} + 1{,}5625\times10^{-4}\right) = \frac{1}{2}(3{,}948)(1{,}578\times10^{-2}) \approx 3{,}12\times10^{-2} \text{ kg}\cdot\text{m}^2$$
+$$I_{1,eng} = \frac{1}{2}(3{,}948)\left(15.625 + 156{,}25\right) = \frac{1}{2}(3{,}948)(15.781{,}25) \approx 31.152 \text{ kg}\cdot\text{mm}^2$$
 
 **Engranaje del eje 2 (diámetro 200 mm)**
 
-- $R_{ext} = 200/2 = 100$ mm $= 0{,}1$ m $\Rightarrow R_{ext}^2 = 1{,}0\times10^{-2}$ m² *(diámetro: dato del esquema)*
-- $R_{int} = 35/2 = 17{,}5$ mm $= 0{,}0175$ m $\Rightarrow R_{int}^2 = 3{,}0625\times10^{-4}$ m² *(radio del eje 2, Punto 3)*
+- $R_{ext} = 200/2 = 100$ mm $\Rightarrow R_{ext}^2 = 10.000$ mm² *(diámetro: dato del esquema)*
+- $R_{int} = 35/2 = 17{,}5$ mm $\Rightarrow R_{int}^2 = 306{,}25$ mm² *(radio del eje 2, Punto 3)*
 
-$$V = \pi\,(1{,}0\times10^{-2} - 3{,}0625\times10^{-4})(0{,}03) \approx 9{,}136\times10^{-4} \text{ m}^3$$
+$$V = \pi\,(10.000 - 306{,}25)(30) \approx 913.614 \text{ mm}^3$$
 
-$$M = 2708 \cdot 9{,}136\times10^{-4} \approx 2{,}474 \text{ kg}$$
+$$M = 2{,}708\times10^{-6} \cdot 913.614 \approx 2{,}474 \text{ kg}$$
 
-$$I_{2,eng} = \frac{1}{2}(2{,}474)\left(1{,}0\times10^{-2} + 3{,}0625\times10^{-4}\right) = \frac{1}{2}(2{,}474)(1{,}0306\times10^{-2}) \approx 1{,}27\times10^{-2} \text{ kg}\cdot\text{m}^2$$
+$$I_{2,eng} = \frac{1}{2}(2{,}474)\left(10.000 + 306{,}25\right) = \frac{1}{2}(2{,}474)(10.306{,}25) \approx 12.749 \text{ kg}\cdot\text{mm}^2$$
 
-*Verificación cruzada con la forma simplificada* $I = \tfrac{1}{2}\,\delta\,\pi\,b\left(R_{ext}^4 - R_{int}^4\right)$*:* $I_{1,eng} \approx 3{,}12\times10^{-2}$ y $I_{2,eng} \approx 1{,}27\times10^{-2}$ kg·m² — coinciden.
+*Verificación cruzada con la forma simplificada* $I = \tfrac{1}{2}\,\delta\,\pi\,b\left(R_{ext}^4 - R_{int}^4\right)$*:* $I_{1,eng} \approx 31.152$ y $I_{2,eng} \approx 12.749$ kg·mm² — coinciden.
 
 **Resultados de este punto (para reutilizar más adelante):**
 
-| Engranaje | Diámetro (mm) | M (kg) | I (kg·m²) |
+| Engranaje | Diámetro (mm) | M (kg) | I (kg·mm²) |
 |---|---|---|---|
-| Eje 1 | 250 | ≈ 3,948 | ≈ 3,12×10⁻² |
-| Eje 2 | 200 | ≈ 2,474 | ≈ 1,27×10⁻² |
+| Eje 1 | 250 | ≈ 3,948 | ≈ 31.152 |
+| Eje 2 | 200 | ≈ 2,474 | ≈ 12.749 |
 
 *Nótese que, pese a que el eje 2 es el de mayor diámetro de eje, su engranaje es el de menor momento de inercia (ver aclaración de nomenclatura en 11.1).*
 
@@ -542,37 +558,45 @@ Ambos puntos son el mismo cálculo aplicado a cada eje: $L = I\,\omega$ (secció
 
 **Qué entra en $I_1$ e $I_2$:** la consigna no lo define para los Puntos 4 y 5. Se adopta el **conjunto rotante completo** de cada eje, es decir eje + engranaje + rodamientos:
 
-$$I = I_{eje} + I_{engranaje} + I_{rodamientos}$$
+$$I = I_{eje} + I_{engranaje} + I_{rodamientos} \qquad \text{(todo en kg·mm², sumando lo de los Puntos 2, 3 y 3b)}$$
 
 Usa todo lo calculado en los Puntos 2, 3 y 3b. Es la lectura que justifica que la consigna pida el momento de inercia de los rodamientos como ítem propio (Punto 2), ya que solo los Puntos 4, 5, 6 y 7 podrían usarlo. La aclaración del Punto 8 ("considerar el momento de inercia del conjunto engranaje y eje") no la contradice: allí $P = T\,\omega$ y el $I$ se cancela, así que el resultado de ese punto no depende de qué componentes se incluyan.
 
-**Componentes de $I$ (de los Puntos 2, 3 y 3b), en kg·m²:**
+**Componentes de $I$ (de los Puntos 2, 3 y 3b), en kg·mm²:**
 
 | Eje | $I_{eje}$ | $I_{engranaje}$ | $I_{rodamientos}$ (×2) |
 |---|---|---|---|
-| 1 | $9{,}03\times10^{-5}$ | $3{,}115\times10^{-2}$ | $1{,}065\times10^{-4}$ |
-| 2 | $3{,}47\times10^{-4}$ | $1{,}275\times10^{-2}$ | $4{,}614\times10^{-4}$ |
+| 1 | $90{,}3$ | $31.152$ | $106{,}5$ |
+| 2 | $346{,}9$ | $12.749$ | $461{,}4$ |
 
 **Eje 1**
 
-$$I_1 = I_{eje} + I_{eng} + I_{rod} = 9{,}03\times10^{-5} + 3{,}115\times10^{-2} + 1{,}065\times10^{-4} \approx 3{,}135\times10^{-2} \text{ kg}\cdot\text{m}^2$$
+$$I_1 = I_{eje} + I_{eng} + I_{rod} = 90{,}3 + 31.152 + 106{,}5 \approx 31.349 \text{ kg}\cdot\text{mm}^2$$
+
+**Conversión a SI (necesaria para usar $L=I\omega$ y reportar $L$ en kg·m²/s):**
+
+$$I_1[\text{kg}\cdot\text{m}^2] = I_1[\text{kg}\cdot\text{mm}^2]\times10^{-6} \approx 3{,}135\times10^{-2} \text{ kg}\cdot\text{m}^2$$
 
 $$L_1 = I_1\,\omega_1 = (3{,}135\times10^{-2})(293{,}2) \approx 9{,}19 \text{ kg}\cdot\text{m}^2/\text{s}$$
 
 **Eje 2**
 
-$$I_2 = 3{,}47\times10^{-4} + 1{,}275\times10^{-2} + 4{,}614\times10^{-4} \approx 1{,}356\times10^{-2} \text{ kg}\cdot\text{m}^2$$
+$$I_2 = 346{,}9 + 12.749 + 461{,}4 \approx 13.558 \text{ kg}\cdot\text{mm}^2$$
+
+**Conversión a SI:**
+
+$$I_2[\text{kg}\cdot\text{m}^2] \approx 1{,}356\times10^{-2} \text{ kg}\cdot\text{m}^2$$
 
 $$L_2 = I_2\,\omega_2 = (1{,}356\times10^{-2})(366{,}5) \approx 4{,}97 \text{ kg}\cdot\text{m}^2/\text{s}$$
 
-*(Unidad: $\text{kg}\cdot\text{m}^2/\text{s}$, equivalente a $\text{N}\cdot\text{m}\cdot\text{s}$ o $\text{J}\cdot\text{s}$.)*
+*(Unidad: $\text{kg}\cdot\text{m}^2/\text{s}$, equivalente a $\text{N}\cdot\text{m}\cdot\text{s}$ o $\text{J}\cdot\text{s}$ — a diferencia de $I$, esta magnitud sí conviene reportarla en SI, por eso se convierte $I$ antes de multiplicar por $\omega$.)*
 
 **Resultados de estos puntos:**
 
-| Eje | $\omega$ (rad/s) | $I$ (kg·m²) | $L$ (kg·m²/s) |
-|---|---|---|---|
-| 1 | ≈ 293,2 | ≈ 3,135×10⁻² | ≈ 9,19 |
-| 2 | ≈ 366,5 | ≈ 1,356×10⁻² | ≈ 4,97 |
+| Eje | $\omega$ (rad/s) | $I$ (kg·mm²) | $I$ (kg·m²) | $L$ (kg·m²/s) |
+|---|---|---|---|---|
+| 1 | ≈ 293,2 | ≈ 31.349 | ≈ 3,135×10⁻² | ≈ 9,19 |
+| 2 | ≈ 366,5 | ≈ 13.558 | ≈ 1,356×10⁻² | ≈ 4,97 |
 
 *Los engranajes están engranados, por lo que giran en **sentidos opuestos**: los valores de arriba son módulos. El signo relativo importa en el Punto 7.*
 
@@ -590,7 +614,7 @@ Con $I_1' = I_1/2$ e $I_2' = I_2/2$:
 
 $$\omega_1' = \frac{I_1}{I_1'}\,\omega_1 = \frac{I_1}{I_1/2}\,\omega_1 = 2\,\omega_1 \qquad\qquad \omega_2' = 2\,\omega_2$$
 
-*(El resultado no depende de cuánto valga $I$, solo de la relación $I/I'=2$: vale como resultado general de la conservación de $L$.)*
+*(El resultado no depende de cuánto valga $I$ ni de en qué unidad esté expresado —kg·mm² o kg·m² dan la misma relación $I/I'=2$—, solo de esa relación: vale como resultado general de la conservación de $L$.)*
 
 **Valores** (con $\omega_1 \approx 293{,}2$ rad/s y $\omega_2 \approx 366{,}5$ rad/s del Punto 1):
 
@@ -600,11 +624,11 @@ $$\omega_1' = 2\,(293{,}2) \approx 586{,}4 \text{ rad/s} \qquad\qquad \omega_2' 
 
 $$n_1' = \frac{60 \cdot 586{,}4}{2\pi} \approx 5600 \text{ RPM} \qquad\qquad n_2' = \frac{60 \cdot 733{,}0}{2\pi} \approx 7000 \text{ RPM}$$
 
-**Verificación de coherencia con el engrane:** al duplicarse ambas velocidades, la relación entre ellas no cambia, y la condición de engrane del Punto 1 se sigue cumpliendo:
+**Verificación de coherencia con el engrane:** al duplicarse ambas velocidades, la relación entre ellas no cambia, y la condición de engrane del Punto 1 se sigue cumpliendo (con $R_1, R_2$ en mm, igual que en el Punto 1):
 
-$$\omega_1' R_1 = 586{,}4 \times 0{,}125 \approx 73{,}3 \text{ m/s} \qquad \omega_2' R_2 = 733{,}0 \times 0{,}1 \approx 73{,}3 \text{ m/s} \quad \checkmark$$
+$$\omega_1' R_1 = 586{,}4 \times 125 \approx 73.304 \text{ mm/s} = 73{,}30 \text{ m/s} \qquad \omega_2' R_2 = 733{,}0 \times 100 \approx 73.304 \text{ mm/s} = 73{,}30 \text{ m/s} \quad \checkmark$$
 
-**Qué se conserva y qué no:** $L$ se conserva (es el dato de partida), pero la energía cinética de rotación $K = \tfrac{1}{2}I\omega^2$ **no**: $K' = \tfrac{1}{2}\left(\tfrac{I}{2}\right)(2\omega)^2 = 2K$. Por ejemplo, en el eje 1 pasa de $K_1 \approx 1{,}35\times10^{3}$ J a $K_1' \approx 2{,}70\times10^{3}$ J. Ese incremento de energía debe provenir del trabajo realizado por lo que produce la reducción de $I$ (análogo a una patinadora que cierra los brazos).
+**Qué se conserva y qué no:** $L$ se conserva (es el dato de partida), pero la energía cinética de rotación $K = \tfrac{1}{2}I\omega^2$ **no**: $K' = \tfrac{1}{2}\left(\tfrac{I}{2}\right)(2\omega)^2 = 2K$ (con $I$ en kg·m², para que $K$ salga en joules). Por ejemplo, en el eje 1 pasa de $K_1 \approx 1{,}35\times10^{3}$ J a $K_1' \approx 2{,}70\times10^{3}$ J. Ese incremento de energía debe provenir del trabajo realizado por lo que produce la reducción de $I$ (análogo a una patinadora que cierra los brazos).
 
 **Resultados de este punto:**
 
@@ -656,19 +680,21 @@ $$L_{total} = 9{,}19 - 4{,}97 \approx 4{,}22 \text{ kg}\cdot\text{m}^2/\text{s}$
 
 **Planteo:** la potencia de rotación es $P = T\cdot\omega$ (sección 5). La consigna pide considerar el momento de inercia del "conjunto engranaje y eje", pero en esa fórmula el $I$ no interviene (ver más abajo), así que el resultado no depende de qué componentes se incluyan. El torque sale de la fuerza tangencial $F = 200$ N aplicada en el punto de contacto entre engranajes (pág. 15 del apunte de Abud). Las velocidades son las del estado inicial (Punto 1, $n_1 = 2800$ RPM), no las del Punto 6.
 
-**Paso 1 — torque en cada eje** ($F$ es tangencial, perpendicular al radio: $\sin\theta = 1$, sección 1):
+**Paso 1 — torque en cada eje** ($F$ es tangencial, perpendicular al radio: $\sin\theta = 1$, sección 1; $R$ en mm da el producto en N·mm):
 
-$$T_1 = F\,R_1 = 200 \cdot 0{,}125 = 25 \text{ N}\cdot\text{m} \qquad\qquad T_2 = F\,R_2 = 200 \cdot 0{,}1 = 20 \text{ N}\cdot\text{m}$$
+$$T_1 = F\,R_1 = 200 \cdot 125 = 25.000 \text{ N}\cdot\text{mm} = 25 \text{ N}\cdot\text{m} \qquad\qquad T_2 = F\,R_2 = 200 \cdot 100 = 20.000 \text{ N}\cdot\text{mm} = 20 \text{ N}\cdot\text{m}$$
 
-**Paso 2 — potencia** ($P = T\,\omega$, con $\omega$ en rad/s del Punto 1):
+*(Conversión N·mm → N·m: se divide por 1000, el mismo tipo de paso que pasar de mm a m en una sola potencia de longitud — no es el factor $10^{-6}$ de $I$, porque acá el momento de inercia no interviene.)*
+
+**Paso 2 — potencia** ($P = T\,\omega$, con $T$ ya en N·m y $\omega$ en rad/s del Punto 1):
 
 $$P_1 = T_1\,\omega_1 = 25 \cdot 293{,}2 \approx 7330 \text{ W} \qquad\qquad P_2 = T_2\,\omega_2 = 20 \cdot 366{,}5 \approx 7330 \text{ W}$$
 
 **El momento de inercia se cancela:** si se escribe la potencia como $P = I\,\omega\,\alpha$ (sección 6), como $I\,\alpha = T$ resulta $P = T\,\omega$. Por eso el $I$ **no modifica $P$**.
 
-**Verificación cruzada** ($P = F\cdot v_{contacto}$, con $v_{contacto} \approx 36{,}6$ m/s del Punto 1):
+**Verificación cruzada** ($P = F\cdot v_{contacto}$, con $v_{contacto} \approx 36{,}65$ m/s del Punto 1):
 
-$$P = 200 \cdot 36{,}6 \approx 7330 \text{ W} \qquad T_1\omega_1 = 25 \cdot 293{,}2 \approx 7330 \text{ W} \qquad T_2\omega_2 = 20 \cdot 366{,}5 \approx 7330 \text{ W} \quad \checkmark$$
+$$P = 200 \cdot 36{,}65 \approx 7330 \text{ W} \qquad T_1\omega_1 = 25 \cdot 293{,}2 \approx 7330 \text{ W} \qquad T_2\omega_2 = 20 \cdot 366{,}5 \approx 7330 \text{ W} \quad \checkmark$$
 
 Ambos ejes transmiten la misma potencia (engrane ideal, sin pérdidas), como corresponde.
 
