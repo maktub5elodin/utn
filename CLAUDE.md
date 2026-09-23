@@ -32,8 +32,8 @@ concept introduction → theory with ASCII diagrams → worked examples → summ
 what the subject is → why engineers need it → bridges from accounting → overview of major blocks → ASCII course map → practical advice
 
 **Style rules:**
-- ASCII diagrams only — no images, no LaTeX
-- Formulas inline with backticks: `` `F = m·a` ``
+- ASCII diagrams only — no images
+- Formulas: LaTeX math is allowed and preferred for developed equations (`$…$` inline, `$$…$$` for equations on their own line, decimal comma as `{,}`), as in `ingenieria_mecanica_i/tp_grupal_mecanica_rotacional/`. Simple formulas can still go inline with backticks: `` `F = m·a` ``. Within a single file, keep one convention (do not mix LaTeX and backticks for math). Inside ASCII diagrams, formulas stay as plain text.
 - Accounting analogies (balance sheets, cash flows, ledger entries, weighted averages) wherever they aid understanding
 - Source footer at end of each file citing PDFs and guides used
 
