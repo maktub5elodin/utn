@@ -27,6 +27,8 @@ Notación: `M` = masa del cuerpo, `R` = radio, `R1`/`R2` = radios interior/exter
 
 **Confianza: alta.** Imagen nítida, fórmulas estándar de mecánica racional, consistentes con bibliografía.
 
+**Respecto de qué eje (Steiner):** todas las fórmulas valen solo para el eje indicado en la columna "Eje". Salvo `f` y `j`, ese eje pasa por el centro de masa; `f` y `j` son justamente Steiner (`I = I_cm + M·h²`) aplicado a `e` y a `i`: `M·l²/12 + M·(l/2)² = M·l²/3` y `M·R²/2 + M·R² = 3·M·R²/2`. Para cualquier otro eje paralelo hay que sumar `M·h²` — p. ej. el rodamiento 6205 (caso `b`, 53,26 kg·mm² respecto de su eje) corrido 78 mm daría ≈ 832 kg·mm². Ver `Mecanica_Rotacional_Apuntes.md` §3.5.
+
 ---
 
 ## 2. Rodamientos rígidos de una hilera de bolas — SKF, Serie 62

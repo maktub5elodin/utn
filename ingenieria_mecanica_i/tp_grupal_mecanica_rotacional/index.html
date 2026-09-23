@@ -578,6 +578,13 @@
     <p class="section-intro"><span class="mono">M</span> = masa del cuerpo · <span class="mono">R</span> = radio (<span class="mono">R₁</span> y <span class="mono">R₂</span>, interior y exterior, en cuerpos huecos) · <span class="mono">l</span> = longitud. El pictograma muestra el cuerpo y el eje de rotación de cada ficha. Las dos fichas resaltadas son las que usa el TP: ejes (cilindro sólido) y engranajes y rodamientos (cilindro anular).</p>
     <div class="inertia-grid" id="inertiaGrid"></div>
     <div class="note ok"><strong>Confianza alta.</strong> Fórmulas estándar, consistentes con la bibliografía de mecánica racional.</div>
+    <div class="note"><strong>Siempre respecto de un eje (Steiner).</strong> Cada fórmula vale solo para el eje de su ficha; las fichas F y J son las E e I trasladadas con <span class="mono">I = I<sub>cm</sub> + M·h²</span>. Si se toma otro eje paralelo, el término <span class="mono">M·h²</span> domina enseguida: el rodamiento 6205 da 53,26 kg·mm² respecto de su eje, pero corrido <span class="mono">h = 3·R<sub>ext</sub> = 78 mm</span> daría <span class="mono">53,26 + 0,128·78² ≈ 832 kg·mm²</span>, unas 15 veces más.
+      <ul>
+        <li>En cada rotor, eje, engranaje y rodamientos son coaxiales (<span class="mono">h = 0</span>): por eso el panel suma sus inercias directamente.</li>
+        <li><span class="mono">I₁</span> e <span class="mono">I₂</span> están referidos a ejes distintos (separados 225 mm) y no se suman entre sí; por eso <span class="mono">L<sub>total</sub> = L₁ − L₂</span> combina los <span class="mono">L</span>, no los <span class="mono">I</span>.</li>
+        <li>La altura <span class="mono">H₁</span> tampoco entra por Steiner: cada rotor gira sobre su propio eje fijo, no orbita alrededor de la base.</li>
+      </ul>
+    </div>
   </section>
 
   <footer>

@@ -91,6 +91,25 @@ $$I = I_m + M h^2$$
 
 Donde *h* es la distancia entre el eje considerado y el eje paralelo que pasa por el centro de masa.
 
+> **⚠ Un momento de inercia siempre es "respecto de un eje".** Las fórmulas de la tabla (sección 4) dan $I_m$, respecto del eje que pasa por el centro de masa del cuerpo. Si se calcula $I$ respecto de otro eje paralelo, aparece el término $Mh^2$, que crece con el **cuadrado** de la distancia y enseguida domina.
+>
+> *Ejemplo con el rodamiento 6205 del ejercicio (Punto 2):* respecto de su propio eje, $I_m \approx 53{,}26$ kg·mm². Si el mismo anillo está corrido $h = 3R_{ext} = 3\cdot26 = 78$ mm del eje de referencia (por ejemplo, el eje $Z$ global de un modelo 3D donde la pieza no quedó centrada en el origen):
+>
+> $$I = 53{,}26 + 0{,}128\cdot78^2 = 53{,}26 + 778{,}75 \approx 832 \text{ kg}\cdot\text{mm}^2$$
+>
+> unas **15 veces** el valor correcto. No es un error de la fórmula del anillo sino del eje: se midió respecto de un eje que no es aquel en torno al cual gira la pieza.
+>
+> *Verificación en FreeCAD* (macros locales `~/FreeCAD/macros/`, fuera de este repo): `comun.inercia()` pide `punto` y `direccion` justamente para obligar a declarar el eje. Si se omiten, mide respecto del eje $Z$ global (con Steiner incluido); pasando la posición de la pieza, mide respecto de su eje propio:
+>
+> ```python
+> import comun as C, parametros as P
+> m = App.ActiveDocument.ModeloTP
+> C.inercia(m.Shape, 0.128 / m.Shape.Volume)                              # eje Z global: ≈ 830 (con Steiner)
+> C.inercia(m.Shape, 0.128 / m.Shape.Volume, punto=m.Placement.Base)      # eje propio:    ≈ 53
+> ```
+>
+> **Regla práctica:** antes de sumar o comparar momentos de inercia, verificar que estén todos referidos al **mismo eje**. Si ese eje coincide con el eje propio de cada pieza ($h = 0$), se suman directamente; si no, cada pieza lleva su término $Mh^2$.
+
 ---
 
 ## 4. Tabla de momentos de inercia de cuerpos rígidos comunes
@@ -460,6 +479,8 @@ Total eje 2 (×2 rodamientos):
 
 $$I_{2,rodamientos} \approx 461{,}4 \text{ kg}\cdot\text{mm}^2$$
 
+*Respecto de qué eje:* todos los valores de este punto son respecto del **eje propio** de cada rodamiento, que coincide con el eje sobre el que está montado ($h = 0$ en Steiner, sección 3.5). Por eso el "×2" es una suma directa: los dos rodamientos de un mismo eje están en distintas posiciones **axiales**, pero sobre la misma línea de giro, y desplazarse a lo largo del eje no cambia $I$. Lo que sí cambiaría el resultado es un corrimiento **radial** respecto del eje de referencia (ver el ejemplo de la sección 3.5: el mismo 6205 corrido 78 mm daría ≈ 832 kg·mm² en vez de 53,26).
+
 ### Punto 3: Momento de inercia de los ejes
 
 **Alcance:** este punto calcula **solo el eje** (acero al carbono). El momento de inercia de los engranajes (aluminio) se calcula aparte, a continuación, como cilindro anular con diámetro interior igual al diámetro del eje (caso (b) de la tabla), para no contar dos veces el núcleo que el eje ocupa dentro del engranaje. Los momentos de inercia totales de cada conjunto ($I_1$, $I_2$ para los Puntos 4 y 5) se arman después sumando eje + engranaje + rodamientos.
@@ -560,6 +581,8 @@ Ambos puntos son el mismo cálculo aplicado a cada eje: $L = I\,\omega$ (secció
 
 $$I = I_{eje} + I_{engranaje} + I_{rodamientos} \qquad \text{(todo en kg·mm², sumando lo de los Puntos 2, 3 y 3b)}$$
 
+**Por qué se pueden sumar directamente:** eje, engranaje y rodamientos de un mismo conjunto son **coaxiales** — todos giran en torno a la misma línea — y cada $I$ de los Puntos 2, 3 y 3b ya está referido a ese eje. Con $h = 0$ para todas las piezas, Steiner (sección 3.5) no agrega nada y la suma es directa. En cambio, $I_1$ e $I_2$ **no** se pueden sumar entre sí como si fueran un solo cuerpo: están referidos a ejes distintos, separados por la distancia entre centros $R_1 + R_2 = 225$ mm. Llevar el conjunto 2 ($M \approx 2{,}266 + 2{,}474 + 2\cdot0{,}288 \approx 5{,}32$ kg) al eje 1 daría $13.558 + 5{,}32\cdot225^2 \approx 282.700$ kg·mm², unas 21 veces su $I$ propio — un número que no describe ningún giro real del mecanismo, porque el conjunto 2 gira sobre su propio eje, no alrededor del eje 1 (ver Punto 7).
+
 Usa todo lo calculado en los Puntos 2, 3 y 3b. Es la lectura que justifica que la consigna pida el momento de inercia de los rodamientos como ítem propio (Punto 2), ya que solo los Puntos 4, 5, 6 y 7 podrían usarlo. La aclaración del Punto 8 ("considerar el momento de inercia del conjunto engranaje y eje") no la contradice: allí $P = T\,\omega$ y el $I$ se cancela, así que el resultado de ese punto no depende de qué componentes se incluyan.
 
 **Componentes de $I$ (de los Puntos 2, 3 y 3b), en kg·mm²:**
@@ -653,6 +676,8 @@ $$\vec{L}_O = \vec{L}_{CM} + \vec{r}_{CM}\times M\,\vec{v}_{CM}$$
 $$\vec{L}_{O,\,eje\,1} = I_1\,\omega_1 \qquad\qquad \vec{L}_{O,\,eje\,2} = I_2\,\omega_2$$
 
 **Consecuencia:** $L$ no depende de dónde esté el origen. Las distancias $H_1$ y $H_2$ **no intervienen** en el resultado: el sistema de referencia en la base da el mismo valor que uno ubicado sobre los propios ejes. Por eso $H_2$ no hace falta y su ausencia en el enunciado no impide resolver el punto.
+
+*Error a evitar — aplicar Steiner con $H_1$:* es tentador "trasladar" el momento de inercia a la base con $I_O = I + M H_1^2$ y calcular $L = I_O\,\omega$. Eso sería correcto si el conjunto **orbitara** alrededor de un eje que pasa por la base (como una piedra atada a una cuerda). En un cuerpo que orbita así, el término $MH^2\omega$ de Steiner es precisamente el aporte $\vec{r}_{CM}\times M\vec{v}_{CM}$ del movimiento del centro de masa. Acá cada conjunto gira sobre su propio eje, que no se mueve: $v_{CM} = 0$ y ese aporte vale cero. El $I$ que va en $L = I\omega$ es siempre el del eje en torno al cual la pieza **efectivamente gira** (sección 3.5).
 
 **Sentidos de giro:** los dos engranajes están engranados por el exterior, así que sus ejes (paralelos) giran en **sentidos opuestos** y sus vectores $\vec{L}_1$ y $\vec{L}_2$ son antiparalelos. Tomando como positivo el sentido de giro del eje 1:
 

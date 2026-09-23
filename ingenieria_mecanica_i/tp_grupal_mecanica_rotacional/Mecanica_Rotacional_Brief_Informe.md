@@ -82,6 +82,8 @@ f) Calcular la potencia transmitida por el mecanismo.
 | Cilindro sólido | `I = M·R²/2` | Ejes |
 | Cilindro anular (radios interior `R₁`, exterior `R₂`) | `I = M·(R₁² + R₂²)/2` | Engranajes y rodamientos |
 
+**Teorema de Steiner (ejes paralelos):** `I = I_cm + M·h²`, con `h` = distancia entre el eje de referencia y el eje paralelo por el centro de masa. Las fórmulas de la tabla dan `I_cm`; si el `I` se toma respecto de otro eje, el término `M·h²` domina rápido. Ejemplo: el rodamiento 6205 respecto de su eje da 53,26 kg·mm², pero corrido `h = 3·R_ext = 78 mm` daría `53,26 + 0,128·78² ≈ 832 kg·mm²` (unas 15 veces más). En este TP todas las piezas de un conjunto son **coaxiales** (`h = 0`), por eso sus `I` se suman directamente; el punto a cuidar es no mezclar `I` referidos a ejes distintos (Puntos 4/5 y 7).
+
 **Convención de unidades de `I` en este informe:** las longitudes del enunciado (diámetros, radios, largos, alturas) ya vienen en milímetros, así que `I` se calcula y se reporta directamente en **kg·mm²** en vez de kg·m² (números más legibles para piezas de este tamaño: decenas a decenas de miles, en vez de `10⁻⁴`–`10⁻²`). La masa a partir de la densidad usa `δ` en kg/mm³ (`δ_acero = 7850 kg/m³ = 7,85×10⁻⁶ kg/mm³`; `δ_Al = 2708 kg/m³ = 2,708×10⁻⁶ kg/mm³`), de modo que `V` en mm³ × `δ` en kg/mm³ da la masa directo en kg: `M = δ·V`; con `V = π·R²·L` (cilindro sólido) o `V = π·(R_ext² − R_int²)·b` (cilindro anular).
 
 **Dónde convertir de vuelta a SI:** `kg·mm² = 10⁻⁶ kg·m²`. Cada vez que `I` se combina con `ω` para dar `L` (que sí se reporta en SI, kg·m²/s), se multiplica `I` por `10⁻⁶` antes de operar — paso explícito en el Punto 4/5. Para el torque (`T = F·R`, Punto 8) el ajuste es distinto: `R` en mm da `T` en N·mm, y se divide por 1000 para pasar a N·m (no interviene el `10⁻⁶` de `I`, porque en `P=T·ω` el momento de inercia se cancela).
@@ -159,6 +161,8 @@ Atajo: `n₂ = n₁·R₁/R₂ = 2800·125/100 = 3500 RPM`.
 
 Cálculo ejemplo eje 1: `½·0,128·(676 + 156,25) = ½·0,128·832,25 ≈ 53,26 kg·mm²`.
 
+Los valores son respecto del eje propio de cada rodamiento, que coincide con el eje sobre el que va montado (`h = 0` en Steiner); por eso el "×2" es suma directa (los dos rodamientos solo difieren en posición axial, que no cambia `I`).
+
 **Punto 3 — Momento de inercia de los ejes (Tabla 4)**
 
 `M = δ_acero·π·R²·L` (con `R`, `L` en mm y `δ` en kg/mm³, `V` sale en mm³); `I = ½·M·R²` (verificación: `I = ½·δ·π·L·R⁴`).
@@ -181,7 +185,7 @@ Cálculo ejemplo eje 1: `½·0,128·(676 + 156,25) = ½·0,128·832,25 ≈ 53,26
 
 **Puntos 4 y 5 — Cantidad de movimiento angular `L₁` y `L₂` (Tablas 5 y 6)**
 
-`I = I_eje + I_engranaje + I_rodamientos` (kg·mm²); se convierte a SI (`×10⁻⁶`) antes de aplicar `L = I·ω` con `ω` en rad/s.
+`I = I_eje + I_engranaje + I_rodamientos` (kg·mm²) — suma directa porque las tres piezas son coaxiales y cada `I` ya está referido al eje del conjunto (Steiner con `h = 0`). `I₁` e `I₂` en cambio **no** se suman entre sí: están referidos a ejes separados 225 mm (llevar el conjunto 2 al eje 1 daría ≈ 282.700 kg·mm², unas 21 veces su `I` propio, sin sentido físico porque el conjunto 2 no orbita alrededor del eje 1). Se convierte a SI (`×10⁻⁶`) antes de aplicar `L = I·ω` con `ω` en rad/s.
 
 Tabla 5 — Componentes de `I` (kg·mm²):
 
@@ -216,6 +220,8 @@ Verificación de engrane: `ω₁'R₁ = 586,4·125 ≈ 73.304 mm/s ≈ 73,30 m/s
 **Punto 7 — `L` total respecto de un sistema fijo a la base**
 
 Principio: `L_O = L_CM + r_CM × M·v_CM`. Cada conjunto es simétrico, gira en torno a un eje fijo que pasa por su centro de masa ⇒ `v_CM = 0`, el segundo término se anula y `L_O = I·ω`, **independiente de `H₁` y `H₂`** (por eso `H₂` no hace falta).
+
+Error a evitar: aplicar Steiner con la altura (`I_O = I + M·H₁²`) y usar ese `I` en `L = I·ω`. Eso describiría un conjunto que **orbita** alrededor de la base; acá cada conjunto gira sobre su propio eje fijo, y el término `M·H²·ω` (que es justamente `r_CM × M·v_CM`) vale cero porque `v_CM = 0`.
 
 Sentidos: engranajes engranados por fuera ⇒ giran en sentidos opuestos ⇒ `L₁` y `L₂` son antiparalelos ⇒ `L_total = L₁ − L₂` (error a evitar: sumar módulos, que daría ≈ 14,16 en vez de ≈ 4,22).
 
