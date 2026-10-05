@@ -1,6 +1,6 @@
 # TP Mecánica Rotacional 2 — Eje sobre rodamientos de rodillos cilíndricos
 
-Segundo ejercicio de aplicación de mecánica rotacional (docente Abud), planteado en el pizarrón. Reutiliza la teoría y las convenciones del primer TP (`../tp_grupal_mecanica_rotacional/Mecanica_Rotacional_Apuntes.md`): unidades en mm / kg·mm² con conversión explícita a SI, `ω = 2πn/60`, Steiner, etc.
+Segundo ejercicio de aplicación de mecánica rotacional (docente Abud), planteado en el pizarrón. Reutiliza la teoría y las convenciones del primer TP (`Mecanica_Rotacional_Apuntes.md`, en la carpeta `tp_grupal_mecanica_rotacional/`): unidades en mm / kg·mm² con conversión explícita a SI, $\omega = 2\pi n/60$, Steiner, etc.
 
 La diferencia principal con el TP anterior es el tipo de rodamiento: allá eran **rígidos de una hilera de bolas (SKF serie 62)**; acá son **de una hilera de rodillos cilíndricos (SKF serie NU 10)**.
 
@@ -79,7 +79,7 @@ $$\boxed{\text{Rodamiento seleccionado: SKF NU 1005}\quad(\text{dos unidades, un
 
 **Verificaciones:**
 
-1. **Velocidad:** $n = 1400$ RPM ≪ $n_{máx} = 16\,000$ rpm (trabaja a menos del 9 % del límite). ✔
+1. **Velocidad:** $n = 1400$ RPM ≪ $n_{\text{máx}} = 16\,000$ rpm (trabaja a menos del 9 % del límite). ✔
 2. **Carga:** aunque toda la fuerza $F = 500$ N ≈ 51 kgf cargara un solo rodamiento, queda muy por debajo de $C_0 = 640$ kgf (más de 12 veces). La verificación es cualitativa: el enunciado no da la distancia del punto de aplicación de $F$ al rodamiento más cercano, así que no se pueden calcular las reacciones en cada apoyo. Con un margen de ese tamaño la conclusión no cambia. ✔
 3. **Tipo de carga:** el NU no admite carga axial (Anexo A). Por eso $F$ se interpreta como **fuerza tangencial a 400 mm del eje**, que genera un par sobre el eje ($T = F \cdot 0{,}4$ m, se usa en el Punto 4) y no empuja a lo largo del eje. En el pizarrón la flecha está dibujada horizontal en la vista lateral, pero esa lectura literal (fuerza axial) sería incompatible con el rodamiento elegido.
 
@@ -366,11 +366,23 @@ $$E_c = 1{,}259\times10^{-3} + 0{,}629\times10^{-3} = 1{,}888\times10^{-3}\ \tex
 
 ## Anexo A — Tabla SKF: rodamientos de una hilera de rodillos cilíndricos, serie NU 10
 
-Transcripción de `rodamientos.jpeg` (catálogo SKF, pág. 69). Copia legible; en la hoja original están marcados con círculo los diámetros $d$ = 25, 30, 35 y 60 mm.
+Datos de `rodamientos.jpeg` (catálogo SKF, pág. 69).
+
+<!-- solo-md -->
+
+Transcripción completa de la tabla. Copia legible; en la hoja original están marcados con círculo los diámetros $d$ = 25, 30, 35 y 60 mm.
+
+<!-- /solo-md -->
 
 Designación: `NU 10` + número de tamaño (ej. tamaño `05` → `NU 1005`). Igual que en la serie 62, para $d \geq 20$ mm el número de tamaño es $d/5$.
 
-> **► Rodamiento seleccionado (Punto 1): SKF NU 1005** ($d = 25$ mm = diámetro del eje). Su fila va destacada en negrita en la tabla.
+> **► Rodamiento seleccionado (Punto 1): SKF NU 1005** ($d = 25$ mm = diámetro del eje).
+
+<!-- solo-md -->
+
+Su fila va destacada en negrita en la tabla. En el PDF, el anexo muestra solo esta fila.
+
+<!-- /solo-md -->
 
 | Rodamiento | Peso (kg) | d (mm) | D (mm) | B (mm) | r (mm) | r₁ (mm) | F (mm) | C dinámica (kg) | C₀ estática (kg) | n máx (rpm) |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -401,7 +413,7 @@ Designación: `NU 10` + número de tamaño (ej. tamaño `05` → `NU 1005`). Igu
 | NU 1038 | 10,9 | 190 | 290 | 46 | 3,5 | 3,5 | 215 | 32500 | 29000 | 2000 |
 | NU 1040 | 14,1 | 200 | 310 | 51 | 3,5 | 3,5 | 229 | 35500 | 32500 | 2000 |
 
-**Significado de las columnas** (según el croquis del catálogo):
+**Significado de cada magnitud** (según el croquis del catálogo):
 
 - $d$ — **diámetro interior** (agujero del aro interior, donde calza el eje).
 - $D$ — diámetro exterior del aro exterior.
@@ -413,7 +425,12 @@ Designación: `NU 10` + número de tamaño (ej. tamaño `05` → `NU 1005`). Igu
 
 **Notas del catálogo:**
 
+<!-- solo-md -->
+
 - Desde el NU 1006 en adelante (excepto el NU 1016) se construyen con separador (jaula) macizo de latón.
+
+<!-- /solo-md -->
+
 - Todos, excepto el NU 1005, pueden suministrarse con ranura en el aro exterior (sufijo `N`, ej. `NU 1006 N`).
 
 > **Diferencia de diseño con los de bolas (serie 62):** en el tipo **NU** el aro exterior tiene dos rebordes y el aro interior **no tiene rebordes**. Los rodillos quedan guiados por el aro exterior y el aro interior puede desplazarse axialmente respecto de ellos. Consecuencia práctica: **soporta carga radial (más que uno de bolas del mismo tamaño), pero no carga axial**.
@@ -424,4 +441,4 @@ Designación: `NU 10` + número de tamaño (ej. tamaño `05` → `NU 1005`). Igu
 
 - `ejercicio.jpeg`: foto del pizarrón con el esquema, los datos y las consignas 1 a 7 (Abud).
 - `rodamientos.jpeg`: catálogo SKF, "Rodamientos de una hilera de rodillos cilíndricos — Serie NU 10", pág. 69 (material entregado en clase).
-- `../tp_grupal_mecanica_rotacional/Mecanica_Rotacional_Apuntes.md` y `Mecanica_Rotacional_Datos.md`: teoría, convenciones de unidades y criterio de selección del TP 1.
+- `Mecanica_Rotacional_Apuntes.md` y `Mecanica_Rotacional_Datos.md` (carpeta `tp_grupal_mecanica_rotacional/`): teoría, convenciones de unidades y criterio de selección del TP 1.
