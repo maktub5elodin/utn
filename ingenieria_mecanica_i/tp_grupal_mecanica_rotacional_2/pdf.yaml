@@ -1,65 +1,7 @@
-# Configuración de pandoc para generar el .tex/.pdf a partir del .md.
-# Se usa desde el Makefile: pandoc --defaults=pdf.yaml <doc>.md -o build/<doc>.tex
-# Misma estructura que ayga/excercise/pdf.yaml.
-
-from: markdown
-to: latex
-standalone: true
-
-# El "# Título" del .md pasa a ser el título del documento; "##" -> \section
-shift-heading-level-by: -1
-
-table-of-contents: true
-toc-depth: 2
-
-# Orden: solo-md y seleccion-catalogo trabajan sobre el contenido del .md;
-# tablas-cebra va al final porque convierte las tablas en LaTeX crudo.
-filters:
-  - filtros/solo-md.lua
-  - filtros/seleccion-catalogo.lua
-  - filtros/png-a-pdf.lua
-  - filtros/referencias-fig.lua
-  - filtros/tablas-cebra.lua
-
-metadata:
-  lang: es   # babel spanish: "Figura", "Índice", fecha en español
+# Variables propias de este documento. La configuración común de pandoc está
+# en pipeline_pdf/base.yaml (ver pipeline_pdf/comun.mk).
 
 variables:
   title-meta: "TP Mecánica Rotacional 2 — Eje sobre rodamientos de rodillos cilíndricos"
   subtitle: "Ingeniería Mecánica I — TP grupal de Mecánica Rotacional, ejercicio 2"
   date: "5 de octubre de 2026"
-  documentclass: article
-  # Opción global: xcolor la toma como [table] (carga colortbl y define
-  # \rowcolors). Va acá porque el template carga xcolor antes que header-includes.
-  classoption: table
-  # Las tablas llegan como LaTeX crudo (filtros/tablas-cebra.lua): pandoc no las
-  # detecta, así que se le indica que cargue longtable/booktabs/array igual.
-  tables: true
-  fontsize: 11pt
-  papersize: a4
-  geometry: margin=2.5cm
-  mainfont: Latin Modern Roman
-  mathfont: Latin Modern Math
-  colorlinks: true
-  linkcolor: blue
-  header-includes: |
-    \usepackage{float}
-    \floatplacement{figure}{H}
-    % Título + índice en la primera página; el contenido empieza en página nueva.
-    \let\indiceoriginal\tableofcontents
-    \renewcommand{\tableofcontents}{\indiceoriginal\clearpage}
-    % Rayado de cebra en todas las tablas (ver filtros/tablas-cebra.lua).
-    \usepackage{etoolbox}
-    \definecolor{cebra}{gray}{0.93}
-    \AtBeginEnvironment{longtable}{\rowcolors{1}{cebra}{}\renewcommand{\arraystretch}{1.3}}
-    % Caracteres Unicode del .md que Latin Modern Roman no tiene: se dibujan
-    % con su equivalente LaTeX (el Makefile corta si aparece uno nuevo).
-    \usepackage{newunicodechar}
-    \usepackage{fontawesome5}
-    \newunicodechar{≈}{\ensuremath{\approx}}
-    \newunicodechar{≪}{\ensuremath{\ll}}
-    \newunicodechar{►}{\ensuremath{\blacktriangleright}}
-    \newunicodechar{✔}{\ensuremath{\checkmark}}
-    \newunicodechar{⚠}{\faExclamationTriangle}
-    \newunicodechar{₀}{\textsubscript{0}}
-    \newunicodechar{₁}{\textsubscript{1}}
