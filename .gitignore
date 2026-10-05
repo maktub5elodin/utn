@@ -23,9 +23,20 @@ desktop.ini
 *.swp
 *.swo
 *.dxf~
+\#*.dxf
+
+# Python
+__pycache__/
 
 # Claude Code (settings locales, no van al repo)
 .claude/
+
+# Salidas de compilación (pandoc/LaTeX): se regeneran con make
+**/build/*
+# Excepciones: se versionan el PDF final de cada build/ y los PNG de figuras/
+# (vista previa del .md en GitHub). Requieren builds reproducibles: ver CLAUDE.md.
+!**/build/*.pdf
+!**/figuras/*.png
 
 # Directorios excluidos temporalmente
 su_myf/

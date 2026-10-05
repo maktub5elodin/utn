@@ -1,0 +1,9 @@
+{
+  // Apuntes en prosa: sin wrap a 80 columnas ni estilo fijo de pipes en tablas.
+  "MD013": false,
+  "MD060": false,
+  // Rótulos en negrita (**Eje 1**, **Punto 1 — ...**) como subtítulos livianos: convención del repo.
+  "MD036": false,
+  // Listas numeradas que continúan después de ecuaciones display ($$...$$).
+  "MD029": false
+}

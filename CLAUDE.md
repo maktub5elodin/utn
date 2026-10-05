@@ -70,3 +70,19 @@ Key sources per subject:
 ## Git and .gitignore
 
 PDFs, Office files (ppt/pptx, doc/docx), and images (jpg/png) are excluded from the repo — they live locally only. The `su_myf/` directory is fully excluded. Do not force-add these file types.
+
+**Excepción — trabajos con pipeline de compilación** (ej. `ayga/excercise/`: `.md` → figuras Python → pandoc/xelatex → PDF, con `make`). Reglas generales en `.gitignore`, válidas para cualquier ejercicio nuevo con la misma estructura (no hace falta editarlo cada vez):
+
+| Se versiona | Por qué |
+|---|---|
+| Fuentes: `.md`, scripts `.py`, `filtros/*.lua`, `Makefile`, `pdf.yaml` | Son el trabajo en sí: texto liviano con diffs legibles |
+| `build/*.pdf` (documento final) | Es el producto: se lee en GitHub sin compilar |
+| `figuras/*.png` | Vista previa: el `.md` apunta a los PNG para que se vean en GitHub |
+
+| No se versiona | Por qué |
+|---|---|
+| `figuras/*.pdf` | Intermedios vectoriales: ya están dentro del PDF final y `make` los regenera |
+| Resto de `build/` (`.tex`, `.aux`, `.log`, `.toc`) | Subproductos de cada compilación; el `.tex` se inspecciona localmente |
+| `__pycache__/`, `#*.dxf` (autoguardado de LibreCAD) | Archivos temporales de herramientas |
+
+**Requisito de las excepciones: builds reproducibles.** El `Makefile` fija `SOURCE_DATE_EPOCH` (y `FORCE_SOURCE_DATE=1`) para que xelatex, incluido el que usa matplotlib para las figuras, no embeba la fecha de compilación: así el PDF y los PNG salen idénticos byte a byte si el contenido no cambió, y `make` no genera cambios falsos en git. Todo Makefile nuevo que produzca archivos versionados debe hacer lo mismo. Fuera de `build/` y `figuras/`, PDFs y PNGs siguen ignorados (bibliografía, guías, fotos); no usar `git add -f` para saltear eso.
