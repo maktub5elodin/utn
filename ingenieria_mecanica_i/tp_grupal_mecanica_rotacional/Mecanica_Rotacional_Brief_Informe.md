@@ -1,7 +1,7 @@
 # Brief para armar el informe — TP grupal Mecánica Rotacional (tren de engranajes)
 
 > **Uso de este archivo:** está pensado para pasárselo completo a Claude (web) junto con la orden "armá el informe siguiendo este brief". Contiene todo lo necesario: datos, marco teórico mínimo, supuestos, resultados ya calculados y la estructura pedida. No hace falta ningún otro archivo.
-
+>
 > **⚠ Nota de divergencia de unidades (22/sep/2026):** esta versión trabaja con longitudes en milímetros y momento de inercia en **kg·mm²** (ver sección 3 y el Punto 2/3/3b), en línea con `Mecanica_Rotacional_Apuntes.md` e `index.html`. El informe final ya entregado (`tp_mecanica_rotacional.odt`/`.pdf`, local, no versionado) se generó **antes** de este cambio y quedó en kg·m² (Sistema Internacional puro); no se regeneró para mantenerlo tal cual fue entregado. Si se vuelve a armar el informe desde este brief, el documento resultante usará kg·mm² y por lo tanto **no coincidirá numéricamente en esa columna** con el `.odt`/`.pdf` ya entregado (los resultados físicos — L, T, P — son los mismos; solo cambia cómo se expresa `I`).
 
 ---

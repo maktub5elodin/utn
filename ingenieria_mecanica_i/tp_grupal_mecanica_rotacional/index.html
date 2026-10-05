@@ -418,7 +418,7 @@
       <div><span>Fuente</span>Enunciado (apunte Abud, págs. 14–15) · catálogo SKF serie 62 · bibliografía de mecánica racional</div>
       <div><span>Estado</span>Ejercicio resuelto, puntos 1 a 8 · cifras idénticas a las del informe</div>
       <div><span>Uso</span>Referencia y verificación; contrastar con el catálogo oficial en diseño crítico</div>
-      <div><span>Unidades</span>Análisis en SI (kg, m, s) · catálogo en mm y kg</div>
+      <div><span>Unidades</span>Análisis en SI (kg, m, s) · I expresado en kg·mm² (= 10⁻⁶ kg·m²) · catálogo en mm y kg</div>
     </div>
   </div>
 
@@ -600,6 +600,7 @@
 /* ============================================================
    MODELO FÍSICO — mismos datos y fórmulas del informe (sin DOM)
    Unidades: SI (m, kg, s). Los diámetros del catálogo vienen en mm.
+   El I se guarda en kg·m² y solo se muestra en kg·mm² (×10⁶, ver mmI()).
    ============================================================ */
 /*MODEL-START*/
 const BEARINGS = (function () {

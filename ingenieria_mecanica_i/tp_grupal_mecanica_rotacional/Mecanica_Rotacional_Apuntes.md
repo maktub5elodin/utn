@@ -214,6 +214,7 @@ Como $R\omega = V_{CM}$:
 $$\boxed{k = \frac{1}{2}I_{CM}\,\omega^2 + \frac{1}{2}M V_{CM}^2}$$
 
 **Interpretación:**
+
 - $\frac{1}{2}I_{CM}\omega^2$ → energía cinética de rotación pura (alrededor del CM)
 - $\frac{1}{2}MV_{CM}^2$ → energía cinética de traslación pura
 
@@ -233,7 +234,7 @@ $$\boxed{k = \frac{1}{2}I_{CM}\,\omega^2 + \frac{1}{2}M V_{CM}^2}$$
 - Deslizando: $v = \sqrt{2\rho h}$
 
 > **Nota de consistencia con la fuente:** tal cual figura en el apunte original del docente (pág. 7 del PDF), ambas fórmulas usan el símbolo `ρ`. Se mantiene así en este documento porque refleja fielmente el material provisto por el profesor. Sin embargo, dimensionalmente `ρ` no puede corresponder a una densidad (no da unidades de velocidad); la ecuación sale de igualar `mgh = ½mv² + ½Iω²`, que solo cierra si ese símbolo es **g (aceleración de la gravedad)**. **Al resolver cálculos reales, usar `g`, no `ρ`.**
-
+>
 > La velocidad del centro de masa es **menor** rodando que deslizando → la rodadura es un estado **más estable**. Por eso es fundamental que exista una fuerza mínima de rozamiento entre las superficies para que haya rodadura pura.
 
 ### 8.4 Momento perpendicular al eje
@@ -329,6 +330,7 @@ $$L = L_1 + L_2 \quad \Rightarrow \quad L \parallel \omega$$
 Sistema de dos ejes paralelos engranados entre sí, cada uno apoyado sobre dos rodamientos.
 
 **Materiales:**
+
 - Eje: acero al carbono
 - Engranajes: aluminio
 - Rodamientos: acero
@@ -337,12 +339,14 @@ Sistema de dos ejes paralelos engranados entre sí, cada uno apoyado sobre dos r
 $$\delta_{Al} = 2{,}708 \text{ g/cm}^3 \qquad \delta_{Acero} = 7{,}85 \text{ g/cm}^3$$
 
 **Geometría — Eje 1 (n₁):**
+
 - Diámetro del eje: 25 mm
 - Diámetro del engranaje: 250 mm
 - Altura respecto a la base: H₁ = 1500 mm
 - Largo del eje: 300 mm
 
 **Geometría — Eje 2 (n₂):**
+
 - Diámetro del eje: 35 mm
 - Diámetro del engranaje: 200 mm
 - Altura respecto a la base: H₂ (sin valor en el enunciado; no hace falta para resolver el ejercicio — ver Punto 7)
@@ -350,6 +354,7 @@ $$\delta_{Al} = 2{,}708 \text{ g/cm}^3 \qquad \delta_{Acero} = 7{,}85 \text{ g/c
 **Ancho de cara de los engranajes:** 30 mm
 
 > **⚠ Aclaración de nomenclatura — "chico"/"grande" no es consistente entre eje y engranaje:**
+>
 > - Por diámetro de **eje**: eje 1 = 25 mm (el más chico), eje 2 = 35 mm (el más grande).
 > - Por diámetro de **engranaje**: engranaje del eje 1 = 250 mm (el más grande de los dos), engranaje del eje 2 = 200 mm (el más chico de los dos).
 >

@@ -1,6 +1,7 @@
 # Datos de referencia — TP Mecánica Rotacional
 
 Extraído de dos imágenes fuente (calidad de escaneo baja/media):
+
 - `momentos_de_inercia.jpg` — tabla de momentos de inercia de cuerpos rígidos (buena legibilidad).
 - `tablas_de_rodamientos.jpg` — catálogo SKF, rodamientos rígidos de una hilera de bolas, serie 62 (legibilidad media-baja, ver notas de confianza al final).
 

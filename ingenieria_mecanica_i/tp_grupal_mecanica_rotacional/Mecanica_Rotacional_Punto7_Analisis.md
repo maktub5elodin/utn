@@ -48,7 +48,7 @@ $$L = I\,\omega\cdot10^{-6} \qquad\Rightarrow\qquad L_1 = 31.349 \cdot 293{,}2 \
 
 Los engranajes están engranados por el exterior, así que **giran en sentidos opuestos**.
 
-```
+```text
         vista según los ejes (ejes perpendiculares al papel)
 
              rotor 1                 rotor 2
@@ -89,7 +89,7 @@ $$\vec{L}_O = \vec{L}_{cm} + \vec{r}_{cm} \times \vec{P}_{cm}$$
 
 **Cómo leer el término orbital.** $\vec{r}_{cm} \times \vec{P}_{cm}$ es exactamente el $\vec{L} = \vec{r} \times \vec{p}$ de una **partícula puntual**, aplicado a una partícula imaginaria de masa $M$ ubicada en el centro de masa. La descomposición de arriba separa el movimiento de cualquier cuerpo en dos partes independientes:
 
-```
+```text
    movimiento del cuerpo  =  traslación del CM          +  giro alrededor del CM
                              (como una partícula de       (el cuerpo girando
                               masa M en r_cm, con v_cm)    sobre sí mismo)
@@ -186,7 +186,7 @@ $$I_O\,\omega = \underbrace{I_{cm}\,\omega}_{\text{giro propio}} + \underbrace{M
 
 Es decir, Steiner es la misma descomposición de la sección 3 ($\vec{L}_{cm} + \vec{r}_{cm} \times \vec{P}_{cm}$), escrita para el caso particular de un cuerpo rígido que orbita alrededor de $O$. El término $M H^2$ **representa** el movimiento orbital del centro de masa: si no hay órbita, no hay término.
 
-```
+```text
    CUERPO QUE ORBITA (Steiner aplica)        ROTOR DEL TP (Steiner no aplica)
 
           ↺ ω                                        ↺ ω
@@ -289,7 +289,7 @@ En el mecanismo, ningún centro de masa se mueve, así que $\vec{P}_{total} = 0$
 
 ## 11. Mapa conceptual
 
-```
+```text
                          L respecto de la base  (Punto 7)
                                      │
                     L_O = Σ ( L_cm  +  r_cm × P_cm )
