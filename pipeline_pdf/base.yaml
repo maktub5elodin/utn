@@ -24,6 +24,7 @@ toc-depth: 2
 # tablas-cebra va al final porque convierte las tablas en LaTeX crudo.
 filters:
   - ${.}/filtros/solo-md.lua
+  - ${.}/filtros/salto-pagina.lua
   - ${.}/filtros/seleccion-catalogo.lua
   - ${.}/filtros/png-a-pdf.lua
   - ${.}/filtros/referencias-fig.lua
