@@ -13,6 +13,7 @@
 # está en base.yaml, junto a este archivo.
 #
 #   make          -> figuras (si hay) -> build/<doc>.tex -> build/<doc>.pdf
+#   make docx     -> build/<doc>.docx (Word, sin la estética de LaTeX; no se versiona)
 #   make figuras  -> solo regenera las figuras
 #   make clean    -> borra build/ (no toca figuras/ ni el .md)
 #
@@ -40,13 +41,15 @@ export FORCE_SOURCE_DATE := 1
 
 FIGS := $(foreach n,$(FIG_NAMES),figuras/$(n).pdf figuras/$(n).png)
 
-.PHONY: all figuras clean
+.PHONY: all docx figuras clean
 
 # Si un paso falla, se borra su salida: nunca queda un PDF "a medias" que
 # make considere actualizado.
 .DELETE_ON_ERROR:
 
 all: $(BUILD)/$(DOC).pdf
+
+docx: $(BUILD)/$(DOC).docx
 
 figuras: $(FIGS)
 
@@ -79,6 +82,12 @@ $(BUILD)/$(DOC).pdf: $(BUILD)/$(DOC).tex $(FIGS)
 		echo "ERROR: caracteres sin glifo en la fuente (ver arriba)"; exit 1; fi
 	@echo "--- Advertencias de LaTeX:"
 	@grep -E 'Warning|Overfull|Underfull' $(BUILD)/$(DOC).log || echo "(ninguna)"
+	@echo "OK: $@"
+
+# Word: mismo .md y mismos filtros de contenido, configuración en docx.yaml.
+# Fórmulas como ecuaciones nativas de Word; figuras en PNG.
+$(BUILD)/$(DOC).docx: $(DOC).md pdf.yaml $(PIPELINE)/docx.yaml $(FILTROS) $(FIGS) | $(BUILD)
+	pandoc --defaults=$(PIPELINE)/docx.yaml --defaults=pdf.yaml $(DOC).md -o $@
 	@echo "OK: $@"
 
 clean:

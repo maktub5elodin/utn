@@ -25,6 +25,7 @@ toc-depth: 2
 filters:
   - ${.}/filtros/solo-md.lua
   - ${.}/filtros/salto-pagina.lua
+  - ${.}/filtros/destacados.lua
   - ${.}/filtros/seleccion-catalogo.lua
   - ${.}/filtros/png-a-pdf.lua
   - ${.}/filtros/referencias-fig.lua
@@ -37,7 +38,9 @@ variables:
   documentclass: article
   # Opción global: xcolor la toma como [table] (carga colortbl y define
   # \rowcolors). Va acá porque el template carga xcolor antes que header-includes.
-  classoption: table
+  # dvipsnames: colores con nombre (ej. BrickRed) que también entiende el
+  # MathJax de GitHub, para colorear fórmulas igual en el .md y en el PDF.
+  classoption: [table, dvipsnames]
   # Las tablas llegan como LaTeX crudo (filtros/tablas-cebra.lua): pandoc no las
   # detecta, así que se le indica que cargue longtable/booktabs/array igual.
   tables: true
@@ -63,6 +66,26 @@ variables:
     % colorear los array de las fórmulas (cases). El encabezado sin color y los
     % bordes los ajusta filtros/tablas-cebra.lua.
     \usepackage{etoolbox}
+    % Recuadros de destacados (filtros/destacados.lua): fondo claro, filete a
+    % la izquierda y texto oscuro del mismo tono (las fórmulas toman el color).
+    % Rojo = error, verde = respuesta correcta. Centrados y más angostos que el
+    % texto, alineados con las ecuaciones centradas; sin cortar palabras ni fórmulas.
+    \usepackage[most]{tcolorbox}
+    \definecolor{errorfondo}{RGB}{253,237,236}
+    \definecolor{errorfilete}{RGB}{192,57,43}
+    \definecolor{errortexto}{RGB}{146,43,33}
+    \definecolor{correctofondo}{RGB}{233,247,239}
+    \definecolor{correctofilete}{RGB}{39,174,96}
+    \definecolor{correctotexto}{RGB}{25,111,61}
+    \tcbset{destacado/.style={enhanced, breakable, sharp corners,
+      boxrule=0pt, leftrule=3pt, left=8pt, right=8pt, top=4pt, bottom=4pt,
+      before skip=8pt, after skip=8pt, width=0.8\linewidth, center, halign=center,
+      before upper={\hyphenpenalty=10000\exhyphenpenalty=10000
+      \binoppenalty=10000\relpenalty=10000}}}
+    \newtcolorbox{destacadoerror}{destacado,
+      colback=errorfondo, colframe=errorfilete, coltext=errortexto}
+    \newtcolorbox{destacadocorrecto}{destacado,
+      colback=correctofondo, colframe=correctofilete, coltext=correctotexto}
     \definecolor{cebra}{gray}{0.93}
     % Filas 30 % más altas: las fracciones no tocan la fila vecina.
     \AtBeginEnvironment{longtable}{\rowcolors{1}{cebra}{}\renewcommand{\arraystretch}{1.3}}

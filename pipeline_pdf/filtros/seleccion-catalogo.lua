@@ -2,7 +2,7 @@
 seleccion-catalogo.lua — En el PDF, del catálogo solo la pieza seleccionada.
 
 El .md trae la tabla completa del catálogo (Anexo A), con la fila elegida
-marcada con "►" en la primera celda. Al compilar a LaTeX, toda tabla que tenga
+marcada con "►" en la primera celda. Al compilar a LaTeX o a Word, toda tabla que tenga
 una fila marcada así se reemplaza por una tabla vertical de dos columnas
 (Magnitud | Valor) con los datos de esa fila sola. La versión vertical entra
 en el ancho de la página; la fila de 11 columnas no.
@@ -25,7 +25,7 @@ local function limpio(s)
 end
 
 function Table(tbl)
-  if not FORMAT:match("latex") then return nil end
+  if not (FORMAT:match("latex") or FORMAT:match("docx")) then return nil end
   local elegida
   for _, cuerpo in ipairs(tbl.bodies) do
     for _, fila in ipairs(cuerpo.body) do

@@ -1,0 +1,31 @@
+# Configuración de pandoc para la salida en Word (.docx): make docx
+#
+# Mismo .md y mismos filtros de contenido que el PDF (base.yaml), sin la parte
+# estética de LaTeX: no hay fuentes, cebra ni figuras vectoriales. Las fórmulas
+# salen como ecuaciones nativas de Word (editables) y las figuras como PNG.
+# El .docx no se versiona (ver .gitignore): se regenera con make docx.
+#
+#   pandoc --defaults=<repo>/pipeline_pdf/docx.yaml --defaults=pdf.yaml doc.md
+
+from: markdown
+to: docx
+standalone: true
+
+# El "# Título" del .md pasa a ser el título del documento; "##" -> Título 1
+shift-heading-level-by: -1
+
+table-of-contents: true
+toc-depth: 2
+
+# Sin png-a-pdf (Word usa los PNG) ni tablas-cebra (genera LaTeX crudo).
+filters:
+  - ${.}/filtros/solo-md.lua
+  - ${.}/filtros/salto-pagina.lua
+  - ${.}/filtros/destacados.lua
+  - ${.}/filtros/seleccion-catalogo.lua
+  - ${.}/filtros/referencias-fig.lua
+  - ${.}/filtros/portada-docx.lua
+
+metadata:
+  lang: es
+  toc-title: Índice
