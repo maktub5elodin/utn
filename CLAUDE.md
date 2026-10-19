@@ -10,7 +10,7 @@ Study notes for **UTN FRBA — Ingeniería Mecánica**, written in Markdown. The
 
 | Carpeta | Materia | Estado |
 |---|---|---|
-| `analisis_matematico_i/` | Análisis Matemático I (A1191) | 4 unidades documentadas |
+| `analisis_matematico_i/` | Análisis Matemático I (A1191) | 4 unidades documentadas + `1er_parcial/` (correcciones del parcial rendido el 17/oct/2026, PDF con `pipeline_pdf/` — ver convenciones abajo) |
 | `ayga/` | Álgebra y Geometría Analítica | intro + Unidad I |
 | `fisica_i/` | Física I | intro + óptica + cinemática + laboratorio (por concurrencia: `1er_concurrencia/` TPN1 + TPN2; `3er_concurrencia/` TP5 resorte + TP6 Arquímedes) + `energia_casos_limite/` (estudio personal, no resumen — ver nota abajo) |
 | `fundamentos_informatica/` | Fundamentos de Informática | preparación parcial de diagramación estructurada (Chapin/Nassi-Shneiderman) del 17/sep/2026 — ver nota abajo |
@@ -59,6 +59,17 @@ Key sources per subject:
 - **Ingeniería Mecánica I:** `Ing. Mec. I - Plan de Estudio.pdf` (programa y cronograma 32 clases), `1.El Ing y su Profesión.pdf`, `1.LA ING. ACTUAL UNIDAD I Y UNIDAD III.pdf`, `HABILIDADES BÁSICAS DE LA INGENIERÍA.pdf`, `1.unidad I Ingeniería y Sociedad.pdf` (37 págs — perfil, ética, patentes, Revolución Industrial), `Mantenimiento[1].pdf` (UT VII completa), `ING MEC POWER 1.pdf` y `ING MEC POWER 2.pdf` (slides de cátedra).
 - **Ingeniería y Sociedad:** 4 textos del parcial, cada uno con archivo `textoN_preguntas_mc.md`. Los textos son: Bitocchi "Ciencia. Noción, origen, paradigmas y encuadre social" (§1–§27), "Estado - Nación" (§28–§36), Ramallo y Repetto "Ciencia y Tecnología en interacción. Cambio tecnológico e innovación" (§37–§47), Gottardo et al. "Globalización: noción, múltiples sentidos y perspectivas" (§48–§56).
 
+## Convenciones específicas — AM1, correcciones del 1er parcial (`analisis_matematico_i/1er_parcial/`)
+
+Documento `Correcciones_1er_Parcial.md` → `make` → `build/Correcciones_1er_Parcial.pdf`; figuras en `figuras_correcciones.py`. Corrige los errores del parcial del 17/oct/2026: los ejercicios 1, 3, 4 y 5 son los del modelo `1° parcial - Ejemplo 3.pdf` (el archivo en disco se llama `1 parcial - Ejemplo 3.pdf`); el ejercicio 2 fue distinto (distancia mínima de $P(0;6)$ a $x^2 - y^2 = 16$); en el 4, la rama $x > 0$ vino como $\operatorname{sen} x / x$ (equivalente a la $-\cos(x + \pi/2)/x$ del modelo).
+
+- **Brevedad:** solo lo que el usuario pide, sin secciones extra (tabla resumen, errores comunes, mapa conceptual, verificaciones no pedidas), **sin puentes contables** y sin diagramas ASCII. Por ejercicio: enunciado → desarrollo → error → respuesta → figura.
+- **Colores:** recuadro rojo `> [!CAUTION]` con "**Mi error:** …" (uno por error del parcial; no repetir dentro del recuadro una fórmula que ya está arriba: se colorea la de arriba con `{\color{BrickRed} …}`); recuadro verde `> [!TIP]` con "**Respuesta:** …"; resultados intermedios destacados (raíces, derivadas, valores de parámetros, primera aparición de una expresión clave) con `{\color{RoyalBlue} …}`; valores obtenidos en recuadro verde `{\color{ForestGreen}\boxed{…}}` (ej. $y = 3$, $x = 5$, cada recta tangente).
+- **Desarrollo:** pasos intermedios visibles (expandir cuadrados, `aligned` para cadenas de igualdades); valores exactos con raíz para coordenadas, decimales aproximados para distancias.
+- **Figuras:** una por ejercicio, al final o junto al planteo, **sin nota al pie** (`![](figuras/…png)` sin texto alternativo); sin elementos que no se mencionan en el texto (ej. asíntotas); etiquetas sin pisar curvas ni líneas; los puntos que el usuario probó "por fuerza bruta" en el parcial van en violeta con su distancia en decimales.
+- **PDF:** sin índice (`table-of-contents: false` en `pdf.yaml`) y sin fuentes (bloque `<!-- solo-md -->`); cada ejercicio en dos hojas, el N en las páginas 2N−1 y 2N (`<!-- salto-pagina -->` antes de cada ejercicio y, si hace falta, dentro); la notación de Leibniz de las reglas de la cadena (y la $\frac{d}{dy}$ del Ej. 2) va solo en el `.md`, el PDF muestra la versión con prima (`<!-- solo-pdf … -->`).
+- **Eficiencia:** una sesión por ejercicio; confirmar el enunciado exacto antes de resolver; revisar figuras con el menor número de renders posible.
+
 ## Convenciones específicas — Ingeniería y Sociedad (preguntas MC)
 
 - **5 opciones** por pregunta (a, b, c, d, e) — nunca 4.
@@ -78,8 +89,9 @@ PDFs, Office files (ppt/pptx, doc/docx), and images (jpg/png) are excluded from 
 | Archivo | Qué hace |
 |---|---|
 | `pipeline_pdf/base.yaml` | Configuración común de pandoc: plantilla, fuentes, tablas, índice, caracteres Unicode, lista de filtros |
-| `pipeline_pdf/comun.mk` | Reglas de `make`: figuras (opcional), `.md` → `.tex` → `.pdf`, pasadas de xelatex, verificaciones (referencias, caracteres sin glifo) |
-| `pipeline_pdf/filtros/*.lua` | `tablas-cebra` (filas alternadas), `png-a-pdf` (PNG en el `.md`, PDF vectorial en el documento), `referencias-fig` (`@fig:x`), `solo-md` (bloques `<!-- solo-md -->` … `<!-- /solo-md -->` y diagramas ASCII no llegan al PDF), `salto-pagina` (`<!-- salto-pagina -->` → salto de página en el PDF, invisible en el `.md`), `seleccion-catalogo` (tabla con fila marcada ► → solo esa fila, vertical) |
+| `pipeline_pdf/comun.mk` | Reglas de `make`: figuras (opcional), `.md` → `.tex` → `.pdf`, pasadas de xelatex, verificaciones (referencias, caracteres sin glifo); `make docx` → `build/<doc>.docx` |
+| `pipeline_pdf/docx.yaml` | Configuración de pandoc para la salida Word (`make docx`): mismo `.md` y mismos filtros de contenido, sin la estética de LaTeX (fórmulas como ecuaciones nativas de Word, figuras en PNG). El `.docx` no se versiona |
+| `pipeline_pdf/filtros/*.lua` | `tablas-cebra` (filas alternadas), `png-a-pdf` (PNG en el `.md`, PDF vectorial en el documento), `referencias-fig` (`@fig:x`), `solo-md` (bloques `<!-- solo-md -->` … `<!-- /solo-md -->` y diagramas ASCII no llegan al PDF; a la inversa, `<!-- solo-pdf` … `-->` entra al PDF y no se ve en el `.md`), `salto-pagina` (`<!-- salto-pagina -->` → salto de página en el PDF, invisible en el `.md`), `seleccion-catalogo` (tabla con fila marcada ► → solo esa fila, vertical), `destacados` (alertas de GitHub: `> [!CAUTION]` → recuadro rojo de error, `> [!TIP]` → recuadro verde de respuesta correcta; en GitHub ya se ven en color, en Word quedan como cita común), `portada-docx` (solo Word: subtítulo y fecha del `pdf.yaml`). `solo-md`, `salto-pagina`, `seleccion-catalogo` y `referencias-fig` actúan igual en PDF y en Word; `png-a-pdf` y `tablas-cebra` son solo de PDF |
 
 Cada documento tiene solo dos archivos propios: un `Makefile` corto (define `DOC`, `SOURCE_DATE_EPOCH` y, si hay figuras, `FIG_SCRIPT`/`FIG_NAMES`, y termina con `include ../../pipeline_pdf/comun.mk`) y un `pdf.yaml` con título, subtítulo y fecha. Para un documento nuevo, copiar esos dos de `ingenieria_mecanica_i/tp_grupal_mecanica_rotacional_2/` y ajustarlos.
 

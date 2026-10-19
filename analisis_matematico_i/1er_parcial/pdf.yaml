@@ -1,0 +1,10 @@
+# Variables propias de este documento. La configuración común de pandoc está
+# en pipeline_pdf/base.yaml (ver pipeline_pdf/comun.mk).
+
+variables:
+  title-meta: "Correcciones del 1er Parcial — Análisis Matemático I"
+  subtitle: "Análisis Matemático I — 1er Parcial rendido el 17/oct/2026"
+  date: "18 de octubre de 2026"
+
+# Documento corto: sin índice.
+table-of-contents: false
