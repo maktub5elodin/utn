@@ -1,0 +1,260 @@
+% Hoja de fórmulas — Química General A1095 (UTN FRBA, Ing. Mecánica).
+% Una sola carilla A4. Solo lleva las fórmulas que pidió el usuario; las
+% sugerencias extra van únicamente en hoja_formulas.md.
+% Compilar con: make  ->  build/hoja_formulas.pdf
+
+\documentclass[9pt]{extarticle}
+\usepackage[a4paper, margin=7mm]{geometry}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage[dvipsnames]{xcolor}
+
+\pagestyle{empty}
+\frenchspacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\columnsep}{4mm}
+\setlength{\columnseprule}{0.3pt}
+\def\columnseprulecolor{\color{gray!50}}
+\setlength{\abovedisplayskip}{1pt}
+\setlength{\belowdisplayskip}{1pt}
+
+% Capítulo: barra de color a todo el ancho de la columna.
+\newcommand{\capitulo}[1]{%
+  \par\vspace{2pt}\colorbox{NavyBlue}{\parbox{\dimexpr\linewidth-2\fboxsep}{%
+  \color{white}\bfseries\small #1}}\par\vspace{1pt}}
+% Subtema: título corto subrayado con filete.
+\newcommand{\subtema}[1]{\par\vspace{3pt}{\bfseries\color{NavyBlue}#1}\par
+  \nointerlineskip\vspace{1pt}{\color{NavyBlue!40}\rule{\linewidth}{0.4pt}}\par\vspace{1pt}}
+% Una fórmula por renglón: fórmula a la izquierda, unidades a la derecha (gris).
+\newcommand{\f}[2]{\par\(\displaystyle #1\)\hfill{\color{gray}\footnotesize #2}\par\vspace{2pt}}
+\newcommand{\nota}[1]{\par{\color{gray}\footnotesize #1}\par\vspace{1pt}}
+
+\begin{document}
+
+{\large\bfseries Química General A1095 — Hoja de fórmulas}\hfill{\small UTN FRBA · Ing. Mecánica}\par
+\vspace{1pt}{\color{NavyBlue}\rule{\linewidth}{0.8pt}}\par\vspace{2pt}
+
+% multicols*: las columnas se llenan en orden, sin balancear (la hoja crece).
+\begin{multicols*}{3}
+
+% Título apenas más ancho que la columna: se comprime 6 % en horizontal para que entre en un renglón.
+\capitulo{\scalebox{0.94}[1]{Cap. 4 — Reacciones en disolución acuosa}}
+
+\subtema{Neutralización ácido–base}
+\f{\text{ácido} + \text{base} \rightarrow \text{sal} + \text{H}_2\text{O}}{}
+\f{\text{HCl} + \text{NaOH} \rightarrow \text{NaCl} + \text{H}_2\text{O}}{ej.}
+\f{\text{H}^+ + \text{OH}^- \rightarrow \text{H}_2\text{O}}{ec. iónica neta}
+{\footnotesize\setlength{\tabcolsep}{3pt}\begin{tabular}{@{}lll@{}}
+ & \color{NavyBlue}\bfseries Ácido & \color{NavyBlue}\bfseries Base\\
+Arrhenius & libera H\(^+\) (H\(_3\)O\(^+\)) & libera OH\(^-\)\\
+Brønsted & dona H\(^+\) & acepta H\(^+\)\\
+Lewis & acepta par e\(^-\) & dona par e\(^-\)\\
+\end{tabular}}\par\vspace{2pt}
+
+\subtema{RedOx {\mdseries\small(reducción–oxidación)}}
+\f{\text{Zn} \rightarrow \text{Zn}^{2+} + 2\,\text{e}^-}{oxidación: \textbf{pierde} e\(^-\)}
+\f{\text{Cu}^{2+} + 2\,\text{e}^- \rightarrow \text{Cu}}{reducción: \textbf{gana} e\(^-\)}
+\nota{Reducir = bajar el n.º de ox.: suma e\(^-\) (negativos)}
+\nota{Se oxida \(\rightarrow\) ag. reductor \quad se reduce \(\rightarrow\) ag. oxidante}
+
+\capitulo{Cap. 5 — Gases}
+
+\subtema{Gases ideales}
+\f{P\,V = n\,R\,T}{\emph{Pibe Vago no Recibe Título}}
+\nota{\(R = 0{,}0821\) L·atm/(mol·K) \(= 8{,}314\) J/(mol·K) \quad \(T\) [K] \(= t\) [°C] \(+ 273{,}15\)}
+
+\capitulo{Cap. 6 — Termoquímica}
+
+\subtema{Primera ley}
+\f{\Delta E = q + w}{J}
+\f{w = -P\,\Delta V}{L·atm \;(1\text{ L·atm} = 101{,}3\text{ J})}
+\nota{1 cal = 4,184 J}
+{\footnotesize\setlength{\tabcolsep}{2pt}\begin{tabular}{@{}ll@{}}
+\(q>0\) absorbe (endo) & \(w>0\) sobre el sist. (\(\Delta V<0\))\\
+\(q<0\) libera (exo) & \(w<0\) por el sist. (\(\Delta V>0\))
+\end{tabular}}\par\vspace{2pt}
+
+\subtema{Entalpía}
+\f{H = E + PV}{J}
+\f{\Delta H = \Delta E + P\,\Delta V}{J}
+\f{q_p = \Delta H}{P = \text{cte}}
+\f{\Delta E = \Delta H - RT\,\Delta n}{J \;(\(R = 8{,}314\) J/(mol·K))}
+\nota{\(\Delta n\): mol de gas (prod − react) \quad \(T\) [K]}
+\nota{\(\Delta H<0\) exotérmica \quad \(\Delta H>0\) endotérmica}
+
+\subtema{Calorimetría}
+\f{C = m\,s}{J/°C}
+\nota{\(s\): calor específico [J/(g·°C)] \quad \(m\) [g]}
+\f{q = m\,s\,\Delta t = C\,\Delta t}{J}
+\nota{\(\Delta t = t_f - t_i\) [°C]}
+{\footnotesize\setlength{\tabcolsep}{3pt}\begin{tabular}{@{}lr@{\hspace{10pt}}lr@{}}
+\multicolumn{4}{@{}l}{\color{NavyBlue}\bfseries Calores específicos \(s\) [J/(g·°C)]}\\
+Agua (H\(_2\)O líq.) & 4,184 & Hierro (Fe) & 0,444\\
+Etanol & 2,46 & Cobre (Cu) & 0,385\\
+Aluminio (Al) & 0,900 & Plomo (Pb) & 0,158\\
+Grafito (C) & 0,720 & Mercurio (Hg) & 0,139\\
+Diamante (C) & 0,502 & Oro (Au) & 0,129\\
+\end{tabular}}\par\vspace{2pt}
+
+\subtema{Entalpía de reacción}
+\f{\Delta H^\circ_{\text{rxn}} = \textstyle\sum n\,\Delta H^\circ_f(\text{prod}) - \sum m\,\Delta H^\circ_f(\text{react})}{}
+\nota{\(n, m\): coeficientes estequiométricos \hfill kJ/mol}
+{\footnotesize\setlength{\tabcolsep}{3pt}\begin{tabular}{@{}lr@{\hspace{10pt}}lr@{}}
+\multicolumn{4}{@{}l}{\color{NavyBlue}\bfseries \(\Delta H^\circ_f\) [kJ/mol] \mdseries(298 K, 1 atm)}\\
+CO\(_{2}\)\,(g) & −393,5 & CH\(_{4}\)\,(g) & −74,8\\
+H\(_{2}\)O\,(l) & −285,8 & C\(_{2}\)H\(_{2}\)\,(g) & +226,8\\
+H\(_{2}\)O\,(g) & −241,8 & C\(_{3}\)H\(_{8}\)\,(g) & −103,8\\
+CO\,(g) & −110,5 & C\(_{4}\)H\(_{10}\)\,(g) & −124,7\\
+NH\(_{3}\)\,(g) & −46,2 & C\(_{8}\)H\(_{18}\)\,(l) & −269,8\\
+NO\,(g) & +90,4 & C\(_{2}\)H\(_{5}\)OH\,(l) & −277,7\\
+SO\(_{2}\)\,(g) & −296,9 & CaCO\(_{3}\)\,(s) & −1207,1\\
+Fe\(_{2}\)O\(_{3}\)\,(s) & −822,2 & CaO\,(s) & −635,5\\
+C diamante\,(s) & +1,9 &&\\
+\end{tabular}}\par\vspace{1pt}
+\nota{\(\Delta H^\circ_f = 0\): elemento puro estable (O\(_2\), H\(_2\), N\(_2\), C graf., Fe, Al)}
+\f{\text{Hess: } \Delta H_{\text{total}} = \textstyle\sum \Delta H_{\text{etapas}}}{kJ}
+
+\columnbreak
+\capitulo{Cap. 11 — Fuerzas intermoleculares}
+
+\nota{Dispersión < dip–dip < puente H < ion–dip}
+
+\subtema{Puente de hidrógeno}
+\f{\text{X–H}\cdots\text{:Y} \qquad \text{X, Y} = \text{N, O, F}}{}
+\nota{H unido a N, O, F atraído por el par libre de otro N, O, F. Dipolo–dipolo especial, mucho más fuerte}
+\nota{Da \(T_b\) y \(\Delta H_{\text{vap}}\) altos y menor \(P\) de vapor}
+\nota{Hielo menos denso que el agua líq. (flota)}
+{\footnotesize\setlength{\tabcolsep}{3pt}\begin{tabular}{@{}lrrr@{}}
+\(T_b\) [°C] con p. H & H\(_2\)O\;100 & HF\;20 & NH\(_3\)\;−33\\
+\hfill sin p. H & H\(_2\)S\;−60 & HCl\;−85 & PH\(_3\)\;−88\\
+\end{tabular}}\par\vspace{2pt}
+
+\subtema{Cambios de fase}
+\f{\Delta H_{\text{sub}} = \Delta H_{\text{fus}} + \Delta H_{\text{vap}}}{kJ/mol}
+\f{q = n\,\Delta H_{\text{fus}} \;(\text{o } \Delta H_{\text{vap}})}{kJ}
+\nota{En el cambio de fase \(t\) = cte (meseta)}
+
+\capitulo{Cap. 12 — Prop. físicas de las soluciones}
+
+\subtema{Unidades de concentración}
+\f{\%\,\text{masa} = \frac{m_{\text{soluto}}}{m_{\text{soluto}} + m_{\text{solvente}}}\times 100\%}{\%}
+\f{X_A = \frac{n_A}{\sum n}}{adimensional}
+\f{M = \frac{n_{\text{soluto}}}{V_{\text{solución}}}}{mol/L}
+\f{m = \frac{n_{\text{soluto}}}{m_{\text{solvente}}}}{mol/kg}
+
+\subtema{Propiedades coligativas}
+\f{P_1 = X_1\,P_1^\circ}{atm, mmHg}
+\nota{Raoult. 1 = solvente; \(P_1^\circ\): presión de vapor del solvente puro}
+\f{\Delta T_b = K_b\,m}{°C}
+\nota{\(\Delta T_b = T_b - T_b^\circ\) \quad \(K_b\) [°C/m]; agua: 0,52}
+\f{\Delta T_f = K_f\,m}{°C}
+\nota{\(\Delta T_f = T_f^\circ - T_f\) \quad \(K_f\) [°C/m]; agua: 1,86}
+\f{\pi = M\,R\,T}{atm}
+\nota{\(M\) [mol/L] \quad \(R = 0{,}0821\) L·atm/(mol·K) \quad \(T\) [K]}
+
+\capitulo{Cap. 14 — Equilibrio químico}
+
+\subtema{Ley de acción de masas}
+\f{a\,A + b\,B \rightleftharpoons c\,C + d\,D}{}
+\f{K_c = \frac{[C]^c\cdot[D]^d}{[A]^a\cdot[B]^b}}{[\;] en mol/L}
+\f{K_P = \frac{P_C^{\,c}\cdot P_D^{\,d}}{P_A^{\,a}\cdot P_B^{\,b}}}{\(P\) en atm}
+\f{K_P = K_c\,(R{\color{BrickRed}T})^{\Delta n}}{\(R = 0{,}0821\) L·atm/(mol·K)}
+\nota{Solo gases: \(\Delta n = \sum\)coef prod \(-\sum\)coef react \quad \(T\) [K]}
+\nota{\(K \gg 1\): predominan productos \quad \(K \ll 1\): reactivos}
+
+\subtema{Cociente de reacción}
+\f{Q_c = \frac{[C]_0^{\,c}\cdot[D]_0^{\,d}}{[A]_0^{\,a}\cdot[B]_0^{\,b}}}{[\;]\(_0\) iniciales}
+{\footnotesize\setlength{\tabcolsep}{4pt}\begin{tabular}{@{}lll@{}}
+\(Q_c < K_c\) & \(\rightarrow\) & avanza hacia productos\\
+\(Q_c = K_c\) & \(\rightleftharpoons\) & en equilibrio\\
+\(Q_c > K_c\) & \(\leftarrow\) & avanza hacia reactivos\\
+\end{tabular}}\par\vspace{2pt}
+
+\subtema{Le Châtelier}
+\nota{Se desplaza para contrarrestar la perturbación}
+{\footnotesize\setlength{\tabcolsep}{3pt}\begin{tabular}{@{}lll@{}}
+\color{NavyBlue}\bfseries Perturbación & \color{NavyBlue}\bfseries Se desplaza a & \color{NavyBlue}\bfseries ¿\(K\)?\\
+\(\uparrow\) react. o \(\downarrow\) prod. & productos & no\\
+\(\uparrow P\) (\(\downarrow V\)) & menos mol de gas & no\\
+\(\uparrow T\) endo (\(\Delta H>0\)) & productos & \textbf{sí}\\
+\(\uparrow T\) exo (\(\Delta H<0\)) & reactivos & \textbf{sí}\\
+Catalizador & no se desplaza & no\\
+Gas inerte (\(V\) cte) & no se desplaza & no\\
+\end{tabular}}\par\vspace{2pt}
+
+\columnbreak
+\capitulo{Cap. 15 — Ácidos y bases}
+
+\subtema{Producto iónico del agua}
+\f{2\,\text{H}_2\text{O} \rightleftharpoons \text{H}_3\text{O}^+ + \text{OH}^-}{}
+\f{K_w = [\text{H}_3\text{O}^+]\cdot[\text{OH}^-] = [\text{H}^+]\cdot[\text{OH}^-]}{}
+\f{K_w = 1{,}0\times10^{-14}}{a 25 °C}
+{\footnotesize\setlength{\tabcolsep}{4pt}\begin{tabular}{@{}ll@{}}
+Neutra & \([\text{H}^+] = [\text{OH}^-]\)\\
+Ácida & \([\text{H}^+] > [\text{OH}^-]\)\\
+Básica & \([\text{H}^+] < [\text{OH}^-]\)\\
+\end{tabular}}\par\vspace{2pt}
+
+\subtema{pH y pOH}
+\f{\text{pH} = -\log[\text{H}^+] \;\Leftrightarrow\; [\text{H}^+] = 10^{-\text{pH}}}{}
+\f{\text{pOH} = -\log[\text{OH}^-] \;\Leftrightarrow\; [\text{OH}^-] = 10^{-\text{pOH}}}{}
+\f{\text{pH} + \text{pOH} = 14{,}00}{a 25 °C}
+
+\subtema{Constantes de ionización}
+\f{\text{HA} + \text{H}_2\text{O} \rightleftharpoons \text{H}_3\text{O}^+ + \text{A}^-}{ácido}
+\f{K_a = \frac{[\text{H}^+]\cdot[\text{A}^-]}{[\text{HA}]}}{}
+\f{\text{B} + \text{H}_2\text{O} \rightleftharpoons \text{BH}^+ + \text{OH}^-}{base}
+\f{K_b = \frac{[\text{BH}^+]\cdot[\text{OH}^-]}{[\text{B}]}}{}
+\nota{Mayor \(K\) \(\Rightarrow\) más fuerte \quad \([\;]\) de equilibrio}
+\f{K_a\cdot K_b = K_w}{par conjugado (HA/A\(^-\), BH\(^+\)/B)}
+\f{\%\ \text{ionización} = \frac{[\text{H}^+]_{\text{eq}}}{[\text{HA}]_0}\times 100\%}{\%}
+\nota{\([\;]_0\): concentración inicial del ácido}
+
+\capitulo{Cap. 18 — Energía libre y equilibrio}
+
+\f{\Delta G^\circ = -R\,T\,\ln K}{J/mol}
+\nota{\(R = 8{,}314\) J/(mol\(\cdot\)K) \quad \(T\) en K}
+\nota{\(\Delta G^\circ < 0 \Leftrightarrow K > 1\) (favorece productos)}
+
+\capitulo{Cap. 19 — Electroquímica}
+
+\subtema{Celda galvánica}
+{\footnotesize\setlength{\tabcolsep}{4pt}\begin{tabular}{@{}lll@{}}
+\textbf{Á}nodo (−) & \textbf{O}xidación & vocales\\
+\textbf{C}átodo (+) & \textbf{R}educción & consonantes\\
+\end{tabular}}\par\vspace{1pt}
+\nota{e\(^-\): ánodo \(\rightarrow\) cátodo por el cable}
+
+\subtema{Potencial estándar de reducción}
+\f{2\,\text{H}^+ + 2\,\text{e}^- \rightarrow \text{H}_2}{\(E^\circ = 0{,}00\) V (referencia)}
+\nota{Mayor \(E^\circ_{\text{red}}\) \(\Rightarrow\) se reduce \(\Rightarrow\) \textbf{cátodo} (mejor oxidante)}
+\f{E^\circ_{\text{celda}} = E^\circ_{\text{cátodo}} - E^\circ_{\text{ánodo}}}{fem [V]}
+\nota{Estándar (°): 1 M, gases a 1 atm, 25 °C}
+\nota{Ambos \(E^\circ_{\text{red}}\) de tabla, {\color{BrickRed}sin} invertir signo}
+\f{\text{Ej.: } 0{,}34 {\color{BrickRed}\,-\,(-}0{,}76) = 1{,}10}{V}
+\nota{Cátodo Cu\(^{2+}\)/Cu (\(+0{,}34\)) \quad ánodo Zn\(^{2+}\)/Zn (\(-0{,}76\))}
+
+\subtema{Espontaneidad y trabajo eléctrico}
+\f{\Delta G^\circ = -\underbrace{n\,F}_{q\ [\text{C}]}\,\underbrace{E^\circ_{\text{celda}}}_{[\text{V}]}}{C\(\cdot\)V = J}
+\nota{\(n\): mol de e\(^-\) \quad \(F = 96\,500\) C/mol e\(^-\)}
+\f{q = n\,F = I\,t}{C = A\(\cdot\)s}
+\nota{\(I\): corriente [A = C/s] \quad \(t\): tiempo [s]}
+\nota{fem = voltaje máx. \(\Rightarrow\) \(\Delta G\) = trabajo eléctrico máx.}
+\nota{\(\Delta G\): energía libre, la disponible para hacer trabajo}
+\nota{\(-\): el sistema hace trabajo sobre los alrededores}
+\f{E^\circ_{\text{celda}} > 0 \;\Leftrightarrow\; \Delta G^\circ < 0 \;\Rightarrow\; \text{espontánea}}{}
+\f{E^\circ_{\text{celda}} = \frac{R\,T}{n\,F}\,\ln K}{V}
+\nota{\(R = 8{,}314\) J/(mol\(\cdot\)K) (no 0,0821) \quad \(T\) en K}
+
+\subtema{Electrólisis {\mdseries\small(masa depositada)}}
+\f{I\,t = q \overset{\div F}{\longrightarrow} \text{mol e}^- \overset{\div\,\text{e}^-\!/\text{ion}}{\longrightarrow} \text{mol} \overset{\times\mathcal{M}}{\longrightarrow} m}{g}
+\nota{e\(^-\)/ion: de la hemirreacción (Cr\(^{3+}\) + 3 e\(^-\) \(\rightarrow\) Cr: 3)}
+
+\end{multicols*}
+\end{document}

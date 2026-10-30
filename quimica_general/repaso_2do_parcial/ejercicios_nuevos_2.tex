@@ -1,0 +1,135 @@
+% Ejercicios nuevos (set 2) para el 2do Parcial — Química General A1095 (UTN FRBA, Ing. Mecánica).
+% Set integrador sobre todo lo estudiado; respuestas en la última página.
+% Compilar con: make  ->  build/ejercicios_nuevos_2.pdf
+
+\documentclass[11pt]{article}
+\usepackage[a4paper, margin=20mm]{geometry}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage{array}
+
+\pagestyle{empty}
+\frenchspacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlist[enumerate,1]{label=\textbf{\alph*)}, leftmargin=2.2em, itemsep=2pt, topsep=3pt}
+\setlist[enumerate,2]{label=\textbf{\roman*)}, leftmargin=2em, itemsep=0pt, topsep=1pt}
+
+% Ejercicio: título con filete.
+\newcommand{\ejercicio}[1]{\par\vspace{10pt}{\large\bfseries\color{NavyBlue}Ejercicio #1}\par
+  \nointerlineskip\vspace{2pt}{\color{NavyBlue!40}\rule{\linewidth}{0.4pt}}\par\vspace{2pt}}
+% Recuadro de datos: fondo gris con barra a la izquierda.
+\newtcolorbox{datos}{enhanced, colback=gray!12, colframe=gray!12, boxrule=0pt,
+  sharp corners, left=6pt, right=4pt, top=2pt, bottom=2pt, before skip=6pt, after skip=2pt,
+  borderline west={2.5pt}{0pt}{black!80}}
+
+\begin{document}
+
+{\LARGE\bfseries Química General — Ejercicios (set 2)}\hfill{\small UTN FRBA · Ing. Mecánica}\par
+\vspace{2pt}{\color{NavyBlue}\rule{\linewidth}{0.8pt}}\par
+
+\ejercicio{1}
+En un recipiente aislado se colocan 200 g de agua a \(60{,}0\) °C y se agregan 50,0 g de hielo a \(-10{,}0\) °C.
+\begin{enumerate}
+\item Antes de calcular la temperatura final: ¿alcanza el calor que puede ceder el agua (enfriándose hasta 0 °C) para calentar y fundir todo el hielo? Justifique con números.
+\item Calcule la temperatura final del sistema.
+\item ¿Cuál es la máxima masa de hielo a \(-10{,}0\) °C que podrían fundir completamente esos 200 g de agua a \(60{,}0\) °C?
+\item El agua tiene un calor específico y un calor de fusión inusualmente altos para una molécula tan chica. ¿Qué tipo de fuerza intermolecular lo explica?
+\end{enumerate}
+\begin{datos}
+\textbf{Datos:} \(s_{\text{hielo}} = 2{,}09\) J/(g·°C)\,; \(s_{\text{agua (l)}} = 4{,}18\) J/(g·°C)\,; \(\Delta H^\circ_{\text{fus}} = 334\) J/g
+\end{datos}
+
+\ejercicio{2}
+La entalpía estándar de combustión del etanol líquido es \(\Delta H^\circ_c = -1367\) kJ/mol (con H\(_2\)O líquida como producto).
+\begin{enumerate}
+\item Escriba la ecuación balanceada de combustión y calcule \(\Delta H^\circ_f\) del C\(_2\)H\(_5\)OH(l).
+\item Compare la energía liberada \textbf{por gramo} de etanol con la del octano (C\(_8\)H\(_{18}\), \(\Delta H^\circ_c = -5471\) kJ/mol). ¿Cuántos gramos de etanol hacen falta para reemplazar 1 g de octano?
+\item En un motor el agua sale como vapor. ¿El calor liberado por mol de etanol es mayor o menor que 1367 kJ? Calcúlelo.
+\end{enumerate}
+\begin{datos}
+\textbf{Datos:} \(\Delta H^\circ_f[\text{CO}_2(g)] = -393{,}5\) kJ/mol\,; \(\Delta H^\circ_f[\text{H}_2\text{O}(l)] = -285{,}8\) kJ/mol\,; \(\Delta H_{\text{vap}}(\text{H}_2\text{O}, 25\ ^\circ\text{C}) = 44{,}0\) kJ/mol\,; \(M_r\): C\(_2\)H\(_5\)OH = 46,07 g/mol, C\(_8\)H\(_{18}\) = 114,2 g/mol
+\end{datos}
+
+\ejercicio{3}
+El circuito de refrigeración de un motor tiene 5,00 kg de agua. Se quiere que no se congele hasta \(-15{,}0\) °C.
+\begin{enumerate}
+\item ¿Qué masa de etilenglicol (C\(_2\)H\(_6\)O\(_2\), no electrolito) hay que agregar?
+\item ¿A qué temperatura hierve esa solución a 1 atm? ¿Es una ventaja o una desventaja para el motor?
+\item Calcule la masa de NaCl que lograría el mismo descenso del punto de congelación (suponga \(i = 2\)). Aunque se necesita menos masa, el NaCl no se usa en radiadores: ¿por qué? (Piense en el capítulo 19.)
+\end{enumerate}
+\begin{datos}
+\textbf{Datos:} \(K_f(\text{agua}) = 1{,}86\) °C·kg/mol\,; \(K_b(\text{agua}) = 0{,}52\) °C·kg/mol\,; \(M_r\): C\(_2\)H\(_6\)O\(_2\) = 62,07 g/mol, NaCl = 58,44 g/mol
+\end{datos}
+
+\newpage
+\ejercicio{4}
+A 448 °C, para la reacción
+\[\text{H}_2(g) + \text{I}_2(g) \rightleftharpoons 2\,\text{HI}(g) \qquad K_c = 50{,}0\]
+se colocan 1,00 mol de H\(_2\) y 1,00 mol de I\(_2\) en un recipiente de 2,00 L.
+\begin{enumerate}
+\item Calcule las concentraciones en el equilibrio. (Pista: mire bien la expresión de \(K_c\) antes de pensar en la cuadrática.)
+\item ¿Qué porcentaje del H\(_2\) reaccionó? ¿Cuánto vale \(K_p\)?
+\item Si se reduce el volumen del recipiente a la mitad, ¿hacia dónde se desplaza el equilibrio? Justifique.
+\item Una vez alcanzado el equilibrio de a), se agregan 0,500 mol de HI. Calcule \(Q_c\), indique hacia dónde evoluciona el sistema y si la \([\text{H}_2]\) del nuevo equilibrio va a ser mayor o menor que la de a).
+\end{enumerate}
+
+\ejercicio{5}
+Se tienen dos soluciones de ácido acético a 25 °C: una 0,10 M y otra 0,0010 M (100 veces más diluida).
+\begin{enumerate}
+\item Para la solución 0,10 M, calcule \([\text{H}^+]\), el pH y el grado de disociación \(\alpha\) (use la aproximación \(x \ll C_0\) y verifique que vale).
+\item Para la solución 0,0010 M, intente la misma aproximación y verifique si vale. Si no, resuelva la cuadrática. Calcule pH y \(\alpha\).
+\item Al diluir 100 veces, ¿\([\text{H}^+]\) bajó 100 veces? ¿Qué pasó con \(\alpha\)? Explíquelo con Le Châtelier.
+\item ¿Cuál sería el pH de HCl 0,0010 M? Compárelo con el de b).
+\end{enumerate}
+\begin{datos}
+\textbf{Datos:} \(K_a(\text{CH}_3\text{COOH}) = 1{,}8\times10^{-5}\)
+\end{datos}
+
+\newpage
+\ejercicio{6}
+Para limpiar óxido de una pieza, se sumerge alambre de hierro de 2,00 g en 100 mL de HCl 1,00 M, hasta que todo el hierro se disuelve:
+\[\text{Fe}(s) + \text{HCl}(ac) \rightarrow \text{FeCl}_2(ac) + \text{H}_2(g)\]
+\begin{enumerate}
+\item Balancee la ecuación. Indique los números de oxidación, qué especie se oxida, cuál se reduce y quién es el agente reductor.
+\item Determine el reactivo limitante y el volumen de H\(_2\) liberado, medido a 25 °C y 1,00 atm.
+\item Calcule el pH de la solución al final (suponga que el volumen no cambia).
+\item Con los potenciales de la tabla, explique por qué el hierro se disuelve en HCl y el cobre no.
+\end{enumerate}
+\begin{datos}
+\textbf{Datos:} \(A_r(\text{Fe}) = 55{,}85\) g/mol\,; \(R = 0{,}0821\) L·atm/(mol·K)\,; \(E^\circ_{\text{red}}\): Fe\(^{2+}\)/Fe = \(-0{,}44\) V, Cu\(^{2+}\)/Cu = \(+0{,}34\) V
+\end{datos}
+
+\ejercicio{7}
+El acero galvanizado es hierro recubierto con una capa de zinc.
+\begin{enumerate}
+\item Si la capa se raya y queda el hierro expuesto a la humedad, ¿cuál de los dos metales se oxida? Justifique con los potenciales.
+\item Para la pila Zn(s)\,|\,Zn\(^{2+}\)(ac)\,||\,Fe\(^{2+}\)(ac)\,|\,Fe(s), calcule \(E^\circ_{\text{celda}}\) y \(\Delta G^\circ\) (en kJ). ¿Qué representa ese \(\Delta G^\circ\)?
+\item La hojalata (latas) es hierro recubierto con estaño. Si se raya, ¿protege al hierro igual que el zinc? ¿Qué metal es ahora el ánodo?
+\item Una cañería enterrada se protege con un ánodo de sacrificio de 1,00 kg de Zn, por el que circula una corriente media de 50,0 mA. ¿Cuánto dura el ánodo (en años)?
+\end{enumerate}
+\begin{datos}
+\textbf{Datos:} \(E^\circ_{\text{red}}\): Zn\(^{2+}\)/Zn = \(-0{,}76\) V, Fe\(^{2+}\)/Fe = \(-0{,}44\) V, Sn\(^{2+}\)/Sn = \(-0{,}14\) V\,; \(F = 96\,500\) C/mol e\(^-\)\,; \(A_r(\text{Zn}) = 65{,}38\) g/mol
+\end{datos}
+
+\newpage
+{\Large\bfseries Respuestas}\hfill{\small\color{gray}solo resultados finales, para verificar}\par
+\vspace{2pt}{\color{NavyBlue}\rule{\linewidth}{0.8pt}}\par\vspace{6pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}>{\bfseries\color{NavyBlue}}l >{\raggedright\arraybackslash}p{0.92\linewidth}@{}}
+1 & a) El hielo necesita \(1{,}05 + 16{,}70 = 17{,}75\) kJ; el agua puede ceder hasta 50,16 kJ \(\rightarrow\) sí, se funde todo \quad b) \(T_f = 31{,}0\) °C \quad c) 354,9 J/g de hielo \(\rightarrow\) 141 g \quad d) puente de hidrógeno\\
+2 & a) \(\text{C}_2\text{H}_5\text{OH} + 3\,\text{O}_2 \rightarrow 2\,\text{CO}_2 + 3\,\text{H}_2\text{O}\); \(\Delta H^\circ_f = -277{,}4\) kJ/mol \quad b) etanol 29,7 kJ/g; octano 47,9 kJ/g \(\rightarrow\) 1,61 g de etanol por g de octano \quad c) menor: \(-1367 + 3\cdot 44{,}0 = -1235\) kJ/mol (1235 kJ liberados)\\
+3 & a) \(m = 8{,}06\) mol/kg \(\rightarrow\) 40,3 mol \(\rightarrow\) 2,50 kg de etilenglicol \quad b) \(\Delta T_b = 4{,}19\) °C \(\rightarrow\) 104,2 °C; ventaja (el refrigerante tarda más en hervir) \quad c) 4,03 mol/kg de NaCl \(\rightarrow\) 1,18 kg; los iones Cl\(^-\) hacen conductora la solución y aceleran la corrosión del circuito\\
+4 & a) \(x = 0{,}390\) M (raíz cuadrada: \(2x/(0{,}500 - x) = \sqrt{50}\)); \([\text{H}_2] = [\text{I}_2] = 0{,}110\) M; \([\text{HI}] = 0{,}780\) M \quad b) 78,0~\%; \(K_p = K_c = 50{,}0\) (\(\Delta n = 0\)) \quad c) no se desplaza (2 mol de gas de cada lado) \quad d) \(Q_c \approx 87 > K_c\) \(\rightarrow\) hacia reactivos; la \([\text{H}_2]\) final es mayor que 0,110 M\\
+5 & a) \([\text{H}^+] = 1{,}3\times10^{-3}\) M; pH = 2,87; \(\alpha = 0{,}013\) (1,3~\% < 5~\%, vale) \quad b) aproximación: \(\alpha \approx 13\)~\% > 5~\%, no vale; cuadrática: \([\text{H}^+] = 1{,}25\times10^{-4}\) M; pH = 3,90; \(\alpha = 0{,}125\) \quad c) \([\text{H}^+]\) bajó solo \(\approx 11\) veces; \(\alpha\) subió \(\approx 9\) veces: al diluir, el equilibrio se desplaza hacia el lado con más partículas disueltas (iones) \quad d) pH = 3,00 (ácido fuerte, más ácido que el acético a igual concentración)\\
+6 & a) \(\text{Fe} + 2\,\text{HCl} \rightarrow \text{FeCl}_2 + \text{H}_2\); Fe: 0 \(\rightarrow\) +2 (se oxida, agente reductor); H: +1 \(\rightarrow\) 0 (se reduce) \quad b) 0,0358 mol Fe frente a 0,100 mol HCl (alcanza para 0,0500 mol Fe) \(\rightarrow\) limita el Fe; 0,0358 mol H\(_2\) \(\rightarrow\) 0,877 L \quad c) sobran 0,0284 mol H\(^+\) \(\rightarrow\) 0,284 M; pH = 0,55 \quad d) Fe: \(E^\circ = 0{,}00 - (-0{,}44) = +0{,}44\) V > 0, espontánea; Cu: \(0{,}00 - 0{,}34 = -0{,}34\) V < 0, no espontánea\\
+7 & a) Zn (menor \(E^\circ_{\text{red}}\)): es el ánodo y protege al Fe \quad b) \(E^\circ = -0{,}44 - (-0{,}76) = 0{,}32\) V; \(\Delta G^\circ = -2\cdot 96\,500\cdot 0{,}32 = -61{,}8\) kJ: trabajo eléctrico máximo por mol de Zn \quad c) no: el Fe tiene menor \(E^\circ_{\text{red}}\) que el Sn, así que el Fe pasa a ser el ánodo y se corroe más rápido \quad d) 15,3 mol Zn \(\rightarrow\) 30,6 mol e\(^-\) \(\rightarrow\) \(Q = 2{,}95\times10^6\) C \(\rightarrow\) \(t = 5{,}90\times10^7\) s \(\approx\) 683 días \(\approx\) 1,87 años\\
+\end{tabular}
+
+\end{document}

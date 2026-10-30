@@ -1,0 +1,124 @@
+% Repaso 2do Parcial — Química General A1095 (UTN FRBA, Ing. Mecánica).
+% Enunciados de los 7 ejercicios del repaso de cátedra, para imprimir; respuestas en la última página.
+% Compilar con: make  ->  build/repaso_2do_parcial.pdf
+
+\documentclass[11pt]{article}
+\usepackage[a4paper, margin=20mm]{geometry}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+\usepackage{array}
+
+\pagestyle{empty}
+\frenchspacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlist[enumerate,1]{label=\textbf{\alph*)}, leftmargin=2.2em, itemsep=2pt, topsep=3pt}
+\setlist[enumerate,2]{label=\textbf{\roman*)}, leftmargin=2em, itemsep=0pt, topsep=1pt}
+
+% Ejercicio: título con filete.
+\newcommand{\ejercicio}[1]{\par\vspace{10pt}{\large\bfseries\color{NavyBlue}Ejercicio #1}\par
+  \nointerlineskip\vspace{2pt}{\color{NavyBlue!40}\rule{\linewidth}{0.4pt}}\par\vspace{2pt}}
+% Recuadro de datos: fondo gris con barra a la izquierda.
+\newtcolorbox{datos}{enhanced, colback=gray!12, colframe=gray!12, boxrule=0pt,
+  sharp corners, left=6pt, right=4pt, top=2pt, bottom=2pt, before skip=6pt, after skip=2pt,
+  borderline west={2.5pt}{0pt}{black!80}}
+
+\begin{document}
+
+{\LARGE\bfseries Química General — Repaso 2do Parcial}\hfill{\small UTN FRBA · Ing. Mecánica}\par
+\vspace{2pt}{\color{NavyBlue}\rule{\linewidth}{0.8pt}}\par
+
+\ejercicio{1}
+Un recipiente contiene 150 g de hielo a \(-10{,}0\) °C a 1 atm de presión.
+\begin{enumerate}
+\item Calcule la cantidad total de calor (en kJ) necesaria para transformar todo el hielo en vapor de agua a \(100{,}0\) °C.
+\item ¿Qué masa de propano (C\(_3\)H\(_8\)) se debe quemar completamente para suministrar esa cantidad de calor, sabiendo que su entalpía de combustión estándar es \(\Delta H^\circ_c = -2220\) kJ/mol?
+\end{enumerate}
+\begin{datos}
+\textbf{Datos:} \(s_{\text{hielo}} = 2{,}09\) J/(g·°C)\,; \(s_{\text{agua (l)}} = 4{,}18\) J/(g·°C)\,; \(\Delta H^\circ_{\text{fus}} = 334\) J/g\,; \(\Delta H^\circ_{\text{vap}} = 2260\) J/g\,; \(M_r(\text{C}_3\text{H}_8) = 44{,}1\) g/mol
+\end{datos}
+
+\ejercicio{2}
+Para la reacción de reducción del óxido cúprico con monóxido de carbono:
+\[\text{CuO}(s) + \text{CO}(g) \rightarrow \text{Cu}(s) + \text{CO}_2(g)\]
+\begin{enumerate}
+\item Calcule la variación de entalpía estándar de reacción (\(\Delta H^\circ_r\)) a partir de las entalpías estándar de formación (\(\Delta H^\circ_f\)):\par
+{\raggedright\(\Delta H^\circ_f[\text{CuO}(s)] = -157{,}3\) kJ/mol\,; \(\Delta H^\circ_f[\text{CO}(g)] = -110{,}5\) kJ/mol\,;\\ \(\Delta H^\circ_f[\text{CO}_2(g)] = -393{,}5\) kJ/mol\par}
+\item Indique si el proceso es endotérmico o exotérmico.
+\item Calcule la cantidad de energía (en kJ) liberada o absorbida al reaccionar completamente 200 g de CuO(s) (\(M_r = 79{,}5\) g/mol).
+\end{enumerate}
+
+\ejercicio{3}
+En un recipiente rígido de 3,0 L a 500 K se introducen 1,20 moles de SO\(_3\)(g). Al alcanzarse el equilibrio de acuerdo con la reacción:
+\[2\,\text{SO}_3(g) \rightleftharpoons 2\,\text{SO}_2(g) + \text{O}_2(g) \qquad (\Delta H^\circ > 0)\]
+permanecen 0,90 moles de SO\(_3\)(g) en el contenedor.
+\begin{enumerate}
+\item Calcule las concentraciones molares de todas las especies en el equilibrio.
+\item Calcule las constantes de equilibrio \(K_c\) y \(K_p\) a 500 K.
+\item Prediga el desplazamiento del equilibrio aplicando el principio de Le Châtelier si:
+  \begin{enumerate}
+  \item se aumenta la temperatura a volumen constante;
+  \item se reduce el volumen del recipiente manteniendo la temperatura constante.
+  \end{enumerate}
+\end{enumerate}
+
+\ejercicio{4}
+Se dispone de una solución acuosa 0,20 M de ácido acético (CH\(_3\)COOH) a 25 °C.
+\begin{enumerate}
+\item Escriba la ecuación química de ionización del ácido en agua.
+\item Calcule la concentración molar de H\(_3\)O\(^+\), el pH y el pOH de la solución y el \% disociado.
+\end{enumerate}
+\begin{datos}
+\textbf{Datos:} \(K_a(\text{CH}_3\text{COOH}) = 1{,}8\times10^{-5}\)
+\end{datos}
+
+\ejercicio{5}
+Se mezclan 200 mL de una solución de HCl 0,15 M con 100 mL de una solución de NaOH 0,20 M. Posteriormente, la mezcla se diluye agregando agua destilada hasta alcanzar un volumen final de 500 mL.
+\begin{enumerate}
+\item Escriba la ecuación química balanceada de neutralización.
+\item Determine qué reactivo actúa en exceso y calcule los moles en exceso.
+\item Calcule la concentración molar del reactivo sobrante en la solución final y el pH resultante (asuma disociación total y volúmenes aditivos).
+\end{enumerate}
+
+\ejercicio{6}
+A partir de los siguientes potenciales estándar de reducción a 25 °C:
+\[E^\circ_{\text{red}}(\text{Ni}^{2+}/\text{Ni}) = -0{,}25\ \text{V} \qquad ; \qquad E^\circ_{\text{red}}(\text{Ag}^{+}/\text{Ag}) = +0{,}80\ \text{V}\]
+\begin{enumerate}
+\item Indique cuál especie actúa como ánodo y cuál como cátodo en condiciones estándar.
+\item Escriba las hemirreacciones anódica y catódica y la reacción global.
+\item Calcule la fuerza electromotriz estándar (FEM \(= \Delta E^\circ_{\text{pila}}\)) e indique si la reacción es espontánea.
+\item Escriba el esquema (notación abreviada) de la pila.
+\end{enumerate}
+
+\ejercicio{7}
+Se realiza la electrólisis de una solución acuosa de cloruro de cromo (III), CrCl\(_3\), haciendo circular una corriente continua de 2,00 A durante 45 minutos.
+\begin{enumerate}
+\item Escriba la hemirreacción de reducción del cromo en el cátodo.
+\item Calcule la carga total \(Q\) transitada y la masa de cromo (Cr) depositada en el cátodo.
+\item Calcule el volumen de cloro gaseoso (Cl\(_2\)) generado en el ánodo medido en CNPT (273 K, 1 atm, \(V_m = 22{,}4\) L/mol).
+\end{enumerate}
+\begin{datos}
+\textbf{Datos:} \(F = 96\,500\) C/mol e\(^-\)\,; \(M_r(\text{Cr}) = 52{,}0\) g/mol
+\end{datos}
+
+\newpage
+{\Large\bfseries Respuestas}\hfill{\small\color{gray}solo resultados finales, para verificar}\par
+\vspace{2pt}{\color{NavyBlue}\rule{\linewidth}{0.8pt}}\par\vspace{6pt}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{@{}>{\bfseries\color{NavyBlue}}l >{\raggedright\arraybackslash}p{0.92\linewidth}@{}}
+1 & a) \(q = 3{,}1 + 50{,}1 + 62{,}7 + 339{,}0 = 454{,}9\) kJ \(\approx 455\) kJ \quad b) 0,205 mol \(\rightarrow\) 9,04 g de C\(_3\)H\(_8\)\\
+2 & a) \(\Delta H^\circ_r = -125{,}7\) kJ \quad b) exotérmico \quad c) 2,52 mol de CuO \(\rightarrow\) 316 kJ liberados\\
+3 & a) \([\text{SO}_3] = 0{,}30\) M; \([\text{SO}_2] = 0{,}10\) M; \([\text{O}_2] = 0{,}050\) M \quad b) \(K_c = 5{,}6\times10^{-3}\); \(K_p = 0{,}23\) (\(\Delta n = 1\)) \quad c) i) hacia productos (endotérmica), \(K\) aumenta; ii) hacia reactivos (menos moles de gas: 2 frente a 3)\\
+4 & a) \(\text{CH}_3\text{COOH} + \text{H}_2\text{O} \rightleftharpoons \text{CH}_3\text{COO}^- + \text{H}_3\text{O}^+\) \quad b) \([\text{H}_3\text{O}^+] = 1{,}9\times10^{-3}\) M; pH = 2,72; pOH = 11,28; 0,95~\%\\
+5 & a) \(\text{HCl} + \text{NaOH} \rightarrow \text{NaCl} + \text{H}_2\text{O}\) \quad b) HCl en exceso: 0,030 mol H\(^+\) vs.\ 0,020 mol OH\(^-\) \(\rightarrow\) sobran 0,010 mol de HCl \quad c) \([\text{HCl}] = [\text{H}^+] = 0{,}020\) M; pH = 1,70\\
+6 & a) Ánodo Ni, cátodo Ag \quad b) \(\text{Ni} \rightarrow \text{Ni}^{2+} + 2\,\text{e}^-\); \(\text{Ag}^+ + \text{e}^- \rightarrow \text{Ag}\) (\(\times 2\)); \(\text{Ni} + 2\,\text{Ag}^+ \rightarrow \text{Ni}^{2+} + 2\,\text{Ag}\) \quad c) FEM = 1,05 V, espontánea \quad d) Ni(s)\,|\,Ni\(^{2+}\)(ac)\,||\,Ag\(^{+}\)(ac)\,|\,Ag(s)\\
+7 & a) \(\text{Cr}^{3+} + 3\,\text{e}^- \rightarrow \text{Cr}\) \quad b) \(Q = 2{,}00 \cdot 2700 = 5400\) C; 0,0560 mol e\(^-\) \(\rightarrow\) 0,970 g de Cr \quad c) 0,0280 mol Cl\(_2\) \(\rightarrow\) 0,627 L\\
+\end{tabular}
+
+\end{document}

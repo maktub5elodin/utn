@@ -1,5 +1,5 @@
 # Química General — Introducción
-**R1091 · UTN FRBA · Ingeniería Mecánica**
+**A1095 · UTN FRBA · Ingeniería Mecánica**
 Cátedra: Dra. Zulma Cataldi / Ing. Ángel Zambrino / Ing. Ricotti-Cruz
 
 ---
@@ -624,4 +624,4 @@ Este análisis dimensional (cancelar unidades) es el mismo que se usa en física
 
 ---
 
-*Fuentes: "La Química" (diapositivas de cátedra, Cataldi-Zambrino) · Guía de Ejercicios y Problemas — Química General (Cataldi/Zambrino, Edición 2020) · Planificación R1091 1er cuatrimestre 2026 (Ricotti-Cruz).*
+*Fuentes: "La Química" (diapositivas de cátedra, Cataldi-Zambrino) · Guía de Ejercicios y Problemas — Química General (Cataldi/Zambrino, Edición 2020) · Planificación A1095 1er cuatrimestre 2026 (Ricotti-Cruz).*
