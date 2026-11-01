@@ -21,7 +21,7 @@ Criterio: **prevalece la Entrega 2** (`03_entrega_2/Entrega_2_Reentrega_0_S1091_
 
 | # | Tema | Qué dicen las fuentes | Cómo quedó en el deck |
 |---|---|---|---|
-| A | Materiales del prototipo | E2 no los define. Proyecto base: estructura de MDF, piezas en PLA/PETG. Imagen IA: todo impreso, rodillo en TPU | Lámina 11: "Prototipo: materiales a definir". Los rótulos de la imagen dicen "impreso" |
+| A | Materiales del prototipo | E2 no los define. Proyecto base: estructura de MDF, piezas en PLA/PETG. Imagen IA: todo impreso, rodillo en TPU. **Propuesta del grupo, en charla, no decidida:** varias piezas impresas en 3D en PLA, con relleno de ~30 % como máximo. Dudas abiertas: el rodillo (PLA vs. TPU o recubrimiento elastomérico, por la fricción) y si husillo y cuchilla son comerciales o impresos | Lámina 11: "Prototipo: piezas impresas en 3D en PLA (en definición)"; el relleno, en las notas. Los rótulos de la imagen dicen "impreso" |
 | B | Valores de la transmisión | E2: se definen en el dimensionamiento | Lámina 10: ejemplo rotulado "Valores de referencia" (sección 3) |
 | C | Rango de envases | E2: "por definir" | Lámina 13: "Cerrar dimensiones" |
 | D | Apoyos complementarios | E2: "se evaluará la necesidad" | No se mencionan |

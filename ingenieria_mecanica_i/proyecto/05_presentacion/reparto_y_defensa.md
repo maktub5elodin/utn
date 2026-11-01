@@ -47,6 +47,10 @@ La botella ya tiene los dos movimientos que generan la hélice, así que la cuch
 
 La sujeción, la transmisión del movimiento y la continuidad y uniformidad del corte (objetivo secundario 5). Valida el principio de funcionamiento, no el dimensionamiento del dispositivo real. Los métodos de medición de la lámina 13 son una propuesta **[propia]**.
 
+### ¿Por qué PLA? **[propia]**
+
+Es de bajo costo y fácil de imprimir, y permite corregir piezas rápido. El prototipo valida el principio de funcionamiento, no la resistencia final. La elección todavía está en definición.
+
 ### ¿a es igual al ancho de la tira? **[propia]**
 
 E2 lo deja a verificar. Geométricamente, la hélice tiene un ángulo muy chico: con `a` = 7 mm y `D_b` = 88 mm, `tan β = 7 / (π · 88)`, o sea `β` ≈ 1,5°. El ancho perpendicular difiere de `a` menos de un 0,1 %. Falta comprobar el efecto real de la cuchilla y de la deformación del envase.

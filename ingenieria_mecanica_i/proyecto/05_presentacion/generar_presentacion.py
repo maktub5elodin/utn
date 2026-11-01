@@ -606,7 +606,7 @@ def lamina_ecuacion():
 def lamina_materiales():
     s = Lamina(1, "Bloque 5", 45,
                "Para el dispositivo real proponemos una base de chapa y perfiles de acero, con un carro en placa mecanizada. El husillo, la tuerca, los engranajes y los rodamientos serían preferentemente comerciales, una vez definidos los esfuerzos. "
-               "El rodillo lleva núcleo rígido con recubrimiento elastomérico reemplazable, y la cuchilla es comercial. Los materiales del prototipo académico todavía están por definir. Para cerrar, veamos los planos y lo que falta.")
+               "El rodillo lleva núcleo rígido con recubrimiento elastomérico reemplazable, y la cuchilla es comercial. Para el prototipo académico estamos definiendo varias piezas impresas en 3D en PLA, con un relleno de alrededor del 30 % como máximo. Para cerrar, veamos los planos y lo que falta.")
     s.titulo("Materiales del dispositivo real")
     s.tabla(.6, 1.55, [3.0, 9.13], [.58, .68, .68, .68, .68, .68], [
         ["Elemento", "Propuesta"],
@@ -616,7 +616,7 @@ def lamina_materiales():
         ["Transmisión", "Husillo, tuerca, engranajes y rodamientos, preferentemente comerciales"],
         ["Cuchilla", "Comercial, con portaherramientas desmontable"],
     ], sz=17)
-    s.tarjeta(.6, 5.85, 12.13, .6, {"t": "**Prototipo:** materiales a definir", "c": "tx2", "algn": "ctr"}, sz=20, anchor="ctr", nombre="Prototipo", margen=.05)
+    s.tarjeta(.6, 5.85, 12.13, .6, {"t": "**Prototipo:** piezas impresas en 3D en PLA (en definición)", "c": "tx2", "algn": "ctr"}, sz=20, anchor="ctr", nombre="Prototipo", margen=.05)
     return s
 
 
