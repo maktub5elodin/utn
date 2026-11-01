@@ -2,7 +2,7 @@
 
 Notas de estudio para la carrera de **Ingeniería Mecánica** en la [Universidad Tecnológica Nacional — Facultad Regional Buenos Aires](https://www.frba.utn.edu.ar/).
 
-Escritas en Markdown, en español, con diagramas ASCII y analogías contables (el autor proviene de Contabilidad).
+Escritas en Markdown, en español, con diagramas ASCII.
 
 ---
 
@@ -17,7 +17,7 @@ Escritas en Markdown, en español, con diagramas ASCII y analogías contables (e
 | [`griego/`](griego/) | Griego Científico | Alfabeto griego con pronunciación y uso científico | 16/abr/2026 |
 | [`quimica_general/`](quimica_general/) | Química General | Introducción · Estructura atómica · Gases (UT3) · Soluciones (UT7) · Hoja de fórmulas · Repaso 2do parcial | 30/oct/2026 |
 | [`ingenieria_y_sociedad/`](ingenieria_y_sociedad/) | Ingeniería y Sociedad | Arocena · 4 textos con preguntas MC (§1–§56) | 31/may/2026 |
-| [`ingenieria_mecanica_i/`](ingenieria_mecanica_i/) | Ingeniería Mecánica I | Introducción · UT I–XI (11 unidades: ingeniería, diseño, manufactura, producción, mantenimiento, gestión, seguridad, ética, economía) · Preparación parcial 1 (banco ~52 preguntas, 3 fuentes) · Proyecto TP Final — Cortadora de Botellas PET: diseño y contenido de Entrega 1 · TP grupal Mecánica Rotacional: apunte teórico revisado + tren de engranajes (ejercicio resuelto, puntos 1-8) · TP grupal Mecánica Rotacional 2: eje sobre rodamientos de rodillos cilíndricos SKF NU 1005 (puntos 1-7 resueltos, PDF con LaTeX) | 05/oct/2026 |
+| [`ingenieria_mecanica_i/`](ingenieria_mecanica_i/) | Ingeniería Mecánica I | Introducción · UT I–XI (11 unidades: ingeniería, diseño, manufactura, producción, mantenimiento, gestión, seguridad, ética, economía) · Preparación parcial 1 (banco ~52 preguntas, 3 fuentes) · Proyecto TP Final — Cortadora de Botellas PET: entregas 1 y 2, presentación (generador del `.pptx`, reparto y defensa) · TP grupal Mecánica Rotacional: apunte teórico revisado + tren de engranajes (ejercicio resuelto, puntos 1-8) · TP grupal Mecánica Rotacional 2: eje sobre rodamientos de rodillos cilíndricos SKF NU 1005 (puntos 1-7 resueltos, PDF con LaTeX) | 01/nov/2026 |
 | [`sistemas_de_representacion/`](sistemas_de_representacion/) | Sistemas de Representación | Expectativas · Normas IRAM · LibreCAD/DXF · Axonometría (isométrico vs. caballera) | 16/sep/2026 |
 
 ---

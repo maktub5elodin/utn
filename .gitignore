@@ -37,6 +37,8 @@ __pycache__/
 # (vista previa del .md en GitHub). Requieren builds reproducibles: ver CLAUDE.md.
 !**/build/*.pdf
 !**/figuras/*.png
+# Excepción puntual: PDF de respaldo de la presentación del TP Final (el .pptx sigue ignorado).
+!ingenieria_mecanica_i/proyecto/05_presentacion/*.pdf
 
 # Directorios excluidos temporalmente
 su_myf/
