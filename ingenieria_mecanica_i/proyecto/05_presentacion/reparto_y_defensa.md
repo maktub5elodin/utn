@@ -77,7 +77,7 @@ Los espesores, diámetros y tolerancias se establecen con el dimensionamiento, q
 
 ### ¿La imagen es el diseño real? **[E2]**
 
-No. Es una ilustración conceptual generada con IA: ubica los componentes, pero no define dimensiones. Si preguntan por los engranajes de la imagen, hay que aclarar que muestra el chico sobre el husillo, y que el diseño prevé lo contrario.
+No. Es una ilustración conceptual generada con IA: ubica los componentes, pero no define dimensiones. Si preguntan por los engranajes, hay que aclarar que la imagen no muestra la transmisión que describe la Entrega 2. Si el grande condujera al chico multiplicaría la velocidad en vez de reducirla, pero la imagen no permite asegurarlo.
 
 ---
 *Fuentes: `03_entrega_2/Entrega_2_Reentrega_0_S1091_Grupo_1.pdf`, `01_proyecto_base/Proyecto Cortadora de Botellas PET.txt`, `04_material_grafico/Proy Mecanica.dxf`. Supuestos detallados en `contradicciones_y_supuestos.md`.*
