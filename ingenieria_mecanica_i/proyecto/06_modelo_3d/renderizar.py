@@ -24,11 +24,64 @@ V = App.Vector
 ANCHO, ALTO = 1920, 1080
 SS = 2                      # supermuestreo: se renderiza al doble y se reduce
 FPS = 30
-SEG_INTRO, SEG_CORTE, SEG_FINAL = 3.0, 30.0, 3.0
+SEG_INTRO, SEG_CORTE, SEG_FINAL = 3.0, 33.0, 3.0
+
+# Perfil de velocidad de la manivela. A velocidad constante de 45 vueltas en 30 s, cada
+# engranaje avanza justo un diente por cuadro y se ve quieto (efecto estroboscópico).
+# El primer plano de la transmisión va en cámara lenta; fuera de él, la velocidad evita
+# los múltiplos de un diente por cuadro.
+LENTO = (9.0, 19.0)      # s del corte en cámara lenta
+RAMPA = 2.0              # s para frenar y para acelerar
+R_LENTA = 0.30           # vueltas de manivela por segundo en cámara lenta
+_T_RAPIDO = SEG_CORTE - (LENTO[1] - LENTO[0]) - 2 * RAMPA
+R_RAPIDA = ((P.VUELTAS_MANIVELA_TOTAL - R_LENTA * (LENTO[1] - LENTO[0]) - 2 * RAMPA * R_LENTA / 2)
+            / (_T_RAPIDO + RAMPA))
+
+
+def velocidad(t):
+    """Vueltas de manivela por segundo en el segundo t del corte."""
+    a, b = LENTO[0] - RAMPA, LENTO[1] + RAMPA
+    if t < a or t >= b:
+        return R_RAPIDA
+    if t < LENTO[0]:
+        return R_RAPIDA + (R_LENTA - R_RAPIDA) * (t - a) / RAMPA
+    if t < LENTO[1]:
+        return R_LENTA
+    return R_LENTA + (R_RAPIDA - R_LENTA) * (t - LENTO[1]) / RAMPA
+
+
+def vueltas_en(t):
+    """Integral exacta de velocidad(t): el contador sigue a la velocidad real."""
+    a, b = LENTO[0] - RAMPA, LENTO[1] + RAMPA
+    total, previo = 0.0, 0.0
+    for fin in (a, LENTO[0], LENTO[1], b, SEG_CORTE):
+        tramo = min(t, fin)
+        if tramo > previo:
+            total += (velocidad(previo) + velocidad(tramo - 1e-9)) / 2 * (tramo - previo)
+        previo = fin
+    return total
+
+
+def por_cuadro(r_manivela):
+    """Cuánto avanza cada elemento por cuadro, en sus propias unidades repetidas."""
+    vb = r_manivela * P.D_R / P.D_B
+    return {"dientes z1": r_manivela * P.Z_1 / FPS,
+            "dientes z2": r_manivela / P.I * P.Z_2 / FPS,
+            "entradas husillo": r_manivela / P.I * P.ENTRADAS / FPS,
+            "marcas botella": vb * 6 / FPS}
+
+
+def control_estroboscopico():
+    """Falla si, a velocidad sostenida, algo avanza casi un número entero por cuadro."""
+    for r_m in (R_LENTA, R_RAPIDA):
+        for nombre, v in por_cuadro(r_m).items():
+            if v > 0.5 and abs(v - round(v)) < 0.15:
+                raise ValueError(f"efecto estroboscópico en {nombre}: {v:.3f} por cuadro")
 
 COLORES = Z.COLORES
 COLOR_PET = Z.COLOR_PET
 COLOR_MARCA = (0.98, 0.78, 0.15)
+COLOR_GIRO = (0.78, 0.04, 0.32)    # marcas para ver el giro y el sentido
 
 
 # ----------------------------------------------------------- mallas que cambian
@@ -181,6 +234,55 @@ def malla_husillo():
     return malla_grilla(filas)
 
 
+# ------------------------------------------------------- marcas de giro (solo video)
+def rayo(x0, x1, y, zc, ang, r0, r1, ancho):
+    """Barra radial en la cara de una pieza de eje X."""
+    a = math.radians(ang)
+    ur, ut = (math.cos(a), math.sin(a)), (-math.sin(a), math.cos(a))
+    pts = []
+    for r_, s in ((r0, -1), (r1, -1), (r1, 1), (r0, 1), (r0, -1)):
+        pts.append(V(x0, y + ur[0] * r_ + ut[0] * s * ancho / 2, zc + ur[1] * r_ + ut[1] * s * ancho / 2))
+    return Part.Face(Part.makePolygon(pts)).extrude(V(x1 - x0, 0, 0))
+
+
+def diente_marcado(z, y, zc, fase, r_ag):
+    """Un diente algo mayor que el engranaje, para que se vea por encima."""
+    x0, x1 = P.X_ENGRANAJES
+    rueda = Z.engranaje(z, x0 - 0.25, x1 + 0.25, y, zc, fase, r_ag, juego=-0.03)
+    ra = P.MODULO * (z + 2) / 2 + 2
+    d = 180.0 / z * 0.98
+    pts = [V(x0 - 1, y, zc)]
+    for ang in (fase - d, fase + d):
+        pts.append(V(x0 - 1, y + ra * math.cos(math.radians(ang)), zc + ra * math.sin(math.radians(ang))))
+    pts.append(pts[0])
+    cuña = Part.Face(Part.makePolygon(pts)).extrude(V(x1 - x0 + 2, 0, 0))
+    return rueda.common(cuña)
+
+
+def marcas_de_giro():
+    """nombre → (forma, color, centro de giro, clave del ángulo)."""
+    f1, f2 = Z.fases_engrane()
+    y, zr, zh = P.Y_R, P.Z_R, P.Z_H
+    x0 = P.X_ENGRANAJES[0]
+    m = P.MODULO
+    marcas = {}
+    for nombre, z, zc, fase, ag, ancho, clave in (
+            ("MarcaZ1", P.Z_1, zr, f1, P.D_EJE / 2, 3.0, "rodillo"),
+            ("MarcaZ2", P.Z_2, zh, f2, P.D_HUSILLO / 2, 3.5, "husillo")):
+        rf = m * (z - 2.5) / 2
+        forma = Part.makeCompound([diente_marcado(z, y, zc, fase, ag),
+                                   rayo(x0 - 0.7, x0 - 0.1, y, zc, fase, ag, rf + 0.5, ancho)])
+        marcas[nombre] = (forma, COLOR_GIRO, (y, zc), clave)
+    # El husillo gira dentro de una tuerca fija: su rosca se ve quieta. Esta franja no.
+    rc, rf = P.D_HUSILLO / 2, P.D_HUSILLO_FONDO / 2
+    marcas["MarcaHusillo"] = (Z.caja((P.X_HUSILLO_INI, P.X_HUSILLO_FIN), (y - 0.8, y + 0.8),
+                                     (zh + rf, zh + rc + 0.25)), COLOR_GIRO, (y, zh), "husillo")
+    marcas["MarcaRodillo"] = (rayo(P.X_RODILLO[0] - 0.6, P.X_RODILLO[0] - 0.1, y, zr, 90,
+                                   P.D_EJE / 2 + 5, P.D_R / 2 - 0.5, 4.0),
+                              (0.92, 0.92, 0.92), (y, zr), "rodillo")
+    return marcas
+
+
 # --------------------------------------------------------------- armar documento
 class Escena:
     def __init__(self):
@@ -194,8 +296,13 @@ class Escena:
             if hasattr(o.ViewObject, "LineWidth"):
                 o.ViewObject.LineWidth = 1.0
             if nombre.startswith("Placa"):   # dejan ver los engranajes
-                o.ViewObject.Transparency = 72
+                o.ViewObject.Transparency = 82
             self.piezas[nombre] = (o, grupo, centro, clave)
+        for nombre, (forma, color, centro, clave) in marcas_de_giro().items():
+            o = self.doc.addObject("Part::Feature", nombre)
+            o.Shape = forma
+            o.ViewObject.ShapeColor = color
+            self.piezas[nombre] = (o, "gira", centro, clave)
         self.mallas = {}
         self._malla("BotellaFija", malla_botella_fija(), COLOR_PET, 55, (0.0, P.H_EJE), "botella")
         self._malla("Marcas", malla_marcas(), COLOR_MARCA, 0, (0.0, P.H_EJE), "botella")
@@ -312,11 +419,12 @@ def rotulos(d, proy, est, lista):
     """lista: (texto, punto 3D en reposo, se mueve con el carro, x, y de la caja)."""
     f = fuente("b", 25)
     for texto, p, movil, x, y in lista:
-        q = (p[0] + (est["s"] if movil else 0), p[1], p[2])
-        px, py = proy(q)
         w = d.textlength(texto, font=f)
-        d.line((x + w / 2, y + 20, px, py), fill=TINTA, width=2)
-        d.ellipse((px - 5, py - 5, px + 5, py + 5), fill=TINTA)
+        if p is not None:
+            q = (p[0] + (est["s"] if movil else 0), p[1], p[2])
+            px, py = proy(q)
+            d.line((x + w / 2, y + 20, px, py), fill=TINTA, width=2)
+            d.ellipse((px - 5, py - 5, px + 5, py + 5), fill=TINTA)
         d.rounded_rectangle((x - 12, y - 4, x + w + 12, y + 38), 8, fill=(255, 255, 255, 240),
                             outline=(204, 208, 214), width=2)
         d.text((x, y), texto, font=f, fill=TINTA)
@@ -348,11 +456,11 @@ OBJ_C = (180.0, 0.0, 100.0)
 PLANOS = [  # (segundo del corte, posición, objetivo, ángulo, cuánto sigue al carro)
     (0.0, (-330, 900, 480), OBJ_C, 24, 0),
     (5.0, (-260, 800, 380), (150, 20, 110), 26, 0),
-    (9.0, (-230, 620, 300), (30, 60, 105), 26, 1),      # transmisión
-    (16.0, (-200, 620, 280), (30, 60, 105), 26, 1),
-    (20.0, (380, -560, 330), (300, -40, 150), 24, 0),   # cuchilla
-    (25.0, (470, -520, 300), (330, -40, 140), 24, 0),
-    (30.0, (820, 760, 520), (230, 0, 100), 25, 0),
+    (9.0, (-300, 340, 165), (47, 72, 98), 18, 1),      # transmisión, en cámara lenta
+    (19.0, (-300, 300, 150), (47, 72, 98), 18, 1),
+    (23.0, (380, -560, 330), (300, -40, 150), 24, 0),   # cuchilla
+    (28.0, (470, -520, 300), (330, -40, 140), 24, 0),
+    (33.0, (820, 760, 520), (230, 0, 100), 25, 0),
 ]
 
 
@@ -375,12 +483,11 @@ def plano(seg, s):
 
 def rotulos_video(seg):
     """Cada plano nombra lo que muestra, con las palabras de E2."""
-    if 9.0 <= seg <= 16.0:
-        return [("Manivela", (P.X_MANIVELA, P.Y_R + 20, P.Z_R), True, 1540, 300),
-                ("Rodillo", (100, P.Y_R + 14, P.Z_R + 14), True, 560, 330),
-                ("Engranajes z1 = 20 / z2 = 40", (47, P.Y_R + 42, P.Z_H), True, 1300, 800),
-                ("Husillo", (150, P.Y_H + 3, P.Z_H), True, 300, 800)]
-    if 20.5 <= seg <= 25.0:
+    if LENTO[0] <= seg <= LENTO[1]:
+        return [("Cámara lenta", None, False, 860, 40),
+                ("Engranajes z1 = 20 / z2 = 40", (47, P.Y_R, P.Z_H - 30), True, 1300, 900),
+                ("Husillo", (150, P.Y_H + 3, P.Z_H), True, 620, 500)]
+    if 23.5 <= seg <= 28.0:
         return [("Cuchilla fija", (P.X_CUCHILLA, -P.R_B - 3, P.H_EJE), False, 700, 190),
                 ("Tira", (P.X_CUCHILLA + 3, -P.R_B - 62, P.H_EJE - 62), False, 1250, 800)]
     return []
@@ -392,7 +499,7 @@ def cuadro_video(esc, i, ruta):
         vueltas, s_corte = 0.0, 0.0
     elif seg < SEG_INTRO + SEG_CORTE:
         s_corte = seg - SEG_INTRO
-        vueltas = P.VUELTAS_MANIVELA_TOTAL * s_corte / SEG_CORTE
+        vueltas = vueltas_en(s_corte)
     else:
         vueltas, s_corte = P.VUELTAS_MANIVELA_TOTAL, SEG_CORTE
     est = esc.posar(vueltas)
@@ -504,6 +611,7 @@ def figuras(esc):
 # --------------------------------------------------------------------------- main
 def main():
     modo = os.environ.get("RENDER", "figuras")
+    control_estroboscopico()
     esc = Escena()
     if modo == "figuras":
         figuras(esc)

@@ -5,7 +5,7 @@
 FREECAD := $(HOME)/Aplicaciones/FreeCAD.AppImage
 SYSPY   := /usr/bin/python3
 TANDAS  := 3
-CUADROS := 1080
+CUADROS := 1170
 GUI     := CARPETA_MODELO=$(CURDIR) QT_QPA_PLATFORM=offscreen
 MODELO  := parametros.py piezas.py
 LAMINAS := 01_conjunto 02_despiece 03_esquema_cinematico 04_hallazgo_manivela
@@ -47,9 +47,10 @@ build/.figuras: $(MODELO) renderizar.py build/.verificado
 	touch $@
 
 # Varias instancias a la vez a veces se caen al guardar la imagen (driver gráfico):
-# cada ronda retoma los cuadros que faltan, y sin los 1080 no se arma el video.
+# cada ronda retoma los cuadros que faltan, y sin todos no se arma el video.
 video: build/.verificado renderizar.py
 	mkdir -p build/cuadros
+	find build/cuadros -name '*.png' ! -newer renderizar.py -delete
 	for ronda in 1 2 3 4 5 6 7 8 9 10 11 12; do \
 	  rm -f build/cuadros/*.crudo.png build/cuadros/*.tmp.png; \
 	  [ $$(ls build/cuadros | wc -l) -ge $(CUADROS) ] && break; \
