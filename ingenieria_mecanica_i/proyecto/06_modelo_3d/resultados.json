@@ -1,0 +1,98 @@
+{
+ "choques_modelo_base": [],
+ "husillo_enroscado_todo_el_recorrido": true,
+ "engrane": {
+  "solape_max_relacion_real_mm3": 0.0,
+  "solape_max_relacion_1_8_control_mm3": 175.8,
+  "distancia_entre_ejes_mm": 60.0
+ },
+ "paso": {
+  "ecuacion_E2_mm": 7.04,
+  "medido_en_simulacion_mm": 7.04,
+  "angulo_helice_grados": 1.46,
+  "vueltas_manivela": 45.0,
+  "vueltas_botella": 25.6,
+  "largo_tira_m": 7.07
+ },
+ "sentidos": {
+  "rosca": "derecha",
+  "manivela_vista_desde_el_borde_abierto": "horaria",
+  "pared_en_la_cuchilla": "baja"
+ },
+ "manivela": {
+  "sobre_el_cuerpo_como_imagen_IA": 282830,
+  "detras_del_soporte_modelo": 0,
+  "hueco_eje_a_botella_mm": 25.0,
+  "radio_max_sobre_el_cuerpo_mm": 13.0
+ },
+ "pinon_sobre_eje_30": [
+  {
+   "modulo": 1.0,
+   "fondo_diente_mm": 17.5,
+   "entra": false
+  },
+  {
+   "modulo": 1.25,
+   "fondo_diente_mm": 21.875,
+   "entra": false
+  },
+  {
+   "modulo": 1.5,
+   "fondo_diente_mm": 26.25,
+   "entra": false
+  },
+  {
+   "modulo": 2.0,
+   "fondo_diente_mm": 35.0,
+   "entra": true
+  },
+  {
+   "modulo": 2.5,
+   "fondo_diente_mm": 43.75,
+   "entra": true
+  }
+ ],
+ "pivote_sobre_husillo": [
+  {
+   "Db": 65,
+   "alcanza": true,
+   "angulo_caja_grados": 17.5,
+   "a_mm": 5.2
+  },
+  {
+   "Db": 75,
+   "alcanza": true,
+   "angulo_caja_grados": 24.6,
+   "a_mm": 6.0
+  },
+  {
+   "Db": 88,
+   "alcanza": true,
+   "angulo_caja_grados": 32.3,
+   "a_mm": 7.04
+  },
+  {
+   "Db": 100,
+   "alcanza": true,
+   "angulo_caja_grados": 38.7,
+   "a_mm": 8.0
+  },
+  {
+   "Db": 110,
+   "alcanza": true,
+   "angulo_caja_grados": 43.7,
+   "a_mm": 8.8
+  }
+ ],
+ "pivote_barrido_grados": 26.2,
+ "envolvente": {
+  "largo_total_mm": 570,
+  "largo_base_mm": 380,
+  "largo_husillo_mm": 264,
+  "husillo_fuera_de_base_al_final_mm": 158,
+  "voladizo_botella_desde_el_cuello_mm": 269,
+  "voladizo_rodillo_mm": 24,
+  "holgura_placa2_botella_mm": 1.5
+ },
+ "fallas": []
+}
