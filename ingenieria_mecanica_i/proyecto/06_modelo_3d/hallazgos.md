@@ -14,11 +14,11 @@ Modelo de FreeCAD del mecanismo que describe la Entrega 2 (E2), simulado en todo
 
 ## 2. Hallazgos
 
-### 2.1 La manivela no puede ir del lado del cuerpo de la botella
+### 2.1 Del lado del cuerpo de la botella, la manivela no entra con ese radio
 
 E2 une la manivela al eje del rodillo, pero no dice de qué lado. El eje del rodillo queda a `Dr/2` = **25 mm** de la pared. Con un mango de radio 12 mm, del lado del cuerpo la manivela no podría tener más de **13 mm** de radio. Con 70 mm de radio, la manivela barre **unos 283 000 mm³ dentro de la botella**.
 
-La imagen IA parece mostrarla de ese lado. Se ve bien porque es una foto de una sola posición: al girar, chocaría.
+El criterio que queda: **con ese radio, la manivela no puede ir del lado del cuerpo.** Las imágenes IA fueron solo una referencia visual inicial, no un diseño: el trabajo siguió en CAD. El detalle está en `planos/estudios/E1_manivela`.
 
 ![](figuras/hallazgo_choque_manivela.png)
 
@@ -95,7 +95,7 @@ Se cambia una medida en `parametros.py` y se vuelve a correr. Si el cambio gener
 | `verificar.py` | Choques, engrane, paso y sentidos, sin ventana |
 | `renderizar.py` | Figuras y video |
 | `exportar_step.py` | `salida/cortadora_pet.step` para SolidWorks: 22 sólidos con nombre y color, en la posición inicial. Lo reabre y compara sólidos y volumen. La tira queda afuera |
-| `planos.py`, `dibujo.py` | Proyectan el modelo y arman las cuatro láminas A3. Falla si dos textos se superponen |
+| `planos.py`, `dibujo.py` | Proyectan el modelo y arman las tres láminas A3 y el estudio de la manivela. Falla si dos textos se superponen |
 | `dxf.py` | Escribe `planos/*.dxf` (R2000) con `ezdxf`, en el Python del sistema |
 | `a_pdf.sh` | DXF a PDF con LibreCAD, en negro |
 | `control_dxf.py` | Audita cada DXF con `ezdxf`, lo dibuja con un segundo lector y compara. `make` falla si hay errores |

@@ -19,8 +19,9 @@ from ezdxf.addons.drawing.matplotlib import MatplotlibBackend
 from PIL import Image
 
 CARPETA = os.path.dirname(os.path.abspath(__file__))
-LAMINAS = {"01_conjunto": 2.5, "02_despiece": 1.0, "03_esquema_cinematico": 1.0,
-           "04_hallazgo_manivela": 2.0}
+LAMINAS = {"01_conjunto": ("planos", 2.5), "02_despiece": ("planos", 1.0),
+           "03_esquema_cinematico": ("planos", 1.0),
+           "E1_manivela": ("planos/estudios", 2.0)}
 ANCHO, ALTO, DPI = 420, 297, 110
 TOLERANCIA_PX = 4
 
@@ -62,8 +63,8 @@ def comparar(a, b):
 
 def main():
     informe, errores = {}, 0
-    for nombre, E in LAMINAS.items():
-        ruta = os.path.join(CARPETA, "planos", nombre + ".dxf")
+    for nombre, (carpeta, E) in LAMINAS.items():
+        ruta = os.path.join(CARPETA, carpeta, nombre + ".dxf")
         doc = ezdxf.readfile(ruta)
         aud = doc.audit()
         errores += len(aud.errors)

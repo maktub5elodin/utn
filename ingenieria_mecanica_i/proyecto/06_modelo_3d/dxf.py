@@ -115,7 +115,10 @@ def main():
     fallas = 0
     for ruta in sorted(glob.glob(os.path.join(CARPETA, "build", "planos_json", "*.json"))):
         nombre = os.path.splitext(os.path.basename(ruta))[0]
-        err, fix = escribir(ruta, os.path.join(salida, nombre + ".dxf"))
+        with open(ruta, encoding="utf-8") as f:
+            destino = os.path.join(salida, json.load(f)["salida"])
+        os.makedirs(os.path.dirname(destino), exist_ok=True)
+        err, fix = escribir(ruta, destino)
         print(f"{nombre}: {err} errores, {fix} corregidos")
         fallas += err
     return 1 if fallas else 0

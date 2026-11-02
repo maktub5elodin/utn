@@ -98,7 +98,8 @@ class Dibujo:
             c = (p2[0] + ux * sen * lejos, p2[1] + uy * sen * lejos)
         self._registrar(c[0] + nx * E, c[1] + ny * E, H, rotulo, "c", ang)
 
-    def guardar(self, ruta, ancho, alto):
+    def guardar(self, ruta, ancho, alto, salida):
         with open(ruta, "w", encoding="utf-8") as f:
-            json.dump({"escala": self.E, "ancho": ancho, "alto": alto, "ops": self.ops},
+            json.dump({"escala": self.E, "ancho": ancho, "alto": alto, "salida": salida,
+                       "ops": self.ops},
                       f, ensure_ascii=False)

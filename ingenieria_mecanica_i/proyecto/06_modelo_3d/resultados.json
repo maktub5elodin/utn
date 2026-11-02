@@ -20,7 +20,7 @@
   "pared_en_la_cuchilla": "baja"
  },
  "manivela": {
-  "sobre_el_cuerpo_como_imagen_IA": 282830,
+  "sobre_el_cuerpo": 282830,
   "detras_del_soporte_modelo": 0,
   "hueco_eje_a_botella_mm": 25.0,
   "radio_max_sobre_el_cuerpo_mm": 13.0
@@ -125,7 +125,7 @@
    "cotas": 0,
    "textos_superpuestos": []
   },
-  "04_hallazgo_manivela": {
+  "E1_manivela": {
    "escala": 2,
    "entidades": 91,
    "cotas": 3,
@@ -154,12 +154,12 @@
    "librecad_cerca_de_ezdxf": 0.966,
    "ezdxf_cerca_de_librecad": 0.94
   },
-  "04_hallazgo_manivela": {
+  "E1_manivela": {
    "version": "AC1015",
    "errores": 0,
    "corregidos": 0,
-   "librecad_cerca_de_ezdxf": 0.944,
-   "ezdxf_cerca_de_librecad": 0.932
+   "librecad_cerca_de_ezdxf": 0.945,
+   "ezdxf_cerca_de_librecad": 0.934
   }
  }
 }

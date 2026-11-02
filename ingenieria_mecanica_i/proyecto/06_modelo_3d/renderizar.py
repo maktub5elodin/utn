@@ -572,7 +572,7 @@ def figuras(esc):
              ("Cuchilla fija", (P.X_CUCHILLA, -P.R_B - 3, P.H_EJE), False, 560, 190),
              ("Tira", (P.X_CUCHILLA + 3, -P.R_B - 62, P.H_EJE - 62), False, 1450, 700)]),))
 
-    # El hallazgo principal: la manivela sobre el cuerpo, como la imagen IA
+    # La manivela del lado del cuerpo de la botella
     x_tras = P.X_RODILLO[1] + 12
     fantasma = esc.doc.addObject("Part::Feature", "ManivelaCuerpo")
     fantasma.Shape = Z.manivela(x_tras, +1)

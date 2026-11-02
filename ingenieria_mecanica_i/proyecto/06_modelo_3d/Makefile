@@ -8,7 +8,7 @@ TANDAS  := 3
 CUADROS := 1170
 GUI     := CARPETA_MODELO=$(CURDIR) QT_QPA_PLATFORM=offscreen
 MODELO  := parametros.py piezas.py
-LAMINAS := 01_conjunto 02_despiece 03_esquema_cinematico 04_hallazgo_manivela
+LAMINAS := 01_conjunto 02_despiece 03_esquema_cinematico estudios/E1_manivela
 DXF     := $(LAMINAS:%=planos/%.dxf)
 PDF     := $(LAMINAS:%=planos/%.pdf)
 STEP    := salida/cortadora_pet.step

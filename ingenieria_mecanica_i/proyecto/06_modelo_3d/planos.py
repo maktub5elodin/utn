@@ -28,6 +28,7 @@ V = App.Vector
 FECHA = "02/11/2026"
 LEYENDA = "Plano de estudio: medidas de referencia, no definitivas"
 SALIDA = os.path.join(CARPETA, "planos")
+LAMINAS_DEL_JUEGO = 3
 
 # Filas de la matriz: u (derecha del papel), v (arriba), w (hacia el observador)
 MAPAS = {
@@ -129,6 +130,12 @@ class Lamina(Dibujo):
         super().__init__(escala)
         self.numero, self.titulo = numero, titulo
 
+    def documento(self):
+        """Última celda del rótulo: lámina del juego, o estudio aparte."""
+        if isinstance(self.numero, int):
+            return (60, "LÁMINA", f"{self.numero} de {LAMINAS_DEL_JUEGO}")
+        return (60, "DOCUMENTO", self.numero)
+
     def pp(self, x, y):
         """De mm de papel a coordenadas del dibujo."""
         return x * self.E, y * self.E
@@ -213,7 +220,7 @@ def marco_y_rotulo(L, escala, metodo=True):
             L.t(x + 1.5, y_inf + 1.8, 3.5, valor)
             x += ancho
     fila(y0, ya, ((60, "ESCALA", escala), (60, "FECHA", FECHA),
-                  (60, "LÁMINA", f"{L.numero} de 4")))
+                  L.documento()))
     fila(ya, yb, ((114, "ASIGNATURA", "UTN FRBA - Ingeniería Mecánica I"),
                   (66, "CURSO", "S1091 - Grupo 1")))
     if metodo:   # símbolo del método E: el cono se mira desde el lado angosto
@@ -690,9 +697,9 @@ def lamina_esquema():
     return L
 
 
-# ------------------------------------------------------------------ lámina d
-def lamina_hallazgo():
-    L = Lamina(2, 4, "Hallazgo: manivela del lado del cuerpo")
+# ------------------------------------------------------------------ estudio 1
+def lamina_estudio_manivela():
+    L = Lamina(2, "Estudio 1", "Manivela del lado del cuerpo")
     marco_y_rotulo(L, "1:2")
     pz = Z.formas()
     H, yr, zr = P.H_EJE, P.Y_R, P.Z_R
@@ -754,7 +761,7 @@ def lamina_hallazgo():
     t(x, y, 5, "Qué muestra")
     y -= 9
     res = json.load(open(os.path.join(CARPETA, "resultados.json"), encoding="utf-8"))
-    vol = res["manivela"]["sobre_el_cuerpo_como_imagen_IA"]
+    vol = res["manivela"]["sobre_el_cuerpo"]
     rmax = res["manivela"]["radio_max_sobre_el_cuerpo_mm"]
     for s in (
         "Vista desde el borde abierto, con la manivela",
@@ -808,12 +815,14 @@ def main():
     os.makedirs(SALIDA, exist_ok=True)
     intermedio = os.path.join(CARPETA, "build", "planos_json")
     os.makedirs(intermedio, exist_ok=True)
-    laminas = (("01_conjunto", lamina_conjunto), ("02_despiece", lamina_despiece),
-               ("03_esquema_cinematico", lamina_esquema), ("04_hallazgo_manivela", lamina_hallazgo))
+    laminas = (("01_conjunto", "", lamina_conjunto), ("02_despiece", "", lamina_despiece),
+               ("03_esquema_cinematico", "", lamina_esquema),
+               ("E1_manivela", "estudios", lamina_estudio_manivela))
     informe, ok = {}, True
-    for nombre, f in laminas:
+    for nombre, carpeta, f in laminas:
         L = f()
-        L.guardar(os.path.join(intermedio, nombre + ".json"), 420, 297)
+        L.guardar(os.path.join(intermedio, nombre + ".json"), 420, 297,
+                  os.path.join(carpeta, nombre + ".dxf"))
         malos = superposiciones(L)
         ok = ok and not malos
         informe[nombre] = {"escala": L.E, "entidades": len(L.ops),
