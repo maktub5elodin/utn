@@ -5,7 +5,6 @@ Si cambia parametros.py, `make` los regenera.
     ~/Aplicaciones/FreeCAD.AppImage freecadcmd planos.py
 Deja un JSON por lámina en build/planos_json/; dxf.py escribe los DXF con ezdxf.
 
-Criterio de normas: IRAM como norma de aplicación, ISO como referencia (ver hallazgos.md).
 
 Cada lámina está en mm reales: el marco A3 se agranda según la escala (1:E), así
 medir sobre el DXF da la medida de la pieza. Termina con error si dos textos se
@@ -26,7 +25,7 @@ import piezas as Z
 from dibujo import Dibujo, formato
 
 V = App.Vector
-FECHA = "2026-11-02"        # ISO 8601, 10 caracteres (ISO 7200)
+FECHA = "02/11/2026"
 LEYENDA = "Plano de estudio: medidas de referencia, no definitivas"
 SALIDA = os.path.join(CARPETA, "planos")
 
@@ -186,72 +185,42 @@ class Vista:
 
 
 # ------------------------------------------------------------- marco y rótulo
-ROT_X0, ROT_X1 = 230.0, 410.0   # 180 mm de ancho (ISO 7200, cláusula 6)
-ROT_Y0, ROT_Y1 = 10.0, 64.0
-AUTOR = "A completar"           # autor y aprobación los define el grupo
+ROT_X0, ROT_X1 = 25.0, 410.0    # todo el ancho del recuadro, como la plantilla de la cátedra
+ROT_Y0, ROT_Y1 = 10.0, 30.0
+COL_1, COL_2, COL_3 = 102.0, 333.0, 371.5
 
 
-def marco_y_rotulo(L, escala, ident, titulo2, tipo, tol="-", metodo=True):
-    """Campos de ISO 7200 con la disposición argentina (IRAM 4508, planos NEFA):
-    título grande arriba; aprobación, n.° de plano y emisión abajo; alteraciones a
-    la izquierda. Márgenes de IRAM 4504: 25 mm a la izquierda y 10 mm en el resto."""
+def marco_y_rotulo(L, escala, metodo=True):
+    """Rótulo de la plantilla de la cátedra (dos filas y tres columnas), llevado a A3."""
     pp = L.pp
     L.polilinea("Texto", [pp(0, 0), pp(420, 0), pp(420, 297), pp(0, 297)], True)
     L.polilinea("Marco", [pp(25, 10), pp(410, 10), pp(410, 287), pp(25, 287)], True)
-    # Marcas de centrado de ISO 5457: en los ejes de simetría de la hoja
     for a, b in (((0, 148.5), (25, 148.5)), ((410, 148.5), (420, 148.5)),
                  ((210, 0), (210, 10)), ((210, 287), (210, 297))):
         L.linea("Marco", pp(*a), pp(*b))
     x0, x1, y0, y1 = ROT_X0, ROT_X1, ROT_Y0, ROT_Y1
+    ym = (y0 + y1) / 2
     L.polilinea("Marco", [pp(x0, y0), pp(x1, y0), pp(x1, y1), pp(x0, y1)], True)
-    ya, yb, yc = y0 + 6, y0 + 18, y0 + 30      # leyenda, firmas, datos y título
-    for y in (ya, yb, yc):
-        L.linea("Texto", pp(x0, y), pp(x1, y))
-    L.t(x0 + 2, y0 + 1.5, 3.5, LEYENDA)
-
-    def fila(y_inf, y_sup, celdas):
-        x = x0
-        for ancho, rotulo, valor in celdas:
-            if x > x0:
-                L.linea("Texto", pp(x, y_inf), pp(x, y_sup))
-            L.t(x + 1.5, y_sup - 3.6, 2.5, rotulo)
-            if valor:
-                L.t(x + 1.5, y_inf + 1.6, 3.5, valor)
-            x += ancho
-    fila(ya, yb, ((38, "APROBÓ", AUTOR), (38, "CREÓ", AUTOR), (38, "N.° DE PLANO", ident),
-                  (14, "REV.", "A"), (32, "EMISIÓN", FECHA), (20, "HOJA", f"{L.numero}/4")))
-    fila(yb, yc, ((22, "ESCALA", escala), (22, "MÉTODO", ""), (46, "TIPO DE DOCUMENTO", tipo),
-                  (28, "ESTADO", "En estudio"), (34, "TOL. GENERALES", tol),
-                  (28, "FORM./IDIOMA", "A3/es")))
+    L.linea("Marco", pp(x0, ym), pp(x1, ym))
+    L.linea("Marco", pp(COL_1, y0), pp(COL_1, y1))
+    L.linea("Marco", pp(COL_2, y0), pp(COL_2, y1))
+    L.linea("Texto", pp(COL_3, y0), pp(COL_3, ym))
+    arriba, abajo = ym + 2.5, y0 + 3.25
+    L.t((x0 + COL_1) / 2, arriba, 5, "UTN FRBA", "c")
+    L.t((COL_1 + COL_2) / 2, arriba, 5, L.titulo, "c")
+    L.t((COL_2 + x1) / 2, arriba, 5, f"Lámina {L.numero} de 4", "c")
+    L.t((x0 + COL_1) / 2, abajo, 3.5, "Curso S1091 - Grupo 1", "c")
+    L.t((COL_1 + COL_2) / 2, abajo, 3.5, "Ingeniería Mecánica I", "c")
+    L.t((COL_2 + COL_3) / 2, abajo, 3.5,
+        f"Escala {escala}" if escala[0].isdigit() else escala, "c")
+    L.t((COL_3 + x1) / 2, abajo, 3.5, FECHA, "c")
     if metodo:   # símbolo del método E: el cono se mira desde el lado angosto
-        xs, ym = x0 + 24, yb + 3.5
-        L.polilinea("Contornos", [pp(xs, ym - 1.2), pp(xs + 7, ym - 2.6), pp(xs + 7, ym + 2.6),
-                                  pp(xs, ym + 1.2)], True)
-        L.circulo("Contornos", pp(xs + 12.5, ym), 2.6 * L.E)
-        L.circulo("Contornos", pp(xs + 12.5, ym), 1.2 * L.E)
-    L.linea("Texto", pp(x0 + 124, yc), pp(x0 + 124, y1))
-    L.t(x0 + 1.5, y1 - 3.6, 2.5, "TÍTULO")
-    L.t(x0 + 62, yc + 12, 5, L.titulo, "c")
-    L.t(x0 + 62, yc + 5, 3.5, titulo2, "c")
-    L.t(x0 + 125.5, y1 - 3.6, 2.5, "PROPIETARIO LEGAL")
-    L.t(x0 + 126, yc + 13, 3.5, "UTN FRBA")
-    L.t(x0 + 126, yc + 8, 3.5, "Ing. Mecánica I")
-    L.t(x0 + 126, yc + 3, 3.5, "S1091 - Grupo 1")
-    # Alteraciones, como en los planos NEFA: el encabezado abajo y las filas hacia arriba
-    xa = 25.0
-    anchos = (14, 131, 30, 30)
-    for k, (izq, der) in enumerate(((10, 16), (16, 22))):
-        L.linea("Texto", pp(xa, der), pp(xa + sum(anchos), der))
-    x = xa
-    for c in anchos[:-1]:
-        x += c
-        L.linea("Texto", pp(x, 10), pp(x, 22))
-    x = xa
-    for c, enc, val in zip(anchos, ("REV.", "ALTERACIONES", "FECHA", "FIRMA"),
-                           ("A", "Primera emisión", FECHA, AUTOR)):
-        L.t(x + 1.5, 11.8, 2.5, enc)
-        L.t(x + 1.5, 17.2, 2.5, val)
-        x += c
+        xs, yc = COL_2 - 24, y0 + 5
+        L.polilinea("Contornos", [pp(xs, yc - 1.2), pp(xs + 7, yc - 2.6), pp(xs + 7, yc + 2.6),
+                                  pp(xs, yc + 1.2)], True)
+        L.circulo("Contornos", pp(xs + 12.5, yc), 2.6 * L.E)
+        L.circulo("Contornos", pp(xs + 12.5, yc), 1.2 * L.E)
+    L.t(x1 - 2, y1 + 1.5, 3.5, LEYENDA, "d")
 
 
 def tabla(L, x, ytop, anchos, filas, h=2.5, fila=5.0):
@@ -291,35 +260,34 @@ def engranaje_simple(z, y, zc):
 
 
 # ------------------------------------------------------------------ lámina a
-LISTA = [  # ítem, descripción, cantidad, especificación y observaciones
-    (1, "Base", 1, "Fija"),
-    (2, "Guía con apoyos", 2, "Fija"),
-    (3, "Carro con patines", 1, "Carro"),
-    (4, "Soporte del cuello", 1, "Carro"),
-    (5, "Rodamiento del cuello", 1, "Carro"),
-    (6, "Mordaza del cuello", 1, "Gira"),
-    (7, "Botella", 1, "Gira. Referencia"),
-    (8, "Placa de la caja", 2, "Carro"),
-    (9, "Eje del rodillo", 1, "Gira"),
-    (10, "Rodillo (núcleo y recubrimiento)", 1, "Gira"),
-    (11, "Manivela", 1, "Gira"),
-    (12, "Engranaje conductor", 1, "Gira. z = 20, m = 2"),
-    (13, "Engranaje conducido", 1, "Gira. z = 40, m = 2"),
-    (14, "Husillo T8, 4 entradas, L = 8", 1, "Gira. Rosca derecha"),
-    (15, "Collar del husillo", 2, "Gira"),
-    (16, "Tuerca con poste", 1, "Fija"),
-    (17, "Portacuchilla", 1, "Fijo"),
-    (18, "Cuchilla", 1, "Fija. Comercial"),
+LISTA = [  # n.°, denominación, cantidad
+    (1, "Base", 1),
+    (2, "Guía con apoyos", 2),
+    (3, "Carro con patines", 1),
+    (4, "Soporte del cuello", 1),
+    (5, "Rodamiento del cuello", 1),
+    (6, "Mordaza del cuello", 1),
+    (7, "Botella", 1),
+    (8, "Placa de la caja", 2),
+    (9, "Eje del rodillo", 1),
+    (10, "Rodillo", 1),
+    (11, "Manivela", 1),
+    (12, "Engranaje conductor", 1),
+    (13, "Engranaje conducido", 1),
+    (14, "Husillo", 1),
+    (15, "Collar del husillo", 2),
+    (16, "Tuerca con poste", 1),
+    (17, "Portacuchilla", 1),
+    (18, "Cuchilla", 1),
 ]
 
 
 def lista_piezas(L, x, y):
-    """Sobre el rótulo y leída hacia arriba, como en los planos NEFA."""
-    anchos = [11, 76, 12, 38]
-    filas = [(a, b, c, d) for a, b, c, d in reversed(LISTA)]
-    filas.append(("ÍTEM", "DESCRIPCIÓN", "CANT.", "ESPECIF. Y OBSERV."))
+    """Se lee hacia arriba, desde el encabezado."""
+    filas = [(a, b, c) for a, b, c in reversed(LISTA)]
+    filas.append(("N.°", "DENOMINACIÓN", "CANT."))
     fila = 5.3
-    tabla(L, x, y + fila * len(filas), anchos, filas, 2.5, fila)
+    tabla(L, x, y + fila * len(filas), [12, 72, 15], filas, 2.5, fila)
 
 
 def primitivo_de_costado(vista, y, zc, dp, planta=False):
@@ -348,7 +316,7 @@ def rosca_de_costado(vista, planta=False):
 
 def lamina_conjunto():
     L = Lamina(2.5, 1, "Plano de conjunto")
-    marco_y_rotulo(L, "1:2,5", "CPET-001", "Cortadora manual de botellas PET", "Plano de conjunto")
+    marco_y_rotulo(L, "1:2,5")
     pz = Z.formas()
     formas = [d[0] for n, d in pz.items() if n not in ("EngranajeZ1", "EngranajeZ2")]
     formas += [engranaje_simple(P.Z_1, P.Y_R, P.Z_R), engranaje_simple(P.Z_2, P.Y_H, P.Z_H),
@@ -412,16 +380,9 @@ def lamina_conjunto():
     L.arco("Finas", Lat.pt(0, yh, zh), P.D_HUSILLO_FONDO / 2, 90, 360)
     L.cota(Lat.pt(0, P.Y_BASE[1], 0), Lat.pt(0, P.Y_BASE[1], H), -11, direc="v")
 
-    # --- Lista de piezas y notas
-    lista_piezas(L, 273, ROT_Y1)
-    for k, s in enumerate((
-            "NOTAS",
-            "1. Método E. Escala según IRAM 4505; 1:2,5 no figura en ISO 5455.",
-            "2. Engranajes según ISO 2203 e IRAM 4522-2, sin dientes y con primitivo en trazo y punto.",
-            "3. Husillo según ISO 6410-1 e IRAM 4520: cresta gruesa y fondo fino.",
-            "4. Trazo largo y dos puntos: posición final del carro y del husillo.",
-            "5. Materiales sin definir. Sin tolerancias generales: es un plano de conjunto.")):
-        L.t(30, 54 - k * 5.2, 2.5, s)
+    # --- Lista de piezas y nota
+    lista_piezas(L, 311, 37)
+    L.t(30, 34, 2.5, "Trazo largo y dos puntos: posición final del carro y del husillo.")
 
     # --- Globos
     g = lambda n, v, p, dx, dy: globo(L, n, v.pt(*p), dx, dy)
@@ -449,8 +410,7 @@ def lamina_conjunto():
 # ------------------------------------------------------------------ lámina b
 def lamina_despiece():
     L = Lamina(1, 2, "Despiece de piezas clave")
-    marco_y_rotulo(L, "1:1", "CPET-002", "Cortadora manual de botellas PET", "Despiece",
-                   "ISO 2768-m")
+    marco_y_rotulo(L, "1:1")
     pz = Z.formas()
     yr, zr, zh = P.Y_R, P.Z_R, P.Z_H
 
@@ -477,9 +437,9 @@ def lamina_despiece():
     # --- Engranajes
     L.t(32, 195, 3.5, "Piezas 12 y 13: par de engranajes")
     g1, g2 = pz["EngranajeZ1"][0], pz["EngranajeZ2"][0]
-    Y_G = 106.0
+    Y_G = 108.0
     G = Vista(L, "lateral", (0, yr, zh), 92, Y_G)
-    # ISO 2203 e IRAM 4522-2: cada rueda como sólido hasta la cabeza, sin dientes, con
+    # Representación convencional: cada rueda como sólido hasta la cabeza, sin dientes, con
     # el primitivo en trazo largo y punto. En la zona de engrane ninguna tapa a la otra.
     M = P.MODULO
     dp1, dp2 = M * P.Z_1, M * P.Z_2
@@ -518,14 +478,13 @@ def lamina_despiece():
     filas = [("Dato", "Conductor", "Conducido")]
     for nom, a, b in zip(("Dientes z", "Módulo m", "Ø primitivo", "Ø exterior", "Ø de fondo"), d1, d2):
         filas.append((nom.replace("Ø", "%%c"), a, b))
-    tabla(L, 30, 53, [40, 18, 18], filas, 2.5, 5.0)
+    tabla(L, 30, 61, [40, 18, 18], filas, 2.5, 5.0)
     filas = [("Dato", "Valor"),
              ("Distancia entre ejes", f"{formato(P.DIST_EJES)} mm"),
              ("Relación i = z2 / z1", formato(P.I)),
              ("Ángulo de presión", "20%%d"),
              ("Ancho de cara", f"{formato(P.X_ENGRANAJES[1] - P.X_ENGRANAJES[0])} mm")]
-    tabla(L, 112, 53, [62, 44], filas, 2.5, 5.0)
-    L.t(30, 55, 2.5, "Tolerancias no especificadas: ISO 2768-m (IRAM ISO 2768-1). Propuesta: se confirma con el dimensionamiento.")
+    tabla(L, 112, 61, [62, 44], filas, 2.5, 5.0)
 
     # --- Placa de la caja
     L.t(248, 222, 3.5, "Pieza 8: placa (2)")
@@ -607,7 +566,7 @@ def apoyo(L, x, y):
 
 def lamina_esquema():
     L = Lamina(1, 3, "Esquema cinemático")
-    marco_y_rotulo(L, "S/E", "CPET-003", "Cortadora manual de botellas PET", "Esquema", metodo=False)
+    marco_y_rotulo(L, "Sin escala", metodo=False)
     t = L.t
     yb, yr, yh = 238.0, 193.0, 154.0     # ejes de botella, rodillo y husillo
 
@@ -701,13 +660,13 @@ def lamina_esquema():
                     (69, "Husillo y tuerca:", "v = L · nh")):
         t(32, y, 3.5, a)
         t(103, y, 3.5, b)
-    rect(L, "Contornos", 32, 45, 204, 61)
-    t(118, 49.5, 7, "a = L·Db / (i·Dr)", "c")
-    t(32, 38.5, 3.5, "a: avance por vuelta de botella, sin deslizamiento.")
-    t(32, 32, 3.5, f"Referencia: a = {formato(P.L_HUSILLO)} · {formato(P.D_B)} / "
+    rect(L, "Contornos", 32, 49, 204, 64)
+    t(118, 53, 7, "a = L·Db / (i·Dr)", "c")
+    t(32, 43, 3.5, "a: avance por vuelta de botella, sin deslizamiento.")
+    t(32, 37.5, 3.5, f"Referencia: a = {formato(P.L_HUSILLO)} · {formato(P.D_B)} / "
                    f"({formato(P.I)} · {formato(P.D_R)}) = " + f"{P.PASO_A:.2f}".replace(".", ",")
                    + " mm/vuelta")
-    t(32, 25.5, 3.5, "Rosca derecha; manivela horaria vista desde el borde abierto.")
+    t(32, 32, 3.5, "Rosca derecha; manivela horaria vista desde el borde abierto.")
     filas = [("Símbolo", "Magnitud", "Valor"),
              ("L", "Avance del husillo por vuelta", f"{formato(P.L_HUSILLO)} mm"),
              ("Db / Dr", "Botella / rodillo", f"{formato(P.D_B)} / {formato(P.D_R)} mm"),
@@ -719,8 +678,8 @@ def lamina_esquema():
 
 # ------------------------------------------------------------------ lámina d
 def lamina_hallazgo():
-    L = Lamina(2, 4, "Hallazgo: manivela")
-    marco_y_rotulo(L, "1:2", "CPET-004", "Manivela del lado del cuerpo de la botella", "Estudio")
+    L = Lamina(2, 4, "Hallazgo: manivela del lado del cuerpo")
+    marco_y_rotulo(L, "1:2")
     pz = Z.formas()
     H, yr, zr = P.H_EJE, P.Y_R, P.Z_R
     x_tras = P.X_RODILLO[1] + 12

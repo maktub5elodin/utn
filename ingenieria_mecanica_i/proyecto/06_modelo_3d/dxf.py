@@ -25,9 +25,9 @@ CAPAS = [  # nombre, color, tipo de línea, grosor en centésimas de mm
 ]
 # Nombres estándar (LibreCAD no admite otros). Patrón con d = 0,25 mm: 12d, 3d, 24d y 0,5d.
 TIPOS = [
-    ("DASHED", "Trazos ISO 128 tipo 02", [3.75, 3.0, -0.75]),
-    ("CENTER", "Trazo largo y punto ISO 128 tipo 04", [7.625, 6.0, -0.75, 0.125, -0.75]),
-    ("DIVIDE", "Trazo largo y dos puntos ISO 128 tipo 05",
+    ("DASHED", "Trazos", [3.75, 3.0, -0.75]),
+    ("CENTER", "Trazo largo y punto", [7.625, 6.0, -0.75, 0.125, -0.75]),
+    ("DIVIDE", "Trazo largo y dos puntos",
      [8.5, 6.0, -0.75, 0.125, -0.75, 0.125, -0.75]),
 ]
 ALIN = {"i": TextEntityAlignment.LEFT, "c": TextEntityAlignment.CENTER,

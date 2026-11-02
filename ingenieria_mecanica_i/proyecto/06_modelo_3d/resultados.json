@@ -109,25 +109,25 @@
  "planos": {
   "01_conjunto": {
    "escala": 2.5,
-   "entidades": 1253,
+   "entidades": 1182,
    "cotas": 5,
    "textos_superpuestos": []
   },
   "02_despiece": {
    "escala": 1,
-   "entidades": 245,
+   "entidades": 198,
    "cotas": 17,
    "textos_superpuestos": []
   },
   "03_esquema_cinematico": {
    "escala": 1,
-   "entidades": 335,
+   "entidades": 289,
    "cotas": 0,
    "textos_superpuestos": []
   },
   "04_hallazgo_manivela": {
    "escala": 2,
-   "entidades": 130,
+   "entidades": 84,
    "cotas": 3,
    "textos_superpuestos": []
   }
@@ -137,29 +137,29 @@
    "version": "AC1015",
    "errores": 0,
    "corregidos": 0,
-   "librecad_cerca_de_ezdxf": 0.981,
+   "librecad_cerca_de_ezdxf": 0.989,
    "ezdxf_cerca_de_librecad": 0.983
   },
   "02_despiece": {
    "version": "AC1015",
    "errores": 0,
    "corregidos": 0,
-   "librecad_cerca_de_ezdxf": 0.982,
-   "ezdxf_cerca_de_librecad": 0.965
+   "librecad_cerca_de_ezdxf": 0.983,
+   "ezdxf_cerca_de_librecad": 0.961
   },
   "03_esquema_cinematico": {
    "version": "AC1015",
    "errores": 0,
    "corregidos": 0,
-   "librecad_cerca_de_ezdxf": 0.97,
-   "ezdxf_cerca_de_librecad": 0.945
+   "librecad_cerca_de_ezdxf": 0.967,
+   "ezdxf_cerca_de_librecad": 0.938
   },
   "04_hallazgo_manivela": {
    "version": "AC1015",
    "errores": 0,
    "corregidos": 0,
-   "librecad_cerca_de_ezdxf": 0.952,
-   "ezdxf_cerca_de_librecad": 0.944
+   "librecad_cerca_de_ezdxf": 0.948,
+   "ezdxf_cerca_de_librecad": 0.93
   }
  }
 }
