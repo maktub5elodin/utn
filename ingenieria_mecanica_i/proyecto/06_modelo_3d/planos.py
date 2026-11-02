@@ -185,13 +185,13 @@ class Vista:
 
 
 # ------------------------------------------------------------- marco y rótulo
-ROT_X0, ROT_X1 = 25.0, 410.0    # todo el ancho del recuadro, como la plantilla de la cátedra
-ROT_Y0, ROT_Y1 = 10.0, 30.0
-COL_1, COL_2, COL_3 = 102.0, 333.0, 371.5
+ROT_X0, ROT_X1 = 230.0, 410.0   # bloque de 180 × 40 mm, abajo a la derecha
+ROT_Y0, ROT_Y1 = 10.0, 50.0
+SUBTITULO = "Cortadora manual de botellas PET"
 
 
 def marco_y_rotulo(L, escala, metodo=True):
-    """Rótulo de la plantilla de la cátedra (dos filas y tres columnas), llevado a A3."""
+    """Rótulo de cursada: celdas con rótulo chico y valor más grande."""
     pp = L.pp
     L.polilinea("Texto", [pp(0, 0), pp(420, 0), pp(420, 297), pp(0, 297)], True)
     L.polilinea("Marco", [pp(25, 10), pp(410, 10), pp(410, 287), pp(25, 287)], True)
@@ -199,28 +199,33 @@ def marco_y_rotulo(L, escala, metodo=True):
                  ((210, 0), (210, 10)), ((210, 287), (210, 297))):
         L.linea("Marco", pp(*a), pp(*b))
     x0, x1, y0, y1 = ROT_X0, ROT_X1, ROT_Y0, ROT_Y1
-    ym = (y0 + y1) / 2
     L.polilinea("Marco", [pp(x0, y0), pp(x1, y0), pp(x1, y1), pp(x0, y1)], True)
-    L.linea("Marco", pp(x0, ym), pp(x1, ym))
-    L.linea("Marco", pp(COL_1, y0), pp(COL_1, y1))
-    L.linea("Marco", pp(COL_2, y0), pp(COL_2, y1))
-    L.linea("Texto", pp(COL_3, y0), pp(COL_3, ym))
-    arriba, abajo = ym + 2.5, y0 + 3.25
-    L.t((x0 + COL_1) / 2, arriba, 5, "UTN FRBA", "c")
-    L.t((COL_1 + COL_2) / 2, arriba, 5, L.titulo, "c")
-    L.t((COL_2 + x1) / 2, arriba, 5, f"Lámina {L.numero} de 4", "c")
-    L.t((x0 + COL_1) / 2, abajo, 3.5, "Curso S1091 - Grupo 1", "c")
-    L.t((COL_1 + COL_2) / 2, abajo, 3.5, "Ingeniería Mecánica I", "c")
-    L.t((COL_2 + COL_3) / 2, abajo, 3.5,
-        f"Escala {escala}" if escala[0].isdigit() else escala, "c")
-    L.t((COL_3 + x1) / 2, abajo, 3.5, FECHA, "c")
+    ya, yb = y0 + 11, y0 + 22
+    L.linea("Texto", pp(x0, ya), pp(x1, ya))
+    L.linea("Texto", pp(x0, yb), pp(x1, yb))
+
+    def fila(y_inf, y_sup, celdas):
+        x = x0
+        for ancho, rotulo, valor in celdas:
+            if x > x0:
+                L.linea("Texto", pp(x, y_inf), pp(x, y_sup))
+            L.t(x + 1.5, y_sup - 3.4, 2.5, rotulo)
+            L.t(x + 1.5, y_inf + 1.8, 3.5, valor)
+            x += ancho
+    fila(y0, ya, ((60, "ESCALA", escala), (60, "FECHA", FECHA),
+                  (60, "LÁMINA", f"{L.numero} de 4")))
+    fila(ya, yb, ((114, "ASIGNATURA", "UTN FRBA - Ingeniería Mecánica I"),
+                  (66, "CURSO", "S1091 - Grupo 1")))
     if metodo:   # símbolo del método E: el cono se mira desde el lado angosto
-        xs, yc = COL_2 - 24, y0 + 5
+        xs, yc = x0 + 20, y0 + 4
         L.polilinea("Contornos", [pp(xs, yc - 1.2), pp(xs + 7, yc - 2.6), pp(xs + 7, yc + 2.6),
                                   pp(xs, yc + 1.2)], True)
         L.circulo("Contornos", pp(xs + 12.5, yc), 2.6 * L.E)
         L.circulo("Contornos", pp(xs + 12.5, yc), 1.2 * L.E)
-    L.t(x1 - 2, y1 + 1.5, 3.5, LEYENDA, "d")
+    L.t(x0 + 1.5, y1 - 3.4, 2.5, "TÍTULO")
+    L.t((x0 + x1) / 2, yb + 8, 5, L.titulo, "c")
+    L.t((x0 + x1) / 2, yb + 2.4, 3.5, SUBTITULO, "c")
+    L.t(x1 - 1, y1 + 1.2, 2.5, LEYENDA, "d")
 
 
 def tabla(L, x, ytop, anchos, filas, h=2.5, fila=5.0):
@@ -287,7 +292,7 @@ def lista_piezas(L, x, y):
     filas = [(a, b, c) for a, b, c in reversed(LISTA)]
     filas.append(("N.°", "DENOMINACIÓN", "CANT."))
     fila = 5.3
-    tabla(L, x, y + fila * len(filas), [12, 72, 15], filas, 2.5, fila)
+    tabla(L, x, y + fila * len(filas), [14, 146, 20], filas, 2.5, fila)
 
 
 def primitivo_de_costado(vista, y, zc, dp, planta=False):
@@ -324,14 +329,16 @@ def lamina_conjunto():
     H, yr, zr, yh, zh = P.H_EJE, P.Y_R, P.Z_R, P.Y_H, P.Z_H
     xman = P.X_MANIVELA - 8 - P.LARGO_MANGO
     xfin = P.X_HUSILLO_FIN + P.RECORRIDO
-    X_F, Y_F = 228.0, 186.0
+    # La posición final del husillo se interrumpe: entera no entra junto a la lista de piezas
+    x_corte, x_dib = P.X_HUSILLO_FIN + 40, P.X_HUSILLO_FIN + 104
+    X_F, Y_F = 185.0, 186.0
 
     # --- Frontal
     F = Vista(L, "frente", (0, 0, 0), X_F, Y_F)
     F.formas(formas)
     F.eje((-12, 0, H), (P.X_BORDE + 8, 0, H))
     F.eje((xman - 6, yr, zr), (P.X_EJE[1] + 8, yr, zr))
-    F.eje((P.X_HUSILLO_INI - 6, yh, zh), (xfin + 6, yh, zh))
+    F.eje((P.X_HUSILLO_INI - 6, yh, zh), (x_dib + 5, yh, zh))
     # Posición final del carro y del husillo
     s = P.RECORRIDO
     c = P.X_CARRO
@@ -342,9 +349,13 @@ def lamina_conjunto():
         L.linea("Extremas", a, b)
     rh = P.D_HUSILLO / 2
     for d in (-rh, rh):
-        L.linea("Extremas", F.pt(P.X_HUSILLO_FIN, 0, zh + d), F.pt(xfin, 0, zh + d))
-    L.linea("Extremas", F.pt(xfin, 0, zh - rh), F.pt(xfin, 0, zh + rh))
-    L.t(112, Y_F + 92, 3.5, "Vista frontal", "c")
+        L.linea("Extremas", F.pt(P.X_HUSILLO_FIN, 0, zh + d), F.pt(x_corte, 0, zh + d))
+        L.linea("Extremas", F.pt(x_corte + 8, 0, zh + d), F.pt(x_dib, 0, zh + d))
+    L.linea("Extremas", F.pt(x_dib, 0, zh - rh), F.pt(x_dib, 0, zh + rh))
+    for xc in (x_corte, x_corte + 8):      # marca de interrupción
+        L.polilinea("Finas", [F.pt(xc, 0, zh - 9), F.pt(xc - 2, 0, zh - 3), F.pt(xc + 2, 0, zh + 3),
+                              F.pt(xc, 0, zh + 9)])
+    L.t(70, Y_F + 92, 3.5, "Vista frontal", "c")
     dp1, dp2 = P.MODULO * P.Z_1, P.MODULO * P.Z_2
     primitivo_de_costado(F, yr, zr, dp1)
     primitivo_de_costado(F, yh, zh, dp2)
@@ -353,7 +364,10 @@ def lamina_conjunto():
     bz = -P.ESPESOR_BASE
     L.cota(F.pt(c[1] + s, 0, bz), F.pt(c[1], 0, bz), -6, f"Recorrido {formato(s)}", "h")
     L.cota(F.pt(P.X_BASE[1], 0, bz), F.pt(P.X_BASE[0], 0, bz), -12, direc="h")
-    L.cota(F.pt(xfin, 0, bz), F.pt(xman, 0, bz), -18, direc="h")
+    L.cota(F.pt(x_dib, 0, bz), F.pt(xman, 0, bz), -18, formato(xfin - xman), "h")
+    yd = F.pt(0, 0, bz)[1] - 18 * L.E          # la cota también lleva la interrupción
+    xd = F.pt(x_corte + 4, 0, 0)[0]
+    L.polilinea("Finas", [(xd + 4, yd - 6), (xd + 1.5, yd - 1), (xd - 1.5, yd + 1), (xd - 4, yd + 6)])
 
     # --- Superior (método E: debajo de la frontal)
     S = Vista(L, "planta", (0, 0, 0), X_F, 110.0)
@@ -361,7 +375,7 @@ def lamina_conjunto():
     S.eje((-12, 0, 0), (P.X_BORDE + 8, 0, 0))
     S.eje((xman - 6, yr, 0), (P.X_EJE[1] + 8, yr, 0))
     S.eje((P.X_HUSILLO_INI - 6, yh, 0), (P.X_HUSILLO_FIN + 6, yh, 0))
-    L.t(180, 158.5, 3.5, "Vista superior", "c")
+    L.t(137, 158.5, 3.5, "Vista superior", "c")
     primitivo_de_costado(S, yr, zr, dp1, True)
     primitivo_de_costado(S, yh, zh, dp2, True)
     rosca_de_costado(S, True)
@@ -381,8 +395,8 @@ def lamina_conjunto():
     L.cota(Lat.pt(0, P.Y_BASE[1], 0), Lat.pt(0, P.Y_BASE[1], H), -11, direc="v")
 
     # --- Lista de piezas y nota
-    lista_piezas(L, 311, 37)
-    L.t(30, 34, 2.5, "Trazo largo y dos puntos: posición final del carro y del husillo.")
+    lista_piezas(L, ROT_X0, ROT_Y1 + 5)
+    L.t(30, 34, 2.5, "Trazo largo y dos puntos: posición final del carro y del husillo (interrumpido; la cota da la medida real).")
 
     # --- Globos
     g = lambda n, v, p, dx, dy: globo(L, n, v.pt(*p), dx, dy)

@@ -103,7 +103,7 @@ Se cambia una medida en `parametros.py` y se vuelve a correr. Si el cambio gener
 
 ## 4. Normas de los planos
 
-Los planos siguen las normas IRAM como norma de aplicación, a nivel de cursada: líneas, márgenes, escala, letra, método E y representación convencional de engranajes y roscas. El rótulo es el de la plantilla de la cátedra, llevado a A3. El relevamiento de normas ISO e IRAM, con sus fuentes y lo que quedó sin confirmar, está en [normas_detalle.md](normas_detalle.md), para cuando el proyecto lo necesite.
+Los planos siguen las normas IRAM como norma de aplicación, a nivel de cursada: líneas, márgenes, escala, letra, método E y representación convencional de engranajes y roscas. El rótulo es un bloque simple de cursada. El relevamiento de normas ISO e IRAM, con sus fuentes y lo que quedó sin confirmar, está en [normas_detalle.md](normas_detalle.md), para cuando el proyecto lo necesite.
 
 ---
-*Fuentes: `03_entrega_2/Entrega_2_Reentrega_0_S1091_Grupo_1.pdf` (secciones 5.1 a 5.5), `04_material_grafico/Proy Mecanica.dxf`, `04_material_grafico/imagen_ia_conjunto_rodillo_marcado.jpeg`, `05_presentacion/contradicciones_y_supuestos.md`, `sistemas_de_representacion/01_materiales_y_normas_iram.md` y `sistemas_de_representacion/template.dxf`, `sistemas_de_representacion/CLASE 3.pdf`. Método de trabajo tomado de `~/FreeCAD/macros/`.*
+*Fuentes: `03_entrega_2/Entrega_2_Reentrega_0_S1091_Grupo_1.pdf` (secciones 5.1 a 5.5), `04_material_grafico/Proy Mecanica.dxf`, `04_material_grafico/imagen_ia_conjunto_rodillo_marcado.jpeg`, `05_presentacion/contradicciones_y_supuestos.md`, `sistemas_de_representacion/01_materiales_y_normas_iram.md` y `sistemas_de_representacion/CLASE 3.pdf`. Método de trabajo tomado de `~/FreeCAD/macros/`.*

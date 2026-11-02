@@ -2,7 +2,7 @@
 
 Anexo de [hallazgos.md](hallazgos.md). Reúne el relevamiento de normas hecho para los planos de la cortadora.
 
-**Qué describe:** la versión de las láminas del commit `fdebf70`, a nivel industria, con rótulo ISO 7200, tabla de alteraciones y tolerancias generales. Las láminas actuales se simplificaron a nivel de cursada, con el rótulo de la cátedra, así que "Qué se aplicó" y "Quedó" no siempre describen lo que se ve hoy. Siguen vigentes líneas, márgenes, escala, letra, método E y representación de engranajes y roscas. La investigación de origen está en [normas_investigacion_paralela.md](normas_investigacion_paralela.md).
+**Qué describe:** la versión de las láminas del commit `fdebf70`, a nivel industria, con rótulo ISO 7200, tabla de alteraciones y tolerancias generales. Las láminas actuales se simplificaron a nivel de cursada, con un rótulo simple, así que "Qué se aplicó" y "Quedó" no siempre describen lo que se ve hoy. Siguen vigentes líneas, márgenes, escala, letra, método E y representación de engranajes y roscas. La investigación de origen está en [normas_investigacion_paralela.md](normas_investigacion_paralela.md).
 
 **Criterio:** IRAM es la norma de aplicación, porque es un trabajo de una cátedra argentina y la industria local la usa. ISO es la referencia de alineación internacional. Cuando difieren, manda IRAM y queda indicado:
 
