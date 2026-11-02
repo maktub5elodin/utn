@@ -26,14 +26,8 @@ SS = 2                      # supermuestreo: se renderiza al doble y se reduce
 FPS = 30
 SEG_INTRO, SEG_CORTE, SEG_FINAL = 3.0, 30.0, 3.0
 
-COLORES = {
-    "fijo": (0.30, 0.33, 0.38),
-    "carro": (0.13, 0.42, 0.72),
-    "gira": (0.95, 0.50, 0.12),
-    "elastomero": (0.10, 0.10, 0.11),
-    "filo": (0.82, 0.84, 0.87),
-}
-COLOR_PET = (0.55, 0.85, 0.72)
+COLORES = Z.COLORES
+COLOR_PET = Z.COLOR_PET
 COLOR_MARCA = (0.98, 0.78, 0.15)
 
 

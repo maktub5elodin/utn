@@ -82,7 +82,7 @@ Alcanza con unos **26° de giro** para ese rango de diámetros, que también es 
 ## 3. Cómo se usa
 
 ```
-make          # verifica y genera las figuras y modelo/cortadora_pet.FCStd
+make          # verifica; genera STEP, planos, figuras y modelo/cortadora_pet.FCStd
 make video    # además, salida/cortadora_pet.mp4
 ```
 
@@ -94,7 +94,9 @@ Se cambia una medida en `parametros.py` y se vuelve a correr. Si el cambio gener
 | `piezas.py` | Sólidos de cada pieza |
 | `verificar.py` | Choques, engrane, paso y sentidos, sin ventana |
 | `renderizar.py` | Figuras y video |
+| `exportar_step.py` | `salida/cortadora_pet.step` para SolidWorks: 22 sólidos con nombre y color, en la posición inicial. Lo reabre y compara sólidos y volumen. La tira queda afuera |
+| `planos.py`, `dxf.py`, `a_pdf.sh` | `planos/`: cuatro láminas A3 en DXF R2000 y PDF, proyectadas desde el modelo. Se regeneran si cambia una medida. Falla si dos textos se superponen |
 | `resultados.json` | Números de la última verificación |
 
 ---
-*Fuentes: `03_entrega_2/Entrega_2_Reentrega_0_S1091_Grupo_1.pdf` (secciones 5.1 a 5.5), `04_material_grafico/Proy Mecanica.dxf`, `04_material_grafico/imagen_ia_conjunto_rodillo_marcado.jpeg`, `05_presentacion/contradicciones_y_supuestos.md`. Método de trabajo tomado de `~/FreeCAD/macros/`.*
+*Fuentes: `03_entrega_2/Entrega_2_Reentrega_0_S1091_Grupo_1.pdf` (secciones 5.1 a 5.5), `04_material_grafico/Proy Mecanica.dxf`, `04_material_grafico/imagen_ia_conjunto_rodillo_marcado.jpeg`, `05_presentacion/contradicciones_y_supuestos.md`, `sistemas_de_representacion/01_materiales_y_normas_iram.md` y `sistemas_de_representacion/CLASE 3.pdf` (líneas, caligrafía y flechas de los planos). Método de trabajo tomado de `~/FreeCAD/macros/`.*

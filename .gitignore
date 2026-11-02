@@ -39,6 +39,8 @@ __pycache__/
 !**/figuras/*.png
 # Excepción puntual: PDF de respaldo de la presentación del TP Final (el .pptx sigue ignorado).
 !ingenieria_mecanica_i/proyecto/05_presentacion/*.pdf
+# Excepción puntual: planos del modelo 3D de la cortadora (se regeneran con make).
+!ingenieria_mecanica_i/proyecto/06_modelo_3d/planos/*.pdf
 
 # Directorios excluidos temporalmente
 su_myf/

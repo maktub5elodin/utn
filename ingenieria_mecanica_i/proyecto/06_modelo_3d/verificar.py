@@ -205,6 +205,14 @@ res["envolvente"] = {
 }
 
 res["fallas"] = fallas
+# Lo que agregan los pasos siguientes de make (STEP y planos) no se pierde.
+ruta_res = os.path.join(CARPETA, "resultados.json")
+if os.path.exists(ruta_res):
+    with open(ruta_res, encoding="utf-8") as f:
+        previo = json.load(f)
+    for clave in ("step", "planos"):
+        if clave in previo:
+            res[clave] = previo[clave]
 with open(os.path.join(CARPETA, "resultados.json"), "w", encoding="utf-8") as f:
     json.dump(res, f, ensure_ascii=False, indent=1)
 print(json.dumps(res, ensure_ascii=False, indent=1))

@@ -19,6 +19,15 @@ import parametros as P
 V = App.Vector
 EJE_X = V(1, 0, 0)
 
+COLORES = {
+    "fijo": (0.30, 0.33, 0.38),
+    "carro": (0.13, 0.42, 0.72),
+    "gira": (0.95, 0.50, 0.12),
+    "elastomero": (0.10, 0.10, 0.11),
+    "filo": (0.82, 0.84, 0.87),
+}
+COLOR_PET = (0.55, 0.85, 0.72)
+
 
 def cil(r, x0, x1, y=0.0, z=None):
     """Cilindro de eje paralelo a X."""
@@ -70,16 +79,27 @@ def fases_engrane():
 
 
 def botella_solida():
-    """Envolvente llena de la botella, para buscar choques."""
-    n = 40
+    """Envolvente llena de la botella: se usa para buscar choques, en el STEP y
+    en los planos. El hombro es una sola curva, no una sucesión de conos."""
     z = P.H_EJE
-    perfil = [V(0, 0, z), V(0, P.R_CUELLO, z)]
-    for k in range(n + 1):
-        x = P.X_CUELLO_FIN + (P.X_HOMBRO_FIN - P.X_CUELLO_FIN) * k / n
-        perfil.append(V(x, P.radio_botella(x), z))
-    perfil += [V(P.X_BORDE, P.R_B, z), V(P.X_BORDE, 0, z), V(0, 0, z)]
+    n = 40
+    hombro = Part.BSplineCurve()
+    hombro.interpolate([
+        V(x, P.radio_botella(x), z)
+        for x in (P.X_CUELLO_FIN + (P.X_HOMBRO_FIN - P.X_CUELLO_FIN) * k / n
+                  for k in range(n + 1))])
+    ini, fin = hombro.value(hombro.FirstParameter), hombro.value(hombro.LastParameter)
+    aristas = [
+        Part.makeLine(V(0, 0, z), V(0, P.R_CUELLO, z)),
+        Part.makeLine(V(0, P.R_CUELLO, z), ini),
+        hombro.toShape(),
+        Part.makeLine(fin, V(P.X_BORDE, P.R_B, z)),
+        Part.makeLine(V(P.X_BORDE, P.R_B, z), V(P.X_BORDE, 0, z)),
+        Part.makeLine(V(P.X_BORDE, 0, z), V(0, 0, z)),
+    ]
+    cara = Part.Face(Part.Wire(aristas))
     # Con la geometría ya en su lugar: colocar() pisa el Placement de la forma.
-    return Part.Face(Part.makePolygon(perfil)).revolve(V(0, 0, z), EJE_X, 360)
+    return cara.revolve(V(0, 0, z), EJE_X, 360)
 
 
 def manivela(x_brazo=None, sentido=-1):

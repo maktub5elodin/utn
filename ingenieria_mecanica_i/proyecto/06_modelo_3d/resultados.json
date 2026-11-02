@@ -94,5 +94,42 @@
   "voladizo_rodillo_mm": 24,
   "holgura_placa2_botella_mm": 1.5
  },
- "fallas": []
+ "fallas": [],
+ "step": {
+  "solidos_modelo": 22,
+  "solidos_step": 22,
+  "volumen_modelo_mm3": 3110914.5,
+  "volumen_step_mm3": 3110914.5,
+  "diferencia_relativa": 3.44e-15,
+  "nombres_conservados": true,
+  "colores_distintos_al_reabrir": 6,
+  "tamano_bytes": 1577200,
+  "ok": true
+ },
+ "planos": {
+  "01_conjunto": {
+   "escala": 2.5,
+   "entidades": 1194,
+   "cotas": 5,
+   "textos_superpuestos": []
+  },
+  "02_despiece": {
+   "escala": 1,
+   "entidades": 1042,
+   "cotas": 17,
+   "textos_superpuestos": []
+  },
+  "03_esquema_cinematico": {
+   "escala": 1,
+   "entidades": 300,
+   "cotas": 0,
+   "textos_superpuestos": []
+  },
+  "04_hallazgo_manivela": {
+   "escala": 2,
+   "entidades": 92,
+   "cotas": 3,
+   "textos_superpuestos": []
+  }
+ }
 }
