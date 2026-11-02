@@ -77,6 +77,7 @@ R_PLACA_HUSILLO = 18.0       # [SUP]
 
 # -------------------------------------------------------------------- husillo
 D_HUSILLO = 8.0       # [REF]
+D_HUSILLO_FONDO = 5.8 # [SUP] fondo de rosca, a confirmar con el proveedor
 X_HUSILLO_INI = 24.0  # [SUP]
 
 # ------------------------------------------------------------ soporte del cuello

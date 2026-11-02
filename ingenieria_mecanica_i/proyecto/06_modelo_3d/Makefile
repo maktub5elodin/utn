@@ -3,6 +3,7 @@
 #   make video       además, video MP4 (unos minutos)
 # Solo se rehace lo que cambió: un cambio en parametros.py regenera todo menos el video.
 FREECAD := $(HOME)/Aplicaciones/FreeCAD.AppImage
+SYSPY   := /usr/bin/python3
 TANDAS  := 3
 CUADROS := 1080
 GUI     := CARPETA_MODELO=$(CURDIR) QT_QPA_PLATFORM=offscreen
@@ -14,7 +15,7 @@ STEP    := salida/cortadora_pet.step
 export SOURCE_DATE_EPOCH := 1793577600
 export FORCE_SOURCE_DATE := 1
 
-all: build/.verificado $(STEP) $(DXF) $(PDF) build/.figuras
+all: build/.verificado $(STEP) $(DXF) $(PDF) build/.auditado build/.figuras
 
 build/.verificado: $(MODELO) verificar.py
 	mkdir -p build
@@ -26,12 +27,19 @@ $(STEP): $(MODELO) exportar_step.py build/.verificado
 	$(GUI) $(FREECAD) exportar_step.py > /dev/null 2>&1
 	touch $@
 
-# Termina con error si dos textos se superponen.
-$(DXF) &: $(MODELO) planos.py dxf.py build/.verificado
+# FreeCAD proyecta y anota; ezdxf, en el Python del sistema, escribe los DXF.
+# Falla si dos textos se superponen o si ezdxf encuentra errores.
+$(DXF) &: $(MODELO) planos.py dibujo.py dxf.py build/.verificado
 	$(FREECAD) freecadcmd planos.py > /dev/null 2>&1
+	$(SYSPY) dxf.py
 
 $(PDF) &: $(DXF) a_pdf.sh
 	./a_pdf.sh
+
+# Auditoría independiente y comparación entre LibreCAD y ezdxf.
+build/.auditado: $(PDF) control_dxf.py
+	$(SYSPY) control_dxf.py
+	touch $@
 
 build/.figuras: $(MODELO) renderizar.py build/.verificado
 	$(GUI) RENDER=figuras $(FREECAD) renderizar.py > /dev/null 2>&1

@@ -157,7 +157,7 @@ def malla_husillo():
     (x/L - θ/2π), y una línea de cresta avanza con θ. Se mueve con Placement."""
     columnas = 72
     dx = 0.33
-    r_c, r_f = P.D_HUSILLO / 2, P.D_HUSILLO / 2 - 1.1
+    r_c, r_f = P.D_HUSILLO / 2, P.D_HUSILLO_FONDO / 2
     y, z = P.Y_H, P.Z_H
 
     def radio(x, th):

@@ -210,7 +210,7 @@ ruta_res = os.path.join(CARPETA, "resultados.json")
 if os.path.exists(ruta_res):
     with open(ruta_res, encoding="utf-8") as f:
         previo = json.load(f)
-    for clave in ("step", "planos"):
+    for clave in ("step", "planos", "auditoria_ezdxf"):
         if clave in previo:
             res[clave] = previo[clave]
 with open(os.path.join(CARPETA, "resultados.json"), "w", encoding="utf-8") as f:

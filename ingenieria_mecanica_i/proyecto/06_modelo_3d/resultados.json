@@ -109,27 +109,57 @@
  "planos": {
   "01_conjunto": {
    "escala": 2.5,
-   "entidades": 1194,
+   "entidades": 1253,
    "cotas": 5,
    "textos_superpuestos": []
   },
   "02_despiece": {
    "escala": 1,
-   "entidades": 1042,
+   "entidades": 245,
    "cotas": 17,
    "textos_superpuestos": []
   },
   "03_esquema_cinematico": {
    "escala": 1,
-   "entidades": 300,
+   "entidades": 335,
    "cotas": 0,
    "textos_superpuestos": []
   },
   "04_hallazgo_manivela": {
    "escala": 2,
-   "entidades": 92,
+   "entidades": 130,
    "cotas": 3,
    "textos_superpuestos": []
+  }
+ },
+ "auditoria_ezdxf": {
+  "01_conjunto": {
+   "version": "AC1015",
+   "errores": 0,
+   "corregidos": 0,
+   "librecad_cerca_de_ezdxf": 0.981,
+   "ezdxf_cerca_de_librecad": 0.983
+  },
+  "02_despiece": {
+   "version": "AC1015",
+   "errores": 0,
+   "corregidos": 0,
+   "librecad_cerca_de_ezdxf": 0.982,
+   "ezdxf_cerca_de_librecad": 0.965
+  },
+  "03_esquema_cinematico": {
+   "version": "AC1015",
+   "errores": 0,
+   "corregidos": 0,
+   "librecad_cerca_de_ezdxf": 0.97,
+   "ezdxf_cerca_de_librecad": 0.945
+  },
+  "04_hallazgo_manivela": {
+   "version": "AC1015",
+   "errores": 0,
+   "corregidos": 0,
+   "librecad_cerca_de_ezdxf": 0.952,
+   "ezdxf_cerca_de_librecad": 0.944
   }
  }
 }
