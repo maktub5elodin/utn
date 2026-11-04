@@ -1,0 +1,192 @@
+% Hoja de fórmulas — Física I A1193 (UTN FRBA, Ing. Mecánica).
+% Hoja de estudio A4 (no hace falta que entre en una carilla). Solo lleva las fórmulas que pidió el usuario; las
+% sugerencias extra van únicamente en hoja_formulas.md.
+% Compilar con: make  ->  build/hoja_formulas.pdf
+
+\documentclass[9pt]{extarticle}
+\usepackage[a4paper, margin=7mm, footskip=4mm]{geometry}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage[dvipsnames]{xcolor}
+
+% Pie: referencia bibliográfica, dentro del margen inferior (no quita alto al texto).
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\color{gray}\scriptsize Referencias: Sears, Zemansky, Young, Freedman — \emph{Física universitaria}, vol. 1, 11.ª ed., Pearson Educación, México, 2004. ISBN 970-26-0511-3.\\
+Young, H. D.; Freedman, R. A. — \emph{University Physics with Modern Physics}, 13th ed., Pearson Addison-Wesley, 2012. ISBN 978-0-321-69686-1.}
+\frenchspacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\columnsep}{4mm}
+\setlength{\columnseprule}{0.3pt}
+\def\columnseprulecolor{\color{gray!50}}
+\setlength{\abovedisplayskip}{1pt}
+\setlength{\belowdisplayskip}{1pt}
+
+% Capítulo: barra de color a todo el ancho de la columna.
+\newcommand{\capitulo}[1]{%
+  \par\vspace{2pt}\colorbox{NavyBlue}{\parbox{\dimexpr\linewidth-2\fboxsep}{%
+  \color{white}\bfseries\small #1}}\par\vspace{1pt}}
+% Subtema: título corto subrayado con filete.
+\newcommand{\subtema}[1]{\par\vspace{3pt}{\bfseries\color{NavyBlue}#1}\par
+  \nointerlineskip\vspace{1pt}{\color{NavyBlue!40}\rule{\linewidth}{0.4pt}}\par\vspace{1pt}}
+% Una fórmula por renglón: fórmula a la izquierda, unidades a la derecha (gris).
+\newcommand{\f}[2]{\par\(\displaystyle #1\)\hfill{\color{gray}\footnotesize #2}\par\vspace{2pt}}
+% Enlace entre secciones: estrella roja con el capítulo donde continúa.
+\newcommand{\enlace}[1]{{\color{BrickRed}\star\,\text{\scriptsize #1}}}
+\newcommand{\nota}[1]{\par{\color{gray}\footnotesize #1}\par\vspace{1pt}}
+
+\begin{document}
+
+{\large\bfseries Física I A1193 — Hoja de fórmulas}\hfill{\small UTN FRBA · Ing. Mecánica}\par
+\vspace{1pt}{\color{NavyBlue}\rule{\linewidth}{0.8pt}}\par\vspace{2pt}
+
+% multicols*: las columnas se llenan en orden, sin balancear (la hoja crece).
+\begin{multicols*}{3}
+\capitulo{Cap. 2 — Movimiento en línea recta}
+
+\subtema{Aceleración constante}
+\nota{Solo valen si \(a_x\) = cte \quad \(x_0, v_{0x}\): en \(t = 0\)}
+\f{v_x = v_{0x} + a_x\,t}{m/s}
+\f{x = x_0 + v_{0x}\,t + \tfrac{1}{2}\,a_x\,t^2}{m}
+\f{v_x^2 = v_{0x}^2 + 2\,a_x\,(x - x_0)\;\enlace{cap. 6}}{m\(^2\)/s\(^2\)}
+\nota{Sin \(t\): se despeja \(t = \frac{v_x - v_{0x}}{a_x}\) de \(v_x\), se reemplaza en la \(x\) de la trayectoria y se desarrolla}
+\f{x - x_0 = \frac{v_{0x} + v_x}{2}\,t}{m}
+\nota{Sin \(a_x\): se igualan \(\displaystyle v_{\text{med-}x} = \frac{x - x_0}{t} = \frac{v_{0x} + v_x}{2}\) y se multiplica por \(t\)}
+
+\capitulo{Cap. 3 — Movimiento en 2 o 3 dim.}
+
+\subtema{Proyectiles}
+\nota{Sin resistencia del aire \quad eje \(y\) hacia arriba}
+\nota{\(a_x = 0\) \quad \(a_y = {\color{BrickRed}-g}\)\hfill\(g = 9{,}80\) m/s\(^2\)}
+\nota{\(x_0 = y_0 = 0\) \quad \(\alpha_0\): ángulo de \(\vec v_0\) sobre \(+x\)}
+\nota{\(v_{0x} = v_0\cos\alpha_0\) \quad \(v_{0y} = v_0\operatorname{sen}\alpha_0\)}
+\f{x = (v_0\cos\alpha_0)\,t}{m}
+\f{y = (v_0\operatorname{sen}\alpha_0)\,t - \tfrac{1}{2}\,g\,t^2}{m}
+\f{v_x = v_0\cos\alpha_0}{m/s}
+\f{v_y = v_0\operatorname{sen}\alpha_0 - g\,t}{m/s}
+
+\subtema{Mov. circular uniforme}
+\nota{\(v\) cte pero cambia la dirección: \(\vec a \perp \vec v\)}
+\nota{\(a_{\text{rad}}\): radial, hacia el centro (centrípeta)}
+\f{a_{\text{rad}} = \gamma = \frac{v^2}{R}}{m/s\(^2\)}
+\f{v = \frac{2\pi R}{T}}{m/s}
+\f{a_{\text{rad}} = \gamma = \frac{4\pi^2 R}{T^2}}{m/s\(^2\)}
+\nota{\(T\): período [s], tiempo de una vuelta}
+\nota{\(v\): rapidez lineal \quad \(\omega\): velocidad angular}
+\f{\omega = \frac{v}{R} = \frac{2\pi}{T}}{rad/s}
+\f{a_{\text{rad}} = \gamma = \omega^2 R}{m/s\(^2\)}
+
+\subtema{Velocidad relativa en el espacio}
+\nota{\(P\): cuerpo \quad \(A, B\): marcos de referencia}
+\nota{\(\vec v_{P/A}\): velocidad de \(P\) respecto de \(A\)}
+\f{\vec v_{P/A} = \vec v_{P/B} + \vec v_{B/A}}{m/s}
+\nota{Suma vectorial: se opera por componentes \quad \(v \ll c\)}
+
+\capitulo{Cap. 4 — Leyes de Newton}
+
+\subtema{Fuerza neta}
+\nota{Fuerzas sobre \textbf{un} cuerpo\hfill\(1\text{ N} = 1\text{ kg·m/s}^2\)}
+\nota{\(w\): peso \quad \(n\): normal \quad \(T\): tensión \quad \(f\): rozamiento}
+\f{\vec R = \sum\vec F = \vec F_1 + \vec F_2 + \dots}{N}
+\f{R_i = \sum F_i \quad (i = x, y, z)}{N}
+
+\subtema{1.ª ley}
+\f{\sum\vec F = 0}{N}
+\nota{\(\vec a = 0\): reposo \textbf{o} \(\vec v\) cte \quad Solo en marcos inerciales}
+
+\subtema{2.ª ley}
+\f{\sum\vec F = m\,\vec a}{N}
+\f{\sum F_i = m\,a_i \quad (i = x, y, z)}{N}
+\nota{Solo fuerzas externas. {\color{BrickRed}\(m\vec a\) no es una fuerza}: no va en el diagrama de cuerpo libre}
+
+\subtema{Peso}
+\nota{Fuerza gravitatoria de la Tierra sobre el cuerpo}
+\f{\vec w = m\,\vec g}{N}
+\nota{Módulo: \(w = m\,g\) (positivo) \quad Dirección: hacia abajo}
+\nota{\(m\) es propia del cuerpo; \(w\) varía con \(g\) según el lugar}
+
+\columnbreak
+\subtema{3.ª ley}
+\f{\vec F_{A\,\text{sobre}\,B} = -\vec F_{B\,\text{sobre}\,A}}{N}
+\nota{Actúan sobre cuerpos \textbf{distintos}: {\color{BrickRed}nunca se cancelan entre sí}}
+\nota{\(n\) no es la reacción de \(w\): la reacción de \(w\) es la atracción del cuerpo sobre la Tierra}
+\nota{Tampoco vale siempre \(n = w\) (plano inclinado, ascensor que acelera)}
+
+\subtema{Método}
+\nota{1) Elegir un cuerpo}
+\nota{2) Diagrama de cuerpo libre: solo fuerzas sobre él}
+\nota{3) \(\sum F\) por eje, con un eje en el sentido de \(\vec a\)}
+
+\capitulo{Cap. 5 — Aplicación de leyes de Newton}
+\nota{\(T\) no siempre es igual a \(w\) (cuerpo colgado de una cuerda que acelera)}
+
+\subtema{Plano inclinado}
+\nota{Eje \(x\) paralelo al plano \quad \(\alpha\): ángulo con la horizontal}
+\f{w_\parallel = m\,g\operatorname{sen}\alpha \qquad w_\perp = m\,g\cos\alpha}{N}
+\nota{\(n = m\,g\cos\alpha\) solo si ninguna otra fuerza tiene componente perpendicular al plano}
+
+\subtema{Rozamiento}
+\f{f_k = \mu_k\,n}{N}
+\f{f_s \le \mu_s\,n}{N}
+\nota{Relaciones entre módulos, no vectoriales: \(\vec f \perp \vec n\)}
+\nota{{\color{BrickRed}``='' solo a punto de deslizar}. Si no, \(f_s\) sale de \(\sum\vec F = 0\)}
+\nota{Por lo general, \(\mu_k < \mu_s\)}
+
+\subtema{Dinámica circular}
+\f{F_{\text{net}} = m\,a_{\text{rad}} = m\,\frac{v^2}{R}}{N}
+\f{F_{\text{net}} = m\,\omega^2 R}{N}
+\nota{\(\sum\vec F\) apunta hacia el centro: es la resultante de las fuerzas que ya están en el diagrama}
+\nota{{\color{BrickRed}No agregar una fuerza ``centrífuga''}: en un marco inercial no existe}
+
+\subtema{Resistencia de fluidos}
+\nota{\(f\) se opone a \(\vec v\)}
+\nota{\(k, D\): \textbf{constantes} para un cuerpo y un fluido dados; no dependen de \(v\)}
+\nota{Rapidez baja (polvo, bolilla en aceite)}
+\f{f = k\,v}{N}
+\f{v_t = \frac{m\,g}{k}}{m/s}
+\nota{\(k\): crece con el tamaño y la viscosidad\hfill kg/s}
+\nota{Rapidez alta (objetos grandes en el aire)}
+\f{f = D\,v^2}{N}
+\f{v_t = \sqrt{\frac{m\,g}{D}}}{m/s}
+\nota{\(D\): crece con el área frontal y la densidad\hfill kg/m}
+\nota{\(v_t\): rapidez terminal de caída (\(a = 0\), \(f = m\,g\))}
+
+\columnbreak
+\capitulo{Cap. 6 — Trabajo y energía cinética}
+
+\subtema{Trabajo con fuerza constante}
+\nota{{\color{black}\textbf{Producto escalar} de \(\vec F\) y \(\vec s\): \(W\) es un \textbf{escalar}}}
+\f{W = \vec F\cdot\vec s = F\,s\cos\phi}{J}
+\f{W = F_x s_x + F_y s_y + F_z s_z}{J}
+\nota{\(\vec s\): desplazamiento recto \quad \(s_x = x_2 - x_1\)}
+\nota{\(\phi\): ángulo entre \(\vec F\) y \(\vec s\)\hfill\(1\text{ J} = 1\text{ N·m}\)}
+
+\subtema{De la cinemática a la energía}
+\nota{Entre dos puntos 1 y 2 del recorrido sobre \(x\):}
+\nota{\(v_{0x} \to v_1\) \quad \(v_x \to v_2\) \quad \(x - x_0 \to s\)}
+\f{v_2^2 = v_1^2 + 2\,a_x\,s\;\enlace{cap. 2}}{m\(^2\)/s\(^2\)}
+\nota{Se despeja \(a_x\,s\):}
+\f{a_x\,s = \tfrac{1}{2}\,v_2^2 - \tfrac{1}{2}\,v_1^2}{m\(^2\)/s\(^2\)}
+\nota{Se multiplica por \(m\), con \(\sum F_x = m\,a_x\):}
+\f{\Bigl(\sum F_x\Bigr)\,s = \tfrac{1}{2}\,m\,v_2^2 - \tfrac{1}{2}\,m\,v_1^2}{J}
+\nota{\(\text{kg}\cdot\frac{\text{m}^2}{\text{s}^2} = \bigl(\text{kg}\cdot\frac{\text{m}}{\text{s}^2}\bigr)\cdot\text{m} = \text{N·m} = \text{J}\)}
+
+\subtema{Energía cinética}
+\f{K = \tfrac{1}{2}\,m\,v^2}{J}
+\nota{Escalar, \(K \ge 0\)}
+
+\subtema{Teorema trabajo-energía}
+\f{W_{\text{tot}} = K_2 - K_1 = \Delta K}{J}
+\nota{{\color{BrickRed}\(W_{\text{tot}}\): todas las fuerzas}, no una sola}
+\nota{Vale también con fuerza variable y trayectoria curva}
+
+\end{multicols*}
+\end{document}
