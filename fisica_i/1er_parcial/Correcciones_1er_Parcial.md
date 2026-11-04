@@ -344,7 +344,9 @@ El bloque parte del reposo, así que no tiene energía cinética inicial:
 $$
 \begin{aligned}
 W &= K_2 - {\color{BrickRed}\cancel{{\color{black}K_1}}} = \frac{1}{2}\,m\,v^2 \\[4pt]
-9{,}68\ \text{J} &= \frac{1}{2} \cdot 2\ \text{kg} \cdot v^2 \implies v^2 = 9{,}68\ \frac{\text{m}^2}{\text{s}^2} \implies {\color{ForestGreen}\boxed{v \approx 3{,}11\ \text{m/s}}}
+9{,}68\ \text{J} &= \frac{1}{{\color{BrickRed}\cancel{{\color{black}2}}}} \cdot {\color{BrickRed}\cancel{{\color{black}2}}}\ \text{kg} \cdot v^2 = 1\ \text{kg} \cdot v^2 \\[4pt]
+v^2 &= \frac{9{,}68\ \text{J}}{1\ \text{kg}} = \frac{9{,}68\ \text{N} \cdot \text{m}}{1\ \text{kg}} = \frac{9{,}68\ \dfrac{{\color{BrickRed}\cancel{{\color{black}\text{kg}}}} \cdot \text{m}}{\text{s}^2} \cdot \text{m}}{1\ {\color{BrickRed}\cancel{{\color{black}\text{kg}}}}} = 9{,}68\ \frac{\text{m}^2}{\text{s}^2} \\[4pt]
+v &= \sqrt{9{,}68\ \frac{\text{m}^2}{\text{s}^2}} \implies {\color{ForestGreen}\boxed{v \approx 3{,}11\ \text{m/s}}}
 \end{aligned}
 $$
 
