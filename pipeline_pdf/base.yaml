@@ -55,6 +55,8 @@ variables:
   # Con figuras flotantes, una figura pendiente después de una longtable
   # desbordaba la página (Overfull \vbox de ~300 pt, bug conocido de longtable).
   header-includes: |
+    % Tachados en fórmulas (\cancel), para mostrar términos que se anulan.
+    \usepackage{cancel}
     \usepackage{float}
     \floatplacement{figure}{H}
     % Título + índice en la primera página; el contenido empieza en página
@@ -86,6 +88,9 @@ variables:
       colback=errorfondo, colframe=errorfilete, coltext=errortexto}
     \newtcolorbox{destacadocorrecto}{destacado,
       colback=correctofondo, colframe=correctofilete, coltext=correctotexto}
+    % Nota aparte: texto azul en recuadro negro, a todo el ancho y alineada a la izquierda.
+    \newtcolorbox{destacadonota}{destacado, unbreakable, width=\linewidth, halign=left,
+      boxrule=0.8pt, leftrule=0.8pt, colback=white, colframe=black, coltext=RoyalBlue}
     \definecolor{cebra}{gray}{0.93}
     % Filas 30 % más altas: las fracciones no tocan la fila vecina.
     \AtBeginEnvironment{longtable}{\rowcolors{1}{cebra}{}\renewcommand{\arraystretch}{1.3}}

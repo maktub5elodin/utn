@@ -9,14 +9,18 @@ En el .md se usa la sintaxis de alerta de GitHub, que allá ya se ve en color:
   > [!TIP]                                      (verde: una respuesta correcta)
   > **Respuesta:** $Q_1 = (5;\,3)$ y $Q_2 = (-5;\,3)$.
 
-En LaTeX la cita pasa al tcolorbox correspondiente (entornos "destacadoerror" y
-"destacadocorrecto", definidos en base.yaml). En Word se quita el marcador y
+  > [!NOTE]                                     (azul con marco negro: una nota aparte)
+  > **Nota:** este resultado difiere del de la corrección.
+
+En LaTeX la cita pasa al tcolorbox correspondiente (entornos "destacadoerror",
+"destacadocorrecto" y "destacadonota", definidos en base.yaml). En Word se quita el marcador y
 queda como cita común. Las citas sin marcador (ej. enunciados) no se tocan.
 ]]
 
 local ENTORNOS = {
   ["[!CAUTION]"] = "destacadoerror",
   ["[!TIP]"] = "destacadocorrecto",
+  ["[!NOTE]"] = "destacadonota",
 }
 
 -- Devuelve el entorno y el contenido de la cita sin el marcador, o nil si no lo tiene.
