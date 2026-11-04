@@ -67,13 +67,13 @@ La ecuación ordinaria es una suma de dos cuadrados igual a 1:
 
 $$\left(\frac{x+1}{\sqrt5}\right)^2 + \left(\frac{y-1}{\sqrt5/2}\right)^2 = 1$$
 
-Por la identidad $\cos^2\theta + \operatorname{sen}^2\theta = 1$, se define:
+Por la identidad $\cos^2\theta + \mathrm{sen}^2\,\theta = 1$, se define:
 
-$$\frac{x+1}{\sqrt5} = \cos\theta, \qquad \frac{y-1}{\sqrt5/2} = \operatorname{sen}\theta$$
+$$\frac{x+1}{\sqrt5} = \cos\theta, \qquad \frac{y-1}{\sqrt5/2} = \mathrm{sen}\,\theta$$
 
 Despejando $x$ e $y$:
 
-$$\boxed{\;x = -1 + \sqrt5\,\cos\theta, \qquad y = 1 + \frac{\sqrt5}{2}\,\operatorname{sen}\theta\;}$$
+$$\boxed{\;x = -1 + \sqrt5\,\cos\theta, \qquad y = 1 + \frac{\sqrt5}{2}\,\mathrm{sen}\,\theta\;}$$
 
 Con $\theta \in [0,\ 2\pi)$ se recorre la elipse completa una vez, en sentido antihorario.
 
@@ -93,11 +93,11 @@ $$\arccos\frac{1}{\sqrt5} = \arctan 2 \approx 1{,}1071 \text{ rad} \approx 63{,}
 
 **Respuesta del ejercicio:**
 
-$$\boxed{\;\begin{cases} x = -1 + \sqrt5\,\cos\theta \\[4pt] y = 1 + \dfrac{\sqrt5}{2}\,\operatorname{sen}\theta \end{cases} \qquad \theta \in \left[-\arctan 2,\ \arctan 2\right] \approx [-1{,}107;\ 1{,}107] \text{ rad}\;}$$
+$$\boxed{\;\begin{cases} x = -1 + \sqrt5\,\cos\theta \\[4pt] y = 1 + \dfrac{\sqrt5}{2}\,\mathrm{sen}\,\theta \end{cases} \qquad \theta \in \left[-\arctan 2,\ \arctan 2\right] \approx [-1{,}107;\ 1{,}107] \text{ rad}\;}$$
 
 ### 2.5. Verificación de extremos y sentido de recorrido
 
-| $\theta$ | $\cos\theta$ | $\operatorname{sen}\theta$ | Punto $(x,y)$ | Rol |
+| $\theta$ | $\cos\theta$ | $\mathrm{sen}\,\theta$ | Punto $(x,y)$ | Rol |
 |---|---|---|---|---|
 | $-\arctan 2$ | $\frac{1}{\sqrt5}$ | $-\frac{2}{\sqrt5}$ | $(0,\ 0)$ | Punto inicial |
 | $0$ | $1$ | $0$ | $(-1+\sqrt5,\ 1) \approx (1{,}236;\ 1)$ | Vértice derecho |
@@ -130,7 +130,7 @@ Conviene distinguir dos ángulos:
 | Símbolo | Nombre | Definición | Valor en $(0,2)$ |
 |---|---|---|---|
 | $\varphi$ | **Ángulo polar** desde el centro | Ángulo real del segmento $\overline{CP}$ | $45^\circ = \pi/4$ |
-| $\theta$ | **Ángulo excéntrico** (el parámetro) | Argumento de $\cos$ y $\operatorname{sen}$ en la parametrización | $63{,}43^\circ \approx 1{,}107$ rad |
+| $\theta$ | **Ángulo excéntrico** (el parámetro) | Argumento de $\cos$ y $\mathrm{sen}$ en la parametrización | $63{,}43^\circ \approx 1{,}107$ rad |
 
 Una comprobación directa: si se reemplaza $\theta = \pi/4$ en la parametrización, el punto que se obtiene es $(0{,}581;\ 1{,}791)$, que **no está sobre el eje $y$**. Tomar $[-\pi/4,\ \pi/4]$ dejaría afuera parte del arco con $x \ge 0$.
 
@@ -140,8 +140,8 @@ El parámetro $\theta$ sí es un ángulo real, pero **de otra figura**: la **cir
 
 Para cada $\theta$:
 
-- $Q = C + a\,(\cos\theta,\ \operatorname{sen}\theta)$ es un punto de la **circunferencia auxiliar**.
-- $P = C + (a\cos\theta,\ b\operatorname{sen}\theta)$ es el punto de la **elipse**.
+- $Q = C + a\,(\cos\theta,\ \mathrm{sen}\,\theta)$ es un punto de la **circunferencia auxiliar**.
+- $P = C + (a\cos\theta,\ b\,\mathrm{sen}\,\theta)$ es el punto de la **elipse**.
 
 $P$ tiene la misma abscisa que $Q$, pero su ordenada respecto del centro se multiplica por $\frac{b}{a} = \frac12$. En otras palabras, la elipse es la circunferencia auxiliar **comprimida verticalmente a la mitad** respecto del centro. El parámetro $\theta$ es el ángulo de $Q$, no el de $P$.
 
@@ -157,7 +157,7 @@ $Q$ y $P$ están **ambos sobre el eje $y$**. La recta $x = 0$ corta a la circunf
 
 Desde el centro, la pendiente del segmento $\overline{CP}$ es:
 
-$$\tan\varphi = \frac{y-\beta}{x-\alpha} = \frac{b\operatorname{sen}\theta}{a\cos\theta} \quad\Longrightarrow\quad \boxed{\;\tan\varphi = \frac{b}{a}\,\tan\theta\;}$$
+$$\tan\varphi = \frac{y-\beta}{x-\alpha} = \frac{b\,\mathrm{sen}\,\theta}{a\cos\theta} \quad\Longrightarrow\quad \boxed{\;\tan\varphi = \frac{b}{a}\,\tan\theta\;}$$
 
 La relación vale para $\theta \in (-\pi/2,\ \pi/2)$, que contiene todo el arco del ejercicio. Con $\frac{b}{a} = \frac12$:
 
@@ -187,11 +187,11 @@ La traslación es un movimiento rígido y conserva ángulos. La compresión en u
 
 Lo incorrecto es usar $[-\pi/4,\ \pi/4]$ **con la parametrización trigonométrica estándar**. Ese rango es correcto para otra parametrización igualmente válida, la **polar desde el centro**, que usa $\varphi$ como parámetro:
 
-$$x = -1 + r(\varphi)\cos\varphi, \qquad y = 1 + r(\varphi)\operatorname{sen}\varphi, \qquad r(\varphi) = \frac{ab}{\sqrt{b^2\cos^2\varphi + a^2\operatorname{sen}^2\varphi}}$$
+$$x = -1 + r(\varphi)\cos\varphi, \qquad y = 1 + r(\varphi)\,\mathrm{sen}\,\varphi, \qquad r(\varphi) = \frac{ab}{\sqrt{b^2\cos^2\varphi + a^2\,\mathrm{sen}^2\,\varphi}}$$
 
 con $\varphi \in [-\pi/4,\ \pi/4]$. Como control: $r(\pi/4) = \sqrt2$, que es la distancia de $C$ a $(0,2)$.
 
-Esta versión es correcta pero bastante menos práctica. La parametrización de la cátedra, con $\cos$ y $\operatorname{sen}$ directos, es la estándar justamente porque **no** usa el ángulo polar. Lo que importa es que **el rango tiene sentido solo junto con la parametrización elegida**: no es una propiedad de la curva sola.
+Esta versión es correcta pero bastante menos práctica. La parametrización de la cátedra, con $\cos$ y $\mathrm{sen}$ directos, es la estándar justamente porque **no** usa el ángulo polar. Lo que importa es que **el rango tiene sentido solo junto con la parametrización elegida**: no es una propiedad de la curva sola.
 
 ---
 
@@ -201,7 +201,7 @@ Esta versión es correcta pero bastante menos práctica. La parametrización de 
 |---|---|
 | Ecuación ordinaria | $\frac{(x+1)^2}{5} + \frac{(y-1)^2}{5/4} = 1$ |
 | Centro y semiejes | $C(-1,1)$, $a = \sqrt5$, $b = \frac{\sqrt5}{2}$ |
-| Parametrización | $x = -1+\sqrt5\cos\theta$, $\ y = 1+\frac{\sqrt5}{2}\operatorname{sen}\theta$ |
+| Parametrización | $x = -1+\sqrt5\cos\theta$, $\ y = 1+\frac{\sqrt5}{2}\,\mathrm{sen}\,\theta$ |
 | Rango para $x \ge 0$ | $\theta \in [-\arctan 2,\ \arctan 2] \approx [-1{,}107;\ 1{,}107]$ rad $(\pm 63{,}43^\circ)$ |
 | Extremos del arco | $(0,0)$ en el inicio y $(0,2)$ en el final, recorrido antihorario |
 | Ángulo polar de los extremos | $\varphi = \pm\pi/4$ (desde el centro) |
@@ -213,7 +213,7 @@ Esta versión es correcta pero bastante menos práctica. La parametrización de 
 1. **Tomar el parámetro $\theta$ como el ángulo polar del punto.** Solo coinciden en la circunferencia o en los vértices ($\theta = 0, \frac{\pi}{2}, \pi, \frac{3\pi}{2}$).
 2. **Olvidar el factor 4 al dividir por 5:** el término en $y$ queda $\frac{4(y-1)^2}{5} = \frac{(y-1)^2}{5/4}$, no $\frac{(y-1)^2}{5}$. De eso depende que $b = \frac{\sqrt5}{2}$ y no $\sqrt5$, que sería una circunferencia.
 3. **Medir ángulos desde el origen** en vez de desde el centro. Desde el origen, el punto $(0,2)$ está a $90^\circ$, un valor que no tiene relación con ninguna de las dos parametrizaciones.
-4. **Dar el rango sin la parametrización.** El intervalo $[-1{,}107;\ 1{,}107]$ vale para $x = -1+\sqrt5\cos\theta$. Con $x = -1+\sqrt5\operatorname{sen}\theta$ (también válida) el rango sería otro.
+4. **Dar el rango sin la parametrización.** El intervalo $[-1{,}107;\ 1{,}107]$ vale para $x = -1+\sqrt5\cos\theta$. Con $x = -1+\sqrt5\,\mathrm{sen}\,\theta$ (también válida) el rango sería otro.
 
 ---
 
@@ -225,11 +225,11 @@ La parametrización transforma la condición cartesiana (una ecuación entre $x$
 
 La idea es buscar dos funciones de $\theta$ que cumplan la ecuación **de manera automática**. La identidad pitagórica
 
-$$\cos^2\theta + \operatorname{sen}^2\theta = 1$$
+$$\cos^2\theta + \mathrm{sen}^2\,\theta = 1$$
 
 ya tiene la forma "suma de dos cuadrados igual a 1", la misma que la ecuación ordinaria. Por eso se identifica término a término:
 
-$$\underbrace{\left(\frac{x-\alpha}{a}\right)^2}_{\cos^2\theta} + \underbrace{\left(\frac{y-\beta}{b}\right)^2}_{\operatorname{sen}^2\theta} = 1$$
+$$\underbrace{\left(\frac{x-\alpha}{a}\right)^2}_{\cos^2\theta} + \underbrace{\left(\frac{y-\beta}{b}\right)^2}_{\mathrm{sen}^2\,\theta} = 1$$
 
 Cada parte de la fórmula $x = \alpha + a\cos\theta$ tiene un papel:
 
@@ -241,11 +241,11 @@ Toda elipse es la imagen de la circunferencia unitaria por una **escala** (facto
 
 ### 6.2. Parametrizaciones no únicas
 
-Una misma curva admite infinitas parametrizaciones. El apunte de cátedra muestra, por ejemplo, que $(R\cos t,\ R\operatorname{sen}t)$ y $(R\operatorname{sen}t,\ R\cos t)$ describen la misma circunferencia con distinto punto inicial y sentido de recorrido. Por eso el enunciado pide "las ecuaciones paramétricas **y** el rango": las dos cosas forman una sola respuesta.
+Una misma curva admite infinitas parametrizaciones. El apunte de cátedra muestra, por ejemplo, que $(R\cos t,\ R\,\mathrm{sen}\,t)$ y $(R\,\mathrm{sen}\,t,\ R\cos t)$ describen la misma circunferencia con distinto punto inicial y sentido de recorrido. Por eso el enunciado pide "las ecuaciones paramétricas **y** el rango": las dos cosas forman una sola respuesta.
 
 ### 6.3. "Desparametrización" (verificación inversa)
 
-Para comprobar una parametrización se elimina el parámetro. De $\cos\theta = \frac{x+1}{\sqrt5}$ y $\operatorname{sen}\theta = \frac{2(y-1)}{\sqrt5}$, elevando al cuadrado y sumando:
+Para comprobar una parametrización se elimina el parámetro. De $\cos\theta = \frac{x+1}{\sqrt5}$ y $\mathrm{sen}\,\theta = \frac{2(y-1)}{\sqrt5}$, elevando al cuadrado y sumando:
 
 $$\frac{(x+1)^2}{5} + \frac{4(y-1)^2}{5} = 1 \;\Longrightarrow\; (x+1)^2 + 4(y-1)^2 = 5$$
 

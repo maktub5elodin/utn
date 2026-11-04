@@ -22,14 +22,14 @@ Solo valen si $a_x$ = cte; $x_0$ y $v_{0x}$ son los valores en $t = 0$.
 
 ### Proyectiles
 
-Sin resistencia del aire y con el eje $y$ hacia arriba: $a_x = 0$, $a_y = {\color{BrickRed}-g}$, con $g = 9{,}80$ m/s². Origen en el punto de lanzamiento ($x_0 = y_0 = 0$); $\alpha_0$ es el ángulo de $\vec v_0$ sobre el semieje $+x$. Componentes de la velocidad inicial: $v_{0x} = v_0\cos\alpha_0$, $v_{0y} = v_0\operatorname{sen}\alpha_0$.
+Sin resistencia del aire y con el eje $y$ hacia arriba: $a_x = 0$, $a_y = {\color{BrickRed}-g}$, con $g = 9{,}80$ m/s². Origen en el punto de lanzamiento ($x_0 = y_0 = 0$); $\alpha_0$ es el ángulo de $\vec v_0$ sobre el semieje $+x$. Componentes de la velocidad inicial: $v_{0x} = v_0\cos\alpha_0$, $v_{0y} = v_0\,\mathrm{sen}\,\alpha_0$.
 
 | Ecuación | Unidades |
 |---|---|
 | $x = (v_0\cos\alpha_0)\,t$ | m |
-| $y = (v_0\operatorname{sen}\alpha_0)\,t - \tfrac{1}{2}\,g\,t^2$ | m |
+| $y = (v_0\,\mathrm{sen}\,\alpha_0)\,t - \tfrac{1}{2}\,g\,t^2$ | m |
 | $v_x = v_0\cos\alpha_0$ | m/s |
-| $v_y = v_0\operatorname{sen}\alpha_0 - g\,t$ | m/s |
+| $v_y = v_0\,\mathrm{sen}\,\alpha_0 - g\,t$ | m/s |
 
 ### Movimiento circular uniforme
 
@@ -105,11 +105,11 @@ Eso se ve escrito así: $\gamma = \underbrace{\omega}_{\text{lo rápido que gira
 Con la posición en componentes, derivar dos veces da todo junto:
 
 $$
-\vec r = R\,(\cos\omega t,\ \operatorname{sen}\omega t)
+\vec r = R\,(\cos\omega t,\ \mathrm{sen}\,\omega t)
 \quad\Rightarrow\quad
-\vec v = \omega R\,(-\operatorname{sen}\omega t,\ \cos\omega t)
+\vec v = \omega R\,(-\mathrm{sen}\,\omega t,\ \cos\omega t)
 \quad\Rightarrow\quad
-\vec a = -\omega^2 R\,(\cos\omega t,\ \operatorname{sen}\omega t) = -\omega^2\,\vec r
+\vec a = -\omega^2 R\,(\cos\omega t,\ \mathrm{sen}\,\omega t) = -\omega^2\,\vec r
 $$
 
 - $|\vec v| = \omega R$: es la relación $v = \omega R$.
@@ -198,7 +198,7 @@ Eje $x$ paralelo al plano; $\alpha$ es el ángulo del plano con la horizontal. $
 
 | Ecuación | Unidades |
 |---|---|
-| $w_\parallel = m\,g\operatorname{sen}\alpha \qquad w_\perp = m\,g\cos\alpha$ | N |
+| $w_\parallel = m\,g\,\mathrm{sen}\,\alpha \qquad w_\perp = m\,g\cos\alpha$ | N |
 
 ### Rozamiento
 

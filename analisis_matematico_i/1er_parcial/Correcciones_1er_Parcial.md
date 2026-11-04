@@ -1,6 +1,6 @@
 # Correcciones del 1er Parcial — Análisis Matemático I
 
-Corrección de los errores del primer parcial rendido el **17 de octubre de 2026**. Los ejercicios 1, 3 y 5 coinciden con el modelo `1° parcial - Ejemplo 3.pdf`; el ejercicio 2 fue distinto (distancia mínima entre una curva y un punto) y el ejercicio 4 cambió la forma de escribir la rama $x > 0$ (en el parcial vino como $\frac{\operatorname{sen} x}{x}$).
+Corrección de los errores del primer parcial rendido el **17 de octubre de 2026**. Los ejercicios 1, 3 y 5 coinciden con el modelo `1° parcial - Ejemplo 3.pdf`; el ejercicio 2 fue distinto (distancia mínima entre una curva y un punto) y el ejercicio 4 cambió la forma de escribir la rama $x > 0$ (en el parcial vino como $\frac{\mathrm{sen}\,x}{x}$).
 
 ---
 
@@ -237,21 +237,21 @@ $$
 
 > Dada
 > $$
-> f(x) = \begin{cases} \dfrac{\ln(1 + x^2)}{x^2} & \text{si } x < 0 \\[2ex] \dfrac{\operatorname{sen} x}{x} & \text{si } x > 0 \end{cases}
+> f(x) = \begin{cases} \dfrac{\ln(1 + x^2)}{x^2} & \text{si } x < 0 \\[2ex] \dfrac{\mathrm{sen}\,x}{x} & \text{si } x > 0 \end{cases}
 > $$
 >
 > a) Analizar si es posible definir $f(0)$ tal que la función sea continua en ese punto.
 >
 > b) Considerando lo realizado en el ítem anterior, analizar si $f$ es derivable en $x = 0$.
 
-Diferencia con el modelo: el modelo da la rama $x > 0$ como $-\frac{\cos\left(x + \frac{\pi}{2}\right)}{x}$. Como $\cos\left(x + \frac{\pi}{2}\right) = -\operatorname{sen} x$, es la misma función; en el parcial vino escrita directamente como $\frac{\operatorname{sen} x}{x}$, el límite notable trabajado en clase.
+Diferencia con el modelo: el modelo da la rama $x > 0$ como $-\frac{\cos\left(x + \frac{\pi}{2}\right)}{x}$. Como $\cos\left(x + \frac{\pi}{2}\right) = -\mathrm{sen}\,x$, es la misma función; en el parcial vino escrita directamente como $\frac{\mathrm{sen}\,x}{x}$, el límite notable trabajado en clase.
 
 ### 4.2 Inciso a) — Límites laterales
 
 Por derecha, límite notable:
 
 $$
-\lim_{x \to 0^+} \frac{\operatorname{sen} x}{x} = {\color{RoyalBlue} 1}
+\lim_{x \to 0^+} \frac{\mathrm{sen}\,x}{x} = {\color{RoyalBlue} 1}
 $$
 
 Por izquierda, $\ln(1 + 0) = 0$ y $0^2 = 0$: indeterminación $\frac{0}{0}$. Numerador y denominador son derivables para $x < 0$ y $(x^2)' = 2x \neq 0$ en ese intervalo, así que se aplica L'Hôpital.
@@ -300,8 +300,8 @@ Por derecha (L'Hôpital dos veces, ambas con $\frac{0}{0}$):
 
 $$
 \begin{aligned}
-f'_+(0) &= \lim_{h \to 0^+} \frac{\frac{\operatorname{sen} h}{h} - 1}{h} = \lim_{h \to 0^+} \frac{\operatorname{sen} h - h}{h^2} \\
-&= \lim_{h \to 0^+} \frac{\cos h - 1}{2h} = \lim_{h \to 0^+} \frac{-\operatorname{sen} h}{2} = {\color{RoyalBlue} 0}
+f'_+(0) &= \lim_{h \to 0^+} \frac{\frac{\mathrm{sen}\,h}{h} - 1}{h} = \lim_{h \to 0^+} \frac{\mathrm{sen}\,h - h}{h^2} \\
+&= \lim_{h \to 0^+} \frac{\cos h - 1}{2h} = \lim_{h \to 0^+} \frac{-\mathrm{sen}\,h}{2} = {\color{RoyalBlue} 0}
 \end{aligned}
 $$
 
@@ -433,6 +433,6 @@ $$
 ## Fuentes
 
 - Enunciado del ejercicio 2: parcial rendido el 17/oct/2026.
-- `1° parcial - Ejemplo 3.pdf` — modelo de parcial de la cátedra (ejercicios 1, 3, 4 y 5; en el 4, la rama $x > 0$ del parcial rendido fue $\frac{\operatorname{sen} x}{x}$, equivalente a la del modelo).
+- `1° parcial - Ejemplo 3.pdf` — modelo de parcial de la cátedra (ejercicios 1, 3, 4 y 5; en el 4, la rama $x > 0$ del parcial rendido fue $\frac{\mathrm{sen}\,x}{x}$, equivalente a la del modelo).
 
 <!-- /solo-md -->

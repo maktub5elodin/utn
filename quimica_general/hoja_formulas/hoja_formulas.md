@@ -177,7 +177,7 @@ Es el puente entre termoquímica y soluciones: los $\Delta H$ de cambio de fase 
 | S11.6 | Fracción de empaquetamiento: cúbica simple 52 %; BCC 68 %; FCC 74 % | — | FCC (y hexagonal compacta) es el empaquetamiento más eficiente |
 | S11.7 | Conteo: vértice $= \tfrac{1}{8}$, cara $= \tfrac{1}{2}$, arista $= \tfrac{1}{4}$, centro $= 1$ | átomos | De dónde salen 1, 2 y 4 átomos por celda |
 | S11.8 | $1\ \text{pm} = 10^{-10}\ \text{cm} \quad;\quad 1\ \text{Å} = 10^{-8}\ \text{cm}$ | — | Los radios vienen en pm o Å y la densidad se pide en g/cm³ |
-| S11.9 | $2\,d\,\operatorname{sen}\theta = n\,\lambda$ | $d$, $\lambda$ en las mismas unidades (pm o Å) | Ley de Bragg (difracción de rayos X) |
+| S11.9 | $2\,d\,\mathrm{sen}\,\theta = n\,\lambda$ | $d$, $\lambda$ en las mismas unidades (pm o Å) | Ley de Bragg (difracción de rayos X) |
 | S11.10 | Tipos de cristal: iónico (NaCl), covalente (diamante, SiO₂), molecular (hielo, I₂), metálico (Fe, Cu) | — | Propiedades: los covalentes y los iónicos tienen $T_f$ altas; los moleculares, bajas; los metálicos conducen |
 
 #### Cambios de fase y diagramas de fase (Chang 11.8–11.9)

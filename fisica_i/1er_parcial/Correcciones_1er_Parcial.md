@@ -24,12 +24,12 @@ $$
 
 La velocidad mínima es la que lleva la piedra justo al borde superior del muro, $(15\ \text{m};\,5\ \text{m})$: con una velocidad mayor pasa más alto.
 
-Con $v_{0x} = v_0\cos\theta$ y $v_{0y} = v_0\operatorname{sen}\theta$, las ecuaciones de posición quedan:
+Con $v_{0x} = v_0\cos\theta$ y $v_{0y} = v_0\,\mathrm{sen}\,\theta$, las ecuaciones de posición quedan:
 
 $$
 \begin{aligned}
 x &= {\color{BrickRed}\cancel{{\color{black}x_0}}} + v_{0x}\,t + {\color{BrickRed}\cancel{{\color{black}\tfrac{1}{2}\,a_x\,t^2}}} = (v_0\cos\theta)\,t \\
-y &= y_0 + v_{0y}\,t + \tfrac{1}{2}\,a_y\,t^2 = y_0 + (v_0\operatorname{sen}\theta)\,t - \tfrac{1}{2}\,g\,t^2
+y &= y_0 + v_{0y}\,t + \tfrac{1}{2}\,a_y\,t^2 = y_0 + (v_0\,\mathrm{sen}\,\theta)\,t - \tfrac{1}{2}\,g\,t^2
 \end{aligned}
 $$
 
@@ -47,15 +47,15 @@ Se reemplaza $t$ en la ecuación en $y$, con $y = 5\ \text{m}$:
 
 $$
 \begin{aligned}
-5\ \text{m} &= 1{,}5\ \text{m} + {\color{BrickRed}\cancel{{\color{black}v_0}}}\operatorname{sen} 45^\circ \cdot \frac{15\ \text{m}}{{\color{BrickRed}\cancel{{\color{black}v_0}}}\cos 45^\circ} - \frac{1}{2}\cdot 10\ \frac{\text{m}}{\text{s}^2} \cdot {\color{BrickRed} \left({\color{black}\frac{15\ \text{m}}{v_0\cos 45^\circ}}\right)^{2}} \\[4pt]
-5\ \text{m} - 1{,}5\ \text{m} &= {\color{RoyalBlue} \operatorname{tg} 45^\circ} \cdot 15\ \text{m} - 5\ \frac{\text{m}}{\text{s}^2} \cdot {\color{BrickRed} \frac{225\ \text{m}^2}{v_0^2\cos^2 45^\circ}}
+5\ \text{m} &= 1{,}5\ \text{m} + {\color{BrickRed}\cancel{{\color{black}v_0}}}\,\mathrm{sen}\,45^\circ \cdot \frac{15\ \text{m}}{{\color{BrickRed}\cancel{{\color{black}v_0}}}\cos 45^\circ} - \frac{1}{2}\cdot 10\ \frac{\text{m}}{\text{s}^2} \cdot {\color{BrickRed} \left({\color{black}\frac{15\ \text{m}}{v_0\cos 45^\circ}}\right)^{2}} \\[4pt]
+5\ \text{m} - 1{,}5\ \text{m} &= {\color{RoyalBlue} \mathrm{tg}\,45^\circ} \cdot 15\ \text{m} - 5\ \frac{\text{m}}{\text{s}^2} \cdot {\color{BrickRed} \frac{225\ \text{m}^2}{v_0^2\cos^2 45^\circ}}
 \end{aligned}
 $$
 
 > [!CAUTION]
 > **Mi error:** al reemplazar $t$ no lo elevé al cuadrado, aunque el $t^2$ estaba bien escrito en la ecuación de partida. Me quedó $5\ \text{m/s}^2 \cdot \frac{15\ \text{m}}{v_0\cos 45^\circ}$ y desde ahí arrastré el error en todo lo marcado en rojo.
 
-Como ${\color{RoyalBlue}\operatorname{sen} 45^\circ = \cos 45^\circ = \tfrac{\sqrt{2}}{2}}$, resulta ${\color{RoyalBlue}\operatorname{tg} 45^\circ = 1}$:
+Como ${\color{RoyalBlue}\mathrm{sen}\,45^\circ = \cos 45^\circ = \tfrac{\sqrt{2}}{2}}$, resulta ${\color{RoyalBlue}\mathrm{tg}\,45^\circ = 1}$:
 
 $$
 \begin{aligned}
@@ -362,7 +362,7 @@ Al separarse del resorte no queda ninguna fuerza horizontal: la aceleración es 
 Sobre el plano, eje $x$ paralelo al plano y hacia arriba, eje $y$ perpendicular. Desde $+x$, el peso forma un ángulo de $180^\circ + 53^\circ = 233^\circ$, porque $180^\circ = 90^\circ + 37^\circ + 53^\circ$:
 
 $$
-\vec w = m\,g \begin{pmatrix} \cos 233^\circ \\ \operatorname{sen} 233^\circ \end{pmatrix} = \begin{pmatrix} -12{,}04\ \text{N} \\ -15{,}97\ \text{N} \end{pmatrix} \implies \vec N = \begin{pmatrix} 0 \\ +15{,}97\ \text{N} \end{pmatrix}
+\vec w = m\,g \begin{pmatrix} \cos 233^\circ \\ \mathrm{sen}\,233^\circ \end{pmatrix} = \begin{pmatrix} -12{,}04\ \text{N} \\ -15{,}97\ \text{N} \end{pmatrix} \implies \vec N = \begin{pmatrix} 0 \\ +15{,}97\ \text{N} \end{pmatrix}
 $$
 
 $$
@@ -378,11 +378,11 @@ $$
 {\color{BrickRed} W_{f_{rd}} = \Delta E_m \implies -f_{rd}\,d = m\,g\,h - \frac{1}{2}\,m\,v^2}
 $$
 
-Recorrido y altura se relacionan por ${\color{BrickRed} d = \dfrac{h}{\operatorname{sen} 37^\circ}}$:
+Recorrido y altura se relacionan por ${\color{BrickRed} d = \dfrac{h}{\mathrm{sen}\,37^\circ}}$:
 
 $$
 \begin{aligned}
-{\color{BrickRed} -7{,}99\ \text{N} \cdot \frac{h}{\operatorname{sen} 37^\circ} - 20\ \text{N} \cdot h} &= {\color{BrickRed} -{\color{RoyalBlue}9{,}68\ \text{J}}} \\[4pt]
+{\color{BrickRed} -7{,}99\ \text{N} \cdot \frac{h}{\mathrm{sen}\,37^\circ} - 20\ \text{N} \cdot h} &= {\color{BrickRed} -{\color{RoyalBlue}9{,}68\ \text{J}}} \\[4pt]
 {\color{BrickRed} (13{,}27\ \text{N} + 20\ \text{N}) \cdot h} &= {\color{BrickRed} {\color{RoyalBlue}9{,}68\ \text{J}}} \\[4pt]
 h &= \frac{9{,}68\ \text{J}}{33{,}27\ \text{N}} \implies {\color{ForestGreen}\boxed{h \approx 0{,}29\ \text{m}}}
 \end{aligned}
@@ -418,11 +418,11 @@ El peso no alcanza a romper el rozamiento estático. Mientras esté en reposo, e
 $$
 \begin{aligned}
 a_x &= \frac{-12{,}04\ \text{N} - 7{,}99\ \text{N}}{2\ \text{kg}} \approx -10{,}01\ \frac{\text{m}}{\text{s}^2} \\[4pt]
-0 &= v^2 + 2\,a_x\,d \implies d = \frac{9{,}68\ \text{m}^2/\text{s}^2}{2 \cdot 10{,}01\ \text{m/s}^2} \approx 0{,}48\ \text{m} \implies h = d\,\operatorname{sen} 37^\circ \approx 0{,}29\ \text{m}
+0 &= v^2 + 2\,a_x\,d \implies d = \frac{9{,}68\ \text{m}^2/\text{s}^2}{2 \cdot 10{,}01\ \text{m/s}^2} \approx 0{,}48\ \text{m} \implies h = d\,\mathrm{sen}\,37^\circ \approx 0{,}29\ \text{m}
 \end{aligned}
 $$
 
-**Descenso, sin la masa.** La condición $m\,g\operatorname{sen} 37^\circ \le \mu_e\,m\,g\cos 37^\circ$ se reduce a $\operatorname{tg} 37^\circ \le \mu_e$. Como $0{,}75 < 0{,}8$, no desciende, cualquiera sea la masa.
+**Descenso, sin la masa.** La condición $m\,g\,\mathrm{sen}\,37^\circ \le \mu_e\,m\,g\cos 37^\circ$ se reduce a $\mathrm{tg}\,37^\circ \le \mu_e$. Como $0{,}75 < 0{,}8$, no desciende, cualquiera sea la masa.
 
 <!-- solo-pdf
 \begingroup\centering
