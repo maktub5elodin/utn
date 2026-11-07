@@ -76,16 +76,19 @@ M5_TUERCA_EC, M5_TUERCA_ALTO = 8.0, 5.0       # [COM] autoblocante
 MADERA_D, MADERA_CABEZA_D = 3.5, 7.0          # [COM] tornillo para madera 3,5 × 16
 HOJA = (18.0, 0.5)                            # [COM] trincheta de 18 mm: ancho, espesor
 LARGO_HOJA = 60.0     # [SUP] tramo de hoja que se usa (se cortan segmentos)
-CHAPITA_ESP = 0.5     # [SUP] chapa del piso de la guía (entra en TUNEL_ALTO)
-MDF = (310.0, 200.0, 18.0)                    # [SUP] largo, ancho, espesor
-MDF_ORIGEN = (-80.0, -75.0)                   # [SUP] esquina de la base
+CHAPITA_ESP = 0.5     # [COM] hoja de galga de espesores de 0,5 mm (o segmento de trincheta)
+CHAPITA_ANCHO = 12.7  # [COM] ancho de una hoja de galga (1/2")
+CHAPITA_LARGO = 18.0  # [SUP] se corta con tijera de hojalatero o doblando
+MDF = (345.0, 200.0, 18.0)                    # [SUP] largo, ancho, espesor
+MDF_ORIGEN = (-115.0, -75.0)                  # [SUP] esquina de la base; -X deja lugar al sargento
 
 # ------------------------------------------------------- altura de la guía
 CAPA = 0.2            # [SUP] altura de capa: las cotas verticales críticas caen en múltiplos
 Z_PISO = 42.0         # [SUP] piso de PLA del cabezal; lo impone la altura de la
                       # torre del carrete (ver más abajo)
-TUNEL_ALTO = 3 * CAPA                     # ranura de la chapita: tres capas
-Z_GUIA = Z_PISO - TUNEL_ALTO + 0.5        # cara de la chapita: el borde apoya acá
+TACO_ALTO = 36.0      # [COM] taco de MDF bajo el cabezal: dos recortes de 18 mm
+POZO_ALTO = 3 * CAPA                      # rebaje de la chapita: tres capas, abierto arriba
+Z_GUIA = Z_PISO - POZO_ALTO + CHAPITA_ESP # cara de la chapita: el borde apoya acá
 RANURA_PROF = 0.3     # [SUP] canaleta bajo la pared: el borde no toca el PLA
 
 # ---------------------------------------------------------------- cabezal
@@ -97,24 +100,35 @@ ALTO_LABIO_INT = 6.0         # [SUP] < W_MIN: la hoja pasa por encima
 ALTO_LABIO_EXT = 16.0        # [SUP]
 TH_LABIOS = (80.0, 125.0)    # [SUP] arco del labio interior, en grados
 TH_LABIO_EXT_FIN = 125.0     # [SUP] el exterior va del filo (90°) hasta acá
-CHAPITA_X = (-32.0, 4.0)     # [SUP] entra por la cara -X, en una ranura bajo los labios
-CHAPITA_Y = (42.5, 45.3)     # [SUP] cubre el fondo de la ranura bajo el filo y 11 mm antes
-HOLG_CHAPITA = 0.2           # [SUP] por lado, en el ancho de su ranura
+CHAPITA_Y0 = 43.65          # [SUP] borde interior: 0,2 mm fuera del labio interior
+CHAPITA_X = (-CHAPITA_LARGO / 2, CHAPITA_LARGO / 2)       # centrada bajo el filo
+CHAPITA_Y = (CHAPITA_Y0, CHAPITA_Y0 + CHAPITA_ANCHO)
+HOLG_CHAPITA = 0.2           # [SUP] por lado, en el rebaje
+LABIO_PIE_R = 56.0           # [SUP] pie del labio exterior, que se atornilla
+LABIO_PIE_TH = (103.0, 125.0)            # [SUP] fuera del calce y del rebaje
+LABIO_PIE_ESP = 3.0          # [SUP]
+TORNILLOS_LABIO = ((52.0, 108.0), (52.0, 121.0))   # [SUP] radio y ángulo
+TORNILLOS_TACO = ((-22.0, 70.0), (30.0, 66.0))     # [SUP] taco a la base, bajo la placa
 CALCE_X = (-8.0, 26.0)       # [SUP] calce y pisador, fuera del paso de la pared
 CALCE_Y = (51.0, 97.0)
 PISADOR_ESP = 5.0            # [SUP]
 HOJA_Y0 = 40.0               # [SUP] la punta entra 4 mm dentro de la botella
 TORNILLOS_HOJA = ((-4.5, 80.0), (22.5, 80.0))   # [SUP] fuera del ancho de la hoja
-PROF_TUERCA_HOJA = 5.5       # [SUP] tuerca cautiva, debajo del piso
+PROF_TUERCA = 2.7            # [SUP] alojamientos de tuerca M3 abiertos hacia abajo
+AGUJERO_TACO = 4.0           # [SUP] mecha para que los tornillos de la hoja pasen al taco
 TORNILLO_HOJA_L = 25.0       # [COM] M3 × 25
 TORNILLOS_CABEZAL = ((-12.0, 30.0), (12.0, 30.0), (-26.0, 96.0), (31.0, 96.0))   # [SUP] lejos de los labios
-PISO_BAJO_TORNILLO = 6.0     # [SUP] material bajo la cabeza del tornillo para madera
+PISO_BAJO_TORNILLO = 3.0     # [SUP] material bajo la cabeza del tornillo para madera
 
 # ----------------------------------------------------- zócalo de la varilla
 ZOCALO_R, ZOCALO_ALTO = 18.0, 28.0     # [SUP]
+ZOCALO_FONDO = 3.0                      # [SUP] piso bajo la varilla
+HOLG_VARILLA = 0.2                      # [SUP] agujero de la varilla lisa, ajustado
+Z_PRISIONERO = 14.0                     # [SUP] tornillo M3 que traba la varilla, desde -X
+PRISIONERO_L = 16.0                     # [COM] M3 × 16
 OREJAS_ZOCALO = (270.0, 30.0, 150.0)   # [SUP] ángulos; ninguna bajo el cabezal (90°)
 OREJA_R = 26.0                          # [SUP] radio de los tornillos
-VARILLA_D, VARILLA_L = 8.0, 380.0       # [COM] varilla roscada M8
+VARILLA_D, VARILLA_L = 8.0, 400.0       # [COM] varilla lisa Ø8 (eje lineal de impresora 3D)
 
 # -------------------------------------------------------------------- ojal
 X_OJAL = 70.0          # [SUP] fuera del barrido de la manivela
@@ -150,14 +164,23 @@ MANGO_R, MANGO_L = 11.0, 55.0           # [SUP]
 TORNILLO_MANGO_L = 70.0                 # [COM] M5 × 70
 LUZ_MANO = 40.0        # [SUP] espacio mínimo entre el mango y la botella
 
+# ----------------------------------------------------------------- sargento
+SARGENTO_XY = (-92.0, 15.0)             # [SUP] centro de la mordaza, sobre el MDF
+SARGENTO_PAD_R = 16.0                   # [COM] mordaza de un sargento chico
+
 # ------------------------------------------------------------ vaso de lastre
 LASTRE_R, LASTRE_ALTO, LASTRE_PARED = 25.0, 30.0, 2.0   # [SUP]
+DENS_TUERCAS = 3.5e-3  # [SUP] g/mm³ de tuercas sueltas apiladas (acero con huecos)
 
 # ---------------------------------------------------- cuentas de funcionamiento
 T_DISENO = 40.0        # [CON] supuesto hasta la prueba 1 (anexo A)
 F_MANO_MAX = 20.0      # [CON] criterio de fuerza en la mano
 SIGMA_PET = 55.0       # [REF] MPa, PET sin orientar: cota baja
 MU_PLA_PET = 0.35      # [SUP] rozamiento PLA-PET, sin lubricar
+MU_TAPA = 0.30         # [SUP] tapa de PE/PP sobre acero liso: valor de diseño, del lado seguro
+MU_PE_ACERO = {"seca": 0.20, "con grasa": 0.20}   # [REF] Engineering Toolbox, polietileno-acero:
+                       # la grasa no lo cambia; no hay dato de polipropileno
+FRACCION_TAPA = 0.10   # [SUP] carga de la tapa sobre la varilla, como fracción del tiro
 FRACCION_NORMAL = 0.5  # [SUP] carga de los labios como fracción del tiro: el
                        # tiro y la reacción de la hoja actúan casi en el mismo
                        # punto y casi se anulan, así que queda del lado seguro

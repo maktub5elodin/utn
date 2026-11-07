@@ -73,11 +73,19 @@ def a_la_cama(forma):
     return App.Placement(V(-b.XMin, -b.YMin, -b.ZMin), App.Rotation())
 
 
-def tornillo_madera(x, y, z_apoyo):
+def tornillo_madera(x, y, z_base, z_apoyo):
     """Agujero pasante con caja para la cabeza; queda PISO_BAJO_TORNILLO de material."""
-    pas = agujero(P.MADERA_D, -1, z_apoyo + 1, x, y)
-    caja_cab = cil(P.MADERA_CABEZA_D / 2 + 0.3, P.PISO_BAJO_TORNILLO, z_apoyo + 1, x, y)
+    pas = agujero(P.MADERA_D, z_base - 1, z_apoyo + 1, x, y)
+    caja_cab = cil(P.MADERA_CABEZA_D / 2 + 0.3, z_base + P.PISO_BAJO_TORNILLO, z_apoyo + 1, x, y)
     return pas.fuse(caja_cab)
+
+
+def rombo_horizontal(d, x0, x1, y, z):
+    """Agujero horizontal en X con forma de rombo: sus caras de arriba están a
+    37° de la vertical, así se imprime sin soporte. Deja pasar un tornillo de Ø d."""
+    a, b = 0.62 * (d + P.HOLG_AGUJERO) * 1.33, 0.62 * (d + P.HOLG_AGUJERO)
+    pts = [V(x0, y + b, z), V(x0, y, z + a), V(x0, y - b, z), V(x0, y, z - a), V(x0, y + b, z)]
+    return Part.Face(Part.makePolygon(pts)).extrude(V(x1 - x0, 0, 0))
 
 
 # ----------------------------------------------------------------- base y eje
@@ -87,6 +95,7 @@ def mdf():
 
 
 def zocalo():
+    """Varilla lisa en un agujero ciego, trabada con un tornillo M3 desde -X."""
     cuerpo = cil(P.ZOCALO_R, 0, P.ZOCALO_ALTO)
     for a in P.OREJAS_ZOCALO:
         x, y = P.OREJA_R * math.cos(math.radians(a)), P.OREJA_R * math.sin(math.radians(a))
@@ -95,13 +104,37 @@ def zocalo():
     for a in P.OREJAS_ZOCALO:
         x, y = P.OREJA_R * math.cos(math.radians(a)), P.OREJA_R * math.sin(math.radians(a))
         cuerpo = cuerpo.cut(agujero(P.MADERA_D, -1, 9, x, y))
-    cuerpo = cuerpo.cut(agujero(P.VARILLA_D, -1, P.ZOCALO_ALTO + 1))
-    cuerpo = cuerpo.cut(hexagono(P.M8_EC + P.HOLG_TUERCA, -1, P.M8_ALTO + 0.5))
+    cuerpo = cuerpo.cut(cil((P.VARILLA_D + P.HOLG_VARILLA) / 2, P.ZOCALO_FONDO, P.ZOCALO_ALTO + 1))
+    z = P.Z_PRISIONERO
+    cuerpo = cuerpo.cut(rombo_horizontal(3.0, -P.ZOCALO_R - 1, 0.0, 0.0, z))
+    # tuerca M3: entra desde arriba por una ranura, de canto
+    ec = P.M3_EC + P.HOLG_TUERCA
+    fondo = z - ec / math.sqrt(3) - 0.1          # la tuerca entra con un vértice abajo
+    cuerpo = cuerpo.cut(caja((-11.5, -11.5 + P.M3_ALTO + 0.4), (-ec / 2, ec / 2), (fondo, P.ZOCALO_ALTO + 1)))
     return cuerpo.removeSplitter()
 
 
 def varilla():
-    return cil(P.VARILLA_D / 2, 1.0, 1.0 + P.VARILLA_L)
+    return cil(P.VARILLA_D / 2, P.ZOCALO_FONDO, P.ZOCALO_FONDO + P.VARILLA_L)
+
+
+def prisionero():
+    """Tornillo M3 × 16 que aprieta la varilla, con su cabeza afuera."""
+    z = P.Z_PRISIONERO
+    x_punta = -P.VARILLA_D / 2
+    x_cab = x_punta - P.PRISIONERO_L
+    rosca = Part.makeCylinder(1.5, P.PRISIONERO_L, V(x_cab, 0, z), V(1, 0, 0))
+    cab = Part.makeCylinder(P.M3_CABEZA_D / 2, P.M3_CABEZA_ALTO, V(x_cab - P.M3_CABEZA_ALTO, 0, z), V(1, 0, 0))
+    return rosca.fuse(cab)
+
+
+def tuerca_prisionero():
+    z = P.Z_PRISIONERO
+    r = P.M3_EC / math.sqrt(3)
+    pts = [V(-11.3, r * math.cos(math.radians(30 + 60 * k)), z + r * math.sin(math.radians(30 + 60 * k)))
+           for k in range(7)]
+    t = Part.Face(Part.makePolygon(pts)).extrude(V(P.M3_ALTO, 0, 0))
+    return t.cut(Part.makeCylinder(1.5, 5, V(-12, 0, z), V(1, 0, 0)))
 
 
 def tuerca_m8(z0, x=0.0, y=0.0):
@@ -114,36 +147,56 @@ def arandela_m8(z0, x=0.0, y=0.0):
 
 
 # ------------------------------------------------------------------- cabezal
+def taco():
+    """Taco de MDF bajo el cabezal: levanta la guía sin gastar plástico. Lleva
+    dos agujeros para la punta de los tornillos de la hoja."""
+    cuerpo = caja(P.CAB_X, P.CAB_Y, (0, P.TACO_ALTO))
+    for x, y in P.TORNILLOS_HOJA:
+        cuerpo = cuerpo.cut(cil(P.AGUJERO_TACO / 2, P.TACO_ALTO - 10, P.TACO_ALTO + 1, x, y))
+    return cuerpo
+
+
 def cabezal():
-    zg = P.Z_PISO          # el piso de PLA; el borde apoya en la chapita, en P.Z_GUIA
-    cuerpo = caja(P.CAB_X, P.CAB_Y, (0, zg))
-    # labio interior: dentro de la botella, más bajo que la hoja
+    """Placa del cabezal: piso de la guía, labio interior, rebaje de la chapita,
+    apoyo del calce y tuercas cautivas. Se imprime con la cara de abajo en la cama."""
+    zb, zg = P.TACO_ALTO, P.Z_PISO          # el borde apoya en la chapita, en P.Z_GUIA
+    cuerpo = caja(P.CAB_X, P.CAB_Y, (zb, zg))
     r_int = P.R_B - P.PARED - P.HOLG_RANURA
-    cuerpo = cuerpo.fuse(sector(P.LABIO_INT_R0, r_int, *P.TH_LABIOS, zg, zg + P.ALTO_LABIO_INT))
-    # labio exterior: aguas arriba del filo (X < 0)
     r_ext = P.R_B + P.HOLG_RANURA
-    th_filo = 90.0 + math.degrees(math.asin(0.6 / r_ext))      # termina 0,6 mm antes del filo
-    cuerpo = cuerpo.fuse(sector(r_ext, r_ext + P.LABIO_ESP, th_filo, P.TH_LABIO_EXT_FIN,
-                                zg, zg + P.ALTO_LABIO_EXT))
-    # ranura de la chapita, debajo de los labios; entra por la cara -X
-    x0 = P.CHAPITA_X[0] - 1
-    yc = (P.CHAPITA_Y[0] - P.HOLG_CHAPITA, P.CHAPITA_Y[1] + P.HOLG_CHAPITA)
-    cuerpo = cuerpo.cut(caja((x0, P.CHAPITA_X[1] + P.HOLG_CHAPITA), yc, (zg - P.TUNEL_ALTO, zg)))
+    # labio interior: dentro de la botella, más bajo que la hoja
+    cuerpo = cuerpo.fuse(sector(P.LABIO_INT_R0, r_int, *P.TH_LABIOS, zg, zg + P.ALTO_LABIO_INT))
+    # rebaje de la chapita, abierto hacia arriba: lo cierran el labio exterior y el calce
+    h = P.HOLG_CHAPITA
+    cuerpo = cuerpo.cut(caja((P.CHAPITA_X[0] - h, P.CHAPITA_X[1] + h),
+                             (P.CHAPITA_Y[0] - h / 2, P.CHAPITA_Y[1] + h), (zg - P.POZO_ALTO, zg + 1)))
     # canaleta bajo la pared y bajo la tira: el borde solo puede apoyar en la chapita
     z_can = (P.Z_GUIA - P.RANURA_PROF, zg + 0.01)
     cuerpo = cuerpo.cut(sector(r_int, r_ext, 85.0, 140.0, *z_can))
     cuerpo = cuerpo.cut(caja((0.0, P.CAB_X[1] + 1), (P.R_B - P.PARED - 0.4, P.R_B + 0.4), z_can))
-    # tornillos de la hoja: agujero vertical y tuerca que entra de costado (+Y)
+    # tornillos de la hoja: tuerca cautiva abierta hacia abajo (la tapa el taco)
     for x, y in P.TORNILLOS_HOJA:
-        cuerpo = cuerpo.cut(agujero(3.0, zg - 16, zg + 1, x, y))
-        ec = P.M3_EC + P.HOLG_TUERCA
-        r_vert = ec / math.sqrt(3)                 # la tuerca entra con un vértice adelante
-        zt = zg - P.PROF_TUERCA_HOJA - 3.0
-        cuerpo = cuerpo.cut(caja((x - ec / 2, x + ec / 2), (y - r_vert, P.CAB_Y[1] + 1),
-                                 (zt, zt + 3.0)))
-    # fijación a la base
+        cuerpo = cuerpo.cut(agujero(3.0, zb - 1, zg + 1, x, y))
+        cuerpo = cuerpo.cut(hexagono(P.M3_EC + P.HOLG_TUERCA, zb - 1, zb + P.PROF_TUERCA, x, y, giro=30))
+    # tornillos del labio exterior y de la placa al taco
+    for r, a in P.TORNILLOS_LABIO:
+        x, y = r * math.cos(math.radians(a)), r * math.sin(math.radians(a))
+        cuerpo = cuerpo.cut(agujero(P.MADERA_D, zb - 1, zg + 1, x, y))
     for x, y in P.TORNILLOS_CABEZAL:
-        cuerpo = cuerpo.cut(tornillo_madera(x, y, zg))
+        cuerpo = cuerpo.cut(tornillo_madera(x, y, zb, zg))
+    return cuerpo.removeSplitter()
+
+
+def labio_exterior():
+    """Labio exterior, aparte: retiene la chapita y se atornilla al taco."""
+    zg = P.Z_PISO
+    r_ext = P.R_B + P.HOLG_RANURA
+    th_filo = 90.0 + math.degrees(math.asin(0.6 / r_ext))      # termina 0,6 mm antes del filo
+    labio = sector(r_ext, r_ext + P.LABIO_ESP, th_filo, P.TH_LABIO_EXT_FIN, zg, zg + P.ALTO_LABIO_EXT)
+    pie = sector(r_ext, P.LABIO_PIE_R, *P.LABIO_PIE_TH, zg, zg + P.LABIO_PIE_ESP)
+    cuerpo = labio.fuse(pie)
+    for r, a in P.TORNILLOS_LABIO:
+        x, y = r * math.cos(math.radians(a)), r * math.sin(math.radians(a))
+        cuerpo = cuerpo.cut(agujero(P.MADERA_D, zg - 1, zg + P.LABIO_PIE_ESP + 1, x, y))
     return cuerpo.removeSplitter()
 
 
@@ -188,13 +241,24 @@ def tornillos_hoja(w=P.W):
 
 
 def tuercas_hoja():
-    zt = P.Z_PISO - P.PROF_TUERCA_HOJA - 3.0 + 0.3
+    zt = P.TACO_ALTO + P.PROF_TUERCA - P.M3_ALTO
     return Part.makeCompound([hexagono(P.M3_EC, zt, zt + P.M3_ALTO, x, y, giro=30).cut(
         cil(1.5, zt - 1, zt + 4, x, y)) for x, y in P.TORNILLOS_HOJA])
 
 
 def chapita():
+    """Trozo de galga de 0,5 mm (o segmento de trincheta) en su rebaje."""
     return caja(P.CHAPITA_X, P.CHAPITA_Y, (P.Z_GUIA - P.CHAPITA_ESP, P.Z_GUIA))
+
+
+def sargento():
+    """Prensa que fija la base a la mesa: mordaza sobre el MDF y arco afuera."""
+    x, y = P.SARGENTO_XY
+    pad = cil(P.SARGENTO_PAD_R, 0, 10, x, y)
+    x_arco = P.MDF_ORIGEN[0] - 20
+    brazo = caja((x_arco, x + 8), (y - 10, y + 10), (10, 28))
+    arco = caja((x_arco, x_arco + 12), (y - 10, y + 10), (-60, 28))
+    return pad.fuse(brazo).fuse(arco)
 
 
 # ----------------------------------------------------------------------- ojal
@@ -378,19 +442,21 @@ def conjunto(s=0.0, con_lastre=True):
         pz[nombre] = {"forma": forma, "tipo": tipo, "cantidad": cantidad, "nota": nota,
                       "impresion": impresion if impresion is not None else a_la_cama(forma)}
 
-    add("Base", mdf(), "comercial", nota="Tabla de MDF de 15 a 18 mm, 310 × 200 mm")
-    add("Zocalo", zocalo(), "impresa", nota="Tuerca M8 cautiva hacia la cama")
-    add("Varilla", varilla(), "comercial", nota="Varilla roscada M8 × 380")
-    add("TuercaZocalo", tuerca_m8(0.3), "comercial", nota="Tuerca M8 cautiva")
-    add("ContratuercaZocalo", arandela_m8(P.ZOCALO_ALTO).fuse(tuerca_m8(P.ZOCALO_ALTO + P.ARANDELA_M8[2])),
-        "comercial", nota="Arandela y tuerca M8 que traban la varilla")
-    add("Cabezal", cabezal(), "impresa", nota="Piso de la guía arriba; sin soportes")
-    add("Chapita", chapita(), "comercial", nota="Fleje de ~0,5 mm, 36 × 2,8 mm")
+    add("Base", mdf(), "comercial", nota="Tabla de MDF de 18 mm")
+    add("Sargento", sargento(), "comercial", nota="Prensa a la mesa")
+    add("Zocalo", zocalo(), "impresa", nota="Varilla lisa trabada con un tornillo M3")
+    add("Varilla", varilla(), "comercial", nota="Varilla lisa Ø8 × 400")
+    add("TuercaPrisionero", tuerca_prisionero(), "comercial", nota="Tuerca M3")
+    add("Prisionero", prisionero(), "comercial", nota="Tornillo M3 × 16")
+    add("Taco", taco(), "comercial", nota="Dos recortes de MDF de 18 mm")
+    add("Cabezal", cabezal(), "impresa", nota="Placa: cara de abajo en la cama")
+    add("Chapita", chapita(), "comercial", nota="Galga de 0,5 mm, 18 × 12,7 mm")
+    add("LabioExterior", labio_exterior(), "impresa", nota="Retiene la chapita")
     add("Calce", calce(P.W), "impresa", nota="Uno por ancho: 7, 8, 9 y 10 mm")
     add("Hoja", hoja(), "comercial", nota="Trincheta de 18 mm")
     add("Pisador", pisador(), "impresa")
     add("TornillosHoja", tornillos_hoja(), "comercial", 2, "M3 × 25")
-    add("TuercasHoja", tuercas_hoja(), "comercial", 2, "Tuerca M3, entra de costado")
+    add("TuercasHoja", tuercas_hoja(), "comercial", 2, "Tuerca M3, cautiva desde abajo")
     add("Ojal", ojal(), "impresa")
     add("Torre", torre(), "impresa", nota="Dos 608ZZ a presión desde arriba")
     add("Rodamientos", rodamientos(), "comercial", 2, "608ZZ")

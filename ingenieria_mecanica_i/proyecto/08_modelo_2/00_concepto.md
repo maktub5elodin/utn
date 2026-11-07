@@ -172,11 +172,11 @@ Todas tienen que entrar en la cama de 256 × 256 mm de la P1S. Se diseñan para 
 
 ### 7.2 Comerciales
 
-**La lista vigente, generada desde el modelo, es [lista_compras.md](lista_compras.md).** Esta tabla fue la primera estimación: el modelo cambió algunas medidas, como el tornillo M8 × 60, cuatro tuercas M8 y la chapita de 36 × 2,8 mm.
+**La lista vigente, generada desde el modelo, es [lista_compras.md](lista_compras.md).** Esta tabla fue la primera estimación: el modelo cambió varias piezas, como la varilla, que pasó a ser lisa, el tornillo M8 × 60, la chapita, que es una galga de 0,5 mm, el taco de MDF bajo el cabezal y el sargento.
 
 | Pieza | Cantidad | Para qué |
 |---|---|---|
-| Varilla roscada M8, unos 380 mm | 1 | Eje vertical de la botella. Roscada y no lisa: se fija con una tuerca, sin ajustes de precisión |
+| Varilla lisa Ø8 mm, 400 mm (eje lineal de impresora 3D) | 1 | Eje vertical de la botella. Lisa y no roscada: la tapa baja y gira sin engancharse en los filetes |
 | Tornillo M8 × 70, cabeza hexagonal, rosca completa | 1 | Eje del carrete |
 | Tuercas M8 | 3 | Una cautiva en el zócalo, una en el carrete y una en la manivela |
 | Arandela M8 | 2 | Entre los rodamientos y lo que gira sobre ellos |

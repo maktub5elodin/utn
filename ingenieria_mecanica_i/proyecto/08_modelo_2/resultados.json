@@ -8,37 +8,47 @@
  "luz_mano_botella_mm": 46.4,
  "armado": [
   {
-   "paso": "Tuerca M8 al zócalo, desde abajo",
-   "ok": true,
-   "choques": []
-  },
-  {
    "paso": "Zócalo sobre la base",
    "ok": true,
    "choques": []
   },
   {
-   "paso": "Varilla, enroscada desde arriba",
+   "paso": "Tuerca M3 del prisionero, por su ranura",
    "ok": true,
    "choques": []
   },
   {
-   "paso": "Arandela y contratuerca del zócalo",
+   "paso": "Varilla lisa en el zócalo, desde arriba",
    "ok": true,
    "choques": []
   },
   {
-   "paso": "Tuercas M3 al cabezal, de costado",
+   "paso": "Prisionero, desde afuera",
    "ok": true,
    "choques": []
   },
   {
-   "paso": "Cabezal sobre la base",
+   "paso": "Taco de MDF sobre la base",
    "ok": true,
    "choques": []
   },
   {
-   "paso": "Chapita, deslizada por la cara -X",
+   "paso": "Tuercas M3 al cabezal, desde abajo",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Cabezal sobre el taco",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Chapita en su rebaje, desde arriba",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Labio exterior, sobre la chapita",
    "ok": true,
    "choques": []
   },
@@ -121,6 +131,11 @@
    "paso": "Vaso de lastre, opcional",
    "ok": true,
    "choques": []
+  },
+  {
+   "paso": "Sargento a la mesa",
+   "ok": true,
+   "choques": []
   }
  ],
  "impresion": {
@@ -128,14 +143,14 @@
    "tamano_mm": [
     68.0,
     80.0,
-    58.0
+    12.0
    ],
    "entra_en_la_cama": true,
    "solidos": 1,
-   "volumen_cm3": 223.3,
+   "volumen_cm3": 32.1,
    "voladizo_mm2": 0.0,
-   "puente_max_mm": 5.8,
-   "puentes": 5,
+   "puente_max_mm": 2.6,
+   "puentes": 3,
    "necesita_soportes": false
   },
   "Calce_10mm": {
@@ -217,6 +232,20 @@
    "entra_en_la_cama": true,
    "solidos": 1,
    "volumen_cm3": 12.3,
+   "voladizo_mm2": 0.0,
+   "puente_max_mm": 0.0,
+   "puentes": 0,
+   "necesita_soportes": false
+  },
+  "LabioExterior": {
+   "tamano_mm": [
+    31.5,
+    18.3,
+    16.0
+   ],
+   "entra_en_la_cama": true,
+   "solidos": 1,
+   "volumen_cm3": 2.6,
    "voladizo_mm2": 0.0,
    "puente_max_mm": 0.0,
    "puentes": 0,
@@ -314,10 +343,10 @@
    ],
    "entra_en_la_cama": true,
    "solidos": 1,
-   "volumen_cm3": 30.0,
+   "volumen_cm3": 30.5,
    "voladizo_mm2": 0.0,
-   "puente_max_mm": 5.4,
-   "puentes": 1,
+   "puente_max_mm": 0.0,
+   "puentes": 0,
    "necesita_soportes": false
   }
  },
@@ -340,17 +369,30 @@
    0.31,
    0.14
   ],
-  "rozamiento_axial_N": 0.23,
+  "rozamiento_axial_N": {
+   "labios": 0.23,
+   "tapa": 0.4,
+   "total": 0.63
+  },
+  "tapa_inclinacion_deslizamiento": 19.7,
   "peso_vaso_lastre_vacio_N": 0.17,
-  "lastre_total_g": 35,
-  "agregar_al_vaso_g": 15,
+  "lastre_total_g": 115,
+  "agregar_al_vaso_g": 100,
   "autoavance_sin_lastre": false,
+  "lastre_segun_mu_tapa_g": {
+   "diseño (0,30)": 115,
+   "PE-acero, seca (0,20)": 90,
+   "PE-acero, con grasa (0,20)": 90
+  },
+  "vaso_capacidad_tuercas_g": 149,
   "corte_por_tornillo_cabezal_N": 10.0,
   "torre_tension_flexion_MPa": 0.58,
   "torre_seguridad_entre_capas": 26.0,
   "ancho_por_construccion_mm": 9.0,
   "chapita_llega_bajo_el_filo": true,
-  "chapita_aguas_arriba_mm": 10.9,
+  "chapita_aguas_arriba_mm": 4.4,
+  "chapita_aguas_abajo_mm": 9.0,
+  "placa_cabezal_mm": 6.0,
   "ranura_mm": 0.85,
   "espesor_calce_mm": 8.9,
   "borde_a_pla_mm": 0.3,
@@ -359,12 +401,20 @@
   "carrete_toma_la_tira": true
  },
  "fallas": [],
+ "impresion_total": {
+  "masa_g": 194,
+  "tiempo_h": 6.1,
+  "cabezal": {
+   "masa_g": 24,
+   "tiempo_min": 39
+  }
+ },
  "stl": {
   "archivos": [
    {
     "stl": "01_Cabezal.stl",
     "cerrado": true,
-    "dif_volumen": 2.5e-05,
+    "dif_volumen": 4.5e-05,
     "apoyado": true,
     "ok": true
    },
@@ -406,7 +456,7 @@
    {
     "stl": "07_Zocalo.stl",
     "cerrado": true,
-    "dif_volumen": 0.00059,
+    "dif_volumen": 0.00057,
     "apoyado": true,
     "ok": true
    },
@@ -456,6 +506,13 @@
     "stl": "14_Lastre.stl",
     "cerrado": true,
     "dif_volumen": 0.00041,
+    "apoyado": true,
+    "ok": true
+   },
+   {
+    "stl": "15_LabioExterior.stl",
+    "cerrado": true,
+    "dif_volumen": 0.00018,
     "apoyado": true,
     "ok": true
    }

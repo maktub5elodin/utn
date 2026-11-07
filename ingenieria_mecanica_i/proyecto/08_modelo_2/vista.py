@@ -19,7 +19,7 @@ ANCHO, ALTO = 1600, 1000
 
 
 def color(nombre, tipo):
-    if nombre == "Base":
+    if nombre in ("Base", "Taco"):
         return Z.COLORES["mdf"]
     if nombre == "Tira":
         return Z.COLORES["tira"]

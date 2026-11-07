@@ -93,13 +93,15 @@ if luz < P.LUZ_MANO:
 # ----------------------------------------------------- 3. armado en orden
 # (paso, piezas que se mueven juntas, dirección de llegada, recorrido en mm)
 PASOS = [
-    ("Tuerca M8 al zócalo, desde abajo", ["TuercaZocalo"], (0, 0, 1), 15, ["Zocalo"]),
-    ("Zócalo sobre la base", ["Zocalo", "TuercaZocalo"], (0, 0, -1), 40, None),
-    ("Varilla, enroscada desde arriba", ["Varilla"], (0, 0, -1), 60, None),
-    ("Arandela y contratuerca del zócalo", ["ContratuercaZocalo"], (0, 0, -1), 60, None),
-    ("Tuercas M3 al cabezal, de costado", ["TuercasHoja"], (0, -1, 0), 30, ["Cabezal"]),
-    ("Cabezal sobre la base", ["Cabezal", "TuercasHoja"], (0, 0, -1), 60, None),
-    ("Chapita, deslizada por la cara -X", ["Chapita"], (1, 0, 0), 40, None),
+    ("Zócalo sobre la base", ["Zocalo"], (0, 0, -1), 40, None),
+    ("Tuerca M3 del prisionero, por su ranura", ["TuercaPrisionero"], (0, 0, -1), 20, None),
+    ("Varilla lisa en el zócalo, desde arriba", ["Varilla"], (0, 0, -1), 60, None),
+    ("Prisionero, desde afuera", ["Prisionero"], (1, 0, 0), 20, None),
+    ("Taco de MDF sobre la base", ["Taco"], (0, 0, -1), 60, None),
+    ("Tuercas M3 al cabezal, desde abajo", ["TuercasHoja"], (0, 0, 1), 20, ["Cabezal"]),
+    ("Cabezal sobre el taco", ["Cabezal", "TuercasHoja"], (0, 0, -1), 40, None),
+    ("Chapita en su rebaje, desde arriba", ["Chapita"], (0, 0, -1), 20, None),
+    ("Labio exterior, sobre la chapita", ["LabioExterior"], (0, 0, -1), 30, None),
     ("Calce", ["Calce"], (0, 0, -1), 30, None),
     ("Ojal", ["Ojal"], (0, 0, -1), 60, None),
     ("Rodamientos a la torre, desde arriba", ["Rodamientos"], (0, 0, -1), 40, ["Torre"]),
@@ -116,6 +118,7 @@ PASOS = [
     ("Pisador", ["Pisador"], (0, 0, -1), 30, None),
     ("Tornillos de la hoja", ["TornillosHoja"], (0, 0, -1), 40, None),
     ("Vaso de lastre, opcional", ["Lastre"], (0, 0, -1), 60, None),
+    ("Sargento a la mesa", ["Sargento"], (0, 0, -1), 40, None),
 ]
 # Contactos de armado que no son choque: rosca sobre rosca, tuerca en su hexágono
 PERMITIDOS_ARMADO = PERMITIDOS | {frozenset(p) for p in [
@@ -226,15 +229,38 @@ if rotura / T < 2:
 # Avance: el empuje hacia la guía tiene que ganarle a la componente axial del rozamiento
 peso_bot = pz0["Botella"]["forma"].Volume * P.DENS_PET / 1000 * P.G
 peso_bot_fin = pz1["Botella"]["forma"].Volume * P.DENS_PET / 1000 * P.G
-roz_axial = P.MU_PLA_PET * P.FRACCION_NORMAL * T * math.sin(P.ALFA)
+roz_labios = P.MU_PLA_PET * P.FRACCION_NORMAL * T * math.sin(P.ALFA)
+# En la tapa el contacto está sobre la varilla, a 4 mm del eje: por vuelta la tapa
+# baja w y gira solo 2π·4 mm, así que la bajada pesa mucho más en el deslizamiento
+avance_tapa = P.W / math.hypot(P.W, 2 * math.pi * P.VARILLA_D / 2)
+roz_tapa = P.MU_TAPA * P.FRACCION_TAPA * T * avance_tapa
+roz_axial = roz_labios + roz_tapa
 lastre_vacio = pz0["Lastre"]["forma"].Volume * 1.24e-3 / 1000 * P.G
 func["peso_botella_N"] = [round(peso_bot, 2), round(peso_bot_fin, 2)]
-func["rozamiento_axial_N"] = round(roz_axial, 2)
+func["rozamiento_axial_N"] = {"labios": round(roz_labios, 2), "tapa": round(roz_tapa, 2),
+                               "total": round(roz_axial, 2)}
+func["tapa_inclinacion_deslizamiento"] = round(math.degrees(math.asin(avance_tapa)), 1)
 func["peso_vaso_lastre_vacio_N"] = round(lastre_vacio, 2)
 falta = max(0.0, 2 * roz_axial - peso_bot_fin)           # margen de 2
 func["lastre_total_g"] = math.ceil(falta / P.G * 1000 / 5) * 5
 func["agregar_al_vaso_g"] = max(0, math.ceil((falta - lastre_vacio) / P.G * 1000 / 5) * 5)
 func["autoavance_sin_lastre"] = peso_bot_fin >= 2 * roz_axial
+
+
+def lastre_para(mu_tapa):
+    """Gramos de lastre total con margen 2, para un rozamiento dado de la tapa."""
+    roz = roz_labios + mu_tapa * P.FRACCION_TAPA * T * avance_tapa
+    return math.ceil(max(0.0, 2 * roz - peso_bot_fin) / P.G * 1000 / 5) * 5
+
+
+func["lastre_segun_mu_tapa_g"] = {"diseño (0,30)": lastre_para(P.MU_TAPA)}
+for estado, mu in P.MU_PE_ACERO.items():
+    func["lastre_segun_mu_tapa_g"][f"PE-acero, {estado} ({mu:.2f})".replace(".", ",")] = lastre_para(mu)
+r_in = P.LASTRE_R - P.LASTRE_PARED
+vol_vaso = math.pi * (r_in ** 2 - (P.VARILLA_D / 2 + 0.6 + P.LASTRE_PARED) ** 2) * (P.LASTRE_ALTO - P.LASTRE_PARED)
+func["vaso_capacidad_tuercas_g"] = round(vol_vaso * P.DENS_TUERCAS)
+if func["vaso_capacidad_tuercas_g"] < func["agregar_al_vaso_g"]:
+    fallas.append("el lastre necesario no entra en el vaso")
 
 # Anclajes
 func["corte_por_tornillo_cabezal_N"] = round(T / len(P.TORNILLOS_CABEZAL), 1)
@@ -249,10 +275,12 @@ func["ancho_por_construccion_mm"] = round(Z.z_hoja() - P.Z_GUIA, 3)
 y_ranura = P.R_B - P.PARED / 2
 func["chapita_llega_bajo_el_filo"] = (P.CHAPITA_X[1] >= 0.0 and P.CHAPITA_Y[0] < y_ranura < P.CHAPITA_Y[1])
 func["chapita_aguas_arriba_mm"] = round(math.sqrt(y_ranura ** 2 - P.CHAPITA_Y[0] ** 2), 1)
+func["chapita_aguas_abajo_mm"] = P.CHAPITA_X[1]
+func["placa_cabezal_mm"] = P.Z_PISO - P.TACO_ALTO
 func["ranura_mm"] = round(P.PARED + 2 * P.HOLG_RANURA, 2)
 func["espesor_calce_mm"] = round(Z.espesor_calce(P.W), 2)
 # el borde de la botella toca la chapita y no el PLA del cabezal
-d_pla = pz0["Botella"]["forma"].distToShape(pz0["Cabezal"]["forma"])[0]
+d_pla = min(pz0["Botella"]["forma"].distToShape(pz0[n]["forma"])[0] for n in ("Cabezal", "LabioExterior"))
 d_met = pz0["Botella"]["forma"].distToShape(pz0["Chapita"]["forma"])[0]
 func["borde_a_pla_mm"] = round(d_pla, 3)
 func["borde_apoya_en_chapita"] = d_met < 1e-3 and d_pla >= 0.05
