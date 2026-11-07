@@ -19,6 +19,7 @@ build/.figuras: $(MODELO) vista.py build/.verificado
 	CARPETA_MODELO=$(CURDIR) QT_QPA_PLATFORM=offscreen $(FREECAD) vista.py > /dev/null 2>&1
 	# FreeCAD guarda la hora en el PNG: se quita, para que la misma imagen dé el mismo archivo
 	$(SYSPY) -c "import sys; from PIL import Image; [Image.open(f).save(f, optimize=True) for f in sys.argv[1:]]" figuras/*.png
+	rm -f modelo/*.FCBak
 	touch $@
 
 .PHONY: all
