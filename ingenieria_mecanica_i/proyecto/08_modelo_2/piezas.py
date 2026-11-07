@@ -388,17 +388,27 @@ def botella(s):
         inte.append((r, zt - x))
     # en el fin del cuello el interior salta de la boca al hombro
     cuerpo = revolucion(ext + inte)
-    # El borde cortado es una hélice: apoya en la guía justo antes del filo (90°) y,
-    # recorriendo la vuelta hacia atrás, sube hasta w. Se modela en escalones de 10°,
-    # cada uno a la altura más baja de su tramo: así el control queda del lado seguro.
-    escalones = []
-    for k in range(1, 36):
-        z_k = P.Z_GUIA + P.W * 10 * k / 360
-        escalones.append(sector(P.R_B - 2, P.R_B + 2, 90 + 10 * k, 100 + 10 * k, P.Z_GUIA - 1, z_k))
-    corte = escalones[0]
-    for e in escalones[1:]:
-        corte = corte.fuse(e)
-    return cuerpo.cut(corte)
+    return cuerpo.cut(_borde_en_helice())
+
+
+_CACHE = {}
+
+
+def _borde_en_helice():
+    """El borde cortado es una hélice: apoya en la guía justo antes del filo (90°) y,
+    recorriendo la vuelta hacia atrás, sube hasta w. Se modela en escalones de 10°,
+    cada uno a la altura más baja de su tramo: así el control queda del lado seguro.
+    No depende de s: se arma una sola vez."""
+    if "borde" not in _CACHE:
+        escalones = []
+        for k in range(1, 36):
+            z_k = P.Z_GUIA + P.W * 10 * k / 360
+            escalones.append(sector(P.R_B - 2, P.R_B + 2, 90 + 10 * k, 100 + 10 * k, P.Z_GUIA - 1, z_k))
+        corte = escalones[0]
+        for e in escalones[1:]:
+            corte = corte.fuse(e)
+        _CACHE["borde"] = corte
+    return _CACHE["borde"]
 
 
 def tapa(s):

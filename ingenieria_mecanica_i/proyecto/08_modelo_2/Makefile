@@ -29,4 +29,25 @@ build/.stl: $(MODELO) exportar_stl.py build/.verificado
 	  $(SYSPY) -c "import json,sys; sys.exit(1 if json.load(open('resultados.json'))['stl']['fallas'] else 0)"
 	touch $@
 
-.PHONY: all
+# Video corto (make video). Varias instancias a la vez a veces se caen al guardar la
+# imagen: cada ronda retoma los cuadros que faltan, y sin todos no se arma el video.
+TANDAS  := 3
+CUADROS := 750
+video: build/.verificado renderizar.py
+	mkdir -p build/cuadros
+	find build/cuadros -name '*.png' ! -newer renderizar.py -delete
+	for ronda in 1 2 3 4 5 6 7 8 9 10; do \
+	  rm -f build/cuadros/*.crudo.png build/cuadros/*.tmp.png; \
+	  [ $$(ls build/cuadros | wc -l) -ge $(CUADROS) ] && break; \
+	  for k in $$(seq 0 $$(($(TANDAS)-1))); do \
+	    CARPETA_MODELO=$(CURDIR) QT_QPA_PLATFORM=offscreen RENDER=video TANDA=$$k/$(TANDAS) $(FREECAD) renderizar.py > /dev/null 2>&1 & \
+	  done; wait; \
+	done
+	rm -f build/cuadros/*.crudo.png build/cuadros/*.tmp.png
+	test $$(ls build/cuadros | wc -l) -eq $(CUADROS)
+	mkdir -p salida
+	ffmpeg -y -loglevel error -framerate 30 -i build/cuadros/%04d.png -c:v libx264 -preset slow \
+	  -crf 22 -pix_fmt yuv420p -movflags +faststart -map_metadata -1 -fflags +bitexact \
+	  -flags:v +bitexact salida/cortadora_v2.mp4
+
+.PHONY: all video

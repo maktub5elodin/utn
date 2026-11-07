@@ -131,10 +131,28 @@ Por eso no se recomienda vaselina ni grasa: no ayudan, y además juntan polvo y 
 | Cabezal | 151 g, ~4 h (relleno del 30 %) | **24 g, ~39 min** (relleno del 40 %) + labio exterior: 2 g, ~7 min |
 | Todas las piezas | 318 g, ~9,3 h | **194 g, ~6,1 h** |
 
-## 6. Cómo se usa
+## 6. Video corto
+
+[salida/cortadora_v2.mp4](salida/cortadora_v2.mp4): 25 s, 1600 × 900, 30 cuadros por segundo, 2,96 MB. Está pensado para mostrarle el principio al grupo; **es una versión preliminar** y así lo dice en pantalla.
+
+| Segundos | Qué muestra |
+|---|---|
+| 0 a 3 | Título, con la máquina quieta |
+| 3 a 10 | Vista general: la manivela gira, la tira se enrolla, la botella gira y baja |
+| 10 a 18 | Primer plano del cabezal, en cámara lenta: el borde sobre la guía, la hoja y la tira saliendo hacia el ojal |
+| 18 a 25 | Vista general hasta terminar el corte |
+
+**Cómo se mueve.** Manda el avance de la botella. Con `n` vueltas de botella, el corte va por `s = w·n`, así que **la botella baja exactamente `w` por vuelta**. La tira mide `π·D·n` y el rollo crece con ella. Las vueltas de la manivela salen de integrar `dL / 2πr`: `(r − r_núcleo) / espesor`, que al final del corte da 41,5, igual que la verificación.
+
+**Efecto estroboscópico.** La botella y el carrete son de revolución: para que se vea que giran llevan marcas pintadas. Antes de renderizar, un control recorre los 750 cuadros y falla si las marcas de la botella, las del carrete o la manivela avanzan casi un número entero de pasos por cuadro: ahí parecerían quietas o girando al revés.
+
+**Simplificación.** El tiempo del video no es el real: el corte de una botella dura 42 vueltas de manivela, y acá entra en unos 21 s.
+
+## 7. Cómo se usa
 
 ```
 make          # verifica; después, figuras, .FCStd, STL, ficha de impresión y lista de compras
+make video    # además, salida/cortadora_v2.mp4 (unos 6 minutos)
 ```
 
 Se cambia una medida en `parametros.py` y se vuelve a correr. Las piezas son formas generadas por código: para modificarlas se edita el código, no el `.FCStd`. Para recorrerlo en FreeCAD sirve la guía del modelo 1, [guia_revisar_en_freecad.md](../06_modelo_3d/guia_revisar_en_freecad.md): los nombres de los objetos cambian, pero el método es el mismo.
@@ -147,6 +165,7 @@ Se cambia una medida en `parametros.py` y se vuelve a correr. Las piezas son for
 | `verificar.py` | Choques, giro de la manivela, armado en orden, impresión y funcionamiento |
 | `vista.py` | Figuras y `modelo/cortadora_v2.FCStd`, con colores: naranja impreso, gris comercial, marrón el MDF |
 | `exportar_stl.py` | `stl/`, un archivo por pieza impresa, orientado para la cama; además escribe la ficha y la lista |
+| `renderizar.py` | Cuadros del video, con el método del modelo 1: escena armada una vez, supermuestreo, rótulos con PIL y control estroboscópico |
 | [ficha_impresion.md](ficha_impresion.md) | **Para Maty:** pieza, cantidad, relleno, perímetros, soportes, peso, tiempo y observaciones |
 | [lista_compras.md](lista_compras.md) | Piezas comerciales, con cantidades contadas del modelo |
 | `resultados.json` | Números de la última verificación |
