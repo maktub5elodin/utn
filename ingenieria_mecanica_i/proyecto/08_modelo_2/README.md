@@ -151,8 +151,9 @@ Por eso no se recomienda vaselina ni grasa: no ayudan, y además juntan polvo y 
 ## 7. Cómo se usa
 
 ```
-make          # verifica; después, figuras, .FCStd, STL, ficha de impresión y lista de compras
+make          # verifica; después, figuras, .FCStd, STL y los tres PDF
 make video    # además, salida/cortadora_v2.mp4 (unos 6 minutos)
+make ficha_pdf | compras_pdf | prueba1_pdf   # solo uno de los PDF (make ya los arma todos)
 ```
 
 Se cambia una medida en `parametros.py` y se vuelve a correr. Las piezas son formas generadas por código: para modificarlas se edita el código, no el `.FCStd`. Para recorrerlo en FreeCAD sirve la guía del modelo 1, [guia_revisar_en_freecad.md](../06_modelo_3d/guia_revisar_en_freecad.md): los nombres de los objetos cambian, pero el método es el mismo.
@@ -166,8 +167,9 @@ Se cambia una medida en `parametros.py` y se vuelve a correr. Las piezas son for
 | `vista.py` | Figuras y `modelo/cortadora_v2.FCStd`, con colores: naranja impreso, gris comercial, marrón el MDF |
 | `exportar_stl.py` | `stl/`, un archivo por pieza impresa, orientado para la cama; además escribe la ficha y la lista |
 | `renderizar.py` | Cuadros del video, con el método del modelo 1: escena armada una vez, supermuestreo, rótulos con PIL y control estroboscópico |
-| [ficha_impresion.md](ficha_impresion.md) | **Para Maty:** pieza, cantidad, relleno, perímetros, soportes, peso, tiempo y observaciones |
-| [lista_compras.md](lista_compras.md) | Piezas comerciales, con cantidades contadas del modelo |
+| [ficha/ficha_impresion.md](ficha/ficha_impresion.md) y [su PDF](ficha/build/ficha_impresion.pdf) | **Para Maty**, en A4 apaisado: miniatura de cada pieza en la cama, cantidad, relleno, perímetros, soportes, peso, tiempo y notas |
+| [compras/lista_compras.md](compras/lista_compras.md) y [su PDF](compras/build/lista_compras.pdf) | Para repartirse las compras: casilla, cantidad, medida, para qué y quién lo consigue; aparte, lo que se pide prestado y las herramientas |
+| [prueba_1/prueba_1_tiro.md](prueba_1/prueba_1_tiro.md) y [su PDF](prueba_1/build/prueba_1_tiro.pdf) | Hoja para imprimir y medir el tiro en la mesa de trabajo (anexo A del concepto), con dibujo, casillas y tabla para completar a mano. La genera `prueba_1/generar_prueba1.py` |
 | `resultados.json` | Números de la última verificación |
 
 El `.FCStd` cambia en cada `make` aunque el modelo no cambie, porque FreeCAD guarda la fecha adentro. Las figuras, los STL y las fichas salen idénticos byte a byte.

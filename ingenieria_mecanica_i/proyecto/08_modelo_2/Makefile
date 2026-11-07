@@ -1,7 +1,8 @@
 # Cortadora PET, modelo 2.0: verificación del modelo.
 #   make     verifica choques, armado en orden, impresión y funcionamiento;
 #            después, figuras de vista previa, modelo/cortadora_v2.FCStd,
-#            un STL por pieza impresa, ficha_impresion.md y lista_compras.md
+#            un STL por pieza impresa, y los PDF de la ficha de impresión, la lista de
+#            compras y la hoja de la prueba 1
 # Termina con error si resultados.json registra alguna falla.
 FREECAD := $(HOME)/Aplicaciones/FreeCAD.AppImage
 SYSPY   := /usr/bin/python3
@@ -9,7 +10,7 @@ export SOURCE_DATE_EPOCH := 1794009600
 export FORCE_SOURCE_DATE := 1
 MODELO  := parametros.py piezas.py
 
-all: build/.verificado build/.figuras build/.stl
+all: build/.verificado build/.figuras build/.stl ficha_pdf compras_pdf prueba1_pdf
 
 build/.verificado: $(MODELO) verificar.py
 	mkdir -p build
@@ -19,7 +20,7 @@ build/.verificado: $(MODELO) verificar.py
 build/.figuras: $(MODELO) vista.py build/.verificado
 	CARPETA_MODELO=$(CURDIR) QT_QPA_PLATFORM=offscreen $(FREECAD) vista.py > /dev/null 2>&1
 	# FreeCAD guarda la hora en el PNG: se quita, para que la misma imagen dé el mismo archivo
-	$(SYSPY) -c "import sys; from PIL import Image; [Image.open(f).save(f, optimize=True) for f in sys.argv[1:]]" figuras/*.png
+	$(SYSPY) -c "import sys; from PIL import Image; [Image.open(f).save(f, optimize=True) for f in sys.argv[1:]]" figuras/*.png ficha/miniaturas/*.png
 	rm -f modelo/*.FCBak
 	touch $@
 
@@ -50,4 +51,16 @@ video: build/.verificado renderizar.py
 	  -crf 22 -pix_fmt yuv420p -movflags +faststart -map_metadata -1 -fflags +bitexact \
 	  -flags:v +bitexact salida/cortadora_v2.mp4
 
-.PHONY: all video
+# PDF de la ficha (A4 apaisado), del mismo .md que escribe exportar_stl.py.
+ficha_pdf: build/.stl build/.figuras
+	$(MAKE) -C ficha
+
+# PDF de la lista de compras (A4 vertical), del .md que escribe exportar_stl.py.
+compras_pdf: build/.stl
+	$(MAKE) -C compras
+
+# Hoja de la prueba 1 (medir el tiro), con los umbrales de parametros.py.
+prueba1_pdf:
+	$(MAKE) -C prueba_1
+
+.PHONY: all video ficha_pdf compras_pdf prueba1_pdf

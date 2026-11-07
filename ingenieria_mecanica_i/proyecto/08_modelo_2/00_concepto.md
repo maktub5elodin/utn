@@ -155,7 +155,7 @@ Tabla para la exposición: qué había, qué queda y por qué.
 
 ### 7.1 Impresas en PLA
 
-Todas tienen que entrar en la cama de 256 × 256 mm de la P1S. Se diseñan para imprimir sin soportes o con muy pocos, con holguras en ejes y encastres, y unidas con tornillos y tuercas: nada pegado ni "mágico". **La ficha vigente, generada desde el modelo, es [ficha_impresion.md](ficha_impresion.md)**; esta tabla fue la primera idea.
+Todas tienen que entrar en la cama de 256 × 256 mm de la P1S. Se diseñan para imprimir sin soportes o con muy pocos, con holguras en ejes y encastres, y unidas con tornillos y tuercas: nada pegado ni "mágico". **La ficha vigente, generada desde el modelo, es [ficha/ficha_impresion.md](ficha/ficha_impresion.md)**; esta tabla fue la primera idea.
 
 | Pieza | Función | Primera idea de impresión |
 |---|---|---|
@@ -172,7 +172,7 @@ Todas tienen que entrar en la cama de 256 × 256 mm de la P1S. Se diseñan para 
 
 ### 7.2 Comerciales
 
-**La lista vigente, generada desde el modelo, es [lista_compras.md](lista_compras.md).** Esta tabla fue la primera estimación: el modelo cambió varias piezas, como la varilla, que pasó a ser lisa, el tornillo M8 × 60, la chapita, que es una galga de 0,5 mm, el taco de MDF bajo el cabezal y el sargento.
+**La lista vigente, generada desde el modelo, es [compras/lista_compras.md](compras/lista_compras.md).** Esta tabla fue la primera estimación: el modelo cambió varias piezas, como la varilla, que pasó a ser lisa, el tornillo M8 × 60, la chapita, que es una galga de 0,5 mm, el taco de MDF bajo el cabezal y el sargento.
 
 | Pieza | Cantidad | Para qué |
 |---|---|---|
@@ -231,7 +231,7 @@ Hasta que lleguen las respuestas de Maty y del grupo, el modelo usa estos supues
 
 - Una botella de 1,5 L lisa, limpia y seca, **con su tapa**.
 - Una trincheta con hoja nueva de 18 mm.
-- Un taco o tabla de madera de unos 20 × 10 cm, y otro taco chico de unos 3 cm de alto.
+- Una tabla de madera de unos 30 × 15 cm, donde se apoyan la botella y los calces, y un taco chico de unos 3 cm de alto.
 - Algo plano para levantar la hoja a la altura del ancho de la tira: arandelas, palitos de helado o cartón apilados, hasta unos 9 mm.
 - Dos tornillos con arandela, o una prensa chica (sargento), para apretar la hoja.
 - Una balanza de equipaje, de las que tienen gancho. Mejor si marca el máximo.
@@ -251,16 +251,16 @@ Hasta que lleguen las respuestas de Maty y del grupo, el modelo usa estos supues
 ```
 
 1. **Cortá la base de la botella** con la trincheta, a la altura donde empieza la parte lisa. Trabajá despacio y con guantes. El borde tiene que quedar lo más parejo posible.
-2. **Armá la cuchilla.** Sobre la tabla, apilá los calces hasta unos 9 mm. Apoyá la hoja encima, con el filo hacia afuera de la tabla, sobresaliendo unos 2 cm. Apretala con el taco de arriba y los tornillos, o con la prensa. **La hoja no se tiene que mover.**
-3. **Medí la altura real** desde la mesa hasta el filo, con regla o calibre: ese es el ancho `w` que vas a cortar. Anotalo.
+2. **Armá la cuchilla.** Sobre la tabla, cerca de un borde, apilá los calces hasta unos 9 mm. Apoyá la hoja encima, con el filo hacia la parte libre de la tabla, sobresaliendo unos 2 cm de los calces. Apretala con el taco de arriba y los tornillos, o con la prensa. **La hoja no se tiene que mover.**
+3. **Medí la altura real** desde la tabla hasta el filo, con regla o calibre: ese es el ancho `w` que vas a cortar. Anotalo.
 4. **Arrancá la tira.** Con la tijera, cortá en la botella una lengüeta de ese mismo ancho y unos 10 cm de largo, desde el borde hacia arriba, siguiendo una línea un poco inclinada.
 5. **Atá la punta** de la tira a un lápiz, y colgá el gancho de la balanza del lápiz.
 
 ### Medición
 
-1. Apoyá la botella parada sobre la mesa, con el pico arriba y el borde cortado sobre la mesa, al lado del filo. Metela de modo que **la hoja entre en el corte**: la pared queda pasando entre la mesa y la hoja.
+1. Apoyá la botella parada sobre la tabla, con el pico arriba y el borde cortado sobre la tabla, al lado del filo. Metela de modo que **la hoja entre en el corte**: la pared queda pasando entre la tabla y la hoja.
 2. Quien ayuda apoya **una mano suave sobre la tapa**, solo para que la botella no se caiga y pueda girar.
-3. **Tirá de la balanza despacio y parejo**, en línea recta, a la altura de la mesa y tangente a la botella: la tira tiene que salir derecha, sin subir ni bajar. La botella va a girar sola.
+3. **Tirá de la balanza despacio y parejo**, en línea recta, a la altura de la tabla y tangente a la botella: la tira tiene que salir derecha, sin subir ni bajar. La botella va a girar sola.
 4. Mirá la balanza mientras tirás:
    - **Tiro medio:** el valor que más se repite mientras el corte avanza parejo.
    - **Tiro máximo:** el pico más alto, por ejemplo al arrancar o si se traba.

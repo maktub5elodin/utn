@@ -54,7 +54,8 @@ ALFA = math.atan(W / (math.pi * D_B))           # ángulo de la hélice
 # ---------------------------------------------------------- impresión (P1S)
 CAMA = 256.0          # [P1S] cama de 256 × 256 × 256 mm
 MARGEN_CAMA = 6.0     # [SUP] lo que se deja libre en el borde de la cama
-BOQUILLA = 0.4        # [SUP] a confirmar con Maty
+BOQUILLA = 0.4        # [P1S] confirmado por Maty el 07/nov/2026
+MATERIAL = "PLA común"  # [P1S] confirmado por Maty el 07/nov/2026
 ANG_VOLADIZO = 45.0   # [REF] más inclinado que esto, desde la vertical, pide soporte
 PUENTE_MAX = 10.0     # [SUP] luz que un puente horizontal salva sin soporte en PLA
 

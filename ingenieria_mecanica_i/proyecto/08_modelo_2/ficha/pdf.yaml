@@ -1,0 +1,12 @@
+# Variables propias de la ficha de impresión. La configuración común de pandoc
+# está en pipeline_pdf/base.yaml; acá solo lo que cambia: A4 apaisado (la tabla
+# es ancha), sin índice y letra más chica.
+
+table-of-contents: false
+
+variables:
+  title-meta: "Ficha de impresión - Cortadora PET 2.0"
+  subtitle: "Cortadora PET 2.0 - Grupo 1, S1091"
+  date: "7 de noviembre de 2026"
+  geometry: "landscape, margin=1.5cm"
+  fontsize: 10pt

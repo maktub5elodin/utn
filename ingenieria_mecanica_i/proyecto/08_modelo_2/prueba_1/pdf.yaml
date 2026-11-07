@@ -1,0 +1,12 @@
+# Hoja de la prueba 1, para imprimir: A4 vertical, sin índice, márgenes chicos.
+# La configuración común de pandoc está en pipeline_pdf/base.yaml.
+
+table-of-contents: false
+include-in-header:
+  - preambulo.tex
+
+variables:
+  title-meta: "Prueba 1: medir el tiro - Cortadora PET 2.0"
+  subtitle: "Cortadora PET 2.0 - Grupo 1, S1091 - 7 de noviembre de 2026"
+  geometry: "margin=1.8cm"
+  fontsize: 10pt
