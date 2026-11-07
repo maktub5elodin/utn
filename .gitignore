@@ -42,6 +42,8 @@ __pycache__/
 # Excepción puntual: planos del modelo 3D de la cortadora (se regeneran con make).
 !ingenieria_mecanica_i/proyecto/06_modelo_3d/planos/*.pdf
 !ingenieria_mecanica_i/proyecto/06_modelo_3d/planos/estudios/*.pdf
+# Referencias de terceros cuya licencia no permite redistribuirlas (ver su README): solo locales.
+ingenieria_mecanica_i/proyecto/07_referencias/**/*.stl
 
 # Directorios excluidos temporalmente
 su_myf/
