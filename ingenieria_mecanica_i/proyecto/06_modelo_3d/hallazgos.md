@@ -26,7 +26,7 @@ En el modelo, el eje se prolonga más allá del soporte del cuello y la manivela
 
 ### 2.2 Los rodamientos del eje no entran junto al rodillo
 
-Un rodamiento para eje Ø30 mide cerca de Ø55 (se tomó el 6006, medida a confirmar con catálogo). Su radio de 27,5 mm no entra en los 25 mm disponibles sobre el cuerpo. Por eso el rodillo queda **en voladizo, a 24 mm** del último apoyo, y la placa de ese apoyo pasa a solo **1,5 mm** del hombro de la botella.
+Un rodamiento para eje Ø30 mide cerca de Ø55 (se tomó el 6006, medida a confirmar con catálogo). Su radio de 27,5 mm no entra en los 25 mm disponibles sobre el cuerpo. Por eso el rodillo queda **en voladizo, a 24 mm** del último apoyo, y la placa de ese apoyo pasa a solo **1,3 mm** del hombro de la botella (distancia mínima entre los sólidos).
 
 **A confirmar:** si el Ø30 del DXF es realmente este eje. Un eje más fino alivia este punto y el siguiente.
 

@@ -200,8 +200,7 @@ res["envolvente"] = {
     "husillo_fuera_de_base_al_final_mm": round(xmax - P.X_BASE[1]),
     "voladizo_botella_desde_el_cuello_mm": round(P.X_BORDE - P.X_MORDAZA[1]),
     "voladizo_rodillo_mm": round(P.X_RODILLO[0] - P.X_PLACA_2[1]),
-    "holgura_placa2_botella_mm": round(
-        P.DIST_BR - P.R_PLACA_EJE - P.radio_botella(P.X_PLACA_2[1]), 1),
+    "holgura_placa2_botella_mm": round(pz["Placa2"][0].distToShape(bot)[0], 2),
 }
 
 res["fallas"] = fallas

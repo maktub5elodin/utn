@@ -92,7 +92,7 @@
   "husillo_fuera_de_base_al_final_mm": 158,
   "voladizo_botella_desde_el_cuello_mm": 269,
   "voladizo_rodillo_mm": 24,
-  "holgura_placa2_botella_mm": 1.5
+  "holgura_placa2_botella_mm": 1.32
  },
  "fallas": [],
  "step": {
