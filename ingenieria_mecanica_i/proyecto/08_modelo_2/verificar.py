@@ -250,9 +250,16 @@ y_ranura = P.R_B - P.PARED / 2
 func["chapita_llega_bajo_el_filo"] = (P.CHAPITA_X[1] >= 0.0 and P.CHAPITA_Y[0] < y_ranura < P.CHAPITA_Y[1])
 func["chapita_aguas_arriba_mm"] = round(math.sqrt(y_ranura ** 2 - P.CHAPITA_Y[0] ** 2), 1)
 func["ranura_mm"] = round(P.PARED + 2 * P.HOLG_RANURA, 2)
+func["espesor_calce_mm"] = round(Z.espesor_calce(P.W), 2)
+# el borde de la botella toca la chapita y no el PLA del cabezal
+d_pla = pz0["Botella"]["forma"].distToShape(pz0["Cabezal"]["forma"])[0]
+d_met = pz0["Botella"]["forma"].distToShape(pz0["Chapita"]["forma"])[0]
+func["borde_a_pla_mm"] = round(d_pla, 3)
+func["borde_apoya_en_chapita"] = d_met < 1e-3 and d_pla >= 0.05
 func["labio_interior_bajo_la_hoja"] = P.ALTO_LABIO_INT < P.W_MIN
 func["carrete_toma_la_tira"] = (P.Z_CORE0 <= P.Z_GUIA - 0.5 and P.Z_CORE1 >= P.Z_GUIA + P.W_MAX + 0.5)
-for clave in ("chapita_llega_bajo_el_filo", "labio_interior_bajo_la_hoja", "carrete_toma_la_tira"):
+for clave in ("chapita_llega_bajo_el_filo", "labio_interior_bajo_la_hoja", "carrete_toma_la_tira",
+              "borde_apoya_en_chapita"):
     if not func[clave]:
         fallas.append(f"funcionamiento: {clave} = False")
 if abs(func["ancho_por_construccion_mm"] - P.W) > 1e-6:

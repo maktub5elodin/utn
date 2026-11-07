@@ -155,7 +155,7 @@ Tabla para la exposición: qué había, qué queda y por qué.
 
 ### 7.1 Impresas en PLA
 
-Todas tienen que entrar en la cama de 256 × 256 mm de la P1S. Se diseñan para imprimir sin soportes o con muy pocos, con holguras en ejes y encastres, y unidas con tornillos y tuercas: nada pegado ni "mágico". Las medidas finales y la ficha de impresión salen de la etapa 3.
+Todas tienen que entrar en la cama de 256 × 256 mm de la P1S. Se diseñan para imprimir sin soportes o con muy pocos, con holguras en ejes y encastres, y unidas con tornillos y tuercas: nada pegado ni "mágico". **La ficha vigente, generada desde el modelo, es [ficha_impresion.md](ficha_impresion.md)**; esta tabla fue la primera idea.
 
 | Pieza | Función | Primera idea de impresión |
 |---|---|---|
@@ -171,6 +171,8 @@ Todas tienen que entrar en la cama de 256 × 256 mm de la P1S. Se diseñan para 
 | Vaso de lastre (opcional) | Se apoya en la tapa; se llena de tuercas o arena si la botella no baja sola | De pie |
 
 ### 7.2 Comerciales
+
+**La lista vigente, generada desde el modelo, es [lista_compras.md](lista_compras.md).** Esta tabla fue la primera estimación: el modelo cambió algunas medidas, como el tornillo M8 × 60, cuatro tuercas M8 y la chapita de 36 × 2,8 mm.
 
 | Pieza | Cantidad | Para qué |
 |---|---|---|

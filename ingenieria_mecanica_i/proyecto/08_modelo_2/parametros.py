@@ -76,13 +76,17 @@ M5_TUERCA_EC, M5_TUERCA_ALTO = 8.0, 5.0       # [COM] autoblocante
 MADERA_D, MADERA_CABEZA_D = 3.5, 7.0          # [COM] tornillo para madera 3,5 × 16
 HOJA = (18.0, 0.5)                            # [COM] trincheta de 18 mm: ancho, espesor
 LARGO_HOJA = 60.0     # [SUP] tramo de hoja que se usa (se cortan segmentos)
-CHAPITA_ESP = 0.5     # [SUP] chapa del piso de la guía
+CHAPITA_ESP = 0.5     # [SUP] chapa del piso de la guía (entra en TUNEL_ALTO)
 MDF = (310.0, 200.0, 18.0)                    # [SUP] largo, ancho, espesor
 MDF_ORIGEN = (-80.0, -75.0)                   # [SUP] esquina de la base
 
 # ------------------------------------------------------- altura de la guía
-Z_GUIA = 42.0         # [SUP] borde de la botella sobre el MDF; lo impone la
-                      # altura de la torre del carrete (ver más abajo)
+CAPA = 0.2            # [SUP] altura de capa: las cotas verticales críticas caen en múltiplos
+Z_PISO = 42.0         # [SUP] piso de PLA del cabezal; lo impone la altura de la
+                      # torre del carrete (ver más abajo)
+TUNEL_ALTO = 3 * CAPA                     # ranura de la chapita: tres capas
+Z_GUIA = Z_PISO - TUNEL_ALTO + 0.5        # cara de la chapita: el borde apoya acá
+RANURA_PROF = 0.3     # [SUP] canaleta bajo la pared: el borde no toca el PLA
 
 # ---------------------------------------------------------------- cabezal
 CAB_X = (-32.0, 36.0)        # [SUP] bloque del cabezal
@@ -95,6 +99,7 @@ TH_LABIOS = (80.0, 125.0)    # [SUP] arco del labio interior, en grados
 TH_LABIO_EXT_FIN = 125.0     # [SUP] el exterior va del filo (90°) hasta acá
 CHAPITA_X = (-32.0, 4.0)     # [SUP] entra por la cara -X, en una ranura bajo los labios
 CHAPITA_Y = (42.5, 45.3)     # [SUP] cubre el fondo de la ranura bajo el filo y 11 mm antes
+HOLG_CHAPITA = 0.2           # [SUP] por lado, en el ancho de su ranura
 CALCE_X = (-8.0, 26.0)       # [SUP] calce y pisador, fuera del paso de la pared
 CALCE_Y = (51.0, 97.0)
 PISADOR_ESP = 5.0            # [SUP]

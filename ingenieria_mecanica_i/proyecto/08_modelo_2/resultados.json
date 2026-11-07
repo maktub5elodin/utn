@@ -135,18 +135,18 @@
    "volumen_cm3": 223.3,
    "voladizo_mm2": 0.0,
    "puente_max_mm": 5.8,
-   "puentes": 4,
+   "puentes": 5,
    "necesita_soportes": false
   },
   "Calce_10mm": {
    "tamano_mm": [
     34.0,
     46.0,
-    10.0
+    9.9
    ],
    "entra_en_la_cama": true,
    "solidos": 1,
-   "volumen_cm3": 15.5,
+   "volumen_cm3": 15.3,
    "voladizo_mm2": 0.0,
    "puente_max_mm": 0.0,
    "puentes": 0,
@@ -156,11 +156,11 @@
    "tamano_mm": [
     34.0,
     46.0,
-    7.0
+    6.9
    ],
    "entra_en_la_cama": true,
    "solidos": 1,
-   "volumen_cm3": 10.8,
+   "volumen_cm3": 10.7,
    "voladizo_mm2": 0.0,
    "puente_max_mm": 0.0,
    "puentes": 0,
@@ -170,11 +170,11 @@
    "tamano_mm": [
     34.0,
     46.0,
-    8.0
+    7.9
    ],
    "entra_en_la_cama": true,
    "solidos": 1,
-   "volumen_cm3": 12.4,
+   "volumen_cm3": 12.2,
    "voladizo_mm2": 0.0,
    "puente_max_mm": 0.0,
    "puentes": 0,
@@ -184,11 +184,11 @@
    "tamano_mm": [
     34.0,
     46.0,
-    9.0
+    8.9
    ],
    "entra_en_la_cama": true,
    "solidos": 1,
-   "volumen_cm3": 13.9,
+   "volumen_cm3": 13.8,
    "voladizo_mm2": 0.0,
    "puente_max_mm": 0.0,
    "puentes": 0,
@@ -268,7 +268,7 @@
    "tamano_mm": [
     38.0,
     18.0,
-    54.0
+    53.9
    ],
    "entra_en_la_cama": true,
    "solidos": 1,
@@ -338,7 +338,7 @@
   "seguridad_tira": 3.1,
   "peso_botella_N": [
    0.31,
-   0.15
+   0.14
   ],
   "rozamiento_axial_N": 0.23,
   "peso_vaso_lastre_vacio_N": 0.17,
@@ -352,8 +352,114 @@
   "chapita_llega_bajo_el_filo": true,
   "chapita_aguas_arriba_mm": 10.9,
   "ranura_mm": 0.85,
+  "espesor_calce_mm": 8.9,
+  "borde_a_pla_mm": 0.3,
+  "borde_apoya_en_chapita": true,
   "labio_interior_bajo_la_hoja": true,
   "carrete_toma_la_tira": true
  },
- "fallas": []
+ "fallas": [],
+ "stl": {
+  "archivos": [
+   {
+    "stl": "01_Cabezal.stl",
+    "cerrado": true,
+    "dif_volumen": 2.5e-05,
+    "apoyado": true,
+    "ok": true
+   },
+   {
+    "stl": "02_Calce_9mm.stl",
+    "cerrado": true,
+    "dif_volumen": 1.1e-05,
+    "apoyado": true,
+    "ok": true
+   },
+   {
+    "stl": "03_Calce_7mm.stl",
+    "cerrado": true,
+    "dif_volumen": 1e-05,
+    "apoyado": true,
+    "ok": true
+   },
+   {
+    "stl": "04_Calce_8mm.stl",
+    "cerrado": true,
+    "dif_volumen": 1e-05,
+    "apoyado": true,
+    "ok": true
+   },
+   {
+    "stl": "05_Calce_10mm.stl",
+    "cerrado": true,
+    "dif_volumen": 1.2e-05,
+    "apoyado": true,
+    "ok": true
+   },
+   {
+    "stl": "06_Pisador.stl",
+    "cerrado": true,
+    "dif_volumen": 1.1e-05,
+    "apoyado": true,
+    "ok": true
+   },
+   {
+    "stl": "07_Zocalo.stl",
+    "cerrado": true,
+    "dif_volumen": 0.00059,
+    "apoyado": true,
+    "ok": true
+   },
+   {
+    "stl": "08_Ojal.stl",
+    "cerrado": true,
+    "dif_volumen": 1.4e-05,
+    "apoyado": true,
+    "ok": true
+   },
+   {
+    "stl": "09_Torre.stl",
+    "cerrado": true,
+    "dif_volumen": 0.00055,
+    "apoyado": true,
+    "ok": true
+   },
+   {
+    "stl": "10_CarreteInferior.stl",
+    "cerrado": true,
+    "dif_volumen": 0.00059,
+    "apoyado": true,
+    "ok": true
+   },
+   {
+    "stl": "11_CarreteSuperior.stl",
+    "cerrado": true,
+    "dif_volumen": 0.00036,
+    "apoyado": true,
+    "ok": true
+   },
+   {
+    "stl": "12_Manivela.stl",
+    "cerrado": true,
+    "dif_volumen": 0.0003,
+    "apoyado": true,
+    "ok": true
+   },
+   {
+    "stl": "13_Mango.stl",
+    "cerrado": true,
+    "dif_volumen": 0.00093,
+    "apoyado": true,
+    "ok": true
+   },
+   {
+    "stl": "14_Lastre.stl",
+    "cerrado": true,
+    "dif_volumen": 0.00041,
+    "apoyado": true,
+    "ok": true
+   }
+  ],
+  "fallas": []
+ }
 }

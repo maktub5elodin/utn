@@ -27,10 +27,10 @@ Modelo por código del principio de tiro descripto en [00_concepto.md](00_concep
 
 | Medida | Valor | Por qué |
 |---|---|---|
-| Altura de la guía sobre el MDF | 42 mm | El carrete tiene que tomar la tira a esa altura, encima de una torre con dos rodamientos |
+| Altura de la guía sobre el MDF | 41,9 mm en la cara de la chapita; el piso de PLA está a 42,0 | El carrete tiene que tomar la tira a esa altura, encima de una torre con dos rodamientos |
 | Ranura entre labios | 0,85 mm | Pared de 0,25 mm más 0,30 mm por lado |
 | Labio interior | 6 mm de alto | Menos que el calce más chico (7 mm): la hoja pasa por encima |
-| Chapita bajo la ranura | Desde el filo hasta 10,9 mm aguas arriba | El borde se apoya en metal justo donde se define el ancho |
+| Chapita bajo la ranura | Desde el filo hasta 10,9 mm aguas arriba | El borde se apoya en metal justo donde se define el ancho. Una canaleta de 0,3 mm bajo el resto de la ranura evita que toque el PLA: `make` comprueba que queda a 0,3 mm |
 | Distancia entre la botella y el carrete | 181 mm | Deja 46 mm entre el mango y la botella para la mano |
 | Brazo de la manivela | 80 mm | Sección 4.1 del concepto |
 
@@ -44,6 +44,8 @@ Modelo por código del principio de tiro descripto en [00_concepto.md](00_concep
 | Hexágonos de tuercas cautivas | +0,3 mm entre caras |
 | Alojamiento del 608ZZ, a presión | 22,15 mm para 22,00 mm |
 | Ranura de la pared | 0,30 mm por lado |
+| Ranura de la chapita | 0,6 mm de alto, tres capas de 0,2 mm, para una chapa de 0,5 mm; 0,2 mm por lado en el ancho |
+| Calce | 0,1 mm menos que el ancho: apoya en el piso de PLA, que queda 0,1 mm más alto que la chapita |
 
 ## 3. Qué verifica `make`
 
@@ -51,11 +53,13 @@ Si algún control falla, `make` termina con error, y `resultados.json` dice qué
 
 | Control | Resultado |
 |---|---|
-| **Choques en el armado**, con la botella al inicio y al final del corte | Ninguno. Solo se permiten dos cruces, que son el propio corte: la hoja con la pared, y la tira con la botella de la que sale |
+| **Choques en el armado**, con la botella al inicio y al final del corte | Ninguno. Solo se permiten dos cruces, que son el propio corte: la hoja con la pared, y la tira con la botella de la que sale. El borde cortado se modela como hélice, en escalones de 10°: apoya en la chapita junto al filo y sube hasta `w` en una vuelta |
 | **La manivela da la vuelta**, en 36 posiciones, al inicio y al final | No toca nada |
 | **Lugar para la mano** | 46 mm entre el mango y la botella; el mínimo es 40 |
 | **Armado en orden**, 23 pasos | Cada pieza llega a su lugar sin atravesar lo ya armado: bajando, de costado o desde abajo, según corresponda |
 | **Impresión**, 14 piezas | Todas entran en la cama, sin voladizos de más de 45° y con puentes de 5,8 mm como máximo. **Ninguna necesita soportes**, y cada una es un sólido único |
+| **STL** | Cada archivo se vuelve a leer: es un sólido cerrado, está apoyado en la cama y su volumen difiere menos de 0,1 % del de la pieza |
+| **Borde sobre metal** | El borde toca la chapita y queda a 0,3 mm del PLA |
 
 ### Control negativo
 
@@ -85,7 +89,7 @@ Con el tiro de diseño de 40 N y la botella de referencia:
 
 | Fuerza a lo largo del eje | Valor |
 |---|---|
-| Peso de la botella | 0,31 N al empezar; **0,15 N al final**, porque se va consumiendo |
+| Peso de la botella | 0,31 N al empezar; **0,14 N al final**, porque se va consumiendo |
 | Rozamiento que frena la bajada | 0,23 N: es la componente axial, con μ = 0,35 y los labios cargados con la mitad del tiro, del lado seguro |
 
 Al final del corte, el peso de la botella ya no alcanza con margen 2. Con un lastre total de **unos 35 g** sí alcanza. El vaso de lastre vacío pesa 17 g, así que hay que **agregarle unos 15 g**, por ejemplo tres tuercas M8. La prueba 2 dirá si hace falta: el rozamiento y la carga de los labios son supuestos.
@@ -93,7 +97,7 @@ Al final del corte, el peso de la botella ya no alcanza con margen 2. Con un las
 ## 5. Cómo se usa
 
 ```
-make          # verifica; después, figuras y modelo/cortadora_v2.FCStd
+make          # verifica; después, figuras, .FCStd, STL, ficha de impresión y lista de compras
 ```
 
 Se cambia una medida en `parametros.py` y se vuelve a correr. Las piezas son formas generadas por código: para modificarlas se edita el código, no el `.FCStd`. Para recorrerlo en FreeCAD sirve la guía del modelo 1, [guia_revisar_en_freecad.md](../06_modelo_3d/guia_revisar_en_freecad.md): los nombres de los objetos cambian, pero el método es el mismo.
@@ -105,9 +109,12 @@ Se cambia una medida en `parametros.py` y se vuelve a correr. Las piezas son for
 | `piezas.py` | Sólidos de cada pieza, armados en su lugar |
 | `verificar.py` | Choques, giro de la manivela, armado en orden, impresión y funcionamiento |
 | `vista.py` | Figuras y `modelo/cortadora_v2.FCStd`, con colores: naranja impreso, gris comercial |
+| `exportar_stl.py` | `stl/`, un archivo por pieza impresa, orientado para la cama; además escribe la ficha y la lista |
+| [ficha_impresion.md](ficha_impresion.md) | **Para Maty:** pieza, cantidad, relleno, perímetros, soportes, peso y observaciones |
+| [lista_compras.md](lista_compras.md) | Piezas comerciales, con cantidades contadas del modelo |
 | `resultados.json` | Números de la última verificación |
 
-El `.FCStd` cambia en cada `make` aunque el modelo no cambie, porque FreeCAD guarda la fecha adentro; las figuras salen idénticas.
+El `.FCStd` cambia en cada `make` aunque el modelo no cambie, porque FreeCAD guarda la fecha adentro. Las figuras, los STL y las fichas salen idénticos byte a byte.
 
 ---
 *Fuentes: [00_concepto.md](00_concepto.md) y sus fuentes; método de `../06_modelo_3d/`; medidas de piezas comerciales: rodamiento 608ZZ (8 × 22 × 7), tuercas y tornillos métricos ISO, rosca de cuello PCO 1881 y hoja de trincheta de 18 mm. La resistencia entre capas del PLA (~15 MPa) es un valor de referencia bajo, a confirmar.*

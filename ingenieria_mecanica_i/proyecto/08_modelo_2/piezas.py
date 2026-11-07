@@ -115,7 +115,7 @@ def arandela_m8(z0, x=0.0, y=0.0):
 
 # ------------------------------------------------------------------- cabezal
 def cabezal():
-    zg = P.Z_GUIA
+    zg = P.Z_PISO          # el piso de PLA; el borde apoya en la chapita, en P.Z_GUIA
     cuerpo = caja(P.CAB_X, P.CAB_Y, (0, zg))
     # labio interior: dentro de la botella, más bajo que la hoja
     r_int = P.R_B - P.PARED - P.HOLG_RANURA
@@ -125,9 +125,14 @@ def cabezal():
     th_filo = 90.0 + math.degrees(math.asin(0.6 / r_ext))      # termina 0,6 mm antes del filo
     cuerpo = cuerpo.fuse(sector(r_ext, r_ext + P.LABIO_ESP, th_filo, P.TH_LABIO_EXT_FIN,
                                 zg, zg + P.ALTO_LABIO_EXT))
-    # ranura de la chapita: queda a ras del piso, debajo de los labios
+    # ranura de la chapita, debajo de los labios; entra por la cara -X
     x0 = P.CHAPITA_X[0] - 1
-    cuerpo = cuerpo.cut(caja((x0, P.CHAPITA_X[1]), P.CHAPITA_Y, (zg - P.CHAPITA_ESP, zg)))
+    yc = (P.CHAPITA_Y[0] - P.HOLG_CHAPITA, P.CHAPITA_Y[1] + P.HOLG_CHAPITA)
+    cuerpo = cuerpo.cut(caja((x0, P.CHAPITA_X[1] + P.HOLG_CHAPITA), yc, (zg - P.TUNEL_ALTO, zg)))
+    # canaleta bajo la pared y bajo la tira: el borde solo puede apoyar en la chapita
+    z_can = (P.Z_GUIA - P.RANURA_PROF, zg + 0.01)
+    cuerpo = cuerpo.cut(sector(r_int, r_ext, 85.0, 140.0, *z_can))
+    cuerpo = cuerpo.cut(caja((0.0, P.CAB_X[1] + 1), (P.R_B - P.PARED - 0.4, P.R_B + 0.4), z_can))
     # tornillos de la hoja: agujero vertical y tuerca que entra de costado (+Y)
     for x, y in P.TORNILLOS_HOJA:
         cuerpo = cuerpo.cut(agujero(3.0, zg - 16, zg + 1, x, y))
@@ -142,10 +147,16 @@ def cabezal():
     return cuerpo.removeSplitter()
 
 
+def espesor_calce(w):
+    """El calce apoya en el piso de PLA, que está un poco más alto que la chapita."""
+    return w - (P.Z_PISO - P.Z_GUIA)
+
+
 def calce(w):
-    pl = caja(P.CALCE_X, P.CALCE_Y, (P.Z_GUIA, P.Z_GUIA + w))
+    e = espesor_calce(w)
+    pl = caja(P.CALCE_X, P.CALCE_Y, (P.Z_PISO, P.Z_PISO + e))
     for x, y in P.TORNILLOS_HOJA:
-        pl = pl.cut(agujero(3.0, P.Z_GUIA - 1, P.Z_GUIA + w + 1, x, y))
+        pl = pl.cut(agujero(3.0, P.Z_PISO - 1, P.Z_PISO + e + 1, x, y))
     return pl
 
 
@@ -177,7 +188,7 @@ def tornillos_hoja(w=P.W):
 
 
 def tuercas_hoja():
-    zt = P.Z_GUIA - P.PROF_TUERCA_HOJA - 3.0 + 0.3
+    zt = P.Z_PISO - P.PROF_TUERCA_HOJA - 3.0 + 0.3
     return Part.makeCompound([hexagono(P.M3_EC, zt, zt + P.M3_ALTO, x, y, giro=30).cut(
         cil(1.5, zt - 1, zt + 4, x, y)) for x, y in P.TORNILLOS_HOJA])
 
@@ -312,8 +323,18 @@ def botella(s):
         r = P.R_CUELLO_INT if x <= P.X_CUELLO_FIN else P.radio_botella(x) - P.PARED
         inte.append((r, zt - x))
     # en el fin del cuello el interior salta de la boca al hombro
-    pts = ext + inte
-    return revolucion(pts)
+    cuerpo = revolucion(ext + inte)
+    # El borde cortado es una hélice: apoya en la guía justo antes del filo (90°) y,
+    # recorriendo la vuelta hacia atrás, sube hasta w. Se modela en escalones de 10°,
+    # cada uno a la altura más baja de su tramo: así el control queda del lado seguro.
+    escalones = []
+    for k in range(1, 36):
+        z_k = P.Z_GUIA + P.W * 10 * k / 360
+        escalones.append(sector(P.R_B - 2, P.R_B + 2, 90 + 10 * k, 100 + 10 * k, P.Z_GUIA - 1, z_k))
+    corte = escalones[0]
+    for e in escalones[1:]:
+        corte = corte.fuse(e)
+    return cuerpo.cut(corte)
 
 
 def tapa(s):
