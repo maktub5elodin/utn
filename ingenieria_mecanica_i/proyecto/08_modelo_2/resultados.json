@@ -1,0 +1,359 @@
+{
+ "choques_s0": [],
+ "choques_s180": [],
+ "manivela_vuelta_completa": {
+  "choques": [],
+  "posiciones": 36
+ },
+ "luz_mano_botella_mm": 46.4,
+ "armado": [
+  {
+   "paso": "Tuerca M8 al zócalo, desde abajo",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Zócalo sobre la base",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Varilla, enroscada desde arriba",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Arandela y contratuerca del zócalo",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Tuercas M3 al cabezal, de costado",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Cabezal sobre la base",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Chapita, deslizada por la cara -X",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Calce",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Ojal",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Rodamientos a la torre, desde arriba",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Tornillo M8 a la torre, desde abajo",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Torre sobre la base",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Arandela sobre el rodamiento",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Carrete inferior con su tuerca, enroscado",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Disco superior del carrete",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Manivela con su tuerca, enroscada",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Mango y su tornillo, desde arriba",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Tuerca del mango, desde abajo",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Botella con su tapa, bajando por la varilla",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Hoja, deslizada desde afuera por la lengüeta",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Pisador",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Tornillos de la hoja",
+   "ok": true,
+   "choques": []
+  },
+  {
+   "paso": "Vaso de lastre, opcional",
+   "ok": true,
+   "choques": []
+  }
+ ],
+ "impresion": {
+  "Cabezal": {
+   "tamano_mm": [
+    68.0,
+    80.0,
+    58.0
+   ],
+   "entra_en_la_cama": true,
+   "solidos": 1,
+   "volumen_cm3": 223.3,
+   "voladizo_mm2": 0.0,
+   "puente_max_mm": 5.8,
+   "puentes": 4,
+   "necesita_soportes": false
+  },
+  "Calce_10mm": {
+   "tamano_mm": [
+    34.0,
+    46.0,
+    10.0
+   ],
+   "entra_en_la_cama": true,
+   "solidos": 1,
+   "volumen_cm3": 15.5,
+   "voladizo_mm2": 0.0,
+   "puente_max_mm": 0.0,
+   "puentes": 0,
+   "necesita_soportes": false
+  },
+  "Calce_7mm": {
+   "tamano_mm": [
+    34.0,
+    46.0,
+    7.0
+   ],
+   "entra_en_la_cama": true,
+   "solidos": 1,
+   "volumen_cm3": 10.8,
+   "voladizo_mm2": 0.0,
+   "puente_max_mm": 0.0,
+   "puentes": 0,
+   "necesita_soportes": false
+  },
+  "Calce_8mm": {
+   "tamano_mm": [
+    34.0,
+    46.0,
+    8.0
+   ],
+   "entra_en_la_cama": true,
+   "solidos": 1,
+   "volumen_cm3": 12.4,
+   "voladizo_mm2": 0.0,
+   "puente_max_mm": 0.0,
+   "puentes": 0,
+   "necesita_soportes": false
+  },
+  "Calce_9mm": {
+   "tamano_mm": [
+    34.0,
+    46.0,
+    9.0
+   ],
+   "entra_en_la_cama": true,
+   "solidos": 1,
+   "volumen_cm3": 13.9,
+   "voladizo_mm2": 0.0,
+   "puente_max_mm": 0.0,
+   "puentes": 0,
+   "necesita_soportes": false
+  },
+  "CarreteInferior": {
+   "tamano_mm": [
+    72.7,
+    72.7,
+    16.0
+   ],
+   "entra_en_la_cama": true,
+   "solidos": 1,
+   "volumen_cm3": 21.2,
+   "voladizo_mm2": 0.0,
+   "puente_max_mm": 5.4,
+   "puentes": 1,
+   "necesita_soportes": false
+  },
+  "CarreteSuperior": {
+   "tamano_mm": [
+    72.7,
+    72.7,
+    3.0
+   ],
+   "entra_en_la_cama": true,
+   "solidos": 1,
+   "volumen_cm3": 12.3,
+   "voladizo_mm2": 0.0,
+   "puente_max_mm": 0.0,
+   "puentes": 0,
+   "necesita_soportes": false
+  },
+  "Lastre": {
+   "tamano_mm": [
+    50.0,
+    50.0,
+    30.0
+   ],
+   "entra_en_la_cama": true,
+   "solidos": 1,
+   "volumen_cm3": 14.2,
+   "voladizo_mm2": 0.0,
+   "puente_max_mm": 0.0,
+   "puentes": 0,
+   "necesita_soportes": false
+  },
+  "Mango": {
+   "tamano_mm": [
+    22.0,
+    22.0,
+    55.0
+   ],
+   "entra_en_la_cama": true,
+   "solidos": 1,
+   "volumen_cm3": 19.6,
+   "voladizo_mm2": 0.0,
+   "puente_max_mm": 0.0,
+   "puentes": 0,
+   "necesita_soportes": false
+  },
+  "Manivela": {
+   "tamano_mm": [
+    101.0,
+    22.0,
+    12.0
+   ],
+   "entra_en_la_cama": true,
+   "solidos": 1,
+   "volumen_cm3": 13.4,
+   "voladizo_mm2": 0.0,
+   "puente_max_mm": 5.4,
+   "puentes": 1,
+   "necesita_soportes": false
+  },
+  "Ojal": {
+   "tamano_mm": [
+    38.0,
+    18.0,
+    54.0
+   ],
+   "entra_en_la_cama": true,
+   "solidos": 1,
+   "volumen_cm3": 7.8,
+   "voladizo_mm2": 0.0,
+   "puente_max_mm": 0.0,
+   "puentes": 0,
+   "necesita_soportes": false
+  },
+  "Pisador": {
+   "tamano_mm": [
+    34.0,
+    46.0,
+    5.0
+   ],
+   "entra_en_la_cama": true,
+   "solidos": 1,
+   "volumen_cm3": 7.7,
+   "voladizo_mm2": 0.0,
+   "puente_max_mm": 0.0,
+   "puentes": 0,
+   "necesita_soportes": false
+  },
+  "Torre": {
+   "tamano_mm": [
+    60.0,
+    60.0,
+    36.0
+   ],
+   "entra_en_la_cama": true,
+   "solidos": 1,
+   "volumen_cm3": 29.2,
+   "voladizo_mm2": 0.0,
+   "puente_max_mm": 0.0,
+   "puentes": 0,
+   "necesita_soportes": false
+  },
+  "Zocalo": {
+   "tamano_mm": [
+    59.0,
+    53.0,
+    28.0
+   ],
+   "entra_en_la_cama": true,
+   "solidos": 1,
+   "volumen_cm3": 30.0,
+   "voladizo_mm2": 0.0,
+   "puente_max_mm": 5.4,
+   "puentes": 1,
+   "necesita_soportes": false
+  }
+ },
+ "funcionamiento": {
+  "ancho_tira_mm": 9.0,
+  "vueltas_botella": 20.0,
+  "largo_tira_m": 5.53,
+  "helice_grados": 1.86,
+  "radio_rollo_mm": [
+   16.0,
+   26.4
+  ],
+  "vueltas_manivela": 42,
+  "fuerza_mano_N": 13.2,
+  "tiro_admisible_N": 61,
+  "tiro_admisible_rollo_mas_grueso_N": 49,
+  "rotura_tira_N": 124,
+  "seguridad_tira": 3.1,
+  "peso_botella_N": [
+   0.31,
+   0.15
+  ],
+  "rozamiento_axial_N": 0.23,
+  "peso_vaso_lastre_vacio_N": 0.17,
+  "lastre_total_g": 35,
+  "agregar_al_vaso_g": 15,
+  "autoavance_sin_lastre": false,
+  "corte_por_tornillo_cabezal_N": 10.0,
+  "torre_tension_flexion_MPa": 0.58,
+  "torre_seguridad_entre_capas": 26.0,
+  "ancho_por_construccion_mm": 9.0,
+  "chapita_llega_bajo_el_filo": true,
+  "chapita_aguas_arriba_mm": 10.9,
+  "ranura_mm": 0.85,
+  "labio_interior_bajo_la_hoja": true,
+  "carrete_toma_la_tira": true
+ },
+ "fallas": []
+}
