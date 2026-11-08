@@ -2,7 +2,7 @@
 #   make     verifica choques, armado en orden, impresión y funcionamiento;
 #            después, figuras de vista previa, modelo/cortadora_v2.FCStd,
 #            un STL por pieza impresa, y los PDF de la ficha de impresión, la lista de
-#            compras y la hoja de la prueba 1
+#            compras, la hoja de la prueba 1 y el instructivo de armado con su plantilla
 # Termina con error si resultados.json registra alguna falla.
 FREECAD := $(HOME)/Aplicaciones/FreeCAD.AppImage
 SYSPY   := /usr/bin/python3
@@ -10,9 +10,9 @@ export SOURCE_DATE_EPOCH := 1794009600
 export FORCE_SOURCE_DATE := 1
 MODELO  := parametros.py piezas.py
 
-all: build/.verificado build/.figuras build/.stl ficha_pdf compras_pdf prueba1_pdf
+all: build/.verificado build/.figuras build/.stl ficha_pdf compras_pdf prueba1_pdf armado_pdf
 
-build/.verificado: $(MODELO) verificar.py
+build/.verificado: $(MODELO) armado.py verificar.py
 	mkdir -p build
 	$(FREECAD) freecadcmd verificar.py > /dev/null 2>&1; grep -q '"fallas": \[\]' resultados.json
 	touch $@
@@ -63,4 +63,13 @@ compras_pdf: build/.stl
 prueba1_pdf:
 	$(MAKE) -C prueba_1
 
-.PHONY: all video ficha_pdf compras_pdf prueba1_pdf
+# Instructivo de armado (A4) y plantilla de perforación de la base (A3). Primero las
+# vistas de cada paso y las medidas del modelo; después el .md y los PDF.
+build/.armado: $(MODELO) armado.py vistas_armado.py build/.verificado
+	CARPETA_MODELO=$(CURDIR) QT_QPA_PLATFORM=offscreen $(FREECAD) vistas_armado.py > /dev/null 2>&1
+	touch $@
+
+armado_pdf: build/.armado build/.stl build/.figuras
+	$(MAKE) -C instructivo
+
+.PHONY: all video ficha_pdf compras_pdf prueba1_pdf armado_pdf

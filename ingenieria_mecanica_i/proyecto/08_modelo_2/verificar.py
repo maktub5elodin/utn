@@ -21,6 +21,7 @@ sys.path.insert(0, CARPETA)
 import FreeCAD as App
 import Part
 
+import armado as A
 import parametros as P
 import piezas as Z
 
@@ -91,44 +92,17 @@ if luz < P.LUZ_MANO:
     fallas.append(f"la mano pasa a {luz:.0f} mm de la botella (mínimo {P.LUZ_MANO:.0f})")
 
 # ----------------------------------------------------- 3. armado en orden
-# (paso, piezas que se mueven juntas, dirección de llegada, recorrido en mm)
-PASOS = [
-    ("Zócalo sobre la base", ["Zocalo"], (0, 0, -1), 40, None),
-    ("Tuerca M3 del prisionero, por su ranura", ["TuercaPrisionero"], (0, 0, -1), 20, None),
-    ("Varilla lisa en el zócalo, desde arriba", ["Varilla"], (0, 0, -1), 60, None),
-    ("Prisionero, desde afuera", ["Prisionero"], (1, 0, 0), 20, None),
-    ("Taco de MDF sobre la base", ["Taco"], (0, 0, -1), 60, None),
-    ("Tuercas M3 al cabezal, desde abajo", ["TuercasHoja"], (0, 0, 1), 20, ["Cabezal"]),
-    ("Cabezal sobre el taco", ["Cabezal", "TuercasHoja"], (0, 0, -1), 40, None),
-    ("Chapita en su rebaje, desde arriba", ["Chapita"], (0, 0, -1), 20, None),
-    ("Labio exterior, sobre la chapita", ["LabioExterior"], (0, 0, -1), 30, None),
-    ("Calce", ["Calce"], (0, 0, -1), 30, None),
-    ("Ojal", ["Ojal"], (0, 0, -1), 60, None),
-    ("Rodamientos a la torre, desde arriba", ["Rodamientos"], (0, 0, -1), 40, ["Torre"]),
-    ("Tornillo M8 a la torre, desde abajo", ["EjeCarrete"], (0, 0, 1), 70, ["Torre", "Rodamientos"]),
-    ("Torre sobre la base", ["Torre", "Rodamientos", "EjeCarrete"], (0, 0, -1), 60, None),
-    ("Arandela sobre el rodamiento", ["ArandelaCarrete"], (0, 0, -1), 40, None),
-    ("Carrete inferior con su tuerca, enroscado", ["CarreteInferior", "TuercaCarrete"], (0, 0, -1), 40, None),
-    ("Disco superior del carrete", ["CarreteSuperior"], (0, 0, -1), 30, None),
-    ("Manivela con su tuerca, enroscada", ["Manivela", "TuercaManivela"], (0, 0, -1), 40, None),
-    ("Mango y su tornillo, desde arriba", ["Mango", "TornilloMango"], (0, 0, -1), 80, None),
-    ("Tuerca del mango, desde abajo", ["TuercaMango"], (0, 0, 1), 20, None),
-    ("Botella con su tapa, bajando por la varilla", ["Botella", "Tapa"], (0, 0, -1), 400, None),
-    ("Hoja, deslizada desde afuera por la lengüeta", ["Hoja"], (0, -1, 0), 70, None),
-    ("Pisador", ["Pisador"], (0, 0, -1), 30, None),
-    ("Tornillos de la hoja", ["TornillosHoja"], (0, 0, -1), 40, None),
-    ("Vaso de lastre, opcional", ["Lastre"], (0, 0, -1), 60, None),
-    ("Sargento a la mesa", ["Sargento"], (0, 0, -1), 40, None),
-]
+# La secuencia está en armado.py: la sigue también el instructivo de armado.
 # Contactos de armado que no son choque: rosca sobre rosca, tuerca en su hexágono
 PERMITIDOS_ARMADO = PERMITIDOS | {frozenset(p) for p in [
     ("TuercaCarrete", "CarreteInferior"),
 ]}
 armadas = ["Base"]
 pasos_res = []
-for nombre_paso, mueven, direc, recorrido, contra in PASOS:
-    d = V(*direc)
-    contra = contra if contra is not None else armadas
+for paso in A.PASOS:
+    nombre_paso, mueven, recorrido = paso["nombre"], paso["mueven"], paso["recorrido"]
+    d = V(*paso["direc"])
+    contra = paso["contra"] if paso["contra"] is not None else armadas
     paso_mm = 3.0 if recorrido > 100 else 1.0
     n = int(recorrido / paso_mm)
     malos = []
@@ -292,6 +266,13 @@ for clave in ("chapita_llega_bajo_el_filo", "labio_interior_bajo_la_hoja", "carr
         fallas.append(f"funcionamiento: {clave} = False")
 if abs(func["ancho_por_construccion_mm"] - P.W) > 1e-6:
     fallas.append("el ancho no coincide con el calce")
+# Tornillos para madera: cuánto entran en la base, y el del taco en el recorte de arriba
+func["tornillos_madera_en_la_base_mm"] = {n: P.MADERA_L - e for n, x, y, e in Z.tornillos_a_la_base() if e}
+func["tornillo_taco_en_recorte_superior_mm"] = P.TORNILLO_TACO_L - P.MDF[2] - P.TACO_ALTO / 2
+if min(func["tornillos_madera_en_la_base_mm"].values()) < 6 or func["tornillo_taco_en_recorte_superior_mm"] < 6:
+    fallas.append("algún tornillo para madera entra menos de 6 mm")
+if P.TORNILLO_TACO_L > P.MDF[2] + P.TACO_ALTO - 2:
+    fallas.append("el tornillo del taco asoma arriba del taco")
 res["funcionamiento"] = func
 
 res["fallas"] = fallas

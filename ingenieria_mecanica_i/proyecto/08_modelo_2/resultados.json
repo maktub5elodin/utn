@@ -398,7 +398,13 @@
   "borde_a_pla_mm": 0.3,
   "borde_apoya_en_chapita": true,
   "labio_interior_bajo_la_hoja": true,
-  "carrete_toma_la_tira": true
+  "carrete_toma_la_tira": true,
+  "tornillos_madera_en_la_base_mm": {
+   "Zocalo": 8.0,
+   "Ojal": 11.0,
+   "Torre": 11.0
+  },
+  "tornillo_taco_en_recorte_superior_mm": 9.0
  },
  "fallas": [],
  "impresion_total": {
@@ -408,6 +414,256 @@
    "masa_g": 24,
    "tiempo_min": 39
   }
+ },
+ "ficha": [
+  {
+   "n": 1,
+   "pieza": "Cabezal",
+   "titulo": "Cabezal (placa)",
+   "cant": 1
+  },
+  {
+   "n": 2,
+   "pieza": "Calce_9mm",
+   "titulo": "Calce de 9 mm",
+   "cant": 1
+  },
+  {
+   "n": 3,
+   "pieza": "Calce_7mm",
+   "titulo": "Calce de 7 mm",
+   "cant": 1
+  },
+  {
+   "n": 4,
+   "pieza": "Calce_8mm",
+   "titulo": "Calce de 8 mm",
+   "cant": 1
+  },
+  {
+   "n": 5,
+   "pieza": "Calce_10mm",
+   "titulo": "Calce de 10 mm",
+   "cant": 1
+  },
+  {
+   "n": 6,
+   "pieza": "Pisador",
+   "titulo": "Pisador de la hoja",
+   "cant": 1
+  },
+  {
+   "n": 7,
+   "pieza": "Zocalo",
+   "titulo": "Zócalo de la varilla",
+   "cant": 1
+  },
+  {
+   "n": 8,
+   "pieza": "Ojal",
+   "titulo": "Ojal",
+   "cant": 1
+  },
+  {
+   "n": 9,
+   "pieza": "Torre",
+   "titulo": "Torre del carrete",
+   "cant": 1
+  },
+  {
+   "n": 10,
+   "pieza": "CarreteInferior",
+   "titulo": "Carrete, disco inferior",
+   "cant": 1
+  },
+  {
+   "n": 11,
+   "pieza": "CarreteSuperior",
+   "titulo": "Carrete, disco superior",
+   "cant": 1
+  },
+  {
+   "n": 12,
+   "pieza": "Manivela",
+   "titulo": "Manivela",
+   "cant": 1
+  },
+  {
+   "n": 13,
+   "pieza": "Mango",
+   "titulo": "Mango",
+   "cant": 1
+  },
+  {
+   "n": 14,
+   "pieza": "Lastre",
+   "titulo": "Vaso de lastre",
+   "cant": 1
+  },
+  {
+   "n": 15,
+   "pieza": "LabioExterior",
+   "titulo": "Labio exterior",
+   "cant": 1
+  }
+ ],
+ "compras": {
+  "comprar": [
+   [
+    "Varilla lisa Ø8 mm",
+    "1",
+    "400 mm",
+    "Eje de la botella. Es el eje liso de las impresoras 3D"
+   ],
+   [
+    "Tornillo M8 × 60, cabeza hexagonal, rosca completa",
+    "1",
+    "",
+    "Eje del carrete"
+   ],
+   [
+    "Tuerca M8",
+    "2",
+    "",
+    "Carrete y manivela"
+   ],
+   [
+    "Arandela M8",
+    "2",
+    "8,4 × 16 mm",
+    "A cada lado de los rodamientos"
+   ],
+   [
+    "Rodamiento 608ZZ",
+    "2",
+    "8 × 22 × 7 mm",
+    "Torre del carrete"
+   ],
+   [
+    "Hoja de trincheta de 18 mm",
+    "1 + repuestos",
+    "Segmentable",
+    "Cuchilla"
+   ],
+   [
+    "Galga de espesores de 0,5 mm (una hoja)",
+    "1",
+    "Se corta a 18 × 12,7 mm",
+    "Apoyo metálico del borde de la botella. Sirve un segmento de trincheta"
+   ],
+   [
+    "Tornillo M3 × 25 y tuerca M3",
+    "2 + 2",
+    "",
+    "Aprietan la hoja"
+   ],
+   [
+    "Tornillo M3 × 16 y tuerca M3",
+    "1 + 1",
+    "",
+    "Traba la varilla"
+   ],
+   [
+    "Tornillo M5 × 70 y tuerca autoblocante M5",
+    "1 + 1",
+    "",
+    "Eje del mango de la manivela"
+   ],
+   [
+    "Tornillo para madera 3,5 × 16",
+    "14",
+    "",
+    "Fijan las piezas impresas a la base"
+   ],
+   [
+    "Tornillo para madera 3,5 × 45, cabeza fresada",
+    "2",
+    "",
+    "Taco a la base, desde abajo"
+   ],
+   [
+    "Tabla de MDF de 18 mm",
+    "1",
+    "345 × 200 mm y dos recortes de 68 × 80 mm",
+    "Base y taco. En la maderera la cortan a medida"
+   ],
+   [
+    "Prensa tipo sargento",
+    "1",
+    "Apertura de 80 mm o más",
+    "Fija la base a la mesa. Si alguien tiene una, no comprarla"
+   ]
+  ],
+  "prestado": [
+   [
+    "Balanza de equipaje con gancho, o dinamómetro",
+    "1",
+    "",
+    "Medir el tiro (prueba 1)"
+   ],
+   [
+    "Calibre",
+    "1",
+    "",
+    "Medir la pared de la botella, la tira y el calce"
+   ],
+   [
+    "Botellas de 1,5 L lisas, con su tapa",
+    "Varias",
+    "",
+    "Para probar y cortar. La tapa se perfora a 9 mm"
+   ],
+   [
+    "Tuercas o tornillos sueltos",
+    "~100 g",
+    "",
+    "Lastre, solo si la botella no baja sola"
+   ]
+  ],
+  "herramientas": [
+   [
+    "Destornillador",
+    "1",
+    "Phillips o el que pidan los tornillos",
+    "Armado"
+   ],
+   [
+    "Llaves o pinza para M8 y M3",
+    "1 juego",
+    "",
+    "Tuercas"
+   ],
+   [
+    "Taladro",
+    "1",
+    "Mechas de 9, 4 y 2,5 mm, y de avellanar",
+    "Tapa, taco y guías de los tornillos"
+   ],
+   [
+    "Punzón o clavo, escuadra, regla y cinta de papel",
+    "1",
+    "",
+    "Marcar los agujeros con la plantilla"
+   ],
+   [
+    "Caño de PVC de electricidad de 20 mm",
+    "Un tramo de 5 cm",
+    "",
+    "Empujar el rodamiento de abajo hasta su lugar"
+   ],
+   [
+    "Tijera de hojalatero",
+    "1",
+    "",
+    "Cortar la galga (o doblarla hasta que se corte)"
+   ],
+   [
+    "Guantes",
+    "1 par",
+    "",
+    "Cortar botellas y cambiar la hoja"
+   ]
+  ]
  },
  "stl": {
   "archivos": [

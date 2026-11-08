@@ -1,0 +1,15 @@
+# Instructivo de armado, para imprimir: A4 vertical, con índice en la portada.
+# La configuración común de pandoc está en pipeline_pdf/base.yaml.
+
+toc-depth: 1
+include-in-header:
+  - preambulo.tex
+include-before-body:
+  - portada.tex
+
+variables:
+  title-meta: "Instructivo de armado - Cortadora PET 2.0"
+  subtitle: "Cortadora PET 2.0 - Grupo 1, S1091"
+  date: "8 de noviembre de 2026"
+  geometry: "margin=1.8cm"
+  fontsize: 10pt

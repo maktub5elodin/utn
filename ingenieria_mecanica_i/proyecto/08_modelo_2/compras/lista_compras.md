@@ -23,7 +23,7 @@ Para repartirse qué consigue cada uno: anotar el nombre en la última columna y
 | ☐ | Tornillo M3 × 16 y tuerca M3 | 1 + 1 |  | Traba la varilla |  |
 | ☐ | Tornillo M5 × 70 y tuerca autoblocante M5 | 1 + 1 |  | Eje del mango de la manivela |  |
 | ☐ | Tornillo para madera 3,5 × 16 | 14 |  | Fijan las piezas impresas a la base |  |
-| ☐ | Tornillo para madera 3,5 × 45, cabeza fresada | 2 |  | Taco a la base |  |
+| ☐ | Tornillo para madera 3,5 × 45, cabeza fresada | 2 |  | Taco a la base, desde abajo |  |
 | ☐ | Tabla de MDF de 18 mm | 1 | 345 × 200 mm y dos recortes de 68 × 80 mm | Base y taco. En la maderera la cortan a medida |  |
 | ☐ | Prensa tipo sargento | 1 | Apertura de 80 mm o más | Fija la base a la mesa. Si alguien tiene una, no comprarla |  |
 
@@ -42,6 +42,8 @@ Para repartirse qué consigue cada uno: anotar el nombre en la última columna y
 |---|------------|-----|---------|------------|-----------|
 | ☐ | Destornillador | 1 | Phillips o el que pidan los tornillos | Armado |  |
 | ☐ | Llaves o pinza para M8 y M3 | 1 juego |  | Tuercas |  |
-| ☐ | Taladro | 1 | Mechas de 9, 4 y 3 mm, y de avellanar | Tapa, taco y guías de los tornillos |  |
+| ☐ | Taladro | 1 | Mechas de 9, 4 y 2,5 mm, y de avellanar | Tapa, taco y guías de los tornillos |  |
+| ☐ | Punzón o clavo, escuadra, regla y cinta de papel | 1 |  | Marcar los agujeros con la plantilla |  |
+| ☐ | Caño de PVC de electricidad de 20 mm | Un tramo de 5 cm |  | Empujar el rodamiento de abajo hasta su lugar |  |
 | ☐ | Tijera de hojalatero | 1 |  | Cortar la galga (o doblarla hasta que se corte) |  |
 | ☐ | Guantes | 1 par |  | Cortar botellas y cambiar la hoja |  |

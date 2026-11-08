@@ -27,6 +27,7 @@ R_CUELLO_INT = 10.85  # [COM] boca de la PCO 1881, Ø21,7
 X_HOMBRO_FIN = 85.0   # [REF] fin del hombro (modelo 1)
 RECORRIDO = 180.0     # [REF] tramo cilíndrico que se corta (modelo 1)
 MASA_BOTELLA = 0.030  # [SUP] botella de 1,5 L vacía, sin base, en kg
+TAPA_AGUJERO = 9.0    # [SUP] agujero en la tapa: la varilla de 8 pasa con juego
 DENS_PET = 1.38e-3    # [REF] g/mm³
 
 
@@ -44,6 +45,8 @@ def radio_botella(x):
 # -------------------------------------------------------------- tira y ancho
 W = 9.0               # [CON] ancho para pared de 0,25 mm (tabla de Function 3D)
 CALCES = (7.0, 8.0, 9.0, 10.0)   # [CON] anchos que se imprimen
+ANCHO_SEGUN_PARED = ((0.20, 10.0), (0.25, 9.0), (0.30, 8.0), (0.35, 7.0))   # [CON] espesor de
+                      # pared → ancho de tira (tabla de Function 3D y Precious Plastic)
 W_MAX = max(CALCES)
 W_MIN = min(CALCES)
 TOL_ANCHO = 0.5       # [CON] criterio w ± 0,5 mm
@@ -75,6 +78,10 @@ M3_CABEZA_D, M3_CABEZA_ALTO = 5.5, 3.0        # [COM] cabeza cilíndrica M3
 M5_CABEZA_D, M5_CABEZA_ALTO = 8.5, 3.5        # [COM]
 M5_TUERCA_EC, M5_TUERCA_ALTO = 8.0, 5.0       # [COM] autoblocante
 MADERA_D, MADERA_CABEZA_D = 3.5, 7.0          # [COM] tornillo para madera 3,5 × 16
+MADERA_L = 16.0                               # [COM]
+TORNILLO_TACO_L = 45.0                        # [COM] 3,5 × 45 cabeza fresada, desde abajo de la base
+MECHA_GUIA = 2.5      # [REF] agujero guía en MDF para tornillo para madera de 3,5
+MECHA_PASANTE = 4.0   # [REF] agujero pasante para tornillo de 3,5
 HOJA = (18.0, 0.5)                            # [COM] trincheta de 18 mm: ancho, espesor
 LARGO_HOJA = 60.0     # [SUP] tramo de hoja que se usa (se cortan segmentos)
 CHAPITA_ESP = 0.5     # [COM] hoja de galga de espesores de 0,5 mm (o segmento de trincheta)
@@ -117,6 +124,7 @@ HOJA_Y0 = 40.0               # [SUP] la punta entra 4 mm dentro de la botella
 TORNILLOS_HOJA = ((-4.5, 80.0), (22.5, 80.0))   # [SUP] fuera del ancho de la hoja
 PROF_TUERCA = 2.7            # [SUP] alojamientos de tuerca M3 abiertos hacia abajo
 AGUJERO_TACO = 4.0           # [SUP] mecha para que los tornillos de la hoja pasen al taco
+AGUJERO_TACO_PROF = 10.0     # [SUP] profundidad de esos agujeros
 TORNILLO_HOJA_L = 25.0       # [COM] M3 × 25
 TORNILLOS_CABEZAL = ((-12.0, 30.0), (12.0, 30.0), (-26.0, 96.0), (31.0, 96.0))   # [SUP] lejos de los labios
 PISO_BAJO_TORNILLO = 3.0     # [SUP] material bajo la cabeza del tornillo para madera
@@ -139,9 +147,10 @@ OJAL_HUECO = 1.5       # [SUP] ancho de la ranura: tira de 0,25 mm más juego
 
 # ----------------------------------------------------------------- carrete
 R_NUCLEO = 16.0        # [SUP] núcleo de Ø32
+RANURA_ENGANCHE = 8.0  # [SUP] profundidad de la ranura donde se engancha la punta de la tira
 R_ROLLO_FIN = math.sqrt(R_NUCLEO ** 2 + LARGO_TIRA * PARED / math.pi)
 R_ROLLO_MAX = max(math.sqrt(R_NUCLEO ** 2 + math.pi * D_B * RECORRIDO / w * t / math.pi)
-                  for w, t in ((10, .20), (9, .25), (8, .30), (7, .35)))
+                  for t, w in ANCHO_SEGUN_PARED)
 R_DISCO = R_ROLLO_MAX + 4.0             # [SUP] discos laterales
 DISCO_ESP = 3.0        # [SUP]
 X_CARRETE = 180.0      # [SUP] lo fija el lugar para la mano (ver verificar.py)

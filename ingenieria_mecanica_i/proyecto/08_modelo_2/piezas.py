@@ -94,16 +94,47 @@ def mdf():
     return caja((x0, x0 + P.MDF[0]), (y0, y0 + P.MDF[1]), (-P.MDF[2], 0))
 
 
+OREJA_ALTO = 8.0
+OJAL_BRIDA = 5.0
+
+
+def tornillos_zocalo():
+    return [(P.OREJA_R * math.cos(math.radians(a)), P.OREJA_R * math.sin(math.radians(a)))
+            for a in P.OREJAS_ZOCALO]
+
+
+def tornillos_ojal():
+    x0, x1 = P.X_OJAL - P.OJAL_LARGO / 2, P.X_OJAL + P.OJAL_LARGO / 2
+    return [(x, P.R_B - P.PARED / 2) for x in (x0 - 7, x1 + 7)]
+
+
+def tornillos_torre():
+    out = []
+    for k in range(3):
+        a = math.radians(90 + 120 * k)
+        out.append((P.X_CARRETE + P.TORRE_TORNILLOS_R * math.cos(a),
+                    P.Y_CARRETE + P.TORRE_TORNILLOS_R * math.sin(a)))
+    return out
+
+
+def tornillos_a_la_base():
+    """Tornillos que fijan piezas a la base: (pieza, x, y, espesor que atraviesan antes
+    de la base). Los del taco van al revés: desde abajo, pasantes en la base."""
+    out = [("Zocalo", x, y, OREJA_ALTO) for x, y in tornillos_zocalo()]
+    out += [("Taco", x, y, None) for x, y in P.TORNILLOS_TACO]
+    out += [("Ojal", x, y, OJAL_BRIDA) for x, y in tornillos_ojal()]
+    out += [("Torre", x, y, P.TORRE_BRIDA[1]) for x, y in tornillos_torre()]
+    return out
+
+
 def zocalo():
     """Varilla lisa en un agujero ciego, trabada con un tornillo M3 desde -X."""
     cuerpo = cil(P.ZOCALO_R, 0, P.ZOCALO_ALTO)
-    for a in P.OREJAS_ZOCALO:
-        x, y = P.OREJA_R * math.cos(math.radians(a)), P.OREJA_R * math.sin(math.radians(a))
-        oreja = cil(7.0, 0, 8.0, x, y).fuse(cil(7.0, 0, 8.0, x / 2, y / 2))
+    for x, y in tornillos_zocalo():
+        oreja = cil(7.0, 0, OREJA_ALTO, x, y).fuse(cil(7.0, 0, OREJA_ALTO, x / 2, y / 2))
         cuerpo = cuerpo.fuse(oreja)
-    for a in P.OREJAS_ZOCALO:
-        x, y = P.OREJA_R * math.cos(math.radians(a)), P.OREJA_R * math.sin(math.radians(a))
-        cuerpo = cuerpo.cut(agujero(P.MADERA_D, -1, 9, x, y))
+    for x, y in tornillos_zocalo():
+        cuerpo = cuerpo.cut(agujero(P.MADERA_D, -1, OREJA_ALTO + 1, x, y))
     cuerpo = cuerpo.cut(cil((P.VARILLA_D + P.HOLG_VARILLA) / 2, P.ZOCALO_FONDO, P.ZOCALO_ALTO + 1))
     z = P.Z_PRISIONERO
     cuerpo = cuerpo.cut(rombo_horizontal(3.0, -P.ZOCALO_R - 1, 0.0, 0.0, z))
@@ -152,7 +183,7 @@ def taco():
     dos agujeros para la punta de los tornillos de la hoja."""
     cuerpo = caja(P.CAB_X, P.CAB_Y, (0, P.TACO_ALTO))
     for x, y in P.TORNILLOS_HOJA:
-        cuerpo = cuerpo.cut(cil(P.AGUJERO_TACO / 2, P.TACO_ALTO - 10, P.TACO_ALTO + 1, x, y))
+        cuerpo = cuerpo.cut(cil(P.AGUJERO_TACO / 2, P.TACO_ALTO - P.AGUJERO_TACO_PROF, P.TACO_ALTO + 1, x, y))
     return cuerpo
 
 
@@ -267,12 +298,12 @@ def ojal():
     yc = P.R_B - P.PARED / 2
     h = P.OJAL_HUECO / 2
     alto = P.Z_GUIA + P.W_MAX + 2.0
-    brida = caja((x0 - 14, x1 + 14), (yc - 9, yc + 9), (0, 5.0))
+    brida = caja((x0 - 14, x1 + 14), (yc - 9, yc + 9), (0, OJAL_BRIDA))
     torre = caja((x0, x1), (yc - h - P.OJAL_PARED, yc + h + P.OJAL_PARED), (0, alto))
     cuerpo = brida.fuse(torre)
     cuerpo = cuerpo.cut(caja((x0 - 1, x1 + 1), (yc - h, yc + h), (P.Z_GUIA - 0.5, alto + 1)))
-    for x in (x0 - 7, x1 + 7):
-        cuerpo = cuerpo.cut(agujero(P.MADERA_D, -1, 6, x, yc))
+    for x, y in tornillos_ojal():
+        cuerpo = cuerpo.cut(agujero(P.MADERA_D, -1, OJAL_BRIDA + 1, x, y))
     return cuerpo.removeSplitter()
 
 
@@ -283,9 +314,7 @@ def torre():
     cuerpo = cil(P.TORRE_R, 0, P.TORRE_ALTO, xc, yc).fuse(cil(rb, 0, eb, xc, yc))
     cuerpo = cuerpo.cut(cil(P.TORRE_CAVIDAD[0], -1, P.TORRE_CAVIDAD[1], xc, yc))
     cuerpo = cuerpo.cut(cil(P.D_608_ALOJ / 2, P.TORRE_CAVIDAD[1], P.TORRE_ALTO + 1, xc, yc))
-    for k in range(3):
-        a = math.radians(90 + 120 * k)
-        x, y = xc + P.TORRE_TORNILLOS_R * math.cos(a), yc + P.TORRE_TORNILLOS_R * math.sin(a)
+    for x, y in tornillos_torre():
         cuerpo = cuerpo.cut(agujero(P.MADERA_D, -1, eb + 1, x, y))
     return cuerpo.removeSplitter()
 
@@ -321,7 +350,7 @@ def carrete_inferior():
     cuerpo = cil(P.R_DISCO, z0, P.Z_CORE0, xc, yc).fuse(cil(P.R_NUCLEO, P.Z_CORE0, P.Z_CORE1, xc, yc))
     cuerpo = cuerpo.cut(agujero(P.VARILLA_D, z0 - 1, P.Z_CORE1 + 1, xc, yc))
     cuerpo = cuerpo.cut(hexagono(P.M8_EC + P.HOLG_TUERCA, z0 - 1, z0 + P.M8_ALTO + 0.5, xc, yc))
-    ranura = caja((xc - 0.6, xc + 0.6), (yc - P.R_NUCLEO - 1, yc - 8.0), (P.Z_CORE0, P.Z_CORE1 + 1))
+    ranura = caja((xc - 0.6, xc + 0.6), (yc - P.R_NUCLEO - 1, yc - P.R_NUCLEO + P.RANURA_ENGANCHE), (P.Z_CORE0, P.Z_CORE1 + 1))
     return cuerpo.cut(ranura).removeSplitter()
 
 
@@ -414,7 +443,7 @@ def _borde_en_helice():
 def tapa(s):
     zt = P.z_superior_botella(s)
     cuerpo = cil(15.0, zt - 12.0, zt + 2.0).cut(cil(P.R_CUELLO + 0.1, zt - 13.0, zt))
-    return cuerpo.cut(cil(4.5, zt - 1, zt + 3))
+    return cuerpo.cut(cil(P.TAPA_AGUJERO / 2, zt - 1, zt + 3))
 
 
 def lastre(s):

@@ -116,7 +116,8 @@ def main():
     res["impresion_total"] = {"masa_g": round(sum(f[6] * f[2] for f in filas)),
                               "tiempo_h": round(sum(f[7] * f[2] for f in filas) / 60, 1),
                               "cabezal": {"masa_g": round(filas[0][6]), "tiempo_min": round(filas[0][7])}}
-    escribir_compras(pz)
+    res["ficha"] = [{"n": k, "pieza": n, "titulo": titulo, "cant": cant} for k, n, cant, _, _, _, _, _, _, titulo in filas]
+    res["compras"] = escribir_compras(pz)
     res["stl"] = {"archivos": controles, "fallas": fallas}
     with open(os.path.join(CARPETA, "resultados.json"), "w", encoding="utf-8") as fh:
         json.dump(res, fh, ensure_ascii=False, indent=1)
@@ -197,7 +198,8 @@ def escribir_ficha(filas, puente):
 
 def escribir_compras(pz):
     """compras/lista_compras.md: para que el grupo se reparta qué consigue cada uno."""
-    n_madera = 3 + len(P.TORNILLOS_CABEZAL) + len(P.TORNILLOS_LABIO) + 2 + 3   # zócalo, placa, labio, ojal, torre
+    n_madera = (len([t for t in Z.tornillos_a_la_base() if t[3]]) + len(P.TORNILLOS_CABEZAL)
+                + len(P.TORNILLOS_LABIO))           # zócalo, ojal y torre a la base; placa y labio al taco
     comprar = [
         ("Varilla lisa Ø8 mm", "1", f"{coma(P.VARILLA_L)} mm", "Eje de la botella. Es el eje liso de las impresoras 3D"),
         ("Tornillo M8 × 60, cabeza hexagonal, rosca completa", "1", "", "Eje del carrete"),
@@ -210,8 +212,9 @@ def escribir_compras(pz):
         ("Tornillo M3 × 25 y tuerca M3", "2 + 2", "", "Aprietan la hoja"),
         ("Tornillo M3 × 16 y tuerca M3", "1 + 1", "", "Traba la varilla"),
         ("Tornillo M5 × 70 y tuerca autoblocante M5", "1 + 1", "", "Eje del mango de la manivela"),
-        ("Tornillo para madera 3,5 × 16", str(n_madera), "", "Fijan las piezas impresas a la base"),
-        ("Tornillo para madera 3,5 × 45, cabeza fresada", str(len(P.TORNILLOS_TACO)), "", "Taco a la base"),
+        (f"Tornillo para madera {coma(P.MADERA_D, 1)} × {coma(P.MADERA_L)}", str(n_madera), "", "Fijan las piezas impresas a la base"),
+        (f"Tornillo para madera {coma(P.MADERA_D, 1)} × {coma(P.TORNILLO_TACO_L)}, cabeza fresada", str(len(P.TORNILLOS_TACO)), "",
+         "Taco a la base, desde abajo"),
         ("Tabla de MDF de 18 mm", "1", f"{coma(P.MDF[0])} × {coma(P.MDF[1])} mm y dos recortes de "
          f"{coma(P.CAB_X[1] - P.CAB_X[0])} × {coma(P.CAB_Y[1] - P.CAB_Y[0])} mm",
          "Base y taco. En la maderera la cortan a medida"),
@@ -226,7 +229,10 @@ def escribir_compras(pz):
     herramientas = [
         ("Destornillador", "1", "Phillips o el que pidan los tornillos", "Armado"),
         ("Llaves o pinza para M8 y M3", "1 juego", "", "Tuercas"),
-        ("Taladro", "1", f"Mechas de 9, {coma(P.AGUJERO_TACO)} y 3 mm, y de avellanar", "Tapa, taco y guías de los tornillos"),
+        ("Taladro", "1", f"Mechas de {coma(P.TAPA_AGUJERO)}, {coma(P.MECHA_PASANTE)} y {coma(P.MECHA_GUIA, 1)} mm, "
+         "y de avellanar", "Tapa, taco y guías de los tornillos"),
+        ("Punzón o clavo, escuadra, regla y cinta de papel", "1", "", "Marcar los agujeros con la plantilla"),
+        ("Caño de PVC de electricidad de 20 mm", "Un tramo de 5 cm", "", "Empujar el rodamiento de abajo hasta su lugar"),
         ("Tijera de hojalatero", "1", "", "Cortar la galga (o doblarla hasta que se corte)"),
         ("Guantes", "1 par", "", "Cortar botellas y cambiar la hoja"),
     ]
@@ -257,6 +263,7 @@ def escribir_compras(pz):
     os.makedirs(os.path.join(CARPETA, "compras"), exist_ok=True)
     with open(os.path.join(CARPETA, "compras", "lista_compras.md"), "w", encoding="utf-8") as fh:
         fh.write("\n".join(lin))
+    return {"comprar": comprar, "prestado": prestado, "herramientas": herramientas}
 
 
 codigo = 1
