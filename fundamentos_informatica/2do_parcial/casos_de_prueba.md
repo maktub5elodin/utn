@@ -1,8 +1,103 @@
 # Casos de prueba — `farmacia.cpp`
 
-## Cómo correrlo en Windows (Dev-C++)
+## Cómo correrlo en Windows
 
-Así lo va a probar el docente. Conviene hacerlo al menos una vez antes de entregar.
+Así lo va a probar el docente. Conviene hacerlo al menos una vez antes de entregar. Hay dos formas: con PowerShell (opción A), que comprueba, descarga, instala, compila y ejecuta, o a mano desde Dev-C++ (opción B).
+
+### Opción A — PowerShell
+
+Abrir **Windows PowerShell** y pegar los bloques **en orden, en la misma ventana**: cada bloque usa variables del anterior.
+
+> [!NOTE]
+> **Por qué la comprobación está armada así:** el objetivo es compilar con el mismo compilador que va a usar el docente, no con cualquiera. Por eso el paso 1 busca primero las instalaciones de **Dev-C++**: la 4.9.9.2 de su link original y la 5.x del `.rar` que compartió. Solo si no encuentra ninguna acepta otro `g++` que esté en el PATH, y en ese caso avisa que no es el entorno del profesor. Si no hay ningún compilador, el paso 2 instala **el mismo Dev-C++ 5.5.3 que compartió el docente**, bajado de su link de Google Drive y verificado contra el archivo original. La compilación usa `-std=c++98`, el estándar con el que compilan esos Dev-C++.
+
+**Paso 0 — Carpeta de trabajo.** Usa una ruta corta y sin espacios, porque los Dev-C++ viejos fallan con espacios o tildes en la ruta.
+
+```powershell
+$dir = 'C:\farmacia'
+New-Item -ItemType Directory -Force $dir | Out-Null
+Set-Location $dir
+$ProgressPreference = 'SilentlyContinue'      # sin esto, las descargas en PowerShell 5.1 son muy lentas
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+```
+
+**Paso 1 — Comprobación: ¿ya hay con qué compilar?**
+
+```powershell
+$gpp = $null
+$candidatos = @(
+    'C:\Dev-Cpp\bin\g++.exe',                               # Dev-C++ 4.9.9.2 (link original del docente)
+    'C:\Program Files (x86)\Dev-Cpp\MinGW64\bin\g++.exe',   # Dev-C++ 5.x de 64 bits (el .rar del docente)
+    'C:\Program Files (x86)\Dev-Cpp\MinGW32\bin\g++.exe',   # Dev-C++ 5.x de 32 bits
+    'C:\Program Files\Dev-Cpp\MinGW64\bin\g++.exe',
+    'C:\Program Files\Dev-Cpp\MinGW32\bin\g++.exe'
+)
+$gpp = $candidatos | Where-Object { Test-Path $_ } | Select-Object -First 1
+if ($gpp) {
+    "OK: Dev-C++ encontrado -> $gpp  (mismo entorno que el docente)"
+} else {
+    $otro = Get-Command g++ -ErrorAction SilentlyContinue
+    if ($otro) {
+        $gpp = $otro.Source
+        "AVISO: no hay Dev-C++, pero hay otro g++ en el PATH -> $gpp"
+        "       Sirve para probar, aunque no es el compilador del docente."
+    } else {
+        "No hay compilador: hace falta el paso 2 (instalar Dev-C++ 5.5.3)."
+    }
+}
+if ($gpp) { & $gpp --version | Select-Object -First 1 }
+```
+
+**Paso 2 — Solo si el paso 1 dijo que no hay compilador: descargar e instalar Dev-C++ 5.5.3.**
+
+```powershell
+$rar   = "$dir\Dev-Cpp 5.5.3 TDM-GCC x64 4.7.1 Setup.rar"
+$setup = "$dir\Dev-Cpp 5.5.3 TDM-GCC x64 4.7.1 Setup.exe"
+
+# 1) el mismo .rar que compartio el docente en Google Drive (43,7 MB)
+Invoke-WebRequest 'https://drive.usercontent.google.com/download?id=1fCsTpvkcOqkju7zYNzRdhlgvbfIPx7PP&export=download&confirm=t' -OutFile $rar
+
+# 2) verificar que es exactamente ese archivo
+if ((Get-FileHash $rar -Algorithm SHA256).Hash -ne '91DF7626EBE4E936BBD80129CE7D3471973F1BBA053732F1AC2C31AB177683C8') {
+    throw 'El archivo descargado no coincide con el del docente: no instalar.'
+}
+
+# 3) descomprimir: tar ya viene en Windows 11; si no puede (Windows 10), probar con 7-Zip
+tar -xf $rar -C $dir 2>$null
+if (-not (Test-Path $setup) -and (Test-Path 'C:\Program Files\7-Zip\7z.exe')) {
+    & 'C:\Program Files\7-Zip\7z.exe' x $rar "-o$dir" -y | Out-Null
+}
+if (-not (Test-Path $setup)) { throw 'No se pudo descomprimir: abrir el .rar con WinRAR o 7-Zip y seguir desde el punto 4.' }
+
+# 4) instalar en modo silencioso (pide permiso de administrador)
+Unblock-File $setup
+Start-Process $setup -ArgumentList '/S' -Verb RunAs -Wait
+```
+
+Después del paso 2, **volver a correr el paso 1**: tiene que decir `OK: Dev-C++ encontrado`. Si la instalación silenciosa no funcionara, se puede hacer doble clic en `C:\farmacia\Dev-Cpp 5.5.3 TDM-GCC x64 4.7.1 Setup.exe` e instalarlo con las opciones por defecto.
+
+**Paso 3 — Bajar el `.cpp` de la entrega, compilarlo y ejecutarlo.**
+
+```powershell
+Invoke-WebRequest 'https://raw.githubusercontent.com/maktub5elodin/utn/main/fundamentos_informatica/2do_parcial/entrega/Paredes_Sergio_S1554.cpp' -OutFile "$dir\Paredes_Sergio_S1554.cpp"
+
+$env:Path = (Split-Path $gpp) + ';' + $env:Path      # las herramientas del compilador quedan a mano
+& $gpp -std=c++98 -Wall -static Paredes_Sergio_S1554.cpp -o Paredes_Sergio_S1554.exe
+if ($LASTEXITCODE -eq 0) { .\Paredes_Sergio_S1554.exe } else { 'La compilacion fallo: ver los errores de arriba.' }
+```
+
+Si compila bien, no muestra nada y arranca el programa en la misma ventana. `-static` mete dentro del `.exe` las bibliotecas que necesita, así se puede ejecutar también fuera de esta ventana.
+
+**Paso 4 — Volver a ejecutar sin compilar (con el `.exe`).**
+
+```powershell
+Set-Location C:\farmacia
+.\Paredes_Sergio_S1554.exe
+```
+
+También funciona con doble clic en `C:\farmacia\Paredes_Sergio_S1554.exe`: la ventana se queda abierta hasta el `Presione ENTER para salir...` final. Recordar que el `.exe` **no se entrega**.
+
+### Opción B — A mano en Dev-C++
 
 1. **Instalar Dev-C++ 5.5.3:** descomprimir `fuentes/Dev-Cpp 5.5.3 TDM-GCC x64 4.7.1 Setup.rar` con 7-Zip o WinRAR, ejecutar el `Setup.exe` y aceptar las opciones por defecto. Al abrirlo por primera vez, pregunta el idioma.
 2. **Copiar `farmacia.cpp`** a una carpeta con ruta corta, sin espacios ni tildes, por ejemplo `C:\farmacia\`. Las versiones viejas de Dev-C++ fallan con rutas como `C:\Users\José\Mis documentos\`.
