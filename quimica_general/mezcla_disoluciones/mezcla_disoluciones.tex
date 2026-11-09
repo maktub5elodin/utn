@@ -1,0 +1,120 @@
+% Mezcla de cuatro disoluciones — Química General A1095 (UTN FRBA, Ing. Mecánica).
+% Ejercicio del 2.º parcial reconstruido de memoria; volúmenes y densidad son supuestos.
+% Compilar con: make  ->  build/mezcla_disoluciones.pdf
+
+\documentclass[10pt]{article}
+\usepackage[a4paper, hmargin=17mm, vmargin=13mm, footskip=6mm]{geometry}
+\usepackage{amsmath}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}
+\setmathfont{Latin Modern Math}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage[dvipsnames]{xcolor}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[C]{\color{gray}\scriptsize Referencia: Chang, R. — \emph{Química}, 9.ª ed. en español, McGraw-Hill, 2007, ISBN 978-970-10-6111-4 (cap. 4, 12 y 15).}
+\frenchspacing
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\abovedisplayskip}{4pt}
+\setlength{\belowdisplayskip}{4pt}
+
+\newcommand{\seccion}[1]{\par\vspace{7pt}\colorbox{NavyBlue}{\parbox{\dimexpr\linewidth-2\fboxsep}{%
+  \color{white}\bfseries #1}}\par\vspace{3pt}}
+\newcommand{\subtema}[1]{\par\vspace{4pt}{\bfseries\color{NavyBlue}#1}\par}
+\newcommand{\nota}[1]{\par{\color{gray!70!black}\small #1}\par}
+\newcommand{\molar}{\mathcal{M}}
+\newcommand{\sto}{\text{soluto}}
+\newcommand{\ste}{\text{solvente}}
+\newcommand{\sln}{\text{solución}}
+\newcommand{\HNO}{\text{HNO}_3}
+\newcommand{\Hp}{\text{H}^+}
+\newcommand{\OHm}{\text{OH}^-}
+
+\begin{document}
+
+{\large\bfseries Mezcla de cuatro disoluciones: de \% m/m a pH final}\hfill{\small Química General A1095 · UTN FRBA}\par
+\vspace{1pt}{\color{NavyBlue}\rule{\linewidth}{0.8pt}}\par
+
+Se mezclan cuatro disoluciones y se busca la concentración final. El enunciado está reconstruido de memoria:
+\textbf{los volúmenes y la densidad son supuestos}. Otros valores cambian el número final, no el procedimiento.
+
+\begin{center}
+\begin{tabular}{@{}clcl@{}}
+\toprule
+\textbf{Inciso} & \textbf{Disolución} & \textbf{Volumen} & \textbf{Dato adicional}\\
+\midrule
+a & \(\HNO\) al 38\,\% m/m & 40 mL & \(\rho = 1{,}23\) g/mL, \ \(\molar = 63\) g/mol\\
+b & ácida, pH 2 & 100 mL & \\
+c & básica, pH 10 & 300 mL & \\
+d & agua, pH 7 & 60 mL & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\seccion{1. Inciso a: pasar de \% m/m a molalidad y molaridad}
+
+El 38\,\% m/m es una relación, así que vale para cualquier cantidad de disolución. Se toma como base \textbf{100 g de disolución}:
+
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+Masa de soluto y de solvente & \(38\) g de \(\HNO\) \ y \ \(100 - 38 = 62\) g de agua\\[2pt]
+Moles de soluto & \(n = \dfrac{38\ \text{g}}{63\ \text{g/mol}} = 0{,}603\) mol\\[8pt]
+\textbf{Molalidad} (por kg de solvente) & \(m = \dfrac{0{,}603\ \text{mol}}{0{,}062\ \text{kg}} = \mathbf{9{,}73}\) mol/kg\\[8pt]
+Volumen de disolución & \(V = \dfrac{100\ \text{g}}{1{,}23\ \text{g/mL}} = 81{,}3\) mL\\[8pt]
+\textbf{Molaridad} (por L de disolución) & \(M = \dfrac{0{,}603\ \text{mol}}{0{,}0813\ \text{L}} = \mathbf{7{,}42}\) mol/L
+\end{tabular}
+\end{center}
+
+\subtema{La molaridad, deducida desde la definición}
+Con \(w = \%\,\text{m/m}\,/\,100\), la masa de soluto es \(m_{\sto} = w\,m_{\sln}\), los moles son \(n_{\sto} = m_{\sto}/\molar\) y la masa de disolución es \(m_{\sln} = \rho V\). Al reemplazar, el volumen se cancela:
+\[
+M = \frac{n_{\sto}}{V} = \frac{w\,m_{\sln}}{\molar\, V} = \frac{w\,\rho\,V}{\molar\, V} = \frac{w\,\rho}{\molar}
+\quad\longrightarrow\quad
+M = \frac{0{,}38 \cdot 1230\ \text{g/L}}{63\ \text{g/mol}} = 7{,}42\ \text{mol/L}
+\]
+
+\nota{La molalidad no necesita densidad; la molaridad sí. Para mezclar se usa la molaridad, porque el dato de cantidad es un volumen: \(n = M\,V\).}
+
+\seccion{2. Moles que aporta cada disolución}
+
+El \(\HNO\) es un ácido fuerte y se disocia por completo: \([\Hp] = M\). En b, c y d el pH ya da directamente la concentración de la especie libre.
+
+\begin{center}
+\begin{tabular}{@{}clll@{}}
+\toprule
+\textbf{Inciso} & \textbf{Concentración} & \textbf{Moles} \(n = C\,V\) & \textbf{Aporta}\\
+\midrule
+a & \([\Hp] = 7{,}42\) mol/L & \(7{,}42 \cdot 0{,}040 = 0{,}2968\) mol & \(\Hp\)\\
+b & \([\Hp] = 10^{-2}\) mol/L & \(10^{-2} \cdot 0{,}100 = 1{,}0 \times 10^{-3}\) mol & \(\Hp\)\\
+c & \(\text{pOH} = 14 - 10 = 4\ \Rightarrow\ [\OHm] = 10^{-4}\) mol/L & \(10^{-4} \cdot 0{,}300 = 3{,}0 \times 10^{-5}\) mol & \(\OHm\)\\
+d & \([\Hp] = [\OHm] = 10^{-7}\) mol/L & \(6 \times 10^{-9}\) mol de cada uno & balance nulo\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\nota{En c también es cierto que \([\Hp] = 10^{-10}\) mol/L, pero ese valor no alcanza para el balance: la especie que predomina y neutraliza es \(\OHm\). En d, \(\Hp\) y \(\OHm\) se compensan entre sí: el agua solo aporta volumen.}
+
+\seccion{3. Balance y concentración final}
+
+Lo que se suma son moles y volúmenes, nunca concentraciones ni valores de pH. Los \(\OHm\) reaccionan 1:1 con los \(\Hp\) (\(\Hp + \OHm \rightarrow \text{H}_2\text{O}\)) y queda el exceso. Se consideran volúmenes aditivos:
+\[
+n_{\Hp,\,\text{exceso}} = (0{,}2968 + 0{,}0010) - 0{,}00003 = 0{,}2977\ \text{mol}
+\qquad
+V_{\text{total}} = 40 + 100 + 300 + 60 = 500\ \text{mL}
+\]
+\[
+[\Hp]_f = \frac{0{,}2977\ \text{mol}}{0{,}500\ \text{L}} = 0{,}595\ \text{mol/L}
+\]
+\begin{center}
+\fcolorbox{ForestGreen}{ForestGreen!10}{\quad\([\Hp]_f = 0{,}595\) mol/L \qquad pH \(= -\log 0{,}595 = 0{,}23\) \qquad pOH \(= 13{,}77\) \qquad \([\OHm]_f = 1{,}7 \times 10^{-14}\) mol/L\quad}
+\end{center}
+
+El 99,7\,\% de los \(\Hp\) proviene del inciso a. Con estos valores, b, c y d casi no modifican los moles y actúan sobre todo como dilución; por eso la conversión de a es el paso que define el resultado.
+
+\end{document}
