@@ -10,15 +10,15 @@ Escritas en Markdown, en español, con diagramas ASCII.
 
 | Carpeta | Materia | Documentos | Último commit |
 |---|---|---|---|
-| [`analisis_matematico_i/`](analisis_matematico_i/) | Análisis Matemático I | Introducción · Funciones · Topología · Límites · Correcciones del 1er parcial (ejercicios 1-5, con figuras en Python y PDF compilado vía pandoc/xelatex, `make`) | 04/nov/2026 |
-| [`ayga/`](ayga/) | Álgebra y Geometría Analítica | Introducción · Vectores, recta y plano · TP7 ej. 1 b) — parametrización de un arco de elipse (por qué el rango no es ±π/4), con figuras en Python y PDF compilado vía pandoc/xelatex (`make`) | 04/nov/2026 |
+| [`analisis_matematico_i/`](analisis_matematico_i/) | Análisis Matemático I | Introducción · Funciones · Topología · Límites · Correcciones del 1er parcial (ejercicios 1-5, con figuras en Python y PDF compilado vía pandoc/xelatex, `make`) | 09/nov/2026 |
+| [`ayga/`](ayga/) | Álgebra y Geometría Analítica | Introducción · Vectores, recta y plano · TP7 ej. 1 b) — parametrización de un arco de elipse (por qué el rango no es ±π/4), con figuras en Python y PDF compilado vía pandoc/xelatex (`make`) | 09/nov/2026 |
 | [`fisica_i/`](fisica_i/) | Física I | Introducción · Óptica · Cinemática · Laboratorio — 1ª concurrencia (TPN1 mediciones · TPN2 óptica), 3ª concurrencia (TP5 resorte · TP6 Arquímedes) · Energía en casos límite (lanzamiento de bala y jabalina) · Hoja de fórmulas · Correcciones del 1er parcial | 04/nov/2026 |
 | [`fundamentos_informatica/`](fundamentos_informatica/) | Fundamentos de Informática | `1er_parcial/`: preparación parcial de diagramación estructurada (Chapin/Nassi-Shneiderman) — relevamiento de candidatos, resolución de referencia y diagrama final del Problema 13 en LibreCAD (`parcial_1.dxf`) con su documentación as-built y visualización vectorial descargable en PNG/PDF · `2do_parcial/`: programa en C++ (consigna, finales modelo, entorno C++98) | 09/nov/2026 |
 | [`griego/`](griego/) | Griego Científico | Alfabeto griego con pronunciación y uso científico | 16/abr/2026 |
-| [`quimica_general/`](quimica_general/) | Química General | Introducción · Estructura atómica · Gases (UT3) · Soluciones (UT7) · Hoja de fórmulas · Repaso 2do parcial | 04/nov/2026 |
-| [`ingenieria_y_sociedad/`](ingenieria_y_sociedad/) | Ingeniería y Sociedad | Arocena · 4 textos con preguntas MC (§1–§56) | 31/may/2026 |
+| [`quimica_general/`](quimica_general/) | Química General | Introducción · Estructura atómica · Gases (UT3) · Soluciones (UT7) · Hoja de fórmulas · Repaso 2do parcial | 09/nov/2026 |
+| [`ingenieria_y_sociedad/`](ingenieria_y_sociedad/) | Ingeniería y Sociedad | Arocena · 4 textos con preguntas MC (§1–§56) | 09/nov/2026 |
 | [`ingenieria_mecanica_i/`](ingenieria_mecanica_i/) | Ingeniería Mecánica I | Introducción · UT I–XI (11 unidades: ingeniería, diseño, manufactura, producción, mantenimiento, gestión, seguridad, ética, economía) · Preparación parcial 1 (banco ~52 preguntas, 3 fuentes) · Proyecto TP Final — Cortadora de Botellas PET: entregas 1 y 2, presentación (generador del `.pptx`, reparto y defensa), modelo 3D 1 y modelo 2.0 para el prototipo impreso (con instructivo de armado) · TP grupal Mecánica Rotacional: apunte teórico revisado + tren de engranajes (ejercicio resuelto, puntos 1-8) · TP grupal Mecánica Rotacional 2: eje sobre rodamientos de rodillos cilíndricos SKF NU 1005 (puntos 1-7 resueltos, PDF con LaTeX) | 08/nov/2026 |
-| [`sistemas_de_representacion/`](sistemas_de_representacion/) | Sistemas de Representación | Expectativas · Normas IRAM · LibreCAD/DXF · Axonometría (isométrico vs. caballera) | 16/sep/2026 |
+| [`sistemas_de_representacion/`](sistemas_de_representacion/) | Sistemas de Representación | Expectativas · Normas IRAM · LibreCAD/DXF · Axonometría (isométrico vs. caballera) | 09/nov/2026 |
 
 ---
 
