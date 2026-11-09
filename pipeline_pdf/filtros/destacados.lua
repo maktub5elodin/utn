@@ -14,7 +14,7 @@ En el .md se usa la sintaxis de alerta de GitHub, que allá ya se ve en color:
 
 En LaTeX la cita pasa al tcolorbox correspondiente (entornos "destacadoerror",
 "destacadocorrecto" y "destacadonota", definidos en base.yaml). En Word se quita el marcador y
-queda como cita común. Las citas sin marcador (ej. enunciados) no se tocan.
+queda como cita común, salvo [!TIP]: estilo "Respuesta", en verde (docx_estilo.py). Las citas sin marcador (ej. enunciados) no se tocan.
 ]]
 
 local ENTORNOS = {
@@ -47,6 +47,9 @@ function BlockQuote(cita)
     for _, b in ipairs(bloques) do salida[#salida + 1] = b end
     salida[#salida + 1] = pandoc.RawBlock("latex", "\\end{" .. entorno .. "}")
     return salida
+  end
+  if entorno == "destacadocorrecto" and FORMAT:match("docx") then
+    return pandoc.Div(bloques, { ["custom-style"] = "Respuesta" })
   end
   return pandoc.BlockQuote(bloques)
 end

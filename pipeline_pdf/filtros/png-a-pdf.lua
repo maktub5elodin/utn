@@ -17,7 +17,7 @@ end
 
 function Image(img)
   if not FORMAT:match("latex") then return nil end
-  local base = img.src:match("^(figuras/.+)%.png$")
+  local base = img.src:match("^(figuras/.+)%.png$") or img.src:match("^(%.%./figuras/.+)%.png$")
   if not base then return nil end
   local pdf = base .. ".pdf"
   if not existe(pdf) then

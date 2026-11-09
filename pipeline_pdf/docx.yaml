@@ -20,6 +20,7 @@ toc-depth: 2
 # Sin png-a-pdf (Word usa los PNG) ni tablas-cebra (genera LaTeX crudo).
 filters:
   - ${.}/filtros/solo-md.lua
+  - ${.}/filtros/color-math-docx.lua
   - ${.}/filtros/salto-pagina.lua
   - ${.}/filtros/destacados.lua
   - ${.}/filtros/seleccion-catalogo.lua

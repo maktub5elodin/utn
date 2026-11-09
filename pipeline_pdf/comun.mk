@@ -7,6 +7,7 @@
 #   SOURCE_DATE_EPOCH := <fecha del documento, en segundos>   (obligatoria)
 #   FIG_SCRIPT        := figuras_xxx.py                       (opcional)
 #   FIG_NAMES         := fig1_a fig2_b                         (opcional)
+#   DOCX_ESCALA       := 0.75   (opcional: tamaño de las figuras en Word)
 #   include ../../pipeline_pdf/comun.mk
 #
 # y su pdf.yaml con título, subtítulo y fecha. La configuración común de pandoc
@@ -86,8 +87,9 @@ $(BUILD)/$(DOC).pdf: $(BUILD)/$(DOC).tex $(FIGS)
 
 # Word: mismo .md y mismos filtros de contenido, configuración en docx.yaml.
 # Fórmulas como ecuaciones nativas de Word; figuras en PNG.
-$(BUILD)/$(DOC).docx: $(DOC).md pdf.yaml $(PIPELINE)/docx.yaml $(FILTROS) $(FIGS) | $(BUILD)
+$(BUILD)/$(DOC).docx: $(DOC).md pdf.yaml $(PIPELINE)/docx.yaml $(PIPELINE)/docx_estilo.py $(FILTROS) $(FIGS) | $(BUILD)
 	pandoc --defaults=$(PIPELINE)/docx.yaml --defaults=pdf.yaml $(DOC).md -o $@
+	python3 $(PIPELINE)/docx_estilo.py $@ $(DOCX_ESCALA)
 	@echo "OK: $@"
 
 clean:
