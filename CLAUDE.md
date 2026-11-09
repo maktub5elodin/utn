@@ -1,110 +1,60 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Study notes for **UTN FRBA — Ingeniería Mecánica**, in Markdown, all in **Spanish**.
+**No accounting analogies or "puentes contables"** in any new or edited material, any subject
+(permanent since 31/oct/2026; older notes keep them unless the user asks).
 
-## What this repository is
+## Subjects
 
-Study notes for **UTN FRBA — Ingeniería Mecánica**, written in Markdown. All notes are in **Spanish**. **No accounting analogies or "puentes contables"** in any new or edited material, in any subject (permanent rule since 31/oct/2026; older notes that still have them are left as they are unless the user asks).
+Each subject folder has its own `CLAUDE.md` with sources, conventions and status;
+it loads automatically when working there. Read it before touching that subject.
 
-## Subject folders
-
-| Carpeta | Materia | Estado |
+| Carpeta | Materia | Detalle |
 |---|---|---|
-| `analisis_matematico_i/` | Análisis Matemático I (A1191) | 4 unidades documentadas + `1er_parcial/` (correcciones del parcial rendido el 17/oct/2026, PDF con `pipeline_pdf/` — ver convenciones abajo) |
-| `ayga/` | Álgebra y Geometría Analítica | intro + Unidad I |
-| `fisica_i/` | Física I | intro + óptica + cinemática + laboratorio (por concurrencia: `1er_concurrencia/` TPN1 + TPN2; `3er_concurrencia/` TP5 resorte + TP6 Arquímedes) + `energia_casos_limite/` (estudio personal, no resumen — ver nota abajo) + `hoja_formulas/` (Física I es A1193; hoja **de estudio**, no de examen: mismo esquema y estética que la de Química — LaTeX directo con `make`, solo las fórmulas que pide el usuario — pero **sin** exigir una carilla; referencias al pie: Sears *Física universitaria* vol. 1, 11.ª ed., 2004, ISBN 970-26-0511-3, en papel, y *University Physics with Modern Physics* 13th ed. en inglés, ISBN 978-0-321-69686-1; sin numeración de ecuaciones del libro; hasta ahora: cap. 2, aceleración constante; cap. 3, proyectiles, movimiento circular uniforme y velocidad relativa en el espacio; cap. 4, leyes de Newton; cap. 5, plano inclinado, rozamiento, dinámica circular y resistencia de fluidos; cap. 6, trabajo y energía cinética: análisis completo en el `.md`, pasa al PDF de a poco a medida que el usuario estudia, con la columna «PDF» de cada tabla; ya están el trabajo con fuerza constante, la derivación desde la ecuación del cap. 2 (enlazadas con estrella roja) y el teorema trabajo-energía; notación del Sears, `s` y `φ`; la aceleración radial va como `a_rad = γ`, `γ` es la notación del docente; en el `.md` de esta hoja, las explicaciones van con figuras matplotlib, `figuras_mcu.py` → `make figuras`, nunca con diagramas ASCII) + `1er_parcial/` (correcciones del parcial rendido el 2/sep/2026, los 5 ejercicios: mismo método que `analisis_matematico_i/1er_parcial/`, con estas diferencias: unidades en todo el desarrollo, un ejercicio ocupa las páginas que necesite sin dejar renglones sueltos, y las notas aparte van con `> [!NOTE]`) |
-| `fundamentos_informatica/` | Fundamentos de Informática | `1er_parcial/`: preparación del parcial de diagramación estructurada (Chapin/Nassi-Shneiderman) del 17/sep/2026 — ver nota abajo; `2do_parcial/`: programa en C++ con base de datos + ordenamiento/búsqueda, entrega 20/nov/2026 — ver nota abajo |
-| `griego/` | Griego Científico | alfabeto griego completo con pronunciación |
-| `ingenieria_mecanica_i/` | Ingeniería Mecánica I | intro + UT I al XI (12 docs: ingeniería y tecnología, diseño, actividad profesional, proyecto, manufactura, producción, mantenimiento, gestión, seguridad, ética, economía) + `tp_grupal_mecanica_rotacional/` (apunte teórico de mecánica rotacional del docente Abud, revisado y corregido, + resolución completa del ejercicio de aplicación tren de engranajes, puntos 1-8; para `I` total se adopta el conjunto rotante completo de cada eje (eje + engranaje + rodamientos, criterio único, sin variantes; el Punto 8 no depende de `I` porque `P = T·ω`); informe final en `tp_mecanica_rotacional.odt`/`.pdf` (locales, excluidos de git) con su brief de estructura en `Mecanica_Rotacional_Brief_Informe.md`; vocabulario del informe: "diámetro interior" (no "bore") y sin desarrollo de `α` en el Punto 8; errores del PDF fuente — `ρ` por `g` en 8.3, factor HP·hora 10⁵ en vez de 10⁶ — se mantienen tal cual con nota de consistencia) + `tp_grupal_mecanica_rotacional_2/` (eje de acero Ø25×500 mm a 1400 RPM sobre rodamientos de rodillos cilíndricos SKF NU 10, `F = 500 N` a 400 mm; resolución puntos 1-7 en `Mecanica_Rotacional_2_Resolucion.md`; tabla SKF NU 10 siempre al final como Anexo A con la selección (NU 1005) destacada; pista = aro exterior fijo; `F` tangencial (el NU no admite carga axial); largo del rodillo = 0,9·B (criterio Abud), diámetro 5,5 mm estimado con aros de igual espesor (supuesto a confirmar); `I_mecanismo` = eje + 2 rodamientos como anillo con masa de catálogo, mismo criterio que el TP 1, sin contar rodillos; PDF con `pipeline_pdf/` (`make` → `build/Mecanica_Rotacional_2_Resolucion.pdf`): el PDF no incluye Anexo A ni Fuentes (quedan solo en el `.md`, los datos del NU 1005 ya están en el Punto 1), la Resolución empieza en página nueva y los diagramas ASCII salen como recuadro "Figura pendiente"; figuras PNG/PDF pendientes para una etapa posterior) |
-| `ingenieria_y_sociedad/` | Ingeniería y Sociedad | Arocena (1 doc) + 4 textos con preguntas MC (§1–§56) |
-| `quimica_general/` | Química General (R1091) | intro + estructura atómica + gases + soluciones + `hoja_formulas/` (hoja de fórmulas de una carilla, LaTeX directo con `make`, sin `pipeline_pdf/`; el PDF lleva **solo** las fórmulas que pide el usuario a medida que avanza — Chang 9.ª ed. en español (ISBN 978-970-10-6111-4, en papel de biblioteca): cap. 6, 11, 12 y 14; ojo, en esa edición el cap. 12 es soluciones y el 13 cinética; la referencia va al pie del PDF —, las sugerencias extra van solo en `hoja_formulas.md`) + `repaso_2do_parcial/` (enunciados de los 7 ejercicios del repaso de cátedra, transcriptos de fotos; `.md` + `.tex` directo con `make`, para imprimir junto a la hoja; en la misma carpeta, `ejercicios_nuevos` con 7 ejercicios propuestos por Claude sobre los mismos temas y otros datos, respuestas finales en la última página; y `ejercicios_nuevos_2`, set integrador de 7 ejercicios que combinan los temas estudiados, mismo formato) |
-| `sistemas_de_representacion/` | Sistemas de Representación | TP 01-22 documentados (falta TP14; TP21-22 consigna a confirmar) — ver nota abajo |
+| `analisis_matematico_i/` | Análisis Matemático I (A1191) | [CLAUDE.md](analisis_matematico_i/CLAUDE.md) |
+| `ayga/` | Álgebra y Geometría Analítica | [CLAUDE.md](ayga/CLAUDE.md) |
+| `fisica_i/` | Física I (A1193) | [CLAUDE.md](fisica_i/CLAUDE.md) |
+| `fundamentos_informatica/` | Fundamentos de Informática | [CLAUDE.md](fundamentos_informatica/CLAUDE.md) |
+| `griego/` | Griego Científico | alfabeto griego con pronunciación |
+| `ingenieria_mecanica_i/` | Ingeniería Mecánica I | [CLAUDE.md](ingenieria_mecanica_i/CLAUDE.md) |
+| `ingenieria_y_sociedad/` | Ingeniería y Sociedad | [CLAUDE.md](ingenieria_y_sociedad/CLAUDE.md) |
+| `quimica_general/` | Química General (R1091) | [CLAUDE.md](quimica_general/CLAUDE.md) |
+| `sistemas_de_representacion/` | Sistemas de Representación | [CLAUDE.md](sistemas_de_representacion/CLAUDE.md) |
 | `su_myf/` | (excluido de git) | — |
 
 ## Writing conventions
 
-**File naming:** `00_introduccion.md`, `01_tema.md`, `02_tema.md`... within each subject folder.
+**File naming:** `00_introduccion.md`, `01_tema.md`, `02_tema.md`... per subject folder.
 
-**Document structure — topic files (`01_` onward):**
-concept introduction → theory with ASCII diagrams → worked examples → summary table → common mistakes → conceptual map
+**Topic files (`01_`+):** concept intro → theory with ASCII diagrams → worked examples →
+summary table → common mistakes → conceptual map.
+**Intro files (`00_`):** what the subject is → why engineers need it → major blocks →
+ASCII course map → practical advice.
 
-**Document structure — introduction files (`00_introduccion.md`):**
-what the subject is → why engineers need it → overview of major blocks → ASCII course map → practical advice
-
-**Style rules:**
-- ASCII diagrams only — no images
-- Formulas: LaTeX math is allowed and preferred for developed equations (`$…$` inline, `$$…$$` for equations on their own line, decimal comma as `{,}`), as in `ingenieria_mecanica_i/tp_grupal_mecanica_rotacional/`. Simple formulas can still go inline with backticks: `` `F = m·a` ``. Within a single file, keep one convention (do not mix LaTeX and backticks for math). Inside ASCII diagrams, formulas stay as plain text.
-- Source footer at end of each file citing PDFs and guides used
+**Style:**
+- ASCII diagrams only, no images (subject files list their exceptions).
+- Formulas: LaTeX preferred (`$…$`, `$$…$$`, decimal comma `{,}`); simple ones may use
+  backticks. One convention per file. Inside ASCII diagrams, plain text.
+- Source footer at the end of each file citing PDFs and guides used.
 
 ## Source material workflow
 
-Before writing any new content:
-1. Read the **official syllabus PDF** in the subject folder to identify the thematic unit (UT) and parcial coverage
-2. Read the **exercise guide PDF** for that subject to extract the problem types expected in parciales
-3. Read any **professor slide PDFs** provided — they define the exact vocabulary and depth required
+Before writing new content: 1) read the subject's syllabus PDF (unit, parcial coverage);
+2) the exercise guide PDF (problem types); 3) professor slides (vocabulary and depth).
+Each subject's `CLAUDE.md` lists its key sources. Large PDFs: always use `pages:`.
 
-Key sources per subject:
-- **Química General:** `PLANIFICACIÓN R1091 TN 1ER CUAT Ricotti-Cruz_v2.pdf` (syllabus), `Guia QUIMICA GENERAL 2020 FINAL.pdf` (exercises), `La Química.pdf` (theory), professor slides as PDFs
-- **AM1:** `Cronograma A1191 2026.pdf` (schedule)
-- **AyGA:** `Programa ALGEBRA Y GEOMETRIA ANALITICA.pdf` (syllabus), `Nociones de geometría analitica y algebra lineal - KOZAK.pdf` (738-page textbook — always use `pages:` parameter); cátedra site: `https://aga.frba.utn.edu.ar/`
-- **Física I:** `Programa- Bibliografia.pdf`; libro de cátedra `Physics — Sears, Young, Freedman, Zemansky` (12ª/13ª ed., en `Libros/` de la raíz del repo, en inglés). Nota sobre `fisica_i/energia_casos_limite/`: a diferencia del resto de la carpeta (resúmenes de clase), es un espacio de estudio personal — parte de una derivación propia (cinemática → trabajo-energía) y la extiende a casos límite reales (lanzamiento de bala y jabalina de alto rendimiento) con datos de récords mundiales y comparativa de potencia humana. No sigue la estructura estándar de "tema" del resto del repo a propósito. Usa notación con referencia en inglés junto al símbolo (`h`=height, `w`=weight, `W`=Work, `μs`/`μk`=static/kinetic friction) — preferencia explícita del usuario, ver memoria `user_fisica_ingles_vocabulario`.
-  - **Laboratorio** (`fisica_i/laboratorio/`): organizado por concurrencia (`1er_concurrencia/` = TPN1 mediciones + TPN2 óptica; `3er_concurrencia/` = TP5 resorte + TP6 Arquímedes/densidad; el usuario faltó a la 2da, TP3/TP4). Curso **A1193, Turno Noche, Grupo N°5** (integrantes: Fleitas, Gonzalez, Lissi, Palazzo, Paredes, Perez). Informes según `laboratorio/propuesta de estructura de informe.pdf` + `laboratorio/Reglamento Tps Laboratorios Física UTN.docx.pdf`; cada concurrencia trae su apoyo teórico propio de los docentes (ej. `3er_concurrencia/Apoyo MOA.pdf`, `Arquímides_V3.pdf`) y a veces una planilla de cálculo (`Planilla_arquimedes_Laboratorio.xlsx`). Estructura: encabezado → Introducción (objetivos + marco teórico) → Procedimiento Experimental → Resultados y Análisis (tablas numeradas con pie) → Conclusiones por objetivo → Anexo de Cálculos → footer de fuentes. **Sin diagramas ASCII en los informes de laboratorio** (excepción a la convención general del repo — preferencia del usuario); las figuras (esquemas, gráficos del Excel) se referencian en el `.md` y el usuario las inserta al armar el Word. Incertezas y redondeo según TP1 (error a 1 cifra significativa). Cada informe puede tener una restricción de consistencia con material firmado/oficial que no hay que "corregir" — ver memoria `project_fisica_lab_3ra_concurrencia`.
-- **Sistemas de Representación:** `CLASE 1.pdf` (condiciones, materiales, A4, rótulo, TP 1-2), `CLASE 2.pdf` (tipos de línea IRAM, aplicaciones, TP 3-6), `CLASE 3.pdf` (caligrafía tipo A tabla completa, acotación, TP 7-10). Nota: no tiene parciales — aprobación por carpeta completa. TP 11-22 existen como `.dxf` (LibreCAD, sí se versionan) sin enunciado en PDF propio — su consigna en `00_expectativas_y_trabajos_practicos.md` está reconstruida a partir del dibujo, no transcripta de un enunciado oficial. `03_axonometria_isometrica_vs_caballera.md` es, igual que `fisica_i/energia_casos_limite/`, un espacio de estudio personal (no resumen de clase): compara TP25 (isométrico) y TP28 (caballera reducida) mediante el giro 3D que conecta ambas posiciones del mismo cubo. **Pendientes conocidos (revisar antes de seguir):**
-  - TP14 no tiene archivo — falta subirlo o confirmar con el docente que no existe.
-  - TP21 y TP22 tienen el mismo esqueleto de líneas que los enlaces de TP19-20, pero el rótulo dice "ISO E" / "ISO A" en vez de un título de ejercicio — consigna real sin confirmar.
-  - Nombre y legajo del alumno en el rótulo: **Paredes Sergio, Leg. 260.861-3** (dato correcto, usado en TP15-18; TP11-13 lo tienen sin completar).
-  - TP09, TP10, TP30, TP32, TP35 y TP37 tienen `.dxf` en el repo (TP30/32/35/37 sin documentar nunca en `00_expectativas_y_trabajos_practicos.md`) y fueron revisados/modificados sin que el `.md` se haya actualizado en consecuencia — falta leer cada rótulo y agregar su sección antes de dar la carpeta por completa.
-- **Fundamentos de Informática:** cátedra Ing. Aldo J. Alaniz, Dto. Ingeniería Mecánica — no tiene syllabus/guía de ejercicios en PDF propio relevado aún, se trabajó a partir de fotos del pizarrón y de un compañero (`.jpeg`, excluidas de git, solo locales). Parcial de diagramación estructurada (Chapin/Nassi-Shneiderman) el **17/sep/2026**; todo su material está en `1er_parcial/` (los nombres de archivo de abajo son relativos a esa carpeta). `candidatos_parcial_chapin.md` releva y prioriza los problemas 12-16 de la guía marcados por el docente como candidatos; el **Problema 13** (selección de personal, 3 referencias de cargo) es el candidato principal — ya resuelto por el docente en el pizarrón, con los incisos marcados con círculos numerados (1a,1b,1c,2a,2b,3). `diagramacion_estructurada.html` es el resumen de cátedra con esa resolución completa; su sección 05 reconstruye el diagrama final como SVG vectorial fiel al `.dxf` (parseado directamente, no un mockup) con botones para descargar PNG/PDF, y el resto de la página tiene un aspecto formal de documento técnico (sin los elementos tipo "nota adhesiva" de versiones previas). `parcial_1.dxf` es la versión final: marco, rótulo A4 y el diagrama completo del Problema 13 ya dibujados en LibreCAD, usando trapecios de decisión anidados (símbolo de selección Chapin clásico, no columnas paralelas — la cascada de cargos avanza por la rama Falso y anida en profundidad dentro de la rama Verdadero de IM/100). `guia_diagrama_ej13_parcial_1.md` documenta ese `.dxf` final tal como quedó armado (coordenadas, texto literal, capas usadas), para referencia si hace falta corregir o reproducir algo.
-  - **2do parcial** (`2do_parcial/`, docente Ing. Rubén Morales): entregar un `.cpp` funcionando, hasta el **20/nov/2026 23:59**; base de datos (finales modelo 2-5 o inventada, nota según complejidad) + ordenamiento o búsqueda secuencial/binaria; línea 1: `/* Sergio Paredes - Legajo 260.861-3 - Comision S1554 - Sede: Campus - Horario: Jue 18:15 a 21:30 */` (Campus, no Medrano como el modelo); base = vectores paralelos con el maestro inicializado dentro del `.cpp` (sin leer archivos) y novedades por teclado; se controla copia con IA (proyectos gemelos se anulan). Consigna, enunciados transcriptos de los finales y apunte de vectores en `00_consigna_y_contexto.md`; fotos e instalador Dev-C++ en `fuentes/` (solo locales). **Código en C++98** (el docente compila con Dev-C++ 4.9.9.2 o 5.5.3): `make` compila con `g++ -std=c++98 -pedantic -Wall -Wextra` en `build/`. Sin tildes ni `ñ` en la salida por consola. Programa: `farmacia.cpp` (Final 3 + ordenamiento por burbujeo, búsqueda binaria, precio, aumento general, reposición, stock crítico y lectura validada; 4 funciones justificadas en comentarios: búsqueda y tres de lectura), sin tildes en todo el archivo; `casos_de_prueba.md` con las entradas y salidas esperadas, verificadas corriendo el programa.
-- **Ingeniería Mecánica I:** `Ing. Mec. I - Plan de Estudio.pdf` (programa y cronograma 32 clases), `1.El Ing y su Profesión.pdf`, `1.LA ING. ACTUAL UNIDAD I Y UNIDAD III.pdf`, `HABILIDADES BÁSICAS DE LA INGENIERÍA.pdf`, `1.unidad I Ingeniería y Sociedad.pdf` (37 págs — perfil, ética, patentes, Revolución Industrial), `Mantenimiento[1].pdf` (UT VII completa), `ING MEC POWER 1.pdf` y `ING MEC POWER 2.pdf` (slides de cátedra).
-- **Ingeniería y Sociedad:** 4 textos del parcial, cada uno con archivo `textoN_preguntas_mc.md`. Los textos son: Bitocchi "Ciencia. Noción, origen, paradigmas y encuadre social" (§1–§27), "Estado - Nación" (§28–§36), Ramallo y Repetto "Ciencia y Tecnología en interacción. Cambio tecnológico e innovación" (§37–§47), Gottardo et al. "Globalización: noción, múltiples sentidos y perspectivas" (§48–§56).
+## Git
 
-## Convenciones específicas — AM1, correcciones del 1er parcial (`analisis_matematico_i/1er_parcial/`)
+PDFs, Office files and images (jpg/png) are git-ignored and stay local; `su_myf/` is fully
+excluded. Never `git add -f`. Exception: documents built with `pipeline_pdf/`
+(`.md` → figures → PDF via `make`) version their `build/*.pdf` and `figuras/*.png`;
+the `.gitignore` rules already cover any new one.
 
-Documento `Correcciones_1er_Parcial.md` → `make` → `build/Correcciones_1er_Parcial.pdf`; figuras en `figuras_correcciones.py`. Corrige los errores del parcial del 17/oct/2026: los ejercicios 1, 3, 4 y 5 son los del modelo `1° parcial - Ejemplo 3.pdf` (el archivo en disco se llama `1 parcial - Ejemplo 3.pdf`); el ejercicio 2 fue distinto (distancia mínima de $P(0;6)$ a $x^2 - y^2 = 16$); en el 4, la rama $x > 0$ vino como $\operatorname{sen} x / x$ (equivalente a la $-\cos(x + \pi/2)/x$ del modelo).
+## PDF pipeline
 
-- **Brevedad:** solo lo que el usuario pide, sin secciones extra (tabla resumen, errores comunes, mapa conceptual, verificaciones no pedidas) y sin diagramas ASCII. Por ejercicio: enunciado → desarrollo → error → respuesta → figura.
-- **Colores:** recuadro rojo `> [!CAUTION]` con "**Mi error:** …" (uno por error del parcial; no repetir dentro del recuadro una fórmula que ya está arriba: se colorea la de arriba con `{\color{BrickRed} …}`); recuadro verde `> [!TIP]` con "**Respuesta:** …"; resultados intermedios destacados (raíces, derivadas, valores de parámetros, primera aparición de una expresión clave) con `{\color{RoyalBlue} …}`; valores obtenidos en recuadro verde `{\color{ForestGreen}\boxed{…}}` (ej. $y = 3$, $x = 5$, cada recta tangente).
-- **Desarrollo:** pasos intermedios visibles (expandir cuadrados, `aligned` para cadenas de igualdades); valores exactos con raíz para coordenadas, decimales aproximados para distancias.
-- **Figuras:** una por ejercicio, al final o junto al planteo, **sin nota al pie** (`![](figuras/…png)` sin texto alternativo); sin elementos que no se mencionan en el texto (ej. asíntotas); etiquetas sin pisar curvas ni líneas; los puntos que el usuario probó "por fuerza bruta" en el parcial van en violeta con su distancia en decimales.
-- **PDF:** sin índice (`table-of-contents: false` en `pdf.yaml`) y sin fuentes (bloque `<!-- solo-md -->`); cada ejercicio en dos hojas, el N en las páginas 2N−1 y 2N (`<!-- salto-pagina -->` antes de cada ejercicio y, si hace falta, dentro); la notación de Leibniz de las reglas de la cadena (y la $\frac{d}{dy}$ del Ej. 2) va solo en el `.md`, el PDF muestra la versión con prima (`<!-- solo-pdf … -->`).
-- **Eficiencia:** una sesión por ejercicio; confirmar el enunciado exacto antes de resolver; revisar figuras con el menor número de renders posible.
-
-## Convenciones específicas — Ingeniería y Sociedad (preguntas MC)
-
-- **5 opciones** por pregunta (a, b, c, d, e) — nunca 4.
-- Una sola correcta, marcada con `**negritas**`, símbolo `✓` y referencia de línea del PDF numerado: *(líneas X–Y)*.
-- **Numeración de secciones continua** entre textos: no reiniciar desde §1 en cada texto nuevo; continuar desde §(N+1) donde terminó el texto anterior.
-- Una pregunta por sección (recuadro numerado ☐N del texto); el stem testa el concepto central, no detalles periféricos.
-- Los distractores deben ser plausibles (requieren pensar) pero sin ambigüedad excesiva; no es necesario que provengan literalmente del texto, basta coherencia conceptual.
-
-## Git and .gitignore
-
-PDFs, Office files (ppt/pptx, doc/docx), and images (jpg/png) are excluded from the repo — they live locally only. The `su_myf/` directory is fully excluded. Do not force-add these file types.
-
-**Excepción — trabajos con pipeline de compilación** (ej. `ayga/excercise/`, `ingenieria_mecanica_i/tp_grupal_mecanica_rotacional_2/`: `.md` → figuras Python → pandoc/xelatex → PDF, con `make`). Reglas generales en `.gitignore`, válidas para cualquier ejercicio nuevo con la misma estructura (no hace falta editarlo cada vez).
-
-**Pipeline compartido — `pipeline_pdf/`** (raíz del repo, fuera de las materias). Toda la lógica de armado de PDF vive en un solo lugar y la usan todos los documentos; no se copia a cada materia. Las mejoras se hacen ahí, y después se recompilan los PDFs de todos los documentos que la usan para verificar que no cambiaron (o que cambiaron solo como se buscaba).
-
-| Archivo | Qué hace |
-|---|---|
-| `pipeline_pdf/base.yaml` | Configuración común de pandoc: plantilla, fuentes, tablas, índice, caracteres Unicode, lista de filtros |
-| `pipeline_pdf/comun.mk` | Reglas de `make`: figuras (opcional), `.md` → `.tex` → `.pdf`, pasadas de xelatex, verificaciones (referencias, caracteres sin glifo); `make docx` → `build/<doc>.docx` |
-| `pipeline_pdf/docx.yaml` | Configuración de pandoc para la salida Word (`make docx`): mismo `.md` y mismos filtros de contenido, sin la estética de LaTeX (fórmulas como ecuaciones nativas de Word, figuras en PNG). El `.docx` no se versiona |
-| `pipeline_pdf/filtros/*.lua` | `tablas-cebra` (filas alternadas), `png-a-pdf` (PNG en el `.md`, PDF vectorial en el documento), `referencias-fig` (`@fig:x`), `solo-md` (bloques `<!-- solo-md -->` … `<!-- /solo-md -->` y diagramas ASCII no llegan al PDF; a la inversa, `<!-- solo-pdf` … `-->` entra al PDF y no se ve en el `.md`), `salto-pagina` (`<!-- salto-pagina -->` → salto de página en el PDF, invisible en el `.md`), `seleccion-catalogo` (tabla con fila marcada ► → solo esa fila, vertical), `destacados` (alertas de GitHub: `> [!CAUTION]` → recuadro rojo de error, `> [!TIP]` → recuadro verde de respuesta correcta, `> [!NOTE]` → texto azul en recuadro negro, para notas aparte; en GitHub ya se ven en color, en Word quedan como cita común), `portada-docx` (solo Word: subtítulo y fecha del `pdf.yaml`). `solo-md`, `salto-pagina`, `seleccion-catalogo` y `referencias-fig` actúan igual en PDF y en Word; `png-a-pdf` y `tablas-cebra` son solo de PDF |
-
-Cada documento tiene solo dos archivos propios: un `Makefile` corto (define `DOC`, `SOURCE_DATE_EPOCH` y, si hay figuras, `FIG_SCRIPT`/`FIG_NAMES`, y termina con `include ../../pipeline_pdf/comun.mk`) y un `pdf.yaml` con título, subtítulo y fecha. Para un documento nuevo, copiar esos dos de `ingenieria_mecanica_i/tp_grupal_mecanica_rotacional_2/` y ajustarlos.
-
-| Se versiona | Por qué |
-|---|---|
-| Fuentes: `.md`, scripts `.py`, `Makefile`, `pdf.yaml` (y `pipeline_pdf/` completo) | Son el trabajo en sí: texto liviano con diffs legibles |
-| `build/*.pdf` (documento final) | Es el producto: se lee en GitHub sin compilar |
-| `figuras/*.png` | Vista previa: el `.md` apunta a los PNG para que se vean en GitHub |
-
-| No se versiona | Por qué |
-|---|---|
-| `figuras/*.pdf` | Intermedios vectoriales: ya están dentro del PDF final y `make` los regenera |
-| Resto de `build/` (`.tex`, `.aux`, `.log`, `.toc`) | Subproductos de cada compilación; el `.tex` se inspecciona localmente |
-| `__pycache__/`, `#*.dxf` (autoguardado de LibreCAD) | Archivos temporales de herramientas |
-
-**Requisito de las excepciones: builds reproducibles.** El `Makefile` fija `SOURCE_DATE_EPOCH` (y `FORCE_SOURCE_DATE=1`) para que xelatex, incluido el que usa matplotlib para las figuras, no embeba la fecha de compilación: así el PDF y los PNG salen idénticos byte a byte si el contenido no cambió, y `make` no genera cambios falsos en git. Todo Makefile nuevo que produzca archivos versionados debe hacer lo mismo. Fuera de `build/` y `figuras/`, PDFs y PNGs siguen ignorados (bibliografía, guías, fotos); no usar `git add -f` para saltear eso.
+All PDF/Word build logic lives in `pipeline_pdf/` (shared, never copied). Each document
+has only a short `Makefile` (`include ../../pipeline_pdf/comun.mk`) and a `pdf.yaml`.
+Makefiles must set `SOURCE_DATE_EPOCH` for reproducible builds. After changing the
+pipeline, rebuild every document that uses it. Filters, markers (`<!-- solo-md -->`,
+`<!-- salto-pagina -->`, `> [!CAUTION]`…) and the versioning tables:
+[pipeline_pdf/README.md](pipeline_pdf/README.md).
