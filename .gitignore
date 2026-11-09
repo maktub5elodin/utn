@@ -52,3 +52,7 @@ ingenieria_mecanica_i/proyecto/07_referencias/**/*.stl
 # Directorios excluidos temporalmente
 su_myf/
 bibliografia_obligatoria/
+
+# Instaladores y ejecutables (ej. Dev-C++ de Fundamentos de Informática): solo locales
+*.rar
+*.exe
