@@ -1115,9 +1115,9 @@ AcDbViewportTableRecord
  21
 1
  12
-192.8666666666667
+103.1904419769214
  22
-150.3333333333333
+159.9639015893751
  13
 0
  23
@@ -1143,7 +1143,7 @@ AcDbViewportTableRecord
  37
 0
  40
-304.3333333333334
+103.5647724798607
  41
 1.844578313253012
  42
@@ -2235,7 +2235,7 @@ AcDbLayerTableRecord
   2
 0
  70
-    1
+    0
  62
     7
   6
@@ -2308,6 +2308,8 @@ GEOMETRIA
     7
   6
 CONTINUOUS
+290
+0
 370
   200
 390
@@ -3677,6 +3679,292 @@ standard
  44
 1
   0
+LINE
+  5
+71
+100
+AcDbEntity
+  8
+GEOMETRIA
+  6
+ByLayer
+ 62
+  256
+370
+   -1
+100
+AcDbLine
+ 10
+25
+ 20
+272
+ 11
+225
+ 21
+272
+  0
+LINE
+  5
+72
+100
+AcDbEntity
+  8
+GEOMETRIA
+  6
+ByLayer
+ 62
+  256
+370
+   -1
+100
+AcDbLine
+ 10
+25
+ 20
+270.5
+ 11
+225
+ 21
+270.5
+  0
+LINE
+  5
+73
+100
+AcDbEntity
+  8
+GEOMETRIA
+  6
+ByLayer
+ 62
+  256
+370
+   -1
+100
+AcDbLine
+ 10
+25
+ 20
+267
+ 11
+225
+ 21
+267
+  0
+LINE
+  5
+74
+100
+AcDbEntity
+  8
+0
+  6
+ByLayer
+ 62
+  256
+370
+   -1
+100
+AcDbLine
+ 10
+25
+ 20
+272
+ 11
+200
+ 21
+267
+  0
+LINE
+  5
+75
+100
+AcDbEntity
+  8
+0
+  6
+ByLayer
+ 62
+  256
+370
+   -1
+100
+AcDbLine
+ 10
+200
+ 20
+272
+ 11
+25
+ 21
+267
+  0
+MTEXT
+  5
+76
+100
+AcDbEntity
+  8
+2B
+  6
+ByLayer
+ 62
+  256
+370
+   -1
+100
+AcDbMText
+ 10
+112.5
+ 20
+269.5
+ 30
+0
+ 40
+5
+ 41
+122.7777880635231
+ 71
+    5
+ 72
+    1
+  1
+Enlaces de las rectas s y t con un
+  7
+standard
+210
+0
+220
+0
+230
+1
+ 50
+0
+ 73
+    2
+ 44
+1
+  0
+LINE
+  5
+77
+100
+AcDbEntity
+  8
+GEOMETRIA
+  6
+ByLayer
+ 62
+  256
+370
+   -1
+100
+AcDbLine
+ 10
+25
+ 20
+265
+ 11
+225
+ 21
+265
+  0
+LINE
+  5
+78
+100
+AcDbEntity
+  8
+GEOMETRIA
+  6
+ByLayer
+ 62
+  256
+370
+   -1
+100
+AcDbLine
+ 10
+25
+ 20
+263.5
+ 11
+225
+ 21
+263.5
+  0
+LINE
+  5
+79
+100
+AcDbEntity
+  8
+GEOMETRIA
+  6
+ByLayer
+ 62
+  256
+370
+   -1
+100
+AcDbLine
+ 10
+25
+ 20
+260
+ 11
+225
+ 21
+260
+  0
+LINE
+  5
+7A
+100
+AcDbEntity
+  8
+0
+  6
+ByLayer
+ 62
+  256
+370
+   -1
+100
+AcDbLine
+ 10
+25
+ 20
+265
+ 11
+200
+ 21
+260
+  0
+LINE
+  5
+7B
+100
+AcDbEntity
+  8
+0
+  6
+ByLayer
+ 62
+  256
+370
+   -1
+100
+AcDbLine
+ 10
+200
+ 20
+265
+ 11
+25
+ 21
+260
+  0
 ENDSEC
   0
 SECTION
@@ -3709,7 +3997,7 @@ AcDbDictionary
   0
 PLOTSETTINGS
   5
-71
+7C
 100
 AcDbPlotSettings
   6
