@@ -1,14 +1,36 @@
 # Casos de prueba — `farmacia.cpp`
 
-Cada caso arranca con el programa **recién abierto** (base inicial sin tocar):
+## Cómo correrlo en Windows (Dev-C++)
+
+Así lo va a probar el docente. Conviene hacerlo al menos una vez antes de entregar.
+
+1. **Instalar Dev-C++ 5.5.3:** descomprimir `fuentes/Dev-Cpp 5.5.3 TDM-GCC x64 4.7.1 Setup.rar` con 7-Zip o WinRAR, ejecutar el `Setup.exe` y aceptar las opciones por defecto. Al abrirlo por primera vez, pregunta el idioma.
+2. **Copiar `farmacia.cpp`** a una carpeta con ruta corta, sin espacios ni tildes, por ejemplo `C:\farmacia\`. Las versiones viejas de Dev-C++ fallan con rutas como `C:\Users\José\Mis documentos\`.
+3. **Abrirlo:** *Archivo → Abrir* (*File → Open*) y elegir `farmacia.cpp`.
+4. **Compilar y ejecutar:** *Ejecutar → Compilar y Ejecutar* (*Execute → Compile & Run*), o **F11**. En Dev-C++ 4.9.9.2, el que linkea el docente, es **Ctrl+F10**. Se abre una consola negra con el menú.
+5. **Si no compila:** los errores aparecen en la pestaña *Compilador* de abajo, con el número de línea. El archivo tal como está compila sin errores ni warnings, así que un error suele indicar que se modificó algo al copiarlo.
+6. **Al terminar:** el programa muestra `Presione ENTER para salir...`. En Dev-C++ 5.5.3, después aparece además `Presione una tecla para continuar...`: es del IDE, no del programa.
+
+Detalles de la consola de Windows:
+
+- **Pegar** una entrada copiada de este documento: clic derecho dentro de la consola.
+- **Fin de entrada (Caso 8):** `Ctrl+Z` y después `ENTER`.
+- **Decimales:** con punto (`5600.50`). La coma se rechaza a propósito (Caso 5).
+- Al compilar se genera `farmacia.exe` en la misma carpeta. **No se entrega**: se sube solo el `.cpp`.
+
+## Cómo correrlo en Linux
 
 ```bash
 make && ./build/farmacia
 ```
 
+## Casos
+
+Cada caso arranca con el programa **recién abierto** (base inicial sin tocar).
+
 En los bloques de pantalla, lo que se tipea va después de cada `:`. `⏎` es un ENTER solo. El menú, que se repite antes de cada `Opcion:`, no se muestra.
 
-## Caso 1 — Listado ordenado
+### Caso 1 — Listado ordenado
 
 ```
 Opcion: 5
@@ -36,7 +58,7 @@ POS  CODIGO  MEDICAMENTO           PRECIO   STOCK
 
 **Qué verifica:** orden alfabético, que cada medicamento conserve su código, precio y stock después del burbujeo, y la marca de stock crítico (entre 1 y 5 unidades).
 
-## Caso 2 — Consulta: minúsculas, espacios y nombres inválidos
+### Caso 2 — Consulta: minúsculas, espacios y nombres inválidos
 
 ```
 Opcion: 2
@@ -64,7 +86,7 @@ Nombre del medicamento: ABCDEFGHIJABCDEFGHIJABCDEFGHIJABCDEFGHIJ
 
 **Qué verifica:** el paso a mayúsculas, que se recorten los espacios del final, la lectura de nombres con espacio interno (`cin.getline`), el aviso de nombre inexistente y el de nombre de 30 caracteres o más. Este último aparece **sin** el "no figura" a continuación.
 
-## Caso 3 — Lote de ventas e informes finales
+### Caso 3 — Lote de ventas e informes finales
 
 ```
 Opcion: 1
@@ -118,7 +140,7 @@ Presione ENTER para salir...⏎
 - **Importe por obra social** (punto 3), solo de las que tuvieron ventas.
 - **La pausa final.**
 
-## Caso 4 — Validación de números
+### Caso 4 — Validación de números
 
 ```
 Opcion: abc
@@ -143,7 +165,7 @@ Nombre del medicamento (PPPPPPP para terminar): PPPPPPP
 - **Fuera de rango:** opción 9, cantidad -3, obra social 25 y 0.
 - **Basura después del número:** `2.5` y `12abc` se rechazan, no se aceptan como 2 y 12.
 
-## Caso 5 — Cambio de precio con coma decimal
+### Caso 5 — Cambio de precio con coma decimal
 
 ```
 Opcion: 3
@@ -157,7 +179,7 @@ Precio nuevo: 5600,50
 
 **Qué verifica:** la coma decimal se rechaza (antes se tomaba como 5600 sin avisar), el mensaje pide usar punto, y un precio 0 no es válido.
 
-## Caso 6 — Aumento general de precios
+### Caso 6 — Aumento general de precios
 
 ```
 Opcion: 6
@@ -182,7 +204,7 @@ POS  CODIGO  MEDICAMENTO           PRECIO   STOCK
 - **Listado automático** después del aumento.
 - **Redondeo a centavos:** 3540,75 × 1,10 = 3894,825 → 3894,83.
 
-## Caso 7 — Reposición de stock
+### Caso 7 — Reposición de stock
 
 ```
 Opcion: 4
@@ -201,7 +223,7 @@ POS  CODIGO  MEDICAMENTO           PRECIO   STOCK
 
 **Qué verifica:** que la reposición sume al stock y que ACIDO FOLICO deje de tener la marca de stock crítico.
 
-## Caso 8 — Fin de la entrada de datos
+### Caso 8 — Fin de la entrada de datos
 
 ```
 Opcion: 1
@@ -212,7 +234,7 @@ Fin de la entrada de datos: el programa termina.
 
 **Qué verifica:** que el programa termine en vez de repetir "Valor invalido" para siempre. Al cortarse así no se muestran los informes finales, porque ya no hay teclado para seguir.
 
-## Caso 9 — Nombre con tilde
+### Caso 9 — Nombre con tilde
 
 ```
 Opcion: 2
