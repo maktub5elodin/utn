@@ -313,13 +313,15 @@ Nota propuesta, todavía no en el PDF: el doble de $v$ da cuatro veces $K$.
 
 | Ecuación | Unidades | PDF |
 |---|---|---|
-| $W = \displaystyle\int_{x_1}^{x_2} F_x\,dx$ | J | no |
-| $W = \displaystyle\int_{P_1}^{P_2} \vec F\cdot d\vec l$ | J | no |
+| $W = \displaystyle\int_{x_1}^{x_2} F_x\,dx$ | J | sí |
+| $W = \displaystyle\int_{P_1}^{P_2} F_\parallel\,dl = \int_{P_1}^{P_2} \vec F\cdot d\vec l$ | J | sí |
 
-Notas propuestas:
+En el PDF:
 
 - $W$ es el área bajo la curva $F_x(x)$, con signo.
 - La segunda es el caso general: la fuerza puede variar y la trayectoria puede ser curva.
+- $d\vec l$: desplazamiento infinitesimal, tangente a la trayectoria (*length*).
+- Solo trabaja la componente de $\vec F$ a lo largo del camino ($F_\parallel = F\cos\phi$).
 
 Por qué así: con $F_x$ constante la integral devuelve $F_x\,(x_2 - x_1)$. Conviene pensarla como la generalización del bloque 1, no como otra fórmula.
 
@@ -327,10 +329,10 @@ Por qué así: con $F_x$ constante la integral devuelve $F_x\,(x_2 - x_1)$. Conv
 
 | Ecuación | Unidades | PDF |
 |---|---|---|
-| $F_x = k\,x$ | N | no |
-| $W = \tfrac{1}{2}\,k\,x_2^2 - \tfrac{1}{2}\,k\,x_1^2$ | J | no |
+| $F_x = k\,x$ | N | sí |
+| $W = \tfrac{1}{2}\,k\,x_2^2 - \tfrac{1}{2}\,k\,x_1^2$ | J | sí |
 
-Notas propuestas:
+En el PDF:
 
 - $x$: estiramiento desde la longitud natural. $k$ [N/m]: constante de fuerza del resorte.
 - Es la fuerza y el trabajo **sobre** el resorte. **Trampa:** el trabajo **del** resorte tiene el signo opuesto.
@@ -345,21 +347,22 @@ Por qué así:
 
 | Ecuación | Unidades | PDF |
 |---|---|---|
-| $P_{\text{med}} = \dfrac{\Delta W}{\Delta t}$ | W | no |
-| $P = \dfrac{dW}{dt} = \vec F\cdot\vec v$ | W | no |
+| $P_{\text{med}} = \dfrac{\Delta W}{\Delta t}$ | W | sí |
+| $P = \dfrac{dW}{dt} = \vec F\cdot\vec v$ | W | sí |
 
-Notas propuestas:
+En el PDF:
 
-- Mostrar de dónde sale la unidad, igual que $1\text{ J} = 1\text{ N}\cdot\text{m}$ en Trabajo: $1\text{ W} = 1\text{ J/s}$, al lado de la fórmula en el PDF.
+- $1\text{ W} = 1\text{ J/s}$, igual que $1\text{ J} = 1\text{ N}\cdot\text{m}$ en Trabajo.
 - $P$ es un escalar.
-- $\vec F\cdot\vec v$ tiene la misma forma que $\vec F\cdot\vec s$: cambia el desplazamiento por la velocidad.
+- Definición: rapidez con que se realiza trabajo.
+- De dónde sale $\vec F\cdot\vec v$: en un $dt$ la fuerza trabaja $dW = \vec F\cdot d\vec l$; al dividir por $dt$, $d\vec l/dt = \vec v$, así que $P = \vec F\cdot\vec v$. Por eso tiene la misma forma que $\vec F\cdot\vec s$, con la velocidad en lugar del desplazamiento.
 - El kWh es unidad de **energía**, no de potencia.
 
 Por qué así: $\vec F\cdot\vec v$ es la fórmula que más se usa de esta sección y permite pasar directo de fuerza y velocidad a potencia. El tema se conecta con `energia_casos_limite/05_comparativa_potencia_humana.md`.
 
 ### Símbolos que conviene separar
 
-Con este capítulo se acumulan letras repetidas. Una línea en el PDF evitaría errores:
+Con este capítulo se acumulan letras repetidas. Está en el PDF:
 
 | Símbolo | Significado | Unidad |
 |---|---|---|
@@ -367,6 +370,156 @@ Con este capítulo se acumulan letras repetidas. Una línea en el PDF evitaría 
 | W (recta) | Watt, unidad de potencia: $1\text{ W} = 1\text{ J/s}$; la potencia es $P$ | — |
 | $w$ | Peso (*weight*) | N |
 | $k$ | Constante del resorte / de resistencia de fluidos | N/m / kg/s |
+| $\vec r$ | Posición (radio vector) | m |
+| $\vec s = \Delta\vec r$ | Desplazamiento recto total, de $P_1$ a $P_2$ | m |
+| $d\vec l = d\vec r$ | Tramo del camino, tangente a la trayectoria (*length*) | m |
+
+## Cap. 7 — Energía potencial y conservación de la energía (en análisis: todavía nada en el PDF)
+
+Igual que el cap. 6: las fórmulas pasan al PDF a medida que se estudian, y la columna «PDF» lleva la cuenta. **En el PDF, el cap. 7 empieza directamente en la 2.ª carilla**: la 1.ª ya no tiene lugar para arrancar un capítulo.
+
+El programa lo reparte en dos clases: «Trabajo de fuerzas conservativas. Energía potencial de fuerzas conservativas» y «Trabajo de fuerzas no conservativas».
+
+### La idea que ordena el capítulo
+
+Es el teorema del cap. 6 con el trabajo total separado en dos partes:
+
+$$
+W_{\text{tot}} = \Delta K
+\qquad
+W_{\text{tot}} = W_{\text{cons}} + W_{\text{otras}}
+\qquad
+W_{\text{cons}} = -\Delta U
+$$
+
+$$
+\Rightarrow\quad \Delta K + \Delta U = W_{\text{otras}}
+\quad\Longleftrightarrow\quad
+K_1 + U_1 + W_{\text{otras}} = K_2 + U_2
+$$
+
+El trabajo de las fuerzas conservativas (peso, resorte) se pasa al otro lado como energía potencial, y en $W_{\text{otras}}$ queda todo lo demás (rozamiento, tensión de una cuerda, una mano que empuja). Si $W_{\text{otras}} = 0$, se conserva $E = K + U$. Todo el capítulo es esta línea más los casos particulares de $U$.
+
+### Orden sugerido de incorporación
+
+| Orden | Bloque | Qué aporta |
+|---|---|---|
+| 1 | Energía potencial gravitatoria | Primera $U$; el trabajo del peso no depende del camino |
+| 2 | Energía potencial elástica | Segunda $U$; conecta con el resorte del cap. 6 |
+| 3 | Conservación de la energía mecánica | $E = K + U$, con y sin $W_{\text{otras}}$ |
+| 4 | Fuerzas conservativas y no conservativas | Por qué existe $U$ para unas y no para otras; energía interna |
+| 5 | Fuerza a partir de $U$ | El camino inverso: derivar $U$ da la fuerza |
+| 6 | Diagramas de energía | Equilibrios estable e inestable |
+
+### 1. Energía potencial gravitatoria
+
+| Ecuación | Unidades | PDF |
+|---|---|---|
+| $U_{\text{grav}} = m\,g\,y$ | J | no |
+| $W_{\text{grav}} = m\,g\,y_1 - m\,g\,y_2 = -\Delta U_{\text{grav}}$ | J | no |
+
+Notas propuestas:
+
+- $y$: altura, con el eje **hacia arriba** (la misma convención que en proyectiles). El cero de $y$ se elige libremente: solo importa $\Delta U$.
+- El signo: si el cuerpo sube, el peso hace trabajo negativo y $U$ aumenta.
+- Vale aunque la trayectoria sea curva: el peso solo trabaja con el desplazamiento vertical.
+
+Por qué así:
+
+- **El signo menos de $W = -\Delta U$ es la fuente de casi todos los errores del capítulo.** Conviene que el PDF lo tenga escrito, no solo $U = m g y$.
+- **Conexión con el cap. 6:** es $W = \vec F\cdot\vec s$ con $\vec F = -m\,g\,\hat\jmath$, que da $-m\,g\,(y_2 - y_1)$ por componentes, sin ángulos. Lo mismo sale con $\int \vec F\cdot d\vec l$ en un camino curvo: solo sobrevive $dy$.
+- **Válida cerca de la superficie de la Tierra**, con $g$ constante. La forma general $U = -G\,m_T\,m/r$ es del cap. 13 y no hace falta ahora.
+
+### 2. Energía potencial elástica
+
+| Ecuación | Unidades | PDF |
+|---|---|---|
+| $U_{\text{el}} = \tfrac{1}{2}\,k\,x^2$ | J | no |
+| $W_{\text{el}} = \tfrac{1}{2}\,k\,x_1^2 - \tfrac{1}{2}\,k\,x_2^2 = -\Delta U_{\text{el}}$ | J | no |
+
+Notas propuestas:
+
+- Ahora la fuerza es la **del** resorte sobre el cuerpo: $F_x = -k\,x$. Es la trampa del bloque «Resorte» del cap. 6 resuelta: allá $F_x = k\,x$ y el trabajo eran **sobre** el resorte; acá es el signo opuesto.
+- $x = 0$ es la longitud natural: acá el cero no es libre, a diferencia de $U_{\text{grav}}$.
+- $U_{\text{el}} \ge 0$ siempre: estirado o comprimido, el resorte guarda energía.
+
+Por qué así: si en la 2.ª carilla se pone $F_x = -k\,x$, conviene un enlace con estrella al bloque Resorte del cap. 6 (como el que ya une cap. 2 y cap. 6), para que se vea que es el mismo resorte con el signo cambiado y no una contradicción.
+
+### 3. Conservación de la energía mecánica
+
+| Ecuación | Unidades | PDF |
+|---|---|---|
+| $E = K + U$, con $U = U_{\text{grav}} + U_{\text{el}}$ | J | no |
+| $K_1 + U_1 = K_2 + U_2$ (solo fuerzas conservativas) | J | no |
+| $K_1 + U_1 + W_{\text{otras}} = K_2 + U_2$ | J | no |
+
+Notas propuestas:
+
+- $W_{\text{otras}}$: trabajo de todas las fuerzas que **no** están en $U$. No se cuenta dos veces: el peso va en $U_{\text{grav}}$ o en $W$, nunca en los dos.
+- Con rozamiento, $W_{\text{otras}} < 0$ y $E$ disminuye.
+- Es una ecuación escalar: no hace falta descomponer, y no da información sobre el tiempo.
+
+Por qué así:
+
+- **La tercera incluye a la segunda** (con $W_{\text{otras}} = 0$). Se podría poner solo la tercera, pero la segunda es la que más se usa y conviene verla sola.
+- **La idea que ordena el capítulo** (la derivación desde $W_{\text{tot}} = \Delta K$) podría ir en el PDF como en el cap. 6 «De la cinemática a la energía»: tres renglones cortos que muestran que el cap. 7 no agrega una ley nueva.
+- **Método, en una nota:** elegir estado 1 y estado 2, el cero de $y$, y listar qué fuerzas van en $U$ y cuáles en $W_{\text{otras}}$.
+
+### 4. Fuerzas conservativas y no conservativas
+
+| Ecuación | Unidades | PDF |
+|---|---|---|
+| $W_{\text{cons}} = -\Delta U$ | J | no |
+| $\oint \vec F_{\text{cons}}\cdot d\vec l = 0$ | J | no |
+| $\Delta K + \Delta U + \Delta U_{\text{int}} = 0$ | J | no |
+
+Notas propuestas:
+
+- Conservativa: el trabajo no depende del camino, solo de los extremos; en un camino cerrado es cero; es reversible. Ejemplos: peso, resorte.
+- No conservativa: el rozamiento cinético siempre se opone al movimiento, así que en un camino cerrado su trabajo es negativo. No tiene $U$.
+- La tercera es la **ley de conservación de la energía**: lo que pierde la energía mecánica aparece como energía interna ($\Delta U_{\text{int}} = -W_{\text{otras}}$ cuando la única fuerza no conservativa es el rozamiento).
+
+Por qué así: la integral cerrada $\oint$ reutiliza el $d\vec l$ que ya está en la hoja; es la forma más compacta de la definición. Si parece demasiado, alcanza con la nota de texto.
+
+### 5. Fuerza a partir de la energía potencial
+
+| Ecuación | Unidades | PDF |
+|---|---|---|
+| $F_x(x) = -\dfrac{dU(x)}{dx}$ | N | no |
+| $\vec F = -\left(\dfrac{\partial U}{\partial x}\,\hat\imath + \dfrac{\partial U}{\partial y}\,\hat\jmath + \dfrac{\partial U}{\partial z}\,\hat k\right) = -\vec\nabla U$ | N | no |
+
+Notas propuestas:
+
+- Es el camino inverso de $W = -\Delta U$: integrar la fuerza da $U$; derivar $U$ da la fuerza.
+- Verificación rápida: $U = m\,g\,y \Rightarrow F_y = -m\,g$; $U = \tfrac12\,k\,x^2 \Rightarrow F_x = -k\,x$.
+- La fuerza apunta hacia donde $U$ **disminuye**.
+
+Por qué así: la forma vectorial con el gradiente es la que encaja con la preferencia por los vectores y por componentes; la de una dimensión es su caso particular, como pasó con las integrales del cap. 6.
+
+### 6. Diagramas de energía
+
+| Ecuación | Unidades | PDF |
+|---|---|---|
+| Equilibrio: $\dfrac{dU}{dx} = 0$ | — | no |
+
+Notas propuestas:
+
+- Mínimo de $U$: equilibrio **estable** (la fuerza devuelve al cuerpo). Máximo: **inestable**.
+- Con $E$ dada, el cuerpo solo puede estar donde $U \le E$, porque $K \ge 0$. Donde $U = E$ se frena y vuelve (puntos de retorno).
+
+Por qué así: es más un gráfico que una fórmula. Si entra, es con una figura matplotlib en el `.md`, como las de movimiento circular; en el PDF alcanza con las dos notas.
+
+### Símbolos que se suman con el cap. 7
+
+| Símbolo | Significado | Unidad |
+|---|---|---|
+| $U$ | Energía potencial | J |
+| $U_{\text{int}}$ | Energía interna (no es potencial: es la de las partículas del cuerpo) | J |
+| $E$ | Energía mecánica total, $K + U$ | J |
+| $W_{\text{otras}}$ | Trabajo de las fuerzas que no están en $U$ | J |
+| $y$ | Altura, eje hacia arriba (en `energia_casos_limite/` es $h$, *height*) | m |
+
+Conviene agregarlos a «Símbolos que conviene separar» cuando el capítulo pase al PDF, sobre todo $U$ frente a $U_{\text{int}}$ y la $W$ de trabajo frente a $W_{\text{otras}}$.
 
 ---
 
@@ -382,4 +535,4 @@ Mismo esquema que `quimica_general/hoja_formulas/`: LaTeX directo (no pasa por `
 
 ---
 
-*Fuentes: Sears, F. W.; Zemansky, M. W.; Young, H. D.; Freedman, R. A. — Física universitaria, vol. 1, 11.ª ed. (Pearson Educación, México, 2004; ISBN 970-26-0511-3, ISBN-13 978-970-26-0511-9; traducción de *University Physics*, vol. 1, 11th ed., ISBN 0-8053-9186-X), ejemplar en papel; Young, H. D.; Freedman, R. A. — University Physics with Modern Physics, 13th ed. (Pearson Addison-Wesley, 2012; ISBN 978-0-321-69686-1, student edition), `Libros/Physics-Sears-13Ed-Vol1.pdf` (cap. 2 «Motion Along a Straight Line»; cap. 3 «Motion in Two or Three Dimensions», §3.3–3.5, incluida la derivación de $a_{\text{rad}}$ de §3.4; §9.3 para $v = R\omega$; cap. 4 «Newton's Laws of Motion»; cap. 5 «Applying Newton's Laws»; cap. 6 «Work and Kinetic Energy»).*
+*Fuentes: Sears, F. W.; Zemansky, M. W.; Young, H. D.; Freedman, R. A. — Física universitaria, vol. 1, 11.ª ed. (Pearson Educación, México, 2004; ISBN 970-26-0511-3, ISBN-13 978-970-26-0511-9; traducción de *University Physics*, vol. 1, 11th ed., ISBN 0-8053-9186-X), ejemplar en papel; Young, H. D.; Freedman, R. A. — University Physics with Modern Physics, 13th ed. (Pearson Addison-Wesley, 2012; ISBN 978-0-321-69686-1, student edition), `Libros/Physics-Sears-13Ed-Vol1.pdf` (cap. 2 «Motion Along a Straight Line»; cap. 3 «Motion in Two or Three Dimensions», §3.3–3.5, incluida la derivación de $a_{\text{rad}}$ de §3.4; §9.3 para $v = R\omega$; cap. 4 «Newton's Laws of Motion»; cap. 5 «Applying Newton's Laws»; cap. 6 «Work and Kinetic Energy»; cap. 7 «Potential Energy and Energy Conservation»), `Programa- Bibliografia.pdf`.*

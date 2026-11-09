@@ -159,6 +159,18 @@ Young, H. D.; Freedman, R. A. — \emph{University Physics with Modern Physics},
 \nota{\(D\): crece con el área frontal y la densidad\hfill kg/m}
 \nota{\(v_t\): rapidez terminal de caída (\(a = 0\), \(f = m\,g\))}
 
+% Al pie de la columna, separado del cap. 5 por un filete negro.
+\vfill
+{\color{black}\rule{\linewidth}{0.8pt}}\par
+\subtema{Símbolos que conviene separar}
+\nota{\(W\) (cursiva): trabajo (\emph{work})\hfill J}
+\nota{W (recta): watt; la potencia es \(P\)\hfill\(1\text{ W} = 1\text{ J/s}\)}
+\nota{\(w\): peso (\emph{weight})\hfill N}
+\nota{\(k\): resorte \textbf{o} resistencia de fluidos\hfill N/m \;/\; kg/s}
+\nota{\(\vec r\): posición (radio vector)\hfill m}
+\nota{\(\vec s = \Delta\vec r\): desplazamiento recto total, de \(P_1\) a \(P_2\)\hfill m}
+\nota{\(d\vec l = d\vec r\): tramo del camino, tangente (\emph{length})\hfill m}
+
 \columnbreak
 \capitulo{Cap. 6 — Trabajo y energía cinética}
 
@@ -187,6 +199,31 @@ Young, H. D.; Freedman, R. A. — \emph{University Physics with Modern Physics},
 \f{W_{\text{tot}} = K_2 - K_1 = \Delta K}{J}
 \nota{{\color{BrickRed}\(W_{\text{tot}}\): todas las fuerzas}, no una sola}
 \nota{Vale también con fuerza variable y trayectoria curva}
+
+\subtema{Trabajo con fuerza variable}
+\f{W = \int_{x_1}^{x_2} F_x\,dx}{J}
+\nota{\(W\): área bajo la curva \(F_x(x)\), con signo}
+\f{W = \int_{P_1}^{P_2} F_\parallel\,dl = \int_{P_1}^{P_2} \vec F\cdot d\vec l}{J}
+\nota{Caso general: \(\vec F\) variable y trayectoria curva}
+\nota{\(d\vec l\): desplazamiento infinitesimal, tangente a la trayectoria (\emph{length})}
+\nota{Solo trabaja la componente de \(\vec F\) a lo largo del camino}
+
+\subtema{Resorte}
+\f{F_x = k\,x}{N}
+\f{W = \tfrac{1}{2}\,k\,x_2^2 - \tfrac{1}{2}\,k\,x_1^2}{J}
+\nota{\(x\): estiramiento desde la longitud natural}
+\nota{\(k\): constante de fuerza del resorte\hfill N/m}
+\nota{Fuerza y trabajo \textbf{sobre} el resorte: {\color{BrickRed}el trabajo \textbf{del} resorte tiene el signo opuesto}}
+
+\subtema{Potencia}
+\nota{Rapidez con que se realiza trabajo}
+\nota{\(P\): escalar\hfill\(1\text{ W} = 1\text{ J/s}\)}
+\f{P_{\text{med}} = \frac{\Delta W}{\Delta t}}{W}
+\f{P = \frac{dW}{dt} = \vec F\cdot\vec v}{W}
+\nota{En un \(dt\) se trabaja \(dW = \vec F\cdot d\vec l\); como \(d\vec l/dt = \vec v\):}
+\f{P = \vec F\cdot\frac{d\vec l}{dt} = \vec F\cdot\vec v}{W}
+\nota{Misma forma que \(\vec F\cdot\vec s\), con \(\vec v\) en lugar de \(\vec s\)}
+\nota{El kWh es unidad de \textbf{energía}, no de potencia}
 
 \end{multicols*}
 \end{document}
