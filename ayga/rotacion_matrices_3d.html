@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rotación de Matrices — Interactivo</title>
+<style>
+  :root{
+    --bg:#0a0a0f;
+    --panel:#131320;
+    --border:#2a2a3d;
+    --pink:#ff4d6d;
+    --yellow:#ffb800;
+    --blue:#3fa9f5;
+    --text:#e8e8f0;
+    --dim:#8888a0;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Segoe UI', system-ui, sans-serif;
+    min-height:100vh;
+  }
+  h1{
+    text-align:center;
+    font-family:Georgia, 'Times New Roman', serif;
+    font-weight:normal;
+    font-size:1.6rem;
+    color:var(--blue);
+    padding:1rem 1rem 0.3rem;
+    margin:0;
+  }
+  .sub{
+    text-align:center;
+    color:var(--dim);
+    font-size:0.85rem;
+    padding-bottom:1rem;
+  }
+  .layout{
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+    padding:0 0.8rem 2rem;
+    max-width:1000px;
+    margin:0 auto;
+  }
+  @media(min-width:820px){
+    .layout{flex-direction:row; align-items:flex-start;}
+    .controls{flex:1; max-width:420px;}
+    .viewer{flex:1;}
+  }
+  .viewer{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+    position:relative;
+  }
+  #canvas-wrap{width:100%; aspect-ratio:1/1; touch-action:none;}
+  .hint{
+    position:absolute; bottom:8px; left:0; right:0;
+    text-align:center; font-size:0.72rem; color:var(--dim);
+    pointer-events:none;
+  }
+  .axis-block{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:0.9rem 1rem;
+    margin-bottom:0.9rem;
+  }
+  .axis-title{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin-bottom:0.5rem;
+  }
+  .axis-title .label{font-size:1rem; font-weight:600;}
+  .axis-title .val{font-family:'Courier New',monospace; font-size:0.95rem;}
+  input[type=range]{
+    width:100%;
+    accent-color: var(--accent);
+    margin-bottom:0.7rem;
+  }
+  .matrix{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:0.25rem 0.6rem;
+    font-family:'Courier New',monospace;
+    font-size:0.95rem;
+    background:#0d0d16;
+    border-radius:8px;
+    padding:0.6rem 0.8rem;
+  }
+  .matrix span{text-align:center;}
+  .rx .val, .rx input[type=range]{accent-color:var(--pink);}
+  .ry .val, .ry input[type=range]{accent-color:var(--yellow);}
+  .rz .val, .rz input[type=range]{accent-color:var(--blue);}
+  .rx .label{color:var(--pink);}
+  .ry .label{color:var(--yellow);}
+  .rz .label{color:var(--blue);}
+  .buttons{
+    display:flex; gap:0.5rem; margin-top:0.3rem; flex-wrap:wrap;
+  }
+  button{
+    flex:1;
+    background:#1c1c2e;
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:0.6rem;
+    border-radius:8px;
+    font-size:0.85rem;
+    cursor:pointer;
+  }
+  button:active{background:#2a2a44;}
+  .note{
+    font-size:0.78rem;
+    color:var(--dim);
+    line-height:1.4;
+    padding:0.6rem 0.2rem 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>Rotación de Matrices</h1>
+<div class="sub">Movés el ángulo y ves cómo cambian los senos/cosenos de la matriz — y cómo rota el cubo</div>
+
+<div class="layout">
+  <div class="controls">
+
+    <div class="axis-block rx">
+      <div class="axis-title">
+        <span class="label">R<sub>x</sub>(θ) — eje rojo</span>
+        <span class="val" id="valX">0.0°</span>
+      </div>
+      <input type="range" id="sliderX" min="0" max="360" step="1" value="0">
+      <div class="matrix" id="matX"></div>
+    </div>
+
+    <div class="axis-block ry">
+      <div class="axis-title">
+        <span class="label">R<sub>y</sub>(θ) — eje verde</span>
+        <span class="val" id="valY">0.0°</span>
+      </div>
+      <input type="range" id="sliderY" min="0" max="360" step="1" value="0">
+      <div class="matrix" id="matY"></div>
+    </div>
+
+    <div class="axis-block rz">
+      <div class="axis-title">
+        <span class="label">R<sub>z</sub>(θ) — eje azul</span>
+        <span class="val" id="valZ">0.0°</span>
+      </div>
+      <input type="range" id="sliderZ" min="0" max="360" step="1" value="0">
+      <div class="matrix" id="matZ"></div>
+    </div>
+
+    <div class="buttons">
+      <button id="resetBtn">Reset</button>
+      <button id="spinBtn">Auto-rotar X</button>
+    </div>
+
+    <div class="note">
+      El cubo aplica las tres rotaciones en orden X → Y → Z. Movés un solo slider por vez
+      para ver claramente qué hace cada matriz por separado: notá que la fila/columna del
+      eje que rota siempre queda como <b>1, 0, 0</b> (no se mueve a sí misma), y el seno y
+      coseno del ángulo aparecen en las otras dos posiciones, intercambiando signo entre
+      filas — eso es lo que "gira" los otros dos ejes uno sobre el otro.
+    </div>
+  </div>
+
+  <div class="viewer">
+    <div id="canvas-wrap"></div>
+    <div class="hint">arrastrá para orbitar la cámara</div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ---------- Three.js scene ----------
+const wrap = document.getElementById('canvas-wrap');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x0d0d16);
+
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+camera.position.set(3.2, 2.6, 3.6);
+camera.lookAt(0,0,0);
+
+const renderer = new THREE.WebGLRenderer({antialias:true});
+function resize(){
+  const s = wrap.clientWidth;
+  renderer.setSize(s, s);
+  camera.aspect = 1;
+  camera.updateProjectionMatrix();
+}
+wrap.appendChild(renderer.domElement);
+resize();
+window.addEventListener('resize', resize);
+
+// lights
+scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+const dl = new THREE.DirectionalLight(0xffffff, 0.8);
+dl.position.set(4,6,5);
+scene.add(dl);
+
+// axes helper (small, at origin)
+scene.add(new THREE.AxesHelper(1.8));
+
+// group that we rotate manually (like the cube in the reel)
+const pivot = new THREE.Group();
+scene.add(pivot);
+
+// Rubik-style cube: 3x3 grid of small cubes, colored faces per side
+const faceColors = {
+  px: 0xff3b1f, // +x red/orange
+  nx: 0xffcc00, // -x yellow
+  py: 0x6a2fe0, // +y purple
+  ny: 0xffffff, // -y white
+  pz: 0x2ecc40, // +z green
+  nz: 0x1e6fff  // -z blue
+};
+
+const cubeGroup = new THREE.Group();
+const gap = 0.04;
+const size = 0.62;
+for(let x=-1;x<=1;x++){
+  for(let y=-1;y<=1;y++){
+    for(let z=-1;z<=1;z++){
+      const materials = [
+        new THREE.MeshStandardMaterial({color: x===1 ? faceColors.px : 0x111111}),
+        new THREE.MeshStandardMaterial({color: x===-1 ? faceColors.nx : 0x111111}),
+        new THREE.MeshStandardMaterial({color: y===1 ? faceColors.py : 0x111111}),
+        new THREE.MeshStandardMaterial({color: y===-1 ? faceColors.ny : 0x111111}),
+        new THREE.MeshStandardMaterial({color: z===1 ? faceColors.pz : 0x111111}),
+        new THREE.MeshStandardMaterial({color: z===-1 ? faceColors.nz : 0x111111}),
+      ];
+      const geo = new THREE.BoxGeometry(size, size, size);
+      const mesh = new THREE.Mesh(geo, materials);
+      mesh.position.set(x*(size+gap), y*(size+gap), z*(size+gap));
+      cubeGroup.add(mesh);
+
+      const edges = new THREE.EdgesGeometry(geo);
+      const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({color:0x000000}));
+      line.position.copy(mesh.position);
+      cubeGroup.add(line);
+    }
+  }
+}
+pivot.add(cubeGroup);
+
+// simple orbit (drag to rotate camera around origin)
+let isDown=false, lastX=0, lastY=0;
+let camTheta = Math.atan2(camera.position.x, camera.position.z);
+let camPhi = Math.acos(camera.position.y / camera.position.length());
+let camRadius = camera.position.length();
+
+function updateCam(){
+  camera.position.x = camRadius * Math.sin(camPhi) * Math.sin(camTheta);
+  camera.position.z = camRadius * Math.sin(camPhi) * Math.cos(camTheta);
+  camera.position.y = camRadius * Math.cos(camPhi);
+  camera.lookAt(0,0,0);
+}
+function pointerDown(x,y){isDown=true; lastX=x; lastY=y;}
+function pointerMove(x,y){
+  if(!isDown) return;
+  const dx = x-lastX, dy = y-lastY;
+  camTheta -= dx*0.008;
+  camPhi = Math.min(Math.max(camPhi - dy*0.008, 0.2), Math.PI-0.2);
+  lastX=x; lastY=y;
+  updateCam();
+}
+function pointerUp(){isDown=false;}
+renderer.domElement.addEventListener('mousedown', e=>pointerDown(e.clientX,e.clientY));
+window.addEventListener('mousemove', e=>pointerMove(e.clientX,e.clientY));
+window.addEventListener('mouseup', pointerUp);
+renderer.domElement.addEventListener('touchstart', e=>{const t=e.touches[0]; pointerDown(t.clientX,t.clientY);}, {passive:true});
+window.addEventListener('touchmove', e=>{const t=e.touches[0]; pointerMove(t.clientX,t.clientY);}, {passive:true});
+window.addEventListener('touchend', pointerUp);
+
+// ---------- Rotation matrix math + UI ----------
+const sliderX = document.getElementById('sliderX');
+const sliderY = document.getElementById('sliderY');
+const sliderZ = document.getElementById('sliderZ');
+const valX = document.getElementById('valX');
+const valY = document.getElementById('valY');
+const valZ = document.getElementById('valZ');
+const matX = document.getElementById('matX');
+const matY = document.getElementById('matY');
+const matZ = document.getElementById('matZ');
+
+function fmt(n){
+  const v = Math.abs(n) < 1e-6 ? 0 : n;
+  return (v>=0? '+':'') + v.toFixed(2);
+}
+// same convention as in the reel screenshots (row-vector form)
+function matRx(t){
+  const c=Math.cos(t), s=Math.sin(t);
+  return [[1,0,0],[0,c,s],[0,-s,c]];
+}
+function matRy(t){
+  const c=Math.cos(t), s=Math.sin(t);
+  return [[c,0,-s],[0,1,0],[s,0,c]];
+}
+function matRz(t){
+  const c=Math.cos(t), s=Math.sin(t);
+  return [[c,s,0],[-s,c,0],[0,0,1]];
+}
+function renderMatrix(container, m){
+  container.innerHTML = '';
+  for(let r=0;r<3;r++){
+    for(let c=0;c<3;c++){
+      const cellVal = m[r][c];
+      const span = document.createElement('span');
+      const isZeroOrOne = Math.abs(cellVal)<1e-6 || Math.abs(cellVal-1)<1e-6;
+      span.textContent = isZeroOrOne ? (Math.abs(cellVal-1)<1e-6?'1':'0') : fmt(cellVal);
+      span.style.color = isZeroOrOne ? '#8888a0' : '#e8e8f0';
+      container.appendChild(span);
+    }
+  }
+}
+
+function update(){
+  const degX = parseFloat(sliderX.value);
+  const degY = parseFloat(sliderY.value);
+  const degZ = parseFloat(sliderZ.value);
+  const radX = degX * Math.PI/180;
+  const radY = degY * Math.PI/180;
+  const radZ = degZ * Math.PI/180;
+
+  valX.textContent = degX.toFixed(1)+'°';
+  valY.textContent = degY.toFixed(1)+'°';
+  valZ.textContent = degZ.toFixed(1)+'°';
+
+  renderMatrix(matX, matRx(radX));
+  renderMatrix(matY, matRy(radY));
+  renderMatrix(matZ, matRz(radZ));
+
+  // apply to the actual 3D cube, order X -> Y -> Z
+  pivot.rotation.order = 'XYZ';
+  pivot.rotation.x = radX;
+  pivot.rotation.y = radY;
+  pivot.rotation.z = radZ;
+}
+
+[sliderX, sliderY, sliderZ].forEach(s=>s.addEventListener('input', update));
+
+document.getElementById('resetBtn').addEventListener('click', ()=>{
+  sliderX.value = 0; sliderY.value = 0; sliderZ.value = 0;
+  update();
+});
+
+let spinning = false;
+document.getElementById('spinBtn').addEventListener('click', (e)=>{
+  spinning = !spinning;
+  e.target.textContent = spinning ? 'Detener' : 'Auto-rotar X';
+});
+
+update();
+updateCam();
+
+function animate(){
+  requestAnimationFrame(animate);
+  if(spinning){
+    let v = (parseFloat(sliderX.value)+1)%360;
+    sliderX.value = v;
+    update();
+  }
+  renderer.render(scene, camera);
+}
+animate();
+</script>
+</body>
+</html>
