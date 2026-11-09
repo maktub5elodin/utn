@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Conceptual — Arocena: Ciencia, Tecnología y Sociedad</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #f7f6f2;
+    font-family: 'Georgia', serif;
+    min-height: 100vh;
+  }
+
+  header {
+    text-align: center;
+    padding: 28px 24px 12px;
+    border-bottom: 1.5px solid #ccc;
+    background: #fff;
+  }
+
+  header h1 {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #1a1a1a;
+    text-transform: uppercase;
+  }
+
+  header p {
+    font-size: 12px;
+    color: #666;
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  #map-container {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Nodos */
+  .node rect {
+    stroke-width: 1.2px;
+    rx: 7;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.10));
+    cursor: default;
+  }
+
+  .node text.label {
+    font-family: 'Georgia', serif;
+    font-size: 12px;
+    font-weight: 700;
+    fill: inherit;
+    pointer-events: none;
+    text-anchor: middle;
+    dominant-baseline: central;
+  }
+
+  .node text.sublabel {
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    fill: inherit;
+    pointer-events: none;
+    text-anchor: middle;
+    dominant-baseline: central;
+  }
+
+  /* Aristas */
+  .link {
+    stroke-width: 1px;
+    fill: none;
+  }
+
+  .link-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 9.5px;
+    fill: #555;
+    text-anchor: middle;
+    dominant-baseline: central;
+    pointer-events: none;
+  }
+
+  /* Paleta por categoría */
+  .cat-proceso   { fill: #e8f4f0; stroke: #2d8a6e; color: #1a5c49; }
+  .cat-historia  { fill: #eeebf7; stroke: #6147a8; color: #3d2b7a; }
+  .cat-innovacion{ fill: #e8eefa; stroke: #2d5aa8; color: #1a3a7a; }
+  .cat-teoria    { fill: #fdf3de; stroke: #c48a10; color: #7a5108; }
+  .cat-institucional { fill: #fce9e4; stroke: #b84020; color: #7a2810; }
+  .cat-al        { fill: #e4f4e4; stroke: #2a7a2a; color: #1a4e1a; }
+  .cat-obstaculo { fill: #fce4e4; stroke: #a82020; color: #7a1010; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Cambio Tecnológico y Desarrollo — Rodrigo Arocena</h1>
+  <p>Ciencia, Tecnología y Sociedad &nbsp;·&nbsp; Ingeniería y Sociedad &nbsp;·&nbsp; UTN</p>
+</header>
+
+<div id="map-container"></div>
+
+<script>
+const W = window.innerWidth;
+const H = window.innerHeight - 80;
+
+document.getElementById('map-container').style.height = H + 'px';
+
+const svg = d3.select('#map-container')
+  .append('svg')
+  .attr('width', W)
+  .attr('height', H);
+
+// Marcador de flecha
+svg.append('defs').append('marker')
+  .attr('id', 'arrowhead')
+  .attr('viewBox', '0 0 10 10')
+  .attr('refX', 9)
+  .attr('refY', 5)
+  .attr('markerWidth', 6)
+  .attr('markerHeight', 6)
+  .attr('orient', 'auto-start-reverse')
+  .append('path')
+  .attr('d', 'M1 1 L9 5 L1 9')
+  .attr('fill', 'none')
+  .attr('stroke', '#888')
+  .attr('stroke-width', 1.5)
+  .attr('stroke-linecap', 'round')
+  .attr('stroke-linejoin', 'round');
+
+// ── NODOS ──────────────────────────────────────────────────────────────────
+const nodes = [
+  { id: 'ct',   label: 'Cambio tecnológico',          sub: 'proceso social continuo',           cat: 'proceso',       w: 170, h: 48 },
+  { id: 'ind',  label: 'Industrialización',           sub: 'difusión desigual por país',        cat: 'proceso',       w: 162, h: 48 },
+  { id: 'ri',   label: 'Revolución Industrial',       sub: 'Inglaterra, s. XVIII',              cat: 'historia',      w: 162, h: 48 },
+  { id: 'sf',   label: 'Sistema fabril',              sub: 'concentración y fragmentación',     cat: 'historia',      w: 162, h: 48 },
+  { id: 'tf',   label: 'Taylorismo / Fordismo',       sub: 'producción masiva y control',       cat: 'historia',      w: 168, h: 48 },
+  { id: 'cts',  label: 'Relación CTS',                sub: 'bidireccional (demanda ↔ oferta)',  cat: 'innovacion',    w: 162, h: 48 },
+  { id: 'id',   label: 'I+D profesionalizada',        sub: 'Edison → Bell Labs',                cat: 'innovacion',    w: 162, h: 48 },
+  { id: 'inn',  label: 'Innovación',                  sub: 'nuevas combinaciones (Schumpeter)', cat: 'teoria',        w: 162, h: 48 },
+  { id: 'dc',   label: 'Destrucción creadora',        sub: 'lo nuevo destruye lo viejo',        cat: 'teoria',        w: 162, h: 48 },
+  { id: 'ole',  label: 'Oleadas de innovación',       sub: 'Freeman: 5 ciclos 1770–hoy',        cat: 'teoria',        w: 168, h: 48 },
+  { id: 'pte',  label: 'Paradigma técnico-económico', sub: 'nuevo "sentido común" productivo',  cat: 'teoria',        w: 196, h: 48 },
+  { id: 'mic',  label: 'Microelectrónica',            sub: 'factor clave; Ley de Moore',        cat: 'innovacion',    w: 162, h: 48 },
+  { id: 'pf',   label: 'Post-fordismo',               sub: 'flexibilidad, redes, calidad',      cat: 'proceso',       w: 148, h: 48 },
+  { id: 'vop',  label: 'Ventana de oportunidad',      sub: 'Carlota Pérez: período transición', cat: 'teoria',        w: 180, h: 48 },
+  { id: 'est',  label: 'Estado intervencionista',     sub: 'motor del catch-up tecnológico',    cat: 'institucional', w: 172, h: 48 },
+  { id: 'et',   label: 'Educación técnica',           sub: 'Alemania, Japón y NICs',            cat: 'institucional', w: 156, h: 48 },
+  { id: 'sni',  label: 'Sist. nac. de innovación',    sub: 'Estado + universidad + empresa',    cat: 'al',            w: 172, h: 48 },
+  { id: 'dep',  label: 'Dependencia tecnológica',     sub: 'no decidir qué ni cómo',            cat: 'obstaculo',     w: 168, h: 48 },
+  { id: 'tpe',  label: 'Transform. productiva',       sub: 'con equidad — CEPAL / Arocena',     cat: 'al',            w: 178, h: 56 },
+];
+
+// Colores por categoría
+const catStyle = {
+  proceso:      { fill: '#e8f4f0', stroke: '#2d8a6e', text: '#1a5c49' },
+  historia:     { fill: '#eeebf7', stroke: '#6147a8', text: '#3d2b7a' },
+  innovacion:   { fill: '#e8eefa', stroke: '#2d5aa8', text: '#1a3a7a' },
+  teoria:       { fill: '#fdf3de', stroke: '#c48a10', text: '#7a5108' },
+  institucional:{ fill: '#fce9e4', stroke: '#b84020', text: '#7a2810' },
+  al:           { fill: '#e4f4e4', stroke: '#2a7a2a', text: '#1a4e1a' },
+  obstaculo:    { fill: '#fce4e4', stroke: '#a82020', text: '#7a1010' },
+};
+
+// ── ARISTAS con etiqueta ─────────────────────────────────────────────────
+const links = [
+  { s: 'ct',  t: 'ind',  label: 'impulsa' },
+  { s: 'ct',  t: 'ri',   label: 'origina' },
+  { s: 'ct',  t: 'cts',  label: 'condiciona' },
+  { s: 'ind', t: 'ri',   label: 'comienza con' },
+  { s: 'ind', t: 'sf',   label: 'desarrolla' },
+  { s: 'ind', t: 'id',   label: 'genera' },
+  { s: 'ind', t: 'et',   label: 'requiere' },
+  { s: 'ind', t: 'pte',  label: 'evoluciona hacia' },
+  { s: 'ri',  t: 'sf',   label: 'establece' },
+  { s: 'sf',  t: 'tf',   label: 'da lugar a' },
+  { s: 'cts', t: 'id',   label: 'enlaza con' },
+  { s: 'id',  t: 'inn',  label: 'alimenta' },
+  { s: 'id',  t: 'ole',  label: 'fundamenta' },
+  { s: 'tf',  t: 'inn',  label: 'genera' },
+  { s: 'tf',  t: 'pf',   label: 'entra en crisis →' },
+  { s: 'tf',  t: 'dep',  label: 'sin Estado: genera' },
+  { s: 'inn', t: 'dc',   label: 'explica mediante' },
+  { s: 'inn', t: 'mic',  label: 'se apoya en' },
+  { s: 'ole', t: 'pte',  label: 'define' },
+  { s: 'dc',  t: 'vop',  label: 'abre' },
+  { s: 'pte', t: 'vop',  label: 'permite identificar' },
+  { s: 'pte', t: 'mic',  label: 'tiene como factor clave' },
+  { s: 'mic', t: 'pf',   label: 'motor del' },
+  { s: 'mic', t: 'sni',  label: 'da base a' },
+  { s: 'pf',  t: 'dep',  label: 'busca superar' },
+  { s: 'est', t: 'ind',  label: 'interviene en' },
+  { s: 'est', t: 'sni',  label: 'articula' },
+  { s: 'est', t: 'vop',  label: 'impulsa aprovechar' },
+  { s: 'et',  t: 'sni',  label: 'articula con' },
+  { s: 'et',  t: 'inn',  label: 'favorece' },
+  { s: 'vop', t: 'tpe',  label: 'puede aprovecharse en' },
+  { s: 'sni', t: 'tpe',  label: 'construye' },
+  { s: 'dep', t: 'tpe',  label: 'se supera con' },
+  { s: 'dep', t: 'sni',  label: 'disminuye con' },
+  { s: 'cts', t: 'inn',  label: 'impulsa' },
+];
+
+// Posiciones iniciales distribuidas en círculo + ruido para mayor dispersión
+const cx = W / 2, cy = H / 2;
+const R = Math.min(W, H) * 0.37;
+nodes.forEach((n, i) => {
+  const angle = (2 * Math.PI * i) / nodes.length - Math.PI / 2;
+  const r = R * (0.5 + 0.5 * Math.random());
+  n.x = cx + r * Math.cos(angle);
+  n.y = cy + r * Math.sin(angle);
+});
+
+// Fijar nodo central (ct) al centro
+nodes.find(n => n.id === 'ct').fx = cx;
+nodes.find(n => n.id === 'ct').fy = cy * 0.45;
+
+// Fijar nodo final (tpe) en la parte baja
+nodes.find(n => n.id === 'tpe').fx = cx;
+nodes.find(n => n.id === 'tpe').fy = H * 0.88;
+
+// Construir mapa source/target
+const nodeById = Object.fromEntries(nodes.map(n => [n.id, n]));
+const linkData = links.map(l => ({
+  ...l,
+  source: nodeById[l.s],
+  target: nodeById[l.t],
+}));
+
+// ── SIMULACIÓN FORCE-DIRECTED ─────────────────────────────────────────────
+const sim = d3.forceSimulation(nodes)
+  .force('link', d3.forceLink(linkData)
+    .id(d => d.id)
+    .distance(160)
+    .strength(0.25)
+  )
+  .force('charge', d3.forceManyBody().strength(-680))
+  .force('collide', d3.forceCollide(d => Math.max(d.w, d.h) * 0.72).iterations(4))
+  .force('center', d3.forceCenter(cx, cy * 0.95).strength(0.04))
+  .force('x', d3.forceX(cx).strength(0.018))
+  .force('y', d3.forceY(cy).strength(0.018))
+  .stop();
+
+// Calentamos la simulación sin animación para obtener posición final
+for (let i = 0; i < 500; i++) sim.tick();
+
+// Clampar dentro de los márgenes
+const pad = 20;
+nodes.forEach(n => {
+  n.x = Math.max(pad + n.w / 2, Math.min(W - pad - n.w / 2, n.x));
+  n.y = Math.max(pad + n.h / 2, Math.min(H - pad - n.h / 2, n.y));
+});
+
+// ── DIBUJAR ───────────────────────────────────────────────────────────────
+
+// Función para calcular punto en el borde del rect más cercano a otro nodo
+function borderPoint(n, other) {
+  const dx = other.x - n.x;
+  const dy = other.y - n.y;
+  const hw = n.w / 2 + 2, hh = n.h / 2 + 2;
+  const sx = dx === 0 ? Infinity : hw / Math.abs(dx);
+  const sy = dy === 0 ? Infinity : hh / Math.abs(dy);
+  const s = Math.min(sx, sy);
+  return { x: n.x + dx * s, y: n.y + dy * s };
+}
+
+// Grupo base
+const g = svg.append('g');
+
+// Aristas
+const linkG = g.append('g').attr('class', 'links');
+
+linkData.forEach(l => {
+  const s = l.source, t = l.target;
+  const p0 = borderPoint(s, t);
+  const p1 = borderPoint(t, s);
+
+  // Leve curva para evitar que muchas aristas se solapen
+  const mx = (p0.x + p1.x) / 2 + (Math.random() - 0.5) * 30;
+  const my = (p0.y + p1.y) / 2 + (Math.random() - 0.5) * 30;
+
+  const path = `M ${p0.x} ${p0.y} Q ${mx} ${my} ${p1.x} ${p1.y}`;
+
+  linkG.append('path')
+    .attr('d', path)
+    .attr('class', 'link')
+    .attr('stroke', '#aaa')
+    .attr('marker-end', 'url(#arrowhead)');
+
+  // Etiqueta en el punto medio de la curva
+  const lx = 0.25 * p0.x + 0.5 * mx + 0.25 * p1.x;
+  const ly = 0.25 * p0.y + 0.5 * my + 0.25 * p1.y;
+
+  // Fondo blanco detrás de la etiqueta
+  const labelW = l.label.length * 5.6 + 8;
+  linkG.append('rect')
+    .attr('x', lx - labelW / 2)
+    .attr('y', ly - 8)
+    .attr('width', labelW)
+    .attr('height', 14)
+    .attr('fill', '#f7f6f2')
+    .attr('rx', 3)
+    .attr('opacity', 0.88);
+
+  linkG.append('text')
+    .attr('class', 'link-label')
+    .attr('x', lx)
+    .attr('y', ly)
+    .text(l.label);
+});
+
+// Nodos
+const nodeG = g.append('g').attr('class', 'nodes');
+
+nodes.forEach(n => {
+  const style = catStyle[n.cat];
+  const grp = nodeG.append('g')
+    .attr('class', 'node')
+    .attr('transform', `translate(${n.x - n.w / 2}, ${n.y - n.h / 2})`);
+
+  grp.append('rect')
+    .attr('width', n.w)
+    .attr('height', n.h)
+    .attr('rx', 7)
+    .attr('fill', style.fill)
+    .attr('stroke', style.stroke)
+    .attr('stroke-width', 1.2)
+    .style('filter', 'drop-shadow(0 1px 3px rgba(0,0,0,0.11))');
+
+  grp.append('text')
+    .attr('class', 'label')
+    .attr('x', n.w / 2)
+    .attr('y', n.sub ? n.h * 0.36 : n.h / 2)
+    .attr('fill', style.text)
+    .text(n.label);
+
+  if (n.sub) {
+    grp.append('text')
+      .attr('class', 'sublabel')
+      .attr('x', n.w / 2)
+      .attr('y', n.h * 0.68)
+      .attr('fill', style.stroke)
+      .text(n.sub);
+  }
+});
+</script>
+</body>
+</html>
