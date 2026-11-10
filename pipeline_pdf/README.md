@@ -29,19 +29,28 @@ Excepción a la regla general del `.gitignore` (PDFs e imágenes excluidos) para
 
 **Requisito: builds reproducibles.** El `Makefile` fija `SOURCE_DATE_EPOCH` (y `FORCE_SOURCE_DATE=1`) para que xelatex, incluido el que usa matplotlib para las figuras, no embeba la fecha de compilación: así el PDF y los PNG salen idénticos byte a byte si el contenido no cambió, y `make` no genera cambios falsos en git. Todo Makefile nuevo que produzca archivos versionados debe hacer lo mismo. Fuera de `build/` y `figuras/`, PDFs y PNGs siguen ignorados (bibliografía, guías, fotos); no usar `git add -f` para saltear eso.
 
+## Logos compartidos — `logos/`
+
+Logos que puede usar cualquier documento o perfil. Cada logo es un `<logo>.tex` (TikZ vectorial, para el PDF) más un `<logo>_png.tex` que lo pasa a PNG para Word. Una regla de `comun.mk` genera `logos/build/<logo>.png` (1200 ppp) **una sola vez**, la primera vez que un documento lo pide, y lo reutilizan todos; se regenera solo si cambia el `.tex`. No se versiona, y el `make clean` de un documento no lo borra.
+
+| Archivo | Qué es |
+|---|---|
+| `logo_utn.tex` | Símbolo UTN («la Araña») con la geometría del manual de identidad oficial: `\logoutn{<alto>}` |
+
+Para usarlo desde un perfil: en el PDF, leer `logos/<logo>.tex` (como `lab-fisica.lua`); en Word, poner `$(PIPELINE)/logos/build/<logo>.png` en las dependencias (ej. `LOGO_PNG` en `lab_fisica/lab.mk`).
+
 ## Perfil `lab_fisica/` — informes de laboratorio de Física
 
 Para los informes de la U.D.B. Física (Física I, y Física II si sigue el mismo reglamento). En vez de `comun.mk` directo, el `Makefile` del informe incluye `lab_fisica/lab.mk`, que reutiliza `comun.mk` con otra configuración. Para un TP nuevo, copiar `lab_fisica/plantilla/` y ajustar la ruta del `include`, `SOURCE_DATE_EPOCH` y el `pdf.yaml`.
 
 | Archivo | Qué hace |
 |---|---|
-| `lab.mk` | Arma el nombre de salida desde `pdf.yaml` (`A1193-TP5-G5`; individual: `A1193-TP3-Apellido`; `archivo:` lo pisa) y genera el logo en PNG para Word (`build/logo/`, no se versiona) |
+| `lab.mk` | Arma el nombre de salida desde `pdf.yaml` (`A1193-TP5-G5`; individual: `A1193-TP3-Apellido`; `archivo:` lo pisa) y usa el logo UTN compartido de `logos/` (en PNG para Word) |
 | `pdf.yaml` / `docx.yaml` | Configuración de pandoc del perfil (reemplazan a `base.yaml` / `docx.yaml`): sin índice, Liberation Sans 10 pt, fórmulas en TeX Gyre Termes Math |
 | `lab-fisica.lua` | Carátula de la U.D.B. (PDF, TikZ con las medidas del formulario oficial `carátula .docx`), página de título con tabla de integrantes y docentes, anexo de fotos firmadas; tablas con encabezado azul, `*Tabla N: …*` → pie gris, `> …` → recuadro de resultado; `## 1. Introducción` → sección (el `# Título` del `.md` se descarta) |
 | `preambulo.tex` | Estética del PDF, la de los informes TP5/TP6: colores `#2E75B6` / `#1F3864`, encabezado con filete, pie con número de página |
 | `docx_lab.py` | Word: carátula con la misma estructura de tablas que el formulario, en su propia sección; encabezado, pie y estilos del PDF. Las franjas largas de la carátula achican la letra, como en el PDF |
-| `logo_utn.tex` | Símbolo UTN vectorial (TikZ), con la geometría del manual de identidad oficial; `logo_utn_png.tex` lo pasa a PNG para Word |
 
-Los datos van en `metadata.laboratorio` del `pdf.yaml`: `curso`, `turno`, `dias`, `grupo` (se omite si el TP es individual), `tp`, `titulo`, `fecha`, `profesor`, `jtp`, `atp` (lista), `integrantes` (lista de `{apellido, nombre}`, **solo los presentes ese día**) y, opcionalmente, `anexo` (fotos de las hojas firmadas, una por página). El `.docx` (`make docx`) es la versión editable para el grupo; el PDF es la principal. Para que también se vea bien al subirlo a Google Docs, el `.docx` evita lo que Google Docs no importa: el formato de las tablas (encabezado azul, bordes) va escrito celda por celda y no como estilo de tabla, y el logo va en línea, no anclado.
+Los datos van en `metadata.laboratorio` del `pdf.yaml`: `curso`, `turno`, `dias`, `grupo` (se omite si el TP es individual), `tp`, `titulo`, `fecha`, `profesor`, `jtp`, `atp` (lista), `integrantes` (lista de `{apellido, nombre}`, **solo los presentes ese día**) y, opcionalmente, `anexo` (fotos de las hojas firmadas: la primera comparte página con el título del anexo, las demás van una por página). El `.docx` (`make docx`) es la versión editable para el grupo; el PDF es la principal. Para que también se vea bien al subirlo a Google Docs, el `.docx` evita lo que Google Docs no importa: el formato de las tablas (encabezado azul, bordes) va escrito celda por celda y no como estilo de tabla, y el logo va en línea, no anclado.
 
 `plantilla/` es genérica (TP0, datos de ejemplo): sus compilaciones de prueba no se versionan (`pipeline_pdf/**/build/` en `.gitignore`); los informes reales viven en `fisica_i/laboratorio/<concurrencia>/` y ahí sí se versiona su `build/*.pdf`.

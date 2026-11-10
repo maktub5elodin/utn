@@ -104,3 +104,15 @@ $(BUILD)/$(SALIDA).docx: $(DOC).md pdf.yaml $(DOCX_DEFAULTS) $(DOCX_DEPS) $(FILT
 
 clean:
 	rm -rf $(BUILD)
+
+# Logos compartidos (logos/): cada <logo>.tex (TikZ vectorial) con su
+# <logo>_png.tex se pasa a PNG a 1200 ppp una sola vez, en logos/build/, y lo
+# reutiliza todo documento que lo pida (ej. LOGO_PNG en lab_fisica/lab.mk).
+# No se versiona; `make clean` de un documento no lo borra.
+LOGOS := $(PIPELINE)/logos
+
+$(LOGOS)/build/%.png: $(LOGOS)/%.tex $(LOGOS)/%_png.tex
+	mkdir -p $(LOGOS)/build
+	cd $(LOGOS) && xelatex -interaction=nonstopmode -halt-on-error \
+		-output-directory=build $*_png.tex > /dev/null
+	pdftoppm -r 1200 -png -singlefile $(LOGOS)/build/$*_png.pdf $(LOGOS)/build/$*

@@ -325,14 +325,25 @@ local cuerpo = {
 local function anexo(d)
   local b = {}
   if #d.anexo == 0 then return b end
+  -- El título abre página y comparte la página con la primera foto (para que
+  -- no quede solo al pie de la anterior); cada foto siguiente, en su página.
+  if LATEX then
+    table.insert(b, raw("\\clearpage"))
+  else
+    table.insert(b, pandoc.RawBlock("openxml", '<w:p><w:r><w:br w:type="page"/></w:r></w:p>'))
+  end
   table.insert(b, pandoc.Header(1, { pandoc.Str(d.anexo_titulo) }))
-  for _, f in ipairs(d.anexo) do
+  for i, f in ipairs(d.anexo) do
     if LATEX then
-      table.insert(b, raw("\\clearpage\\thispagestyle{empty}\\begin{center}\\vspace*{\\fill}"
-        .. "\\includegraphics[width=\\textwidth,height=0.95\\textheight,keepaspectratio]{" .. f .. "}"
+      local alto = i == 1 and "0.85" or "0.95"
+      table.insert(b, raw((i == 1 and "" or "\\clearpage")
+        .. "\\begin{center}\\vspace*{\\fill}"
+        .. "\\includegraphics[width=\\textwidth,height=" .. alto .. "\\textheight,keepaspectratio]{" .. f .. "}"
         .. "\\vspace*{\\fill}\\end{center}"))
     else
-      table.insert(b, pandoc.RawBlock("openxml", '<w:p><w:r><w:br w:type="page"/></w:r></w:p>'))
+      if i > 1 then
+        table.insert(b, pandoc.RawBlock("openxml", '<w:p><w:r><w:br w:type="page"/></w:r></w:p>'))
+      end
       table.insert(b, pandoc.Para({ pandoc.Image({}, f, "", pandoc.Attr("", {}, { width = "16cm" })) }))
     end
   end
@@ -344,7 +355,7 @@ function Pandoc(doc)
   local blocks = doc.blocks:walk(cuerpo)
   local inicio = {}
   if LATEX then
-    local f = io.open(AQUI .. "/logo_utn.tex", "r")
+    local f = io.open(AQUI .. "/../logos/logo_utn.tex", "r")
     local logo = f:read("a"); f:close()
     table.insert(inicio, raw(logo))
     table.insert(inicio, raw(string.format(

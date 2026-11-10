@@ -24,17 +24,11 @@ endif
 
 PDF_DEFAULTS  := $(LAB)/pdf.yaml
 DOCX_DEFAULTS := $(LAB)/docx.yaml
-LOGO_PNG      := build/logo/logo_utn.png
+# Logo UTN para Word: PNG compartido, generado una sola vez (regla en comun.mk).
+LOGO_PNG      := $(LAB)/../logos/build/logo_utn.png
 DOCX_POST      = python3 $(LAB)/docx_lab.py $@ pdf.yaml $(LOGO_PNG)
 DOCX_DEPS     := $(LAB)/docx_lab.py $(LOGO_PNG)
-PERFIL_DEPS   := $(LAB)/lab-fisica.lua $(LAB)/preambulo.tex $(LAB)/logo_utn.tex
+PERFIL_DEPS   := $(LAB)/lab-fisica.lua $(LAB)/preambulo.tex $(LAB)/../logos/logo_utn.tex
 
 include $(LAB)/../comun.mk
 
-# Logo UTN para Word: el mismo TikZ de la carátula del PDF, en PNG a 1200 ppp.
-# Queda en build/logo/ (no se versiona).
-$(LOGO_PNG): $(LAB)/logo_utn.tex $(LAB)/logo_utn_png.tex
-	mkdir -p build/logo
-	cd $(LAB) && xelatex -interaction=nonstopmode -halt-on-error \
-		-output-directory=$(abspath build/logo) logo_utn_png.tex > /dev/null
-	pdftoppm -r 1200 -png -singlefile build/logo/logo_utn_png.pdf build/logo/logo_utn
