@@ -1,0 +1,8 @@
+% Logo UTN suelto, para pasarlo a PNG de alta resolución (lo usa la salida
+% Word: lab.mk -> build/logo/logo_utn.png). Fondo blanco, como en la carátula.
+\documentclass[border=0pt]{standalone}
+\usepackage{tikz}
+\input{logo_utn.tex}
+\begin{document}
+\setlength{\fboxsep}{0pt}\colorbox{white}{\logoutn{1.90cm}}
+\end{document}

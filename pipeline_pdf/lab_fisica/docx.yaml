@@ -1,0 +1,18 @@
+# Configuración de pandoc para los informes de laboratorio de Física (Word).
+# Mismo .md, mismos datos y mismos filtros que el PDF; la estética (fuentes,
+# colores, carátula, encabezado y pie) la aplica docx_lab.py después de pandoc.
+# El .docx es la versión editable para compartir con el grupo: el PDF manda.
+
+from: markdown
+to: docx
+standalone: true
+
+filters:
+  - ${.}/../filtros/solo-md.lua
+  - ${.}/../filtros/color-math-docx.lua
+  - ${.}/../filtros/salto-pagina.lua
+  - ${.}/../filtros/referencias-fig.lua
+  - ${.}/lab-fisica.lua
+
+metadata:
+  lang: es-AR

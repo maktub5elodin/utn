@@ -42,15 +42,25 @@ export FORCE_SOURCE_DATE := 1
 
 FIGS := $(foreach n,$(FIG_NAMES),figuras/$(n).pdf figuras/$(n).png)
 
+# Perfiles (ej. lab_fisica/lab.mk) pueden cambiar el nombre de salida y la
+# configuración de pandoc antes de incluir este archivo. Por defecto:
+# build/<DOC>.pdf con base.yaml, y Word con docx.yaml + docx_estilo.py.
+SALIDA        ?= $(DOC)
+PDF_DEFAULTS  ?= $(PIPELINE)/base.yaml
+DOCX_DEFAULTS ?= $(PIPELINE)/docx.yaml
+DOCX_POST     ?= python3 $(PIPELINE)/docx_estilo.py $@ $(DOCX_ESCALA)
+DOCX_DEPS     ?= $(PIPELINE)/docx_estilo.py
+PERFIL_DEPS   ?=
+
 .PHONY: all docx figuras clean
 
 # Si un paso falla, se borra su salida: nunca queda un PDF "a medias" que
 # make considere actualizado.
 .DELETE_ON_ERROR:
 
-all: $(BUILD)/$(DOC).pdf
+all: $(BUILD)/$(SALIDA).pdf
 
-docx: $(BUILD)/$(DOC).docx
+docx: $(BUILD)/$(SALIDA).docx
 
 figuras: $(FIGS)
 
@@ -62,34 +72,34 @@ endif
 $(BUILD):
 	mkdir -p $@
 
-$(BUILD)/$(DOC).tex: $(DOC).md pdf.yaml $(PIPELINE)/base.yaml $(FILTROS) $(FIGS) | $(BUILD)
-	pandoc --defaults=$(PIPELINE)/base.yaml --defaults=pdf.yaml $(DOC).md -o $@
+$(BUILD)/$(SALIDA).tex: $(DOC).md pdf.yaml $(PDF_DEFAULTS) $(FILTROS) $(PERFIL_DEPS) $(FIGS) | $(BUILD)
+	pandoc --defaults=$(PDF_DEFAULTS) --defaults=pdf.yaml $(DOC).md -o $@
 
 # Pasadas de xelatex hasta que LaTeX deja de pedir "Rerun" (máx. 4), y siempre
 # al menos 2: la primera escribe .aux/.toc, la segunda arma el índice. Se buscan
 # los dos avisos: "Rerun to get..." (referencias) y "Rerun LaTeX" (anchos de
 # longtable).
-$(BUILD)/$(DOC).pdf: $(BUILD)/$(DOC).tex $(FIGS)
+$(BUILD)/$(SALIDA).pdf: $(BUILD)/$(SALIDA).tex $(FIGS)
 	@for i in 1 2 3 4; do \
 		echo "xelatex, pasada $$i"; \
-		$(XELATEX) $< > /dev/null || { grep -A5 '^!' $(BUILD)/$(DOC).log; exit 1; }; \
-		if [ $$i -ge 2 ] && ! grep -qE 'Rerun to get|Rerun LaTeX' $(BUILD)/$(DOC).log; then break; fi; \
+		$(XELATEX) $< > /dev/null || { grep -A5 '^!' $(BUILD)/$(SALIDA).log; exit 1; }; \
+		if [ $$i -ge 2 ] && ! grep -qE 'Rerun to get|Rerun LaTeX' $(BUILD)/$(SALIDA).log; then break; fi; \
 	done
-	@if grep -qE 'undefined|Rerun to get|Rerun LaTeX' $(BUILD)/$(DOC).log; then \
-		grep -E 'undefined|Rerun to get|Rerun LaTeX' $(BUILD)/$(DOC).log; \
+	@if grep -qE 'undefined|Rerun to get|Rerun LaTeX' $(BUILD)/$(SALIDA).log; then \
+		grep -E 'undefined|Rerun to get|Rerun LaTeX' $(BUILD)/$(SALIDA).log; \
 		echo "ERROR: referencias sin resolver (ver arriba)"; exit 1; fi
-	@if grep -q 'Missing character' $(BUILD)/$(DOC).log; then \
-		grep 'Missing character' $(BUILD)/$(DOC).log | sort -u; \
+	@if grep -q 'Missing character' $(BUILD)/$(SALIDA).log; then \
+		grep 'Missing character' $(BUILD)/$(SALIDA).log | sort -u; \
 		echo "ERROR: caracteres sin glifo en la fuente (ver arriba)"; exit 1; fi
 	@echo "--- Advertencias de LaTeX:"
-	@grep -E 'Warning|Overfull|Underfull' $(BUILD)/$(DOC).log || echo "(ninguna)"
+	@grep -E 'Warning|Overfull|Underfull' $(BUILD)/$(SALIDA).log || echo "(ninguna)"
 	@echo "OK: $@"
 
 # Word: mismo .md y mismos filtros de contenido, configuración en docx.yaml.
 # Fórmulas como ecuaciones nativas de Word; figuras en PNG.
-$(BUILD)/$(DOC).docx: $(DOC).md pdf.yaml $(PIPELINE)/docx.yaml $(PIPELINE)/docx_estilo.py $(FILTROS) $(FIGS) | $(BUILD)
-	pandoc --defaults=$(PIPELINE)/docx.yaml --defaults=pdf.yaml $(DOC).md -o $@
-	python3 $(PIPELINE)/docx_estilo.py $@ $(DOCX_ESCALA)
+$(BUILD)/$(SALIDA).docx: $(DOC).md pdf.yaml $(DOCX_DEFAULTS) $(DOCX_DEPS) $(FILTROS) $(PERFIL_DEPS) $(FIGS) | $(BUILD)
+	pandoc --defaults=$(DOCX_DEFAULTS) --defaults=pdf.yaml $(DOC).md -o $@
+	$(DOCX_POST)
 	@echo "OK: $@"
 
 clean:

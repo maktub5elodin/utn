@@ -1,0 +1,47 @@
+# Configuración de pandoc para los informes de laboratorio de Física (PDF).
+# La usa lab.mk en lugar de ../base.yaml: misma idea, otra estética (la de los
+# informes TP5/TP6) y la carátula obligatoria de la U.D.B. Física.
+#
+#   pandoc --defaults=<repo>/pipeline_pdf/lab_fisica/pdf.yaml --defaults=pdf.yaml doc.md
+#
+# Los datos del informe (TP, título, fecha, docentes, integrantes presentes)
+# van en el bloque `laboratorio:` del pdf.yaml de cada documento.
+
+from: markdown
+to: latex
+standalone: true
+
+# Niveles de título: los ajusta lab-fisica.lua ("## 1. Introducción" ->
+# \section, numeración escrita a mano en el .md, como en los informes
+# anteriores; el "# Título" del .md se descarta).
+
+# Filtros de contenido compartidos + el del laboratorio (último: arma la
+# carátula, la página de título, las tablas y los recuadros).
+filters:
+  - ${.}/../filtros/solo-md.lua
+  - ${.}/../filtros/salto-pagina.lua
+  - ${.}/../filtros/png-a-pdf.lua
+  - ${.}/../filtros/referencias-fig.lua
+  - ${.}/lab-fisica.lua
+
+include-in-header:
+  - ${.}/preambulo.tex
+
+metadata:
+  lang: es
+
+variables:
+  documentclass: article
+  classoption: [table, dvipsnames]
+  fontsize: 10pt
+  papersize: a4
+  geometry: [left=2cm, right=2cm, top=2.3cm, bottom=2.3cm, headsep=12pt, footskip=28pt]
+  mainfont: Liberation Sans
+  sansfont: Liberation Sans
+  monofont: Liberation Mono
+  mathfont: TeX Gyre Termes Math
+  colorlinks: true
+  linkcolor: azullab
+  urlcolor: azullab
+  tables: true
+  graphics: true

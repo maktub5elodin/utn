@@ -1,0 +1,37 @@
+# Datos del informe: la carátula de la U.D.B., la página de título, el
+# encabezado y el nombre del archivo salen de acá. En cada TP, confirmar si es
+# individual o grupal, quiénes estuvieron presentes y si los docentes siguen
+# siendo los mismos. Nombres y apellidos siempre con sus tildes.
+
+variables:
+  title-meta: "Trabajo Práctico N°0 — Título del TP"
+
+metadata:
+  laboratorio:
+    materia: Física I
+    curso: A1193
+    turno: Noche
+    dias: Miércoles
+    grupo: 5                # omitir si el TP es individual: archivo <curso>-TP<n>-<Apellido>
+    tp: 0
+    titulo: Título del TP
+    fecha: DD/MM/AAAA       # «REALIZADO EL» de la carátula
+    profesor: Vella, Ruben
+    jtp: Ing. Pella, Martín
+    atp:
+      - Ing. Lasala, José
+      - Ing. Quevedo, Rubén
+      - Ing. Smoisman, Sergio
+    # Solo los presentes el día que se realizó (reglamento)
+    integrantes:
+      - {apellido: Fleitas, nombre: Facundo}
+      - {apellido: González, nombre: Federico}
+      - {apellido: Lissi, nombre: Lucas}
+      - {apellido: Palazzo, nombre: Juan}
+      - {apellido: Paredes, nombre: Sergio}
+      - {apellido: Pérez, nombre: Lautaro}
+    # Fotos de las hojas de datos firmadas, una por página al final (opcional)
+    # anexo:
+    #   - fotos/datos_1.jpg
+    # Nombre de archivo a mano (opcional; por defecto A1193-TP<n>-G<grupo>)
+    # archivo: A1193-TP0-G5

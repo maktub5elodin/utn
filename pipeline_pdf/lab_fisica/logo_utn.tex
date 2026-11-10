@@ -1,0 +1,27 @@
+% logo_utn.tex — Símbolo de la UTN («la Araña», Ricardo Blanco) en TikZ, vectorial.
+%
+% Geometría tomada del vector oficial del manual de identidad de la UTN
+% (identidad.frc.utn.edu.ar, «Manual de uso UTN FRC», pág. 6, «Retícula
+% constructiva»). Unidad = ancho del trazo:
+%   - barra vertical de 1 de ancho, alto total 5,8963;
+%   - barra horizontal de 5 × 1, centrada;
+%   - arriba, media corona circular (radios 2,5 y 1,5) con centro en el borde
+%     superior, abierta hacia arriba; abajo, la misma reflejada.
+%
+% Uso: \logoutn{<alto>}   (ej. \logoutn{1.9cm}); color = color del texto actual.
+% Lo usan la carátula del PDF (lab-fisica.lua) y logo_utn_png.tex (PNG para Word).
+
+\providecommand{\logoutn}[1]{%
+  \begingroup
+  \pgfmathsetmacro{\logoescala}{#1/5.8963}%
+  \begin{tikzpicture}[x=\logoescala pt, y=\logoescala pt, baseline=(current bounding box.south)]
+    \def\h{2.94815}
+    \fill (-0.5,-\h) rectangle (0.5,\h);
+    \fill (-2.5,-0.5) rectangle (2.5,0.5);
+    \fill (-2.5,\h) arc[start angle=180, end angle=360, radius=2.5]
+          -- (1.5,\h) arc[start angle=0, end angle=-180, radius=1.5] -- cycle;
+    \fill (-2.5,-\h) arc[start angle=180, end angle=0, radius=2.5]
+          -- (1.5,-\h) arc[start angle=0, end angle=180, radius=1.5] -- cycle;
+  \end{tikzpicture}%
+  \endgroup
+}

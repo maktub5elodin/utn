@@ -1,0 +1,63 @@
+% preambulo.tex — Estética de los informes de laboratorio de Física (PDF).
+% Replica la de los informes TP5/TP6 (A1193-TP5-G5.pdf): Liberation Sans
+% (métrica de Arial), títulos azul marino, subtítulos azules, encabezado con
+% filete azul, tablas de encabezado azul. Lo incluye lab_fisica/pdf.yaml.
+
+\usepackage{tikz}
+\usetikzlibrary{babel}   % babel spanish activa < > como atajos: sin esto, TikZ falla
+\usepackage{float}
+\floatplacement{figure}{H}
+\usepackage{graphicx}
+
+% Colores tomados del TP5 (los mismos que usa docx_lab.py)
+\definecolor{azullab}{HTML}{2E75B6}
+\definecolor{marinolab}{HTML}{1F3864}
+\definecolor{grislab}{HTML}{676767}
+\definecolor{bordelab}{HTML}{AAAAAA}
+\definecolor{grisfondo}{HTML}{E6E6E6}
+
+% Carátula: Times (Liberation Serif, misma métrica que Times New Roman)
+\newfontfamily\caratulafuente{Liberation Serif}[Ligatures=TeX]
+\newcommand{\caratulagrande}{\caratulafuente\fontsize{16}{19}\selectfont\bfseries}
+\newcommand{\caratulanombres}{\caratulafuente\fontsize{16}{19}\selectfont\mdseries}
+\newcommand{\caratulachica}{\caratulafuente\fontsize{11}{13}\selectfont\bfseries}
+% Texto de una línea que se achica si no entra en el ancho dado
+\newsavebox{\labcaja}
+\newcommand{\labajustar}[2]{\sbox{\labcaja}{#2}\ifdim\wd\labcaja>#1\resizebox{#1}{!}{\usebox{\labcaja}}\else\usebox{\labcaja}\fi}
+
+% Cuerpo
+\linespread{1.1}
+\usepackage{titlesec}
+\titleformat{\section}{\Large\bfseries\color{marinolab}}{}{0pt}{}
+\titleformat{\subsection}{\large\bfseries\color{azullab}}{}{0pt}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\color{azullab}}{}{0pt}{}
+\titlespacing*{\section}{0pt}{16pt}{6pt}
+\titlespacing*{\subsection}{0pt}{12pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{10pt}{2pt}
+
+% Encabezado y pie: el texto del encabezado lo fija lab-fisica.lua
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[R]{\small\thepage}
+\renewcommand{\headrule}{\vspace{-2pt}{\color{azullab}\hrule height 0.6pt}}
+\renewcommand{\footrule}{{\color{azullab}\hrule height 0.6pt}\vspace{4pt}}
+\setlength{\headheight}{14pt}
+
+% Pies de figura (los de tabla los arma lab-fisica.lua)
+\usepackage{caption}
+\captionsetup{font={footnotesize,color=grislab},labelsep=colon}
+
+% Tablas: texto chico, filas altas, grilla gris; poco aire antes del pie
+\newcommand{\tablalab}{\small\renewcommand{\arraystretch}{1.5}\arrayrulecolor{bordelab}}
+\setlength{\LTpost}{2pt}
+
+% Recuadro de resultado: filete azul, a todo el ancho, contenido centrado
+\usepackage[most]{tcolorbox}
+\newtcolorbox{resultadolab}{sharp corners, colback=white, colframe=azullab,
+  boxrule=0.6pt, left=6pt, right=6pt, top=4pt, bottom=4pt,
+  before skip=8pt, after skip=8pt, halign=flush center}
+
+% Caracteres Unicode sin glifo en Liberation Sans
+\usepackage{newunicodechar}
+\newunicodechar{≈}{\ensuremath{\approx}}
