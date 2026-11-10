@@ -174,11 +174,15 @@ def caratula(d):
     alto = max(1000, 2490 - (nf - 3) * 390)  # 4,39 cm, igual que en el PDF
     x.append(sep)
     x.append(tabla(ANCHO, [ANCHO], [(alto, [celda(ANCHO, parrafo("INDICACIONES PARA LAS CORRECCIONES:", sz=22, subrayado=True))])]))
-    # Fin de la sección de la carátula: márgenes del formulario, sin encabezado ni pie
-    x.append('<w:p><w:pPr><w:spacing w:before="0" w:after="0"/><w:sectPr>'
+    # Fin de la sección de la carátula: márgenes del formulario, sin encabezado ni pie.
+    # El párrafo que lleva el corte mide 1 pt y el margen inferior es de 1 cm: la
+    # carátula llena la hoja casi justa y, si ese párrafo no entra, Google Docs lo
+    # pasa a otra página y deja una hoja en blanco antes del cuerpo.
+    x.append('<w:p><w:pPr><w:spacing w:before="0" w:after="0" w:line="20" w:lineRule="exact"/>'
+             '<w:rPr><w:sz w:val="2"/><w:szCs w:val="2"/></w:rPr><w:sectPr>'
              '<w:pgSz w:w="11906" w:h="16838"/>'
-             '<w:pgMar w:top="1134" w:right="1418" w:bottom="1134" w:left="1418" '
-             'w:header="0" w:footer="709" w:gutter="0"/></w:sectPr></w:pPr></w:p>')
+             '<w:pgMar w:top="1134" w:right="1418" w:bottom="567" w:left="1418" '
+             'w:header="0" w:footer="0" w:gutter="0"/></w:sectPr></w:pPr></w:p>')
     return "".join(x)
 
 
