@@ -3,7 +3,7 @@
 **Fecha:** 7 de mayo de 2026  
 **Profesor:** Abud  
 **Unidad:** UT I / UT II — La Ingeniería y la Tecnología / Proceso de Diseño  
-**Referencia:** Ver también `campus_virtual/12_esfuerzos_caracteristicos.md` para desarrollo completo con diagramas y errores frecuentes.
+**Referencia:** Ver también `campus_virtual/12_esfuerzos_caracteristicos.md` (solo local, fuera de git) para desarrollo completo con diagramas y errores frecuentes.
 
 ---
 

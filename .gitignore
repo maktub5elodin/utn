@@ -54,6 +54,8 @@ ingenieria_mecanica_i/proyecto/07_referencias/**/*.stl
 # Directorios excluidos temporalmente
 su_myf/
 bibliografia_obligatoria/
+# Ing. Mecánica I: resúmenes del campus virtual que no se usaron; quedan solo en disco.
+ingenieria_mecanica_i/campus_virtual/
 
 # Instaladores y ejecutables (ej. Dev-C++ de Fundamentos de Informática): solo locales
 *.rar
