@@ -106,3 +106,10 @@ variables:
     \newunicodechar{⚠}{\faExclamationTriangle}
     \newunicodechar{₀}{\textsubscript{0}}
     \newunicodechar{₁}{\textsubscript{1}}
+    \newunicodechar{₂}{\textsubscript{2}}
+    \newunicodechar{✓}{\ensuremath{\checkmark}}
+    \newunicodechar{★}{\faStar}
+    \newunicodechar{α}{\ensuremath{\alpha}}
+    \newunicodechar{θ}{\ensuremath{\theta}}
+    \newunicodechar{τ}{\ensuremath{\tau}}
+    \newunicodechar{ω}{\ensuremath{\omega}}

@@ -1,0 +1,10 @@
+# Variables propias de este documento. La configuración común de pandoc está
+# en pipeline_pdf/base.yaml (ver pipeline_pdf/comun.mk).
+
+# Anclas internas con el estilo de GitHub (#3-resumen-…), como en el .md.
+from: markdown+gfm_auto_identifiers
+
+variables:
+  title-meta: "Preparación Parcial 2 — Ingeniería Mecánica I"
+  subtitle: "Banco de preguntas reales — Prof. Abud"
+  date: "11 de noviembre de 2026"
