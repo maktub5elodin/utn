@@ -2,15 +2,20 @@
 #   make     verifica choques, armado en orden, impresión y funcionamiento;
 #            después, figuras de vista previa, modelo/cortadora_v2.FCStd,
 #            un STL por pieza impresa, y los PDF de la ficha de impresión, la lista de
-#            compras, la hoja de la prueba 1 y el instructivo de armado con su plantilla
+#            compras, la hoja de la prueba 1, el instructivo de armado con su plantilla
+#            los planos (DXF y PDF A3) y salida/cortadora_v2.step para SolidWorks
 # Termina con error si resultados.json registra alguna falla.
 FREECAD := $(HOME)/Aplicaciones/FreeCAD.AppImage
 SYSPY   := /usr/bin/python3
 export SOURCE_DATE_EPOCH := 1794009600
 export FORCE_SOURCE_DATE := 1
 MODELO  := parametros.py piezas.py
+LAMINAS := 01_conjunto 02_cabezal 03_carrete 04_esquema
+DXF     := $(LAMINAS:%=planos/%.dxf)
+PDF     := $(LAMINAS:%=planos/%.pdf)
+STEP    := salida/cortadora_v2.step
 
-all: build/.verificado build/.figuras build/.stl ficha_pdf compras_pdf prueba1_pdf armado_pdf
+all: build/.verificado build/.figuras build/.stl $(STEP) $(DXF) $(PDF) build/.auditado ficha_pdf compras_pdf prueba1_pdf armado_pdf
 
 build/.verificado: $(MODELO) armado.py verificar.py
 	mkdir -p build
@@ -28,6 +33,27 @@ build/.figuras: $(MODELO) vista.py build/.verificado
 build/.stl: $(MODELO) exportar_stl.py build/.verificado
 	$(FREECAD) freecadcmd exportar_stl.py > /dev/null 2>&1; \
 	  $(SYSPY) -c "import json,sys; sys.exit(1 if json.load(open('resultados.json'))['stl']['fallas'] else 0)"
+	touch $@
+
+# STEP con nombres y colores. Termina con error si al reabrirlo no coinciden sólidos,
+# volumen o nombres.
+$(STEP): $(MODELO) exportar_step.py build/.verificado
+	CARPETA_MODELO=$(CURDIR) QT_QPA_PLATFORM=offscreen $(FREECAD) exportar_step.py > /dev/null 2>&1
+	touch $@
+
+# Planos: FreeCAD proyecta y anota; ezdxf, en el Python del sistema, escribe los DXF
+# (R2000, el formato que abren AutoCAD y LibreCAD). Falla si dos textos se superponen
+# o si ezdxf encuentra errores. Después LibreCAD pasa cada DXF a PDF A3.
+$(DXF) &: $(MODELO) planos.py dibujo.py dxf.py build/.verificado
+	$(FREECAD) freecadcmd planos.py > /dev/null 2>&1
+	$(SYSPY) dxf.py
+
+$(PDF) &: $(DXF) a_pdf.sh
+	./a_pdf.sh
+
+# Auditoría independiente y comparación entre LibreCAD y ezdxf.
+build/.auditado: $(PDF) control_dxf.py
+	$(SYSPY) control_dxf.py
 	touch $@
 
 # Video corto (make video). Varias instancias a la vez a veces se caen al guardar la
