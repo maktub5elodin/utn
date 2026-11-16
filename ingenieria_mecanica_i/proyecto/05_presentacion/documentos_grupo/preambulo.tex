@@ -1,0 +1,20 @@
+% Común a los documentos para el grupo (se suma al preámbulo de base.yaml).
+% Pensados para imprimir y leer en papel: encabezado con el proyecto, número de
+% página abajo y cada pregunta junto con su respuesta.
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Cortadora PET 2.0 · Grupo 1, S1091}
+\fancyhead[R]{\small Uso interno del grupo}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+% La primera página (título e índice) también lleva el encabezado.
+\fancypagestyle{plain}{\fancyhf{}\fancyhead[L]{\small Cortadora PET 2.0 · Grupo 1, S1091}%
+  \fancyhead[R]{\small Uso interno del grupo}\fancyfoot[C]{\small\thepage}}
+% needspace: disponible para evitar títulos sueltos al pie.
+\usepackage{needspace}
+% Casillas de las listas de control.
+\newunicodechar{☐}{\faSquare[regular]}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{μ}{\ensuremath{\mu}}

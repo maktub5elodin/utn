@@ -75,7 +75,7 @@ M8_CABEZA_EC, M8_CABEZA_ALTO = 13.0, 5.3      # [COM] cabeza del tornillo M8
 ARANDELA_M8 = (8.4, 16.0, 1.6)                # [COM] interior, exterior, espesor
 M3_EC, M3_ALTO = 5.5, 2.4                     # [COM] tuerca M3
 M3_CABEZA_D, M3_CABEZA_ALTO = 5.5, 3.0        # [COM] cabeza cilíndrica M3
-M5_CABEZA_D, M5_CABEZA_ALTO = 8.5, 3.5        # [COM]
+M5_CABEZA_D, M5_CABEZA_ALTO = 8.5, 5.0        # [COM] cabeza cilíndrica Allen (ISO 4762), llave de 4 mm
 M5_TUERCA_EC, M5_TUERCA_ALTO = 8.0, 5.0       # [COM] autoblocante
 MADERA_D, MADERA_CABEZA_D = 3.5, 7.0          # [COM] tornillo para madera 3,5 × 16
 MADERA_L = 16.0                               # [COM]
@@ -171,8 +171,11 @@ MANIVELA_ESP = 8.0     # [SUP] espesor del brazo
 MANIVELA_ANCHO = 16.0  # [SUP]
 CUBO_R, CUBO_ALTO = 11.0, 12.0          # [SUP]
 MANGO_R, MANGO_L = 11.0, 55.0           # [SUP]
-TORNILLO_MANGO_L = 70.0                 # [COM] M5 × 70
+TORNILLO_MANGO_L = 75.0                 # [PROTO] el del prototipo: M5 × 75 cabeza Allen. El diseño
+                                        # pedía M5 × 70; con 75 la punta roza la tira (hallazgo H2)
+TORNILLO_MANGO_TXT = f"M5 × {TORNILLO_MANGO_L:.0f} cabeza Allen"
 LUZ_MANO = 40.0        # [SUP] espacio mínimo entre el mango y la botella
+LUZ_GIRO_TIRA = 3.0    # [SUP] luz mínima entre lo que gira con la manivela y la tira (hallazgo H2)
 
 # ----------------------------------------------------------------- sargento
 SARGENTO_XY = (-92.0, 15.0)             # [SUP] centro de la mordaza, sobre el MDF
@@ -200,6 +203,10 @@ G = 9.81
 Z_CORE0 = TORRE_ALTO + ARANDELA_M8[2] + DISCO_ESP   # base del núcleo
 Z_CORE1 = Z_CORE0 + ALTO_NUCLEO
 Z_MANIVELA = Z_CORE1 + DISCO_ESP                     # base del cubo de la manivela
+# La manivela va con la cara que apoyó en la cama hacia arriba, como quedó en el
+# prototipo (15/11/2026, hallazgo H1): el brazo queda en la parte alta del cubo.
+Z_BRAZO = Z_MANIVELA + CUBO_ALTO - MANIVELA_ESP      # cara de abajo del brazo
+Z_BRAZO_SUP = Z_MANIVELA + CUBO_ALTO                 # cara de arriba del brazo y del cubo
 
 
 def z_superior_botella(s):

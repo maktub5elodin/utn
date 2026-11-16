@@ -77,7 +77,7 @@ def miniaturas(pz):
     vista.setAnimationEnabled(False)
     for n, forma in sorted(formas.items()):
         f = forma.copy()
-        f.Placement = Z.a_la_cama(forma).multiply(f.Placement)
+        f.Placement = Z.a_la_cama(forma, n).multiply(f.Placement)
         b = f.BoundBox
         m = max(6.0, 0.15 * max(b.XLength, b.YLength))      # borde de cama alrededor
         pieza.Shape = f

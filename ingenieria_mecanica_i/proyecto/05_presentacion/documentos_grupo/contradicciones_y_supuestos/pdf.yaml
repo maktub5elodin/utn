@@ -1,0 +1,13 @@
+# Para imprimir y repartir en el grupo: A4 vertical.
+# La configuración común de pandoc está en pipeline_pdf/base.yaml.
+
+table-of-contents: false
+include-in-header:
+  - ../preambulo.tex
+
+variables:
+  title-meta: "Decisiones, hallazgos y supuestos - Cortadora PET 2.0"
+  subtitle: "Cortadora PET 2.0 · Grupo 1, S1091 · Exposición del 19/11/2026"
+  date: "15 de noviembre de 2026"
+  geometry: "margin=2cm"
+  fontsize: 11pt

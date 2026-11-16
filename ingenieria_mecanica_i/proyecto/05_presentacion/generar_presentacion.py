@@ -1,26 +1,31 @@
 #!/usr/bin/env python3
-"""Genera Presentacion_Cortadora_PET_S1091_Grupo_1.pptx sin dependencias de PPTX.
+"""Genera Presentacion_Cortadora_PET_S1091_Grupo_1.pptx (modelo 2.0) y su PDF, sin dependencias de PPTX.
 
-Escribe el OOXML directamente con zipfile: las formas, la tabla y el gráfico quedan
-nativos y editables en PowerPoint. El contenido de cada lámina está en las funciones
-lamina_*; los valores de referencia del cálculo, en la sección CALCULO.
-Uso: python3 generar_presentacion.py
+Escribe el OOXML directamente con zipfile: formas y tablas quedan nativas y editables en PowerPoint.
+El contenido de cada lámina está en las funciones lamina_*; los números salen de ../08_modelo_2/resultados.json.
+Las figuras se arman en figuras/ a partir de los renders, planos e imágenes del modelo 2.0; los dos renders
+propios de la presentación los hace renderizar_figuras.py (FreeCAD). La v1 (modelo 1) quedó en v1_modelo_1/.
+Uso: python3 generar_presentacion.py [--sin-pdf]   (escribe el .pptx y, con LibreOffice, el .pdf)
 """
-import io
+import json
 import math
 import re
+import subprocess
+import sys
+import tempfile
 import uuid
 import zipfile
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-from PIL import Image
+from PIL import Image, ImageChops
 
 AQUI = Path(__file__).resolve().parent
-GRAFICO = AQUI.parent / "04_material_grafico"
+MODELO_2 = AQUI.parent / "08_modelo_2"
+MODELO_1 = AQUI.parent / "06_modelo_3d"
 FIGURAS = AQUI / "figuras"
 SALIDA = AQUI / "Presentacion_Cortadora_PET_S1091_Grupo_1.pptx"
-FECHA_ZIP = (2026, 11, 1, 12, 0, 0)
+FECHA_ZIP = (2026, 11, 15, 12, 0, 0)
 
 EMU = 914400
 W, H = 13.333, 7.5
@@ -64,7 +69,7 @@ def linea(c=None, pt=1.0, guion=None, punta=False):
 TOKEN = re.compile(r"(\*\*.+?\*\*|_\{.+?\}|\^\{.+?\})")
 
 
-def corridas(texto, sz, c, b=False, i=False, fuente=None):
+def corridas(texto, sz, c, b=False, i=False, fuente=None, link=None):
     """Marcado mínimo: **negrita**, _{subíndice}, ^{superíndice}."""
     salida = []
     for parte in TOKEN.split(texto):
@@ -81,6 +86,8 @@ def corridas(texto, sz, c, b=False, i=False, fuente=None):
         if base:
             attrs += f' baseline="{base}"'
         f = f'<a:latin typeface="{fuente or "+mn-lt"}"/>'
+        if link:
+            f += f'<a:hlinkClick r:id="{link}"/>'
         salida.append(f'<a:r><a:rPr {attrs} dirty="0">{relleno(c)}{f}</a:rPr>'
                       f"<a:t>{escape(parte)}</a:t></a:r>")
     return "".join(salida)
@@ -100,13 +107,13 @@ def parrafo(p, sz, c, algn="l"):
     espacio = (f'<a:spcBef><a:spcPts val="{int(p.get("antes", 0) * 100)}"/></a:spcBef>'
                f'<a:spcAft><a:spcPts val="{int(p.get("despues", 0) * 100)}"/></a:spcAft>')
     return (f"<a:p><a:pPr {attrs}>{espacio}{viñeta}</a:pPr>"
-            + corridas(p["t"], tam, col, p.get("b", False), p.get("i", False), p.get("fuente"))
+            + corridas(p["t"], tam, col, p.get("b", False), p.get("i", False), p.get("fuente"), p.get("link"))
             + "</a:p>")
 
 
 class Lamina:
-    def __init__(self, layout, orador, segundos, notas):
-        self.layout, self.seccion, self.segundos, self.notas = layout, orador, segundos, notas
+    def __init__(self, layout, orador, segundos, bloque, notas):
+        self.layout, self.orador, self.segundos, self.bloque, self.notas = layout, orador, segundos, bloque, notas
         self.formas, self.rels = [], []
         self.n = 1
 
@@ -114,9 +121,12 @@ class Lamina:
         self.n += 1
         return self.n
 
-    def rel(self, tipo, destino):
-        self.rels.append((tipo, destino))
+    def rel(self, tipo, destino, externo=False):
+        self.rels.append((tipo, destino, externo))
         return f"rId{len(self.rels) + 1}"  # rId1 es el layout
+
+    def hipervinculo(self, url):
+        return self.rel(f"{REL}/hyperlink", url, externo=True)
 
     def titulo(self, texto, tipo="title"):
         self.formas.append(
@@ -134,7 +144,7 @@ class Lamina:
 
     def caja(self, x, y, w, h, parrafos=None, sz=16, c="tx1", anchor="t", fondo=None, borde=None,
              borde_pt=1.0, geom="rect", radio=None, margen=0.0, algn="l", nombre="Texto", alt="",
-             transparencia=None):
+             transparencia=None, guion=None):
         parrafos = parrafos if parrafos is not None else []
         if isinstance(parrafos, (str, dict)):
             parrafos = [parrafos]
@@ -146,7 +156,7 @@ class Lamina:
         self.formas.append(
             f'<p:sp><p:nvSpPr><p:cNvPr id="{self._id()}" name="{escape(nombre)}"{descr}/><p:cNvSpPr{txbox}/><p:nvPr/></p:nvSpPr>'
             f'<p:spPr><a:xfrm><a:off x="{e(x)}" y="{e(y)}"/><a:ext cx="{e(w)}" cy="{e(h)}"/></a:xfrm>'
-            f'<a:prstGeom prst="{geom}">{av}</a:prstGeom>{relleno(fondo, transparencia)}{linea(borde, borde_pt)}</p:spPr>'
+            f'<a:prstGeom prst="{geom}">{av}</a:prstGeom>{relleno(fondo, transparencia)}{linea(borde, borde_pt, guion)}</p:spPr>'
             f'<p:txBody><a:bodyPr wrap="square" lIns="{m}" tIns="{m}" rIns="{m}" bIns="{m}" anchor="{anchor}" rtlCol="0"><a:noAutofit/></a:bodyPr>'
             f"<a:lstStyle/>{cuerpo}</p:txBody></p:sp>")
 
@@ -203,14 +213,14 @@ class Lamina:
             f'<p:blipFill><a:blip r:embed="{rid}"/><a:stretch><a:fillRect/></a:stretch></p:blipFill>'
             f'<p:spPr><a:xfrm><a:off x="{e(x)}" y="{e(y)}"/><a:ext cx="{e(w)}" cy="{e(h)}"/></a:xfrm>{geom}{linea(borde, borde_pt)}</p:spPr></p:pic>')
 
-    def tabla(self, x, y, anchos, altos, filas, sz=14):
+    def tabla(self, x, y, anchos, altos, filas, sz=14, resaltar_fila=None):
         grid = "".join(f'<a:gridCol w="{e(a)}"/>' for a in anchos)
         cuerpo = ""
         for i, fila in enumerate(filas):
             celdas = ""
             for j, celda in enumerate(fila):
                 encabezado, lateral = i == 0, j == 0
-                resaltada = j == len(fila) - 1 and not encabezado
+                resaltada = (i == resaltar_fila) if resaltar_fila is not None else (j == len(fila) - 1 and not encabezado)
                 c = "bg1" if encabezado else ("tx2" if lateral else "tx1")
                 negrita = encabezado or lateral
                 fondo = "tx2" if encabezado else ("bg2" if resaltada else None)
@@ -225,16 +235,6 @@ class Lamina:
             f'<p:xfrm><a:off x="{e(x)}" y="{e(y)}"/><a:ext cx="{e(sum(anchos))}" cy="{e(sum(altos))}"/></p:xfrm>'
             f'<a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/table">'
             f'<a:tbl><a:tblPr firstRow="1"/><a:tblGrid>{grid}</a:tblGrid>{cuerpo}</a:tbl></a:graphicData></a:graphic></p:graphicFrame>')
-
-    def grafico(self, x, y, w, h, alt):
-        rid = self.rel(f"{REL}/chart", "../charts/chart1.xml")
-        self.formas.append(
-            f'<p:graphicFrame><p:nvGraphicFramePr><p:cNvPr id="{self._id()}" name="Gráfico" descr="{escape(alt)}"/>'
-            f'<p:cNvGraphicFramePr/><p:nvPr/></p:nvGraphicFramePr>'
-            f'<p:xfrm><a:off x="{e(x)}" y="{e(y)}"/><a:ext cx="{e(w)}" cy="{e(h)}"/></p:xfrm>'
-            f'<a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/chart">'
-            f'<c:chart xmlns:c="http://schemas.openxmlformats.org/drawingml/2006/chart" r:id="{rid}"/>'
-            f'</a:graphicData></a:graphic></p:graphicFrame>')
 
     def numero(self, n):
         self.formas.append(
@@ -253,79 +253,61 @@ MEDIOS = set()
 CAMPO_NUMERO = "{B6F15528-21DE-4FAA-801E-634DDDAF4B2B}"
 
 
-# ---------- CALCULO: valores de referencia (a confirmar en el dimensionamiento) ----------
-D_RODILLO = 50.0            # mm, leído del plano Proy Mecanica.dxf
-BOTELLAS = [("Ø65", 65.0), ("Ø88", 88.0), ("Ø110", 110.0)]
-L_M8, I_M8 = 1.25, 1.0      # M8 de paso normal, sin reducción
-L_T8, I_T8 = 8.0, 2.0       # husillo T8 de 4 entradas, reducción 2:1
-TRAMO_CILINDRICO = 180.0    # mm, supuesto para el largo de corte
+# ---------- Datos que todavía pueden cambiar ----------
+# Ancho de la tira medido por el grupo (mínimo, máximo) en mm. Con None, la lámina dice que se está midiendo.
+MEDICION_ANCHO = None
+# Enlace al video de respaldo (.mp4 publicado por el grupo). Con None, la lámina muestra un recuadro pendiente.
+VIDEO_URL = None
 
-
-def avance(L, i, Db, Dr=D_RODILLO):
-    """a = L·Db / (i·Dr) — Entrega 2, apartado 5.3."""
-    return L * Db / (i * Dr)
-
-
-# ---------- Plano: DXF a trazos vectoriales ----------
-def leer_dxf(ruta):
-    filas = ruta.read_text(encoding="cp1252", errors="replace").split("\n")
-    pares = [(filas[i].strip(), filas[i + 1].rstrip()) for i in range(0, len(filas) - 1, 2)]
-    ini = pares.index(("2", "ENTITIES"))
-    fin = next(k for k, p in enumerate(pares) if p == ("0", "ENDSEC") and k > ini)
-    entidades, actual = [], None
-    for a, b in pares[ini + 1:fin]:
-        if a == "0":
-            actual = {"t": b}
-            entidades.append(actual)
-        elif a not in actual:
-            actual[a] = b
-    return entidades
-
-
-def polilineas_dxf(entidades, capas):
-    salida = []
-    for en in entidades:
-        if en.get("8") not in capas:
-            continue
-        if en["t"] == "LINE":
-            salida.append([(float(en["10"]), float(en["20"])), (float(en["11"]), float(en["21"]))])
-        elif en["t"] in ("CIRCLE", "ARC"):
-            cx, cy, r = float(en["10"]), float(en["20"]), float(en["40"])
-            a0, a1 = (0.0, 360.0) if en["t"] == "CIRCLE" else (float(en["50"]), float(en["51"]))
-            if a1 <= a0:
-                a1 += 360.0
-            pasos = max(int((a1 - a0) / 6), 4)
-            salida.append([(cx + r * math.cos(math.radians(a0 + (a1 - a0) * k / pasos)),
-                            cy + r * math.sin(math.radians(a0 + (a1 - a0) * k / pasos))) for k in range(pasos + 1)])
-    return salida
-
-
-def vista_dxf(lam, entidades, caja, x, y, escala, nombre):
-    """Dibuja una vista del DXF (mm) en la lámina (pulgadas), con una forma libre por tipo de línea."""
-    x0, y0, x1, y1 = caja
-    estilos = [(("Trazos",), "accent3", 0.6, "dash"), (("Ejes",), "accent4", 0.6, "lgDashDot"),
-               (("Elementos",), "tx1", 0.9, None), (("Contornos",), "tx1", 1.25, None)]
-    for capas, c, pt, guion in estilos:
-        trazos = [[(x + (px - x0) * escala, y + (y1 - py) * escala) for px, py in s]
-                  for s in polilineas_dxf(entidades, capas)
-                  if all(x0 <= px <= x1 and y0 <= py <= y1 for px, py in s)]
-        if trazos:
-            lam.trazo(trazos, c=c, pt=pt, guion=guion, nombre=f"Plano {nombre} {capas[0]}",
-                      alt=f"Vista {nombre} del plano preliminar")
+# Números del modelo 2.0 que sostienen decisiones (08_modelo_2/README.md, sección 4, y 00_concepto.md, 4.1)
+MODELO = json.loads((MODELO_2 / "resultados.json").read_text(encoding="utf-8"))
+RENDER = json.loads((AQUI / "build" / "render.json").read_text(encoding="utf-8")) if (AQUI / "build" / "render.json").exists() else {}
 
 
 # ---------- Figuras ----------
+def recorte_blanco(im, margen=0):
+    """Recorta el blanco alrededor de la imagen y deja un margen parejo."""
+    rgb = im.convert("RGB")
+    caja = ImageChops.difference(rgb, Image.new("RGB", rgb.size, "white")).getbbox()
+    x0, y0, x1, y1 = caja
+    return im.crop((max(0, x0 - margen), max(0, y0 - margen), min(im.width, x1 + margen), min(im.height, y1 + margen)))
+
+
+def pdf_a_png(pdf, dpi):
+    with tempfile.TemporaryDirectory() as tmp:
+        base = Path(tmp) / "hoja"
+        subprocess.run(["pdftoppm", "-r", str(dpi), "-png", "-singlefile", str(pdf), str(base)], check=True)
+        return Image.open(f"{base}.png").convert("RGB")
+
+
 def preparar_figuras():
+    """Genera figuras/*.png a partir de los renders, figuras y planos del modelo 2.0 (y del modelo 1)."""
     FIGURAS.mkdir(exist_ok=True)
-    rodillo = Image.open(GRAFICO / "imagen_ia_conjunto_rodillo_marcado.jpeg").convert("RGB")
-    tuerca = Image.open(GRAFICO / "imagen_ia_conjunto_tuerca_marcada.jpeg").convert("RGB")
-    # Ambas imágenes son iguales salvo el anillo: se compone una versión limpia sin marcas.
-    limpia = tuerca.copy()
-    zona = (475, 345, 635, 505)
-    limpia.paste(rodillo.crop(zona), zona[:2])
-    salida = {"conjunto": limpia.crop((0, 46, 895, 566)),
-              "detalle_rodillo": rodillo.crop((205, 62, 525, 302)),
-              "detalle_tuerca": tuerca.crop((440, 346, 730, 516))}
+    # FreeCAD guarda la hora dentro del PNG: se reescriben para que el mismo render dé el mismo archivo
+    for ruta in FIGURAS.glob("render_*.png"):
+        Image.open(ruta).save(ruta, optimize=True)
+    m2 = MODELO_2
+    salida = {}
+    salida["portada"] = recorte_blanco(Image.open(m2 / "figuras" / "conjunto.png"), 30)
+    salida["modelo_1"] = Image.open(MODELO_1 / "figuras" / "conjunto_inicio.png").convert("RGB").crop((340, 175, 1730, 965))
+    salida["cabezal"] = Image.open(m2 / "figuras" / "detalle_cabezal.png").convert("RGB").crop((180, 120, 1460, 900))
+    # Detalle A de la lámina 02: sin la columna de rótulos (llevan la numeración del plano); se rotula en la lámina
+    hoja = pdf_a_png(m2 / "planos" / "02_cabezal.pdf", 200)
+    k = hoja.width / 1820
+    salida["detalle_a"] = hoja.crop(tuple(int(v * k) for v in DETALLE_A))
+    salida["explotada"] = recorte_blanco(Image.open(FIGURAS / "render_explotada.png"), 20)
+    salida["carrete_manivela"] = Image.open(FIGURAS / "render_carrete_manivela.png").convert("RGB").crop(RECORTE_CARRETE)
+    # Mosaico de las piezas impresas, en el orden de la ficha (sin el vaso de lastre, que no se imprimió)
+    mini = m2 / "ficha" / "miniaturas"
+    mosaico = Image.new("RGB", (4 * 400, 4 * 300), "white")
+    for i, n in enumerate(PIEZAS_IMPRESAS):
+        im = Image.open(mini / f"{n}.png").convert("RGBA")
+        mosaico.paste(im, ((i % 4) * 400, (i // 4) * 300), im)
+    salida["piezas_impresas"] = recorte_blanco(mosaico, 10)
+    plantilla = pdf_a_png(m2 / "instructivo" / "build" / "plantilla_base_A3.pdf", 150)
+    salida["plantilla"] = plantilla.crop((205, 70, 2275, 1285))
+    for n in ("paso_12", "paso_22"):
+        salida[n] = recorte_blanco(Image.open(m2 / "instructivo" / "pasos" / f"{n}.png"), 10)
     rutas = {}
     for nombre, im in salida.items():
         ruta = FIGURAS / f"{nombre}.png"
@@ -334,19 +316,39 @@ def preparar_figuras():
     return rutas
 
 
+DETALLE_A = (1010, 555, 1619, 1030)        # en píxeles de la lámina a 1820 de ancho
+# Altura de cada rótulo del detalle A, como fracción del alto del recorte (la línea de referencia llega al borde)
+ROTULOS_A = [("Labio exterior", .116), ("Pisador", .191), ("Hoja", .278), ("Calce", .519),
+             ("Chapita", .720), ("Placa del cabezal", .808), ("Taco de MDF", .920)]
+RECORTE_CARRETE = (0, 170, 1600, 1000)
+TUERCA_MANGO = (620 / 1600, (530 - 170) / 830)   # posición de la tuerca del mango en el recorte
+PIEZAS_IMPRESAS = ["Cabezal", "LabioExterior", "Calce_7mm", "Calce_8mm", "Calce_9mm", "Calce_10mm", "Pisador",
+                   "Zocalo", "Ojal", "Torre", "CarreteInferior", "CarreteSuperior", "Manivela", "Mango"]
+
+
+def encajar(fig, nombre, x, y, w, h):
+    """Posición de la imagen dentro de la caja (x, y, w, h), centrada y sin deformar."""
+    asp = fig[nombre][1]
+    if w / h > asp:
+        ancho, alto = h * asp, h
+    else:
+        ancho, alto = w, w / asp
+    return x + (w - ancho) / 2, y + (h - alto) / 2, ancho, alto
+
+
 # ---------- Láminas ----------
-# Seis bloques continuos de 2:30 (total 15:00). La asignación de integrantes se define en el grupo.
+# Seis integrantes; cada uno expone lo que hizo. Las notas llevan orador, tiempo y minuto de inicio y fin.
 
 
 def lamina_portada(fig):
-    s = Lamina(0, "Bloque 1", 30,
-               "Buenas. Somos el Grupo 1 del curso S1091 y les presentamos nuestro trabajo final: una cortadora manual que transforma botellas PET en una tira continua. "
-               "Entre los seis vamos a recorrer el problema, la solución mecánica, las ecuaciones de diseño y lo que todavía falta validar con el prototipo.")
+    s = Lamina(0, "Camila", 15, "Apertura",
+               "Buenas. Somos el Grupo 1 del curso S1091. Les presentamos nuestro trabajo final: una cortadora manual que convierte una botella PET en una tira continua. "
+               "La trajimos funcionando.")
     s.titulo("Cortadora manual de botellas PET", "ctrTitle")
     s.subtitulo("Tiras continuas por corte helicoidal controlado")
-    ruta, asp = fig["conjunto"]
-    s.imagen(ruta, 6.95, 1.75, 5.78, 5.78 / asp, "Ilustración del conjunto: botella sujeta por el cuello, rodillo, manivela, engranajes, husillo y cuchilla sobre una base con guías", radio=3500)
-    s.caja(6.95, 1.75 + 5.78 / asp + .08, 5.78, .3, "Ilustración conceptual generada con IA", sz=11, c="bg2", nombre="Crédito de la imagen")
+    x, y, w, h = encajar(fig, "portada", 7.0, .9, 5.75, 5.3)
+    s.imagen(fig["portada"][0], x, y, w, h, "Modelo 2.0 de la cortadora: base de MDF, botella vertical sobre una varilla, cabezal de corte, ojal y carrete con manivela", radio=2500)
+    s.caja(x, y + h + .06, w, .3, "Modelo 2.0 en FreeCAD", sz=11, c="bg2", nombre="Crédito de la imagen")
     s.caja(.7, 4.55, 5.9, 1.9, [
         {"t": "TP Final · Ingeniería Mecánica I · UTN FRBA · 2026", "b": True, "despues": 6},
         {"t": "Grupo 1 · S1091", "despues": 6},
@@ -364,11 +366,9 @@ def tira(x, y, largo, alto, onda):
 
 
 def lamina_problema():
-    s = Lamina(1, "Bloque 1", 60,
-               "Empiezo por el problema. Convertir botellas PET en tiras continuas es una forma simple de aprovechar el residuo, pero cuando el corte se hace a mano aparecen tres dificultades. "
-               "Primero, la desalineación: la botella es cilíndrica y flexible, y tiende a desplazarse o deformarse frente a la herramienta. "
-               "Segundo, el ancho irregular: esa falta de control produce una tira variable, como muestro en este esquema, que es solo ilustrativo y no una medición. "
-               "Tercero, la exposición al filo, porque hay que sostener el envase y el elemento cortante al mismo tiempo. "
+    s = Lamina(1, "Camila", 45, "Apertura",
+               "El problema. Cortar una botella en tira a mano tiene tres dificultades: la botella es flexible y se desalinea frente al filo, "
+               "el ancho de la tira sale irregular, como muestra este esquema, que es ilustrativo, y hay que sostener la botella y el filo al mismo tiempo. "
                "Todo depende de la habilidad de quien corta. De ahí sale nuestra pregunta: cómo obtener una tira continua y uniforme sin depender de esa habilidad.")
     s.titulo("Cortar una botella a mano depende del operador")
     items = ["Desalineación", "Ancho irregular", "Exposición al filo"]
@@ -377,26 +377,25 @@ def lamina_problema():
         s.anillo(.6, y + .1, .62, k + 1, "accent4")
         s.caja(1.42, y, 4.75, .82, {"t": t, "b": True, "c": "tx2"}, sz=24, anchor="ctr", nombre=t)
     s.caja(6.65, 1.55, 6.08, .36, {"t": "A mano", "b": True, "c": "accent4"}, sz=18, nombre="Rótulo a mano")
-    s.trazo(tira(6.65, 2.05, 6.08, .62, .07), c="accent4", pt=1, fondo="accent4", transparencia=70, nombre="Tira irregular", alt="Esquema de una tira de ancho irregular")
+    s.trazo(tira(6.65, 2.05, 6.08, .62, .07), c="accent4", pt=1, fondo="accent4", transparencia=70, nombre="Esquema tira irregular", alt="Esquema de una tira de ancho irregular")
     s.caja(6.65, 3.05, 6.08, .36, {"t": "Con mecanismo", "b": True, "c": "accent1"}, sz=18, nombre="Rótulo con mecanismo")
-    s.trazo([[(6.65, 3.52), (12.73, 3.52), (12.73, 4.14), (6.65, 4.14), (6.65, 3.52)]], c="accent1", pt=1, fondo="accent1", transparencia=70, nombre="Tira uniforme", alt="Esquema de una tira de ancho uniforme")
+    s.trazo([[(6.65, 3.52), (12.73, 3.52), (12.73, 4.14), (6.65, 4.14), (6.65, 3.52)]], c="accent1", pt=1, fondo="accent1", transparencia=70, nombre="Esquema tira uniforme", alt="Esquema de una tira de ancho uniforme")
     s.tarjeta(.6, 4.95, 12.13, 1.45, {"t": "¿Cómo obtener una tira continua y uniforme sin depender de la habilidad manual?", "b": True, "c": "bg1", "algn": "ctr", "fuente": "+mj-lt"},
               fondo="tx2", sz=25, anchor="ctr", nombre="Pregunta del trabajo", margen=.3)
     return s
 
 
 def lamina_objetivos():
-    s = Lamina(1, "Bloque 1", 60,
-               "Para responderla nos propusimos como objetivo principal desarrollar un dispositivo mecánico de accionamiento manual que transforme botellas PET en tiras continuas mediante un corte helicoidal controlado. "
-               "Elegimos el verbo desarrollar porque implica diseñar, calcular y fabricar. Planteamos cinco objetivos secundarios: una sujeción exterior del cuello, que permita el giro y retenga la botella; "
-               "un guiado longitudinal frente a una cuchilla fija; una transmisión manual que coordine giro y avance; regulaciones y piezas intercambiables para adaptarnos a distintos envases; "
-               "y un prototipo experimental para evaluar todo lo anterior. A continuación, veamos qué encontramos en los antecedentes.")
-    s.titulo("Objetivo: tira continua con una sola entrada manual")
+    s = Lamina(1, "Camila", 35, "Apertura",
+               "Nuestro objetivo principal: desarrollar un dispositivo manual que transforme la botella en tira mediante un corte helicoidal controlado. "
+               "Desarrollar implica diseñar, calcular y fabricar. Para lograrlo nos propusimos sostener la botella sin cargar el cuello, fijar el ancho por geometría, "
+               "accionarla con una manivela directa, adaptarla con calces y llegar a un prototipo que funcione.")
+    s.titulo("Objetivo: una tira continua con una sola entrada manual")
     s.tarjeta(.6, 1.55, 5.0, 4.85, [
         {"t": "Objetivo principal", "b": True, "sz": 16, "c": "bg2", "despues": 10},
         {"t": "Desarrollar un dispositivo manual que transforme botellas PET en tiras continuas por corte helicoidal controlado", "c": "bg1"},
     ], fondo="tx2", sz=25, margen=.3, anchor="ctr", nombre="Objetivo principal")
-    items = ["Sujeción del cuello", "Guiado", "Transmisión manual", "Adaptación a envases", "Prototipo"]
+    items = ["Cuello sin carga", "Ancho fijado por geometría", "Manivela directa", "Adaptación con calces", "Prototipo funcional"]
     for k, t in enumerate(items):
         y = 1.55 + k * .99
         s.anillo(6.0, y + .06, .66, k + 1, sz=18)
@@ -405,19 +404,17 @@ def lamina_objetivos():
 
 
 def lamina_antecedentes():
-    s = Lamina(1, "Bloque 2", 75,
-               "Revisamos dos trabajos recientes. Tylman y Dzierżek, en 2020, documentan una máquina de bajo costo, con piezas impresas en 3D, que produce tiras con cuchilla fija y un bobinado motorizado con engranajes de relación 1 a 10. "
-               "Ellos mismos señalan que la irregularidad del ancho generó defectos en el material final. Eso nos indica que el problema no es solo cortar, sino controlar el avance. "
-               "Meraj y colaboradores, en 2024, proponen una máquina automatizada con dos rodamientos afilados y un husillo roscado controlado por Arduino. "
-               "Para nosotros es un antecedente clave, porque muestra que el husillo ya se usó para sincronizar corte y avance sobre una botella. "
-               "Nuestra propuesta toma esa idea y la resuelve sin electrónica: con manivela, engranajes y husillo.")
-    s.titulo("En los antecedentes, el avance es el punto crítico")
-    s.tabla(.6, 1.55, [2.0, 3.45, 3.45, 3.23], [.6, .72, .72, .78, 1.0], [
+    s = Lamina(1, "Camila", 40, "Apertura",
+               "Partimos de dos trabajos. Tylman y Dzierżek usan cuchilla fija y bobinado motorizado, y señalan que el ancho irregular arruina el material final. "
+               "Meraj y colaboradores sincronizan corte y avance con un husillo controlado por Arduino. "
+               "Nosotros llegamos a algo más simple: la guía fija el paso y la propia tira arrastra la botella. Sergio cuenta cómo llegamos ahí.")
+    s.titulo("Antecedentes: el ancho de la tira es lo crítico")
+    s.tabla(.6, 1.55, [2.0, 3.35, 3.35, 3.43], [.6, .72, .72, .78, 1.0], [
         ["", "Tylman y Dzierżek (2020)^{1}", "Meraj et al. (2024)^{2}", "Este proyecto"],
-        ["Accionamiento", "Bobinado motorizado", "Automatizado con Arduino", "Manual, por manivela"],
-        ["Corte", "Cuchilla fija", "Dos rodamientos afilados", "Cuchilla fija comercial"],
-        ["Avance", "Bobinado de la tira, engranajes 1:10", "Husillo roscado (lead screw)", "Engranajes y husillo vinculados al giro"],
-        ["Qué aporta", "La irregularidad del ancho genera defectos en el material", "El husillo sincroniza corte y avance sobre una botella", "Coordinación mecánica con una única entrada manual"],
+        ["Accionamiento", "Bobinado motorizado", "Automatizado con Arduino", "Manual, manivela directa al carrete"],
+        ["Corte", "Cuchilla fija", "Dos rodamientos afilados", "Hoja de trincheta fija sobre un calce"],
+        ["Avance", "Bobinado de la tira, engranajes 1:10", "Husillo roscado (lead screw)", "La guía fija el paso; la tira arrastra la botella"],
+        ["Qué aporta", "La irregularidad del ancho genera defectos en el material", "El husillo sincroniza corte y avance sobre una botella", "Ancho fijado por geometría, sin mecanismo de avance"],
     ], sz=16)
     s.nota_pie([
         "^{1} Tylman, I., & Dzierżek, K. (2020). Filament for a 3D printer from PET bottles — Simple machine. International Journal of Mechanical Engineering and Robotics Research, 9(10), 1386–1392. https://doi.org/10.18178/ijmerr.9.10.1386-1392",
@@ -426,332 +423,312 @@ def lamina_antecedentes():
     return s
 
 
-def lamina_principio(fig):
-    s = Lamina(1, "Bloque 2", 75,
-               "Esta es la solución. Aclaro que la imagen es una ilustración conceptual generada con inteligencia artificial: sirve para ubicar los componentes, pero no define dimensiones. "
-               "El principio combina dos movimientos. El primero es el giro: un rodillo hace girar la botella por fricción. El segundo es el avance: un husillo desplaza longitudinalmente el carro que lleva la botella. "
-               "La cuchilla queda fija a la base, así que es la botella la que se mueve frente a ella. La combinación de giro y avance dibuja una hélice sobre la pared del envase, y esa hélice es la tira. "
-               "Durante el corte, lo único que hago como operador es girar la manivela. Ahora veamos cómo se usa y cómo se conectan los movimientos.")
-    s.titulo("Giro más avance: un corte helicoidal controlado")
-    ruta, asp = fig["conjunto"]
-    ancho = 7.7
-    s.imagen(ruta, .6, 1.55, ancho, ancho / asp, "Ilustración del conjunto con rótulos: sujeción exterior del cuello, rodillo, manivela, engranajes, husillo y tuerca, guías y carro, cuchilla metálica", radio=2500, borde="bg2")
-    s.caja(.6, 1.55 + ancho / asp + .06, ancho, .28, "Ilustración conceptual generada con IA; no define dimensiones.", sz=11, c="accent6", nombre="Crédito de la imagen")
-    items = [("Giro", "Rodillo por fricción", "accent1"), ("Avance", "Husillo y carro", "accent2"), ("Corte", "Cuchilla fija", "accent3")]
-    for k, (t, d, c) in enumerate(items):
-        y = 1.55 + k * 1.15
-        s.anillo(8.7, y + .1, .66, k + 1, c, sz=18)
-        s.caja(9.6, y, 3.13, .95, [{"t": t, "b": True, "sz": 22, "c": "tx2"}, d], sz=18, anchor="ctr", nombre=t)
-    s.tarjeta(8.7, 5.1, 4.03, 1.2, {"t": "Durante el corte, el operador solo gira la manivela", "b": True, "c": "tx2"}, sz=19, anchor="ctr", nombre="Mensaje")
+def lamina_modelo_1(fig):
+    s = Lamina(1, "Sergio", 50, "Del modelo 1 al 2.0",
+               "Nuestro primer diseño, el de la segunda entrega, hacía girar la botella con un rodillo por fricción y la hacía avanzar con un husillo y engranajes. "
+               "Al modelarlo para construirlo vimos dos problemas. El rodillo podía resbalar: la fuerza que transmite depende del rozamiento, y cae si la botella se deforma. "
+               "Y el cuello cargaba con todo: sostenía la botella, tomaba el empuje y giraba, con casi 27 centímetros de botella en voladizo. "
+               "Así que lo descartamos antes de construirlo. Fue parte normal del diseño.")
+    s.titulo("Modelo 1: lo descartamos antes de construirlo")
+    x, y, w, h = encajar(fig, "modelo_1", .6, 1.5, 7.3, 4.95)
+    s.imagen(fig["modelo_1"][0], x, y, w, h, "Render del modelo 1: botella horizontal sujeta del cuello, rodillo, engranajes, husillo, tuerca fija y cuchilla fija", radio=2500, borde="bg2")
+    s.caja(x, y + h + .04, w, .28, "Modelo 1 en FreeCAD (Entrega 2)", sz=11, c="accent6", nombre="Crédito de la imagen")
+    items = [("Rodillo por fricción", "Podía resbalar: F_{t} ≤ μ_{s}·N"),
+             ("Cuello", "Sostenía, empujaba y giraba, con 269 mm en voladizo")]
+    for k, (t, d) in enumerate(items):
+        yy = 1.55 + k * 1.75
+        s.anillo(8.3, yy + .12, .62, k + 1, "accent4")
+        s.caja(9.1, yy, 3.63, 1.55, [{"t": t, "b": True, "sz": 22, "c": "tx2", "despues": 4}, d], sz=18, nombre=t)
+    s.tarjeta(8.3, 5.15, 4.43, 1.25, {"t": "Iteración de diseño: del modelo al cambio de principio", "b": True, "c": "tx2"}, sz=18, anchor="ctr", nombre="Mensaje")
     return s
 
 
-def lamina_proceso():
-    s = Lamina(1, "Bloque 3", 60,
-               "El uso tiene cinco pasos. Primero quito la base de la botella, porque el corte empieza en ese borde abierto. Después sujeto el cuello con una pieza desmontable de dos mitades, que gira sobre rodamientos. "
-               "Tercero, regulo la posición y la presión del rodillo, y ajusto la cuchilla, que queda bloqueada durante la operación. Cuarto, giro la manivela: el corte avanza desde el borde abierto hacia el cuello. "
-               "Quinto, me detengo antes de llegar a la franja próxima al hombro, que es donde apoya el rodillo y por eso queda sin cortar, y retiro la tira.")
-    s.titulo("Del envase a la tira en cinco pasos")
-    ejey, R = 2.72, .66
-    x_hombro, x_cuerpo, x_fin = 2.55, 3.75, 10.55
-    arriba = [(1.55, ejey - .3), (x_hombro, ejey - .3)]
-    arriba += [(x_hombro + (x_cuerpo - x_hombro) * k / 24,
-                ejey - .3 - (R - .3) * (1 - math.cos(math.pi * k / 24)) / 2) for k in range(1, 25)]
-    arriba += [(x_fin, ejey - R)]
-    abajo = [(x, 2 * ejey - y) for x, y in reversed(arriba)]
-    s.trazo([arriba + abajo + [arriba[0]]], c="accent1", pt=1.75, fondo="accent1", transparencia=86, nombre="Esquema botella", alt="Esquema de botella horizontal con el cuello a la izquierda y el borde abierto a la derecha")
-    s.trazo([[(x_fin, ejey - R), (11.05, ejey - R), (11.3, ejey - R * .55), (11.3, ejey + R * .55), (11.05, ejey + R), (x_fin, ejey + R)]],
-            c="accent6", pt=1.25, guion="dash", nombre="Esquema base retirada")
-    s.trazo([[(3.85, ejey - R), (4.75, ejey - R), (4.75, ejey + R), (3.85, ejey + R), (3.85, ejey - R)]], c="accent2", pt=1, fondo="accent2", transparencia=55, nombre="Esquema franja del rodillo")
-    s.caja(1.72, ejey - .47, .58, .94, fondo="accent3", geom="roundRect", radio=14000, nombre="Esquema sujeción", alt="Sujeción exterior del cuello")
-    paso, hel, x = .42, [], x_fin
-    while x - paso / 2 > 5.0:
-        hel.append([(x, ejey - R), (x - paso / 2, ejey + R)])
-        x -= paso
-    s.trazo(hel, c="accent4", pt=1.25, nombre="Esquema trayectoria helicoidal", alt="Líneas inclinadas que representan la trayectoria helicoidal del corte")
-    def rotulo(tx, ty, tw, texto, lx, ly1, ly2, c="tx2"):
-        s.caja(tx, ty, tw, .3, {"t": texto, "b": True, "c": c, "algn": "ctr"}, sz=15, nombre=f"Rótulo {texto}")
-        s.recta(lx, ly1, lx, ly2, c=c, pt=1, punta=False)
-    rotulo(.8, 1.5, 2.4, "Sujeción del cuello", 2.0, 1.82, ejey - .47, "accent3")
-    rotulo(3.3, 1.5, 2.0, "Franja del rodillo", 4.3, 1.82, ejey - R, "tx2")
-    rotulo(6.8, 1.5, 2.4, "Zona de corte", 8.0, 1.82, ejey - R, "accent4")
-    rotulo(10.2, 1.5, 1.8, "Base retirada", 11.1, 1.82, ejey - R, "accent6")
-    s.recta(10.3, ejey + R + .14, 5.1, ejey + R + .14, c="accent4", pt=1.75, nombre="Flecha de sentido")
-    s.caja(5.2, ejey + R + .18, 5.1, .3, {"t": "Del borde abierto al cuello", "c": "accent4", "algn": "ctr", "b": True}, sz=15, nombre="Sentido del corte")
-    pasos = ["Quitar la base", "Sujetar el cuello", "Regular rodillo y cuchilla", "Girar la manivela", "Retirar la tira"]
-    w = 2.3
-    for k, t in enumerate(pasos):
-        x = .6 + k * (w + .1075)
-        s.tarjeta(x, 4.25, w, 2.15, fondo="bg2", nombre=f"Fondo paso {k + 1}")
-        s.anillo(x + .16, 4.4, .56, k + 1, sz=16)
-        s.caja(x + .16, 5.08, w - .3, 1.2, {"t": t, "c": "tx2", "b": True}, sz=20, nombre=f"Paso {k + 1}")
+def flecha_arco(s, cx, cy, r, a0, a1, c, nombre):
+    """Arco de a0 a a1 (grados, sentido horario en pantalla) con punta al final."""
+    n = 24
+    pts = [(cx + r * math.cos(math.radians(a0 + (a1 - a0) * k / n)), cy + r * math.sin(math.radians(a0 + (a1 - a0) * k / n))) for k in range(n + 1)]
+    s.trazo([pts[:-1]], c=c, pt=2.5, nombre=nombre)
+    s.recta(*pts[-3], *pts[-1], c=c, pt=2.5, nombre=nombre + " punta")
+
+
+def lamina_principio():
+    s = Lamina(1, "Sergio", 70, "Del modelo 1 al 2.0",
+               "El modelo 2.0 cambia el principio: la tira tira de la botella. La botella va parada, con el pico arriba, sobre una varilla vertical. "
+               "El borde cortado apoya en la guía del cabezal y la pared pasa por una ranura donde está la hoja fija. "
+               "La tira pasa por un ojal y se enrolla en un carrete. Al girar la manivela, la tira se enrolla, tira de la pared, la botella gira y la hoja corta. "
+               "El corte es una hélice: en cada vuelta la botella baja el ancho de la tira y vuelve a apoyar en la guía. El paso lo fija la guía, no un mecanismo. "
+               "Y no hay nada que dependa de la fricción: si el corte pide más fuerza, se tira más fuerte.")
+    s.titulo("Modelo 2.0: la tira tira de la botella")
+    k = .021                                   # pulgadas por mm del modelo
+    bx, by = 1.75, 3.95                        # eje de la botella
+    rb = 44 * k
+    xc, yc = bx + 180 * k, by - 22.8 * k        # eje del carrete
+    yt = by - rb                               # la tira sale tangente
+    gris, naranja, verde = "accent6", "accent2", "accent1"
+    s.caja(bx - rb, by - rb, 2 * rb, 2 * rb, fondo="bg2", borde=verde, borde_pt=2, geom="ellipse", nombre="Esquema botella")
+    s.caja(bx - .07, by - .07, .14, .14, fondo=gris, geom="ellipse", nombre="Esquema varilla")
+    s.caja(bx - .25, yt - .42, .95, .5, fondo=naranja, borde=None, geom="rect", nombre="Esquema cabezal", transparencia=25)
+    s.recta(bx, yt, xc, yt, c=verde, pt=5, punta=False, nombre="Esquema tira")
+    s.caja(bx + 70 * k - .08, yt - .2, .16, .4, fondo=naranja, geom="rect", nombre="Esquema ojal")
+    for r, f in ((36.4, "bg2"), (21.2, verde), (16, naranja)):
+        s.caja(xc - r * k, yc - r * k, 2 * r * k, 2 * r * k, fondo=f, borde=naranja if f == "bg2" else None, borde_pt=1.5, geom="ellipse", nombre="Esquema carrete")
+    s.recta(xc, yc, xc + 80 * k, yc, c=naranja, pt=9, punta=False, nombre="Esquema manivela")
+    s.caja(xc + 80 * k - 11 * k, yc - 11 * k, 22 * k, 22 * k, fondo=naranja, geom="ellipse", nombre="Esquema mango")
+    # Visto desde arriba, botella y carrete giran en sentido horario (README del modelo 2.0, sección 2)
+    flecha_arco(s, bx, by, rb + .2, 115, 235, "accent3", "Esquema giro botella")
+    flecha_arco(s, xc, yc, 80 * k + .38, -45, 45, "accent3", "Esquema giro manivela")
+    s.recta(bx + 1.6, yt - .32, bx + 2.5, yt - .32, c="accent3", pt=2.5, nombre="Esquema tiro")
+    rot = [("Botella", bx - .25, by + rb + .3), ("Hoja", bx - .3, yt - .95), ("Tiro", bx + 1.75, yt - .78),
+           ("Ojal", bx + 70 * k - .3, yt + .3), ("Carrete", xc - .5, yc + 38 * k + .12), ("Manivela", xc + .55, yc + .3)]
+    for t, x, y in rot:
+        s.caja(x, y, 1.2, .36, {"t": t, "b": True, "c": "tx2"}, sz=15, nombre=f"Esquema rótulo {t}")
+    s.caja(.6, 6.1, 6.9, .3, "Vista desde arriba, sin escala", sz=12, c="accent6", nombre="Crédito del esquema")
+    pasos = ["Manivela: enrolla la tira", "El tiro gira la botella contra la hoja", "Baja w por vuelta: la guía fija el paso"]
+    for i, t in enumerate(pasos):
+        y = 1.6 + i * 1.12
+        s.anillo(8.0, y + .1, .62, i + 1, sz=18)
+        s.caja(8.8, y, 3.93, .95, {"t": t, "c": "tx2", "b": True}, sz=19, anchor="ctr", nombre=f"Paso {i + 1}")
+    s.tarjeta(8.0, 5.15, 4.73, 1.25, {"t": "Nada depende de la fricción", "b": True, "c": "bg1", "algn": "ctr"}, fondo="tx2", sz=22, anchor="ctr", nombre="Mensaje")
     return s
 
 
-def lamina_cadena():
-    s = Lamina(1, "Bloque 3", 90,
-               "Veamos la cadena cinemática. Hay una única entrada, la manivela, unida al eje del rodillo de modo que no haya giro relativo entre ambos. Desde ese eje salen dos caminos. "
-               "Por arriba, el rodillo transmite el movimiento a la botella por fricción; como es un contacto exterior, giran en sentidos opuestos. "
-               "Por abajo, un par de engranajes reduce la velocidad y la entrega al husillo, que al girar a través de una tuerca fija convierte el giro en avance del carro. "
-               "Los dos caminos terminan en la misma trayectoria helicoidal, y el dato que la define es a, el avance por vuelta de botella: la velocidad del carro dividida por la velocidad de giro de la botella. "
-               "La clave es que giro y avance nacen del mismo eje. Entonces quedan vinculados mecánicamente: si giro más rápido o más lento, los dos cambian juntos y la relación se mantiene, siempre que el rodillo no deslice. "
-               "Esa es la diferencia con cortar a mano. Pasemos ahora a los dos eslabones críticos.")
-    s.titulo("Una manivela, dos caminos cinemáticos")
-    def caja(x, y, w, t, sub="", c="bg2", tc="tx2"):
-        ps = [{"t": t, "b": True, "sz": 18, "c": tc, "algn": "ctr"}]
-        if sub:
-            ps.append({"t": sub, "sz": 16, "c": tc if c == "tx2" else "tx1", "algn": "ctr"})
-        s.tarjeta(x, y, w, 1.02, ps, fondo=c, anchor="ctr", margen=.05, nombre=t)
-    fy, ay, cy = 1.7, 4.0, 2.85
-    caja(.6, cy, 1.6, "Manivela", "Entrada", "tx2", "bg1")
-    caja(2.5, cy, 1.45, "Eje")
-    s.recta(2.2, cy + .51, 2.5, cy + .51)
-    s.recta(3.95, cy + .51, 4.4, cy + .51, punta=False)
-    s.recta(4.4, fy + .51, 4.4, ay + .51, punta=False)
-    s.recta(4.4, fy + .51, 4.75, fy + .51, c="accent1", pt=2.25)
-    s.recta(4.4, ay + .51, 4.75, ay + .51, c="accent2", pt=2.25)
-    caja(4.75, fy, 1.7, "Rodillo", "n_{r}")
-    s.recta(6.45, fy + .51, 8.5, fy + .51, c="accent1", pt=2.25)
-    s.caja(6.5, fy + .1, 1.95, .34, {"t": "Fricción", "b": True, "c": "accent1", "algn": "ctr"}, sz=16, nombre="Rótulo fricción")
-    caja(8.5, fy, 1.8, "Botella gira", "n_{b}")
-    caja(4.75, ay, 1.7, "Engranajes", "i")
-    s.recta(6.45, ay + .51, 6.7, ay + .51, c="accent2", pt=2.25)
-    caja(6.7, ay, 1.55, "Husillo", "L")
-    s.recta(8.25, ay + .51, 8.5, ay + .51, c="accent2", pt=2.25)
-    caja(8.5, ay, 1.8, "Carro avanza", "v")
-    s.recta(10.3, fy + .51, 10.62, fy + .51, c="accent1", pt=2.25, punta=False)
-    s.recta(10.3, ay + .51, 10.62, ay + .51, c="accent2", pt=2.25, punta=False)
-    s.recta(10.62, fy + .51, 10.62, cy + .38, c="accent1", pt=2.25, punta=False)
-    s.recta(10.62, ay + .51, 10.62, cy + .64, c="accent2", pt=2.25, punta=False)
-    s.recta(10.62, cy + .38, 10.95, cy + .38, c="accent1", pt=2.25)
-    s.recta(10.62, cy + .64, 10.95, cy + .64, c="accent2", pt=2.25)
-    caja(10.95, cy, 1.78, "Hélice", "a = v / n_{b}", "tx2", "bg1")
-    s.caja(.6, 5.45, 12.13, .75, {"t": "Giro y avance quedan **vinculados mecánicamente**", "algn": "ctr"}, sz=24, c="tx2", anchor="ctr", nombre="Mensaje")
+def lamina_cabezal(fig):
+    s = Lamina(1, "Martín", 55, "Diseño y cuentas",
+               "El requisito más importante es que el ancho sea constante, porque es lo que los antecedentes marcan como problema. "
+               "En el cabezal, el ancho es la altura del filo sobre la guía, y esa altura la fija el calce que va debajo de la hoja. No depende del diámetro de la botella ni de la mano. "
+               "La pared pasa por una ranura de 0,85 milímetros entre dos labios, así no se inclina, y el borde apoya sobre una chapita de metal para que no gaste el plástico; en el prototipo todavía falta ponerla. "
+               "Para otro ancho se cambia el calce: hay de 7, 8, 9 y 10 milímetros.")
+    s.titulo("El ancho de la tira lo fija el cabezal")
+    x, y, w, h = encajar(fig, "cabezal", .6, 1.5, 5.6, 3.5)
+    s.imagen(fig["cabezal"][0], x, y, w, h, "Render del cabezal de corte: placa sobre el taco de MDF, labios, chapita, calce, hoja, pisador y la tira saliendo hacia el ojal", radio=2500, borde="bg2")
+    s.tarjeta(.6, 5.2, 5.6, 1.25, {"t": "**w** = altura del filo sobre la guía = espesor del **calce** (7, 8, 9 o 10 mm)", "c": "tx2"}, sz=18, anchor="ctr", nombre="Ecuación del ancho")
+    ancho_a = 4.05
+    asp = fig["detalle_a"][1]
+    xa, ya, ha = 6.55, 1.5, ancho_a / asp
+    s.imagen(fig["detalle_a"][0], xa, ya, ancho_a, ha, "Corte por la ranura del cabezal: pared de la botella entre los labios, hoja a la altura w sobre la chapita, calce, pisador, placa y taco de MDF")
+    for t, f in ROTULOS_A:
+        s.caja(xa + ancho_a + .04, ya + f * ha - .11, 2.1, .22, {"t": t, "c": "tx1"}, sz=11, anchor="ctr", nombre=f"Rótulo plano {t}")
+    s.caja(6.55, ya + ha + .02, ancho_a, .26, {"t": "Corte por la ranura (lámina 2, detalle A)", "c": "accent6"}, sz=11, nombre="Rótulo plano detalle")
+    s.caja(6.55, 5.35, 6.18, 1.1, "Ranura de 0,85 mm: la pared no se inclina. Falta la chapita del borde.",
+           sz=17, c="tx2", nombre="Ranura y chapita")
     return s
 
 
-def tarjeta_ecuacion(s, x, y, w, h, formula, pie, sz=25):
-    s.tarjeta(x, y, w, h, [{"t": formula, "sz": sz, "b": True, "c": "tx2", "algn": "ctr", "fuente": "+mj-lt", "despues": 2},
-                           {"t": pie, "sz": 15, "algn": "ctr"}], anchor="ctr", margen=.1, nombre="Ecuación")
-
-
-def lamina_friccion(fig):
-    s = Lamina(1, "Bloque 4", 75,
-               "El primer eslabón crítico es el contacto entre rodillo y botella. La fuerza tangencial que puedo transmitir sin deslizamiento tiene un límite: el coeficiente de fricción estática por la fuerza normal. "
-               "Es un límite de adherencia, no una fuerza constante. Si aprieto poco, el rodillo desliza y el avance del husillo pierde la relación prevista con el giro de la botella. Si aprieto demasiado, deformo el envase. "
-               "Por eso la posición y la presión son regulables, y el intervalo correcto lo vamos a determinar experimentalmente. La segunda ecuación es la condición de rodadura sin deslizamiento: "
-               "a igual velocidad del rodillo, una botella de mayor diámetro gira más lento. Eso va a importar enseguida para el paso del corte.")
-    s.titulo("Fricción: transmitir el giro sin deslizar ni aplastar")
-    ruta, asp = fig["detalle_rodillo"]
-    s.imagen(ruta, .6, 1.55, 4.9, 4.9 / asp, "Detalle ilustrado del rodillo sobre la franja de la botella y la manivela, marcados con un anillo rojo", radio=2500, borde="bg2")
-    s.caja(.6, 1.55 + 4.9 / asp + .06, 4.9, .28, "Ilustración conceptual generada con IA.", sz=11, c="accent6", nombre="Crédito de la imagen")
-    tarjeta_ecuacion(s, 5.9, 1.55, 3.05, 1.3, "F_{t} ≤ μ_{s} · N", "Límite de adherencia^{3}")
-    tarjeta_ecuacion(s, 9.13, 1.55, 3.6, 1.3, "n_{b} · D_{b} = n_{r} · D_{r}", "Rodadura sin deslizamiento^{4}")
-    s.caja(5.9, 3.15, 6.83, 2.5, [
-        {"t": "**Poca presión:** desliza", "viñeta": True, "despues": 10},
-        {"t": "**Mucha presión:** aplasta", "viñeta": True, "despues": 10},
-        {"t": "**Presión regulable:** intervalo por ensayos", "viñeta": True},
-    ], sz=22, nombre="Consecuencias")
-    s.nota_pie(["^{3} OpenStax. (2016). 6.2 Friction. En University Physics Volume 1. https://openstax.org/books/university-physics-volume-1/pages/6-2-friction",
-                "^{4} OpenStax. (2016). 11.1 Rolling Motion. En University Physics Volume 1. https://openstax.org/books/university-physics-volume-1/pages/11-1-rolling-motion"], y=6.3, h=.7)
-    return s
-
-
-def lamina_husillo(fig):
-    s = Lamina(1, "Bloque 4", 75,
-               "El segundo eslabón es el avance. Un par de engranajes cilíndricos de dientes rectos conecta el eje del rodillo con el husillo. Como el conducido tiene más dientes, el husillo gira más lento que el rodillo: esa es la relación de reducción i. "
-               "La tuerca está fija a la base, entonces el husillo gira y se desplaza a través de ella, y arrastra al carro, al que está retenido axialmente. Engranajes y apoyos acompañan al carro, así se conserva la distancia entre ejes. "
-               "La velocidad del carro es L por la velocidad del husillo. Un detalle importante: L es el avance por vuelta, y coincide con el paso de rosca solo si el husillo tiene una entrada. Ahora combinemos estas relaciones.")
-    s.titulo("Husillo: del giro reducido al avance longitudinal")
-    ruta, asp = fig["detalle_tuerca"]
-    s.caja(.6, 1.55, 6.83, 2.2, [
-        {"t": "**Tuerca fija** a la base", "viñeta": True, "despues": 10},
-        {"t": "El husillo arrastra el carro", "viñeta": True, "despues": 10},
-        {"t": "L = paso solo con **una entrada**", "viñeta": True},
-    ], sz=22, nombre="Funcionamiento")
-    tarjeta_ecuacion(s, .6, 3.95, 4.05, 1.3, "i = z_{2} / z_{1} = n_{r} / n_{h}", "Reducción^{5}")
-    tarjeta_ecuacion(s, 4.83, 3.95, 2.6, 1.3, "v = L · n_{h}", "Velocidad^{6}")
-    s.imagen(ruta, 7.83, 1.55, 4.9, 4.9 / asp, "Detalle ilustrado del husillo y la tuerca fija, marcados con un anillo verde", radio=2500, borde="bg2")
-    s.caja(7.83, 1.55 + 4.9 / asp + .06, 4.9, .28, "Ilustración conceptual generada con IA.", sz=11, c="accent6", nombre="Crédito de la imagen")
-    s.nota_pie(["^{5} Kohara Gear Industry Co., Ltd. (s. f.). Internal gears: KHK technical information. https://khkgears.net/pdf/2025/internal-gears.pdf",
-                "^{6} Thomson Industries, Inc. (s. f.). Lead vs. pitch: What's the difference? https://www.thomsonlinear.com/en/training/lead-screws/lead_vs_pitch"], y=6.3, h=.7)
-    return s
-
-
-def lamina_ecuacion():
-    a_t8 = avance(L_T8, I_T8, 88.0)
-    a_m8 = avance(L_M8, I_M8, 88.0)
-    largo_m = math.pi * 88.0 * TRAMO_CILINDRICO / a_t8 / 1000
-    vueltas_manivela = TRAMO_CILINDRICO / a_t8 * 88.0 / D_RODILLO
-    s = Lamina(1, "Bloque 5", 105,
-               "Si combino las relaciones anteriores obtengo la ecuación de diseño: a es igual a L por el diámetro de la botella, dividido i por el diámetro del rodillo. "
-               "a es el paso de la hélice; todavía tenemos que verificar su correspondencia con el ancho real de la tira. Hicimos una primera pasada con valores de referencia, que no son definitivos. "
-               f"Tomé un rodillo de 50 milímetros, leído del plano preliminar, y una botella de 88. Con una varilla roscada M8 común, sin reducción, a da apenas {a_m8:.1f} milímetros, y con reducción daría menos todavía. ".replace("2.2", "2,2")
-               + f"Con un husillo de 8 milímetros de avance por vuelta, como los T8 de cuatro entradas, y una reducción de 2 a 1, a da unos {a_t8:.0f} milímetros. "
-               f"Si suponemos un tramo de corte de 180 milímetros, serían unos {largo_m:.0f} metros de tira y unas {vueltas_manivela:.0f} vueltas de manivela. "
-               "El gráfico deja otra conclusión: a crece con el diámetro de la botella. Por eso, para adaptar el avance a distintos envases, estudiamos pares de engranajes intercambiables.")
-    s.titulo("Ecuación de diseño: el paso del corte")
-    s.tarjeta(.6, 1.55, 5.1, 1.2, {"t": "a = L · D_{b} / (i · D_{r})", "sz": 32, "b": True, "c": "bg1", "algn": "ctr", "fuente": "+mj-lt"},
-              fondo="tx2", anchor="ctr", nombre="Ecuación de diseño")
-    s.caja(.6, 2.92, 5.1, .4, {"t": "Botella: D_{b} = 88 mm", "b": True, "c": "tx2"}, sz=20, nombre="Datos del ejemplo")
-    datos = [(f"≈{a_t8:.0f} mm", "T8", "accent1"), (f"≈{a_m8:.1f} mm".replace(".", ","), "M8", "accent6")]
-    for k, (v, d, c) in enumerate(datos):
-        s.caja(.6 + k * 2.6, 3.42, 2.5, 1.3, [{"t": v, "sz": 34, "b": True, "c": c, "fuente": "+mj-lt"}, {"t": d, "sz": 18}], nombre=f"Dato {d}")
-    s.tarjeta(.6, 4.95, 5.1, .75, {"t": "Valores de referencia", "b": True, "c": "tx2", "algn": "ctr"}, sz=20, anchor="ctr", nombre="Aclaración")
-    s.grafico(6.0, 1.5, 6.73, 4.45, "Gráfico de barras del avance por vuelta de botella según diámetro, para dos combinaciones de husillo y reducción")
-    s.nota_pie(["Valores a confirmar: D_{r} = 50 mm leído del plano preliminar; D_{b} a medir; M8 × 1,25 según ISO 261 (1998); L = 8 mm en husillos T8 comerciales de 4 entradas. Ecuación: Entrega 2, apartado 5.3; valores: elaboración propia."], y=6.2, h=.8)
-    return s
-
-
-def lamina_materiales():
-    s = Lamina(1, "Bloque 5", 45,
-               "Para el dispositivo real proponemos una base de chapa y perfiles de acero, con un carro en placa mecanizada. El husillo, la tuerca, los engranajes y los rodamientos serían preferentemente comerciales, una vez definidos los esfuerzos. "
-               "El rodillo lleva núcleo rígido con recubrimiento elastomérico reemplazable, y la cuchilla es comercial. Para el prototipo académico estamos definiendo varias piezas impresas en 3D en PLA, con un relleno de alrededor del 30 % como máximo. Para cerrar, veamos los planos y lo que falta.")
-    s.titulo("Materiales del dispositivo real")
-    s.tabla(.6, 1.55, [3.0, 9.13], [.58, .68, .68, .68, .68, .68], [
-        ["Elemento", "Propuesta"],
-        ["Base", "Chapa y perfiles de acero, con puntos de fijación a un banco de trabajo"],
-        ["Carro", "Placa mecanizada con alojamientos y ranuras de regulación"],
-        ["Ejes y rodillo", "Ejes metálicos; rodillo con núcleo rígido y recubrimiento elastomérico reemplazable"],
-        ["Transmisión", "Husillo, tuerca, engranajes y rodamientos, preferentemente comerciales"],
-        ["Cuchilla", "Comercial, con portaherramientas desmontable"],
-    ], sz=17)
-    s.tarjeta(.6, 5.85, 12.13, .6, {"t": "**Prototipo:** piezas impresas en 3D en PLA (en definición)", "c": "tx2", "algn": "ctr"}, sz=20, anchor="ctr", nombre="Prototipo", margen=.05)
-    return s
-
-
-def lamina_plano(dxf):
-    s = Lamina(1, "Bloque 6", 45,
-               "Estos son los primeros planos del grupo, dibujados en CAD. Muestro el rodillo entre sus dos apoyos con rodamientos, la manivela y el porta rodamientos, partido en dos mitades. "
-               "Las medidas que ven son las leídas del dibujo y están sujetas al dimensionamiento. Todavía faltan el conjunto general, la transmisión y las tolerancias, que son parte de lo que nos queda por cerrar.")
-    s.titulo("Anteproyecto: conjunto del rodillo y sus apoyos")
-    esc = .0215
-    vista_dxf(s, dxf, (248, 20, 562, 126), .6, 1.5, esc, "frontal")
-    vista_dxf(s, dxf, (128, 20, 212, 126), 7.55, 1.5, esc, "lateral")
-    vista_dxf(s, dxf, (483, 123, 557, 197), 1.5, 4.25, esc, "manivela")
-    vista_dxf(s, dxf, (573, 128, 647, 212), 4.3, 4.15, esc, "porta rodamientos")
-    s.caja(.6, 3.84, 6.6, .26, {"t": "Rodillo entre apoyos, con manivela (vista interrumpida)", "algn": "ctr", "c": "accent6"}, sz=11, nombre="Rótulo plano frontal")
-    s.caja(7.3, 3.84, 2.3, .26, {"t": "Vista lateral", "algn": "ctr", "c": "accent6"}, sz=11, nombre="Rótulo plano lateral")
-    s.caja(.9, 5.88, 2.7, .26, {"t": "Manivela", "algn": "ctr", "c": "accent6"}, sz=11, nombre="Rótulo plano manivela")
-    s.caja(3.65, 6.0, 3.1, .26, {"t": "Porta rodamientos (dos mitades)", "algn": "ctr", "c": "accent6"}, sz=11, nombre="Rótulo plano porta rodamientos")
-    datos = [("Ø50 mm", "Rodillo"), ("Ø30 mm", "Eje"), ("Ø70 mm", "Manivela"), ("70 × 80 mm", "Porta rodamientos")]
+def lamina_cuentas():
+    fun = MODELO["funcionamiento"]
+    coma = lambda v: f"{v}".replace(".", ",")
+    s = Lamina(1, "Martín", 65, "Diseño y cuentas",
+               "La cuenta que más decisiones tomó es la fuerza en la mano: el tiro de la tira por el radio del rollo, dividido por el brazo de la manivela. "
+               "Comparamos tres transmisiones. El tren de engranajes de una bobinadora de filamento multiplica la velocidad y pide unos 85 newtons. "
+               "Una reducción 1 a 3 baja la fuerza pero triplica las vueltas. La manivela directa al carrete pide unos 13 newtons, por debajo del criterio de 20, y no lleva engranajes. "
+               "La tira aguanta unos 124 newtons, tres veces el tiro. Una aclaración: el tiro de 40 newtons es un supuesto, todavía no lo medimos. "
+               "Y el modelo nos avisó que, hacia el final, la botella pesa tan poco que podría no bajar sola: previó un lastre de unos 115 gramos.")
+    s.titulo("Cuentas clave: manivela directa, sin engranajes")
+    s.tabla(.6, 1.55, [3.9, 2.3, 2.3], [.62, .7, .7, .7], [
+        ["Transmisión", "Fuerza en la mano", "Vueltas por botella"],
+        ["Tren de una bobinadora (×6,6)", "~85 N", "~7"],
+        ["Directa 1:1 (elegida)", f"{coma(fun['fuerza_mano_N'])} N", str(fun["vueltas_manivela"])],
+        ["Reducción 1:3", "~4 N", "~130"],
+    ], sz=17, resaltar_fila=2)
+    s.tarjeta(.6, 4.5, 8.5, 1.3, [{"t": "F = T · r / R", "b": True, "sz": 28, "fuente": "+mj-lt", "c": "tx2"},
+                                 {"t": "T: tiro · r: radio del rollo · R: brazo (80 mm)", "sz": 16}],
+              anchor="ctr", nombre="Ecuación de la fuerza", algn="ctr")
+    datos = [(f"{fun['rotura_tira_N']} N", "rompe la tira: 3 veces el tiro"), (f"~{fun['lastre_total_g']} g", "de lastre previsto al final del corte")]
     for k, (v, d) in enumerate(datos):
-        y = 1.55 + k * .98
-        s.tarjeta(10.05, y, 2.68, .88, [{"t": v, "b": True, "sz": 22, "c": "accent1", "fuente": "+mj-lt", "algn": "ctr"}, {"t": d, "sz": 15, "algn": "ctr"}], anchor="ctr", margen=.05, nombre=d)
-    s.tarjeta(7.3, 5.55, 5.43, .75, {"t": "Plano preliminar", "b": True, "c": "tx2", "algn": "ctr"}, sz=20, anchor="ctr", nombre="Aclaración")
+        y = 1.55 + k * 2.15
+        s.tarjeta(9.45, y, 3.28, 1.95, [{"t": v, "b": True, "sz": 30, "c": "accent1", "fuente": "+mj-lt", "algn": "ctr"}, {"t": d, "sz": 16, "algn": "ctr"}],
+                  anchor="ctr", margen=.12, nombre=d)
+    s.nota_pie(["Tiro de diseño T = 40 N: supuesto, todavía sin medir. Criterio: hasta 20 N en la mano. Rollo lleno: r = 26,4 mm. Valores del modelo 2.0 y del documento conceptual, sección 4."], y=5.95, h=.5)
     return s
 
 
-def lamina_ensayos():
-    s = Lamina(1, "Bloque 6", 60,
-               "Lo que no se puede resolver en el papel se responde con el prototipo, que tiene que contestar cuatro preguntas. ¿Retiene? Controlamos que el cuello no se desplace durante el recorrido. "
-               "¿Desliza? Marcamos rodillo y botella y comparamos las vueltas reales con la relación teórica. ¿Es uniforme? Medimos el ancho a lo largo de la tira y lo comparamos con a calculado. "
-               "¿Es continua? Registramos cortes y longitud total. Con esas cuatro respuestas vamos a saber qué partes del diseño se sostienen y cuáles hay que corregir. Los próximos pasos son cerrar dimensiones y rango de envases, completar los planos, construir el prototipo, ensayar y ajustar el diseño.")
-    s.titulo("El prototipo debe responder cuatro preguntas")
-    cuadros = [("¿Retiene?", "Sujeción del cuello"), ("¿Desliza?", "Rodillo y botella"), ("¿Es uniforme?", "Ancho de la tira"), ("¿Es continua?", "Corte completo")]
-    for k, (t, sub) in enumerate(cuadros):
-        x, y = .6 + (k % 2) * 4.33, 1.55 + (k // 2) * 2.45
-        s.tarjeta(x, y, 4.15, 2.3, [{"t": t, "b": True, "sz": 28, "c": "tx2", "fuente": "+mj-lt", "despues": 6}, {"t": sub, "c": "accent1", "b": True}], sz=20, margen=.22, anchor="ctr", nombre=t)
-    s.caja(9.4, 1.55, 3.33, .4, {"t": "Próximos pasos", "b": True, "c": "tx2"}, sz=20, nombre="Próximos pasos")
-    pasos = ["Cerrar dimensiones", "Completar planos", "Construir prototipo", "Ensayar y ajustar"]
-    s.recta(9.68, 2.45, 9.68, 5.5, c="accent1", pt=2, punta=False, nombre="Línea de pasos")
-    for k, t in enumerate(pasos):
-        y = 2.2 + k * 1.04
-        s.anillo(9.4, y, .56, k + 1, sz=15)
-        s.caja(10.12, y - .12, 2.61, .8, t, sz=17, anchor="ctr", nombre=f"Paso {k + 1}")
+def lamina_modelo_3d(fig):
+    s = Lamina(1, "Martín", 40, "Diseño y cuentas",
+               "Todo lo armamos primero en FreeCAD, un CAD paramétrico libre, equivalente a SolidWorks. Antes de imprimir comprobamos que ninguna pieza choque, "
+               "al principio y al final del corte, que la manivela dé la vuelta completa sin tocar nada, que se pueda armar en orden, en 26 pasos, "
+               "y que cada pieza se imprima sin soportes. De ahí salieron los planos y el instructivo de armado.")
+    s.titulo("Todo se armó primero en el modelo 3D")
+    x, y, w, h = encajar(fig, "explotada", .6, 1.5, 6.6, 4.95)
+    s.imagen(fig["explotada"][0], x, y, w, h, "Vista explotada del modelo 2.0: zócalo, cabezal con sus capas, ojal, torre con rodamientos, carrete y manivela con el mango")
+    s.caja(x, y + h + .02, w, .28, "Vista explotada (FreeCAD)", sz=11, c="accent6", nombre="Crédito de la imagen")
+    s.tarjeta(7.55, 1.55, 5.18, .95, {"t": "FreeCAD: CAD paramétrico libre, equivalente a SolidWorks", "b": True, "c": "tx2"}, sz=17, anchor="ctr", nombre="Programa")
+    items = ["Sin choques al inicio ni al final", "La manivela da la vuelta completa", "26 pasos de armado en orden", "Piezas sin soportes de impresión"]
+    for k, t in enumerate(items):
+        yy = 2.8 + k * .92
+        s.anillo(7.55, yy + .08, .56, "✓", sz=16)
+        s.caja(8.3, yy, 4.43, .72, {"t": t, "c": "tx2", "b": True}, sz=18, anchor="ctr", nombre=t)
+    return s
+
+
+def lamina_impresion(fig):
+    s = Lamina(1, "Matías", 45, "Construcción",
+               "Las piezas las imprimí en PLA, en una Bambu Lab P1S. Son 14 piezas: el cabezal, los calces, el zócalo, el ojal, la torre, el carrete y la manivela. "
+               "Elegimos PLA porque es barato, fácil de imprimir y permite corregir rápido: el prototipo prueba el principio, no la resistencia final. "
+               "El juego completo lleva unas 6 horas y menos de 200 gramos. Hubo reimpresiones y ajustes en el camino.")
+    s.titulo("Piezas impresas en PLA")
+    x, y, w, h = encajar(fig, "piezas_impresas", .6, 1.5, 6.6, 4.95)
+    s.imagen(fig["piezas_impresas"][0], x, y, w, h, "Las 14 piezas impresas tal como van en la cama de la impresora")
+    datos = [("14 piezas", "Bambu Lab P1S, sin soportes"), ("~6 h · ~190 g", "juego completo, estimado")]
+    for k, (v, d) in enumerate(datos):
+        yy = 1.55 + k * 1.45
+        s.tarjeta(7.55, yy, 5.18, 1.25, [{"t": v, "b": True, "sz": 26, "c": "accent1", "fuente": "+mj-lt"}, {"t": d, "sz": 16}], anchor="ctr", nombre=v)
+    s.tarjeta(7.55, 4.45, 5.18, 1.0, {"t": "**PLA:** barato, fácil de imprimir y rápido de corregir", "c": "tx2"}, sz=17, anchor="ctr", nombre="Por qué PLA")
+    s.caja(7.55, 5.6, 5.18, .8, "Hubo reimpresiones y ajustes durante la construcción", sz=16, c="accent6", anchor="ctr", nombre="Reimpresiones")
+    return s
+
+
+def lamina_abastecimiento():
+    s = Lamina(1, "Camila", 35, "Construcción",
+               "Matías y yo nos ocupamos de los materiales. La ferretería tenía tornillos de hasta 45 milímetros y necesitábamos de 60, así que fuimos a una bulonera. "
+               "En la maderera nos cortaron la base y el taco de MDF a medida. Y en el taller cuidamos dos reglas: la trincheta siempre guardada "
+               "y el taladro desenchufado para cambiar la mecha.")
+    s.titulo("Materiales, compras y seguridad")
+    s.tarjeta(.6, 1.55, 5.9, 2.15, [{"t": "Bulonera", "b": True, "sz": 22, "c": "tx2", "despues": 4},
+                                   "Tornillos de 60 mm (ferretería: hasta 45 mm)"], sz=18, nombre="Bulonera")
+    s.tarjeta(.6, 3.95, 5.9, 2.15, [{"t": "Maderera", "b": True, "sz": 22, "c": "tx2", "despues": 4},
+                                   "Base y taco de MDF cortados a medida"], sz=18, nombre="Maderera")
+    s.tarjeta(6.85, 1.55, 5.88, 4.55, [{"t": "Seguridad en el taller", "b": True, "sz": 22, "c": "bg1", "despues": 10},
+                                      {"t": "Trincheta siempre guardada", "viñeta": True, "c": "bg1", "despues": 8},
+                                      {"t": "Taladro desenchufado para cambiar la mecha", "viñeta": True, "c": "bg1", "despues": 8},
+                                      {"t": "Guantes para cortar", "viñeta": True, "c": "bg1"}],
+              fondo="tx2", sz=19, margen=.3, nombre="Seguridad")
+    return s
+
+
+def lamina_taller(fig):
+    s = Lamina(1, "Lautaro y Angelo", 60, "Construcción",
+               "LAUTARO: Para perforar la base usamos una plantilla impresa en escala 1 a 1: se pega sobre el MDF, se marca con punzón y se agujerea. "
+               "Las herramientas fueron el taladro, mechas de 9, 4 y 2,5 milímetros, destornillador y llaves. "
+               "ANGELO: En el armado, la prensa fue clave: sujeta la base a la mesa y nos permitió trabajar con las dos manos. Los rodamientos entran a presión en la torre "
+               "y la hoja va apretada entre el calce y el pisador. Hubo rediseños y reimpresiones mientras armábamos.")
+    s.titulo("Construcción en el taller")
+    cajas = [("plantilla", "Plantilla 1:1 para perforar"), ("paso_12", "Rodamientos a presión"), ("paso_22", "Hoja sobre el calce")]
+    for i, (n, t) in enumerate(cajas):
+        x0 = .6 + i * 4.11
+        x, y, w, h = encajar(fig, n, x0, 1.5, 3.91, 2.6)
+        s.imagen(fig[n][0], x, y, w, h, t, borde="bg2")
+        s.caja(x0, 4.15, 3.91, .4, {"t": t, "c": "accent6", "algn": "ctr"}, sz=14, nombre=f"Rótulo {t}")
+    s.tarjeta(.6, 4.8, 5.9, 1.6, [{"t": "Herramientas", "b": True, "c": "tx2", "sz": 19, "despues": 4}, "Taladro, mechas de 9, 4 y 2,5 mm, destornillador, llaves"],
+              sz=16, nombre="Herramientas")
+    s.tarjeta(6.83, 4.8, 5.9, 1.6, [{"t": "La prensa fue clave", "b": True, "c": "tx2", "sz": 19, "despues": 4}, "Sujeta la base: las dos manos quedan libres"],
+              sz=16, nombre="Prensa")
+    return s
+
+
+def lamina_demo():
+    s = Lamina(2, "Angelo (opera) y Lautaro", 150, "Demostración",
+               "GUION DE LA DEMO. Antes de empezar: botella sin base, tapa perforada, lengüeta de 25 cm ya enganchada en el carrete, base sujeta con la prensa. "
+               "ANGELO: Ahora lo ven funcionando. Giro la manivela en sentido horario, a ritmo parejo. Miren tres cosas. "
+               "Uno: la botella gira sola, porque la tira la arrastra. Dos: la tira sale por el ojal y se enrolla en el carrete. Tres: yo solo marco la velocidad; la fuerza la pide el corte. "
+               "Al arrancar la acompaño con la mano hasta que el borde se asienta en la guía; después sigue sola. "
+               "LAUTARO: mientras Angelo gira, muestra un tramo de tira cortada al público. "
+               "Si se traba: parar, girar un poco hacia atrás, revisar ojal y borde, y seguir. Si no arranca en un minuto, pasar a la lámina siguiente, con el video.")
+    s.titulo("Demostración en vivo")
+    items = ["La botella gira: la tira la arrastra", "La tira pasa por el ojal y se enrolla", "La mano solo marca la velocidad"]
+    for k, t in enumerate(items):
+        y = 2.0 + k * 1.2
+        s.caja(.7, y + .1, .7, .7, {"t": str(k + 1), "b": True, "c": "tx2", "algn": "ctr"}, sz=18, anchor="ctr", fondo="bg1", borde="accent2", borde_pt=3, geom="ellipse", nombre=f"Anillo {k + 1}")
+        s.caja(1.7, y, 10.9, 1.0, {"t": t, "b": True, "sz": 26, "c": "bg1"}, anchor="ctr", nombre=t)
+    s.caja(.7, 5.85, 11.9, .6, {"t": "Respaldo: video en la lámina siguiente", "c": "bg2"}, sz=16, anchor="ctr", nombre="Respaldo")
+    return s
+
+
+def lamina_video():
+    s = Lamina(1, "Respaldo", 0, "Demostración",
+               "Solo si la demostración en vivo falla: abrir el enlace y reproducir el video. Si la demo salió bien, pasar de largo.")
+    s.titulo("Respaldo: video del funcionamiento")
+    if VIDEO_URL:
+        rid = s.hipervinculo(VIDEO_URL)
+        s.tarjeta(.6, 2.2, 12.13, 2.4, [{"t": "Ver el video", "b": True, "sz": 30, "c": "tx2", "algn": "ctr", "despues": 8},
+                                       {"t": VIDEO_URL, "sz": 16, "algn": "ctr", "link": rid}], anchor="ctr", nombre="Video")
+    else:
+        s.caja(.6, 1.6, 12.13, 4.6, [{"t": "VIDEO PENDIENTE", "b": True, "sz": 30, "c": "accent4", "algn": "ctr", "despues": 8},
+                                     {"t": "Acá va el enlace al video (.mp4) del funcionamiento", "sz": 18, "algn": "ctr", "c": "accent6"}],
+               anchor="ctr", borde="accent4", borde_pt=2, guion="dash", nombre="Video pendiente")
+    return s
+
+
+def lamina_respuestas():
+    if MEDICION_ANCHO:
+        uniforme = f"Sí: ancho entre {MEDICION_ANCHO[0]} y {MEDICION_ANCHO[1]} mm".replace(".", ",")
+    else:
+        uniforme = "A simple vista sí, no perfecta: midiendo mín. y máx."
+    s = Lamina(1, "Lautaro", 65, "Resultados y cierre",
+               "Antes de construir nos habíamos hecho cuatro preguntas. ¿Retiene? La botella, sí: la varilla y la tapa la sostienen sin cargar el cuello. "
+               "La punta de la tira, al principio no: la ranura del carrete no la retenía y hoy la fija un tornillo, como solución provisoria. "
+               "¿Desliza? No hay rodillo, así que no: la tira arrastra la botella. "
+               "¿Es uniforme? A simple vista sí, pero no es perfecta; esta semana medimos el ancho mínimo y máximo. "
+               "¿Es continua? Casi: la primera botella completa salió en dos tiras. Arrancar cuesta, y hacia el final la botella deja de bajar, como había anticipado el modelo.")
+    s.titulo("Qué respondió el prototipo")
+    cuadros = [("¿Retiene?", "Botella, sí. Punta de la tira: tornillo provisorio", "accent2"),
+               ("¿Desliza?", "No: la tira arrastra la botella", "accent1"),
+               ("¿Es uniforme?", uniforme, "accent1" if MEDICION_ANCHO else "accent2"),
+               ("¿Es continua?", "Casi: una botella dio dos tiras", "accent2")]
+    for k, (t, d, c) in enumerate(cuadros):
+        x, y = .6 + (k % 2) * 6.17, 1.55 + (k // 2) * 2.5
+        s.tarjeta(x, y, 5.96, 2.3, [{"t": t, "b": True, "sz": 28, "c": "tx2", "fuente": "+mj-lt", "despues": 6}, {"t": d, "c": c, "b": True}], sz=19, margen=.22, anchor="ctr", nombre=t)
+    return s
+
+
+def lamina_mejoras(fig):
+    s = Lamina(1, "Matías", 45, "Resultados y cierre",
+               "Las pruebas dejaron cuatro mejoras concretas. La tuerca del mango, debajo de la manivela, roza la tira en cada vuelta: hay que alejarla, rediseñando y reimprimiendo la manivela. "
+               "La punta de la tira necesita un anclaje real en el carrete, una pinza o una ranura con traba, en lugar del tornillo provisorio. "
+               "Para que la botella baje hasta el final, probar el vaso de lastre que ya está diseñado y que todavía no imprimimos. "
+               "Y poner la chapita de metal: sin ella, el borde apoya en el plástico y la tira sale medio milímetro más ancha.")
+    s.titulo("Mejoras identificadas")
+    x, y, w, h = encajar(fig, "carrete_manivela", .6, 1.5, 6.6, 4.95)
+    s.imagen(fig["carrete_manivela"][0], x, y, w, h, "Render del carrete con la manivela pasando sobre la tira: la tuerca del mango queda justo encima de la tira", borde="bg2")
+    tx, ty = x + TUERCA_MANGO[0] * w, y + TUERCA_MANGO[1] * h
+    s.caja(tx - .3, ty - .3, .6, .6, borde="accent4", borde_pt=3, geom="ellipse", nombre="Marca tuerca")
+    s.caja(x, y + h + .02, w, .28, f"Tuerca del mango sobre la tira (modelo: {RENDER.get('luz_tuerca_mango_tira_mm', 0.7)} mm de luz)".replace(".", ","),
+           sz=11, c="accent6", nombre="Crédito de la imagen")
+    items = [("Manivela", "Alejar de la tira la tuerca del mango"), ("Anclaje de la tira", "Pinza o ranura con traba en el carrete"), ("Bajada", "Probar el lastre ya diseñado"),
+             ("Chapita", "Colocarla: que el borde apoye en metal")]
+    for k, (t, d) in enumerate(items):
+        yy = 1.55 + k * 1.22
+        s.anillo(7.55, yy + .12, .62, k + 1, "accent2", sz=18)
+        s.caja(8.35, yy, 4.38, 1.12, [{"t": t, "b": True, "sz": 22, "c": "tx2", "despues": 4}, d], sz=18, nombre=t)
     return s
 
 
 def lamina_conclusiones():
-    s = Lamina(2, "Bloque 6", 45,
-               "Cierro con tres ideas. Este trabajo nos permitió aplicar cinemática, transmisión de movimiento y resistencia mecánica a un problema concreto. Una sola entrada manual alcanza para coordinar giro y avance, porque los vinculamos mecánicamente. El paso de corte se puede seleccionar por diseño, con husillo, reducción y rodillo. "
-               "Y lo que falta validar es experimental: la adherencia del rodillo, la estabilidad del envase y la continuidad del corte. Muchas gracias. ¿Tienen alguna pregunta?")
+    s = Lamina(2, "Sergio", 35, "Resultados y cierre",
+               "Cierro con tres ideas. El principio funciona: la tira arrastra la botella y la hoja la corta, que es lo que pedía la consigna, que la máquina funcione. "
+               "El ancho lo fija la geometría del cabezal, no la habilidad de quien gira. Y el prototipo nos dejó mejoras concretas para la próxima versión. Muchas gracias. ¿Preguntas?")
     s.titulo("Conclusiones")
-    items = [("Una entrada, dos movimientos", "La manivela coordina giro y avance"),
-             ("Paso controlable por diseño", "a = L · D_{b} / (i · D_{r})"),
-             ("Falta validar con el prototipo", "Fricción, estabilidad y continuidad")]
+    items = [("El principio funciona", "La tira arrastra y la hoja corta"),
+             ("El ancho lo fija la geometría", "No la habilidad de quien gira"),
+             ("Mejoras concretas", "Manivela, anclaje, bajada y chapita")]
     for k, (t, d) in enumerate(items):
-        y = 1.95 + k * 1.25
+        y = 1.85 + k * 1.25
         s.caja(.7, y + .1, .7, .7, {"t": str(k + 1), "b": True, "c": "tx2", "algn": "ctr"}, sz=18, anchor="ctr", fondo="bg1", borde="accent2", borde_pt=3, geom="ellipse", nombre=f"Anillo {k + 1}")
-        s.caja(1.7, y, 10.9, 1.0, [{"t": t, "b": True, "sz": 24, "c": "bg1"}, {"t": d, "sz": 19, "c": "bg2"}], anchor="ctr", nombre=t)
+        s.caja(1.7, y, 5.9, 1.0, [{"t": t, "b": True, "sz": 23, "c": "bg1"}, {"t": d, "sz": 17, "c": "bg2"}], anchor="ctr", nombre=t)
+    s.caja(8.0, 1.85, 4.73, 3.55, [{"t": "FOTO PENDIENTE", "b": True, "sz": 22, "c": "accent2", "algn": "ctr", "despues": 6},
+                                  {"t": "El grupo con la máquina", "sz": 16, "c": "bg2", "algn": "ctr"}],
+           anchor="ctr", borde="accent2", borde_pt=2, guion="dash", nombre="Foto pendiente")
     s.caja(.7, 5.8, 11.9, .7, {"t": "Muchas gracias. ¿Preguntas?", "b": True, "c": "accent2", "fuente": "+mj-lt"}, sz=30, anchor="ctr", nombre="Cierre")
     return s
 
 
 def lamina_bibliografia():
-    s = Lamina(1, "Consulta", 0, "Lámina de consulta: no se expone. Queda disponible por si piden alguna referencia durante las preguntas.")
+    s = Lamina(1, "Consulta", 0, "Consulta", "Lámina de consulta: no se expone. Queda disponible por si piden alguna referencia durante las preguntas.")
     s.titulo("Bibliografía")
     refs = [
-        "International Organization for Standardization. (1998). ISO general purpose metric screw threads — General plan (ISO 261:1998).",
-        "Kohara Gear Industry Co., Ltd. (s. f.). Calculation of gear dimensions, sección 4.1: Spur gears. KHK Gears. https://khkgears.net/gear-knowledge/gear-technical-reference/calculation-gear-dimensions/",
-        "Kohara Gear Industry Co., Ltd. (s. f.). Internal gears: KHK technical information [Catálogo técnico]. https://khkgears.net/pdf/2025/internal-gears.pdf",
+        "Appropedia. (s. f.). 3D printed improved PET bottle stripper. https://www.appropedia.org/3D_printed_improved_PET_bottle_stripper",
+        "Engineering ToolBox. (s. f.). Friction and friction coefficients. https://www.engineeringtoolbox.com/friction-coefficients-d_778.html",
+        "Function 3D. (s. f.). PETALOT: PET bottle to 3D printer filament [Repositorio]. https://github.com/function3d/petalot",
+        "Low-tech Lab. (s. f.). Découpeuse de bouteille plastique. https://wiki.lowtechlab.org/wiki/Découpeuse_de_bouteille_plastique/en",
         "Meraj, M., Ku, P. X., Choo, H. L., & Aung, P. P. (2024). Design and development of an automated PET plastic bottle 3D printer filament making machine. Journal of Physics: Conference Series, 2923(1), 012005. https://doi.org/10.1088/1742-6596/2923/1/012005",
-        "OpenStax. (2016). University Physics Volume 1: 6.2 Friction; 11.1 Rolling Motion; 12.3 Stress, strain, and elastic modulus. https://openstax.org/books/university-physics-volume-1",
-        "Thomson Industries, Inc. (s. f.). Lead vs. pitch: What's the difference? https://www.thomsonlinear.com/en/training/lead-screws/lead_vs_pitch",
+        "OpenStax. (2016). University Physics Volume 1: 6.2 Friction; 12.3 Stress, strain, and elastic modulus. https://openstax.org/books/university-physics-volume-1",
+        "Precious Plastic. (s. f.). PET filament from bottles. https://community.preciousplastic.com/library/pet-filament-from-bottles",
         "Tylman, I., & Dzierżek, K. (2020). Filament for a 3D printer from PET bottles — Simple machine. International Journal of Mechanical Engineering and Robotics Research, 9(10), 1386–1392. https://doi.org/10.18178/ijmerr.9.10.1386-1392",
     ]
-    s.caja(.6, 1.5, 12.13, 4.3, [{"t": r, "despues": 6} for r in refs], sz=14, nombre="Referencias")
-    s.caja(.6, 5.9, 11.0, .6, "Ilustraciones generadas con IA por el grupo (31/oct/2026). Planos preliminares y cálculos con valores de referencia: elaboración propia.", sz=12, c="accent6", anchor="ctr", nombre="Crédito de la imagen")
+    s.caja(.6, 1.45, 12.13, 4.6, [{"t": r, "despues": 4} for r in refs], sz=14, nombre="Referencias")
+    s.caja(.6, 6.1, 11.0, .4, "Renders, planos y cálculos: elaboración propia con FreeCAD.", sz=12, c="accent6", anchor="ctr", nombre="Crédito de las imágenes")
     return s
 
 
-# ---------- Gráfico nativo ----------
-def libro_xlsx(categorias, series):
-    """Libro mínimo embebido para que el gráfico se pueda editar desde PowerPoint."""
-    def celda(ref, v):
-        if isinstance(v, str):
-            return f'<c r="{ref}" t="inlineStr"><is><t>{escape(v)}</t></is></c>'
-        return f'<c r="{ref}"><v>{v}</v></c>'
-    filas = '<row r="1">' + celda("A1", "Botella") + "".join(celda(f"{chr(66 + j)}1", n) for j, (n, _) in enumerate(series)) + "</row>"
-    for i, cat in enumerate(categorias):
-        filas += f'<row r="{i + 2}">' + celda(f"A{i + 2}", cat) + "".join(celda(f"{chr(66 + j)}{i + 2}", v[i]) for j, (_, v) in enumerate(series)) + "</row>"
-    buf = io.BytesIO()
-    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
-        for nombre, datos in [
-            ("[Content_Types].xml", XML + '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>'),
-            ("_rels/.rels", XML + f'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="{REL}/officeDocument" Target="xl/workbook.xml"/></Relationships>'),
-            ("xl/workbook.xml", XML + f'<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="{REL}"><sheets><sheet name="Datos" sheetId="1" r:id="rId1"/></sheets></workbook>'),
-            ("xl/_rels/workbook.xml.rels", XML + f'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="{REL}/worksheet" Target="worksheets/sheet1.xml"/></Relationships>'),
-            ("xl/worksheets/sheet1.xml", XML + f'<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>{filas}</sheetData></worksheet>'),
-        ]:
-            info = zipfile.ZipInfo(nombre, FECHA_ZIP)
-            info.compress_type = zipfile.ZIP_DEFLATED
-            z.writestr(info, datos)
-    return buf.getvalue()
-
-
-def grafico_xml():
-    categorias = [n for n, _ in BOTELLAS]
-    series = [("M8: L = 1,25, i = 1", [round(avance(L_M8, I_M8, d), 2) for _, d in BOTELLAS]),
-              ("T8: L = 8, i = 2", [round(avance(L_T8, I_T8, d), 2) for _, d in BOTELLAS])]
-    def texto(sz, b=False, c="tx1"):
-        return (f'<c:txPr><a:bodyPr/><a:lstStyle/><a:p><a:pPr><a:defRPr sz="{sz * 100}" b="{int(b)}">{relleno(c)}'
-                f'<a:latin typeface="+mn-lt"/></a:defRPr></a:pPr><a:endParaRPr lang="es-AR"/></a:p></c:txPr>')
-    sers = ""
-    cat_pts = "".join(f'<c:pt idx="{i}"><c:v>{escape(n)}</c:v></c:pt>' for i, n in enumerate(categorias))
-    for j, (nombre, vals) in enumerate(series):
-        col = chr(66 + j)
-        c = ["accent6", "accent1"][j]
-        pts = "".join(f'<c:pt idx="{i}"><c:v>{v}</c:v></c:pt>' for i, v in enumerate(vals))
-        sers += (f'<c:ser><c:idx val="{j}"/><c:order val="{j}"/><c:tx><c:strRef><c:f>Datos!${col}$1</c:f><c:strCache><c:ptCount val="1"/><c:pt idx="0"><c:v>{escape(nombre)}</c:v></c:pt></c:strCache></c:strRef></c:tx>'
-                 f'<c:spPr>{relleno(c)}</c:spPr><c:invertIfNegative val="0"/>'
-                 f'<c:dLbls><c:numFmt formatCode="0.0" sourceLinked="0"/><c:spPr><a:noFill/><a:ln><a:noFill/></a:ln></c:spPr>{texto(14, True)}<c:dLblPos val="outEnd"/><c:showLegendKey val="0"/><c:showVal val="1"/><c:showCatName val="0"/><c:showSerName val="0"/><c:showPercent val="0"/><c:showBubbleSize val="0"/></c:dLbls>'
-                 f'<c:cat><c:strRef><c:f>Datos!$A$2:$A${len(vals) + 1}</c:f><c:strCache><c:ptCount val="{len(vals)}"/>{cat_pts}</c:strCache></c:strRef></c:cat>'
-                 f'<c:val><c:numRef><c:f>Datos!${col}$2:${col}${len(vals) + 1}</c:f><c:numCache><c:formatCode>General</c:formatCode><c:ptCount val="{len(vals)}"/>{pts}</c:numCache></c:numRef></c:val></c:ser>')
-    titulo = ('<c:title><c:tx><c:rich><a:bodyPr/><a:lstStyle/><a:p><a:pPr><a:defRPr sz="1500" b="1"/></a:pPr>'
-              f'<a:r><a:rPr lang="es-AR" sz="1500" b="1">{relleno("tx2")}<a:latin typeface="+mn-lt"/></a:rPr><a:t>a [mm]</a:t></a:r></a:p></c:rich></c:tx><c:overlay val="0"/></c:title>')
-    gris = relleno("accent6", 70)
-    xml = (XML + '<c:chartSpace xmlns:c="http://schemas.openxmlformats.org/drawingml/2006/chart" xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
-           f'xmlns:r="{REL}"><c:roundedCorners val="0"/><c:chart>{titulo}<c:autoTitleDeleted val="0"/><c:plotArea><c:layout/>'
-           f'<c:barChart><c:barDir val="col"/><c:grouping val="clustered"/><c:varyColors val="0"/>{sers}<c:gapWidth val="70"/><c:overlap val="-5"/><c:axId val="111111111"/><c:axId val="222222222"/></c:barChart>'
-           f'<c:catAx><c:axId val="111111111"/><c:scaling><c:orientation val="minMax"/></c:scaling><c:delete val="0"/><c:axPos val="b"/><c:numFmt formatCode="General" sourceLinked="0"/><c:majorTickMark val="none"/><c:minorTickMark val="none"/><c:tickLblPos val="nextTo"/><c:spPr><a:ln w="9525">{relleno("accent6")}</a:ln></c:spPr>{texto(14)}<c:crossAx val="222222222"/><c:crosses val="autoZero"/><c:auto val="1"/><c:lblAlgn val="ctr"/><c:lblOffset val="100"/><c:noMultiLvlLbl val="0"/></c:catAx>'
-           f'<c:valAx><c:axId val="222222222"/><c:scaling><c:orientation val="minMax"/><c:max val="10"/><c:min val="0"/></c:scaling><c:delete val="0"/><c:axPos val="l"/><c:majorGridlines><c:spPr><a:ln w="6350">{gris}</a:ln></c:spPr></c:majorGridlines><c:numFmt formatCode="0" sourceLinked="0"/><c:majorTickMark val="none"/><c:minorTickMark val="none"/><c:tickLblPos val="nextTo"/><c:spPr><a:ln><a:noFill/></a:ln></c:spPr>{texto(14)}<c:crossAx val="111111111"/><c:crosses val="autoZero"/><c:crossBetween val="between"/><c:majorUnit val="2"/></c:valAx>'
-           f'</c:plotArea><c:legend><c:legendPos val="b"/><c:overlay val="0"/>{texto(14)}</c:legend><c:plotVisOnly val="1"/><c:dispBlanksAs val="gap"/></c:chart>'
-           '<c:externalData r:id="rId1"><c:autoUpdate val="0"/></c:externalData></c:chartSpace>')
-    return xml, libro_xlsx(categorias, series)
-
-
-# ---------- Partes del paquete ----------
 def tema_xml():
     colores = "".join(f'<a:{k}><a:srgbClr val="{v}"/></a:{k}>' for k, v in TEMA.items())
     def relleno_tema():
@@ -840,7 +817,8 @@ def notas_xml(texto):
 
 
 def rels(lista):
-    cuerpo = "".join(f'<Relationship Id="{i}" Type="{t}" Target="{d}"/>' for i, t, d in lista)
+    cuerpo = "".join(f'<Relationship Id="{r[0]}" Type="{r[1]}" Target="{escape(r[2], {chr(34): "&quot;"})}"'
+                     + (' TargetMode="External"' if len(r) > 3 and r[3] else "") + "/>" for r in lista)
     return XML + f'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">{cuerpo}</Relationships>'
 
 
@@ -854,7 +832,6 @@ def empaquetar(laminas):
              "/ppt/presProps.xml": "application/vnd.openxmlformats-officedocument.presentationml.presProps+xml",
              "/ppt/viewProps.xml": "application/vnd.openxmlformats-officedocument.presentationml.viewProps+xml",
              "/ppt/tableStyles.xml": "application/vnd.openxmlformats-officedocument.presentationml.tableStyles+xml",
-             "/ppt/charts/chart1.xml": "application/vnd.openxmlformats-officedocument.drawingml.chart+xml",
              "/docProps/core.xml": "application/vnd.openxmlformats-package.core-properties+xml",
              "/docProps/app.xml": "application/vnd.openxmlformats-officedocument.extended-properties+xml"}
     lays = layouts()
@@ -870,10 +847,6 @@ def empaquetar(laminas):
     partes["ppt/theme/theme2.xml"] = tema_xml()
     partes["ppt/notesMasters/notesMaster1.xml"] = notas_master_xml()
     partes["ppt/notesMasters/_rels/notesMaster1.xml.rels"] = rels([("rId1", f"{REL}/theme", "../theme/theme2.xml")])
-    chart, libro = grafico_xml()
-    partes["ppt/charts/chart1.xml"] = chart
-    partes["ppt/charts/_rels/chart1.xml.rels"] = rels([("rId1", f"{REL}/package", "../embeddings/Datos_grafico1.xlsx")])
-    partes["ppt/embeddings/Datos_grafico1.xlsx"] = libro
 
     for n, lam in enumerate(laminas, 1):
         if lam.layout == 1:
@@ -881,7 +854,7 @@ def empaquetar(laminas):
         partes[f"ppt/slides/slide{n}.xml"] = (
             XML + f'<p:sld {NS}><p:cSld><p:spTree>{GRUPO}{"".join(lam.formas)}</p:spTree></p:cSld><p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr></p:sld>')
         lista = [("rId1", f"{REL}/slideLayout", f"../slideLayouts/slideLayout{lam.layout + 1}.xml")]
-        lista += [(f"rId{i + 2}", t, d) for i, (t, d) in enumerate(lam.rels)]
+        lista += [(f"rId{i + 2}", t, d, ext) for i, (t, d, ext) in enumerate(lam.rels)]
         lista.append((f"rId{len(lista) + 1}", f"{REL}/notesSlide", f"../notesSlides/notesSlide{n}.xml"))
         partes[f"ppt/slides/_rels/slide{n}.xml.rels"] = rels(lista)
         partes[f"ppt/notesSlides/notesSlide{n}.xml"] = notas_xml(lam.notas)
@@ -893,13 +866,13 @@ def empaquetar(laminas):
     for ruta in MEDIOS:
         partes[f"ppt/media/{ruta.name}"] = ruta.read_bytes()
 
-    # Secciones: una por bloque de exposición
+    # Secciones: una por bloque del relato (los oradores van en las notas)
     secciones, orden = {}, []
     for n, lam in enumerate(laminas):
-        if lam.seccion not in secciones:
-            secciones[lam.seccion] = []
-            orden.append(lam.seccion)
-        secciones[lam.seccion].append(256 + n)
+        if lam.bloque not in secciones:
+            secciones[lam.bloque] = []
+            orden.append(lam.bloque)
+        secciones[lam.bloque].append(256 + n)
     sec_xml = "".join(
         f'<p14:section name="{escape(nom)}" id="{{{str(uuid.uuid5(uuid.NAMESPACE_DNS, nom)).upper()}}}"><p14:sldIdLst>'
         + "".join(f'<p14:sldId id="{i}"/>' for i in secciones[nom]) + "</p14:sldIdLst></p14:section>" for nom in orden)
@@ -921,8 +894,8 @@ def empaquetar(laminas):
     partes["ppt/tableStyles.xml"] = XML + '<a:tblStyleLst xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" def="{5C22544A-7EE6-4342-B048-85BDC9FD1C3A}"/>'
     partes["docProps/core.xml"] = (
         XML + '<cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
-        '<dc:title>Cortadora manual de botellas PET</dc:title><dc:subject>TP Final Ingeniería Mecánica I</dc:subject><dc:creator>Grupo 1, curso S1091</dc:creator>'
-        '<dcterms:created xsi:type="dcterms:W3CDTF">2026-11-01T12:00:00Z</dcterms:created><dcterms:modified xsi:type="dcterms:W3CDTF">2026-11-01T12:00:00Z</dcterms:modified></cp:coreProperties>')
+        '<dc:title>Cortadora manual de botellas PET, modelo 2.0</dc:title><dc:subject>TP Final Ingeniería Mecánica I</dc:subject><dc:creator>Grupo 1, curso S1091</dc:creator>'
+        '<dcterms:created xsi:type="dcterms:W3CDTF">2026-11-15T12:00:00Z</dcterms:created><dcterms:modified xsi:type="dcterms:W3CDTF">2026-11-15T12:00:00Z</dcterms:modified></cp:coreProperties>')
     partes["docProps/app.xml"] = (XML + f'<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties"><Application>generar_presentacion.py</Application><Slides>{n_lam}</Slides><Notes>{n_lam}</Notes></Properties>')
     partes["_rels/.rels"] = rels([
         ("rId1", f"{REL}/officeDocument", "ppt/presentation.xml"),
@@ -942,20 +915,34 @@ def empaquetar(laminas):
             z.writestr(info, datos.encode("utf-8") if isinstance(datos, str) else datos)
 
 
+
+
+def a_pdf():
+    """PDF de respaldo con LibreOffice, en un perfil temporal para no chocar con una sesión abierta."""
+    with tempfile.TemporaryDirectory() as perfil:
+        subprocess.run(["soffice", f"-env:UserInstallation=file://{perfil}", "--headless", "--convert-to", "pdf",
+                        "--outdir", str(AQUI), str(SALIDA)], check=True, capture_output=True)
+    return SALIDA.with_suffix(".pdf")
+
+
 def main():
     fig = preparar_figuras()
-    dxf = leer_dxf(GRAFICO / "Proy Mecanica.dxf")
-    laminas = [lamina_portada(fig), lamina_problema(), lamina_objetivos(), lamina_antecedentes(), lamina_principio(fig),
-               lamina_proceso(), lamina_cadena(), lamina_friccion(fig), lamina_husillo(fig), lamina_ecuacion(),
-               lamina_materiales(), lamina_plano(dxf), lamina_ensayos(), lamina_conclusiones(), lamina_bibliografia()]
+    laminas = [lamina_portada(fig), lamina_problema(), lamina_objetivos(), lamina_antecedentes(),
+               lamina_modelo_1(fig), lamina_principio(),
+               lamina_cabezal(fig), lamina_cuentas(), lamina_modelo_3d(fig),
+               lamina_impresion(fig), lamina_abastecimiento(), lamina_taller(fig),
+               lamina_demo(), lamina_video(),
+               lamina_respuestas(), lamina_mejoras(fig), lamina_conclusiones(), lamina_bibliografia()]
     transcurrido = 0
     for lam in laminas:
         if lam.segundos:
             ini, transcurrido = transcurrido, transcurrido + lam.segundos
-            lam.notas = (f"{lam.seccion.upper()} · {lam.segundos // 60}:{lam.segundos % 60:02d} min "
+            lam.notas = (f"{lam.orador.upper()} · {lam.segundos // 60}:{lam.segundos % 60:02d} min "
                          f"(del {ini // 60}:{ini % 60:02d} al {transcurrido // 60}:{transcurrido % 60:02d}). {lam.notas}")
     empaquetar(laminas)
-    print(f"{SALIDA.name}: {len(laminas)} láminas")
+    print(f"{SALIDA.name}: {len(laminas)} láminas, {transcurrido // 60}:{transcurrido % 60:02d} min asignados")
+    if "--sin-pdf" not in sys.argv:
+        print(f"{a_pdf().name}: listo")
 
 
 if __name__ == "__main__":

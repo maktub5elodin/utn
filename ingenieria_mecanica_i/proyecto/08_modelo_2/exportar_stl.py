@@ -89,7 +89,7 @@ def main():
     filas, controles, fallas = [], [], []
     for k, (n, titulo, cant, relleno, perim, obs) in enumerate(IMPRESAS, 1):
         f = formas.pop(n).copy()
-        f.Placement = Z.a_la_cama(f).multiply(f.Placement)
+        f.Placement = Z.a_la_cama(f, n).multiply(f.Placement)
         malla = MeshPart.meshFromShape(Shape=f, LinearDeflection=0.02, AngularDeflection=0.15,
                                        Relative=False)
         ruta = os.path.join(CARPETA, "stl", f"{k:02d}_{n}.stl")
@@ -197,7 +197,7 @@ def escribir_ficha(filas, puente):
 
 
 def escribir_compras(pz):
-    """compras/lista_compras.md: para que el grupo se reparta qué consigue cada uno."""
+    """compras/lista_compras.md: lo que hay que comprar o conseguir, para tildar a medida que está."""
     n_madera = (len([t for t in Z.tornillos_a_la_base() if t[3]]) + len(P.TORNILLOS_CABEZAL)
                 + len(P.TORNILLOS_LABIO))           # zócalo, ojal y torre a la base; placa y labio al taco
     comprar = [
@@ -211,7 +211,7 @@ def escribir_compras(pz):
          "Apoyo metálico del borde de la botella. Sirve un segmento de trincheta"),
         ("Tornillo M3 × 25 y tuerca M3", "2 + 2", "", "Aprietan la hoja"),
         ("Tornillo M3 × 16 y tuerca M3", "1 + 1", "", "Traba la varilla"),
-        ("Tornillo M5 × 70 y tuerca autoblocante M5", "1 + 1", "", "Eje del mango de la manivela"),
+        (f"Tornillo {P.TORNILLO_MANGO_TXT} y tuerca autoblocante M5", "1 + 1", "", "Eje del mango de la manivela"),
         (f"Tornillo para madera {coma(P.MADERA_D, 1)} × {coma(P.MADERA_L)}", str(n_madera), "", "Fijan las piezas impresas a la base"),
         (f"Tornillo para madera {coma(P.MADERA_D, 1)} × {coma(P.TORNILLO_TACO_L)}, cabeza fresada", str(len(P.TORNILLOS_TACO)), "",
          "Taco a la base, desde abajo"),
@@ -238,9 +238,9 @@ def escribir_compras(pz):
     ]
 
     def tabla(filas):
-        out = ["| Listo | Pieza | Cant. | Medida | Para qué | Quién lo consigue |",
-               "|---|------------|-----|---------|------------|-----------|"]
-        out += [f"| ☐ | {a} | {b} | {c} | {d} |  |" for a, b, c, d in filas]
+        out = ["| Listo | Pieza | Cant. | Medida | Para qué |",
+               "|---|------------|-----|---------|------------|"]
+        out += [f"| ☐ | {a} | {b} | {c} | {d} |" for a, b, c, d in filas]
         return out + [""]
 
     lin = [
@@ -253,12 +253,9 @@ def escribir_compras(pz):
         "",
         "<!-- /solo-md -->",
         "",
-        "Para repartirse qué consigue cada uno: anotar el nombre en la última columna y tildar la casilla "
-        "cuando ya está. Las piezas de plástico las imprime Maty y no están en esta lista.",
-        "",
         "## Comprar",
         "",
-    ] + tabla(comprar) + ["## Conseguir prestado o juntar", ""] + tabla(prestado) + \
+    ] + tabla(comprar) + ["<!-- salto-pagina -->", "", "## Conseguir prestado o juntar", ""] + tabla(prestado) + \
         ["## Herramientas (prestadas)", ""] + tabla(herramientas)
     os.makedirs(os.path.join(CARPETA, "compras"), exist_ok=True)
     with open(os.path.join(CARPETA, "compras", "lista_compras.md"), "w", encoding="utf-8") as fh:

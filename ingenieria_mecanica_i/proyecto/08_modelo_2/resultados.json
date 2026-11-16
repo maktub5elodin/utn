@@ -3,7 +3,14 @@
  "choques_s180": [],
  "manivela_vuelta_completa": {
   "choques": [],
+  "conocidos": [],
   "posiciones": 36
+ },
+ "luz_giro_tira": {
+  "mm": 0.0,
+  "pieza": "TornilloMango",
+  "angulo": 164,
+  "s": 0.0
  },
  "luz_mano_botella_mm": 46.4,
  "armado": [
@@ -407,6 +414,9 @@
   "tornillo_taco_en_recorte_superior_mm": 9.0
  },
  "fallas": [],
+ "avisos": [
+  "TornilloMango pasa a 0.0 mm de la tira (mínimo 3, manivela a 164°)"
+ ],
  "impresion_total": {
   "masa_g": 194,
   "tiempo_h": 6.1,
@@ -564,7 +574,7 @@
     "Traba la varilla"
    ],
    [
-    "Tornillo M5 × 70 y tuerca autoblocante M5",
+    "Tornillo M5 × 75 cabeza Allen y tuerca autoblocante M5",
     "1 + 1",
     "",
     "Eje del mango de la manivela"
@@ -778,8 +788,8 @@
  "step": {
   "solidos_modelo": 33,
   "solidos_step": 33,
-  "volumen_modelo_mm3": 1700584.3,
-  "volumen_step_mm3": 1700584.3,
+  "volumen_modelo_mm3": 1700767.6,
+  "volumen_step_mm3": 1700767.6,
   "diferencia_relativa": 4.48e-14,
   "nombres_conservados": true,
   "colores_distintos_al_reabrir": 4,
@@ -789,7 +799,7 @@
  "planos": {
   "01_conjunto": {
    "escala": 2.5,
-   "entidades": 2165,
+   "entidades": 2161,
    "cotas": 6,
    "textos_superpuestos": []
   },
@@ -801,7 +811,7 @@
   },
   "03_carrete": {
    "escala": 1,
-   "entidades": 350,
+   "entidades": 356,
    "cotas": 21,
    "textos_superpuestos": []
   },
@@ -831,7 +841,7 @@
    "version": "AC1015",
    "errores": 0,
    "corregidos": 0,
-   "librecad_cerca_de_ezdxf": 0.958,
+   "librecad_cerca_de_ezdxf": 0.956,
    "ezdxf_cerca_de_librecad": 0.961
   },
   "04_esquema": {

@@ -375,7 +375,7 @@ LISTA = [  # n.°, denominación, cantidad, material u observación
     (17, "Carrete inferior", 1, "PLA, tuerca M8 caut."),
     (18, "Carrete superior", 1, "PLA"),
     (19, "Manivela", 1, "PLA, tuerca M8 caut."),
-    (20, "Mango y tornillo M5 x 70", 1, "PLA, tuerca M5 aut."),
+    (20, f"Mango y tornillo M5 x {P.TORNILLO_MANGO_L:.0f} Allen", 1, "PLA, tuerca M5 aut."),
     (21, "Botella y tapa perforada", 1, "PET, tapa a %%c9"),
     (22, "Vaso de lastre (opcional)", 1, "PLA"),
     (23, "Tornillo para madera 3,5 x 16", 14, "Comercial"),
@@ -448,7 +448,7 @@ def lamina_conjunto():
     g(21, F, (-P.R_B, 0, 230), 14, 6)
     g(3, F, (-P.VARILLA_D / 2, 0, 388), 14, 4)
     g(22, F, (-P.LASTRE_R, 0, 352), 14, 4)
-    g(5, F, (P.CAB_X[0], 104, 18), 14, -2)
+    g(5, F, (P.CAB_X[0], 104, 30), 14, 0)        # arriba del 42 de la altura de la guía
     g(6, F, (P.CAB_X[0], 104, 39), 14, 9)
     g(8, F, (-20, 49, 57), 16, 14)
     g(9, F, (P.CALCE_X[1], 97, 46), -16, 14)
@@ -458,7 +458,7 @@ def lamina_conjunto():
     g(15, F, (XC + P.D_608 / 2, YC, 33), 14, -6)
     g(17, F, (XC + P.R_DISCO, YC, 39), -14, -4)
     g(18, F, (XC + P.R_DISCO, YC, 55), 6, 16)
-    g(19, F, (XC + 40, YC, P.Z_MANIVELA + P.MANIVELA_ESP), 0, 20)
+    g(19, F, (XC + 40, YC, P.Z_BRAZO_SUP), 0, 20)
     g(16, F, (XC, YC, 36.8), 16, 10)
     g(20, F, (x_mango, YC, 100), -8, 10)
     g(1, S, (x0, 100, 0), 10, 0)
@@ -519,7 +519,7 @@ def lamina_cabezal():
     L.guia(Pa.pt(*xy_polar(52, 108), zg), Pa.pt(-26, -22, 0),
            "2 agujeros %%c3,9 para los tornillos del labio exterior")
     L.guia(Pa.pt(P.TORNILLOS_CABEZAL[3][0] - 1.2, 97.2, zg), Pa.pt(54, 102, zg),
-           "4 agujeros %%c3,9 con caja %%c7,6: tornillos a la base")
+           "4 agujeros %%c3,9 con caja %%c7,6: tornillos al taco")
     L.guia(Pa.pt(P.TORNILLOS_HOJA[1][0] + 1.2, 81.2, zg), Pa.pt(54, 84, zg),
            "2 agujeros %%c3,4 con tuerca M3 cautiva por abajo")
     L.guia(Pa.pt(6, P.CHAPITA_Y[1] - 1, zg), Pa.pt(54, 70, zg),
@@ -685,9 +685,9 @@ def lamina_carrete():
     Mf = Vista(L, "largo", (XC, YC, zm), 262, 212)
     Mf.formas([man])
     L.cota(Mf.pt(XC - P.CUBO_R, YC, zm), Mf.pt(XC - P.CUBO_R, YC, zm + P.CUBO_ALTO), 6, direc="v")
-    L.cota(Mf.pt(XC + P.R_MANIVELA + 10, YC, zm), Mf.pt(XC + P.R_MANIVELA + 10, YC, zm + P.MANIVELA_ESP), -6, direc="v")
-    L.t(252, 204, 2.5, "Tuerca M8 cautiva en el cubo, abierta hacia la cama.")
-    L.t(252, 199, 2.5, "Mango (20): tubo %%c22 x 55, con tornillo M5 x 70.")
+    L.cota(Mf.pt(XC + P.R_MANIVELA + 10, YC, P.Z_BRAZO), Mf.pt(XC + P.R_MANIVELA + 10, YC, P.Z_BRAZO_SUP), -6, direc="v")
+    L.t(252, 204, 2.5, "Tuerca M8 en el cubo, abierta hacia la cama; se arma con esa cara arriba.")
+    L.t(252, 199, 2.5, "Mango (20): tubo %%c22 x 55, con tornillo " + P.TORNILLO_MANGO_TXT.replace("×", "x") + ".")
 
     # --- Pieza 2: zócalo
     L.t(252, 190, 3.5, "Pieza 2: zócalo de la varilla")

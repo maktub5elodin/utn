@@ -5,7 +5,8 @@ Verificación del modelo 2.0, por consola y sin ventana:
 
 Cinco controles, y resultados.json con los números:
   1. choques en el armado, con la botella al inicio y al final del corte;
-  2. la manivela gira una vuelta completa sin tocar nada;
+  2. la manivela gira una vuelta completa sin tocar nada y pasa a una luz
+     mínima de la tira (LUZ_GIRO_TIRA);
   3. armado en orden: cada pieza llega a su lugar sin atravesar lo ya armado;
   4. impresión: tamaño de cama, voladizos y puentes de cada pieza impresa;
   5. funcionamiento: fuerza en la mano, resistencia de la tira, avance,
@@ -27,7 +28,13 @@ import piezas as Z
 
 V = App.Vector
 UMBRAL = 0.5          # mm³: por debajo es contacto o error numérico, no un choque
-res, fallas = {}, []
+res, fallas, avisos = {}, [], []
+
+# Problemas conocidos del prototipo: se registran como aviso, no detienen make.
+# Cada uno remite a su hallazgo en hallazgos_prototipo.md y sale de acá cuando se resuelve.
+CONOCIDOS = {
+    frozenset(("TornilloMango", "Tira")): "H2: el M5 × 75 del prototipo asoma debajo de la tuerca y roza la tira",
+}
 
 # Pares que se tocan o se cruzan a propósito
 PERMITIDOS = {frozenset(p) for p in [
@@ -80,9 +87,31 @@ for k in range(36):
                 v = comun(f, pz[m]["forma"])
                 if v > UMBRAL:
                     peor.append((n, m, 10 * k, round(v, 1)))
-res["manivela_vuelta_completa"] = {"choques": peor[:10], "posiciones": 36}
+conocidos = [x for x in peor if frozenset(x[:2]) in CONOCIDOS]
+peor = [x for x in peor if frozenset(x[:2]) not in CONOCIDOS]
+res["manivela_vuelta_completa"] = {"choques": peor[:10], "conocidos": conocidos[:10], "posiciones": 36}
 if peor:
     fallas.append(f"la manivela choca al girar: {peor[:3]}")
+for par in {frozenset(x[:2]) for x in conocidos}:
+    avisos.append(f"la manivela choca al girar ({CONOCIDOS[par]})")
+
+# Luz entre lo que gira y la tira, de a 2°: no alcanza con que no choquen
+# (hallazgo H2 del prototipo: la tuerca y la punta del tornillo del mango la rozaban)
+luz_tira = None
+for s, pz in ((0.0, pz0), (P.RECORRIDO, pz1)):
+    tira = pz["Tira"]["forma"]
+    for n in GIRAN:
+        for a in range(0, 360, 2):
+            f = pz[n]["forma"].copy()
+            f.rotate(eje_c, V(0, 0, 1), float(a))
+            d = f.distToShape(tira)[0]
+            if luz_tira is None or d < luz_tira["mm"]:
+                luz_tira = {"mm": round(d, 2), "pieza": n, "angulo": a, "s": s}
+res["luz_giro_tira"] = luz_tira
+if luz_tira["mm"] < P.LUZ_GIRO_TIRA:
+    par = frozenset((luz_tira["pieza"], "Tira"))
+    (avisos if par in CONOCIDOS else fallas).append(f"{luz_tira['pieza']} pasa a {luz_tira['mm']} mm de la tira "
+                  f"(mínimo {P.LUZ_GIRO_TIRA:.0f}, manivela a {luz_tira['angulo']}°)")
 
 # Lugar para la mano: del mango a la botella, en la posición más cercana
 d_ejes = math.hypot(P.X_CARRETE, P.Y_CARRETE)
@@ -134,7 +163,7 @@ impresas.update(Z.calces_todos())
 fichas = {}
 for n, forma in sorted(impresas.items()):
     f = forma.copy()
-    f.Placement = Z.a_la_cama(forma).multiply(f.Placement)
+    f.Placement = Z.a_la_cama(forma, n).multiply(f.Placement)
     b = f.BoundBox
     tam = (round(b.XLength, 1), round(b.YLength, 1), round(b.ZLength, 1))
     cabe = max(tam[0], tam[1]) <= lim_cama and tam[2] <= P.CAMA
@@ -276,6 +305,7 @@ if P.TORNILLO_TACO_L > P.MDF[2] + P.TACO_ALTO - 2:
 res["funcionamiento"] = func
 
 res["fallas"] = fallas
+res["avisos"] = avisos
 with open(os.path.join(CARPETA, "resultados.json"), "w", encoding="utf-8") as fh:
     json.dump(res, fh, ensure_ascii=False, indent=1)
 sys.stdout.flush()

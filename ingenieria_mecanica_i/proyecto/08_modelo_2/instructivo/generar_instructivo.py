@@ -218,14 +218,19 @@ INSTR = {
     "manivela": dict(
         titulo="Manivela",
         usa=[pz("Manivela"), "1 × tuerca M8"],
-        texto=["Meter la tuerca M8 en el hexágono de la cara de abajo de la manivela.",
-               "Enroscarla en el tornillo hasta que apoye en el disco superior.",
+        texto=["La cara de la manivela que apoyó en la cama, la del hexágono, va **hacia arriba**. La de abajo es "
+               f"lisa y el cubo sobresale {c(M['cubo_bajo_el_brazo'])} mm del brazo (figura de abajo).",
+               "Pasar la manivela por el tornillo hasta que el cubo apoye en el disco superior.",
+               "Enroscar la tuerca M8 en el tornillo hasta que entre en el hexágono y apoye en su fondo.",
                "Sostener el carrete con una mano y apretar la manivela girándola en sentido horario, visto desde "
                "arriba: firme con la mano, sin herramientas."],
-        comprobar="la manivela y el carrete giran juntos, suaves, sin juego hacia arriba ni hacia abajo."),
+        figura=("pasos/manivela_caras.png", "La manivela con su tuerca: a la izquierda, desde arriba (el hexágono "
+                "con la tuerca); a la derecha, desde abajo (cara lisa, con el cubo)."),
+        comprobar="la tuerca quedó dentro del hexágono: si se tira de la manivela hacia arriba, no sale. La "
+                  "manivela y el carrete giran juntos, suaves, sin juego hacia arriba ni hacia abajo."),
     "mango": dict(
         titulo="Mango",
-        usa=[pz("Mango"), f"1 × tornillo M5 × {c(P.TORNILLO_MANGO_L)}"],
+        usa=[pz("Mango"), f"1 × tornillo {P.TORNILLO_MANGO_TXT}"],
         texto=["Pasar el tornillo por el mango y por el agujero de la punta de la manivela, desde arriba."],
         comprobar="la cabeza del tornillo apoya en el mango y la rosca asoma por debajo de la manivela."),
     "tuerca_mango": dict(
@@ -235,7 +240,10 @@ INSTR = {
                f"hacia abajo, pero siga girando libre: entre el mango y la manivela quedan {c(M['mango_juego'])} mm. "
                "La tuerca autoblocante no se afloja sola."],
         comprobar=f"girar la manivela una vuelta completa en sentido horario visto desde arriba: no toca nada. El "
-                  f"mango gira libre en la mano y pasa a {c(M['manivela_a_botella'])} mm del lugar de la botella."),
+                  f"mango gira libre en la mano y pasa a {c(M['manivela_a_botella'])} mm del lugar de la botella."
+                  + (f" **Atención:** la punta del tornillo asoma {c(M['tornillo_mango_bajo_tuerca'])} mm debajo de "
+                     "la tuerca y, al cortar, roza la tira (hallazgo H2 en `hallazgos_prototipo.md`)."
+                     if RES["luz_giro_tira"]["mm"] < P.LUZ_GIRO_TIRA else "")),
     "botella": dict(
         titulo="Botella",
         usa=["una botella preparada, con su tapa perforada (ver «Primer uso», 1)"],
@@ -489,8 +497,8 @@ def documento(agujeros):
     a("- **No sobreapretar.** Las piezas son de plástico: los tornillos para madera se aprietan hasta que la cabeza "
       "apoya y nada más; los M3, firmes con los dedos y un cuarto de vuelta con el destornillador. Si una rosca "
       "gira en falso, avisar al grupo: no seguir apretando.")
-    a("- **Tuercas cautivas** (M3 de la placa, M8 del carrete y de la manivela). Van en hexágonos abiertos de la "
-      "cara de abajo. Alinear las caras de la tuerca con las del hexágono y empujarla con el pulgar. Si no entra, "
+    a("- **Tuercas cautivas** (M3 de la placa, M8 del carrete y de la manivela). Van en hexágonos abiertos hacia "
+      "la cara que apoyó en la cama: la de abajo en la placa y en el carrete, la de arriba en la manivela. Alinear las caras de la tuerca con las del hexágono y empujarla con el pulgar. Si no entra, "
       "pasar un tornillo de la misma medida desde el otro lado, enroscarlo en la tuerca y apretarlo: la tuerca "
       "entra sola. Después, sacar el tornillo. No martillar.")
     a("- **Rodamientos 608ZZ.** Entran a presión en la torre, siempre empujando el aro de afuera, nunca el de "
@@ -568,6 +576,9 @@ def documento(agujeros):
         for k, t in enumerate(ins["texto"], 1):
             a(f"{k}. {t}")
         a("")
+        if "figura" in ins:
+            a(f"![{ins['figura'][1]}]({ins['figura'][0]}){{width=12cm}}")
+            a("")
         a("> [!TIP]")
         a(f"> **Comprobar:** {ins['comprobar']}")
     a("")
@@ -591,14 +602,19 @@ def documento(agujeros):
     a(f"2. Montar la botella y la hoja como en los pasos {_n('botella')} a {_n('tornillos_hoja')}.")
     a("3. Pasar la lengüeta por la ranura del ojal, desde arriba.")
     a(f"4. Meter la punta de la lengüeta en la ranura del núcleo del carrete, entre los dos discos: entra "
-      f"{c(M['ranura_nucleo'])} mm. Girar la manivela una vuelta, despacio, para que la tira se enrolle sobre su "
-      "punta y quede tomada.")
+      f"{c(M['ranura_nucleo'])} mm. La ranura sola no la retiene: fijar la punta al interior del carrete con un "
+      "tornillo para madera chico (solución provisoria, hallazgo H4). Girar la manivela una vuelta, despacio, "
+      "para que la tira se enrolle sobre su punta.")
     a("")
     a("### 3. Cortar")
     a("")
     a(f"Girar la manivela **en sentido horario, visto desde arriba**, a ritmo parejo. Una botella son unas "
-      f"{c(FUNC['vueltas_manivela'])} vueltas de manivela y unos {c(FUNC['largo_tira_m'], 1)} m de tira. La "
-      f"botella gira y baja sola, {c(W)} mm por vuelta.")
+      f"{c(FUNC['vueltas_manivela'])} vueltas de manivela y unos {c(FUNC['largo_tira_m'], 1)} m de tira.")
+    a("")
+    a("1. **Arranque:** acompañar la botella con la mano, empujándola hacia abajo, hasta que el borde se asiente en "
+      f"la chapita. Desde ahí gira y baja por su cuenta, {c(W)} mm por vuelta.")
+    a("2. **Final:** al llegar al hombro, la pared deja de ser cilíndrica: la botella deja de bajar y la tira se "
+      "corta. Ahí termina el corte; lo que queda se corta a mano.")
     a("")
     a("### 4. Si algo no anda")
     a("")
@@ -606,7 +622,7 @@ def documento(agujeros):
       "que la tira siga en el ojal, que el borde de la botella siga apoyado en la chapita y que la botella no "
       "tenga restos de etiqueta o de pegamento. Si la hoja no corta parejo, cambiar el segmento (ver "
       "«Mantenimiento»).")
-    a(f"- **La botella no baja:** el corte sube por la pared y la tira sale más angosta. Poner el vaso de lastre "
+    a(f"- **La botella no baja antes del hombro:** el corte sube por la pared y la tira sale más angosta. Poner el vaso de lastre "
       f"(paso {_n('lastre')}) con unos {c(FUNC['agregar_al_vaso_g'])} g de tuercas. Si sigue sin bajar, avisar al "
       "grupo.")
     a(f"- **La tira sale de otro ancho:** medirla con calibre en varios puntos; tiene que dar {c(W)} ± "

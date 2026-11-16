@@ -67,10 +67,18 @@ def revolucion(puntos_rz):
     return Part.Face(Part.makePolygon(pts)).revolve(V(0, 0, 0), Z_UP, 360)
 
 
-def a_la_cama(forma):
-    """Placement que apoya la forma armada sobre la cama, sin girarla."""
-    b = forma.BoundBox
-    return App.Placement(V(-b.XMin, -b.YMin, -b.ZMin), App.Rotation())
+# Piezas que se imprimen dadas vuelta respecto de como van armadas
+VOLTEADAS = {"Manivela"}
+
+
+def a_la_cama(forma, nombre=None):
+    """Placement que apoya la forma armada sobre la cama. Las piezas de VOLTEADAS
+    se giran 180° alrededor de X: su cara de arriba es la que apoya en la cama."""
+    rot = App.Rotation(V(1, 0, 0), 180) if nombre in VOLTEADAS else App.Rotation()
+    f = forma.copy()
+    f.Placement = App.Placement(V(0, 0, 0), rot).multiply(f.Placement)
+    b = f.BoundBox
+    return App.Placement(V(-b.XMin, -b.YMin, -b.ZMin), rot)
 
 
 def tornillo_madera(x, y, z_base, z_apoyo):
@@ -365,41 +373,47 @@ def tuerca_carrete():
     return tuerca_m8(P.Z_CORE0 - P.DISCO_ESP + 0.3, P.X_CARRETE, P.Y_CARRETE)
 
 
+# Hexágono de la manivela, abierto hacia arriba (hacia la cama al imprimir)
+Z_HEX_MANIVELA = P.Z_BRAZO_SUP - (P.M8_ALTO + 0.5)
+
+
 def tuerca_manivela():
-    return tuerca_m8(P.Z_MANIVELA + 0.3, P.X_CARRETE, P.Y_CARRETE)
+    """Tuerca M8 en el hexágono de arriba: apoya en su fondo y aprieta la manivela."""
+    return tuerca_m8(Z_HEX_MANIVELA, P.X_CARRETE, P.Y_CARRETE)
 
 
 def manivela():
+    """Armada con la cara de la cama hacia arriba: el cubo apoya en el disco superior,
+    el brazo y el hexágono de la tuerca M8 quedan arriba."""
     xc, yc = P.X_CARRETE, P.Y_CARRETE
-    z0 = P.Z_MANIVELA
-    cubo = cil(P.CUBO_R, z0, z0 + P.CUBO_ALTO, xc, yc)
-    brazo = caja((xc, xc + P.R_MANIVELA), (yc - P.MANIVELA_ANCHO / 2, yc + P.MANIVELA_ANCHO / 2),
-                 (z0, z0 + P.MANIVELA_ESP))
-    punta = cil(P.MANIVELA_ANCHO / 2 + 2, z0, z0 + P.MANIVELA_ESP, xc + P.R_MANIVELA, yc)
+    z0, zb, zs = P.Z_MANIVELA, P.Z_BRAZO, P.Z_BRAZO_SUP
+    cubo = cil(P.CUBO_R, z0, zs, xc, yc)
+    brazo = caja((xc, xc + P.R_MANIVELA), (yc - P.MANIVELA_ANCHO / 2, yc + P.MANIVELA_ANCHO / 2), (zb, zs))
+    punta = cil(P.MANIVELA_ANCHO / 2 + 2, zb, zs, xc + P.R_MANIVELA, yc)
     cuerpo = cubo.fuse(brazo).fuse(punta)
-    cuerpo = cuerpo.cut(agujero(P.VARILLA_D, z0 - 1, z0 + P.CUBO_ALTO + 1, xc, yc))
-    cuerpo = cuerpo.cut(hexagono(P.M8_EC + P.HOLG_TUERCA, z0 - 1, z0 + P.M8_ALTO + 0.5, xc, yc))
-    cuerpo = cuerpo.cut(agujero(5.0, z0 - 1, z0 + P.MANIVELA_ESP + 1, xc + P.R_MANIVELA, yc))
+    cuerpo = cuerpo.cut(agujero(P.VARILLA_D, z0 - 1, zs + 1, xc, yc))
+    cuerpo = cuerpo.cut(hexagono(P.M8_EC + P.HOLG_TUERCA, Z_HEX_MANIVELA, zs + 1, xc, yc))
+    cuerpo = cuerpo.cut(agujero(5.0, zb - 1, zs + 1, xc + P.R_MANIVELA, yc))
     return cuerpo.removeSplitter()
 
 
 def mango():
     x, y = P.X_CARRETE + P.R_MANIVELA, P.Y_CARRETE
-    z0 = P.Z_MANIVELA + P.MANIVELA_ESP + 0.5
+    z0 = P.Z_BRAZO_SUP + 0.5
     return cil(P.MANGO_R, z0, z0 + P.MANGO_L, x, y).cut(agujero(5.0, z0 - 1, z0 + P.MANGO_L + 1, x, y))
 
 
 def tornillo_mango():
     x, y = P.X_CARRETE + P.R_MANIVELA, P.Y_CARRETE
-    z_top = P.Z_MANIVELA + P.MANIVELA_ESP + 0.5 + P.MANGO_L
+    z_top = P.Z_BRAZO_SUP + 0.5 + P.MANGO_L
     cab = cil(P.M5_CABEZA_D / 2, z_top, z_top + P.M5_CABEZA_ALTO, x, y)
     return cab.fuse(cil(2.5, z_top - P.TORNILLO_MANGO_L, z_top, x, y))
 
 
 def tuerca_mango():
     x, y = P.X_CARRETE + P.R_MANIVELA, P.Y_CARRETE
-    z_t = P.Z_MANIVELA - P.M5_TUERCA_ALTO
-    return hexagono(P.M5_TUERCA_EC, z_t, P.Z_MANIVELA, x, y).cut(cil(2.5, z_t - 1, P.Z_MANIVELA + 1, x, y))
+    z_t = P.Z_BRAZO - P.M5_TUERCA_ALTO
+    return hexagono(P.M5_TUERCA_EC, z_t, P.Z_BRAZO, x, y).cut(cil(2.5, z_t - 1, P.Z_BRAZO + 1, x, y))
 
 
 # -------------------------------------------------------------------- botella
@@ -504,10 +518,11 @@ def conjunto(s=0.0, con_lastre=True):
     add("CarreteInferior", carrete_inferior(), "impresa", nota="Tuerca M8 cautiva hacia la cama")
     add("CarreteSuperior", carrete_superior(), "impresa")
     add("TuercaCarrete", tuerca_carrete(), "comercial", nota="Tuerca M8 cautiva en el carrete")
-    add("Manivela", manivela(), "impresa", nota="Tuerca M8 cautiva hacia la cama")
-    add("TuercaManivela", tuerca_manivela(), "comercial", nota="Tuerca M8 cautiva en la manivela")
+    add("Manivela", manivela(), "impresa", nota="Hexágono de la tuerca M8 hacia la cama; se arma con esa cara arriba",
+        impresion=a_la_cama(manivela(), "Manivela"))
+    add("TuercaManivela", tuerca_manivela(), "comercial", nota="Tuerca M8 en el hexágono de arriba de la manivela")
     add("Mango", mango(), "impresa")
-    add("TornilloMango", tornillo_mango(), "comercial", nota="M5 × 70")
+    add("TornilloMango", tornillo_mango(), "comercial", nota=P.TORNILLO_MANGO_TXT)
     add("TuercaMango", tuerca_mango(), "comercial", nota="Tuerca autoblocante M5")
     add("Botella", botella(s), "botella")
     add("Tapa", tapa(s), "botella", nota="La tapa de la botella, perforada a 9 mm")

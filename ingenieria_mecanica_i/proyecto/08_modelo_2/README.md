@@ -51,17 +51,18 @@ Modelo por código del principio de tiro descripto en [00_concepto.md](00_concep
 
 ## 3. Qué verifica `make`
 
-Si algún control falla, `make` termina con error, y `resultados.json` dice qué y dónde. Los números de abajo son los de la última corrida.
+Si algún control falla, `make` termina con error, y `resultados.json` dice qué y dónde. Los números de abajo son los de la última corrida. Los problemas conocidos del prototipo, cada uno con su hallazgo en [hallazgos_prototipo.md](hallazgos_prototipo.md), se registran en `avisos` y no detienen `make` hasta que se resuelven.
 
 | Control | Resultado |
 |---|---|
 | **Choques en el armado**, con la botella al inicio y al final del corte | Ninguno. Solo se permiten dos cruces, que son el propio corte: la hoja con la pared, y la tira con la botella de la que sale. El borde cortado se modela como hélice, en escalones de 10°: apoya en la chapita junto al filo y sube hasta `w` en una vuelta |
 | **La manivela da la vuelta**, en 36 posiciones, al inicio y al final | No toca nada |
+| **Luz entre lo que gira y la tira**, de a 2°, al inicio y al final; mínimo 3 mm | **Aviso H2:** la punta del M5 × 75 del prototipo toca la tira. Con un M5 × 70 da 3,2 mm |
 | **Lugar para la mano** | 46 mm entre el mango y la botella; el mínimo es 40 |
 | **Armado en orden**, 26 pasos | Cada pieza llega a su lugar sin atravesar lo ya armado: bajando, de costado o desde abajo, según corresponda |
 | **Impresión**, 15 piezas | Todas entran en la cama, sin voladizos de más de 45° y con puentes de 5,4 mm como máximo. **Ninguna necesita soportes**, y cada una es un sólido único. El agujero del prisionero es un rombo, para que su techo no quede en voladizo |
 | **STL** | Cada archivo se vuelve a leer: es un sólido cerrado, está apoyado en la cama y su volumen difiere menos de 0,1 % del de la pieza |
-| **Borde sobre metal** | El borde toca la chapita y queda a 0,3 mm del PLA, tanto de la placa como del labio exterior |
+| **Borde sobre metal** | El borde toca la chapita y queda a 0,3 mm del PLA, tanto de la placa como del labio exterior. En el prototipo falta la chapita y el borde apoya en el PLA (H7) |
 | **Lastre** | El que hace falta entra en el vaso: caben unos 149 g de tuercas sueltas |
 
 ### Controles negativos
@@ -133,7 +134,7 @@ Por eso no se recomienda vaselina ni grasa: no ayudan, y además juntan polvo y 
 
 ## 6. Video corto
 
-[salida/cortadora_v2.mp4](salida/cortadora_v2.mp4): 25 s, 1600 × 900, 30 cuadros por segundo, 2,96 MB. Está pensado para mostrarle el principio al grupo; **es una versión preliminar** y así lo dice en pantalla.
+[salida/cortadora_v2.mp4](salida/cortadora_v2.mp4): 25 s, 1600 × 900, 30 cuadros por segundo, 2,96 MB. Es el respaldo de la demostración: muestra el principio con el prototipo tal como está armado al 15/11/2026 (manivela con el hexágono arriba, M5 × 75, sin vaso de lastre).
 
 | Segundos | Qué muestra |
 |---|---|

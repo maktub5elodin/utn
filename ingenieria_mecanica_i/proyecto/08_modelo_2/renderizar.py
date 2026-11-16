@@ -148,7 +148,7 @@ class Escena:
     def __init__(self):
         self.doc = App.newDocument("Video_v2")
         self.obj = {}
-        pz = Z.conjunto(0.0)
+        pz = Z.conjunto(0.0, con_lastre=False)     # como el prototipo: el lastre no se imprimió
         for n, d in pz.items():
             o = self.doc.addObject("Part::Feature", n)
             o.Shape = d["forma"]
@@ -158,8 +158,6 @@ class Escena:
             o.ViewObject.ShapeColor = c
             if n in ("Botella", "Tapa"):
                 o.ViewObject.Transparency = 55
-            if n == "Lastre":
-                o.ViewObject.Transparency = 35
             self.obj[n] = o
         for n, forma in (("MarcasCarrete", marcas_carrete()), ("MarcasBotella", marcas_botella(estado(0.0)))):
             o = self.doc.addObject("Part::Feature", n)
@@ -176,7 +174,6 @@ class Escena:
         e = estado(n_b)
         self.obj["Botella"].Shape = Z.botella(e["s"])
         self.obj["Tapa"].Shape = Z.tapa(e["s"])
-        self.obj["Lastre"].Shape = Z.lastre(e["s"])
         self.obj["Tira"].Shape = Z.tira(e["s"])
         mb = marcas_botella(e)
         self.obj["MarcasBotella"].Visibility = mb is not None
@@ -261,7 +258,7 @@ def rotulo(d, proy, texto, p3, x, y, alfa=255):
 
 
 def etiqueta_version(d):
-    t = "Modelo 2.0 - versión preliminar"
+    t = "Modelo 2.0 · render del modelo 3D"
     f = fuente("n", 22)
     w = d.textlength(t, font=f)
     d.rounded_rectangle((24, 22, 24 + w + 32, 62), 10, fill=(255, 255, 255, 225))
@@ -269,7 +266,7 @@ def etiqueta_version(d):
 
 
 def titulo(d, alfa):
-    t = "Modelo 2.0 - versión preliminar"
+    t = "Cortadora de botellas PET · Modelo 2.0"
     f = fuente("b", 50)
     w = d.textlength(t, font=f)
     d.rounded_rectangle(((ANCHO - w) / 2 - 30, 40, (ANCHO + w) / 2 + 30, 124), 14,

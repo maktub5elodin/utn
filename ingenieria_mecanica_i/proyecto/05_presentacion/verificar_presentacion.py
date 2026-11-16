@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Control de calidad de la presentación: palabras, fuentes, márgenes, superposiciones, ajuste de texto y tiempos.
+"""Control de calidad de la presentación (modelo 2.0): palabras, fuentes, márgenes, superposiciones, ajuste de texto,
+tiempos por orador y reglas de la exposición del 19/nov/2026 (15 min con margen, demostración en vivo con tiempo
+propio, los seis integrantes, sin mencionar Python ni scripts, FreeCAD presentado como equivalente a SolidWorks).
 
 Uso: python3 verificar_presentacion.py [archivo.pptx]. Sale con código 1 si encuentra algún problema.
 Exenciones acordadas: notas al pie, créditos y rótulos del plano (mínimo 10 pt, fuera del conteo de palabras);
@@ -22,6 +24,10 @@ PALABRAS_MINUTO = 115
 FUENTES = "/usr/share/fonts/truetype/crosextra/"
 EXENTOS = ("Notas al pie", "Crédito", "Rótulo plano")
 TITULO_SZ = {"ctrTitle": 44, "title": 34}
+TOTAL_MAX = 15 * 60 - 30          # 15 minutos, con al menos 30 s para cambios de orador
+DEMO_MIN = 120                    # la demostración en vivo tiene que tener al menos 2 minutos propios
+INTEGRANTES = ("CAMILA", "SERGIO", "MARTÍN", "MATÍAS", "LAUTARO", "ANGELO")
+PROHIBIDAS = re.compile(r"\b(python|script|scripts|código)\b", re.I)
 
 
 def fuente(sz, b, serif):
@@ -77,12 +83,18 @@ def main(ruta):
     problemas = []
     n_lam = len([n for n in z.namelist() if re.fullmatch(r"ppt/slides/slide\d+\.xml", n)])
     tiempos = defaultdict(lambda: [0, 0])
+    pendientes, demo, freecad_ok = [], 0, False
     print("lám  palabras  (con exentos)")
     for n in range(1, n_lam + 1):
         raiz = etree.fromstring(z.read(f"ppt/slides/slide{n}.xml"))
         arbol = raiz.find(f"{P}cSld/{P}spTree")
         titulo = ""
         palabras = todas = 0
+        texto_lamina = " ".join(x.text or "" for x in arbol.iter(A + "t"))
+        if PROHIBIDAS.search(texto_lamina):
+            problemas.append(f"L{n}: menciona {PROHIBIDAS.search(texto_lamina).group(0)} en la lámina")
+        if re.search(r"PENDIENTE", texto_lamina):
+            pendientes.append(f"L{n}: {re.findall(r'[A-ZÁÉÍÓÚ]+ PENDIENTE', texto_lamina)}")
         cajas = []
         for sp in arbol:
             cnv = sp.find(f".//{P}cNvPr")
@@ -159,6 +171,10 @@ def main(ruta):
             cuerpo = texto.split("). ", 1)[1]
             tiempos[m.group(1)][0] += int(m.group(2)) * 60 + int(m.group(3))
             tiempos[m.group(1)][1] += len(cuerpo.split())
+            if titulo.startswith("Demostración"):
+                demo = int(m.group(2)) * 60 + int(m.group(3))
+        if "equivalente a SolidWorks" in texto_lamina:
+            freecad_ok = True
     print("\nbloque             asignado  palabras  a %d pal/min" % PALABRAS_MINUTO)
     total = 0
     for k, (seg, pal) in tiempos.items():
@@ -168,12 +184,25 @@ def main(ruta):
         if hablado > seg * 1.15:
             problemas.append(f"Notas del {k}: exceden el tiempo asignado")
     print(f"Total asignado: {total // 60}:{total % 60:02d}")
+    if total > TOTAL_MAX:
+        problemas.append(f"Tiempo total {total // 60}:{total % 60:02d}: deja menos de 30 s de margen en 15 min")
+    if demo < DEMO_MIN:
+        problemas.append(f"La demostración en vivo tiene {demo} s (mínimo {DEMO_MIN})")
+    for nombre in INTEGRANTES:
+        if not any(nombre in k for k in tiempos):
+            problemas.append(f"{nombre.title()} no expone ninguna lámina")
+    if not freecad_ok:
+        problemas.append("Ninguna lámina presenta FreeCAD como equivalente a SolidWorks")
     # Secciones contiguas y en orden
     pres = z.read("ppt/presentation.xml").decode()
     orden = re.findall(r'<p:sldId id="(\d+)"', pres)
     secc = re.findall(r'<p14:sldId id="(\d+)"', pres)
     if orden != secc:
         problemas.append("Las secciones p14 no siguen el orden de las láminas")
+    if pendientes:
+        print("\nPendientes marcados (no son errores):")
+        for x in pendientes:
+            print(" -", x)
     print(f"\n{len(problemas)} problema(s)")
     for x in problemas:
         print(" -", x)

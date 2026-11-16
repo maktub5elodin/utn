@@ -8,6 +8,8 @@ Lo lanza el Makefile (make armado_pdf).
                                   gris claro, la pieza nueva en color y una flecha que
                                   indica por dónde entra; la misma cámara en toda la etapa
   instructivo/pasos/portada.png   la máquina armada
+  instructivo/pasos/manivela_caras.png  la manivela con su tuerca, desde arriba y
+                                  desde abajo: qué cara va arriba (hallazgo H1)
   build/armado.json               contornos y agujeros de la base, y medidas del modelo
                                   que cita el texto
 
@@ -176,6 +178,38 @@ def pasos(esc, pz, solo):
         esc.foto(os.path.join(carpeta, "portada.png"))
 
 
+def manivela_caras(esc, pz):
+    """Manivela y tuerca M8 solas, desde arriba y desde abajo, lado a lado."""
+    for n, o in esc.obj.items():
+        vo = o.ViewObject
+        vo.Visibility = n in ("Manivela", "TuercaManivela")
+        vo.ShapeColor = NUEVA if n == "Manivela" else GRIS
+        vo.Transparency = 0
+    for o in esc.doc.Objects:              # la flecha y la tira de la portada
+        if o.Name not in esc.obj:
+            o.ViewObject.Visibility = False
+    esc.doc.recompute()
+    caja = pz["Manivela"]["forma"].BoundBox
+    c = caja.Center
+    carpeta = os.path.join(CARPETA, "instructivo", "pasos")
+    rutas = []
+    for lado, dz in (("arriba", 1), ("abajo", -1)):
+        pos = (c.x - 70.0, c.y - 150.0, c.z + dz * 130.0)
+        esc.camara(pos, (c.x, c.y, c.z), 22.0)
+        ruta = os.path.join(carpeta, f"manivela_{lado}.tmp.png")
+        esc.foto(ruta)
+        rutas.append(ruta)
+    imgs = [Image.open(r) for r in rutas]
+    w, h = imgs[0].size
+    junta = Image.new("RGB", (2 * w, h), FONDO)
+    for k, im in enumerate(imgs):
+        junta.paste(im, (k * w, 0))
+    junta = junta.resize((w, h // 2), Image.LANCZOS)
+    junta.save(os.path.join(carpeta, "manivela_caras.png"), optimize=True)
+    for r in rutas:
+        os.remove(r)
+
+
 # ------------------------------------------------------------------ datos
 def r1(x):
     return round(x, 2)
@@ -216,7 +250,9 @@ def datos(pz):
             "tornillo_m8_sobre_torre": r1(b["EjeCarrete"].ZMax - P.TORRE_ALTO),
             "cabeza_m8_sobre_base": r1(b["EjeCarrete"].ZMin),
             "rodamientos_separacion": r1(P.TORRE_ALTO - P.TORRE_CAVIDAD[1] - 2 * P.ANCHO_608),
-            "mango_juego": r1(b["Mango"].ZMin - (P.Z_MANIVELA + P.MANIVELA_ESP)),
+            "mango_juego": r1(b["Mango"].ZMin - P.Z_BRAZO_SUP),
+            "cubo_bajo_el_brazo": r1(P.Z_BRAZO - P.Z_MANIVELA),
+            "tornillo_mango_bajo_tuerca": r1(b["TuercaMango"].ZMin - b["TornilloMango"].ZMin),
             "tornillo_hoja_en_taco": r1(P.TACO_ALTO - b["TornillosHoja"].ZMin),
             "tuerca_m3_hundida": r1(P.PROF_TUERCA - P.M3_ALTO),
             "tapa_a_la_varilla": r1(P.TAPA_AGUJERO - P.VARILLA_D),
@@ -235,7 +271,10 @@ def main():
     solo = {int(x) for x in os.environ["PASOS"].split(",")} if os.environ.get("PASOS") else None
     if not solo:
         datos(pz)
-    pasos(Escena(pz), pz, solo)
+    esc = Escena(pz)
+    pasos(esc, pz, solo)
+    if not solo:
+        manivela_caras(esc, pz)
 
 
 codigo = 1

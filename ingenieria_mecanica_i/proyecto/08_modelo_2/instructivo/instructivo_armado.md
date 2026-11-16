@@ -38,7 +38,7 @@ El número es el de la ficha de impresión y el de cada archivo. Los calces van 
 | Galga de espesores de 0,5 mm (una hoja) | 1 | Se corta a 18 × 12,7 mm |
 | Tornillo M3 × 25 y tuerca M3 | 2 + 2 | — |
 | Tornillo M3 × 16 y tuerca M3 | 1 + 1 | — |
-| Tornillo M5 × 70 y tuerca autoblocante M5 | 1 + 1 | — |
+| Tornillo M5 × 75 cabeza Allen y tuerca autoblocante M5 | 1 + 1 | — |
 | Tornillo para madera 3,5 × 16 | 14 | — |
 | Tornillo para madera 3,5 × 45, cabeza fresada | 2 | — |
 | Tabla de MDF de 18 mm | 1 | 345 × 200 mm y dos recortes de 68 × 80 mm |
@@ -63,7 +63,7 @@ El número es el de la ficha de impresión y el de cada archivo. Los calces van 
 ### Cuidados con el plástico
 
 - **No sobreapretar.** Las piezas son de plástico: los tornillos para madera se aprietan hasta que la cabeza apoya y nada más; los M3, firmes con los dedos y un cuarto de vuelta con el destornillador. Si una rosca gira en falso, avisar al grupo: no seguir apretando.
-- **Tuercas cautivas** (M3 de la placa, M8 del carrete y de la manivela). Van en hexágonos abiertos de la cara de abajo. Alinear las caras de la tuerca con las del hexágono y empujarla con el pulgar. Si no entra, pasar un tornillo de la misma medida desde el otro lado, enroscarlo en la tuerca y apretarlo: la tuerca entra sola. Después, sacar el tornillo. No martillar.
+- **Tuercas cautivas** (M3 de la placa, M8 del carrete y de la manivela). Van en hexágonos abiertos hacia la cara que apoyó en la cama: la de abajo en la placa y en el carrete, la de arriba en la manivela. Alinear las caras de la tuerca con las del hexágono y empujarla con el pulgar. Si no entra, pasar un tornillo de la misma medida desde el otro lado, enroscarlo en la tuerca y apretarlo: la tuerca entra sola. Después, sacar el tornillo. No martillar.
 - **Rodamientos 608ZZ.** Entran a presión en la torre, siempre empujando el aro de afuera, nunca el de adentro ni la tapita. Ponerlos derechos, empujar con el pulgar y terminar con el sargento entre dos tacos de madera, o con golpes suaves sobre un taco. Para el de abajo, empujar con el caño de PVC de 20 mm. Si entran muy duros o quedan flojos, avisar al grupo: no limar la torre.
 
 ### Cómo se nombran los lados
@@ -405,12 +405,15 @@ Cada paso tiene una vista: en gris, lo que ya está armado; en naranja, la pieza
 
 **Usa:** manivela (n.° 12); 1 × tuerca M8.
 
-1. Meter la tuerca M8 en el hexágono de la cara de abajo de la manivela.
-2. Enroscarla en el tornillo hasta que apoye en el disco superior.
-3. Sostener el carrete con una mano y apretar la manivela girándola en sentido horario, visto desde arriba: firme con la mano, sin herramientas.
+1. La cara de la manivela que apoyó en la cama, la del hexágono, va **hacia arriba**. La de abajo es lisa y el cubo sobresale 4 mm del brazo (figura de abajo).
+2. Pasar la manivela por el tornillo hasta que el cubo apoye en el disco superior.
+3. Enroscar la tuerca M8 en el tornillo hasta que entre en el hexágono y apoye en su fondo.
+4. Sostener el carrete con una mano y apretar la manivela girándola en sentido horario, visto desde arriba: firme con la mano, sin herramientas.
+
+![La manivela con su tuerca: a la izquierda, desde arriba (el hexágono con la tuerca); a la derecha, desde abajo (cara lisa, con el cubo).](pasos/manivela_caras.png){width=12cm}
 
 > [!TIP]
-> **Comprobar:** la manivela y el carrete giran juntos, suaves, sin juego hacia arriba ni hacia abajo.
+> **Comprobar:** la tuerca quedó dentro del hexágono: si se tira de la manivela hacia arriba, no sale. La manivela y el carrete giran juntos, suaves, sin juego hacia arriba ni hacia abajo.
 
 <!-- solo-pdf
 \needspace{9cm}
@@ -420,7 +423,7 @@ Cada paso tiene una vista: en gris, lo que ya está armado; en naranja, la pieza
 
 ![](pasos/paso_19.png){width=8.5cm}
 
-**Usa:** mango (n.° 13); 1 × tornillo M5 × 70.
+**Usa:** mango (n.° 13); 1 × tornillo M5 × 75 cabeza Allen.
 
 1. Pasar el tornillo por el mango y por el agujero de la punta de la manivela, desde arriba.
 
@@ -440,7 +443,7 @@ Cada paso tiene una vista: en gris, lo que ya está armado; en naranja, la pieza
 1. Enroscar la tuerca por debajo de la manivela hasta que el mango no tenga juego hacia arriba ni hacia abajo, pero siga girando libre: entre el mango y la manivela quedan 0,5 mm. La tuerca autoblocante no se afloja sola.
 
 > [!TIP]
-> **Comprobar:** girar la manivela una vuelta completa en sentido horario visto desde arriba: no toca nada. El mango gira libre en la mano y pasa a 46,4 mm del lugar de la botella.
+> **Comprobar:** girar la manivela una vuelta completa en sentido horario visto desde arriba: no toca nada. El mango gira libre en la mano y pasa a 46,4 mm del lugar de la botella. **Atención:** la punta del tornillo asoma 6,5 mm debajo de la tuerca y, al cortar, roza la tira (hallazgo H2 en `hallazgos_prototipo.md`).
 
 <!-- solo-pdf
 \needspace{9cm}
@@ -557,16 +560,19 @@ Botella de 1,5 L lisa, limpia y seca, con su tapa. Con guantes:
 1. Si la hoja está puesta, aflojar sus dos tornillos y sacar el pisador y la hoja.
 2. Montar la botella y la hoja como en los pasos 21 a 24.
 3. Pasar la lengüeta por la ranura del ojal, desde arriba.
-4. Meter la punta de la lengüeta en la ranura del núcleo del carrete, entre los dos discos: entra 8 mm. Girar la manivela una vuelta, despacio, para que la tira se enrolle sobre su punta y quede tomada.
+4. Meter la punta de la lengüeta en la ranura del núcleo del carrete, entre los dos discos: entra 8 mm. La ranura sola no la retiene: fijar la punta al interior del carrete con un tornillo para madera chico (solución provisoria, hallazgo H4). Girar la manivela una vuelta, despacio, para que la tira se enrolle sobre su punta.
 
 ### 3. Cortar
 
-Girar la manivela **en sentido horario, visto desde arriba**, a ritmo parejo. Una botella son unas 42 vueltas de manivela y unos 5,5 m de tira. La botella gira y baja sola, 9 mm por vuelta.
+Girar la manivela **en sentido horario, visto desde arriba**, a ritmo parejo. Una botella son unas 42 vueltas de manivela y unos 5,5 m de tira.
+
+1. **Arranque:** acompañar la botella con la mano, empujándola hacia abajo, hasta que el borde se asiente en la chapita. Desde ahí gira y baja por su cuenta, 9 mm por vuelta.
+2. **Final:** al llegar al hombro, la pared deja de ser cilíndrica: la botella deja de bajar y la tira se corta. Ahí termina el corte; lo que queda se corta a mano.
 
 ### 4. Si algo no anda
 
 - **Se traba o cuesta mucho:** parar, no forzar. Girar un poco hacia atrás para aflojar la tira y revisar: que la tira siga en el ojal, que el borde de la botella siga apoyado en la chapita y que la botella no tenga restos de etiqueta o de pegamento. Si la hoja no corta parejo, cambiar el segmento (ver «Mantenimiento»).
-- **La botella no baja:** el corte sube por la pared y la tira sale más angosta. Poner el vaso de lastre (paso 25) con unos 100 g de tuercas. Si sigue sin bajar, avisar al grupo.
+- **La botella no baja antes del hombro:** el corte sube por la pared y la tira sale más angosta. Poner el vaso de lastre (paso 25) con unos 100 g de tuercas. Si sigue sin bajar, avisar al grupo.
 - **La tira sale de otro ancho:** medirla con calibre en varios puntos; tiene que dar 9 ± 0,5 mm. Si no, revisar el calce y la chapita.
 
 ### 5. Al terminar
