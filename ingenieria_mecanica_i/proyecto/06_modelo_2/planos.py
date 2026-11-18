@@ -10,7 +10,7 @@ medir sobre el DXF da la medida de la pieza. Termina con error si dos textos se
 superponen o si alguno se sale del marco.
 
 Juego: 01 conjunto (1:2,5) · 02 cabezal de corte (1:1, detalle 5:1) ·
-03 carrete, manivela y zócalo (1:1) · 04 esquema de funcionamiento (sin escala).
+03 carrete, manivela y zócalo (1:1).
 """
 import json, math, os, sys, traceback
 
@@ -30,7 +30,7 @@ V = App.Vector
 FECHA = "19/11/2026"
 LEYENDA = "Prototipo: piezas impresas en PLA; medidas de diseño"
 SALIDA = os.path.join(CARPETA, "planos")
-LAMINAS_DEL_JUEGO = 4
+LAMINAS_DEL_JUEGO = 3
 
 # Filas de la matriz: u (derecha del papel), v (arriba), w (hacia el observador)
 MAPAS = {
@@ -105,8 +105,41 @@ def _clave(p):
     return ("p", tuple(round(v, 2) for q in p[1] for v in q))
 
 
+def _muestras(p, n=7):
+    if p[0] == "l":
+        (ax, ay), (bx, by) = p[1], p[2]
+        return [(ax + (bx - ax) * k / (n - 1), ay + (by - ay) * k / (n - 1)) for k in range(n)]
+    if p[0] in ("c", "a"):
+        (cx, cy), r = p[1], p[2]
+        a0, a1 = (0.0, 360.0) if p[0] == "c" else (p[3], p[3] + (p[4] - p[3]) % 360)
+        return [(cx + r * math.cos(math.radians(a0 + (a1 - a0) * k / (n - 1))),
+                 cy + r * math.sin(math.radians(a0 + (a1 - a0) * k / (n - 1)))) for k in range(n)]
+    return list(p[1])
+
+
+def _sobre(q, p, tol=0.05):
+    """¿El punto q cae sobre la primitiva p?"""
+    x, y = q
+    if p[0] == "l":
+        (ax, ay), (bx, by) = p[1], p[2]
+        dx, dy = bx - ax, by - ay
+        L2 = dx * dx + dy * dy or 1e-12
+        t = max(0.0, min(1.0, ((x - ax) * dx + (y - ay) * dy) / L2))
+        return math.hypot(x - ax - t * dx, y - ay - t * dy) < tol
+    if p[0] in ("c", "a"):
+        (cx, cy), r = p[1], p[2]
+        return abs(math.hypot(x - cx, y - cy) - r) < tol
+    return any(_sobre(q, ("l", a, b), tol) for a, b in zip(p[1], p[1][1:]))
+
+
 def proyectar(formas, mapa, ocultas=True):
-    """Devuelve (visibles, ocultas) en coordenadas del papel, sin escala."""
+    """Devuelve (visibles, ocultas) en coordenadas del papel, sin escala.
+    ocultas: True (todas), False (ninguna) o una lista de formas: solo las ocultas
+    que caen sobre aristas de esas formas."""
+    solo = None
+    if isinstance(ocultas, (list, tuple)):
+        v2, o2 = proyectar(list(ocultas), mapa, True)
+        solo, ocultas = v2 + o2, True
     c = Part.makeCompound(formas).transformed(matriz(mapa))
     r = TechDraw.projectEx(c, V(0, 0, 1))
     vis, ocu, vistos = [], [], set()
@@ -124,6 +157,8 @@ def proyectar(formas, mapa, ocultas=True):
             if k not in vistos:
                 vistos.add(k)
                 destino.append(p)
+    if solo is not None:
+        ocu = [p for p in ocu if all(any(_sobre(q, s) for s in solo) for q in _muestras(p))]
     return vis, ocu
 
 
@@ -142,6 +177,21 @@ class Lamina(Dibujo):
     def t(self, x, y, h, s, alin="i", capa="Texto", rot=0.0):
         X, Y = self.pp(x, y)
         self.texto(capa, X, Y, h, s, alin, rot)
+
+    def trazos(self, a, b, raya=1.5, hueco=0.75):
+        """Línea oculta con trazos explícitos (mm de papel): en agujeros cortos el patrón
+        de la capa saldría como una línea llena."""
+        E = self.E
+        lg = math.hypot(b[0] - a[0], b[1] - a[1])
+        if lg < 1e-9:
+            return
+        ux, uy = (b[0] - a[0]) / lg, (b[1] - a[1]) / lg
+        n = max(1, round((lg / E + hueco) / (raya + hueco)))
+        r = (lg / E + hueco) / n - hueco        # raya ajustada: empieza y termina en trazo
+        for k in range(n):
+            t0 = k * (r + hueco) * E
+            t1 = t0 + r * E
+            self.linea("Ocultas", (a[0] + ux * t0, a[1] + uy * t0), (a[0] + ux * t1, a[1] + uy * t1))
 
     def rectangulo(self, capa, a, b):
         """Rectángulo entre dos esquinas, en coordenadas del dibujo."""
@@ -230,10 +280,10 @@ class Vista:
     def eje(self, a, b):
         self.L.linea("Ejes", self.pt(*a), self.pt(*b))
 
-    def cruz(self, p, r):
-        """Ejes de una circunferencia vista de frente."""
+    def cruz(self, p, r, sale=4.0):
+        """Ejes de una circunferencia vista de frente; sobresalen `sale` mm de papel."""
         x, y = self.pt(*p)
-        s = 4 * self.L.E
+        s = sale * self.L.E
         self.L.linea("Ejes", (x - r - s, y), (x + r + s, y))
         self.L.linea("Ejes", (x, y - r - s), (x, y + r + s))
 
@@ -320,25 +370,23 @@ def flecha(L, punta, desde, largo=3.5, ancho=0.45):
              (punta[0] - ux * largo * E - uy * ancho * E, punta[1] - uy * largo * E + ux * ancho * E))
 
 
-def flecha_giro(L, c, r, a0, a1, horaria=False):
-    """Arco con punta, para indicar un sentido de giro (coordenadas del dibujo)."""
-    L.arco("Cotas", c, r, a0, a1)
-    a = math.radians(a0 if horaria else a1)
-    px, py = c[0] + r * math.cos(a), c[1] + r * math.sin(a)
-    t = -1 if horaria else 1
-    tx, ty = -math.sin(a) * t, math.cos(a) * t
-    flecha(L, (px, py), (px - tx, py - ty))
-
-
 # ------------------------------------------------------------ formas auxiliares
 def botella_simple(s=0.0):
-    """Botella como sólido de revolución, sin pared ni hélice: para la proyección."""
+    """Botella como sólido de revolución, sin pared ni hélice: para la proyección.
+    Hombro y cuerpo en una sola curva suave: en la vista no quedan rayas horizontales
+    (las aristas que dejaría un perfil poligonal)."""
     largo = P.ALTO_BOTELLA - s
     zt = P.z_superior_botella(s)
-    xs = [0.0, P.X_CUELLO_FIN] + [P.X_CUELLO_FIN + (P.X_HOMBRO_FIN - P.X_CUELLO_FIN) * k / 12
-                                  for k in range(1, 13)] + [largo]
-    perfil = [(0.0, zt)] + [(P.radio_botella(x), zt - x) for x in xs] + [(0.0, zt - largo)]
-    return Z.revolucion(perfil)
+    x0, x1 = P.X_CUELLO_FIN, P.X_HOMBRO_FIN
+    xs = [x0 + (x1 - x0) * k / 16 for k in range(17)]
+    xs += [x1 + (largo - x1) * k / 6 for k in range(1, 7)]
+    curva = Part.BSplineCurve()
+    curva.interpolate([V(P.radio_botella(x), 0, zt - x) for x in xs])
+    lados = [Part.makePolygon([V(0, 0, zt), V(P.R_CUELLO, 0, zt), V(P.R_CUELLO, 0, zt - x0)]),
+             Part.Wire(curva.toShape()),
+             Part.makePolygon([V(P.R_B, 0, zt - largo), V(0, 0, zt - largo), V(0, 0, zt)])]
+    cara = Part.Face(Part.Wire([e for w in lados for e in w.Edges]))
+    return cara.revolve(V(0, 0, 0), V(0, 0, 1), 360)
 
 
 def xy_polar(r, a):
@@ -391,6 +439,46 @@ def lista_piezas(L, x, y):
     tabla(L, x, y + fila * len(filas), LISTA_ANCHOS, filas, 2.5, fila)
 
 
+def agujeros_madera():
+    """Agujeros en la madera (base y taco) de los tornillos para madera: (x, y, d, z0, z1).
+    No se ven desde afuera: van en línea de trazos."""
+    out = []
+    for nombre, x, y, e in Z.tornillos_a_la_base():
+        if e is None:      # tornillos del taco: pasantes en la base, guía en el taco
+            out.append((x, y, P.MECHA_PASANTE, -P.MDF[2], 0.0))
+            out.append((x, y, P.MECHA_GUIA, 0.0, P.TORNILLO_TACO_L - P.MDF[2]))
+        else:
+            out.append((x, y, P.MECHA_GUIA, -(P.MADERA_L - e), 0.0))
+    zb = P.TACO_ALTO
+    for x, y in P.TORNILLOS_CABEZAL:          # placa al taco: la cabeza apoya a 3 mm del fondo
+        out.append((x, y, P.MECHA_GUIA, zb - (P.MADERA_L - P.PISO_BAJO_TORNILLO), zb))
+    e = P.LABIO_PIE_ESP + P.Z_PISO - zb      # labio: atraviesa su pie y la placa
+    for r, a in P.TORNILLOS_LABIO:
+        x, y = xy_polar(r, a)
+        out.append((x, y, P.MECHA_GUIA, zb - (P.MADERA_L - e), zb))
+    return out
+
+
+def trazar_agujeros(V_, eje_u):
+    """Agujeros de agujeros_madera() en una vista frontal o lateral, de trazos.
+    eje_u: índice de la coordenada (0 = x, 1 = y) que va a lo ancho del papel."""
+    hechos = set()
+    for x, y, d, z0, z1 in agujeros_madera():
+        c = (x, y)[eje_u]
+        k = (round(c, 1), round(d, 1), round(z0, 1), round(z1, 1))
+        if k in hechos:
+            continue
+        hechos.add(k)
+        for sgn in (-1, 1):
+            q = [x, y]
+            q[eje_u] = c + sgn * d / 2
+            V_.L.trazos(V_.pt(q[0], q[1], z0), V_.pt(q[0], q[1], z1))
+        q0, q1 = [x, y], [x, y]
+        q0[eje_u], q1[eje_u] = c - d / 2, c + d / 2
+        for z in (z0, z1):
+            V_.L.trazos(V_.pt(q0[0], q0[1], z), V_.pt(q1[0], q1[1], z))
+
+
 def lamina_conjunto():
     L = Lamina(2.5, 1, "Plano de conjunto")
     marco_y_rotulo(L, "1:2,5")
@@ -405,17 +493,19 @@ def lamina_conjunto():
 
     # --- Frontal, desde el lado de la cuchilla
     F = Vista(L, "frente", (0, 0, 0), X_F, Y_F)
-    F.formas(formas)
-    F.eje((0, 0, zb - 8), (0, 0, P.ZOCALO_FONDO + P.VARILLA_L + 8))
-    F.eje((XC, YC, zb - 8), (XC, YC, P.Z_MANIVELA + P.CUBO_ALTO + 8))
+    F.formas(formas, ocultas=[pz[n]["forma"] for n in ("Rodamientos", "EjeCarrete")])
+    trazar_agujeros(F, 0)
+    F.eje((0, 0, zb - 4), (0, 0, P.ZOCALO_FONDO + P.VARILLA_L + 8))
+    F.eje((XC, YC, zb - 4), (XC, YC, P.Z_MANIVELA + P.CUBO_ALTO + 8))
     F.eje((x_mango - P.MANGO_R, YC, P.Z_MANIVELA - 8), (x_mango - P.MANGO_R, YC, 132))
-    L.t(X_F, 281.5, 3.5, "Vista frontal", "c")
+    L.t(X_F + 6, 281.5, 3.5, "Vista frontal")        # al costado de la varilla, no encima
     L.cota(F.pt(P.CAB_X[0], 104, 0), F.pt(P.CAB_X[0], 104, P.Z_PISO), -8, direc="v")
     L.cota(F.pt(x0, 104, zb), F.pt(x0, 104, 0), -6, direc="v")
 
     # --- Superior (método E: debajo de la frontal; el lado de la cuchilla queda abajo)
     S = Vista(L, "planta", (0, 0, 0), X_F, 70.0)
-    S.formas(formas)
+    S.formas(formas, ocultas=[pz[n]["forma"] for n in ("Zocalo", "Prisionero", "TuercaPrisionero",
+                                                     "Hoja", "Chapita")])
     S.cruz((0, 0, 0), P.R_B)
     S.cruz((XC, YC, 0), P.R_DISCO)
     S.eje((XC, YC, 0), (x_mango + 4, YC, 0))
@@ -427,10 +517,11 @@ def lamina_conjunto():
 
     # --- Lateral izquierda (método E: desde el lado del carrete, a la derecha)
     Lat = Vista(L, "lateral", (0, 0, 0), 238.0, Y_F)
-    Lat.formas(formas)
+    Lat.formas(formas, ocultas=False)
+    trazar_agujeros(Lat, 1)
     Lat.eje((0, 0, zb - 8), (0, 0, P.ZOCALO_FONDO + P.VARILLA_L + 8))
     Lat.eje((XC, YC, zb - 8), (XC, YC, P.Z_MANIVELA + P.CUBO_ALTO + 8))
-    L.t(248, 281.5, 3.5, "Vista lateral izquierda", "c")
+    L.t(244, 281.5, 3.5, "Vista lateral izquierda")
 
     # --- Lista de piezas y notas
     lista_piezas(L, LISTA_X, ROT_Y1 + 5)
@@ -445,29 +536,29 @@ def lamina_conjunto():
     # --- Globos
     g = lambda n, v, p, dx, dy: globo(L, n, v.pt(*p), dx, dy)
     g(21, F, (-P.R_B, 0, 230), 14, 6)
-    g(3, F, (-P.VARILLA_D / 2, 0, 388), 14, 4)
+    g(3, F, (-P.VARILLA_D / 2, 0, 388), 14, 0)
     g(22, F, (-P.LASTRE_R, 0, 352), 14, 4)
     g(5, F, (P.CAB_X[0], 104, 30), 14, 0)        # arriba del 42 de la altura de la guía
     g(6, F, (P.CAB_X[0], 104, 39), 14, 9)
     g(8, F, (-20, 49, 57), 16, 14)
-    g(9, F, (P.CALCE_X[1], 97, 46), -16, 14)
-    g(11, F, (P.CALCE_X[1], 97, 54), -14, 20)
+    g(9, F, (P.CALCE_X[1], 97, 46), -18, 8)
+    g(11, F, (P.CALCE_X[1], 97, 54), -12, 22)
     g(13, F, (P.X_OJAL, 49, 52), -14, 4)
-    g(14, F, (XC + P.TORRE_R, YC, 22), -12, -6)
-    g(15, F, (XC + P.D_608 / 2, YC, 33), 14, -6)
-    g(17, F, (XC + P.R_DISCO, YC, 39), -14, -4)
+    g(14, F, (XC + P.TORRE_R, YC, 22), -12, -1)
+    g(15, F, (XC + P.D_608 / 2, YC, 33), 16, -7)
+    g(17, F, (XC + P.R_DISCO, YC, 39), -10, 4)
     g(18, F, (XC + P.R_DISCO, YC, 55), 6, 16)
     g(19, F, (XC + 40, YC, P.Z_BRAZO_SUP), 0, 20)
-    g(16, F, (XC, YC, 36.8), 16, 10)
+    g(16, F, (XC, YC, 36.8), 20, 14)
     g(20, F, (x_mango, YC, 100), -8, 10)
     g(1, S, (x0, 100, 0), 10, 0)
     g(2, S, (-P.ZOCALO_R, 0, 28), 22, 10)
     g(4, S, (-22, 0, 14), 22, -6)
-    g(12, S, (P.TORNILLOS_HOJA[1][0], 80, 59.4), 22, -12)
-    g(10, S, (9, 47, 51.4), 14, -10)
-    g(7, S, (5, 47.5, 41.9), 24, -16)
+    g(12, S, (P.TORNILLOS_HOJA[1][0], 80, 59.4), -18, -10)
+    g(10, S, (9, 47, 51.4), 24, 7)
+    g(7, S, (5, 47.5, 41.9), 26, -20)
     g(23, S, (58, 43.9, 5), 0, -12)
-    g(24, Lat, (36, 68, -9), 14, -6)
+    g(24, Lat, (36, 68, -9), 14, -10)
     return L
 
 
@@ -486,8 +577,8 @@ def plano_de_corte(L, V_, x_plano, y_a, y_b, letra="A"):
 
 
 def lamina_cabezal():
-    L = Lamina(1, 2, "Cabezal de corte")
-    marco_y_rotulo(L, "1:1 (detalle 4:1)")
+    L = Lamina(1, 2, "Subconjunto cabezal de corte")
+    marco_y_rotulo(L, "1:1 (A 4:1)")
     pz = Z.conjunto(0.0)
     zb, zg = P.TACO_ALTO, P.Z_PISO
     r_int = P.R_B - P.PARED - P.HOLG_RANURA
@@ -495,7 +586,7 @@ def lamina_cabezal():
     e9 = Z.espesor_calce(P.W)
 
     # --- Pieza 6: placa del cabezal. Frente arriba y planta abajo (método E).
-    L.t(32, 283, 3.5, "Pieza 6: placa del cabezal")
+    L.t(40, 283, 3.5, "Pieza 6: placa del cabezal")
     placa = pz["Cabezal"]["forma"]
     Pf = Vista(L, "largo", (0, 0, zb), 70, 266)
     Pf.formas([placa], ocultas=False)
@@ -505,7 +596,15 @@ def lamina_cabezal():
     Pa = Vista(L, "arriba", (0, 0, 0), 70, 150)
     Pa.formas([placa], ocultas=False)
     Pa.cruz((0, 0, 0), 3)
+    x_e, y_e = Pa.pt(5, -10, 0)
+    L.texto("Texto", x_e, y_e, 2.5, "Eje de la botella")
     L.arco("Ejes", Pa.pt(0, 0, 0), P.R_B, 62, 140)        # la botella, como referencia
+    for x, y in P.TORNILLOS_CABEZAL:                        # ejes de todos los agujeros
+        Pa.cruz((x, y, 0), P.MADERA_CABEZA_D / 2 + 0.3, 2)
+    for x, y in P.TORNILLOS_HOJA:
+        Pa.cruz((x, y, 0), 1.7, 2)
+    for r, a in P.TORNILLOS_LABIO:
+        Pa.cruz((*xy_polar(r, a), 0), P.MADERA_D / 2, 2)
     L.cota(Pa.pt(P.CAB_X[0], P.CAB_Y[0], zg), Pa.pt(P.CAB_X[1], P.CAB_Y[0], zg), -14, direc="h")
     L.cota(Pa.pt(P.CAB_X[0], P.CAB_Y[0], zg), Pa.pt(P.CAB_X[0], P.CAB_Y[1], zg), 6, direc="v")
     L.cota(Pa.pt(P.CAB_X[0], 0, 0), Pa.pt(P.CAB_X[0], P.CAB_Y[0], zg), 6, direc="v")
@@ -513,9 +612,9 @@ def lamina_cabezal():
     L.cota(Pa.pt(P.TORNILLOS_HOJA[0][0], 80, zg), Pa.pt(P.TORNILLOS_HOJA[1][0], 80, zg), 30,
            direc="h")
     plano_de_corte(L, Pa, -3.0, 20, 106)
-    L.guia(Pa.pt(*xy_polar(41.7, 112), zg), Pa.pt(-26, -14, 0),
+    L.guia(Pa.pt(*xy_polar(41.7, 86), zg), Pa.pt(54, 56, zg),
            "Labio interior R40 / R43,45, de 80%%d a 125%%d")
-    L.guia(Pa.pt(*xy_polar(52, 108), zg), Pa.pt(-26, -22, 0),
+    L.guia(Pa.pt(*xy_polar(52, 121), zg), Pa.pt(-26, -20, 0),
            "2 agujeros %%c3,9 para los tornillos del labio exterior")
     L.guia(Pa.pt(P.TORNILLOS_CABEZAL[3][0] - 1.2, 97.2, zg), Pa.pt(54, 102, zg),
            "4 agujeros %%c3,9 con caja %%c7,6: tornillos al taco")
@@ -526,14 +625,18 @@ def lamina_cabezal():
            f"{formato(P.CHAPITA_ANCHO + 1.5 * P.HOLG_CHAPITA)}, {formato(P.POZO_ALTO)} de profundidad")
 
     # --- Piezas 9 y 11: calce y pisador, abajo a la izquierda
-    L.t(32, 112, 3.5, "Piezas 9 y 11: calce y pisador")
+    L.t(32, 120, 3.5, "Piezas 9 y 11: calce y pisador")
     calce = pz["Calce"]["forma"]
     Cf = Vista(L, "largo", (P.CALCE_X[0], 0, zg), 50, 96)
     Cf.formas([calce], ocultas=False)
-    L.cota(Cf.pt(P.CALCE_X[1], 0, zg + e9), Cf.pt(P.CALCE_X[1], 0, zg), -6, formato(e9), "v")
+    L.cota(Cf.pt(P.CALCE_X[1], 0, zg + e9), Cf.pt(P.CALCE_X[1], 0, zg), -6, formato(e9), "v", afuera=-1)
     Ca = Vista(L, "arriba", (P.CALCE_X[0], P.CALCE_Y[0], zg), 50, 40)
     Ca.formas([calce], ocultas=False)
-    L.cota(Ca.pt(P.CALCE_X[0], P.CALCE_Y[0], zg), Ca.pt(P.CALCE_X[1], P.CALCE_Y[0], zg), -6, direc="h")
+    xm = (P.CALCE_X[0] + P.CALCE_X[1]) / 2                  # eje de simetría
+    Ca.eje((xm, P.CALCE_Y[0] - 4, zg), (xm, P.CALCE_Y[1] + 4, zg))
+    for x, y in P.TORNILLOS_HOJA:
+        Ca.cruz((x, y, zg), 1.7, 2)
+    L.cota(Ca.pt(P.CALCE_X[0], P.CALCE_Y[0], zg), Ca.pt(P.CALCE_X[1], P.CALCE_Y[0], zg), -6, direc="h", pos=0.3)
     L.cota(Ca.pt(P.CALCE_X[1], P.CALCE_Y[0], zg), Ca.pt(P.CALCE_X[1], P.CALCE_Y[1], zg), -6, direc="v")
     L.cota(Ca.pt(P.TORNILLOS_HOJA[0][0], 80, zg), Ca.pt(P.TORNILLOS_HOJA[1][0], 80, zg), 22, direc="h")
     for k, s in enumerate(("Calces: uno por ancho de tira w,",
@@ -555,12 +658,14 @@ def lamina_cabezal():
     La.formas([labio], ocultas=False)
     L.arco("Ejes", La.pt(0, 0, 0), P.R_B, 86, 124)
     L.linea("Ejes", La.pt(0, P.R_B - 6, 0), La.pt(0, 60, 0))
+    for r, a in P.TORNILLOS_LABIO:
+        La.cruz((*xy_polar(r, a), 0), P.MADERA_D / 2, 2)
     L.cota(La.pt(0, P.R_B, 0), La.pt(0, r_ext + P.LABIO_ESP, 0), -18, direc="v")
     for k, s in enumerate((f"Arco de R{formato(r_ext)} a R{formato(r_ext + P.LABIO_ESP)}, de 90,8%%d a 125%%d:",
                            "termina 0,6 antes del filo.",
                            f"Pie R{formato(P.LABIO_PIE_R)}, {formato(P.LABIO_PIE_ESP)} de alto, de 103%%d a 125%%d,",
                            "con 2 agujeros %%c3,9. Retiene la chapita.")):
-        L.t(150, 106 - 5 * k, 2.5, s)
+        L.t(150, 99 - 5 * k, 2.5, s)
 
     # --- Detalle A: corte por la ranura, 3 mm antes del filo, 4:1
     K = 4.0
@@ -592,7 +697,9 @@ def lamina_cabezal():
         L.rayado(dp(*a), dp(*b), 2.5, 1)
     L.rectangulo("Contornos", dp(Y0, Z0), dp(Yw, zb))                 # taco de MDF
     L.rayado(dp(Y0, Z0), dp(Yw, zb), 4.0, -1)
-    L.relleno("Contornos", dp(P.CHAPITA_Y[0], zc - P.CHAPITA_ESP), dp(P.CHAPITA_Y[1], zc))
+    # chapita: rayado fino en vez de ennegrecida (pedido de los técnicos)
+    L.rectangulo("Contornos", dp(P.CHAPITA_Y[0], zc - P.CHAPITA_ESP), dp(P.CHAPITA_Y[1], zc))
+    L.rayado(dp(P.CHAPITA_Y[0], zc - P.CHAPITA_ESP), dp(P.CHAPITA_Y[1], zc), 1.0, -1)
     L.rectangulo("Contornos", dp(r_ext, zg), dp(r_ext + P.LABIO_ESP, zg + P.ALTO_LABIO_EXT))
     L.rayado(dp(r_ext, zg), dp(r_ext + P.LABIO_ESP, zg + P.ALTO_LABIO_EXT), 2.5, -1)
     z_h = Z.z_hoja()
@@ -608,7 +715,8 @@ def lamina_cabezal():
     L.cota(dp(r_int, zg + P.ALTO_LABIO_EXT), dp(r_ext, zg + P.ALTO_LABIO_EXT), 4, f"{r_ext - r_int:.2f}".replace(".", ","), "h")
     L.cota(dp(P.LABIO_INT_R0, zg), dp(P.LABIO_INT_R0, zg + P.ALTO_LABIO_INT), 8, formato(P.ALTO_LABIO_INT), "v")
     L.cota(dp(Y0, zb), dp(Y0, zg), 8, formato(zg - zb), "v")
-    y_w = (r_ext + P.LABIO_ESP + P.CALCE_Y[0]) / 2       # en el hueco entre el labio y el calce
+    y_w = P.CALCE_Y[0] - 0.4      # en el hueco entre el labio y el calce, pegada al calce:
+                                  # el número, a su izquierda, entra en el hueco
     L.cota(dp(y_w, zc), dp(y_w, z_h), 0, f"w = {formato(P.W)}", "v")
     izq(41.7, zg + 5.5, "Labio interior", 4.5)
     izq(yb0, Zw - 2, "Pared de la botella")
@@ -624,196 +732,122 @@ def lamina_cabezal():
 
 # ------------------------------------------------------------------ lámina 3
 def lamina_carrete():
+    """Método E en todas las piezas: la vista frontal arriba y la superior debajo,
+    cada una con su nombre. Torre y carrete arriba a la izquierda, manivela abajo a la
+    izquierda y zócalo a la derecha."""
     L = Lamina(1, 3, "Carrete, manivela y zócalo")
     marco_y_rotulo(L, "1:1")
     pz = Z.conjunto(0.0)
+    c45 = math.cos(math.radians(45))
 
-    # --- Pieza 14: torre
+    def nombre(x, y, s):
+        L.t(x, y, 2.5, s, "c")
+
+    # --- Pieza 14: torre (columna izquierda)
     L.t(32, 277, 3.5, "Pieza 14: torre del carrete")
     torre = pz["Torre"]["forma"]
     rb, eb = P.TORRE_BRIDA
-    Ta = Vista(L, "arriba", (XC, YC, 0), 75, 220)
-    Ta.formas([torre], ocultas=False)
-    Ta.cruz((XC, YC, 0), rb)
-    L.circulo("Ejes", Ta.pt(XC, YC, 0), P.TORRE_TORNILLOS_R)
-    L.guia(Ta.pt(*Z.tornillos_torre()[0], 0), Ta.pt(XC + 36, YC + 36, 0), f"3 agujeros %%c3,9 en R{formato(P.TORRE_TORNILLOS_R)}")
-    L.cota(Ta.pt(XC - P.D_608_ALOJ / 2, YC, 0), Ta.pt(XC + P.D_608_ALOJ / 2, YC, 0), 8, d_(P.D_608_ALOJ), "h")
-    Tf = Vista(L, "largo", (XC, YC, 0), 75, 150)
+    Tf = Vista(L, "largo", (XC, YC, 0), 75, 225)
     Tf.formas([torre])
-    Tf.eje((XC, YC, -6), (XC, YC, P.TORRE_ALTO + 6))
-    L.cota(Tf.pt(XC - rb, YC, 0), Tf.pt(XC + rb, YC, 0), -8, d_(2 * rb), "h")
+    Tf.eje((XC, YC, -2), (XC, YC, P.TORRE_ALTO + 4))
+    for x, y in Z.tornillos_torre():                       # ejes de los agujeros de la brida
+        if abs(x - XC) > 1:
+            Tf.eje((x, YC, -2), (x, YC, eb + 2))
     L.cota(Tf.pt(XC - P.TORRE_R, YC, P.TORRE_ALTO), Tf.pt(XC + P.TORRE_R, YC, P.TORRE_ALTO), 6, d_(2 * P.TORRE_R), "h")
     L.cota(Tf.pt(XC + rb, YC, 0), Tf.pt(XC + rb, YC, eb), -8, direc="v")
     L.cota(Tf.pt(XC + rb, YC, 0), Tf.pt(XC + rb, YC, P.TORRE_ALTO), -16, direc="v")
     L.cota(Tf.pt(XC - rb, YC, 0), Tf.pt(XC - rb, YC, P.TORRE_CAVIDAD[1]), 8, direc="v")
-    L.cota(Tf.pt(XC - P.TORRE_CAVIDAD[0], YC, 0), Tf.pt(XC + P.TORRE_CAVIDAD[0], YC, 0), -16, d_(2 * P.TORRE_CAVIDAD[0]), "h")
-    L.t(32, 128, 2.5, "Dos 608ZZ a presión; cavidad para la cabeza del M8.")
+    # primero la cavidad (Ø20), más cerca de la pieza; después la brida (Ø60)
+    L.cota(Tf.pt(XC - P.TORRE_CAVIDAD[0], YC, 0), Tf.pt(XC + P.TORRE_CAVIDAD[0], YC, 0), -8, d_(2 * P.TORRE_CAVIDAD[0]), "h")
+    L.cota(Tf.pt(XC - rb, YC, 0), Tf.pt(XC + rb, YC, 0), -16, d_(2 * rb), "h")
+    nombre(75, 202, "Vista frontal")
+    Ta = Vista(L, "arriba", (XC, YC, 0), 75, 165)
+    Ta.formas([torre], ocultas=False)
+    Ta.cruz((XC, YC, 0), rb)
+    L.circulo("Ejes", Ta.pt(XC, YC, 0), P.TORRE_TORNILLOS_R)
+    for x, y in Z.tornillos_torre():
+        Ta.cruz((x, y, 0), P.MADERA_D / 2, 2)
+    L.guia(Ta.pt(*Z.tornillos_torre()[0], 0), Ta.pt(XC + 36, YC + 36, 0), f"3 agujeros %%c3,9 en R{formato(P.TORRE_TORNILLOS_R)}")
+    ra = P.D_608_ALOJ / 2                                   # diámetro en diagonal, dentro del agujero
+    L.cota(Ta.pt(XC - ra * c45, YC - ra * c45, 0), Ta.pt(XC + ra * c45, YC + ra * c45, 0), 0, d_(P.D_608_ALOJ), pos=0.7)
+    nombre(75, 124, "Vista superior")
+    L.t(32, 108, 2.5, "Dos 608ZZ a presión; cavidad para la cabeza del M8.")
 
-    # --- Piezas 17 y 18: carrete
+    # --- Piezas 17 y 18: carrete (columna del medio)
     L.t(135, 277, 3.5, "Piezas 17 y 18: carrete")
     carrete = pz["CarreteInferior"]["forma"]
-    Ra = Vista(L, "arriba", (XC, YC, 0), 185, 220)
-    Ra.formas([carrete], ocultas=False)
-    Ra.cruz((XC, YC, 0), P.R_DISCO)
-    L.cota(Ra.pt(XC - P.R_NUCLEO, YC, 0), Ra.pt(XC + P.R_NUCLEO, YC, 0), 8, d_(2 * P.R_NUCLEO), "h")
-    L.guia(Ra.pt(XC + 0.6, YC - P.R_NUCLEO + 2, 0), Ra.pt(XC + 42, YC - 52, 0), f"Ranura 1,2 x {formato(P.RANURA_ENGANCHE)}: engancha la tira")
-    L.guia(Ra.pt(XC - 3.2, YC + 2.7, 0), Ra.pt(XC - 40, YC + 48, 0), f"Hexágono {formato(P.M8_EC + P.HOLG_TUERCA)} e/c, tuerca M8 cautiva", 2.5, "d")
     z0 = P.Z_CORE0 - P.DISCO_ESP
-    Rf = Vista(L, "largo", (XC, YC, z0), 185, 150)
+    Rf = Vista(L, "largo", (XC, YC, z0), 185, 225)
     Rf.formas([carrete])
-    Rf.eje((XC, YC, z0 - 6), (XC, YC, P.Z_CORE1 + 6))
+    Rf.eje((XC, YC, z0 - 2), (XC, YC, P.Z_CORE1 + 4))
     L.cota(Rf.pt(XC - P.R_DISCO, YC, z0), Rf.pt(XC + P.R_DISCO, YC, z0), -8, d_(2 * P.R_DISCO), "h")
-    L.cota(Rf.pt(XC + P.R_DISCO, YC, z0), Rf.pt(XC + P.R_DISCO, YC, P.Z_CORE0), -8, direc="v")
+    L.cota(Rf.pt(XC + P.R_DISCO, YC, z0), Rf.pt(XC + P.R_DISCO, YC, P.Z_CORE0), -8, direc="v", afuera=-1)
     L.cota(Rf.pt(XC + P.R_DISCO, YC, P.Z_CORE0), Rf.pt(XC + P.R_DISCO, YC, P.Z_CORE1), -8, direc="v")
     L.cota(Rf.pt(XC - 4.2, YC, P.Z_CORE1), Rf.pt(XC + 4.2, YC, P.Z_CORE1), 6, d_(P.VARILLA_D + P.HOLG_AGUJERO), "h")
-    L.t(135, 128, 2.5, f"Disco superior (18): igual, {formato(P.DISCO_ESP)} de espesor, sin núcleo ni hexágono.")
+    nombre(185, 207, "Vista frontal")
+    Ra = Vista(L, "arriba", (XC, YC, 0), 185, 160)
+    Ra.formas([carrete], ocultas=False)
+    Ra.cruz((XC, YC, 0), P.R_DISCO)
+    rn = P.R_NUCLEO
+    L.cota(Ra.pt(XC - rn * c45, YC - rn * c45, 0), Ra.pt(XC + rn * c45, YC + rn * c45, 0), 0, d_(2 * rn), pos=0.78)
+    L.guia(Ra.pt(XC + 0.6, YC - P.R_NUCLEO + 2, 0), Ra.pt(XC + 30, YC - 48, 0), f"Ranura 1,2 x {formato(P.RANURA_ENGANCHE)}: engancha la tira")
+    L.guia(Ra.pt(XC - 3.2, YC + 2.7, 0), Ra.pt(XC - 40, YC - 45, 0), f"Hexágono {formato(P.M8_EC + P.HOLG_TUERCA)} e/c, tuerca M8 cautiva", 2.5, "d")
+    nombre(185, 112, "Vista superior")
+    L.t(135, 104, 2.5, f"Disco superior (18): igual, {formato(P.DISCO_ESP)} de espesor, sin núcleo ni hexágono.")
 
-    # --- Pieza 19: manivela
-    L.t(252, 277, 3.5, "Pieza 19: manivela")
+    # --- Pieza 19: manivela (abajo a la izquierda)
+    L.t(32, 99, 3.5, "Pieza 19: manivela")
     man = pz["Manivela"]["forma"]
     zm = P.Z_MANIVELA
-    Ma = Vista(L, "arriba", (XC, YC, zm), 262, 250)
-    Ma.formas([man], ocultas=False)
-    Ma.eje((XC - 16, YC, zm), (XC + P.R_MANIVELA + 16, YC, zm))
-    Ma.eje((XC, YC - 16, zm), (XC, YC + 16, zm))
-    Ma.eje((XC + P.R_MANIVELA, YC - 14, zm), (XC + P.R_MANIVELA, YC + 14, zm))
-    L.cota(Ma.pt(XC, YC + P.CUBO_R, zm), Ma.pt(XC + P.R_MANIVELA, YC + P.CUBO_R, zm), 8, direc="h")
-    L.cota(Ma.pt(XC + 40, YC - P.MANIVELA_ANCHO / 2, zm), Ma.pt(XC + 40, YC + P.MANIVELA_ANCHO / 2, zm), 0, direc="v")
-    L.guia(Ma.pt(XC - P.CUBO_R * 0.7, YC - P.CUBO_R * 0.7, zm), Ma.pt(XC - 4, YC - 22, zm), f"Cubo %%c{formato(2 * P.CUBO_R)}, agujero %%c{formato(P.VARILLA_D + P.HOLG_AGUJERO)}")
-    L.guia(Ma.pt(XC + P.R_MANIVELA + 2.5, YC - 1.2, zm), Ma.pt(XC + P.R_MANIVELA + 14, YC - 18, zm), f"Agujero %%c{formato(5 + P.HOLG_AGUJERO)} (M5)")
-    Mf = Vista(L, "largo", (XC, YC, zm), 262, 212)
+    xr = XC + P.R_MANIVELA
+    Mf = Vista(L, "largo", (XC, YC, zm), 50, 82)
     Mf.formas([man])
     L.cota(Mf.pt(XC - P.CUBO_R, YC, zm), Mf.pt(XC - P.CUBO_R, YC, zm + P.CUBO_ALTO), 6, direc="v")
-    L.cota(Mf.pt(XC + P.R_MANIVELA + 10, YC, P.Z_BRAZO), Mf.pt(XC + P.R_MANIVELA + 10, YC, P.Z_BRAZO_SUP), -6, direc="v")
-    L.t(252, 204, 2.5, "Tuerca M8 en el cubo, abierta hacia la cama; se arma con esa cara arriba.")
-    L.t(252, 199, 2.5, "Mango (20): tubo %%c22 x 55, con tornillo " + P.TORNILLO_MANGO_TXT.replace("×", "x") + ".")
+    L.cota(Mf.pt(xr + 10, YC, P.Z_BRAZO), Mf.pt(xr + 10, YC, P.Z_BRAZO_SUP), -6, direc="v")
+    nombre(90, 74, "Vista frontal")
+    Ma = Vista(L, "arriba", (XC, YC, zm), 50, 48)
+    Ma.formas([man], ocultas=False)
+    Ma.eje((XC - 16, YC, zm), (xr + 14, YC, zm))
+    Ma.eje((XC, YC - 14, zm), (XC, YC + 14, zm))
+    Ma.eje((xr, YC - 12, zm), (xr, YC + 12, zm))
+    L.cota(Ma.pt(XC, YC + P.CUBO_R, zm), Ma.pt(xr, YC + P.CUBO_R, zm), 8, direc="h")
+    # ancho del brazo: afuera, más allá del ojo del mango
+    ojo = P.MANIVELA_ANCHO / 2 + 2
+    L.cota(Ma.pt(xr - 14, YC - P.MANIVELA_ANCHO / 2, zm), Ma.pt(xr - 14, YC + P.MANIVELA_ANCHO / 2, zm), -(14 + ojo + 6), direc="v")
+    L.guia(Ma.pt(XC - P.CUBO_R * 0.7, YC - P.CUBO_R * 0.7, zm), Ma.pt(XC - 4, YC - 21, zm), f"Cubo %%c{formato(2 * P.CUBO_R)}, agujero %%c{formato(P.VARILLA_D + P.HOLG_AGUJERO)}")
+    L.guia(Ma.pt(xr - 1.9, YC - 1.9, zm), Ma.pt(xr - 10, YC - 21, zm), f"Agujero %%c{formato(5 + P.HOLG_AGUJERO)} (M5)")
+    nombre(90, 18, "Vista superior")
+    for k, s in enumerate(("Tuerca M8 en el cubo, abierta hacia",
+                           "la cama; se arma con esa cara arriba.",
+                           "Mango (20): tubo %%c22 x 55, con",
+                           "tornillo " + P.TORNILLO_MANGO_TXT.replace("×", "x") + ".")):
+        L.t(160, 64 - 5 * k, 2.5, s)
 
-    # --- Pieza 2: zócalo
-    L.t(252, 190, 3.5, "Pieza 2: zócalo de la varilla")
-    L.t(252, 184, 2.5, "Orejas a 30%%d, 150%%d y 270%%d: ninguna bajo el cabezal.")
+    # --- Pieza 2: zócalo (columna derecha)
+    L.t(262, 277, 3.5, "Pieza 2: zócalo de la varilla")
+    L.t(262, 271, 2.5, "Orejas a 30%%d, 150%%d y 270%%d: ninguna bajo el cabezal.")
     zoc = pz["Zocalo"]["forma"]
-    Za = Vista(L, "arriba", (0, 0, 0), 300, 140)
-    Za.formas([zoc], ocultas=False)
-    Za.cruz((0, 0, 0), P.OREJA_R + 7)
-    L.circulo("Ejes", Za.pt(0, 0, 0), P.OREJA_R)
-    L.cota(Za.pt(-(P.VARILLA_D + P.HOLG_VARILLA) / 2, 0, 0), Za.pt((P.VARILLA_D + P.HOLG_VARILLA) / 2, 0, 0), -12, d_(P.VARILLA_D + P.HOLG_VARILLA), "h")
-    L.guia(Za.pt(*xy_polar(P.OREJA_R, 30), 0), Za.pt(46, 40, 0), f"3 agujeros %%c3,9 en R{formato(P.OREJA_R)}")
-    L.guia(Za.pt(-11.4, 2.5, 0), Za.pt(-42, -8, 0), "Ranura de la tuerca M3", 2.5, "d")
-    Zf = Vista(L, "largo", (0, 0, 0), 300, 62)
+    Zf = Vista(L, "largo", (0, 0, 0), 330, 225)
     Zf.formas([zoc])
-    Zf.eje((0, 0, -6), (0, 0, P.ZOCALO_ALTO + 6))
-    L.cota(Zf.pt(P.ZOCALO_R, 0, 0), Zf.pt(P.ZOCALO_R, 0, P.ZOCALO_ALTO), -22, direc="v")
-    L.cota(Zf.pt(P.ZOCALO_R, 0, 0), Zf.pt(P.ZOCALO_R, 0, P.Z_PRISIONERO), -14, direc="v")
+    Zf.eje((0, 0, -2), (0, 0, P.ZOCALO_ALTO + 4))
+    L.cota(Zf.pt(P.ZOCALO_R, 0, 0), Zf.pt(P.ZOCALO_R, 0, P.ZOCALO_ALTO), -27, direc="v")
+    L.cota(Zf.pt(P.ZOCALO_R, 0, 0), Zf.pt(P.ZOCALO_R, 0, P.Z_PRISIONERO), -17, direc="v")
     L.cota(Zf.pt(-P.ZOCALO_R, 0, 0), Zf.pt(-P.ZOCALO_R, 0, P.ZOCALO_FONDO), 22, direc="v")
     L.cota(Zf.pt(-P.ZOCALO_R, 0, P.ZOCALO_ALTO), Zf.pt(P.ZOCALO_R, 0, P.ZOCALO_ALTO), 6, d_(2 * P.ZOCALO_R), "h")
-    L.guia(Zf.pt(-P.ZOCALO_R - 1, 0, P.Z_PRISIONERO + 1.5), Zf.pt(-42, 0, 40), "Agujero del prisionero M3, en rombo (sin soporte)", 2.5, "d")
-    return L
-
-
-# ------------------------------------------------------------------ lámina 4
-def lamina_esquema():
-    L = Lamina(1, 4, "Esquema de funcionamiento")
-    marco_y_rotulo(L, "Sin escala", metodo=False)
-    t = L.t
-    res = json.load(open(os.path.join(CARPETA, "resultados.json"), encoding="utf-8"))["funcionamiento"]
-
-    # --- Planta esquemática: la tira tira de la botella
-    t(32, 277, 3.5, "Vista desde arriba")
-    cb, rb = (95.0, 212.0), 28.0
-    L.circulo("Contornos", cb, rb)
-    L.circulo("Ejes", cb, 1.0)
-    L.linea("Ejes", (cb[0] - rb - 6, cb[1]), (cb[0] + rb + 6, cb[1]))
-    L.linea("Ejes", (cb[0], cb[1] - rb - 6), (cb[0], cb[1] + rb + 6))
-    t(cb[0], cb[1] - rb - 8, 3.5, "Botella, %%cD, sobre la varilla", "c")
-    flecha_giro(L, cb, 14, 110, 340, horaria=True)   # vista desde arriba: horaria
-    # cabezal con la hoja en el punto (0, R): la tira sale hacia +X
-    xh, yh = cb[0], cb[1] + rb
-    L.polilinea("Contornos", [(xh - 18, yh - 6), (xh + 10, yh - 6), (xh + 10, yh + 10), (xh - 18, yh + 10)], True)
-    L.polilinea("Contornos", [(xh, yh), (xh + 9, yh + 1.6), (xh + 9, yh - 1.6)], True)
-    t(xh - 18, yh + 13, 2.5, "Cabezal: guía, labios y hoja fija")
-    # tira, ojal y carrete
-    cc, r0, rf = (200.0, 204.0), 10.0, 17.0
-    L.linea("Contornos", (xh, yh), (cc[0], cc[1] + r0))
-    L.linea("Contornos", (xh, yh + 0.8), (cc[0], cc[1] + r0 + 0.8))
-    xo = 150.0
-    y_t = yh + (cc[1] + r0 - yh) * (xo - xh) / (cc[0] - xh)
-    L.rectangulo("Contornos", (xo - 5, y_t - 3.5), (xo + 5, y_t - 1.0))
-    L.rectangulo("Contornos", (xo - 5, y_t + 2.2), (xo + 5, y_t + 4.7))
-    t(xo, y_t - 9, 2.5, "Ojal fijo", "c")
-    L.circulo("Contornos", cc, r0)
-    L.circulo("Extremas", cc, rf)
-    L.linea("Ejes", (cc[0] - 50, cc[1]), (cc[0] + 50, cc[1]))
-    L.linea("Ejes", (cc[0], cc[1] - 24), (cc[0], cc[1] + 24))
-    L.rectangulo("Contornos", (cc[0], cc[1] - 3), (cc[0] + 32, cc[1] + 3))
-    L.circulo("Contornos", (cc[0] + 32, cc[1]), 4.5)
-    flecha_giro(L, cc, 22, 150, 20, horaria=True)
-    t(cc[0] - 40, cc[1] - 30, 2.5, "Carrete: núcleo r0, rollo r (crece)")
-    t(cc[0] + 2, cc[1] + 9, 2.5, "Manivela, brazo R")
-    t(xo + 22, y_t + 1, 2.5, "Tira, tiro T")
-    t(32, 168, 2.5, "Vistos desde arriba, la botella y el carrete giran en sentido horario.")
-    t(32, 163, 2.5, "El eje M8 tiene rosca derecha: ese giro aprieta la tuerca de la manivela.")
-
-    # --- Alzado esquemático: el paso lo fija la guía
-    t(32, 150, 3.5, "Vista de frente")
-    xv, zg = 100.0, 95.0
-    L.linea("Contornos", (xv, 68), (xv, 148))                  # varilla
-    L.polilinea("Contornos", [(xv - 22, zg), (xv - 22, 128), (xv - 8, 142), (xv + 8, 142), (xv + 22, 128), (xv + 22, zg)])
-    L.rectangulo("Contornos", (xv - 7, 140), (xv + 7, 146))           # tapa
-    L.rectangulo("Contornos", (xv - 32, 68), (xv + 32, 74))           # taco
-    L.rectangulo("Contornos", (xv - 32, 74), (xv + 32, zg))           # cabezal, hasta la guía
-    L.linea("Contornos", (xv - 32, 68), (xv + 32, 68))
-    for x in range(int(xv - 60), int(xv + 100), 5):
-        L.linea("Cotas", (x + 3, 68), (x, 65))
-    L.linea("Contornos", (xv - 60, 68), (xv + 100, 68))
-    # hoja a la altura w sobre la guía, y la tira saliendo
-    L.linea("Contornos", (xv + 22, zg + 9), (xv + 40, zg + 9))
-    L.rectangulo("Contornos", (xv + 22, zg), (xv + 100, zg + 9))
-    t(xv + 42, zg + 11, 2.5, "Hoja, a w sobre la guía")
-    t(xv + 60, zg + 2.5, 2.5, "Tira, ancho w")
-    L.cota((xv + 22, zg), (xv + 22, zg + 9), -6, "w", "v")
-    L.linea("Cotas", (xv - 22, zg + 9), (xv + 22, zg))           # borde en hélice, inclinación alfa
-    t(xv - 52, zg + 15, 2.5, "Borde cortado:")
-    t(xv - 52, zg + 10.5, 2.5, "hélice de paso w")
-    t(xv - 46, 80, 2.5, "Base de MDF")
-    t(xv - 10, 150, 2.5, "Tapa perforada: centra")
-    t(xv - 60, 128, 2.5, "La botella baja w por")
-    t(xv - 60, 123, 2.5, "vuelta: el borde vuelve")
-    t(xv - 60, 118, 2.5, "a apoyar en la guía")
-
-    # --- Cadena de cuentas
-    x = 245.0
-    t(x, 277, 5, "Cadena del movimiento")
-    ecs = (("Paso del corte, lo fija la guía:", "p = w"),
-           ("Inclinación de la hélice:", "tg(alfa) = w / (pi·D)"),
-           ("Vueltas de botella:", "nb = s / w"),
-           ("Largo de la tira:", "L = pi·D·nb"),
-           ("Radio del rollo lleno:", "rf^2 = r0^2 + L·t / pi"),
-           ("Vueltas de manivela (carrete directo, i = 1):", "nm = (rf - r0) / t"),
-           ("Fuerza en la mano:", "F = T·r / R"))
-    y = 266
-    for a, b in ecs:
-        t(x, y, 3.5, a)
-        t(x, y - 5.5, 3.5, b, capa="Texto")
-        y -= 13
-    L.rectangulo("Contornos", (x, 158), (x + 100, 172))
-    t(x + 50, 162, 6, "F = T·rf / R", "c")
-    t(x, 152, 2.5, "La tensión de la tira la pone el corte, no la mano: la manivela solo fija la velocidad.")
-    t(x, 147, 2.5, "Un brazo R más largo baja F sin agregar engranajes.")
-    filas = [("Símbolo", "Magnitud", "Valor"),
-             ("D", "Diámetro de la botella", f"{formato(P.D_B)} mm"),
-             ("t", "Espesor de pared", f"{P.PARED:.2f}".replace(".", ",") + " mm"),
-             ("w", "Ancho de tira (calce)", f"{formato(P.W)} mm"),
-             ("s", "Tramo cortado", f"{formato(P.RECORRIDO)} mm"),
-             ("alfa", "Inclinación de la hélice", f"{res['helice_grados']:.2f}".replace(".", ",") + "%%d"),
-             ("nb", "Vueltas de botella", formato(res["vueltas_botella"])),
-             ("L", "Largo de la tira", f"{res['largo_tira_m']:.2f}".replace(".", ",") + " m"),
-             ("r0 / rf", "Radio del rollo, vacío / lleno", f"{formato(res['radio_rollo_mm'][0])} / {formato(res['radio_rollo_mm'][1])} mm"),
-             ("nm", "Vueltas de manivela", formato(res["vueltas_manivela"])),
-             ("R", "Brazo de la manivela", f"{formato(P.R_MANIVELA)} mm"),
-             ("T", "Tiro de diseño (supuesto)", f"{formato(P.T_DISENO)} N"),
-             ("F", "Fuerza en la mano, rollo lleno", f"{formato(res['fuerza_mano_N'])} N (criterio: hasta {formato(P.F_MANO_MAX)} N)")]
-    tabla(L, x, 140, [16, 58, 86], filas, 2.5, 5.0)
-    t(x, 70, 2.5, "Valores calculados con el modelo digital del prototipo.")
+    L.guia(Zf.pt(-P.ZOCALO_R - 1, 0, P.Z_PRISIONERO + 1.5), Zf.pt(-42, 0, 40), "Agujero del prisionero M3, en rombo", 2.5, "d")
+    nombre(330, 216, "Vista frontal")
+    Za = Vista(L, "arriba", (0, 0, 0), 330, 170)
+    Za.formas([zoc], ocultas=False)
+    # solo el eje vertical: la pieza es simétrica respecto de él, no del horizontal
+    Za.eje((0, -(P.OREJA_R + 11), 0), (0, P.OREJA_R + 11, 0))
+    L.circulo("Ejes", Za.pt(0, 0, 0), P.OREJA_R)
+    for x, y in Z.tornillos_zocalo():
+        Za.cruz((x, y, 0), P.MADERA_D / 2, 2)
+    rv = (P.VARILLA_D + P.HOLG_VARILLA) / 2       # agujero chico: diámetro con línea de referencia
+    L.guia(Za.pt(rv * c45, rv * c45, 0), Za.pt(8, 26, 0), d_(2 * rv))
+    L.guia(Za.pt(*xy_polar(P.OREJA_R, 30), 0), Za.pt(30, 40, 0), f"3 agujeros %%c3,9 en R{formato(P.OREJA_R)}")
+    L.guia(Za.pt(-11.4, 2.5, 0), Za.pt(-42, -8, 0), "Ranura de la tuerca M3", 2.5, "d")
+    nombre(330, 125, "Vista superior")
     return L
 
 
@@ -840,7 +874,7 @@ def main():
     os.makedirs(intermedio, exist_ok=True)
     pedidas = [a for a in sys.argv[1:] if not a.endswith(".py")]
     laminas = (("01_conjunto", lamina_conjunto), ("02_cabezal", lamina_cabezal),
-               ("03_carrete", lamina_carrete), ("04_esquema", lamina_esquema))
+               ("03_carrete", lamina_carrete))
     informe, ok = {}, True
     for nombre, f in laminas:
         if pedidas and nombre not in pedidas:

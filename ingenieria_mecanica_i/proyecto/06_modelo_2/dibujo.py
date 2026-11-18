@@ -61,9 +61,11 @@ class Dibujo:
         self.ops.append(["t", capa, x, y, H, s, alin, rot])
         self._registrar(x, y, H, s, alin, rot)
 
-    def cota(self, a, b, d, s=None, direc=None):
+    def cota(self, a, b, d, s=None, direc=None, pos=0.5, afuera=1):
         """Cota lineal entre a y b, con la línea a d mm de papel de la recta que
-        los une. direc: 'h', 'v' o None (paralela a ab). s: texto; None = medida."""
+        los une. direc: 'h', 'v' o None (paralela a ab). s: texto; None = medida.
+        pos: dónde va el número a lo largo de la línea (0 = a, 1 = b). Si no entra,
+        sale afuera: más allá de b (afuera=1) o de a (afuera=-1)."""
         E = self.E
         if direc == "h":
             ang = 0.0
@@ -84,19 +86,23 @@ class Dibujo:
         med = abs(tb - ta)
         entero = abs(med - round(med)) < 0.005
         rotulo = s if s is not None else formato(med)
-        self.ops.append(["d", list(a), list(b), list(base), ang,
-                         "<>" if s is None and entero else rotulo])
-        # Dónde va a quedar el número, para el control de superposiciones
+        # Dónde va el número: siempre sobre la línea de cota (del lado de la normal,
+        # que con el ángulo ya corregido es "arriba" para quien lee), a 1 mm de ella
         p1 = (base[0] + ux * ta, base[1] + uy * ta)
         p2 = (base[0] + ux * tb, base[1] + uy * tb)
         H = 3.5 * E
         w = ancho_texto(rotulo, H)
-        c = ((p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2)
-        if med < 7 * E + w + 2 * E:       # espacio reducido: número afuera
-            lejos = w / 2 + 7 * E + E
-            sen = 1 if tb > ta else -1
-            c = (p2[0] + ux * sen * lejos, p2[1] + uy * sen * lejos)
+        c = (p1[0] + (p2[0] - p1[0]) * pos, p1[1] + (p2[1] - p1[1]) * pos)
+        if med < w + 2.5 * E:             # el número no entra a lo largo de la cota: afuera
+            fin, otro = (p2, p1) if afuera == 1 else (p1, p2)
+            lg = math.hypot(fin[0] - otro[0], fin[1] - otro[1]) or 1.0
+            ex, ey = (fin[0] - otro[0]) / lg, (fin[1] - otro[1]) / lg
+            lejos = w / 2 + 5 * E       # justo después de la flecha (3,5) y 1,5 de aire
+            c = (fin[0] + ex * lejos, fin[1] + ey * lejos)
         self._registrar(c[0] + nx * E, c[1] + ny * E, H, rotulo, "c", ang)
+        medio = (c[0] + nx * (E + H / 2), c[1] + ny * (E + H / 2))
+        self.ops.append(["d", list(a), list(b), list(base), ang,
+                         "<>" if s is None and entero else rotulo, list(medio)])
 
     def guardar(self, ruta, ancho, alto, salida):
         with open(ruta, "w", encoding="utf-8") as f:

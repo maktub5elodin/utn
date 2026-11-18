@@ -20,7 +20,7 @@ from PIL import Image
 
 CARPETA = os.path.dirname(os.path.abspath(__file__))
 LAMINAS = {"01_conjunto": ("planos", 2.5), "02_cabezal": ("planos", 1.0),
-           "03_carrete": ("planos", 1.0), "04_esquema": ("planos", 1.0)}
+           "03_carrete": ("planos", 1.0)}
 ANCHO, ALTO, DPI = 420, 297, 110
 TOLERANCIA_PX = 4
 

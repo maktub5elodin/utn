@@ -4,7 +4,7 @@
 set -e
 raiz="$(cd "$(dirname "$0")" && pwd)"
 mkdir -p "$raiz/build/planos"
-for dxf in 01_conjunto:0.4 02_cabezal:1 03_carrete:1 04_esquema:1; do
+for dxf in 01_conjunto:0.4 02_cabezal:1 03_carrete:1; do
   r=${dxf%%:*}; s=${dxf##*:}
   n=$(basename "$r")
   cd "$raiz/planos/$(dirname "$r")"

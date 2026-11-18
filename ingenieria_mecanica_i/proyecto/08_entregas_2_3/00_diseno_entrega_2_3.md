@@ -39,7 +39,7 @@ Comunes: título «Cortadora Manual de Botellas PET»; Profesor: Abud, Moises Ro
 
 | Corrección | Dónde se atiende | Control automático |
 |---|---|---|
-| E2: falta Planos/Diagramas | Sección 6 «Planos», con las 4 láminas A3 de `06_modelo_2/planos/` a página completa, apaisadas, en las dos versiones | El build falla si la sección falta, está vacía o no tiene las 4 láminas |
+| E2: falta Planos/Diagramas | Sección 6 «Planos», con las 3 láminas A3 de `06_modelo_2/planos/` (la 4, esquema, no va en el informe) a página completa, apaisadas, en las dos versiones | El build falla si la sección falta, está vacía o no tiene las 3 láminas |
 | E2: falta Bibliografía (además de las notas al pie) | Sección final «Bibliografía» (APA, alfabética) + «Links de interés», en las dos versiones | El build falla si falta o está vacía |
 | E1: Introducción innecesariamente extensa | 2 párrafos breves: problema, propuesta y alcance | ≤ 150 palabras y ≤ 2 párrafos |
 | E1: Estado del arte sin nota al pie | Cada dato de fuente externa con nota al pie numerada, también en el Estado del arte | Toda nota con fuente tiene URL o DOI; notas ↔ Bibliografía ∪ Links, en los dos sentidos; Bibliografía en orden alfabético |
@@ -66,7 +66,7 @@ Página 2: título del trabajo y, debajo, el índice. La numeración 1–6 es la
 | 5.4 Autoavance y lastre | 5.4 |
 | 5.5 Verificaciones del modelo digital | 5.5 |
 | 5.6 Materiales, fabricación y montaje | 5.6 |
-| 6. Planos (Láminas 1 a 4) | 6. Planos (Láminas 1 a 4) |
+| 6. Planos (Láminas 1 a 3) | 6. Planos (Láminas 1 a 3) |
 | 7. Resultados (7.1 Ancho de tira medido · 7.2 Observaciones de funcionamiento · 7.3 Valores calculados del modelo) | — |
 | 8. Conclusión | — |
 | Anexo A. Piezas impresas y comerciales | Anexo A |
@@ -165,7 +165,7 @@ Solo imágenes que ya existen; numeradas, con epígrafe.
 | Figura 2 | `06_modelo_2/figuras/detalle_cabezal.png` | 5.2 |
 | Figura 3 | una vista del carrete y la manivela de `instructivo/pasos/` (a elegir al redactar) | 5.3 |
 | Figuras del Anexo B | 3 o 4 vistas de `instructivo/pasos/` | Anexo B |
-| Láminas 1 a 4 | `06_modelo_2/planos/01_conjunto.pdf` … `04_esquema.pdf`, vectoriales, una por página A4 apaisada (en Word, PNG a 300 ppp de esos mismos PDF) | 6 |
+| Láminas 1 a 3 | `06_modelo_2/planos/01_conjunto.pdf` … `03_carrete.pdf`, vectoriales, una por página A4 apaisada (en Word, PNG a 300 ppp de esos mismos PDF) | 6 |
 
 ## 8. Bibliografía y Links de interés
 
@@ -191,7 +191,7 @@ Toda URL se verifica antes de compilar la versión final.
 
 | Control | Qué comprueba |
 |---|---|
-| Secciones obligatorias | Planos (con 4 láminas) y Bibliografía presentes y no vacías en las dos versiones; Abstract, Resultados y Conclusión presentes solo en E3 |
+| Secciones obligatorias | Planos (con 3 láminas) y Bibliografía presentes y no vacías en las dos versiones; Abstract, Resultados y Conclusión presentes solo en E3 |
 | Citas ↔ Bibliografía | Cada nota con fuente tiene URL/DOI; el conjunto de fuentes de las notas es igual al de Bibliografía ∪ Links de interés; Bibliografía en orden alfabético |
 | Vocabulario | Ningún término prohibido fuera del párrafo de alternativas: rodillo motriz, transmisión por fricción, engranajes reductores, husillo, tuerca fija, carro, guías paralelas, sujeción exterior del cuello, `a = L·Db/(i·Dr)`, «se propone», «se prevé», «se evaluará», Maty, [SUP], [PROTO], make, verificar.py, H1–H7, «modelo 2.0», «modelo 1», nombres de carpetas y de scripts |
 | Introducción | ≤ 150 palabras y ≤ 2 párrafos |

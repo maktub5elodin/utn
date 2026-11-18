@@ -102,8 +102,11 @@ def escribir(ruta_json, ruta_dxf):
                          dxfattribs={"layer": capa, "style": "IRAM"}
                          ).set_placement((x, y), align=ALIN[alin])
         elif t == "d":
-            _, a, b, base, ang, s = op
+            _, a, b, base, ang, s, medio = op
+            # Posición del número fijada: si no, ezdxf lo pone del lado opuesto a la pieza
+            # (debajo de la línea en las cotas horizontales)
             msp.add_linear_dim(base=base, p1=a, p2=b, angle=ang, text=s, dimstyle="IRAM",
+                               location=medio, override={"dimtmove": 0},
                                dxfattribs={"layer": "Cotas"}).render()
     # Vista guardada = "zoom all" sobre la hoja: al abrir el DXF se ve la lámina entera
     # (sin esto LibreCAD abre en el origen y la pantalla queda negra).

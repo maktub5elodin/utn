@@ -162,15 +162,13 @@ En el prototipo se utilizó una varilla de acero de [7,3]{.v k=med.varilla_mm} m
 
 ## 6. Planos
 
-Las cuatro láminas se dibujaron en formato A3 a partir del modelo digital del prototipo, en sistema europeo (método E), y se reproducen reducidas a A4: las escalas indicadas en cada rótulo corresponden al formato A3 original. La lámina 1 muestra el conjunto con la lista de piezas; las láminas 2 y 3 detallan las piezas impresas del cabezal de corte y del accionamiento, y la lámina 4 resume el principio de funcionamiento y la cadena de cálculo.
+Las tres láminas se dibujaron en formato A3 a partir del modelo digital del prototipo, en sistema europeo (método E), y se reproducen reducidas a A4: las escalas indicadas en cada rótulo corresponden al formato A3 original. La lámina 1 muestra el conjunto con la lista de piezas; las láminas 2 y 3 detallan las piezas impresas del cabezal de corte y del accionamiento.
 
 ![Plano de conjunto, con la lista de piezas. Lámina A3 reducida a A4: la escala 1:2,5 del rótulo corresponde al formato original.](../06_modelo_2/planos/01_conjunto.pdf){.lamina}
 
-![Cabezal de corte: placa, labio exterior, calce y pisador, con el detalle A del corte por la ranura. Lámina A3 reducida a A4: las escalas 1:1 y 4:1 del rótulo corresponden al formato original.](../06_modelo_2/planos/02_cabezal.pdf){.lamina}
+![Subconjunto cabezal de corte: placa, labio exterior, calce y pisador, con el detalle A del corte por la ranura. Lámina A3 reducida a A4: las escalas 1:1 y 4:1 del rótulo corresponden al formato original.](../06_modelo_2/planos/02_cabezal.pdf){.lamina}
 
 ![Carrete, manivela y zócalo de la varilla. Lámina A3 reducida a A4: la escala 1:1 del rótulo corresponde al formato original.](../06_modelo_2/planos/03_carrete.pdf){.lamina}
-
-![Esquema de funcionamiento y cadena de cálculo (sin escala). Lámina A3 reducida a A4.](../06_modelo_2/planos/04_esquema.pdf){.lamina}
 
 ::: solo-e3
 

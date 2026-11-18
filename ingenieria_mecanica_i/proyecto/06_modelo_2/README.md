@@ -151,16 +151,15 @@ Por eso no se recomienda vaselina ni grasa: no ayudan, y además juntan polvo y 
 
 ## 7. Planos
 
-Juego de cuatro láminas A3 en `planos/`, generadas desde el mismo modelo con el método del modelo 1: FreeCAD proyecta las piezas con líneas ocultas y anota, ezdxf escribe los DXF (R2000, el formato que abren AutoCAD y LibreCAD) y LibreCAD los pasa a PDF. Si cambia `parametros.py`, `make` los regenera. Rótulo de cursada, método E, cotas ISO 129-1 y letra ISO 3098.
+Juego de tres láminas A3 en `planos/`, generadas desde el mismo modelo con el método del modelo 1: FreeCAD proyecta las piezas con líneas ocultas y anota, ezdxf escribe los DXF (R2000, el formato que abren AutoCAD y LibreCAD) y LibreCAD los pasa a PDF. Si cambia `parametros.py`, `make` los regenera. Rótulo de cursada, método E, cotas ISO 129-1 y letra ISO 3098.
 
 | Lámina | Escala | Qué muestra |
 |---|---|---|
 | [01_conjunto](planos/01_conjunto.pdf) | 1:2,5 | Frontal desde el lado de la cuchilla, superior y lateral izquierda, con la botella al inicio del corte; lista de 24 piezas con material y globos |
 | [02_cabezal](planos/02_cabezal.pdf) | 1:1 | Placa del cabezal, labio exterior, calce y pisador, y el **detalle A a 4:1**: corte por la ranura 3 mm antes del filo, con los labios, la chapita en su rebaje, la hoja a `w` y la pared de la botella |
 | [03_carrete](planos/03_carrete.pdf) | 1:1 | Torre, carrete, manivela y zócalo, con líneas ocultas para los alojamientos |
-| [04_esquema](planos/04_esquema.pdf) | sin escala | Principio de tiro visto desde arriba y de frente, cadena de cuentas y tabla de valores tomados de `resultados.json` |
 
-**Qué controla `make`:** que ningún texto se pise ni se salga del marco, que ezdxf no encuentre errores al releer cada DXF, y que lo que dibuja LibreCAD coincida con lo que dibuja ezdxf (más del 94 % en las cuatro láminas). El sargento no se dibuja: no es parte de la máquina y va con nota. Las medidas de las piezas impresas son las del modelo, sin tolerancias: en FDM las fija la impresora.
+**Qué controla `make`:** que ningún texto se pise ni se salga del marco, que ezdxf no encuentre errores al releer cada DXF, y que lo que dibuja LibreCAD coincida con lo que dibuja ezdxf (más del 94 % en las tres láminas). El sargento no se dibuja: no es parte de la máquina y va con nota. Las medidas de las piezas impresas son las del modelo, sin tolerancias: en FDM las fija la impresora.
 
 ## 8. Cómo se usa
 
@@ -187,7 +186,7 @@ Se cambia una medida en `parametros.py` y se vuelve a correr. Las piezas son for
 | [compras/lista_compras.md](compras/lista_compras.md) y [su PDF](compras/build/lista_compras.pdf) | Para repartirse las compras: casilla, cantidad, medida, para qué y quién lo consigue; aparte, lo que se pide prestado y las herramientas |
 | [prueba_1/prueba_1_tiro.md](prueba_1/prueba_1_tiro.md) y [su PDF](prueba_1/build/prueba_1_tiro.pdf) | Hoja para imprimir y medir el tiro en la mesa de trabajo (anexo A del concepto), con dibujo, casillas y tabla para completar a mano. La genera `prueba_1/generar_prueba1.py` |
 | [instructivo/instructivo_armado.md](instructivo/instructivo_armado.md), [su PDF](instructivo/build/instructivo_armado.pdf) y la [plantilla A3](instructivo/build/plantilla_base_A3.pdf) | Instructivo de armado para quien no conoce el proyecto: piezas, herramientas, seguridad, preparación de la base, los 26 pasos con vista y control a mano, primer uso y mantenimiento. La plantilla de perforación va a escala 1:1. Los genera `instructivo/generar_instructivo.py`, con los números del modelo |
-| `planos.py`, `dibujo.py`, `dxf.py`, `a_pdf.sh`, `control_dxf.py` | Las cuatro láminas de `planos/` (sección 7): proyección y anotación en FreeCAD, registro en JSON, DXF con ezdxf, PDF con LibreCAD y auditoría |
+| `planos.py`, `dibujo.py`, `dxf.py`, `a_pdf.sh`, `control_dxf.py` | Las tres láminas de `planos/` (sección 7): proyección y anotación en FreeCAD, registro en JSON, DXF con ezdxf, PDF con LibreCAD y auditoría |
 | `exportar_step.py` | `salida/cortadora_v2.step` para SolidWorks y otros programas: 33 sólidos con nombre y color, en la posición inicial del corte. Lo reabre y compara sólidos, volumen y nombres. Quedan afuera la tira y el sargento |
 | `resultados.json` | Números de la última verificación |
 

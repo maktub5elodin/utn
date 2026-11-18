@@ -27,7 +27,7 @@ metadata:
     controles:
       obligatorias: [Planos, Bibliografía]
       solo_e3: [Abstract, Resultados, Conclusión]
-      laminas: 4
+      laminas: 3
       introduccion: {max_palabras: 150, max_parrafos: 2}
       abstract: {min_palabras: 150, max_palabras: 250, min_parrafos: 1, max_parrafos: 1}
       conclusion: {min_parrafos: 2, max_parrafos: 3, max_palabras: 250}

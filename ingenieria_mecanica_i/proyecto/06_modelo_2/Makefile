@@ -10,7 +10,7 @@ SYSPY   := /usr/bin/python3
 export SOURCE_DATE_EPOCH := 1794009600
 export FORCE_SOURCE_DATE := 1
 MODELO  := parametros.py piezas.py
-LAMINAS := 01_conjunto 02_cabezal 03_carrete 04_esquema
+LAMINAS := 01_conjunto 02_cabezal 03_carrete
 DXF     := $(LAMINAS:%=planos/%.dxf)
 PDF     := $(LAMINAS:%=planos/%.pdf)
 STEP    := salida/cortadora_v2.step
