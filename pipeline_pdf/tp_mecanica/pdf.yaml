@@ -1,0 +1,37 @@
+# Configuración de pandoc para el TP Final de Ingeniería Mecánica I (PDF).
+# La usa tp.mk en lugar de ../base.yaml: formato de la cátedra (Times New
+# Roman 12, justificado, interlineado 1,15, A4), carátula oficial y controles.
+#
+#   pandoc --defaults=<repo>/pipeline_pdf/tp_mecanica/pdf.yaml --defaults=pdf.yaml doc.md
+#
+# Los datos del trabajo (carátula, versiones, límites, vocabulario controlado)
+# van en el bloque `tp:` del pdf.yaml de cada documento.
+
+from: markdown
+to: latex
+standalone: true
+
+# Orden: tp-mecanica.lua primero (versión, valores, controles, carátula,
+# láminas); referencias-fig numera las figuras que quedan.
+filters:
+  - ${.}/../filtros/solo-md.lua
+  - ${.}/../filtros/salto-pagina.lua
+  - ${.}/tp-mecanica.lua
+  - ${.}/../filtros/referencias-fig.lua
+
+include-in-header:
+  - ${.}/preambulo.tex
+
+metadata:
+  lang: es
+
+variables:
+  documentclass: article
+  fontsize: 12pt
+  papersize: a4
+  geometry: [top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm, footskip=1.2cm]
+  mainfont: Times New Roman
+  mathfont: TeX Gyre Termes Math
+  hyperrefoptions: [hidelinks]
+  tables: true
+  graphics: true

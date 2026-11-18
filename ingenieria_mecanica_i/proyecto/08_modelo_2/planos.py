@@ -28,7 +28,7 @@ from dibujo import Dibujo, formato
 
 V = App.Vector
 FECHA = "19/11/2026"
-LEYENDA = "Prototipo 2.0: piezas impresas en PLA; medidas del modelo"
+LEYENDA = "Prototipo: piezas impresas en PLA; medidas de diseño"
 SALIDA = os.path.join(CARPETA, "planos")
 LAMINAS_DEL_JUEGO = 4
 
@@ -241,17 +241,16 @@ class Vista:
 # ------------------------------------------------------------- marco y rótulo
 ROT_X0, ROT_X1 = 230.0, 410.0   # bloque de 180 × 40 mm, abajo a la derecha
 ROT_Y0, ROT_Y1 = 10.0, 50.0
-SUBTITULO = "Cortadora manual de botellas PET - Modelo 2.0"
+SUBTITULO = "Cortadora manual de botellas PET - Prototipo"
 
 
 def marco_y_rotulo(L, escala, metodo=True):
     """Rótulo de cursada: celdas con rótulo chico y valor más grande."""
     pp = L.pp
     L.polilinea("Texto", [pp(0, 0), pp(420, 0), pp(420, 297), pp(0, 297)], True)
+    # Sin marcas de centrado en el medio de cada lado: criterio de los técnicos que
+    # revisaron los planos (no van y se ven feas).
     L.polilinea("Marco", [pp(25, 10), pp(410, 10), pp(410, 287), pp(25, 287)], True)
-    for a, b in (((0, 148.5), (25, 148.5)), ((410, 148.5), (420, 148.5)),
-                 ((210, 0), (210, 10)), ((210, 287), (210, 297))):
-        L.linea("Marco", pp(*a), pp(*b))
     x0, x1, y0, y1 = ROT_X0, ROT_X1, ROT_Y0, ROT_Y1
     L.polilinea("Marco", [pp(x0, y0), pp(x1, y0), pp(x1, y1), pp(x0, y1)], True)
     ya, yb = y0 + 11, y0 + 22
@@ -799,7 +798,7 @@ def lamina_esquema():
     L.rectangulo("Contornos", (x, 158), (x + 100, 172))
     t(x + 50, 162, 6, "F = T·rf / R", "c")
     t(x, 152, 2.5, "La tensión de la tira la pone el corte, no la mano: la manivela solo fija la velocidad.")
-    t(x, 147, 2.5, "Un brazo R más largo baja F sin agregar engranajes (concepto, 4.1).")
+    t(x, 147, 2.5, "Un brazo R más largo baja F sin agregar engranajes.")
     filas = [("Símbolo", "Magnitud", "Valor"),
              ("D", "Diámetro de la botella", f"{formato(P.D_B)} mm"),
              ("t", "Espesor de pared", f"{P.PARED:.2f}".replace(".", ",") + " mm"),
@@ -814,7 +813,7 @@ def lamina_esquema():
              ("T", "Tiro de diseño (supuesto)", f"{formato(P.T_DISENO)} N"),
              ("F", "Fuerza en la mano, rollo lleno", f"{formato(res['fuerza_mano_N'])} N (criterio: hasta {formato(P.F_MANO_MAX)} N)")]
     tabla(L, x, 140, [16, 58, 86], filas, 2.5, 5.0)
-    t(x, 70, 2.5, "Valores de la última corrida del modelo (resultados.json).")
+    t(x, 70, 2.5, "Valores calculados con el modelo digital del prototipo.")
     return L
 
 

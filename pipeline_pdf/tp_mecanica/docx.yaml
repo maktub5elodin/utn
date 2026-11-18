@@ -1,0 +1,18 @@
+# Configuración de pandoc para el TP Final de Ingeniería Mecánica I (Word).
+# Mismo .md, mismos datos y mismos filtros de contenido que el PDF; el formato
+# (Times New Roman 12, justificado, 1,15, A4), la carátula oficial, el pie, el
+# índice y las secciones apaisadas de las láminas los aplica docx_tp.py.
+
+from: markdown
+to: docx
+standalone: true
+
+filters:
+  - ${.}/../filtros/solo-md.lua
+  - ${.}/../filtros/color-math-docx.lua
+  - ${.}/../filtros/salto-pagina.lua
+  - ${.}/tp-mecanica.lua
+  - ${.}/../filtros/referencias-fig.lua
+
+metadata:
+  lang: es-AR

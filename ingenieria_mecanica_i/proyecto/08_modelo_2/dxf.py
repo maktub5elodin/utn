@@ -21,7 +21,7 @@ CAPAS = [  # nombre, color, tipo de línea, grosor en centésimas de mm
     ("Texto", 8, "Continuous", 25),         # rótulo, tablas y notas
     ("Extremas", 30, "DIVIDE", 25),         # fina de trazo largo y dos puntos
     ("Finas", 4, "Continuous", 25),         # fondo de rosca y de diente
-    ("Marco", 7, "Continuous", 70),         # recuadro y marcas de centrado
+    ("Marco", 7, "Continuous", 70),         # recuadro y rótulo
 ]
 # Nombres estándar (LibreCAD no admite otros). Patrón con d = 0,25 mm: 12d, 3d, 24d y 0,5d.
 TIPOS = [
@@ -105,6 +105,12 @@ def escribir(ruta_json, ruta_dxf):
             _, a, b, base, ang, s = op
             msp.add_linear_dim(base=base, p1=a, p2=b, angle=ang, text=s, dimstyle="IRAM",
                                dxfattribs={"layer": "Cotas"}).render()
+    # Vista guardada = "zoom all" sobre la hoja: al abrir el DXF se ve la lámina entera
+    # (sin esto LibreCAD abre en el origen y la pantalla queda negra).
+    ancho, alto = dat["ancho"] * dat["escala"], dat["alto"] * dat["escala"]
+    doc.header["$EXTMIN"] = (0, 0, 0)
+    doc.header["$EXTMAX"] = (ancho, alto, 0)
+    doc.set_modelspace_vport(height=alto * 1.03, center=(ancho / 2, alto / 2))
     auditoria = doc.audit()
     doc.saveas(ruta_dxf)
     return len(auditoria.errors), len(auditoria.fixes)

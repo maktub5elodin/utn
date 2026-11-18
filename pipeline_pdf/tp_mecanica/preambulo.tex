@@ -1,0 +1,72 @@
+% preambulo.tex — Formato del TP Final de Ingeniería Mecánica I (PDF).
+% Manual de la cátedra: Times New Roman 12, alineación justificada,
+% interlineado 1,15, A4. Lo incluye tp_mecanica/pdf.yaml.
+
+\usepackage{graphicx}
+\usepackage{pdfpages}          % carátula oficial (PDF de la carátula .docx completada)
+\usepackage{pdflscape}         % láminas A3 reducidas, en página apaisada
+\usepackage{float}
+\floatplacement{figure}{H}
+\usepackage{xurl}              % URLs largas de las notas: cortan en cualquier carácter
+\usepackage{etoolbox}
+
+% Interlineado 1,15 de Word. En Word, el renglón «sencillo» de Times New Roman
+% 12 mide 13,8 pt (1,15 em); 1,15 × 13,8 = 15,87 pt. El renglón de LaTeX a
+% 12 pt es de 14,5 pt: 15,87 / 14,5 = 1,0945.
+\linespread{1.0945}
+
+% Párrafos en bloque, separados 6 pt, como el informe anterior; justificado
+% (alineación por defecto de LaTeX: no se usa \raggedright en el cuerpo).
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 1pt}
+\setlength{\emergencystretch}{2em}  % evita renglones desbordados sin romper la justificación
+
+% Títulos: negrita, en la misma fuente, sin color
+\usepackage{titlesec}
+\titleformat{\section}{\fontsize{14}{17}\selectfont\bfseries}{}{0pt}{}
+\titleformat{\subsection}{\normalsize\bfseries}{}{0pt}{}
+\titleformat{\subsubsection}{\normalsize\bfseries\itshape}{}{0pt}{}
+\titlespacing*{\section}{0pt}{18pt}{6pt}
+\titlespacing*{\subsection}{0pt}{12pt}{4pt}
+\titlespacing*{\subsubsection}{0pt}{10pt}{2pt}
+
+% Índice con puntos guía también en las secciones
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsecfont}{\normalfont}
+\renewcommand{\cftsecpagefont}{\normalfont}
+\setlength{\cftbeforesecskip}{3pt}
+\renewcommand{\cfttoctitlefont}{\fontsize{14}{17}\selectfont\bfseries}
+\AtBeginDocument{\tocloftpagestyle{tp}}   % sin esto, la página del índice sale con estilo plain (sin pie)
+
+% Pie de página: el del informe anterior + número de página
+\usepackage{fancyhdr}
+\newcommand{\tppie}{Ing. Mecánica - Grupo 01 - Curso S1091 - Año 2026}  % lo redefine tp-mecanica.lua
+\fancypagestyle{tp}{%
+  \fancyhf{}%
+  \fancyfoot[L]{\small\itshape\tppie}%
+  \fancyfoot[R]{\small\thepage}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0pt}}
+\pagestyle{tp}
+
+% Epígrafes de figuras y tablas: 11 pt; «Tabla», no «Cuadro»
+\usepackage{caption}
+\captionsetup{font=small,labelsep=colon,justification=centering}
+\AtBeginDocument{\renewcommand{\tablename}{Tabla}}
+
+% Tablas: 11 pt, filas algo más altas
+\AtBeginEnvironment{longtable}{\small\renewcommand{\arraystretch}{1.25}}
+
+% Notas al pie: 10 pt, justificadas, sangría francesa del número
+\usepackage[hang,flushmargin]{footmisc}
+\setlength{\footnotesep}{10pt}
+\renewcommand{\footnotelayout}{\linespread{1.0}\selectfont}
+
+% Viñetas: «•» de la fuente del texto, como en Word. babel-spanish pone las
+% suyas al empezar el documento; esto va después.
+\AddToHook{begindocument/end}{\renewcommand{\labelitemi}{\textbullet}\renewcommand{\labelitemii}{\textendash}}
+
+% Bibliografía: sangría francesa de 1,27 cm (APA)
+\newenvironment{tpbiblio}{\par\setlength{\parskip}{4pt}}{\par}
+\newcommand{\tpitem}{\par\noindent\hangindent=1.27cm\hangafter=1 }

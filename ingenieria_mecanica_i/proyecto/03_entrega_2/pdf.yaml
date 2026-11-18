@@ -1,0 +1,71 @@
+# Datos del TP Final (perfil pipeline_pdf/tp_mecanica). Un solo informe.md
+# genera las dos entregas; la versión la elige make (e2 o e3).
+metadata:
+  tp:
+    titulo: Cortadora Manual de Botellas PET
+    grupo: "01"
+    curso: S1091
+    anio: 2026
+    pie: Ing. Mecánica - Grupo 01 - Curso S1091 - Año 2026
+    profesor: Abud, Moises Rolando
+    atp: Caceres Guido, Jeronimo
+    alumnos:
+      - {nombre: "Burelli, Angelo", legajo: "233.072-6"}
+      - {nombre: "Fernandez, Lautaro", legajo: "260.809-1"}
+      - {nombre: "Franco Solignac, Matias", legajo: "260.815-7"}
+      - {nombre: "Kainer, Martin", legajo: "260.825-0"}
+      - {nombre: "Ledesma Blanco, Camila Cecilia", legajo: "260.827-3"}
+      - {nombre: "Paredes, Sergio Gaston", legajo: "260.861-3"}
+    # Carátula oficial de la cátedra (local, fuera de git)
+    caratula: Caratula Entrega 2 TP FINAL Mecanica 1 S1092 S1091.docx
+    resumen_sz: 20            # tamaño (medios puntos) del abstract en el campo «Resumen»
+    valores: build/aux/valores.json
+    laminas_png: build/aux/laminas
+    versiones:
+      e2: {archivo: Entrega_2_Reentrega_1_S1091_Grupo_1, entrega: 2, revision: 1, resumen: false}
+      e3: {archivo: S1091-G1-E3, entrega: 3, revision: 0, resumen: true}
+    controles:
+      obligatorias: [Planos, Bibliografía]
+      solo_e3: [Abstract, Resultados, Conclusión]
+      laminas: 4
+      introduccion: {max_palabras: 150, max_parrafos: 2}
+      abstract: {min_palabras: 150, max_palabras: 250, min_parrafos: 1, max_parrafos: 1}
+      conclusion: {min_parrafos: 2, max_parrafos: 3, max_palabras: 250}
+      # Fuera del bloque `::: alternativas` no puede aparecer ninguno de estos
+      # términos (minúsculas, sin tildes; «re:» = patrón de Lua)
+      vocabulario:
+        - rodillo motriz
+        - transmisión por fricción
+        - engranajes reductores
+        - husillo
+        - tuerca fija
+        - carro
+        - guías paralelas
+        - sujeción exterior del cuello
+        - "re:l%s*\\cdot%s*d_?b"
+        - "re:i%s*\\cdot%s*d_?r"
+        - "l·db"
+        - "i·dr"
+        - se propone
+        - se prevé
+        - se evaluará
+        - maty
+        - "[sup]"
+        - "[proto]"
+        - make
+        - verificar.py
+        - h1
+        - h2
+        - h3
+        - h4
+        - h5
+        - h6
+        - h7
+        - modelo 2.0
+        - modelo 2
+        - modelo 1
+        - prototipo 2.0
+        - "re:%d%d_[%a_]+"
+        - "re:[%w_]+%.py"
+        - "re:[%w_]+%.json"
+        - "re:[%w_]+%.md"

@@ -12,5 +12,8 @@ for dxf in 01_conjunto:0.4 02_cabezal:1 03_carrete:1 04_esquema:1; do
   QT_QPA_PLATFORM=offscreen librecad dxf2pdf -p 420x297 -f 0,0,0,0 -s "$s" -c -m "$n.dxf" </dev/null >/dev/null 2>&1
   test -s "$n.pdf"
   sed -i -E 's#/CreationDate \(D:[^)]*\)#/CreationDate (D:20261119000000)#; s#/ModDate \(D:[^)]*\)#/ModDate (D:20261119000000)#' "$n.pdf"
+  # La fecha nueva no tiene el mismo largo: mutool reescribe la tabla xref (si no,
+  # los visores la reparan sin avisar, pero xelatex no puede incluir el PDF)
+  mutool clean "$n.pdf" "$n.tmp.pdf" 2>/dev/null && mv "$n.tmp.pdf" "$n.pdf"
   pdftoppm -r 110 -png -singlefile "$n.pdf" "$raiz/build/planos/$n"
 done
