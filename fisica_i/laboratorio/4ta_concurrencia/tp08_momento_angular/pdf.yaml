@@ -1,0 +1,30 @@
+# Datos del informe: la carátula de la U.D.B., la página de título, el
+# encabezado y el nombre del archivo salen de acá.
+
+variables:
+  title-meta: "Trabajo Práctico N°8 — Conservación del momento angular (monografía)"
+
+metadata:
+  laboratorio:
+    materia: Física I
+    curso: A1193
+    turno: Noche
+    dias: Miércoles
+    grupo: 5
+    tp: 8
+    titulo: Conservación del momento angular (monografía)
+    fecha: 04/11/2026
+    profesor: Vella, Ruben
+    jtp: Ing. Pella, Martín
+    atp:
+      - Ing. Lasala, José
+      - Ing. Quevedo, Rubén
+      - Ing. Smoisman, Sergio
+    # Solo los presentes el día que se realizó (reglamento)
+    integrantes:
+      - {apellido: Fleitas, nombre: Facundo}
+      - {apellido: González, nombre: Federico}
+      - {apellido: Lissi, nombre: Lucas}
+      - {apellido: Palazzo, nombre: Juan}
+      - {apellido: Paredes, nombre: Sergio}
+      - {apellido: Pérez, nombre: Lautaro}

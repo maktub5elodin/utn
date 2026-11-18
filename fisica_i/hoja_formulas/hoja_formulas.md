@@ -234,9 +234,9 @@ $f$ se opone a $\vec v$. $k$ y $D$ son **constantes** para un cuerpo y un fluido
 
 Sugerencia (no está en el PDF ni en el cap. 5 del libro): en una esfera, $k = 6\pi\eta r$ (ley de Stokes, $\eta$: viscosidad); en general, $D = \tfrac12 C\rho A$ ($C$: coeficiente de arrastre, $\rho$: densidad, $A$: área frontal).
 
-## Cap. 6 — Trabajo y energía cinética (en curso: pasa al PDF de a poco)
+## Cap. 6 — Trabajo y energía cinética (terminado)
 
-Esta sección es de análisis: las fórmulas pasan al PDF de a poco, a medida que se estudian. La columna «PDF» de cada tabla lleva la cuenta.
+Capítulo estudiado completo. La columna «PDF» de cada tabla indica qué fórmulas están en el PDF.
 
 ### La idea que ordena el capítulo
 
