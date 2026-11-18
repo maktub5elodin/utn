@@ -40,18 +40,18 @@ __pycache__/
 # Excepción a la excepción: la plantilla del pipeline es genérica, sus builds de prueba no se suben.
 pipeline_pdf/**/build/
 # Excepción puntual: PDF de respaldo de la presentación del TP Final, vigente y v1 (el .pptx sigue ignorado).
-!ingenieria_mecanica_i/proyecto/05_presentacion/*.pdf
-!ingenieria_mecanica_i/proyecto/05_presentacion/v1_modelo_1/*.pdf
+!ingenieria_mecanica_i/proyecto/07_presentacion/*.pdf
+!ingenieria_mecanica_i/proyecto/07_presentacion/v1_modelo_1/*.pdf
 # Excepción puntual: planos del modelo 3D de la cortadora (se regeneran con make).
-!ingenieria_mecanica_i/proyecto/06_modelo_3d/planos/*.pdf
-!ingenieria_mecanica_i/proyecto/06_modelo_3d/planos/estudios/*.pdf
-!ingenieria_mecanica_i/proyecto/08_modelo_2/planos/*.pdf
+!ingenieria_mecanica_i/proyecto/05_modelo_1/planos/*.pdf
+!ingenieria_mecanica_i/proyecto/05_modelo_1/planos/estudios/*.pdf
+!ingenieria_mecanica_i/proyecto/06_modelo_2/planos/*.pdf
 # Miniaturas de la ficha de impresión del modelo 2.0 (van dentro del PDF y se ven en el .md).
-!ingenieria_mecanica_i/proyecto/08_modelo_2/ficha/miniaturas/*.png
+!ingenieria_mecanica_i/proyecto/06_modelo_2/ficha/miniaturas/*.png
 # Vistas de cada paso del instructivo de armado del modelo 2.0 (mismo criterio).
-!ingenieria_mecanica_i/proyecto/08_modelo_2/instructivo/pasos/*.png
+!ingenieria_mecanica_i/proyecto/06_modelo_2/instructivo/pasos/*.png
 # Referencias de terceros cuya licencia no permite redistribuirlas (ver su README): solo locales.
-ingenieria_mecanica_i/proyecto/07_referencias/**/*.stl
+ingenieria_mecanica_i/proyecto/02_referencias/**/*.stl
 
 # Directorios excluidos temporalmente
 su_myf/

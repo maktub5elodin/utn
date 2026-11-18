@@ -12,7 +12,7 @@ Docente: Abud. Dos parciales multiple choice de 30 preguntas (las incorrectas re
 | `2do_parcial/` | `preparacion_parcial_2.md` (banco de 102 preguntas reales) + `preguntas_sugeridas_parcial_2.md` (104 inventadas) + `fuentes/`. |
 | `final/` | Por ahora solo `fuentes/`. |
 | `campus_virtual/` | Intro + UT I al XI + esfuerzos característicos (13 docs). No se usaron: desde nov/2026 quedan solo en disco, fuera de git. |
-| `proyecto/` | TP Final: cortadora de botellas PET. El informe vigente (prototipo de `08_modelo_2/`) está en `03_entrega_2/`: un solo `informe.md` genera la Entrega 2 Rev. 1 y la Entrega 3, en PDF y Word, con el perfil `pipeline_pdf/tp_mecanica/` (diseño y decisiones en `00_diseno_entrega_2_3.md`). |
+| `proyecto/` | TP Final: cortadora de botellas PET. El informe vigente (prototipo de `06_modelo_2/`) está en `08_entregas_2_3/`: un solo `01_informe.md` genera la Entrega 2 Rev. 1 y la Entrega 3, en PDF y Word, con el perfil `pipeline_pdf/tp_mecanica/` (diseño y decisiones en `00_diseno_entrega_2_3.md`). |
 | `tp_grupal_mecanica_rotacional*/` | Dos TP grupales (detalle abajo). |
 
 **Bancos de preguntas:** la respuesta correcta se marca `**(✓) …**`; cada pregunta lleva su nivel de confianza (`[OFICIAL]` clave del campus · `[ALUMNOS]` marcada por alumnos · `[DEDUCIDA]` del apunte) y `[★×N]` según en cuántas fuentes aparece. Las preguntas inventadas van siempre en archivo aparte, nunca mezcladas con las reales. En cada `fuentes/descargas_web/` va lo bajado de internet. Las dudas abiertas del 2° parcial y las discrepancias detectadas con el banco del 1er parcial (pendientes para el final) están en la sección 5 de `preparacion_parcial_2.md`.

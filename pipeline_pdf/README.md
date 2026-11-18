@@ -57,7 +57,7 @@ Los datos van en `metadata.laboratorio` del `pdf.yaml`: `curso`, `turno`, `dias`
 
 ## Perfil `tp_mecanica/` — TP Final de Ingeniería Mecánica I
 
-Para los informes del TP Final (cursos S1091/S1092): formato del manual de la cátedra (Times New Roman 12, justificado, interlineado 1,15, A4), carátula oficial, notas al pie reales, láminas apaisadas y controles que cortan el build. Un solo `.md` genera dos entregas (versiones `e2` y `e3`), cada una en PDF (principal) y en Word (editable, compatible con Google Docs). Lo usa `ingenieria_mecanica_i/proyecto/03_entrega_2/`.
+Para los informes del TP Final (cursos S1091/S1092): formato del manual de la cátedra (Times New Roman 12, justificado, interlineado 1,15, A4), carátula oficial, notas al pie reales, láminas apaisadas y controles que cortan el build. Un solo `.md` genera dos entregas (versiones `e2` y `e3`), cada una en PDF (principal) y en Word (editable, compatible con Google Docs). Lo usa `ingenieria_mecanica_i/proyecto/08_entregas_2_3/`.
 
 | Archivo | Qué hace |
 |---|---|

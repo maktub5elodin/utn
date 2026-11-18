@@ -5,11 +5,11 @@
 #
 # Makefile del documento:
 #
-#   DOC               := informe                    # el .md, sin extensión
+#   DOC               := 01_informe                 # el .md, sin extensión
 #   SOURCE_DATE_EPOCH := <fecha>                    # builds reproducibles (obligatoria)
 #   VALORES_SCRIPT    := valores.py                 # escribe el JSON de valores
 #   VALORES_DEPS      := ...                        # de qué depende ese JSON
-#   LAMINAS_DIR       := ../08_modelo_2/planos      # PDF de las láminas
+#   LAMINAS_DIR       := ../06_modelo_2/planos      # PDF de las láminas
 #   LAMINAS           := 01_conjunto 02_cabezal     # sin extensión
 #   include ../../../pipeline_pdf/tp_mecanica/tp.mk
 #
