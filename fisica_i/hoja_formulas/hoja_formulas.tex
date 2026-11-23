@@ -209,7 +209,7 @@ Young, H. D.; Freedman, R. A. — \emph{University Physics with Modern Physics},
 \nota{Solo trabaja la componente de \(\vec F\) a lo largo del camino}
 
 \subtema{Resorte}
-\f{F_x = k\,x}{N}
+\f{F_x = k\,x\;\enlace{cap. 7}}{N}
 \f{W = \tfrac{1}{2}\,k\,x_2^2 - \tfrac{1}{2}\,k\,x_1^2}{J}
 \nota{\(x\): estiramiento desde la longitud natural}
 \nota{\(k\): constante de fuerza del resorte\hfill N/m}
@@ -224,6 +224,61 @@ Young, H. D.; Freedman, R. A. — \emph{University Physics with Modern Physics},
 \f{P = \vec F\cdot\frac{d\vec l}{dt} = \vec F\cdot\vec v}{W}
 \nota{Misma forma que \(\vec F\cdot\vec s\), con \(\vec v\) en lugar de \(\vec s\)}
 \nota{El kWh es unidad de \textbf{energía}, no de potencia}
+
+% Cap. 7 arranca en la 2.ª carilla: la col. 3 de la 1.ª termina con Potencia.
+\columnbreak
+\capitulo{Cap. 7 — En. potencial y conservación}
+
+\subtema{Energía potencial}
+\nota{Energía asociada a la \textbf{posición} del sistema: mide su capacidad de efectuar trabajo}
+\nota{Gravitatoria: por la altura en el campo de \(g\)}
+\nota{Elástica: por la deformación de un resorte}
+
+\subtema{Energía potencial gravitatoria}
+\nota{\(\vec w = -m\,g\,\hat\jmath\) constante, eje \(y\) hacia arriba:}
+\f{W_{\text{grav}} = \vec w\cdot\vec s = -m\,g\,(y_2 - y_1)}{J}
+\f{W_{\text{grav}} = m\,g\,y_1 - m\,g\,y_2}{J}
+\nota{Solo cuenta \(\Delta y\): vale con trayectoria curva}
+\f{{\color{RoyalBlue}U_{\text{grav}} = m\,g\,y}}{J}
+\nota{\(y = 0\) donde convenga: solo importa \(\Delta U\)}
+\f{W_{\text{grav}} = U_1 - U_2}{J}
+\f{W_{\text{grav}} = -(U_2 - U_1) = -\Delta U_{\text{grav}}}{J}
+\nota{{\color{BrickRed}\(\Delta U = U_2 - U_1\): siempre final menos inicial}}
+\nota{Sube: \(\Delta U > 0\), \(W_{\text{grav}} < 0\) (\(\vec w\) opuesto a \(\vec s\))}
+\nota{Baja: \(\Delta U < 0\), \(W_{\text{grav}} > 0\) (\(\vec w\) a favor de \(\vec s\))}
+\nota{El peso trabaja a costa de \(U\)}
+
+\subtema{Energía potencial elástica}
+\nota{Fuerza \textbf{del} resorte sobre el cuerpo, de \(x_1\) a \(x_2\):}
+\f{F_x = -k\,x\;\enlace{cap. 6}}{N}
+\f{W_{\text{el}} = \int_{x_1}^{x_2} (-k\,x)\,dx}{J}
+\f{W_{\text{el}} = \tfrac{1}{2}\,k\,x_1^2 - \tfrac{1}{2}\,k\,x_2^2}{J}
+\f{{\color{RoyalBlue}U_{\text{el}} = \tfrac{1}{2}\,k\,x^2}}{J}
+\nota{{\color{BrickRed}\(x = 0\) fijo: longitud natural (resorte sin deformar)}}
+\nota{A diferencia de \(y\), el origen no se elige}
+\nota{\(U_{\text{el}} \ge 0\): estirado (\(x > 0\)) o comprimido (\(x < 0\))}
+\f{W_{\text{el}} = U_1 - U_2 = -\Delta U_{\text{el}}}{J}
+\nota{Se deforma más: \(\Delta U > 0\), \(W_{\text{el}} < 0\)}
+\nota{Vuelve hacia \(x = 0\): \(\Delta U < 0\), \(W_{\text{el}} > 0\)}
+\nota{{\color{BrickRed}\textbf{Por} el resorte (sobre el cuerpo): \(W_{\text{el}} = -\Delta U_{\text{el}}\)}}
+\nota{{\color{BrickRed}\textbf{Sobre} el resorte (cap. 6): \(W = +\Delta U_{\text{el}}\)}}
+
+\subtema{Conservación de la energía mecánica}
+\f{E = K + U \qquad U = U_{\text{grav}} + U_{\text{el}}}{J}
+\nota{Solo fuerzas conservativas (peso, resorte):}
+\f{K_1 + U_1 = K_2 + U_2}{J}
+\nota{Con otras fuerzas (rozamiento, tensión, una mano):}
+\f{K_1 + U_1 + W_{\text{otras}} = K_2 + U_2}{J}
+\nota{\(W_{\text{otras}}\): trabajo de las fuerzas que \textbf{no} están en \(U\)}
+\nota{{\color{BrickRed}Peso y resorte van en \(U\) o en \(W\), nunca en los dos}}
+\nota{Con rozamiento, \(W_{\text{otras}} < 0\) y \(E\) disminuye}
+\nota{Ecuación escalar: sin componentes y sin \(t\)}
+
+\subtema{Conservación de la energía}
+\f{\Delta K + \Delta U + \Delta U_{\text{int}} = 0}{J}
+\nota{La \(E\) que se pierde pasa a energía interna \(U_{\text{int}}\)}
+\nota{Si la única fuerza no conservativa es el rozamiento:}
+\f{\Delta U_{\text{int}} = -W_{\text{otras}}}{J}
 
 \end{multicols*}
 \end{document}

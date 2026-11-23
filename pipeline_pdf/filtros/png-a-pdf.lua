@@ -7,6 +7,10 @@ figuras/X.pdf, de modo que el documento final usa siempre el vectorial.
 
 Si el .pdf correspondiente no existe, la compilación se detiene (en lugar de
 caer silenciosamente al PNG).
+
+Figuras de un documento vecino (../<carpeta>/figuras/X.png, ej. un documento
+que reúne ejercicios de otros): se usa su PDF si existe; si no, queda el PNG
+(renders o fotos que no tienen versión vectorial).
 ]]
 
 local function existe(ruta)
@@ -17,6 +21,11 @@ end
 
 function Image(img)
   if not FORMAT:match("latex") then return nil end
+  local vecina = img.src:match("^(%.%./[^/]+/figuras/[^/]+)%.png$")
+  if vecina then
+    if existe(vecina .. ".pdf") then img.src = vecina .. ".pdf" end
+    return img
+  end
   local base = img.src:match("^(figuras/.+)%.png$") or img.src:match("^(%.%./figuras/.+)%.png$")
   if not base then return nil end
   local pdf = base .. ".pdf"

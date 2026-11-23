@@ -374,7 +374,7 @@ Con este capítulo se acumulan letras repetidas. Está en el PDF:
 | $\vec s = \Delta\vec r$ | Desplazamiento recto total, de $P_1$ a $P_2$ | m |
 | $d\vec l = d\vec r$ | Tramo del camino, tangente a la trayectoria (*length*) | m |
 
-## Cap. 7 — Energía potencial y conservación de la energía (en análisis: todavía nada en el PDF)
+## Cap. 7 — Energía potencial y conservación de la energía (terminado: el PDF llega hasta el bloque 4)
 
 Igual que el cap. 6: las fórmulas pasan al PDF a medida que se estudian, y la columna «PDF» lleva la cuenta. **En el PDF, el cap. 7 empieza directamente en la 2.ª carilla**: la 1.ª ya no tiene lugar para arrancar un capítulo.
 
@@ -415,10 +415,14 @@ El trabajo de las fuerzas conservativas (peso, resorte) se pasa al otro lado com
 
 | Ecuación | Unidades | PDF |
 |---|---|---|
-| $U_{\text{grav}} = m\,g\,y$ | J | no |
-| $W_{\text{grav}} = m\,g\,y_1 - m\,g\,y_2 = -\Delta U_{\text{grav}}$ | J | no |
+| $W_{\text{grav}} = \vec w\cdot\vec s = -m\,g\,(y_2 - y_1)$ | J | sí |
+| $W_{\text{grav}} = m\,g\,y_1 - m\,g\,y_2$ | J | sí |
+| $U_{\text{grav}} = m\,g\,y$ | J | sí |
+| $W_{\text{grav}} = U_1 - U_2 = -(U_2 - U_1) = -\Delta U_{\text{grav}}$ | J | sí |
 
-Notas propuestas:
+En el PDF: abre el capítulo una definición breve de energía potencial (asociada a la posición, capacidad de efectuar trabajo; gravitatoria y elástica). En el bloque: $\vec w = -m\,g\,\hat\jmath$ con eje $y$ hacia arriba; solo cuenta el desplazamiento vertical; nivel de referencia libre; el signo menos desglosado ($\Delta U$ = final − inicial; sube: $\Delta U > 0$, $W < 0$; baja: $\Delta U < 0$, $W > 0$; el peso trabaja a costa de $U$).
+
+Notas propuestas (las que siguen ya quedaron cubiertas en el PDF salvo la de validez cerca de la Tierra):
 
 - $y$: altura, con el eje **hacia arriba** (la misma convención que en proyectiles). El cero de $y$ se elige libremente: solo importa $\Delta U$.
 - El signo: si el cuerpo sube, el peso hace trabajo negativo y $U$ aumenta.
@@ -434,8 +438,10 @@ Por qué así:
 
 | Ecuación | Unidades | PDF |
 |---|---|---|
-| $U_{\text{el}} = \tfrac{1}{2}\,k\,x^2$ | J | no |
-| $W_{\text{el}} = \tfrac{1}{2}\,k\,x_1^2 - \tfrac{1}{2}\,k\,x_2^2 = -\Delta U_{\text{el}}$ | J | no |
+| $U_{\text{el}} = \tfrac{1}{2}\,k\,x^2$ | J | sí |
+| $W_{\text{el}} = \tfrac{1}{2}\,k\,x_1^2 - \tfrac{1}{2}\,k\,x_2^2 = -\Delta U_{\text{el}}$ | J | sí |
+
+En el PDF, armado igual que la gravitatoria: $F_x = -k\,x$ (fuerza **del** resorte, con estrella recíproca al bloque Resorte del cap. 6), $W_{\text{el}}$ como integral y desarrollado, $U_{\text{el}}$, origen fijo en la longitud natural (a diferencia de $y$, que se elige donde convenga), $U_{\text{el}} \ge 0$, el signo según se deforme más o vuelva hacia $x = 0$, y la distinción **por** el resorte ($-\Delta U$) / **sobre** el resorte ($+\Delta U$).
 
 Notas propuestas:
 
@@ -449,9 +455,11 @@ Por qué así: si en la 2.ª carilla se pone $F_x = -k\,x$, conviene un enlace c
 
 | Ecuación | Unidades | PDF |
 |---|---|---|
-| $E = K + U$, con $U = U_{\text{grav}} + U_{\text{el}}$ | J | no |
-| $K_1 + U_1 = K_2 + U_2$ (solo fuerzas conservativas) | J | no |
-| $K_1 + U_1 + W_{\text{otras}} = K_2 + U_2$ | J | no |
+| $E = K + U$, con $U = U_{\text{grav}} + U_{\text{el}}$ | J | sí |
+| $K_1 + U_1 = K_2 + U_2$ (solo fuerzas conservativas) | J | sí |
+| $K_1 + U_1 + W_{\text{otras}} = K_2 + U_2$ | J | sí |
+
+En el PDF: las tres, con $U = U_{\text{grav}} + U_{\text{el}}$, y las tres notas propuestas. Quedan fuera la derivación desde $W_{\text{tot}} = \Delta K$ y el método.
 
 Notas propuestas:
 
@@ -471,7 +479,10 @@ Por qué así:
 |---|---|---|
 | $W_{\text{cons}} = -\Delta U$ | J | no |
 | $\oint \vec F_{\text{cons}}\cdot d\vec l = 0$ | J | no |
-| $\Delta K + \Delta U + \Delta U_{\text{int}} = 0$ | J | no |
+| $\Delta K + \Delta U + \Delta U_{\text{int}} = 0$ | J | sí |
+| $\Delta U_{\text{int}} = -W_{\text{otras}}$ (solo rozamiento) | J | sí |
+
+En el PDF, como bloque «Conservación de la energía» después de la mecánica: solo la tercera, con su nota (energía interna y $\Delta U_{\text{int}} = -W_{\text{otras}}$). Las dos primeras quedan acá.
 
 Notas propuestas:
 

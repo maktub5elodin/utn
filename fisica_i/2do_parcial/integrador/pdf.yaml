@@ -1,0 +1,7 @@
+# Variables propias de este documento. La configuración común de pandoc está
+# en pipeline_pdf/base.yaml (ver pipeline_pdf/comun.mk).
+
+variables:
+  title-meta: "Integrador del 2do parcial de Física I"
+  subtitle: "Física I — ejercicios resueltos de los cuatro documentos, por tema y dificultad"
+  date: "22 de noviembre de 2026"
