@@ -1,0 +1,10 @@
+# Variables propias de este documento. La configuración común de pandoc está
+# en pipeline_pdf/base.yaml (ver pipeline_pdf/comun.mk).
+
+variables:
+  title-meta: "Parcial de Física I (2002) — enunciados reconstruidos"
+  subtitle: "Física I — resolución de H. Cassia, con los enunciados reconstruidos"
+  date: "22 de noviembre de 2026"
+
+# Documento corto: sin índice.
+table-of-contents: false

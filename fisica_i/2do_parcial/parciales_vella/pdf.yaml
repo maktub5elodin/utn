@@ -1,0 +1,7 @@
+# Variables propias de este documento. La configuración común de pandoc está
+# en pipeline_pdf/base.yaml (ver pipeline_pdf/comun.mk).
+
+variables:
+  title-meta: "Parciales del 2do parcial de Física I — curso Z1054 (Vella)"
+  subtitle: "Física I — evaluaciones 2020–2021 del Prof. R. Vella, resueltas y contrastadas"
+  date: "22 de noviembre de 2026"
