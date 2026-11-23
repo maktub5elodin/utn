@@ -2,7 +2,7 @@
 
 Notas de estudio para la carrera de **Ingeniería Mecánica** en la [Universidad Tecnológica Nacional — Facultad Regional Buenos Aires](https://www.frba.utn.edu.ar/).
 
-Escritas en Markdown, en español, con diagramas ASCII.
+Escritas en Markdown, en español, con diagramas ASCII. Algunos documentos (correcciones de parciales, ejercicios resueltos, informes de laboratorio, hojas de fórmulas) usan figuras generadas con Python y se compilan a PDF con `make`.
 
 ---
 
@@ -27,10 +27,10 @@ Escritas en Markdown, en español, con diagramas ASCII.
 Los archivos de tema siguen siempre la misma estructura:
 introducción conceptual → teoría con diagramas ASCII → ejemplos resueltos → tabla resumen → errores comunes → mapa conceptual.
 
-Las fórmulas se escriben con backticks (`` `E = m·c²` ``), sin LaTeX.
+Las fórmulas se escriben en LaTeX (`$…$` y `$$…$$`, con coma decimal), que GitHub muestra renderizado; las muy simples pueden ir con backticks (`` `E = m·c²` ``). Cada archivo usa una sola convención.
 
 ---
 
 ## Nota
 
-Los PDFs de cátedra, presentaciones y apuntes oficiales no están incluidos en el repositorio (`.gitignore`). Solo se versiona el contenido generado en Markdown.
+Los PDFs de cátedra, presentaciones, apuntes oficiales, archivos de Office e imágenes no están incluidos en el repositorio (`.gitignore`). Se versiona el contenido propio: Markdown, scripts y Makefiles. Excepción: los documentos que se compilan con [`pipeline_pdf/`](pipeline_pdf/) (`.md` → figuras → PDF) versionan también su PDF final (`build/*.pdf`) y las figuras PNG (`figuras/*.png`), para leerlos en GitHub sin compilar.
