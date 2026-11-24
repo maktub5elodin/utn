@@ -11,4 +11,4 @@ SOURCE_DATE_EPOCH := 1794020400
 include ../../../../pipeline_pdf/comun.mk
 
 # Las miniaturas no pasan por png-a-pdf (no están en figuras/): se incluyen como PNG.
-$(BUILD)/$(DOC).tex: $(wildcard miniaturas/*.png)
+$(TEX): $(wildcard miniaturas/*.png)

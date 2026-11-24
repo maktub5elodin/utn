@@ -22,4 +22,4 @@ $(DOC).md: armar_integrador.py $(FUENTES_MD)
 figuras-origen:
 	@for d in $(ORIGENES); do $(MAKE) --no-print-directory -C ../$$d figuras; done
 
-$(BUILD)/$(DOC).tex: $(wildcard $(foreach d,$(ORIGENES),../$(d)/figuras/*.pdf)) | figuras-origen
+$(TEX): $(wildcard $(foreach d,$(ORIGENES),../$(d)/figuras/*.pdf)) | figuras-origen

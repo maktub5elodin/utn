@@ -25,7 +25,7 @@ endif
 PDF_DEFAULTS  := $(LAB)/pdf.yaml
 DOCX_DEFAULTS := $(LAB)/docx.yaml
 # Logo UTN para Word: PNG compartido, generado una sola vez (regla en comun.mk).
-LOGO_PNG      := $(LAB)/../logos/build/logo_utn.png
+LOGO_PNG      := $(LAB)/../logos/.build/logo_utn.png
 DOCX_POST      = python3 $(LAB)/docx_lab.py $@ pdf.yaml $(LOGO_PNG)
 DOCX_DEPS     := $(LAB)/docx_lab.py $(LOGO_PNG)
 PERFIL_DEPS   := $(LAB)/lab-fisica.lua $(LAB)/preambulo.tex $(LAB)/../logos/logo_utn.tex

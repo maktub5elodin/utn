@@ -637,7 +637,7 @@ def armar(ruta, ruta_yaml, version, ruta_car):
     doc.core_properties.title = tp["titulo"]
     doc.core_properties.author = tp["pie"]
     doc.save(ruta)
-    aux = Path(ruta).parent / "aux"
+    aux = Path(".build", "aux")  # relativo a la carpeta del documento, como en tp-mecanica.lua
     with tempfile.TemporaryDirectory(dir=aux) as tmp:
         paginas = paginar(ruta, entradas, tmp)
     faltan = [entradas[k][1] for k in range(len(entradas)) if k not in paginas]
@@ -648,7 +648,7 @@ def armar(ruta, ruta_yaml, version, ruta_car):
     sdt.addprevious(indice_xml(entradas, paginas))
     sdt.getparent().remove(sdt)
     doc.save(ruta)
-    # Vista de control: el .docx terminado, en PDF (LibreOffice), en build/aux/
+    # Vista de control: el .docx terminado, en PDF (LibreOffice), en .build/aux/
     a_pdf(ruta, aux)
 
 

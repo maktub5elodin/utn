@@ -2,7 +2,7 @@
 #
 #   make        -> build/repaso_2do_parcial.pdf y build/ejercicios_nuevos.pdf,
 #                y build/ejercicios_nuevos_2.pdf
-#   make clean  -> borra build/
+#   make clean  -> borra build/ y .build/
 
 DOCS := repaso_2do_parcial ejercicios_nuevos ejercicios_nuevos_2
 
@@ -11,26 +11,29 @@ SOURCE_DATE_EPOCH := 1793242800
 export SOURCE_DATE_EPOCH
 export FORCE_SOURCE_DATE := 1
 
+# build/: solo el PDF (versionado). .build/: intermedios (.aux, .log), ignorados.
 BUILD   := build
-XELATEX := xelatex -interaction=nonstopmode -halt-on-error -output-directory=$(BUILD)
+INTER   := .build
+XELATEX := xelatex -interaction=nonstopmode -halt-on-error -output-directory=$(INTER)
 
 .PHONY: all clean
 .DELETE_ON_ERROR:
 
 all: $(DOCS:%=$(BUILD)/%.pdf)
 
-$(BUILD):
+$(BUILD) $(INTER):
 	mkdir -p $@
 
-$(BUILD)/%.pdf: %.tex | $(BUILD)
-	@$(XELATEX) $< > /dev/null || { grep -A5 '^!' $(BUILD)/$*.log; exit 1; }
-	@if grep -q 'Missing character' $(BUILD)/$*.log; then \
-		grep 'Missing character' $(BUILD)/$*.log | sort -u; \
+$(BUILD)/%.pdf: %.tex | $(BUILD) $(INTER)
+	@$(XELATEX) $< > /dev/null || { grep -A5 '^!' $(INTER)/$*.log; exit 1; }
+	@if grep -q 'Missing character' $(INTER)/$*.log; then \
+		grep 'Missing character' $(INTER)/$*.log | sort -u; \
 		echo "ERROR: caracteres sin glifo en la fuente"; exit 1; fi
-	@grep 'Output written' $(BUILD)/$*.log
+	@grep 'Output written' $(INTER)/$*.log
 	@echo "--- Advertencias de LaTeX:"
-	@grep -E 'Warning|Overfull|Underfull' $(BUILD)/$*.log || echo "(ninguna)"
+	@grep -E 'Warning|Overfull|Underfull' $(INTER)/$*.log || echo "(ninguna)"
+	@mv $(INTER)/$*.pdf $@
 	@echo "OK: $@"
 
 clean:
-	rm -rf $(BUILD)
+	rm -rf $(BUILD) $(INTER)

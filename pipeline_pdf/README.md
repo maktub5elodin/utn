@@ -5,7 +5,7 @@ Toda la lógica de armado de PDF vive en un solo lugar y la usan todos los docum
 | Archivo | Qué hace |
 |---|---|
 | `base.yaml` | Configuración común de pandoc: plantilla, fuentes, tablas, índice, caracteres Unicode, lista de filtros |
-| `comun.mk` | Reglas de `make`: figuras (opcional), `.md` → `.tex` → `.pdf`, pasadas de xelatex, verificaciones (referencias, caracteres sin glifo); `make docx` → `build/<doc>.docx` |
+| `comun.mk` | Reglas de `make`: figuras (opcional), `.md` → `.build/<doc>.tex` → `build/<doc>.pdf`, pasadas de xelatex, verificaciones (referencias, caracteres sin glifo); `make docx` → `build/<doc>.docx`. Un `Makefile` que agrega dependencias al `.tex` usa `$(TEX)` |
 | `docx.yaml` | Configuración de pandoc para la salida Word (`make docx`): mismo `.md` y mismos filtros de contenido, sin la estética de LaTeX (fórmulas como ecuaciones nativas de Word, figuras en PNG). El `.docx` no se versiona |
 | `filtros/*.lua` | `tablas-cebra` (filas alternadas), `png-a-pdf` (PNG en el `.md`, PDF vectorial en el documento; con figuras de un documento vecino, `../<carpeta>/figuras/X.png`, usa su PDF si existe y si no deja el PNG), `referencias-fig` (`@fig:x`), `solo-md` (bloques `<!-- solo-md -->` … `<!-- /solo-md -->` y diagramas ASCII no llegan al PDF; a la inversa, `<!-- solo-pdf` … `-->` entra al PDF y no se ve en el `.md`), `salto-pagina` (`<!-- salto-pagina -->` → salto de página en el PDF, invisible en el `.md`), `seleccion-catalogo` (tabla con fila marcada ► → solo esa fila, vertical), `destacados` (alertas de GitHub: `> [!CAUTION]` → recuadro rojo de error, `> [!TIP]` → recuadro verde de respuesta correcta, `> [!NOTE]` → texto azul en recuadro negro, para notas aparte; en GitHub ya se ven en color, en Word quedan como cita común), `portada-docx` (solo Word: subtítulo y fecha del `pdf.yaml`). `solo-md`, `salto-pagina`, `seleccion-catalogo` y `referencias-fig` actúan igual en PDF y en Word; `png-a-pdf` y `tablas-cebra` son solo de PDF |
 
@@ -24,20 +24,21 @@ Excepción a la regla general del `.gitignore` (PDFs e imágenes excluidos) para
 | No se versiona | Por qué |
 |---|---|
 | `figuras/*.pdf` | Intermedios vectoriales: ya están dentro del PDF final y `make` los regenera |
-| Resto de `build/` (`.tex`, `.aux`, `.log`, `.toc`) | Subproductos de cada compilación; el `.tex` se inspecciona localmente |
+| `build/*.docx` | Versión editable, se regenera con `make docx` |
+| `.build/` (`.tex`, `.aux`, `.log`, `.toc`) | Intermedios de cada compilación, en carpeta oculta junto a `build/`: así `build/` guarda solo entregables. El `.log` y el `.tex` se inspeccionan ahí cuando algo falla; `make` los necesita para no recompilar de más |
 | `__pycache__/`, `#*.dxf` (autoguardado de LibreCAD) | Archivos temporales de herramientas |
 
 **Requisito: builds reproducibles.** El `Makefile` fija `SOURCE_DATE_EPOCH` (y `FORCE_SOURCE_DATE=1`) para que xelatex, incluido el que usa matplotlib para las figuras, no embeba la fecha de compilación: así el PDF y los PNG salen idénticos byte a byte si el contenido no cambió, y `make` no genera cambios falsos en git. Todo Makefile nuevo que produzca archivos versionados debe hacer lo mismo. Fuera de `build/` y `figuras/`, PDFs y PNGs siguen ignorados (bibliografía, guías, fotos); no usar `git add -f` para saltear eso.
 
 ## Logos compartidos — `logos/`
 
-Logos que puede usar cualquier documento o perfil. Cada logo es un `<logo>.tex` (TikZ vectorial, para el PDF) más un `<logo>_png.tex` que lo pasa a PNG para Word. Una regla de `comun.mk` genera `logos/build/<logo>.png` (1200 ppp) **una sola vez**, la primera vez que un documento lo pide, y lo reutilizan todos; se regenera solo si cambia el `.tex`. No se versiona, y el `make clean` de un documento no lo borra.
+Logos que puede usar cualquier documento o perfil. Cada logo es un `<logo>.tex` (TikZ vectorial, para el PDF) más un `<logo>_png.tex` que lo pasa a PNG para Word. Una regla de `comun.mk` genera `logos/.build/<logo>.png` (1200 ppp) **una sola vez**, la primera vez que un documento lo pide, y lo reutilizan todos; se regenera solo si cambia el `.tex`. No se versiona, y el `make clean` de un documento no lo borra.
 
 | Archivo | Qué es |
 |---|---|
 | `logo_utn.tex` | Símbolo UTN («la Araña») con la geometría del manual de identidad oficial: `\logoutn{<alto>}` |
 
-Para usarlo desde un perfil: en el PDF, leer `logos/<logo>.tex` (como `lab-fisica.lua`); en Word, poner `$(PIPELINE)/logos/build/<logo>.png` en las dependencias (ej. `LOGO_PNG` en `lab_fisica/lab.mk`).
+Para usarlo desde un perfil: en el PDF, leer `logos/<logo>.tex` (como `lab-fisica.lua`); en Word, poner `$(PIPELINE)/logos/.build/<logo>.png` en las dependencias (ej. `LOGO_PNG` en `lab_fisica/lab.mk`).
 
 ## Perfil `lab_fisica/` — informes de laboratorio de Física
 

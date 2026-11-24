@@ -8,4 +8,4 @@ SOURCE_DATE_EPOCH := 1794711600
 
 include ../../../../../pipeline_pdf/comun.mk
 
-$(BUILD)/$(DOC).tex: ../preambulo.tex
+$(TEX): ../preambulo.tex

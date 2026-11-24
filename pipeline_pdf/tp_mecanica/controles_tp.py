@@ -16,7 +16,7 @@ el formato de los archivos ya armados. Termina con error si algo no pasa.
       láminas apaisadas; misma cantidad de notas que el .md; índice con
       números de página que coinciden con el paginado de LibreOffice
 
-  python3 controles_tp.py resumen build/aux
+  python3 controles_tp.py resumen .build/aux
       tabla con el resultado de todos los controles
 """
 import json
@@ -28,6 +28,9 @@ import zipfile
 from pathlib import Path
 
 import yaml
+
+# Intermedios de tp.mk, relativos a la carpeta del documento (desde donde corre make).
+AUX = Path(".build", "aux")
 
 W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 A4 = (595.28, 841.89)
@@ -92,7 +95,7 @@ def control_pdf(ruta, ruta_yaml, version):
                   + (f"; falta en {sin_pie}" if sin_pie else "")}
 
     res["justificado"] = justificado(ruta, paginas, rotadas)
-    guardar(Path(ruta).parent / "aux", f"formato_{Path(ruta).stem}.pdf.json", res)
+    guardar(AUX, f"formato_{Path(ruta).stem}.pdf.json", res)
     informar(f"formato del PDF {Path(ruta).name}", res)
 
 
@@ -234,7 +237,7 @@ def control_docx(ruta, ruta_yaml, version):
                           + (f"; sin justificar: {(malos + notas_mal)[:4]}" if malos or notas_mal else "")}
 
     # Notas: tantas como en el .md
-    lua = Path(ruta).parent / "aux" / f"controles_{Path(ruta).stem}.docx.json"
+    lua = AUX / f"controles_{Path(ruta).stem}.docx.json"
     esperadas = json.loads(lua.read_text(encoding="utf-8"))["notas"] if lua.exists() else None
     res["notas"] = {"ok": esperadas is None or esperadas == n_notas,
                     "detalle": f"{n_notas} notas al pie reales" + (f" (en el .md: {esperadas})" if esperadas is not None else "")}
@@ -280,7 +283,7 @@ def control_docx(ruta, ruta_yaml, version):
             ts = [t.text or "" for t in p.iter(W + "t")]
             if len(ts) >= 2:
                 entradas.append((ts[0].strip(), ts[-1].strip()))
-    vista = Path(ruta).parent / "aux" / (Path(ruta).stem + ".pdf")
+    vista = AUX / (Path(ruta).stem + ".pdf")
     desajustes = []
     if vista.exists():
         paginas = sh("pdftotext", "-layout", str(vista), "-").split("\f")
@@ -291,7 +294,7 @@ def control_docx(ruta, ruta_yaml, version):
     res["indice"] = {"ok": bool(entradas) and all(n.isdigit() for _, n in entradas) and not desajustes,
                      "detalle": f"{len(entradas)} entradas con página" + (f"; no coinciden: {desajustes}" if desajustes else "")}
 
-    guardar(Path(ruta).parent / "aux", f"formato_{Path(ruta).stem}.docx.json", res)
+    guardar(AUX, f"formato_{Path(ruta).stem}.docx.json", res)
     informar(f"formato del Word {Path(ruta).name}", res)
 
 

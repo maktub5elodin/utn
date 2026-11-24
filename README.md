@@ -8,17 +8,31 @@ Escritas en Markdown, en español, con diagramas ASCII. Algunos documentos (corr
 
 ## Materias
 
-| Carpeta | Materia | Documentos | Último commit |
+«Último trabajo» resume lo que se hizo en la fecha de «Última edición»: el día en que se editó por última vez el contenido de la materia (no cuenta recompilar PDFs ni el mantenimiento). El detalle de cada materia está en su carpeta.
+
+| Carpeta | Materia | Último trabajo | Última edición |
 |---|---|---|---|
-| [`analisis_matematico_i/`](analisis_matematico_i/) | Análisis Matemático I | Introducción · Funciones · Topología · Límites · Correcciones del 1er parcial (ejercicios 1-5, con figuras en Python y PDF compilado vía pandoc/xelatex, `make`) | 04/nov/2026 |
-| [`ayga/`](ayga/) | Álgebra y Geometría Analítica | Introducción · Vectores, recta y plano · TP7 ej. 1 b) — parametrización de un arco de elipse (por qué el rango no es ±π/4), con figuras en Python y PDF compilado vía pandoc/xelatex (`make`) | 04/nov/2026 |
-| [`fisica_i/`](fisica_i/) | Física I | Introducción · Óptica · Cinemática · Laboratorio — 1ª concurrencia (TPN1 mediciones · TPN2 óptica), 3ª concurrencia (TP5 resorte · TP6 Arquímedes), 4ª concurrencia (TP7 péndulo físico · TP8 monografía de momento angular, PDF + Word con `pipeline_pdf/lab_fisica`) · Energía en casos límite (lanzamiento de bala y jabalina) · Hoja de fórmulas (caps. 2–7) · Correcciones del 1er parcial · 2do parcial resuelto: parciales de Vella (Z1054), examen tipo FRBA, guía extra y parcial 2002 reconstruido, más un integrador con los 53 ejercicios por tema y dificultad (PDF con pandoc/xelatex, `make`) | 22/nov/2026 |
-| [`fundamentos_informatica/`](fundamentos_informatica/) | Fundamentos de Informática | `1er_parcial/`: preparación parcial de diagramación estructurada (Chapin/Nassi-Shneiderman) — relevamiento de candidatos, resolución de referencia y diagrama final del Problema 13 en LibreCAD (`parcial_1.dxf`) con su documentación as-built y visualización vectorial descargable en PNG/PDF · `2do_parcial/`: programa en C++ (consigna, finales modelo, entorno C++98) | 09/nov/2026 |
-| [`griego/`](griego/) | Griego Científico | Alfabeto griego con pronunciación y uso científico | 16/abr/2026 |
-| [`quimica_general/`](quimica_general/) | Química General | Introducción · Estructura atómica · Gases (UT3) · Soluciones (UT7) · Hoja de fórmulas · Repaso 2do parcial | 04/nov/2026 |
-| [`ingenieria_y_sociedad/`](ingenieria_y_sociedad/) | Ingeniería y Sociedad | Arocena · 4 textos con preguntas MC (§1–§56) | 10/jun/2026 |
-| [`ingenieria_mecanica_i/`](ingenieria_mecanica_i/) | Ingeniería Mecánica I | Introducción · UT I–XI (11 unidades: ingeniería, diseño, manufactura, producción, mantenimiento, gestión, seguridad, ética, economía) · Preparación parcial 1 (banco ~52 preguntas, 3 fuentes) · Proyecto TP Final — Cortadora de Botellas PET: entregas 1 y 2, presentación (generador del `.pptx`, reparto y defensa), modelo 3D 1 y modelo 2.0 para el prototipo impreso (con instructivo de armado) · TP grupal Mecánica Rotacional: apunte teórico revisado + tren de engranajes (ejercicio resuelto, puntos 1-8) · TP grupal Mecánica Rotacional 2: eje sobre rodamientos de rodillos cilíndricos SKF NU 1005 (puntos 1-7 resueltos, PDF con LaTeX) | 08/nov/2026 |
-| [`sistemas_de_representacion/`](sistemas_de_representacion/) | Sistemas de Representación | Expectativas · Normas IRAM · LibreCAD/DXF · Axonometría (isométrico vs. caballera) | 30/sep/2026 |
+| [`analisis_matematico_i/`](analisis_matematico_i/) | Análisis Matemático I | Resolución paso a paso del 1er parcial, con figura y PDF | 09/nov/2026 |
+| [`ayga/`](ayga/) | Álgebra y Geometría Analítica | TP7 ej. 1 b): parametrización de un arco de elipse, con figuras y PDF | 04/nov/2026 |
+| [`fisica_i/`](fisica_i/) | Física I | Hoja de fórmulas, cap. 8 (cantidad de movimiento, impulso, choques); 2do parcial con la notación de la hoja | 23/nov/2026 |
+| [`fundamentos_informatica/`](fundamentos_informatica/) | Fundamentos de Informática | 2do parcial: programa en C++98, casos de prueba y archivo de entrega | 09/nov/2026 |
+| [`quimica_general/`](quimica_general/) | Química General | Hoja de fórmulas: referencia del Chang al pie | 09/nov/2026 |
+| [`ingenieria_y_sociedad/`](ingenieria_y_sociedad/) | Ingeniería y Sociedad | Mapa conceptual interactivo de Arocena (CTS) | 10/jun/2026 |
+| [`ingenieria_mecanica_i/`](ingenieria_mecanica_i/) | Ingeniería Mecánica I | Proyecto cortadora PET: planos del modelo 2.0 en 3 láminas e informe Entrega 2 Rev. 1 / Entrega 3 | 18/nov/2026 |
+| [`sistemas_de_representacion/`](sistemas_de_representacion/) | Sistemas de Representación | TP19 en LibreCAD | 30/sep/2026 |
+
+---
+
+## Recursos comunes
+
+Material de consulta que sirve para varias materias.
+
+| Recurso | Qué es |
+|---|---|
+| [Constantes de la calculadora](recursos/calculadora_casio_constantes.md) | Las 47 constantes científicas de la Casio fx-991LA CW (CODATA 2018), por categoría, y cómo llegar a cada una en el catálogo |
+| [Alfabeto griego](griego/00_alfabeto_griego.md) | Las 24 letras con pronunciación y su uso en ciencia e ingeniería |
+| Hoja de fórmulas de Física I | [Apunte](fisica_i/hoja_formulas/hoja_formulas.md) · [PDF](fisica_i/hoja_formulas/build/hoja_formulas.pdf) |
+| Hoja de fórmulas de Química General | [Apunte](quimica_general/hoja_formulas/hoja_formulas.md) · [PDF](quimica_general/hoja_formulas/build/hoja_formulas.pdf) |
 
 ---
 

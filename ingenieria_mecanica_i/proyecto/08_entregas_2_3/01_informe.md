@@ -74,7 +74,7 @@ La cortadora se construyó sobre una base de MDF de [345]{.v k=par.MDF.1} × [20
 
 El funcionamiento se basa en el tiro de la propia tira: al girar la manivela, la tira se enrolla en el carrete y tira de la pared, la botella gira sobre la varilla y la hoja corta. El borde cortado describe una hélice; en cada vuelta, el nuevo borde desciende y vuelve a apoyarse en la guía, de modo que el paso del corte, igual al ancho de la tira, queda fijado por la guía y no por un mecanismo que sincronice el giro con el avance.
 
-![Conjunto de la cortadora en el modelo digital, con la botella al inicio del corte. En naranja, las piezas impresas en PLA; en gris, las comerciales; en marrón, la base de MDF.](build/aux/recortes/conjunto.png){#fig:conjunto width=10cm}
+![Conjunto de la cortadora en el modelo digital, con la botella al inicio del corte. En naranja, las piezas impresas en PLA; en gris, las comerciales; en marrón, la base de MDF.](.build/aux/recortes/conjunto.png){#fig:conjunto width=10cm}
 
 Los criterios de diseño fueron los siguientes:
 

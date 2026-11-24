@@ -17,7 +17,7 @@ include ../../../pipeline_pdf/comun.mk
 # Figuras compartidas: si faltan, las genera el Makefile de las correcciones.
 FIGS_COMUNES := $(foreach n,fig0_ej1_bolzano_asintota fig2_ej3_tangentes fig3_ej4_continuidad fig4_ej5_dominio_ln,../figuras/$(n).pdf)
 
-$(BUILD)/$(DOC).tex: $(FIGS_COMUNES)
+$(TEX): $(FIGS_COMUNES)
 
 $(FIGS_COMUNES):
 	$(MAKE) -C .. figuras

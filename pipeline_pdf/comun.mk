@@ -13,18 +13,23 @@
 # y su pdf.yaml con título, subtítulo y fecha. La configuración común de pandoc
 # está en base.yaml, junto a este archivo.
 #
-#   make          -> figuras (si hay) -> build/<doc>.tex -> build/<doc>.pdf
+#   make          -> figuras (si hay) -> .build/<doc>.tex -> build/<doc>.pdf
 #   make docx     -> build/<doc>.docx (Word, sin la estética de LaTeX; no se versiona)
 #   make figuras  -> solo regenera las figuras
-#   make clean    -> borra build/ (no toca figuras/ ni el .md)
+#   make clean    -> borra build/ y .build/ (no toca figuras/ ni el .md)
+#
+# build/ guarda solo los entregables (.pdf, que se versiona, y .docx); los
+# intermedios (.tex, .aux, .log, .toc) van a .build/, oculto e ignorado por git.
+# Un documento que agrega dependencias al .tex usa $(TEX) (ej. `$(TEX): ../x.tex`).
 #
 # Usa el python3, pandoc y xelatex del sistema. Detiene la compilación si queda
 # alguna referencia sin resolver o algún carácter que la fuente no tiene.
 
 PIPELINE := $(patsubst %/,%,$(dir $(lastword $(MAKEFILE_LIST))))
 BUILD    := build
+INTER    := .build
 FILTROS  := $(wildcard $(PIPELINE)/filtros/*.lua)
-XELATEX  := xelatex -interaction=nonstopmode -halt-on-error -output-directory=$(BUILD)
+XELATEX  := xelatex -interaction=nonstopmode -halt-on-error -output-directory=$(INTER)
 
 ifndef DOC
 $(error Falta definir DOC en el Makefile del documento)
@@ -52,6 +57,9 @@ DOCX_POST     ?= python3 $(PIPELINE)/docx_estilo.py $@ $(DOCX_ESCALA)
 DOCX_DEPS     ?= $(PIPELINE)/docx_estilo.py
 PERFIL_DEPS   ?=
 
+TEX := $(INTER)/$(SALIDA).tex
+LOG := $(INTER)/$(SALIDA).log
+
 .PHONY: all docx figuras clean
 
 # Si un paso falla, se borra su salida: nunca queda un PDF "a medias" que
@@ -69,30 +77,32 @@ $(FIGS) &: $(FIG_SCRIPT)
 	python3 $(FIG_SCRIPT)
 endif
 
-$(BUILD):
+$(BUILD) $(INTER):
 	mkdir -p $@
 
-$(BUILD)/$(SALIDA).tex: $(DOC).md pdf.yaml $(PDF_DEFAULTS) $(FILTROS) $(PERFIL_DEPS) $(FIGS) | $(BUILD)
+$(TEX): $(DOC).md pdf.yaml $(PDF_DEFAULTS) $(FILTROS) $(PERFIL_DEPS) $(FIGS) | $(INTER)
 	pandoc --defaults=$(PDF_DEFAULTS) --defaults=pdf.yaml $(DOC).md -o $@
 
 # Pasadas de xelatex hasta que LaTeX deja de pedir "Rerun" (máx. 4), y siempre
 # al menos 2: la primera escribe .aux/.toc, la segunda arma el índice. Se buscan
 # los dos avisos: "Rerun to get..." (referencias) y "Rerun LaTeX" (anchos de
-# longtable).
-$(BUILD)/$(SALIDA).pdf: $(BUILD)/$(SALIDA).tex $(FIGS)
+# longtable). El PDF se arma en .build/ y, si pasa los controles, se mueve a build/
+# (xelatex no separa la carpeta del PDF de la de sus intermedios).
+$(BUILD)/$(SALIDA).pdf: $(TEX) $(FIGS) | $(BUILD)
 	@for i in 1 2 3 4; do \
 		echo "xelatex, pasada $$i"; \
-		$(XELATEX) $< > /dev/null || { grep -A5 '^!' $(BUILD)/$(SALIDA).log; exit 1; }; \
-		if [ $$i -ge 2 ] && ! grep -qE 'Rerun to get|Rerun LaTeX' $(BUILD)/$(SALIDA).log; then break; fi; \
+		$(XELATEX) $< > /dev/null || { grep -A5 '^!' $(LOG); echo "(log completo: $(LOG))"; exit 1; }; \
+		if [ $$i -ge 2 ] && ! grep -qE 'Rerun to get|Rerun LaTeX' $(LOG); then break; fi; \
 	done
-	@if grep -qE 'undefined|Rerun to get|Rerun LaTeX' $(BUILD)/$(SALIDA).log; then \
-		grep -E 'undefined|Rerun to get|Rerun LaTeX' $(BUILD)/$(SALIDA).log; \
+	@if grep -qE 'undefined|Rerun to get|Rerun LaTeX' $(LOG); then \
+		grep -E 'undefined|Rerun to get|Rerun LaTeX' $(LOG); \
 		echo "ERROR: referencias sin resolver (ver arriba)"; exit 1; fi
-	@if grep -q 'Missing character' $(BUILD)/$(SALIDA).log; then \
-		grep 'Missing character' $(BUILD)/$(SALIDA).log | sort -u; \
+	@if grep -q 'Missing character' $(LOG); then \
+		grep 'Missing character' $(LOG) | sort -u; \
 		echo "ERROR: caracteres sin glifo en la fuente (ver arriba)"; exit 1; fi
 	@echo "--- Advertencias de LaTeX:"
-	@grep -E 'Warning|Overfull|Underfull' $(BUILD)/$(SALIDA).log || echo "(ninguna)"
+	@grep -E 'Warning|Overfull|Underfull' $(LOG) || echo "(ninguna)"
+	@mv $(INTER)/$(SALIDA).pdf $@
 	@echo "OK: $@"
 
 # Word: mismo .md y mismos filtros de contenido, configuración en docx.yaml.
@@ -103,16 +113,16 @@ $(BUILD)/$(SALIDA).docx: $(DOC).md pdf.yaml $(DOCX_DEFAULTS) $(DOCX_DEPS) $(FILT
 	@echo "OK: $@"
 
 clean:
-	rm -rf $(BUILD)
+	rm -rf $(BUILD) $(INTER)
 
 # Logos compartidos (logos/): cada <logo>.tex (TikZ vectorial) con su
-# <logo>_png.tex se pasa a PNG a 1200 ppp una sola vez, en logos/build/, y lo
+# <logo>_png.tex se pasa a PNG a 1200 ppp una sola vez, en logos/.build/, y lo
 # reutiliza todo documento que lo pida (ej. LOGO_PNG en lab_fisica/lab.mk).
 # No se versiona; `make clean` de un documento no lo borra.
 LOGOS := $(PIPELINE)/logos
 
-$(LOGOS)/build/%.png: $(LOGOS)/%.tex $(LOGOS)/%_png.tex
-	mkdir -p $(LOGOS)/build
+$(LOGOS)/.build/%.png: $(LOGOS)/%.tex $(LOGOS)/%_png.tex
+	mkdir -p $(LOGOS)/.build
 	cd $(LOGOS) && xelatex -interaction=nonstopmode -halt-on-error \
-		-output-directory=build $*_png.tex > /dev/null
-	pdftoppm -r 1200 -png -singlefile $(LOGOS)/build/$*_png.pdf $(LOGOS)/build/$*
+		-output-directory=.build $*_png.tex > /dev/null
+	pdftoppm -r 1200 -png -singlefile $(LOGOS)/.build/$*_png.pdf $(LOGOS)/.build/$*

@@ -19,8 +19,8 @@ metadata:
     # Carátula oficial de la cátedra (en 00_consignas/, local, fuera de git)
     caratula: ../00_consignas/Caratula_Entrega_2_TP_FINAL_Mecanica_1_S1092_S1091.docx
     resumen_sz: 20            # tamaño (medios puntos) del abstract en el campo «Resumen»
-    valores: build/aux/valores.json
-    laminas_png: build/aux/laminas
+    valores: .build/aux/valores.json
+    laminas_png: .build/aux/laminas
     versiones:
       e2: {archivo: Entrega_2_Reentrega_1_S1091_Grupo_1, entrega: 2, revision: 1, resumen: false}
       e3: {archivo: S1091-G1-E3, entrega: 3, revision: 0, resumen: true}

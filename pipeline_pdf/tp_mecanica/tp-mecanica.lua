@@ -13,7 +13,7 @@ tp.mk). A partir del bloque `tp:` del pdf.yaml del documento:
      y de la conclusión, vocabulario controlado fuera del bloque `::: alternativas`,
      correspondencia entre notas al pie y Bibliografía ∪ Links de interés, orden
      alfabético, imágenes existentes, figuras citadas. Deja un informe JSON en
-     build/aux/controles_<salida>.<formato>.json.
+     .build/aux/controles_<salida>.<formato>.json.
   4. Armado: carátula (PDF: la carátula oficial completada, ya en PDF; en Word
      la inserta docx_tp.py), página de título e índice, `## 1. Sección` -> nivel 1
      (el `# Título` del .md se descarta), láminas a página completa apaisada,
@@ -91,7 +91,7 @@ local function datos(meta)
     titulo = stringify(m.titulo),
     pie = stringify(m.pie),
     valores = stringify(m.valores),
-    caratula_pdf = "build/aux/caratula_" .. VERSION .. ".pdf",
+    caratula_pdf = ".build/aux/caratula_" .. VERSION .. ".pdf",
     laminas_png = stringify(m.laminas_png),
     c = m.controles or {},
   }
@@ -600,8 +600,8 @@ function Pandoc(doc)
 
   informe.formato = FORMAT
   informe.problemas = problemas
-  os.execute("mkdir -p build/aux")
-  local f = io.open("build/aux/controles_" .. SALIDA .. "." .. (LATEX and "pdf" or "docx") .. ".json", "w")
+  os.execute("mkdir -p .build/aux")
+  local f = io.open(".build/aux/controles_" .. SALIDA .. "." .. (LATEX and "pdf" or "docx") .. ".json", "w")
   if f then f:write(a_json(informe), "\n"); f:close() end
   if #problemas > 0 then
     error("\ntp-mecanica.lua — controles que no pasan (" .. VERSION .. "):\n  - " .. table.concat(problemas, "\n  - "))

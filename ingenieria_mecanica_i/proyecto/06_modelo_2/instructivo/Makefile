@@ -18,4 +18,4 @@ all: build/plantilla_base_A3.pdf
 $(DOC).md build/plantilla_base_A3.pdf pasos/plantilla.png &: $(DATOS) | $(BUILD)
 	python3 generar_instructivo.py
 
-$(BUILD)/$(DOC).tex: pasos/plantilla.png $(wildcard pasos/paso_*.png) portada.tex preambulo.tex
+$(TEX): pasos/plantilla.png $(wildcard pasos/paso_*.png) portada.tex preambulo.tex

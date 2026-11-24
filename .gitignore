@@ -31,7 +31,9 @@ __pycache__/
 # Claude Code (settings locales, no van al repo)
 .claude/
 
-# Salidas de compilación (pandoc/LaTeX): se regeneran con make
+# Intermedios de compilación (pandoc/LaTeX: .tex, .aux, .log, .toc): se regeneran con make
+.build/
+# Salidas de compilación: se regeneran con make
 **/build/*
 # Excepciones: se versionan el PDF final de cada build/ y los PNG de figuras/
 # (vista previa del .md en GitHub). Requieren builds reproducibles: ver CLAUDE.md.

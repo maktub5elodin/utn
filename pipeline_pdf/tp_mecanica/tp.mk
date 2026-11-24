@@ -24,7 +24,7 @@
 
 TP    := $(patsubst %/,%,$(dir $(lastword $(MAKEFILE_LIST))))
 BUILD := build
-AUX   := $(BUILD)/aux
+AUX   := .build/aux
 
 ifeq ($(VERSION),)
 # ── Nivel superior: una sub-make por versión ────────────────────────────
@@ -45,7 +45,7 @@ docx:
 	@$(MAKE) --no-print-directory VERSION=e3 docx
 
 clean:
-	rm -rf $(BUILD)
+	rm -rf $(BUILD) .build
 
 else
 # ── Una versión ─────────────────────────────────────────────────────────
