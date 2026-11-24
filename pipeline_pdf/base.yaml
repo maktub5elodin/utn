@@ -110,6 +110,8 @@ variables:
     \newunicodechar{✓}{\ensuremath{\checkmark}}
     \newunicodechar{★}{\faStar}
     \newunicodechar{α}{\ensuremath{\alpha}}
+    \newunicodechar{δ}{\ensuremath{\delta}}
+    \newunicodechar{π}{\ensuremath{\pi}}
     \newunicodechar{θ}{\ensuremath{\theta}}
     \newunicodechar{τ}{\ensuremath{\tau}}
     \newunicodechar{ω}{\ensuremath{\omega}}

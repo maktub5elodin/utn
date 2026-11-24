@@ -1,0 +1,10 @@
+# Variables propias de este documento. La configuración común de pandoc está
+# en pipeline_pdf/base.yaml (ver pipeline_pdf/comun.mk).
+
+# Anclas internas con el estilo de GitHub (#1-régimen-y-estrategia), como en el .md.
+from: markdown+gfm_auto_identifiers
+
+variables:
+  title-meta: "Examen 2026 — 2° parcial de Ingeniería Mecánica I"
+  subtitle: "Temas 16 y 17 unificados, resueltos y cruzados con el banco — preparación del recuperatorio"
+  date: "24 de noviembre de 2026"

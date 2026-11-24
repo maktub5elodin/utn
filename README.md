@@ -18,7 +18,7 @@ Escritas en Markdown, en español, con diagramas ASCII. Algunos documentos (corr
 | [`fundamentos_informatica/`](fundamentos_informatica/) | Fundamentos de Informática | 2do parcial: programa en C++98, casos de prueba y archivo de entrega | 09/nov/2026 |
 | [`quimica_general/`](quimica_general/) | Química General | Hoja de fórmulas: referencia del Chang al pie | 09/nov/2026 |
 | [`ingenieria_y_sociedad/`](ingenieria_y_sociedad/) | Ingeniería y Sociedad | Mapa conceptual interactivo de Arocena (CTS) | 10/jun/2026 |
-| [`ingenieria_mecanica_i/`](ingenieria_mecanica_i/) | Ingeniería Mecánica I | Proyecto cortadora PET: planos del modelo 2.0 en 3 láminas e informe Entrega 2 Rev. 1 / Entrega 3 | 18/nov/2026 |
+| [`ingenieria_mecanica_i/`](ingenieria_mecanica_i/) | Ingeniería Mecánica I | 2° parcial 2026 (Temas 16 y 17) resuelto y cruzado con el banco, para el recuperatorio | 24/nov/2026 |
 | [`sistemas_de_representacion/`](sistemas_de_representacion/) | Sistemas de Representación | TP19 en LibreCAD | 30/sep/2026 |
 
 ---

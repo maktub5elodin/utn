@@ -8,7 +8,7 @@
 - Copian los formatos que usa en las preguntas reales: "quién se mueve", pares espejo, frases con dos huecos, "directa o inversamente proporcional", "¿cuál NO…?", combinaciones "I y II".
 - Los distractores son, siempre que se puede, la respuesta correcta de otra pregunta del mismo tema — igual que hace él.
 
-**Por dónde empezar:** los bloques `S-TE` y `S-EM` cubren los dos temas anunciados para los que no apareció ninguna pregunta real (teoría del engrane; árboles, ejes y demás elementos). El resto rellena huecos de temas que sí tienen preguntas reales.
+**Por dónde empezar:** los bloques `S-TE` y `S-EM` cubren teoría del engrane y árboles, ejes y demás elementos. Cuando se armaron, esos temas no tenían ninguna pregunta real. El parcial 2026 trajo las primeras: 6 de engranajes (bloque `TE` del banco) y 6 de árboles y ejes (`EM6` a `EM11`), todas en [examen_2026](examen_2026/examen_2026.md). Estudiar primero esas; estos bloques sirven para lo que no tomó (relación de transmisión, tipos de engranajes, cojinetes, chavetas, correas). El resto rellena huecos de temas que sí tienen preguntas reales.
 
 | Código | Tema | Preguntas | Fuente principal |
 |---|---|---|---|

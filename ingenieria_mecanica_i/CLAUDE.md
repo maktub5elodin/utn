@@ -2,14 +2,14 @@
 
 ## Estado
 
-Docente: Abud. Dos parciales multiple choice de 30 preguntas (las incorrectas restan; las no respondidas valen 0) y final del mismo tipo, que mezcla preguntas de ambos. Abud repite preguntas textuales de un año a otro: por eso se trabaja con bancos de preguntas.
+Docente: Abud. Dos parciales multiple choice de 30 preguntas (el 2° de 2026 tuvo 40), con tope de errores: el 2° parcial 2026 se aprobaba con 24 correctas y como máximo 3 mal; las no respondidas valen 0. El final es del mismo tipo y mezcla preguntas de ambos. Abud repite preguntas textuales de un año a otro, y en un mismo día reparte el mismo examen con distinto número de tema: por eso se trabaja con bancos de preguntas.
 
 | Carpeta | Contenido |
 |---|---|
 | `clases/` | Apuntes de clase 1–11 (primer cuatrimestre). De la segunda mitad del año no hay carpeta propia. |
 | `material_catedra/` | Apuntes y diapositivas de Abud, con los nombres del campus. Local, fuera de git. |
 | `1er_parcial/` | `preparacion_parcial_1.md` (banco de ~52 preguntas) + `fuentes/`. |
-| `2do_parcial/` | `preparacion_parcial_2.md` (banco de 102 preguntas reales) + `preguntas_sugeridas_parcial_2.md` (104 inventadas) + `fuentes/`. |
+| `2do_parcial/` | `preparacion_parcial_2.md` (banco de 121 preguntas reales; las 19 nuevas del parcial 2026 son RO15–18, MH20, CA14–15, EM6–11 y el bloque TE) + `preguntas_sugeridas_parcial_2.md` (104 inventadas) + `examen_2026/` (parcial del 12/nov/2026: los Temas 16 y 17 son el mismo examen, en un solo documento resuelto, con régimen, estrategia y cruce con el banco; base del recuperatorio) + `fuentes/` (escaneo del Tema 17; las fotos del Tema 16 no se conservan). |
 | `final/` | Por ahora solo `fuentes/`. |
 | `campus_virtual/` | Intro + UT I al XI + esfuerzos característicos (13 docs). No se usaron: desde nov/2026 quedan solo en disco, fuera de git. |
 | `proyecto/` | TP Final: cortadora de botellas PET. El informe vigente (prototipo de `06_modelo_2/`) está en `08_entregas_2_3/`: un solo `01_informe.md` genera la Entrega 2 Rev. 1 y la Entrega 3, en PDF y Word, con el perfil `pipeline_pdf/tp_mecanica/` (diseño y decisiones en `00_diseno_entrega_2_3.md`). |
@@ -25,6 +25,6 @@ Docente: Abud. Dos parciales multiple choice de 30 preguntas (las incorrectas re
 
 **Cátedra (`material_catedra/`):** `Mecanica Rotacional.pdf` e `ingenieria_del_control_automatico.pdf` (apuntes teóricos, ciclo 2018); `6.Unidad VI proceso de Moldeo.docx`; `7.UNIDADAD VII Maquinas Herramientas.docx` y su `.pptx` de procesos con y sin arranque de viruta; `9.UNIDAD IX Elementos usados en Ingeniería.docx` (roscas, tornillos, resortes, chavetas, ajustes y tolerancias); `10.X.1 ARBOLES,ENGRANAJES.docx` (árboles, ejes, cojinetes, rodamientos, correas, engranajes); `11.UNIDAD XI Graficos, Curvas, Manuales.docx`. Las diapositivas de las unidades X y XI son casi solo imágenes con título.
 
-**Exámenes anteriores:** inventario con origen en la sección "Fuentes" de cada banco. La más confiable es `2do_parcial/fuentes/descargas_web/2° Parcial - S1021.pdf` (campus 2021, con clave). El foro de Mecánica de UTNianos tiene 38 hilos de la materia; los adjuntos bajan sin login.
+**Exámenes anteriores:** inventario con origen en la sección "Fuentes" de cada banco. La más confiable es `2do_parcial/fuentes/descargas_web/2° Parcial - S1021.pdf` (campus 2021, con clave). La que mejor predijo el parcial 2026 fue el formulario `F23`: salieron 17 de sus 42 preguntas, y le sigue el final `FIN14`. El foro de Mecánica de UTNianos tiene 38 hilos de la materia; los adjuntos bajan sin login.
 
 **Campus virtual (base de `campus_virtual/`; los PDF ya no están en la carpeta):** `Ing. Mec. I - Plan de Estudio.pdf` (programa y cronograma 32 clases), `1.El Ing y su Profesión.pdf`, `1.LA ING. ACTUAL UNIDAD I Y UNIDAD III.pdf`, `HABILIDADES BÁSICAS DE LA INGENIERÍA.pdf`, `1.unidad I Ingeniería y Sociedad.pdf` (37 págs — perfil, ética, patentes, Revolución Industrial), `Mantenimiento[1].pdf` (UT VII completa), `ING MEC POWER 1.pdf` y `ING MEC POWER 2.pdf` (slides de cátedra).

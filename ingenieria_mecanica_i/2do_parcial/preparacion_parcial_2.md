@@ -1,10 +1,10 @@
 # Preparación Parcial 2 — Ingeniería Mecánica I
 
 **Profesor:** Abud  
-**Fecha del examen:** a confirmar  
+**Fecha del examen:** 12/nov/2026, Temas 16 y 17 (mismo examen) → [examen_2026](examen_2026/examen_2026.md), resuelto y cruzado con este banco · recuperatorio: a confirmar  
 **Modalidad:** multiple choice — las incorrectas restan; las no respondidas valen 0 (mismo régimen que el 1er parcial)  
 **Temario anunciado por Abud:** máquinas y herramientas (transformación de la materia prima, Unidad VII) · marcas, patentes y derecho de autor · mecánica rotacional (todo) · ingeniería de control automático · teoría del engrane · elementos de máquinas (árboles y ejes, entre otros)  
-**Estado:** banco de **102 preguntas reales únicas** — 62 dentro del temario anunciado (bloques RO, MH, SV, CA, EM, PI), 7 "comodines" de parciales recientes (VA) y 33 de 2° parciales viejos fuera del temario (VJ).  
+**Estado:** banco de **121 preguntas reales únicas** — 81 dentro del temario anunciado (bloques RO, MH, SV, CA, EM, TE, PI), 7 "comodines" de parciales recientes (VA) y 33 de 2° parciales viejos fuera del temario (VJ). De ellas, 19 son nuevas del parcial 2026; las otras 21 preguntas de ese examen ya estaban.  
 **Preguntas sugeridas (inventadas, no son de examen):** van en archivo aparte → [preguntas_sugeridas_parcial_2.md](preguntas_sugeridas_parcial_2.md)
 
 ---
@@ -21,6 +21,8 @@
 | `FIN14` | Final "Tema 14", 32 preguntas | Sí — marcadas por alumnos |
 | `F23` | Formulario "Preguntas de repaso — 2° Parcial" (2023), 42 preguntas "sacadas de parciales viejos" | No (la clave se ve recién al enviarlo) |
 | `R23` | Resumen manuscrito del 2° parcial (2023) | No tiene preguntas; confirma temario y datos |
+| `P26-16` | 2° parcial 12/nov/2026, Tema 16: fotos de las preguntas 1–35 (no se conservan) | No |
+| `P26-17` | 2° parcial 12/nov/2026, Tema 17: escaneo completo, 40 preguntas | No — mismo examen que el Tema 16, palabra por palabra: para `★×N` cuentan como **una** fuente |
 | `AP` | Apuntes y diapositivas de cátedra (`material_catedra/`) | — |
 
 **Marcadores de confianza:**
@@ -33,7 +35,7 @@
 | `[★×N]` | La pregunta aparece en N fuentes distintas — a más estrellas, más probabilidad de repetición. |
 | `[⚠ …]` | Fuentes en conflicto, respuesta en duda o respuesta de cátedra que no coincide con la teoría estricta — leer la nota. |
 
-**Códigos:** `RO` rotacional · `MH` máquinas-herramienta (arranque de viruta) · `SV` procesos sin arranque de viruta · `CA` control automático · `EM` elementos de máquinas · `PI` propiedad intelectual · `VA` comodines recientes · `VJ` 2° parciales viejos.
+**Códigos:** `RO` rotacional · `MH` máquinas-herramienta (arranque de viruta) · `SV` procesos sin arranque de viruta · `CA` control automático · `EM` elementos de máquinas · `TE` teoría del engrane · `PI` propiedad intelectual · `VA` comodines recientes · `VJ` 2° parciales viejos.
 
 > En el campus las opciones aparecen mezcladas y sin letra: **memorizá el texto de la respuesta, no la letra**. Las letras de este documento son las de la versión en papel cuando existe.
 
@@ -43,33 +45,36 @@
 
 ### Qué tomó en cada modelo conocido
 
-| Tema | 2013 (`P13`) | ≈2018–19 (`COMP` numerado) | 2021 (`CV21`) |
-|---|---|---|---|
-| Mecánica rotacional | 5 | — | **13** |
-| Máquinas-herramienta y procesos de fabricación | — | — | **13** (10 con viruta + 3 sin viruta) |
-| Control automático (+ analogía eléctrica) | — | **10** | 2 |
-| Marcas, patentes y derecho de autor | — | 4 | — |
-| Modelos (termostato, modelo analógico) | 3 | 1 | — |
-| Toma de decisiones, problemas, creatividad, sombreros | 8 | 2 | 1 |
-| Optimización | 4 | — | — |
-| Máquinas en base racional / empírica | 3 | 3 | — |
-| Proyecto de máquina, gestión y transferencia de tecnología | 2 | 6 | — |
-| Unidades elementales de transformación (UET) | 5 | 3 | — |
-| Informes escritos | — | 1 | 1 |
-| **Total** | 30 | 30 | 30 |
+| Tema | 2013 (`P13`) | ≈2018–19 (`COMP` numerado) | 2021 (`CV21`) | 2026 (`P26-16` = `P26-17`) |
+|---|---|---|---|---|
+| Mecánica rotacional | 5 | — | **13** | 5 |
+| Máquinas-herramienta y procesos de fabricación | — | — | **13** (10 con viruta + 3 sin viruta) | **15** (10 con viruta + 5 sin viruta) |
+| Control automático (+ analogía eléctrica) | — | **10** | 2 | 5 |
+| Elementos de máquinas: roscas | — | — | — | 3 |
+| Teoría del engrane | — | — | — | 6 |
+| Elementos de máquinas: árboles y ejes | — | — | — | 6 |
+| Marcas, patentes y derecho de autor | — | 4 | — | — |
+| Modelos (termostato, modelo analógico) | 3 | 1 | — | — |
+| Toma de decisiones, problemas, creatividad, sombreros | 8 | 2 | 1 | — |
+| Optimización | 4 | — | — | — |
+| Máquinas en base racional / empírica | 3 | 3 | — | — |
+| Proyecto de máquina, gestión y transferencia de tecnología | 2 | 6 | — | — |
+| Unidades elementales de transformación (UET) | 5 | 3 | — | — |
+| Informes escritos | — | 1 | 1 | — |
+| **Total** | 30 | 30 | 30 | **40** |
 
-**Lectura:** el temario cambia de un año a otro, pero **dentro de cada tema las preguntas se repiten textuales** (de las cinco de rotacional de 2013, cuatro están idénticas en 2021 y la quinta aparece en su versión espejo). El temario que anunció este año es la unión del modelo 2021 (rotacional + procesos) con el de ≈2018–19 (control + patentes), más engranajes y elementos de máquinas.
+**Lectura:** el temario cambia de un año a otro, pero **dentro de cada tema las preguntas se repiten textuales** (de las cinco de rotacional de 2013, cuatro están idénticas en 2021 y la quinta aparece en su versión espejo). El temario que anunció este año es la unión del modelo 2021 (rotacional + procesos) con el de ≈2018–19 (control + patentes), más engranajes y elementos de máquinas. **El examen de 2026 lo cumplió casi completo** (40 preguntas, todas del temario; patentes no salió). De esas 40, 21 ya estaban en este banco: 13 textuales, 7 con otra redacción y 1 con el sentido invertido. Las redacciones repetidas son las del formulario `F23` y el final `FIN14`, no las del campus 2021. Análisis completo en la sección 5 de [examen_2026](examen_2026/examen_2026.md).
 
 ### Cobertura del banco frente al temario anunciado
 
 | Tema anunciado | Preguntas reales | Dónde |
 |---|---|---|
-| Mecánica rotacional | 14 (13 con clave oficial) | Bloque RO |
-| Máquinas y herramientas | 26 (13 con clave oficial) | Bloques MH y SV |
-| Control automático | 13 (2 con clave oficial) | Bloque CA |
+| Mecánica rotacional | 18 (13 con clave oficial; 4 de 2026) | Bloque RO |
+| Máquinas y herramientas | 27 (13 con clave oficial; 1 de 2026) | Bloques MH y SV |
+| Control automático | 15 (2 con clave oficial; 2 de 2026) | Bloque CA |
 | Marcas, patentes, derecho de autor | 4 | Bloque PI |
-| Elementos de máquinas | 5 — todas de roscas | Bloque EM |
-| Teoría del engrane · árboles y ejes | **0** — no apareció ninguna en las fuentes | Solo [sugeridas](preguntas_sugeridas_parcial_2.md) |
+| Elementos de máquinas | 11 — 5 de roscas + 6 de árboles y ejes (2026) | Bloque EM |
+| Teoría del engrane | 6 — todas de 2026, sin clave | Bloque TE |
 
 ### Patrones observados
 
@@ -79,12 +84,17 @@
 4. **"Solo…" casi siempre es falsa.** En `CV21` hubo 10 opciones con "solo": 9 falsas. La única verdadera: *"Solo en el avance del torpedo"* (MH14).
 5. **"Ninguna es correcta" es relleno.** En `CV21` apareció 6 veces y nunca fue la respuesta. (En el 1er parcial sí lo fue una vez: cianuración.)
 6. **Respuestas de cátedra que no se razonan, se memorizan:** fresado cilíndrico → "a) y b) son correctas" (MH3); informe escrito → "introducción, antecedentes, metodología y planos" (VA2); derecho de autor → "vida del autor y 50 años más" (PI3).
+7. **Invierte el sentido del enunciado entre versiones.** SV2 pedía la que **NO** se corresponde con la pieza fundida (respuesta: "no se necesita ninguna acción posterior"); en 2026 la misma pregunta, con las mismas opciones, pide la que **sí** (respuesta: fragilidad). Antes de marcar, leer si pide la verdadera o la falsa.
+8. **Los temas de un mismo día son el mismo examen.** En 2026 el Tema 16 y el Tema 17 tienen las mismas preguntas, en el mismo orden y con las mismas opciones: cambia solo el número.
+9. **Espejos de las oficiales en rotacional.** En 2026 tomó RO5 cambiando "potencia" por "momento de rotación" (RO15, cambia la respuesta) y RO7 cambiando "trabajo" por "potencia" (RO16, misma respuesta). Conviene saber qué magnitud depende de qué, no memorizar el enunciado.
 
 ### Puntaje
 
 Rige lo mismo que en el 1er parcial (ver [estrategia del 1er parcial](../1er_parcial/preparacion_parcial_1.md#1-estrategia-para-el-examen)): responder lo que se sabe, dejar en blanco lo que no se puede acotar.
 
-Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este examen debe tener como mínimo el 65 % (21) correctamente respondidas y como máximo 5 mal contestadas. La pregunta que no sabe no la conteste."* No está confirmado que el parcial use ese mismo criterio, pero es la única pista escrita de la "tablita" de Abud: **además de sumar correctas, hay un tope de errores**. Con más de 5 mal, el final se desaprueba aunque sobren correctas.
+Del encabezado del final Tema 14 (32 preguntas): *"para aprobar este examen debe tener como mínimo el 65 % (21) correctamente respondidas y como máximo 5 mal contestadas. La pregunta que no sabe no la conteste."*
+
+**Confirmado en el parcial 2026** (40 preguntas, mismo encabezado en los dos temas): para aprobar, **24 correctas (60 %), al menos 3 de rotacional y como máximo 3 mal**; para promocionar, 32 correctas (80 %), al menos 3 de control y 3 de rotacional, y no más de 4 mal. Con más errores que el tope se desaprueba aunque sobren correctas. Estrategia aplicada a ese examen en [examen_2026](examen_2026/examen_2026.md#1-régimen-y-estrategia).
 
 ### Checklist antes de entregar
 
@@ -94,6 +104,9 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 - [ ] Torno: gira la **pieza**. Fresadora, alesadora, taladro: gira la **herramienta**. Rectificadora: giran **las dos**.
 - [ ] Servomecanismo = **posición** de un elemento mecánico. Regulador = referencia **fija** por períodos largos.
 - [ ] Whitworth = **55°** e hilos por **pulgada**. Métrica = **60°** y paso en **mm**.
+- [ ] ¿Pide la que **sí** corresponde o la que **NO**? (SV2 apareció de las dos formas.)
+- [ ] Momento de rotación `T = I·α` · potencia `P = I·ω·α` · cantidad de movimiento `L = I·ω`: ¿por cuál pregunta?
+- [ ] Árbol **transmite** potencia; eje **solo soporta**. Gorrón = apoyo en cojinetes; cabeza = donde van engranajes y poleas.
 - [ ] Patente = 20 años **no renovable**. Marca = 10 años **renovable** (usada en los últimos 5). Derecho de autor = vida + 50.
 
 ---
@@ -104,7 +117,7 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ### Bloque RO — Mecánica rotacional
 
-> Fue el 43 % del parcial 2021. Las 14 preguntas se responden con seis fórmulas del apunte de Abud: `K = ½·I·ω²` · `L = I·ω` · `T_ext = dL/dt` · `P = T·ω = I·ω·α` · `dW = T·dθ` · `ωp = T / (L·sen θ)`.
+> Fue el 43 % del parcial 2021 y 5 de 40 en 2026. Las 18 preguntas se responden con seis fórmulas del apunte de Abud: `K = ½·I·ω²` · `L = I·ω` · `T_ext = dL/dt` · `P = T·ω = I·ω·α` · `dW = T·dθ` · `ωp = T / (L·sen θ)`.
 
 ---
 
@@ -186,7 +199,7 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ---
 
-#### RO8 — Dos ejes apoyados respectivamente en dos rodamientos cada uno están acoplados a través de un engranaje y girando cada uno a sendas velocidades angulares. La cantidad de movimiento angular de cada eje… `[OFICIAL · ★×3 · ⚠ EL COMPILADO RESALTA OTRA]`
+#### RO8 — Dos ejes apoyados respectivamente en dos rodamientos cada uno están acoplados a través de un engranaje y girando cada uno a sendas velocidades angulares. La cantidad de movimiento angular de cada eje… `[OFICIAL · ★×4 · ⚠ EL COMPILADO RESALTA OTRA]`
 
 - **(✓) a. Es función del producto del momento de inercia y la velocidad angular.**
 - ( ) b. Es solo función de la velocidad angular.
@@ -195,6 +208,8 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 - ( ) e. La cantidad de movimiento angular no es función ni de la velocidad angular ni del momento de inercia.
 
 > `L = I·ω`. El compilado `COMP` tiene resaltada la b ("solo función de la velocidad angular"): **es un error de quien lo armó**. La clave del campus dice a, y coincide con el apunte. La c es la trampa: describe la energía cinética, no la cantidad de movimiento. Fuentes: `CV21` (clave), `P13`, `COMP`.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 1): textual, con "cantidad de movimiento rotacional" y sin la opción e.
 
 ---
 
@@ -264,6 +279,48 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ---
 
+#### RO15 — El momento de rotación de un mecanismo que gira en torno a un eje: `[DEDUCIDA · ⚠ ESPEJO DE RO5]`
+
+- ( ) a. Es función del producto del momento de inercia, velocidad angular y aceleración angular.
+- ( ) b. Solo es función de la velocidad angular sin depender de su momento de inercia y aceleración angular.
+- **(✓) c. Es función del producto del momento de inercia y la aceleración angular.**
+- ( ) d. Es función del producto del momento de inercia y su velocidad angular.
+
+> `T = I·α`. **Espejo de RO5:** casi las mismas opciones, pero RO5 pregunta por la **potencia** (`P = I·ω·α`, la a) y esta por el **momento de rotación**: sobra la `ω`. La d es `L = I·ω` (RO8). Fuentes: `P26-16`, `P26-17` (sin clave). 2026, pregunta 2.
+
+---
+
+#### RO16 — Se tiene un mecanismo que tiene un determinado momento de rotación; si su aceleración angular aumenta y su momento de inercia no varía: `[DEDUCIDA · ⚠ ESPEJO DE RO7]`
+
+- ( ) a. La potencia disminuye.
+- ( ) b. La potencia se mantiene constante.
+- **(✓) c. La potencia aumenta.**
+- ( ) d. La potencia es independiente de la aceleración angular.
+
+> `P = T·ω = I·ω·α`: con `I` fijo, más `α` es más potencia. **Espejo de RO7**, que pregunta por el trabajo de rotación (oficial: aumenta); misma respuesta. La d contradice RO5 y RO6. Fuentes: `P26-16`, `P26-17` (sin clave). 2026, pregunta 3.
+
+---
+
+#### RO17 — La rodadura se puede interpretar como un giro alrededor de un eje instantáneo de rotación; dicho movimiento se puede interpretar como: `[DEDUCIDA]`
+
+- ( ) a. La combinación de un movimiento de rotación alrededor del punto de contacto y la traslación de este.
+- **(✓) b. La combinación de un movimiento de rotación alrededor de su centro de masa y la traslación de este.**
+- ( ) c. La combinación de un movimiento de rotación alrededor del punto de contacto y la traslación del centro de masa.
+
+> La rotación pura alrededor del punto de contacto equivale a **rotación alrededor del centro de masa + traslación del centro de masa**: `K = ½·I_CM·ω² + ½·M·v_CM²` (RO11). La a y la c mezclan los dos puntos de vista: si se gira alrededor del punto de contacto, no se suma traslación. Fuentes: `P26-16`, `P26-17` (sin clave). 2026, pregunta 4.
+
+---
+
+#### RO18 — Una polea que está girando con una velocidad angular, su cantidad de movimiento angular respecto del eje de giro: `[DEDUCIDA]`
+
+- **(✓) a. Es proporcional al momento de inercia respecto al eje de giro.**
+- ( ) b. Es proporcional al momento de inercia respecto a un eje perpendicular al eje de giro.
+- ( ) c. No existe proporcionalidad con el momento de inercia.
+
+> `L = I·ω`, con `I` respecto del mismo eje de giro (el momento de inercia "es función del eje con respecto al que se está moviendo", RO3). Fuentes: `P26-16`, `P26-17` (sin clave). 2026, pregunta 5.
+
+---
+
 ### Bloque MH — Máquinas-herramienta (procesos con arranque de viruta)
 
 > Casi todas preguntan lo mismo: **quién gira, quién avanza y en qué dirección**. Hay dos redacciones por máquina: la del campus 2021 y la del final viejo. Conviene estudiarlas de a pares.
@@ -281,7 +338,7 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ---
 
-#### MH2 — Entre las máquinas herramientas está el torno. Diga cómo es el movimiento relativo entre la pieza y la herramienta: `[ALUMNOS]`
+#### MH2 — Entre las máquinas herramientas está el torno. Diga cómo es el movimiento relativo entre la pieza y la herramienta: `[ALUMNOS · ★×2]`
 
 - ( ) a. La herramienta gira y la pieza se mueve en sentido longitudinal y transversal.
 - **(✓) b. La pieza gira y la herramienta se mueve en sentido longitudinal y transversal.**
@@ -289,6 +346,8 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 - ( ) d. La pieza y la herramienta giran simultáneamente.
 
 > Misma idea que MH1 en la redacción del final. La a describe una fresadora; la c, un taladro; la d, una rectificadora. Fuente: `FIN14`.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 11): textual.
 
 ---
 
@@ -315,13 +374,15 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ---
 
-#### MH5 — En una fresadora horizontal la herramienta y la pieza tienen los siguientes movimientos: `[ALUMNOS]`
+#### MH5 — En una fresadora horizontal la herramienta y la pieza tienen los siguientes movimientos: `[ALUMNOS · ★×2]`
 
 - **(✓) a. La herramienta gira y la pieza se mueve en un plano horizontal en sentido longitudinal y transversal.**
 - ( ) b. La pieza gira y la herramienta se mueve en un plano horizontal en sentido longitudinal y transversal.
 - ( ) c. La herramienta y la pieza giran conjuntamente en diferentes planos.
 
 > Apunte: "La fresa realiza el movimiento circular de corte. Los movimientos de avance y de aproximación son realizados por la pieza". La b es el torno. Fuente: `FIN14`.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 12): textual.
 
 ---
 
@@ -336,13 +397,15 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ---
 
-#### MH7 — En una alesadora el movimiento de la herramienta y la pieza son: `[ALUMNOS]`
+#### MH7 — En una alesadora el movimiento de la herramienta y la pieza son: `[ALUMNOS · ★×2]`
 
 - ( ) a. La herramienta está fija y la pieza gira.
 - **(✓) b. La herramienta gira y la pieza se mueve en un plano horizontal.**
 - ( ) c. La herramienta y la pieza giran en diferentes planos.
 
 > Coincide con el apunte: "la herramienta arranca la viruta según una trayectoria circular; pero el movimiento de avance (rectilíneo y constante) lo tiene la pieza". No contradice a MH6: en las dos la herramienta gira y la pieza no. Fuente: `FIN14`.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 14): textual.
 
 ---
 
@@ -357,7 +420,7 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ---
 
-#### MH9 — En un proceso de rectificado cilíndrico los movimientos son los siguientes: `[ALUMNOS · ★×2]`
+#### MH9 — En un proceso de rectificado cilíndrico los movimientos son los siguientes: `[ALUMNOS · ★×3]`
 
 - ( ) a. Rotación de la herramienta con la pieza fija.
 - ( ) b. Rotación de la pieza con la herramienta fija.
@@ -365,6 +428,8 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 - ( ) d. Movimiento longitudinal de la pieza y la herramienta, sin movimiento de rotación.
 
 > Redacción del final de la misma pregunta MH8. Fuentes: `FIN14`, `F23`.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 19): textual.
 
 ---
 
@@ -379,13 +444,15 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ---
 
-#### MH11 — En un proceso de brochado se obtienen piezas: `[ALUMNOS · ★×2]`
+#### MH11 — En un proceso de brochado se obtienen piezas: `[ALUMNOS · ★×3]`
 
 - ( ) a. En forma lenta y de baja calidad superficial.
 - ( ) b. En forma rápida y de baja calidad superficial.
 - **(✓) c. En forma rápida y de alta calidad superficial.**
 
 > Apunte: "Mediante el brochado se consiguen, con poco tiempo de mecanizado, piezas de dimensiones exactas y de elevada calidad superficial". Fuentes: `FIN14`, `F23`.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 20): textual.
 
 ---
 
@@ -400,13 +467,15 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ---
 
-#### MH13 — En una cepilladora el movimiento de la pieza respecto de la herramienta es: `[ALUMNOS · ★×2]`
+#### MH13 — En una cepilladora el movimiento de la pieza respecto de la herramienta es: `[ALUMNOS · ★×3]`
 
 - **(✓) a. En un plano perpendicular a la herramienta en forma longitudinal y transversal.**
 - ( ) b. En un plano paralelo a la herramienta.
 - ( ) c. No hay movimiento relativo entre la pieza y la herramienta.
 
 > Redacción del final de MH12: mismos dos movimientos (longitudinal y transversal). La c es absurda: sin movimiento relativo no hay corte. Fuentes: `FIN14`, `F23`.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 17): textual.
 
 ---
 
@@ -420,7 +489,7 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ---
 
-#### MH15 — En una limadora el movimiento del torpedo, que imprime el movimiento al porta herramienta, es producido por: `[OFICIAL · ★×2]`
+#### MH15 — En una limadora el movimiento del torpedo, que imprime el movimiento al porta herramienta, es producido por: `[OFICIAL · ★×3]`
 
 - ( ) Un engranaje (volante) sin biela.
 - ( ) Un engranaje (volante) con una cremallera.
@@ -428,16 +497,20 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 - **(✓) Un engranaje (volante) con una biela excéntrica.**
 
 > El giro del volante se convierte en vaivén del torpedo con una biela tomada fuera del centro (excéntrica). El apunte lo llama "biela oscilante de corredera". Con la biela "fija en su centro" no habría carrera. Fuentes: `CV21` (clave), `F23`.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 16), con otras opciones: "a. Una corona que gira, una biela que pivotea y una manivela con una unión excéntrica a la corona" (✓) · "b. … una biela que pivotea sin excéntrica" · "c. … una excéntrica unida a esta sin biela".
 
 ---
 
-#### MH16 — En una limadora el movimiento de la herramienta se lo da el torpedo; este tiene un movimiento: `[★×2 · ⚠ RESPUESTA EN DUDA]`
+#### MH16 — En una limadora el movimiento de la herramienta se lo da el torpedo; este tiene un movimiento: `[★×3 · ⚠ RESPUESTA EN DUDA]`
 
 - **(✓ recomendada) a. Longitudinal en sentido de avance y retroceso.**
 - ( ) b. Longitudinal y en un solo sentido. ← la que marcó el alumno en `FIN14`
 - ( ) c. Circular.
 
 > **Conflicto.** El final resuelto `FIN14` tiene marcada la b. Pero el apunte de cátedra describe el movimiento del torpedo como "movimiento de ida y vuelta del carro de la limadora", con "carrera de trabajo" y "carrera de vacío (retroceso)", y la clave oficial de MH14 presupone que el retroceso existe. Lo que ocurre en un solo sentido es el **corte**, no el movimiento del torpedo. Recomendación: **a**. Es la pregunta 5 del formulario `F23`: al enviarlo se ve la clave y se puede salir de la duda. Fuentes: `FIN14`, `F23`.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 15): textual. Sigue sin clave.
 
 ---
 
@@ -462,13 +535,25 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ---
 
-#### MH19 — El proceso de amortajado, la herramienta: `[ALUMNOS · ★×2]`
+#### MH19 — El proceso de amortajado, la herramienta: `[ALUMNOS · ★×3]`
 
 - **(✓) a. Tiene un movimiento vertical alternativo.**
 - ( ) b. Tiene un movimiento rotatorio.
 - ( ) c. Tiene un movimiento horizontal paralelo a la mesa donde se fija la pieza.
 
 > Redacción del final de MH18. La c describe la limadora. Fuentes: `FIN14`, `F23`.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 21): textual.
+
+---
+
+#### MH20 — En una fresadora vertical: `[DEDUCIDA · ⚠ CONFIANZA MEDIA]`
+
+- **(✓) a. La herramienta gira en un plano paralelo al desplazamiento de la pieza.**
+- ( ) b. La herramienta gira en un plano perpendicular al desplazamiento de la pieza.
+- ( ) c. La herramienta está fija y la pieza gira en un plano paralelo.
+
+> Husillo vertical: la fresa gira en un plano horizontal y la mesa lleva la pieza en un plano horizontal, así que son paralelos. Es el fresado frontal de MH4 (oficial: eje de giro perpendicular al plano de avance). La b es la fresadora horizontal; la c es falsa (en la fresadora gira la herramienta). Confianza media por el antecedente de MH3, de clave contraintuitiva. Fuentes: `P26-16`, `P26-17` (sin clave). 2026, pregunta 13.
 
 ---
 
@@ -488,17 +573,19 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ---
 
-#### SV2 — En una pieza obtenida por fundición, esta es producto de un proceso de armado de un molde. Diga cuál de las características o resultados siguientes NO se corresponde con la pieza terminada: `[ALUMNOS · ★×2]`
+#### SV2 — En una pieza obtenida por fundición, esta es producto de un proceso de armado de un molde. Diga cuál de las características o resultados siguientes NO se corresponde con la pieza terminada: `[ALUMNOS · ★×3 · ⚠ EN 2026 SIN EL "NO"]`
 
 - ( ) a. Fragilidad.
 - **(✓) b. No se necesita ninguna acción posterior.**
 - ( ) c. El molde de tierra arcillosa no puede volver a utilizarse.
 
 > La pregunta pide la **falsa**. La pieza fundida es frágil (a, verdadera) y el molde de arena es "molde perdido": se rompe para sacar la pieza (c, verdadera). Lo que no es cierto es que salga lista: después vienen el desbarbado, la limpieza y, muchas veces, mecanizado o tratamiento térmico. En el final las opciones se combinaban además en "I) a y b · II) a y c · III) b y c"; el alumno marcó la b sola. Fuentes: `FIN14`, `F23`.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 18): mismas opciones **sin el "NO"**: pide la que **sí** se corresponde con la pieza terminada. Respuesta: **a. Fragilidad** (deducida). La c también es verdadera, pero habla del molde, no de la pieza; la b sigue siendo falsa. El escaneo del Tema 17 confirma que el "NO" no estaba. Detalle en [examen_2026](examen_2026/examen_2026.md).
 
 ---
 
-#### SV3 — En el laminado de un metal, la deformación se produce por la acción de dos rodillos con una determinada separación. La deformación producida en la barra es: `[OFICIAL · ★×2]`
+#### SV3 — En el laminado de un metal, la deformación se produce por la acción de dos rodillos con una determinada separación. La deformación producida en la barra es: `[OFICIAL · ★×3]`
 
 - ( ) Solo en la altura de la misma.
 - **(✓) En altura, longitudinal y transversalmente.**
@@ -506,6 +593,8 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 - ( ) En altura y longitudinalmente.
 
 > Apunte, textual: "se producen tres tipos de deformaciones: por aplastamiento o de la altura de la barra; transversal o ensanchamiento; longitudinal o alargamiento". Fuentes: `CV21` (clave), `F23`.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 22), con otra redacción: "El principio del laminado consta de deformaciones…"; respuesta "Vertical, transversal y longitudinal", contra "Transversal, longitudinal" · "Aplastamiento y alargamiento" · "Vertical, longitudinal y torsional".
 
 ---
 
@@ -520,7 +609,7 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ---
 
-#### SV5 — El proceso de sinterizado está basado en la metalurgia de polvos; estos deben tener ciertas características, entre las cuales se encuentran capacidad de compresión, capacidad de fundirse y: `[DEDUCIDA]`
+#### SV5 — El proceso de sinterizado está basado en la metalurgia de polvos; estos deben tener ciertas características, entre las cuales se encuentran capacidad de compresión, capacidad de fundirse y: `[DEDUCIDA · ★×2]`
 
 - ( ) a) Forma y tamaño de la partícula del polvo.
 - ( ) b) Capacidad para fluir libremente.
@@ -531,10 +620,12 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
   - ( ) 3) "c" y "d".
 
 > El apunte enumera lo que hay que considerar del polvo: "forma de la partícula · tamaño de la partícula · su capacidad para fluir libremente · capacidad de compresión · su capacidad de sinterizado (fundirse o unirse)". El enunciado ya nombra las dos últimas; faltan forma y tamaño (a) y fluir libremente (b). De solidificación no dice nada. Fuente: `F23` (sin clave).
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 24): textual.
 
 ---
 
-#### SV6 — El proceso de estampa en frío se utiliza para la obtención de piezas de formas variadas. Esta produce piezas de: `[DEDUCIDA]`
+#### SV6 — El proceso de estampa en frío se utiliza para la obtención de piezas de formas variadas. Esta produce piezas de: `[DEDUCIDA · ★×2]`
 
 - ( ) a. Baja dureza.
 - **(✓) b. Alta dureza.**
@@ -542,10 +633,12 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 - ( ) d. Frágil.
 
 > Apunte, textual: "Esta deformación en frío genera en el material el fenómeno de acritud. Se obtiene una pieza con una alta dureza". Fuente: `F23` (sin clave).
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 23): textual ("estampado en frío").
 
 ---
 
-#### SV7 — El proceso de repujado se utiliza para la obtención de piezas: `[DEDUCIDA · ⚠ CONFIANZA MEDIA]`
+#### SV7 — El proceso de repujado se utiliza para la obtención de piezas: `[DEDUCIDA · ★×2 · ⚠ CONFIANZA MEDIA]`
 
 - ( ) a. Poco profundas y de gran espesor.
 - ( ) b. Profundas y de gran espesor.
@@ -558,16 +651,20 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 ### Bloque CA — Ingeniería de control automático
 
 > Todo sale del apunte "Ingeniería del control automático" (ciclo 2018). Vocabulario mínimo: `r` entrada de referencia · `c` variable controlada · `e` señal actuadora (o de error) · `G(p)` elementos de control · `H(p)` elementos de realimentación. Relaciones: `e = r − c` (comparador) y `c = G(p)·e`.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 25): textual. Sigue sin clave.
 
 ---
 
-#### CA1 — En la ingeniería del control automático, si analizamos un lazo, diga cuál de las siguientes corresponde a un comparador: `[ALUMNOS · ★×2]`
+#### CA1 — En la ingeniería del control automático, si analizamos un lazo, diga cuál de las siguientes corresponde a un comparador: `[ALUMNOS · ★×3]`
 
 - ( ) a. El comparador multiplica la señal de referencia con la señal realimentada.
 - **(✓) b. El comparador resta de la señal de referencia la señal realimentada.**
 - ( ) c. El comparador resta de la señal de referencia con la señal actuante.
 
 > Apunte, textual: "El comparador resta de la señal de referencia 'r' la señal realimentada 'c' que produce la señal actuante 'e'". `e = r − c`. En la c, la señal actuante aparece como lo que se resta, cuando en realidad es el resultado. Fuentes: `COMP`, `F23`.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 9), con otra redacción: "el comparador realiza una operatoria entre:" → "La señal de referencia y la señal realimentada" (✓), contra "referencia y error" y "realimentada y error".
 
 ---
 
@@ -632,7 +729,7 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ---
 
-#### CA8 — Un servomecanismo es un tipo particular de sistema de control realimentado en el que… `[OFICIAL · ★×3]`
+#### CA8 — Un servomecanismo es un tipo particular de sistema de control realimentado en el que… `[OFICIAL · ★×4]`
 
 - ( ) La entrada de referencia se mantiene fija.
 - ( ) La variable controlada se mantiene fija durante períodos de tiempo largos.
@@ -640,6 +737,8 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 - **(✓) La variable controlada es la posición de un elemento mecánico.**
 
 > Definición del apunte; ejemplo: "la posición angular de un eje (regulación de entrada de aire de un quemador)". **Par con CA9:** el distractor de cada una es la respuesta de la otra. Fuentes: `CV21` (clave), `COMP`, `F23`.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 8), con otra redacción ("donde la variable controlada:") y tres opciones; el distractor a es la definición de regulador (CA9).
 
 ---
 
@@ -654,13 +753,15 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ---
 
-#### CA10 — En un sistema realimentado, la señal actuadora y la variable controlada se relacionan por: `[DEDUCIDA]`
+#### CA10 — En un sistema realimentado, la señal actuadora y la variable controlada se relacionan por: `[DEDUCIDA · ★×2]`
 
 - ( ) a. Suma.
 - **(✓) b. Producto.**
 - ( ) c. Suma y producto.
 
 > Apunte: "la relación entre la señal actuadora 'e' […] y la variable controlada 'c' se expresa por la siguiente ecuación: C = G(p)·e […]. El rectángulo representa una multiplicación". La suma (el círculo) es del comparador y relaciona otras señales: referencia, realimentación y señal actuadora. Fuente: `F23` (sin clave).
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 7), con opciones largas: "Se relaciona a través de una función de transferencia por medio de un producto" (✓).
 
 ---
 
@@ -698,19 +799,42 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ---
 
-### Bloque EM — Elementos de máquinas
+#### CA14 — En un sistema de control realimentado un termostato es un ejemplo típico de este. La variable controlada: `[DEDUCIDA]`
 
-> Lo único que apareció de este tema en las fuentes son las cinco preguntas de roscas del formulario 2023, que no trae clave. Las respuestas salen del apunte de la Unidad IX y coinciden con el resumen manuscrito `R23` ("Whitworth 55° · métrica 60° · paso: distancia entre dos crestas sucesivas"). De árboles, ejes, cojinetes, chavetas y engranajes no hay ninguna pregunta real: ver [sugeridas](preguntas_sugeridas_parcial_2.md).
+- **(✓) a. Se compara con la entrada de referencia.**
+- ( ) b. La entrada de referencia no se compara con la variable controlada.
+- ( ) c. No está relacionada con la señal de error.
+- ( ) d. Todas son falsas.
+
+> Apunte: en un sistema realimentado la variable controlada es "realimentada y comparada con la entrada de referencia". La b es lazo abierto; la c es falsa porque `e = r − c`. Fuentes: `P26-16`, `P26-17` (sin clave). 2026, pregunta 6.
 
 ---
 
-#### EM1 — En una rosca, el paso es: `[DEDUCIDA]`
+#### CA15 — En un sistema de control de lazo cerrado, la transformación de la señal para que pueda ser introducida en el comparador se realiza: `[DEDUCIDA]`
+
+- **(✓) a. Mediante una función de transferencia introducida en la realimentación.**
+- ( ) b. Mediante una función de transferencia introducida a continuación del elemento de control.
+- ( ) c. Mediante una función de transferencia inmediatamente a continuación del comparador.
+
+> Apunte: si la variable controlada no es de la misma naturaleza que la referencia, se agregan **elementos de realimentación `H(p)`** y al comparador llega `b = H(p)·c`. La c es la posición de `G(p)`. Fuentes: `P26-16`, `P26-17` (sin clave). 2026, pregunta 10.
+
+---
+
+### Bloque EM — Elementos de máquinas
+
+> Roscas (EM1 a EM5): las cinco del formulario 2023, sin clave; las respuestas salen del apunte de la Unidad IX y coinciden con el resumen manuscrito `R23` ("Whitworth 55° · métrica 60° · paso: distancia entre dos crestas sucesivas"). Tres salieron en 2026. Árboles y ejes (EM6 a EM11): todas de 2026. Las de gorrón, cabeza y eje siguen casi textual el [apunte web de árboles y ejes](https://calculosmaquinasyelementos.blogspot.com/p/manuales_22.html), que divide el árbol en gorrones, cuellos y cabezas. De cojinetes, chavetas y correas sigue sin haber preguntas reales: ver [sugeridas](preguntas_sugeridas_parcial_2.md).
+
+---
+
+#### EM1 — En una rosca, el paso es: `[DEDUCIDA · ★×2]`
 
 - ( ) a. Altura del filete.
 - **(✓) b. Distancia entre filetes.**
 - ( ) c. Radio de los filetes.
 
 > Apunte: "Paso de la rosca: distancia que hay entre dos crestas sucesivas". Fuente: `F23` (sin clave), `R23`.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 28), con otras opciones: "La distancia entre los centros de dos filetes consecutivos" (✓) · "La altura del filete" · "El radio de acuerdo del filete".
 
 ---
 
@@ -736,7 +860,7 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ---
 
-#### EM4 — En una rosca métrica el ángulo del cono de la hélice es: `[DEDUCIDA]`
+#### EM4 — En una rosca métrica el ángulo del cono de la hélice es: `[DEDUCIDA · ★×2]`
 
 - ( ) a. 55°
 - **(✓) b. 60°**
@@ -744,10 +868,12 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 - ( ) d. 50°
 
 > El perfil de la rosca métrica ISO es un triángulo de 60°. Fuente: `F23` (sin clave), `R23`.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 26): textual.
 
 ---
 
-#### EM5 — En una rosca Whitworth el ángulo del cono de la hélice es: `[DEDUCIDA]`
+#### EM5 — En una rosca Whitworth el ángulo del cono de la hélice es: `[DEDUCIDA · ★×2]`
 
 - **(✓) a. 55°**
 - ( ) b. 60°
@@ -758,9 +884,144 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 
 ---
 
+#### EM6 — En los elementos de máquinas el árbol se define como: `[DEDUCIDA · ⚠ DUDOSA ENTRE a Y b]`
+
+- **(✓ recomendada) a. Aquellos que transmiten fuerza motriz si las cargas que soportan son de gran magnitud.**
+- ( ) b. Aquellos que transmiten fuerza motriz si las cargas que soportan son de pequeña magnitud.
+- ( ) c. Aquellos que no transmiten potencia y soportan cargas.
+- ( ) d. Aquellos que solo transmiten movimiento.
+
+> El árbol transmite potencia: la c es el eje (EM7) y la d dice "solo" cuando además soporta flexión y torsión. Sobre la magnitud de las cargas no dicen nada ni la Unidad X ni el [apunte web de árboles y ejes](https://calculosmaquinasyelementos.blogspot.com/p/manuales_22.html) ("Árboles: transmiten, en general, fuerza motriz desde un punto a otro"). Se recomienda la a porque la Unidad X insiste en que el árbol soporta "el peso de la máquina" y transmite "grandes momentos de giro". Candidata a dejar en blanco. Fuentes: `P26-17`; del `P26-16` solo se vio el enunciado.
+
+---
+
+#### EM7 — En los elementos de máquinas el eje se define como: `[DEDUCIDA]`
+
+- **(✓) a. Aquellos que soportan cargas sin transmitir potencia.**
+- ( ) b. Aquellos que transmiten potencia y soportan grandes cargas.
+- ( ) c. Aquellos solo transmiten potencia.
+
+> Casi textual al [apunte web de árboles y ejes](https://calculosmaquinasyelementos.blogspot.com/p/manuales_22.html): "Ejes: soportan cargas, sin transmitir potencia". Unidad X: el eje "puede girar libremente o no, pero no transmite movimiento". Fuente: `P26-17` (sin clave; del Tema 16 no hubo foto de esta pregunta).
+
+---
+
+#### EM8 — En los árboles o ejes el gorrón es: `[DEDUCIDA]`
+
+- ( ) a. La zona central donde se montan las cargas.
+- **(✓) b. La zona de apoyo sobre los cojinetes de los soportes.**
+- ( ) c. La zona que media entre los soportes y la parte central.
+
+> [apunte web de árboles y ejes](https://calculosmaquinasyelementos.blogspot.com/p/manuales_22.html): "Gorrones: zona de trabajo de los rodamientos o cojinetes". La Unidad X lo usa igual ("el gorrón del árbol y la superficie de rodadura del soporte"). La c es el cuello ("zonas intermedias que vinculan las anteriores"). Fuente: `P26-17` (sin clave; del Tema 16 no hubo foto de esta pregunta).
+
+---
+
+#### EM9 — En los árboles o ejes la cabeza es: `[DEDUCIDA]`
+
+- **(✓) a. La zona donde se montan los órganos de transmisión (ruedas dentadas, poleas, etc.).**
+- ( ) b. La zona de apoyo sobre los cojinetes.
+- ( ) c. La zona de unión entre los gorrones y los cojinetes.
+
+> Casi textual al [apunte web de árboles y ejes](https://calculosmaquinasyelementos.blogspot.com/p/manuales_22.html): "Cabezas: lugar donde van montados los órganos de transmisión (engranajes, poleas, etc.)". La b es el gorrón (EM8). Fuente: `P26-17` (sin clave; del Tema 16 no hubo foto de esta pregunta).
+
+---
+
+#### EM10 — En los árboles y ejes, debido a las pequeñas excentricidades que puedan existir, se generan fuerzas centrífugas que actúan como cargas que flexionan el árbol. Debido a este fenómeno se establece la velocidad crítica de un sistema dado, que se va a relacionar de la siguiente manera: `[DEDUCIDA]`
+
+- **(✓) a. Proporcional a la constante elástica del sistema e inversamente proporcional a la masa.**
+- ( ) b. Inversamente proporcional a la constante elástica del sistema y proporcional a la masa.
+- ( ) c. Directamente proporcional a la constante elástica del sistema y a la masa.
+- ( ) d. Directamente proporcional a la masa y a la flecha.
+
+> Velocidad crítica = frecuencia natural de flexión: `ω_c = √(k/m)` ("proporcional" en sentido amplio: a la raíz). La d es al revés: con la flecha estática `δ = m·g/k`, `ω_c = √(g/δ)` baja si la flecha crece. Fuente: `P26-17` (sin clave; del Tema 16 no hubo foto de esta pregunta).
+
+---
+
+#### EM11 — En los elementos de máquinas los husillos se utilizan en máquinas herramientas, estos son: `[DEDUCIDA · ⚠ CONFIANZA MEDIA]`
+
+- ( ) a. Árboles largos con cierta flexibilidad.
+- **(✓) b. Árboles cortos de gran rigidez.**
+- ( ) c. Árboles cortos con cierta flexibilidad.
+- ( ) d. Árboles largos de gran rigidez.
+
+> El husillo lleva la pieza (torno) o la herramienta (fresadora, taladro): corto y muy rígido, porque cualquier flexión se copia en la pieza como error de forma. No lo definen ni el apunte ni el apunte web. Fuente: `P26-17` (sin clave; del Tema 16 no hubo foto de esta pregunta).
+
+---
+
+### Bloque TE — Teoría del engrane
+
+> Las primeras preguntas reales de engranajes aparecieron en 2026: ninguna fuente vieja traía una. Todas son deducidas de la Unidad X y de la teoría general del engrane. Teoría de apoyo: bloque `S-TE` de [sugeridas](preguntas_sugeridas_parcial_2.md).
+
+---
+
+#### TE1 — En la teoría del engrane dos superficies conjugadas son: `[DEDUCIDA]`
+
+- ( ) a. Aquellas donde una superficie S1 es proporcional a otra superficie S2.
+- **(✓) b. Aquellas donde una superficie S1 envuelve a otra S2.**
+- ( ) c. Aquellas donde dos superficies están en contacto ortogonalmente.
+- ( ) d. Aquellas que se conjugan solo a través de un determinado valor de velocidad.
+
+> Una es la **envolvente** de las posiciones sucesivas de la otra en el movimiento relativo: siempre tangentes, con relación de velocidades constante. La c es falsa (tangentes, no ortogonales). Fuentes: `P26-16`, `P26-17` (sin clave). 2026, pregunta 29.
+
+---
+
+#### TE2 — En una rueda dentada las superficies conjugadas están limitadas por: `[DEDUCIDA · ⚠ CONFIANZA MEDIA]`
+
+- **(✓) a. El cilindro de cabeza y el cilindro de raíz.**
+- ( ) b. El cilindro de cabeza y el cilindro primitivo.
+- ( ) c. El cilindro primitivo y el cilindro de raíz.
+- ( ) d. El cilindro primitivo y la corona.
+
+> Las superficies conjugadas son los flancos, del pie (raíz) a la cabeza. La b es solo el adendum y la c solo el dedendum. Confianza media: en rigor la evolvente arranca en el cilindro base, que ninguna opción nombra. Fuentes: `P26-16`, `P26-17` (sin clave). 2026, pregunta 30.
+
+---
+
+#### TE3 — En una rueda dentada el movimiento completo (360°) se puede transmitir: `[DEDUCIDA]`
+
+- ( ) a. A través de un solo par de superficies conjugadas.
+- ( ) b. A través de dos pares de superficies conjugadas.
+- **(✓) c. A través de varios pares de superficies conjugadas igualmente espaciadas.**
+- ( ) d. A través de varios pares de superficies conjugadas diferentemente espaciadas.
+
+> Cada par de flancos actúa solo durante el arco de acción; para la vuelta completa se relevan muchos dientes, a paso constante (mismo módulo en las dos ruedas). Fuentes: `P26-16`, `P26-17` (sin clave). 2026, pregunta 31.
+
+---
+
+#### TE4 — En una rueda dentada se denomina paso del dentado al: `[DEDUCIDA]`
+
+- ( ) a. Arco de circunferencia de cabeza comprendido entre los ejes de simetría de dos dientes consecutivos.
+- **(✓) b. Arco de circunferencia primitiva comprendido entre los ejes de simetría de dos dientes consecutivos.**
+- ( ) c. Arco de circunferencia primitiva comprendido entre los flancos de un mismo diente.
+- ( ) d. Arco de circunferencia de raíz comprendido entre los ejes de simetría de dos dientes consecutivos.
+
+> Unidad X: el paso circular es "la longitud de la circunferencia **primitiva** correspondiente a un diente y un vano consecutivos" (`t = π·M`). La c es el espesor del diente. Fuentes: `P26-16`, `P26-17` (sin clave). 2026, pregunta 32.
+
+---
+
+#### TE5 — En el sistema métrico el módulo de una rueda dentada tiene la siguiente definición (D: diámetro exterior; t: paso; Z: número de dientes; M: módulo): `[DEDUCIDA]`
+
+- **(✓) a. `M = t/π`**
+- ( ) b. `M = Z/D`
+- ( ) c. `M = π/t`
+
+> De `t = π·M` sale `M = t/π`. La otra definición es `M = Dp/Z` (diámetro primitivo); la b está invertida y usa el exterior. La c es el *diametral pitch* (TE6). Fuentes: `P26-16`, `P26-17` (sin clave). 2026, pregunta 33.
+
+---
+
+#### TE6 — En el sistema inglés el Pitch (paso) se mide en pulgadas y se define como: `[DEDUCIDA]`
+
+- ( ) a. `π/z`
+- **(✓) b. `π/t`**
+- ( ) c. `π/D`
+
+> *Diametral pitch* = dientes por pulgada de diámetro primitivo: `P = Z/Dp = π/t` (con `t` en pulgadas); equivale a `P = 25,4/M` con `M` en mm. Fuentes: `P26-16`, `P26-17` (sin clave). 2026, pregunta 34.
+
+---
+
 ### Bloque PI — Marcas, patentes y derecho de autor
 
 > Tres de estas cuatro ya estaban en el banco del 1er parcial (J1, J2, J3). Se repiten acá completas porque el tema está anunciado para este parcial; la de marcas es nueva.
+>
+> **2026** (`P26-16` y `P26-17`, pregunta 27), con otros distractores: 53° y 57° en vez de 65° y 50°.
 
 ---
 
@@ -1262,12 +1523,13 @@ Dato nuevo, del encabezado del final Tema 14 (32 preguntas): *"para aprobar este
 | Momento de inercia | `I = Σ m·r²` — depende del eje y de cómo está distribuida la masa; **no** de `ω` | RO3 |
 | Ejes paralelos | `I = I_CM + M·h²` | RO12 |
 | Energía cinética de rotación | `K = ½·I·ω²` | RO1 |
-| Cantidad de movimiento angular | `L = I·ω` (partícula: `L = r × p`) | RO8, RO10 |
+| Cantidad de movimiento angular | `L = I·ω` (partícula: `L = r × p`) | RO8, RO10, RO18 |
+| Momento de rotación | `T = I·α` | RO15 |
 | Ley fundamental | `T_ext = dL/dt` | RO9 |
 | Conservación (`T_ext = 0`) | `L = cte` → `I₁·ω₁ = I₂·ω₂` | RO4, RO9 |
 | Trabajo de rotación | `dW = T·dθ` → `W = T·(θ₂ − θ₁)` | RO7 |
-| Potencia | `P = T·ω = I·ω·α` (análoga a `P = F·v`) | RO2, RO5, RO6 |
-| Rodadura | `K = ½·I_CM·ω² + ½·M·v_CM² = ½·I_P·ω²` (`P` = punto de contacto) | RO11, RO12 |
+| Potencia | `P = T·ω = I·ω·α` (análoga a `P = F·v`) | RO2, RO5, RO6, RO16 |
+| Rodadura | `K = ½·I_CM·ω² + ½·M·v_CM² = ½·I_P·ω²` (`P` = punto de contacto): rotación sobre el CM + traslación del CM | RO11, RO12, RO17 |
 | Precesión | `T = ωp × L` · `ωp = T / (L·sen θ) = r·m·g / L` | RO13, RO14 |
 
 En la rodadura, el punto de contacto tiene velocidad 0, el centro `v_CM` y el punto superior `2·v_CM`.
@@ -1279,7 +1541,7 @@ En la rodadura, el punto de contacto tiene velocidad 0, el centro `v_CM` y el pu
 | Máquina | Movimiento de corte | Avance | Frase de examen |
 |---|---|---|---|
 | **Torno** | La **pieza** gira | Herramienta: longitudinal y transversal | "La pieza gira y la herramienta se mueve en sentido longitudinal y transversal" |
-| **Fresadora** | La **fresa** gira | Pieza: plano horizontal, longitudinal y transversal | Cilíndrico: eje paralelo a la superficie → "a) y b)". Frontal: eje perpendicular al plano de avance |
+| **Fresadora** | La **fresa** gira | Pieza: plano horizontal, longitudinal y transversal | Cilíndrico: eje paralelo a la superficie → "a) y b)". Frontal: eje perpendicular al plano de avance. Vertical: la fresa gira en un plano paralelo al desplazamiento de la pieza |
 | **Alesadora** | La **herramienta** gira | Pieza (no gira): se desplaza en un plano horizontal | "La pieza fija y la herramienta girando" |
 | **Rectificadora cilíndrica** | **Muela y pieza** giran | Longitudinal | "Rotación de la pieza y la herramienta combinado con un movimiento longitudinal" |
 | **Brochadora** | La **brocha**, rectilíneo | Lo dan los filos, de dimensiones crecientes | "En forma rápida y de alta calidad superficial" |
@@ -1293,7 +1555,7 @@ Cepillado, limado y amortajado: herramienta de un solo filo que corta solo en la
 
 | Proceso | Qué es | Dato de examen |
 |---|---|---|
-| Fundición en arena | Molde perdido de tierra con arcilla | Compactación media + agujereado para gases · la pieza necesita acciones posteriores |
+| Fundición en arena | Molde perdido de tierra con arcilla | Compactación media + agujereado para gases · la pieza necesita acciones posteriores · la pieza es frágil |
 | Laminado | Deformación plástica entre dos cilindros | Tres deformaciones: altura, transversal y longitudinal |
 | Estampado en frío | Deformación entre dos estampas, a presión | Acritud → alta dureza |
 | Repujado | Conformado de chapa sobre torno | Piezas profundas y de bajo espesor |
@@ -1318,7 +1580,8 @@ Cepillado, limado y amortajado: herramienta de un solo filo que corta solo en la
 | Entrada de referencia `r` | El valor deseado (en el termostato, la posición del dial) |
 | Variable controlada `c` | El valor verdadero (la temperatura real) |
 | Señal actuadora `e` | La señal de error que acciona los elementos de control |
-| Lazo cerrado | La variable controlada se realimenta y se compara con la referencia |
+| Lazo cerrado | La variable controlada se realimenta y se compara con la referencia (termostato) |
+| Elementos de realimentación `H(p)` | Transforman la variable controlada para que se pueda comparar con la referencia: `b = H(p)·c` |
 | Lazo abierto | No hay comparador; cada ajuste fija una posición de los elementos de control |
 | Servomecanismo | La variable controlada es la **posición** de un elemento mecánico |
 | Regulador | La entrada de referencia se mantiene **fija** durante períodos largos |
@@ -1338,7 +1601,7 @@ En todos los bloques entra la fuerza (o la cupla) y sale el desplazamiento (o el
 
 Analogía mecánico-eléctrica de Abud: resorte = inductancia · amortiguador = resistencia · masa = capacitancia.
 
-### Bloques EM y PI
+### Bloques EM, TE y PI
 
 | Rosca | Ángulo | Cómo se expresa el paso |
 |---|---|---|
@@ -1346,6 +1609,24 @@ Analogía mecánico-eléctrica de Abud: resorte = inductancia · amortiguador = 
 | Whitworth (inglesa) | 55° | En hilos (filetes) por pulgada |
 
 Paso = distancia entre dos crestas (filetes) sucesivas.
+
+| Árboles y ejes | Definición de examen |
+|---|---|
+| Árbol | Transmite potencia (fuerza motriz); trabaja a flexión y torsión |
+| Eje | Soporta cargas sin transmitir potencia; trabaja a flexión |
+| Gorrón | Zona de apoyo sobre los cojinetes |
+| Cabeza | Zona donde se montan los órganos de transmisión (ruedas dentadas, poleas) |
+| Cuello | Zona intermedia entre las anteriores |
+| Husillo | Árbol corto de gran rigidez (máquinas-herramienta) |
+| Velocidad crítica | `ω_c = √(k/m)`: crece con la rigidez, baja con la masa |
+
+| Engranajes | Definición de examen |
+|---|---|
+| Superficies conjugadas | Una envuelve a la otra; en la rueda, limitadas por los cilindros de cabeza y de raíz |
+| Movimiento de 360° | Varios pares de superficies conjugadas igualmente espaciadas |
+| Paso | Arco de circunferencia **primitiva** entre ejes de dos dientes consecutivos: `t = π·M` |
+| Módulo | `M = t/π = Dp/Z` |
+| *Diametral pitch* | `P = π/t = Z/Dp` (dientes por pulgada) |
 
 | Derecho | Duración (respuesta de examen) | Renovable |
 |---|---|---|
@@ -1367,60 +1648,80 @@ Paso = distancia entre dos crestas (filetes) sucesivas.
 | RO5 | Función de momento de inercia, velocidad y aceleración angular | `P = I·ω·α` | Oficial ★×3 |
 | RO6 | Dependiente de la variación de su velocidad angular | `α = dω/dt` | Oficial ★×2 |
 | RO7 | El trabajo de rotación aumenta | `dW = I·α·dθ` | Oficial ★×2 |
-| RO8 | Producto del momento de inercia y la velocidad angular | `L = I·ω` | Oficial ★×3 |
+| RO8 | Producto del momento de inercia y la velocidad angular | `L = I·ω` | Oficial ★×4 |
 | RO9 | Se mantiene constante | `T_ext = 0` → `L = cte` | Oficial ★×2 |
 | RO10 | Función de `I`, `ω`, la masa, la velocidad `V` y `R` | `L = I·ω + m·v·R` | Oficial |
 | RO11 | `I` respecto del centro de masa y velocidad del centro de masa | Energía cinética → CM | Oficial |
 | RO12 | `I` respecto del punto de contacto | Eje instantáneo → contacto | Oficial |
 | RO13 | Plano perpendicular al formado por `ωp` y `L` | `T = ωp × L` | Oficial |
 | RO14 | La velocidad de precesión disminuye | `ωp = T / (L·sen θ)` | Oficial |
+| RO15 | Función del producto de `I` y `α` | Momento de rotación: `T = I·α` (espejo de RO5) | Deducida |
+| RO16 | La potencia aumenta | `P = I·ω·α` (espejo de RO7) | Deducida |
+| RO17 | Rotación alrededor del centro de masa + traslación de este | Rodadura | Deducida |
+| RO18 | Proporcional a `I` respecto del eje de giro | Polea: `L = I·ω` | Deducida |
 | **Bloque MH** | | | |
 | MH1 | Longitudinal y transversal | Avance de la herramienta del torno | Oficial ★×2 |
-| MH2 | La pieza gira y la herramienta se mueve long. y transv. | Torno | Alumnos |
+| MH2 | La pieza gira y la herramienta se mueve long. y transv. | Torno | Alumnos ★×2 |
 | MH3 | a) y b) son correctas | Fresado cilíndrico — memorizar | Oficial ★×2 |
 | MH4 | Perpendicular al plano de avance de la pieza | Fresado frontal | Oficial ★×2 |
-| MH5 | La herramienta gira y la pieza se mueve en un plano horizontal, long. y transv. | Fresadora horizontal | Alumnos |
+| MH5 | La herramienta gira y la pieza se mueve en un plano horizontal, long. y transv. | Fresadora horizontal | Alumnos ★×2 |
 | MH6 | La pieza fija y la herramienta girando | Alesado | Oficial ★×2 |
-| MH7 | La herramienta gira y la pieza se mueve en un plano horizontal | Alesadora | Alumnos |
+| MH7 | La herramienta gira y la pieza se mueve en un plano horizontal | Alesadora | Alumnos ★×2 |
 | MH8 | Rotación en forma longitudinal de la herramienta y la pieza | Rectificado: giran las dos | Oficial ★×2 |
-| MH9 | Rotación de la pieza y la herramienta + movimiento longitudinal | Rectificado (final) | Alumnos ★×2 |
+| MH9 | Rotación de la pieza y la herramienta + movimiento longitudinal | Rectificado (final) | Alumnos ★×3 |
 | MH10 | Dimensiones crecientes en el sentido de avance | Filos de la brocha | Oficial ★×2 |
-| MH11 | Rápida y de alta calidad superficial | Brochado | Alumnos ★×2 |
+| MH11 | Rápida y de alta calidad superficial | Brochado | Alumnos ★×3 |
 | MH12 | Mesa longitudinal + herramienta transversal sobre bastidor fijo | Cepillado | Oficial ★×2 |
-| MH13 | Plano perpendicular a la herramienta, longitudinal y transversal | Cepilladora (final) | Alumnos ★×2 |
+| MH13 | Plano perpendicular a la herramienta, longitudinal y transversal | Cepilladora (final) | Alumnos ★×3 |
 | MH14 | Solo en el avance del torpedo | Limadora: viruta | Oficial ★×2 |
-| MH15 | Volante con una biela excéntrica | Limadora: mecanismo | Oficial ★×2 |
-| MH16 | Longitudinal en sentido de avance y retroceso | Limadora: torpedo | ⚠ en duda |
+| MH15 | Volante con una biela excéntrica (2026: corona, biela y manivela excéntrica) | Limadora: mecanismo | Oficial ★×3 |
+| MH16 | Longitudinal en sentido de avance y retroceso | Limadora: torpedo | ⚠ en duda ★×3 |
 | MH17 | Carro | Limadora: dónde va la herramienta | Deducida |
 | MH18 | En forma vertical alternativamente | Amortajadora | Oficial ★×2 |
-| MH19 | Movimiento vertical alternativo | Amortajado (final) | Alumnos ★×2 |
+| MH19 | Movimiento vertical alternativo | Amortajado (final) | Alumnos ★×3 |
+| MH20 | La herramienta gira en un plano paralelo al desplazamiento de la pieza | Fresadora vertical | Deducida ⚠ |
 | **Bloque SV** | | | |
 | SV1 | Compactación media y con agujereado para salida de gases | Moldeo en tierra | Oficial ★×2 |
-| SV2 | "No se necesita ninguna acción posterior" (es la falsa) | Pieza fundida | Alumnos ★×2 |
-| SV3 | En altura, longitudinal y transversalmente | Laminado | Oficial ★×2 |
+| SV2 | Con "NO": "No se necesita ninguna acción posterior" · **sin "NO" (2026): fragilidad** | Pieza fundida: leer si pide la falsa | Alumnos ★×3 |
+| SV3 | En altura (o vertical), longitudinal y transversalmente | Laminado | Oficial ★×3 |
 | SV4 | Polvo → comprimir en molde → horno | Sinterizado | Oficial |
-| SV5 | "a" y "b": forma y tamaño de partícula + fluir libremente | Polvos | Deducida |
-| SV6 | Alta dureza | Estampa en frío (acritud) | Deducida |
-| SV7 | Profundas y de bajo espesor | Repujado | Deducida ⚠ |
+| SV5 | "a" y "b": forma y tamaño de partícula + fluir libremente | Polvos | Deducida ★×2 |
+| SV6 | Alta dureza | Estampa en frío (acritud) | Deducida ★×2 |
+| SV7 | Profundas y de bajo espesor | Repujado | Deducida ★×2 ⚠ |
 | **Bloque CA** | | | |
-| CA1 | Resta de la señal de referencia la señal realimentada | `e = r − c` | Alumnos ★×2 |
+| CA1 | Resta de la señal de referencia la señal realimentada | `e = r − c` | Alumnos ★×3 |
 | CA2 | La operación de los elementos de control | `G(p)` | Alumnos ★×2 |
 | CA3 | `G(p) = 1/k` | Resorte | Alumnos ★×2 |
 | CA4 | Inversamente proporcional a la suma de las acciones | `1/(M·p² + C·p + K)` | Alumnos ★×2 |
 | CA5 | Inversamente proporcional a `Ks` | Resorte de torsión | Alumnos |
 | CA6 | `Xe = (Xr − Xc)/2` | Comparador de cremalleras | Alumnos |
 | CA7 | La salida aumenta constantemente con el tiempo | Integrador | Alumnos ★×2 |
-| CA8 | La variable controlada es la posición de un elemento mecánico | Servomecanismo | Oficial ★×3 |
+| CA8 | La variable controlada es la posición de un elemento mecánico | Servomecanismo | Oficial ★×4 |
 | CA9 | Se mantiene fija o constante durante períodos largos | Regulador | Oficial ★×3 |
-| CA10 | Producto | `c = G(p)·e` | Deducida |
+| CA10 | Producto | `c = G(p)·e` | Deducida ★×2 |
 | CA11 | Un resorte equivale a una inductancia | Analogía eléctrica | Alumnos |
 | CA12 | Modelo analógico | Termostato | Alumnos ★×4 |
 | CA13 | Variable controlada de distinta naturaleza que la medida | Modelo analógico | Alumnos ★×2 |
+| CA14 | Se compara con la entrada de referencia | Termostato realimentado | Deducida |
+| CA15 | Función de transferencia en la realimentación | `H(p)` | Deducida |
 | **Bloque EM** | | | |
-| EM1 · EM2 | Distancia entre filetes | Paso de la rosca | Deducida |
+| EM1 · EM2 | Distancia entre filetes | Paso de la rosca | Deducida (EM1 ★×2) |
 | EM3 | Cantidad de filetes por pulgada | Hilos Whitworth | Deducida |
-| EM4 | 60° | Rosca métrica | Deducida |
-| EM5 | 55° | Rosca Whitworth | Deducida |
+| EM4 | 60° | Rosca métrica | Deducida ★×2 |
+| EM5 | 55° | Rosca Whitworth | Deducida ★×2 |
+| EM6 | Transmiten fuerza motriz con cargas de gran magnitud | Árbol | Deducida ⚠ |
+| EM7 | Soportan cargas sin transmitir potencia | Eje | Deducida |
+| EM8 | Zona de apoyo sobre los cojinetes | Gorrón | Deducida |
+| EM9 | Zona donde se montan los órganos de transmisión | Cabeza | Deducida |
+| EM10 | Proporcional a `k`, inversamente a la masa | Velocidad crítica `√(k/m)` | Deducida |
+| EM11 | Árboles cortos de gran rigidez | Husillo | Deducida ⚠ |
+| **Bloque TE** | | | |
+| TE1 | Una superficie envuelve a la otra | Superficies conjugadas | Deducida |
+| TE2 | Cilindro de cabeza y cilindro de raíz | Límites del flanco | Deducida ⚠ |
+| TE3 | Varios pares igualmente espaciados | Movimiento de 360° | Deducida |
+| TE4 | Arco primitivo entre ejes de dos dientes consecutivos | Paso | Deducida |
+| TE5 | `M = t/π` | Módulo | Deducida |
+| TE6 | `π/t` | *Diametral pitch* | Deducida |
 | **Bloque PI** | | | |
 | PI1 | Cada 10 años, si se usó en los últimos 5 | Marca | Alumnos |
 | PI2 | 20 años y no renovable | Patente | Alumnos ★×3 |
@@ -1521,6 +1822,12 @@ Al cruzar las fuentes nuevas aparecieron respuestas distintas a las del [banco d
 - `Resumen 2do Parcial ABUD.pdf` — `R23`. Hilo [Resúmenes Ingeniería Mecánica 1 Abud](https://www.utnianos.com.ar/foro/tema-resumenes-ingenieria-mecanica-1-abud).
 - `carpeta_completa_im1_otro_anio.pdf` — Carpeta manuscrita completa de una cursada con Abud (43 páginas). La segunda mitad del año va de la página 13 a la 43: rotacional, mecanismos, modelización, control automático, proyecto de máquinas. Sale del Drive "Mecánica 1" enlazado en el hilo [La biblioteca de Joey](https://www.utnianos.com.ar/foro/tema-recursos-parciales-carpetas-resumenes-la-biblioteca-de-joey).
 - `TOMA DE DECISIONES.pdf` — Diapositivas de los seis sombreros. Hilo [Ing Mecánica 1 — Abud — Seis sombreros para pensar](https://www.utnianos.com.ar/foro/tema-ing-mec%C3%A1nica-1-abud-seis-sombreros-para-pensar).
+
+**Parcial 2026** (provisto por el usuario):
+
+- `P26-16` — fotos del Tema 16 (12/nov/2026), preguntas 1–35; no se conservan. Transcripción en [examen_2026](examen_2026/examen_2026.md).
+- `2do_parcial/fuentes/examen_2026_tema_17_escaneo.pdf` — `P26-17`. Escaneo del Tema 17 completo (11 páginas, sin marcas). Mismo examen que el Tema 16.
+- [Cálculo de elementos de máquinas: Árboles y ejes](https://calculosmaquinasyelementos.blogspot.com/p/manuales_22.html) — apunte web que siguen casi textual EM7 a EM9 (no es fuente de preguntas).
 
 **Otras descargas, guardadas por instancia:** `final/fuentes/descargas_web/` (respuestas manuscritas de finales viejos, del hilo [2do. Parcial y finales de Ingeniería Mecánica 1 Abud](https://www.utnianos.com.ar/foro/tema-2do-parcial-y-finales-de-ingenieria-mecanica-1-abud), y un cuestionario a desarrollar de otra cátedra) y `1er_parcial/fuentes/descargas_web/` (apunte manuscrito del 1er cuatrimestre y una grilla de respuestas sin enunciados).
 
