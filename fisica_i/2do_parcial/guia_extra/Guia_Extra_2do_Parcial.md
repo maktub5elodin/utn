@@ -2,7 +2,7 @@
 
 Resolución de la «Guía de ejercicios extra — 2do parcial» (4 páginas, 23 ejercicios): fluidos, cuerpo rígido, momento cinético y movimiento oscilatorio armónico. La guía no indica materia ni cátedra; sus temas coinciden con las unidades 5 a 12 del programa 2024 de Física I.
 
-Se usa $g = 10\ \text{m/s}^2$. Notación (con el término del Sears en inglés): $\vec w$ peso (*weight*), $\vec B$ empuje (*buoyant force*), $K$ energía cinética (*kinetic energy*), $U$ energía potencial (*potential energy*), $W$ trabajo (*work*), $\mu_s$ y $\mu_k$ coeficientes de rozamiento estático y cinético (*static*, *kinetic friction*; la guía los llama $\mu_E$ y $\mu_C$), $I$ momento de inercia (*moment of inertia*), $\tau_z$ torque (*torque*), $\vec L$ momento cinético (*angular momentum*), $\alpha_z$ aceleración angular (*angular acceleration*).
+Se usa $g = 10\ \text{m/s}^2$. Notación (con el término del Sears en inglés): $\vec w$ peso (*weight*), $\vec B$ empuje (*buoyant force*), $K$ energía cinética (*kinetic energy*), $U$ energía potencial (*potential energy*), $W$ trabajo (*work*), $\mu_s$ y $\mu_k$ coeficientes de rozamiento estático y cinético (*static*, *kinetic friction*; la guía los llama $\mu_E$ y $\mu_C$), $I$ momento de inercia (*moment of inertia*), $\tau_z$ torque (*torque*), $\vec L$ momento cinético (*angular momentum*), $\gamma_z$ aceleración angular (*angular acceleration*).
 
 Convención para la rotación: eje $z$ saliente de la hoja, positivo antihorario. Los torques y momentos cinéticos se calculan como producto vectorial, $\tau_z = x\,F_y - y\,F_x$ y $L_z = x\,p_y - y\,p_x$, con $(x;\,y)$ el punto de aplicación respecto del eje.
 
@@ -147,7 +147,7 @@ Se supone rodadura y se calcula el rozamiento necesario. Con $\vec f = (-f;\ 0)$
 $$
 \begin{aligned}
 x:&\quad F - f = M\,a \\
-\text{rotación:}&\quad -R\,f = I\,\alpha_z = \tfrac{1}{2}\,M\,R^2\,\alpha_z,\quad \text{rodadura: } \alpha_z = -\frac{a}{R} \implies f = \tfrac{1}{2}\,M\,a
+\text{rotación:}&\quad -R\,f = I\,\gamma_z = \tfrac{1}{2}\,M\,R^2\,\gamma_z,\quad \text{rodadura: } \gamma_z = -\frac{a}{R} \implies f = \tfrac{1}{2}\,M\,a
 \end{aligned}
 $$
 
@@ -161,7 +161,7 @@ $$
 a = \frac{F - \mu_k\,N}{M} = \frac{8\ \text{N} - 0{,}5\ \text{N}}{0{,}5\ \text{kg}} = 15\ \tfrac{\text{m}}{\text{s}^2} \implies v_{\text{cm}}(3\ \text{s}) = 15\ \tfrac{\text{m}}{\text{s}^2} \cdot 3\ \text{s} \implies {\color{ForestGreen}\boxed{v_{\text{cm}} = 45\ \text{m/s}}}
 $$
 
-Mientras tanto gira con $|\alpha_z| = \tfrac{\mu_k\,N\,R}{I} = 10$ rad/s²: a los 3 s, $\omega\,R = 6$ m/s, muy lejos de 45 m/s, lo que confirma que desliza.
+Mientras tanto gira con $|\gamma_z| = \tfrac{\mu_k\,N\,R}{I} = 10$ rad/s²: a los 3 s, $\omega\,R = 6$ m/s, muy lejos de 45 m/s, lo que confirma que desliza.
 
 ### R3 — Dos ruedas solidarias con dos masas colgantes
 
@@ -177,16 +177,16 @@ $$
 r_1\,m_1\,g = r_2\,m_2\,g \implies m_2 = \frac{r_1}{r_2}\,m_1 = \frac{1{,}2}{0{,}4} \cdot 24\ \text{kg} \implies {\color{ForestGreen}\boxed{m_2 = 72\ \text{kg}}}
 $$
 
-**b)** Con $m_1' = 36$ kg, $m_1'$ baja con $a_1 = \alpha\,r_1$ y $m_2$ sube con $a_2 = \alpha\,r_2$:
+**b)** Con $m_1' = 36$ kg, $m_1'$ baja con $a_1 = \gamma\,r_1$ y $m_2$ sube con $a_2 = \gamma\,r_2$:
 
 $$
-m_1'\,g - T_1 = m_1'\,\alpha\,r_1 \qquad T_2 - m_2\,g = m_2\,\alpha\,r_2 \qquad r_1\,T_1 - r_2\,T_2 = I\,\alpha
+m_1'\,g - T_1 = m_1'\,\gamma\,r_1 \qquad T_2 - m_2\,g = m_2\,\gamma\,r_2 \qquad r_1\,T_1 - r_2\,T_2 = I\,\gamma
 $$
 
 Despejando $T_1$ y $T_2$ y reemplazando en la ecuación de rotación:
 
 $$
-\alpha = \frac{(m_1'\,r_1 - m_2\,r_2)\,g}{I + m_1'\,r_1^2 + m_2\,r_2^2} = \frac{(43{,}2 - 28{,}8)\ \text{kg·m} \cdot 10\ \tfrac{\text{m}}{\text{s}^2}}{(40 + 51{,}84 + 11{,}52)\ \text{kg·m}^2} \implies {\color{ForestGreen}\boxed{\alpha \approx 1{,}39\ \text{rad/s}^2}}
+\gamma = \frac{(m_1'\,r_1 - m_2\,r_2)\,g}{I + m_1'\,r_1^2 + m_2\,r_2^2} = \frac{(43{,}2 - 28{,}8)\ \text{kg·m} \cdot 10\ \tfrac{\text{m}}{\text{s}^2}}{(40 + 51{,}84 + 11{,}52)\ \text{kg·m}^2} \implies {\color{ForestGreen}\boxed{\gamma \approx 1{,}39\ \text{rad/s}^2}}
 $$
 
 en sentido antihorario: baja $m_1$.
@@ -206,12 +206,12 @@ $$
 **a) Sin roce:**
 
 $$
-a = \frac{F_1 + F_2}{M} = {\color{ForestGreen}\boxed{8\ \text{m/s}^2}} \qquad \alpha_z = \frac{-1{,}2 + 0{,}2}{0{,}02}\ \tfrac{\text{rad}}{\text{s}^2} \implies {\color{ForestGreen}\boxed{\alpha_z = -50\ \text{rad/s}^2}}\ \text{(horario)}
+a = \frac{F_1 + F_2}{M} = {\color{ForestGreen}\boxed{8\ \text{m/s}^2}} \qquad \gamma_z = \frac{-1{,}2 + 0{,}2}{0{,}02}\ \tfrac{\text{rad}}{\text{s}^2} \implies {\color{ForestGreen}\boxed{\gamma_z = -50\ \text{rad/s}^2}}\ \text{(horario)}
 $$
 
-Para rodar con $a = 8$ m/s² haría falta $|\alpha_z| = a/R = 40$ rad/s²: sin roce, gira de más y patina.
+Para rodar con $a = 8$ m/s² haría falta $|\gamma_z| = a/R = 40$ rad/s²: sin roce, gira de más y patina.
 
-**b) Rodadura**, con roce $\vec f = (f;\,0)$ en $(0;\,-R)$, de torque $\tau_z = R\,f$, y $\alpha_z = -a/R$:
+**b) Rodadura**, con roce $\vec f = (f;\,0)$ en $(0;\,-R)$, de torque $\tau_z = R\,f$, y $\gamma_z = -a/R$:
 
 $$
 \begin{aligned}
@@ -275,7 +275,7 @@ $$
 m\,g\,(0{,}9 - 0{,}3)\ \text{m} = \tfrac{7}{10}\,m\,v_B^2 \implies v_B = \sqrt{\frac{10 \cdot 10 \cdot 0{,}6}{7}}\ \tfrac{\text{m}}{\text{s}} = {\color{RoyalBlue} 2{,}93\ \text{m/s}}
 $$
 
-**a)** En B la pista es horizontal: la componente tangencial de la aceleración es nula, porque la del peso a lo largo de la pista es $g\,\mathrm{sen}\,0^\circ = 0$. La componente normal, $\gamma = v_B^2/\rho$, depende del radio de curvatura $\rho$ de la pista en B, que la figura no da. Apenas deja la pista, el centro de masa cae libremente: ${\color{ForestGreen}\boxed{\vec a = (0;\ -g) = (0;\ -10)\ \text{m/s}^2}}$.
+**a)** En B la pista es horizontal: la componente tangencial de la aceleración es nula, porque la del peso a lo largo de la pista es $g\,\mathrm{sen}\,0^\circ = 0$. La componente normal, $a_{\text{rad}} = v_B^2/\rho$, depende del radio de curvatura $\rho$ de la pista en B, que la figura no da. Apenas deja la pista, el centro de masa cae libremente: ${\color{ForestGreen}\boxed{\vec a = (0;\ -g) = (0;\ -10)\ \text{m/s}^2}}$.
 
 > [!NOTE]
 > El enunciado no permite calcular la aceleración sobre la pista en B. Puede ser que pida la *velocidad* ($v_B \approx 2{,}93$ m/s, o $3{,}16$ m/s si se toma el desnivel de la pista, 0,7 m, en lugar del del centro de masa) o la aceleración justo al salir, que es $g$.
@@ -546,8 +546,8 @@ $$
 | F5 | $p_2 \approx 1{,}21 \cdot 10^5$ Pa (con 3 m) |
 | R1 | $H = 0{,}05$ m |
 | R2 | a) no desliza ($f = 1$ N $\le 2$ N); b) desliza, $v_{\text{cm}} = 45$ m/s |
-| R3 | a) $m_2 = 72$ kg; b) $\alpha \approx 1{,}39$ rad/s² |
-| R4 | a) $a = 8$ m/s², $\alpha_z = -50$ rad/s²; b) $f \approx 0{,}67$ N hacia adelante |
+| R3 | a) $m_2 = 72$ kg; b) $\gamma \approx 1{,}39$ rad/s² |
+| R4 | a) $a = 8$ m/s², $\gamma_z = -50$ rad/s²; b) $f \approx 0{,}67$ N hacia adelante |
 | R5 | a) rueda sin deslizar; b) $a \approx 2{,}44$ m/s² hacia arriba |
 | R6 | a) al dejar la pista, $\vec a = (0;\,-10)$ m/s² ($v_B \approx 2{,}93$ m/s); b) $W = 24$ J |
 | R7 | $v = 20$ m/s |

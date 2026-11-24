@@ -86,7 +86,7 @@ BLOQUES = [
     (
         "Dinámica de rotación: torque y rodadura",
         "Sears cap. 10",
-        "Segunda ley para la rotación, $\\tau_z = I\\,\\alpha_z$, junto con la de traslación. "
+        "Segunda ley para la rotación, $\\tau_z = I\\,\\gamma_z$, junto con la de traslación. "
         "En la rodadura hay que decidir el sentido del rozamiento estático: se supone uno y el signo lo confirma.",
         [
             ("V", "B5", 1, "alta", "eje fijo y aceleración angular constante"),
@@ -298,8 +298,8 @@ def main():
     w("Se usa $g = 10\\ \\text{m/s}^2$. Notación (con el término del Sears en inglés): $\\vec w$ peso (*weight*), "
       "$\\vec N$ normal, $\\vec f$ rozamiento (*friction*), $\\vec B$ empuje (*buoyant force*), $K$ energía cinética, "
       "$U$ energía potencial, $W$ trabajo (*work*), $\\mu_s$ y $\\mu_k$ coeficientes de rozamiento estático y cinético, "
-      "$I$ momento de inercia, $\\tau_z$ torque, $\\vec L$ momento cinético (*angular momentum*), $\\alpha_z$ aceleración "
-      "angular y $\\gamma = v^2/R$ aceleración radial. Rotación: eje $z$ saliente de la hoja, positivo antihorario; "
+      "$I$ momento de inercia, $\\tau_z$ torque, $\\vec L$ momento cinético (*angular momentum*), $\\gamma_z$ aceleración "
+      "angular y $a_{\\text{rad}} = v^2/R$ aceleración radial. Rotación: eje $z$ saliente de la hoja, positivo antihorario; "
       "$\\tau_z = x\\,F_y - y\\,F_x$ y $L_z = x\\,p_y - y\\,p_x$. En las resoluciones, azul = resultado intermedio y "
       "verde = resultado final.")
     w("")

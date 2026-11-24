@@ -15,7 +15,7 @@ Los 53 ejercicios distintos de los cuatro documentos de `2do_parcial/`, ordenado
 
 Repetidos, que aparecen una sola vez: Vella Q1 = Vella R1 (ej. 6); Vella A1 = Vella H2 (ej. 46); Vella B4 = Vella P4 (ej. 12); Guía MAS3 = Guía MAS1 (ej. 43); Guía F5 = Vella P3 (ej. 53).
 
-Se usa $g = 10\ \text{m/s}^2$. Notación (con el término del Sears en inglés): $\vec w$ peso (*weight*), $\vec N$ normal, $\vec f$ rozamiento (*friction*), $\vec B$ empuje (*buoyant force*), $K$ energía cinética, $U$ energía potencial, $W$ trabajo (*work*), $\mu_s$ y $\mu_k$ coeficientes de rozamiento estático y cinético, $I$ momento de inercia, $\tau_z$ torque, $\vec L$ momento cinético (*angular momentum*), $\alpha_z$ aceleración angular y $\gamma = v^2/R$ aceleración radial. Rotación: eje $z$ saliente de la hoja, positivo antihorario; $\tau_z = x\,F_y - y\,F_x$ y $L_z = x\,p_y - y\,p_x$. En las resoluciones, azul = resultado intermedio y verde = resultado final.
+Se usa $g = 10\ \text{m/s}^2$. Notación (con el término del Sears en inglés): $\vec w$ peso (*weight*), $\vec N$ normal, $\vec f$ rozamiento (*friction*), $\vec B$ empuje (*buoyant force*), $K$ energía cinética, $U$ energía potencial, $W$ trabajo (*work*), $\mu_s$ y $\mu_k$ coeficientes de rozamiento estático y cinético, $I$ momento de inercia, $\tau_z$ torque, $\vec L$ momento cinético (*angular momentum*), $\gamma_z$ aceleración angular y $a_{\text{rad}} = v^2/R$ aceleración radial. Rotación: eje $z$ saliente de la hoja, positivo antihorario; $\tau_z = x\,F_y - y\,F_x$ y $L_z = x\,p_y - y\,p_x$. En las resoluciones, azul = resultado intermedio y verde = resultado final.
 
 > [!NOTE]
 > Conviene hacer cada ejercicio sin mirar la resolución y después comparar con el resultado en verde.
@@ -390,7 +390,7 @@ $$
 
 #### Las dos preguntas conceptuales
 
-**¿Por qué la aceleración entre A y B no es constante?** En cada punto de la pista, la componente del peso tangente a la trayectoria es $g\,\mathrm{sen}\,\theta$, donde $\theta$ es la inclinación de la tangente en ese punto. En un cuarto de circunferencia, $\theta$ cambia de $90^\circ$ en A a $0^\circ$ en B; además, la trayectoria es curva y aparece una aceleración radial $\gamma = v^2/R$ que crece a medida que el cuerpo gana velocidad. Por eso no sirven las ecuaciones de aceleración constante y se resuelve por energía.
+**¿Por qué la aceleración entre A y B no es constante?** En cada punto de la pista, la componente del peso tangente a la trayectoria es $g\,\mathrm{sen}\,\theta$, donde $\theta$ es la inclinación de la tangente en ese punto. En un cuarto de circunferencia, $\theta$ cambia de $90^\circ$ en A a $0^\circ$ en B; además, la trayectoria es curva y aparece una aceleración radial $a_{\text{rad}} = v^2/R$ que crece a medida que el cuerpo gana velocidad. Por eso no sirven las ecuaciones de aceleración constante y se resuelve por energía.
 
 **¿Por qué el cuerpo 1 no vuelve a la altura de A?** En el choque elástico se conserva la energía cinética **del sistema**, no la de cada cuerpo. El cuerpo 1 le transfiere al cuerpo 2 la mayor parte de su energía: después del choque le quedan $\left(\tfrac{1}{3}\right)^2 = \tfrac{1}{9}$ de su energía cinética inicial, y por eso sube a $R/9 \approx 0{,}089$ m.
 
@@ -470,7 +470,7 @@ $$
 
 #### b) Reacción en D
 
-En D, la vía está por encima del carrito: la normal y el peso apuntan hacia abajo, hacia el centro. Con $y$ hacia arriba, $\vec N = (0;\,-N)$, $\vec w = (0;\,-m\,g)$ y la aceleración es la radial, $\vec a = (0;\,-\gamma)$ con $\gamma = v_D^2/R$:
+En D, la vía está por encima del carrito: la normal y el peso apuntan hacia abajo, hacia el centro. Con $y$ hacia arriba, $\vec N = (0;\,-N)$, $\vec w = (0;\,-m\,g)$ y la aceleración es la radial, $\vec a = (0;\,-a_{\text{rad}})$ con $a_{\text{rad}} = v_D^2/R$:
 
 ![](../examen_tipo/figuras/fig1b_p1_dcl_D.png)
 
@@ -638,7 +638,7 @@ $$
 m\,g\,(0{,}9 - 0{,}3)\ \text{m} = \tfrac{7}{10}\,m\,v_B^2 \implies v_B = \sqrt{\frac{10 \cdot 10 \cdot 0{,}6}{7}}\ \tfrac{\text{m}}{\text{s}} = {\color{RoyalBlue} 2{,}93\ \text{m/s}}
 $$
 
-**a)** En B la pista es horizontal: la componente tangencial de la aceleración es nula, porque la del peso a lo largo de la pista es $g\,\mathrm{sen}\,0^\circ = 0$. La componente normal, $\gamma = v_B^2/\rho$, depende del radio de curvatura $\rho$ de la pista en B, que la figura no da. Apenas deja la pista, el centro de masa cae libremente: ${\color{ForestGreen}\boxed{\vec a = (0;\ -g) = (0;\ -10)\ \text{m/s}^2}}$.
+**a)** En B la pista es horizontal: la componente tangencial de la aceleración es nula, porque la del peso a lo largo de la pista es $g\,\mathrm{sen}\,0^\circ = 0$. La componente normal, $a_{\text{rad}} = v_B^2/\rho$, depende del radio de curvatura $\rho$ de la pista en B, que la figura no da. Apenas deja la pista, el centro de masa cae libremente: ${\color{ForestGreen}\boxed{\vec a = (0;\ -g) = (0;\ -10)\ \text{m/s}^2}}$.
 
 > [!NOTE]
 > El enunciado no permite calcular la aceleración sobre la pista en B. Puede ser que pida la *velocidad* ($v_B \approx 2{,}93$ m/s, o $3{,}16$ m/s si se toma el desnivel de la pista, 0,7 m, en lugar del del centro de masa) o la aceleración justo al salir, que es $g$.
@@ -779,7 +779,7 @@ $$
 v = \sqrt{\frac{24\ \text{J}}{1{,}875\ \text{kg}}} = \sqrt{12{,}8\ \tfrac{\text{m}^2}{\text{s}^2}} \implies {\color{ForestGreen}\boxed{v \approx 3{,}58\ \text{m/s}}}
 $$
 
-**Comprobación por dinámica.** Bloque: $M\,g - T = M\,a$. Cilindro, con ejes del plano: $T + f - m\,g\,\mathrm{sen}\,37^\circ = m\,a_{\text{cm}}$; torque respecto del centro: $T\,R - f\,R = \tfrac{1}{2}\,m\,R^2\,\alpha$, con $\alpha = a_{\text{cm}}/R$. Sumando las dos ecuaciones del cilindro, $2\,T - m\,g\,\mathrm{sen}\,37^\circ = \tfrac{3}{2}\,m\,a_{\text{cm}}$, y con $a = 2\,a_{\text{cm}}$:
+**Comprobación por dinámica.** Bloque: $M\,g - T = M\,a$. Cilindro, con ejes del plano: $T + f - m\,g\,\mathrm{sen}\,37^\circ = m\,a_{\text{cm}}$; torque respecto del centro: $T\,R - f\,R = \tfrac{1}{2}\,m\,R^2\,\gamma$, con $\gamma = a_{\text{cm}}/R$. Sumando las dos ecuaciones del cilindro, $2\,T - m\,g\,\mathrm{sen}\,37^\circ = \tfrac{3}{2}\,m\,a_{\text{cm}}$, y con $a = 2\,a_{\text{cm}}$:
 
 $$
 a_{\text{cm}} = \frac{M\,g - \tfrac{1}{2}\,m\,g\,\mathrm{sen}\,37^\circ}{2\,M + \tfrac{3}{4}\,m} = \frac{30 - 6}{6 + 1{,}5}\ \tfrac{\text{m}}{\text{s}^2} = 3{,}2\ \tfrac{\text{m}}{\text{s}^2} \implies a = 6{,}4\ \tfrac{\text{m}}{\text{s}^2} \implies v^2 = 2\,a\,h = 12{,}8\ \tfrac{\text{m}^2}{\text{s}^2}
@@ -831,7 +831,7 @@ $$
 m\,g\,d = \tfrac12\,I_O\,\omega^2 \implies \omega = \sqrt{\frac{2 \cdot 20\ \text{J}}{4{,}33\ \text{kg·m}^2}} = 3{,}04\ \text{rad/s} \implies {\color{ForestGreen}\boxed{v_{\text{cm}} = \omega\,d \approx 6{,}08\ \text{m/s}}}
 $$
 
-En la vertical el peso no hace torque respecto de O, así que $\alpha_z = 0$ y el centro de masa solo tiene aceleración centrípeta, $\omega^2 d$, hacia O (arriba):
+En la vertical el peso no hace torque respecto de O, así que $\gamma_z = 0$ y el centro de masa solo tiene aceleración centrípeta, $\omega^2 d$, hacia O (arriba):
 
 $$
 T - m\,g = m\,\omega^2\,d \implies T = 10\ \text{N} + 1\ \text{kg} \cdot 9{,}23\ \text{s}^{-2} \cdot 2\ \text{m} \implies {\color{ForestGreen}\boxed{T \approx 28{,}5\ \text{N}}}
@@ -841,7 +841,7 @@ $$
 
 ## 3. Dinámica de rotación: torque y rodadura (Sears cap. 10)
 
-Segunda ley para la rotación, $\tau_z = I\,\alpha_z$, junto con la de traslación. En la rodadura hay que decidir el sentido del rozamiento estático: se supone uno y el signo lo confirma.
+Segunda ley para la rotación, $\tau_z = I\,\gamma_z$, junto con la de traslación. En la rodadura hay que decidir el sentido del rozamiento estático: se supone uno y el signo lo confirma.
 
 | Ej. | Origen | Nivel | Prioridad | Qué tiene |
 |----|----------|-----|---------|-------------------------------------|
@@ -871,10 +871,10 @@ Segunda ley para la rotación, $\tau_z = I\,\alpha_z$, junto con la de traslaci�
 
 > El volante de la figura, de geometría cilíndrica ($I_{\text{cm}} = \tfrac12\,M\,R^2$), de masa 4 kg y radio 20 cm, se encuentra girando con velocidad angular de intensidad $\omega_0 = 20$ rad/s. Se le aplica un momento de frenado de intensidad $M = 2$ N·m. Determine el número de vueltas girado desde que se aplicó el freno hasta detenerse, y cuánto demoró en hacerlo.
 
-$I = \tfrac12 \cdot 4\ \text{kg} \cdot (0{,}2\ \text{m})^2 = 0{,}08\ \text{kg·m}^2$, y el freno da una desaceleración $|\alpha_z| = 2\ \text{N·m} / 0{,}08\ \text{kg·m}^2 = {\color{RoyalBlue} 25\ \text{rad/s}^2}$.
+$I = \tfrac12 \cdot 4\ \text{kg} \cdot (0{,}2\ \text{m})^2 = 0{,}08\ \text{kg·m}^2$, y el freno da una desaceleración $|\gamma_z| = 2\ \text{N·m} / 0{,}08\ \text{kg·m}^2 = {\color{RoyalBlue} 25\ \text{rad/s}^2}$.
 
 $$
-t = \frac{\omega_0}{|\alpha_z|} = \frac{20}{25}\ \text{s} \implies {\color{ForestGreen}\boxed{t = 0{,}8\ \text{s}}} \qquad \Delta\theta = \frac{\omega_0^2}{2\,|\alpha_z|} = 8\ \text{rad} \implies {\color{ForestGreen}\boxed{\approx 1{,}27\ \text{vueltas}}}
+t = \frac{\omega_0}{|\gamma_z|} = \frac{20}{25}\ \text{s} \implies {\color{ForestGreen}\boxed{t = 0{,}8\ \text{s}}} \qquad \Delta\theta = \frac{\omega_0^2}{2\,|\gamma_z|} = 8\ \text{rad} \implies {\color{ForestGreen}\boxed{\approx 1{,}27\ \text{vueltas}}}
 $$
 
 <!-- solo-pdf
@@ -947,16 +947,16 @@ $$
 r_1\,m_1\,g = r_2\,m_2\,g \implies m_2 = \frac{r_1}{r_2}\,m_1 = \frac{1{,}2}{0{,}4} \cdot 24\ \text{kg} \implies {\color{ForestGreen}\boxed{m_2 = 72\ \text{kg}}}
 $$
 
-**b)** Con $m_1' = 36$ kg, $m_1'$ baja con $a_1 = \alpha\,r_1$ y $m_2$ sube con $a_2 = \alpha\,r_2$:
+**b)** Con $m_1' = 36$ kg, $m_1'$ baja con $a_1 = \gamma\,r_1$ y $m_2$ sube con $a_2 = \gamma\,r_2$:
 
 $$
-m_1'\,g - T_1 = m_1'\,\alpha\,r_1 \qquad T_2 - m_2\,g = m_2\,\alpha\,r_2 \qquad r_1\,T_1 - r_2\,T_2 = I\,\alpha
+m_1'\,g - T_1 = m_1'\,\gamma\,r_1 \qquad T_2 - m_2\,g = m_2\,\gamma\,r_2 \qquad r_1\,T_1 - r_2\,T_2 = I\,\gamma
 $$
 
 Despejando $T_1$ y $T_2$ y reemplazando en la ecuación de rotación:
 
 $$
-\alpha = \frac{(m_1'\,r_1 - m_2\,r_2)\,g}{I + m_1'\,r_1^2 + m_2\,r_2^2} = \frac{(43{,}2 - 28{,}8)\ \text{kg·m} \cdot 10\ \tfrac{\text{m}}{\text{s}^2}}{(40 + 51{,}84 + 11{,}52)\ \text{kg·m}^2} \implies {\color{ForestGreen}\boxed{\alpha \approx 1{,}39\ \text{rad/s}^2}}
+\gamma = \frac{(m_1'\,r_1 - m_2\,r_2)\,g}{I + m_1'\,r_1^2 + m_2\,r_2^2} = \frac{(43{,}2 - 28{,}8)\ \text{kg·m} \cdot 10\ \tfrac{\text{m}}{\text{s}^2}}{(40 + 51{,}84 + 11{,}52)\ \text{kg·m}^2} \implies {\color{ForestGreen}\boxed{\gamma \approx 1{,}39\ \text{rad/s}^2}}
 $$
 
 en sentido antihorario: baja $m_1$.
@@ -1012,10 +1012,10 @@ $$
 \tau_z = (\vec r \times \vec T')_z = r_x\,T'_y - r_y\,T'_x = 0 \cdot 0 - (-R)\,T = {\color{RoyalBlue} R\,T}
 $$
 
-Como la cuerda no desliza, la velocidad del punto tangente es la del bloque: $v_x = \omega_z\,R$, y por lo tanto $a_x = \alpha_z\,R$. Con $I = m\,R^2$:
+Como la cuerda no desliza, la velocidad del punto tangente es la del bloque: $v_x = \omega_z\,R$, y por lo tanto $a_x = \gamma_z\,R$. Con $I = m\,R^2$:
 
 $$
-\tau_z = I\,\alpha_z \implies R\,T = m\,R^2\,\frac{a_x}{R} \implies {\color{RoyalBlue} T = m\,a_x}
+\tau_z = I\,\gamma_z \implies R\,T = m\,R^2\,\frac{a_x}{R} \implies {\color{RoyalBlue} T = m\,a_x}
 $$
 
 #### a) Aceleración
@@ -1068,7 +1068,7 @@ Se supone rodadura y se calcula el rozamiento necesario. Con $\vec f = (-f;\ 0)$
 $$
 \begin{aligned}
 x:&\quad F - f = M\,a \\
-\text{rotación:}&\quad -R\,f = I\,\alpha_z = \tfrac{1}{2}\,M\,R^2\,\alpha_z,\quad \text{rodadura: } \alpha_z = -\frac{a}{R} \implies f = \tfrac{1}{2}\,M\,a
+\text{rotación:}&\quad -R\,f = I\,\gamma_z = \tfrac{1}{2}\,M\,R^2\,\gamma_z,\quad \text{rodadura: } \gamma_z = -\frac{a}{R} \implies f = \tfrac{1}{2}\,M\,a
 \end{aligned}
 $$
 
@@ -1082,7 +1082,7 @@ $$
 a = \frac{F - \mu_k\,N}{M} = \frac{8\ \text{N} - 0{,}5\ \text{N}}{0{,}5\ \text{kg}} = 15\ \tfrac{\text{m}}{\text{s}^2} \implies v_{\text{cm}}(3\ \text{s}) = 15\ \tfrac{\text{m}}{\text{s}^2} \cdot 3\ \text{s} \implies {\color{ForestGreen}\boxed{v_{\text{cm}} = 45\ \text{m/s}}}
 $$
 
-Mientras tanto gira con $|\alpha_z| = \tfrac{\mu_k\,N\,R}{I} = 10$ rad/s²: a los 3 s, $\omega\,R = 6$ m/s, muy lejos de 45 m/s, lo que confirma que desliza.
+Mientras tanto gira con $|\gamma_z| = \tfrac{\mu_k\,N\,R}{I} = 10$ rad/s²: a los 3 s, $\omega\,R = 6$ m/s, muy lejos de 45 m/s, lo que confirma que desliza.
 
 <!-- solo-pdf
 ```{=latex}
@@ -1099,12 +1099,12 @@ Mientras tanto gira con $|\alpha_z| = \tfrac{\mu_k\,N\,R}{I} = 10$ rad/s²: a lo
 
 ![](../parciales_vella/figuras/p5_cilindro_F.png)
 
-Ejes: $x$ paralelo al plano hacia arriba, $y$ normal. La cuerda tira en $(0;\,r)$ con $\vec F = (F;\,0)$ y el rozamiento actúa en $(0;\,-r)$ con $\vec f = (f;\,0)$; se supone $f$ hacia arriba y el signo lo confirma. Rodar hacia arriba es girar en sentido horario: $\alpha_z = -a/r$.
+Ejes: $x$ paralelo al plano hacia arriba, $y$ normal. La cuerda tira en $(0;\,r)$ con $\vec F = (F;\,0)$ y el rozamiento actúa en $(0;\,-r)$ con $\vec f = (f;\,0)$; se supone $f$ hacia arriba y el signo lo confirma. Rodar hacia arriba es girar en sentido horario: $\gamma_z = -a/r$.
 
 **Rotación** respecto del centro de masa: $\tau_z = 0 \cdot 0 - r\,F + r\,f$:
 
 $$
-\tfrac12\,m\,r^2\,\alpha_z = -r\,F + r\,f \implies \tfrac12\,m\,a = F - f
+\tfrac12\,m\,r^2\,\gamma_z = -r\,F + r\,f \implies \tfrac12\,m\,a = F - f
 $$
 
 **Traslación** según $x$:
@@ -1136,16 +1136,16 @@ Coincide con Vella.
 
 ![](../parciales_vella/figuras/r4_cilindro_F.png)
 
-La cuerda tira en $(0;\,R)$ con $\vec F = (F;\,0)$ y el rozamiento actúa en $(0;\,-R)$ con $\vec f = (f;\,0)$. Avanza a la derecha girando en sentido horario: $\alpha_z = -a/R$.
+La cuerda tira en $(0;\,R)$ con $\vec F = (F;\,0)$ y el rozamiento actúa en $(0;\,-R)$ con $\vec f = (f;\,0)$. Avanza a la derecha girando en sentido horario: $\gamma_z = -a/R$.
 
 $$
-\tfrac12\,M\,R^2\,\alpha_z = -R\,F + R\,f \implies \tfrac12\,M\,a = F - f \qquad\qquad F + f = M\,a
+\tfrac12\,M\,R^2\,\gamma_z = -R\,F + R\,f \implies \tfrac12\,M\,a = F - f \qquad\qquad F + f = M\,a
 $$
 
 Sumando, $2F = \tfrac32\,M\,a$:
 
 $$
-a = \frac{4\,F}{3\,M} = {\color{RoyalBlue} 10\ \text{m/s}^2}, \qquad f = M\,a - F = {\color{RoyalBlue} 10\ \text{N}}\ \text{hacia adelante}, \qquad \alpha_z = -20\ \text{s}^{-2}
+a = \frac{4\,F}{3\,M} = {\color{RoyalBlue} 10\ \text{m/s}^2}, \qquad f = M\,a - F = {\color{RoyalBlue} 10\ \text{N}}\ \text{hacia adelante}, \qquad \gamma_z = -20\ \text{s}^{-2}
 $$
 
 A los 5 s, partiendo del reposo: $v_{\text{cm}} = 50$ m/s y $\omega = 100$ rad/s.
@@ -1213,10 +1213,10 @@ $$
 
 ![](../parciales_vella/figuras/a4_cilindro_tambor.png)
 
-La cuerda sale de la parte superior del tambor: $\vec F = (F;\,0)$ en $(0;\,r)$; rozamiento $\vec f = (f;\,0)$ en $(0;\,-R)$, supuesto hacia adelante. Rueda hacia adelante: $\alpha_z = -a/R$.
+La cuerda sale de la parte superior del tambor: $\vec F = (F;\,0)$ en $(0;\,r)$; rozamiento $\vec f = (f;\,0)$ en $(0;\,-R)$, supuesto hacia adelante. Rueda hacia adelante: $\gamma_z = -a/R$.
 
 $$
-\tfrac12\,M\,R^2\,\alpha_z = -r\,F + R\,f \implies \tfrac12\,M\,R\,a = r\,F - R\,f \qquad\qquad F + f = M\,a
+\tfrac12\,M\,R^2\,\gamma_z = -r\,F + R\,f \implies \tfrac12\,M\,R\,a = r\,F - R\,f \qquad\qquad F + f = M\,a
 $$
 
 Reemplazando $M\,a$ de la segunda en la primera:
@@ -1288,12 +1288,12 @@ $$
 **a) Sin roce:**
 
 $$
-a = \frac{F_1 + F_2}{M} = {\color{ForestGreen}\boxed{8\ \text{m/s}^2}} \qquad \alpha_z = \frac{-1{,}2 + 0{,}2}{0{,}02}\ \tfrac{\text{rad}}{\text{s}^2} \implies {\color{ForestGreen}\boxed{\alpha_z = -50\ \text{rad/s}^2}}\ \text{(horario)}
+a = \frac{F_1 + F_2}{M} = {\color{ForestGreen}\boxed{8\ \text{m/s}^2}} \qquad \gamma_z = \frac{-1{,}2 + 0{,}2}{0{,}02}\ \tfrac{\text{rad}}{\text{s}^2} \implies {\color{ForestGreen}\boxed{\gamma_z = -50\ \text{rad/s}^2}}\ \text{(horario)}
 $$
 
-Para rodar con $a = 8$ m/s² haría falta $|\alpha_z| = a/R = 40$ rad/s²: sin roce, gira de más y patina.
+Para rodar con $a = 8$ m/s² haría falta $|\gamma_z| = a/R = 40$ rad/s²: sin roce, gira de más y patina.
 
-**b) Rodadura**, con roce $\vec f = (f;\,0)$ en $(0;\,-R)$, de torque $\tau_z = R\,f$, y $\alpha_z = -a/R$:
+**b) Rodadura**, con roce $\vec f = (f;\,0)$ en $(0;\,-R)$, de torque $\tau_z = R\,f$, y $\gamma_z = -a/R$:
 
 $$
 \begin{aligned}

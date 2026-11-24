@@ -13,7 +13,7 @@ Resolución de seis evaluaciones del curso Z1054 de Física I (FRBA, Prof. R. Ve
 
 Los temas A y B tienen el formato de Vella (misma grilla de notas y el mismo pie: «Condición mínima de aprobación 50 % bien resuelto»). Hay ejercicios repetidos: Q1 = R1, A1 = H2 y B4 = P4. Además, P3 es el F5 de la guía de ejercicios extra (`../guia_extra/`), y confirma que el «3 mm» de la guía es una errata de «3 m».
 
-Se usa $g = 10\ \text{m/s}^2$, como piden los parciales. Notación (con el término del Sears en inglés): $\vec w$ peso (*weight*), $\vec B$ empuje (*buoyant force*), $\vec N$ normal, $\vec f$ rozamiento (*friction*), $K$ energía cinética (*kinetic energy*), $U$ energía potencial (*potential energy*), $W$ trabajo (*work*), $\mu_s$ y $\mu_k$ coeficientes de rozamiento estático y cinético (*static*, *kinetic friction*; los parciales los llaman $\mu_e$ y $\mu_c$), $I$ momento de inercia (*moment of inertia*), $\tau_z$ torque (*torque*), $\alpha_z$ aceleración angular (*angular acceleration*). Las densidades van con $\rho$ (los parciales usan $\delta$).
+Se usa $g = 10\ \text{m/s}^2$, como piden los parciales. Notación (con el término del Sears en inglés): $\vec w$ peso (*weight*), $\vec B$ empuje (*buoyant force*), $\vec N$ normal, $\vec f$ rozamiento (*friction*), $K$ energía cinética (*kinetic energy*), $U$ energía potencial (*potential energy*), $W$ trabajo (*work*), $\mu_s$ y $\mu_k$ coeficientes de rozamiento estático y cinético (*static*, *kinetic friction*; los parciales los llaman $\mu_e$ y $\mu_c$), $I$ momento de inercia (*moment of inertia*), $\tau_z$ torque (*torque*), $\gamma_z$ aceleración angular (*angular acceleration*). Las densidades van con $\rho$ (los parciales usan $\delta$).
 
 Convención para la rotación: eje $z$ saliente de la hoja, positivo antihorario. Los torques se calculan como producto vectorial, $\tau_z = x\,F_y - y\,F_x$, con $(x;\,y)$ el punto de aplicación respecto del centro de masa.
 
@@ -149,12 +149,12 @@ Coincide con Vella ($v_{\text{cm}} = 0{,}81$ m/s, truncado).
 
 ![](figuras/p5_cilindro_F.png)
 
-Ejes: $x$ paralelo al plano hacia arriba, $y$ normal. La cuerda tira en $(0;\,r)$ con $\vec F = (F;\,0)$ y el rozamiento actúa en $(0;\,-r)$ con $\vec f = (f;\,0)$; se supone $f$ hacia arriba y el signo lo confirma. Rodar hacia arriba es girar en sentido horario: $\alpha_z = -a/r$.
+Ejes: $x$ paralelo al plano hacia arriba, $y$ normal. La cuerda tira en $(0;\,r)$ con $\vec F = (F;\,0)$ y el rozamiento actúa en $(0;\,-r)$ con $\vec f = (f;\,0)$; se supone $f$ hacia arriba y el signo lo confirma. Rodar hacia arriba es girar en sentido horario: $\gamma_z = -a/r$.
 
 **Rotación** respecto del centro de masa: $\tau_z = 0 \cdot 0 - r\,F + r\,f$:
 
 $$
-\tfrac12\,m\,r^2\,\alpha_z = -r\,F + r\,f \implies \tfrac12\,m\,a = F - f
+\tfrac12\,m\,r^2\,\gamma_z = -r\,F + r\,f \implies \tfrac12\,m\,a = F - f
 $$
 
 **Traslación** según $x$:
@@ -242,16 +242,16 @@ Coincide con Vella ($x \cong 0{,}168$ m).
 
 ![](figuras/r4_cilindro_F.png)
 
-La cuerda tira en $(0;\,R)$ con $\vec F = (F;\,0)$ y el rozamiento actúa en $(0;\,-R)$ con $\vec f = (f;\,0)$. Avanza a la derecha girando en sentido horario: $\alpha_z = -a/R$.
+La cuerda tira en $(0;\,R)$ con $\vec F = (F;\,0)$ y el rozamiento actúa en $(0;\,-R)$ con $\vec f = (f;\,0)$. Avanza a la derecha girando en sentido horario: $\gamma_z = -a/R$.
 
 $$
-\tfrac12\,M\,R^2\,\alpha_z = -R\,F + R\,f \implies \tfrac12\,M\,a = F - f \qquad\qquad F + f = M\,a
+\tfrac12\,M\,R^2\,\gamma_z = -R\,F + R\,f \implies \tfrac12\,M\,a = F - f \qquad\qquad F + f = M\,a
 $$
 
 Sumando, $2F = \tfrac32\,M\,a$:
 
 $$
-a = \frac{4\,F}{3\,M} = {\color{RoyalBlue} 10\ \text{m/s}^2}, \qquad f = M\,a - F = {\color{RoyalBlue} 10\ \text{N}}\ \text{hacia adelante}, \qquad \alpha_z = -20\ \text{s}^{-2}
+a = \frac{4\,F}{3\,M} = {\color{RoyalBlue} 10\ \text{m/s}^2}, \qquad f = M\,a - F = {\color{RoyalBlue} 10\ \text{N}}\ \text{hacia adelante}, \qquad \gamma_z = -20\ \text{s}^{-2}
 $$
 
 A los 5 s, partiendo del reposo: $v_{\text{cm}} = 50$ m/s y $\omega = 100$ rad/s.
@@ -337,7 +337,7 @@ $$
 m\,g\,d = \tfrac12\,I_O\,\omega^2 \implies \omega = \sqrt{\frac{2 \cdot 20\ \text{J}}{4{,}33\ \text{kg·m}^2}} = 3{,}04\ \text{rad/s} \implies {\color{ForestGreen}\boxed{v_{\text{cm}} = \omega\,d \approx 6{,}08\ \text{m/s}}}
 $$
 
-En la vertical el peso no hace torque respecto de O, así que $\alpha_z = 0$ y el centro de masa solo tiene aceleración centrípeta, $\omega^2 d$, hacia O (arriba):
+En la vertical el peso no hace torque respecto de O, así que $\gamma_z = 0$ y el centro de masa solo tiene aceleración centrípeta, $\omega^2 d$, hacia O (arriba):
 
 $$
 T - m\,g = m\,\omega^2\,d \implies T = 10\ \text{N} + 1\ \text{kg} \cdot 9{,}23\ \text{s}^{-2} \cdot 2\ \text{m} \implies {\color{ForestGreen}\boxed{T \approx 28{,}5\ \text{N}}}
@@ -422,10 +422,10 @@ Es igual a $k_1$: dos resortes iguales en serie dan la mitad de la constante.
 
 ![](figuras/a4_cilindro_tambor.png)
 
-La cuerda sale de la parte superior del tambor: $\vec F = (F;\,0)$ en $(0;\,r)$; rozamiento $\vec f = (f;\,0)$ en $(0;\,-R)$, supuesto hacia adelante. Rueda hacia adelante: $\alpha_z = -a/R$.
+La cuerda sale de la parte superior del tambor: $\vec F = (F;\,0)$ en $(0;\,r)$; rozamiento $\vec f = (f;\,0)$ en $(0;\,-R)$, supuesto hacia adelante. Rueda hacia adelante: $\gamma_z = -a/R$.
 
 $$
-\tfrac12\,M\,R^2\,\alpha_z = -r\,F + R\,f \implies \tfrac12\,M\,R\,a = r\,F - R\,f \qquad\qquad F + f = M\,a
+\tfrac12\,M\,R^2\,\gamma_z = -r\,F + R\,f \implies \tfrac12\,M\,R\,a = r\,F - R\,f \qquad\qquad F + f = M\,a
 $$
 
 Reemplazando $M\,a$ de la segunda en la primera:
@@ -509,10 +509,10 @@ Mismo enunciado y datos que P4: ${\color{ForestGreen}\boxed{v_{\text{cm}} \appro
 
 > El volante de la figura, de geometría cilíndrica ($I_{\text{cm}} = \tfrac12\,M\,R^2$), de masa 4 kg y radio 20 cm, se encuentra girando con velocidad angular de intensidad $\omega_0 = 20$ rad/s. Se le aplica un momento de frenado de intensidad $M = 2$ N·m. Determine el número de vueltas girado desde que se aplicó el freno hasta detenerse, y cuánto demoró en hacerlo.
 
-$I = \tfrac12 \cdot 4\ \text{kg} \cdot (0{,}2\ \text{m})^2 = 0{,}08\ \text{kg·m}^2$, y el freno da una desaceleración $|\alpha_z| = 2\ \text{N·m} / 0{,}08\ \text{kg·m}^2 = {\color{RoyalBlue} 25\ \text{rad/s}^2}$.
+$I = \tfrac12 \cdot 4\ \text{kg} \cdot (0{,}2\ \text{m})^2 = 0{,}08\ \text{kg·m}^2$, y el freno da una desaceleración $|\gamma_z| = 2\ \text{N·m} / 0{,}08\ \text{kg·m}^2 = {\color{RoyalBlue} 25\ \text{rad/s}^2}$.
 
 $$
-t = \frac{\omega_0}{|\alpha_z|} = \frac{20}{25}\ \text{s} \implies {\color{ForestGreen}\boxed{t = 0{,}8\ \text{s}}} \qquad \Delta\theta = \frac{\omega_0^2}{2\,|\alpha_z|} = 8\ \text{rad} \implies {\color{ForestGreen}\boxed{\approx 1{,}27\ \text{vueltas}}}
+t = \frac{\omega_0}{|\gamma_z|} = \frac{20}{25}\ \text{s} \implies {\color{ForestGreen}\boxed{t = 0{,}8\ \text{s}}} \qquad \Delta\theta = \frac{\omega_0^2}{2\,|\gamma_z|} = 8\ \text{rad} \implies {\color{ForestGreen}\boxed{\approx 1{,}27\ \text{vueltas}}}
 $$
 
 <!-- salto-pagina -->

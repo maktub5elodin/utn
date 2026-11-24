@@ -12,7 +12,7 @@ Resolución de un parcial de Física I de 2002, con los enunciados reconstruidos
 
 Se usa $g = 10\ \text{m/s}^2$, igual que la resolución.
 
-Notación (con el término del Sears en inglés): $K$ energía cinética (*kinetic energy*), $U$ energía potencial (*potential energy*), $W$ trabajo (*work*), $\vec w$ peso (*weight*), $\mu_k$ coeficiente de rozamiento cinético (*kinetic friction*), $I$ momento de inercia (*moment of inertia*), $\alpha_z$ aceleración angular (*angular acceleration*). La resolución original llama $\gamma$ a la aceleración angular; acá $\gamma$ no se usa, porque en el curso es la aceleración radial.
+Notación (con el término del Sears en inglés): $K$ energía cinética (*kinetic energy*), $U$ energía potencial (*potential energy*), $W$ trabajo (*work*), $\vec w$ peso (*weight*), $\mu_k$ coeficiente de rozamiento cinético (*kinetic friction*), $I$ momento de inercia (*moment of inertia*), $\gamma_z$ aceleración angular (*angular acceleration*), como en la resolución original, y $a_{\text{rad}} = v^2/R$ aceleración radial.
 
 ---
 
@@ -100,7 +100,7 @@ $$
 
 ### 1.6 Las dos preguntas conceptuales
 
-**¿Por qué la aceleración entre A y B no es constante?** En cada punto de la pista, la componente del peso tangente a la trayectoria es $g\,\mathrm{sen}\,\theta$, donde $\theta$ es la inclinación de la tangente en ese punto. En un cuarto de circunferencia, $\theta$ cambia de $90^\circ$ en A a $0^\circ$ en B; además, la trayectoria es curva y aparece una aceleración radial $\gamma = v^2/R$ que crece a medida que el cuerpo gana velocidad. Por eso no sirven las ecuaciones de aceleración constante y se resuelve por energía.
+**¿Por qué la aceleración entre A y B no es constante?** En cada punto de la pista, la componente del peso tangente a la trayectoria es $g\,\mathrm{sen}\,\theta$, donde $\theta$ es la inclinación de la tangente en ese punto. En un cuarto de circunferencia, $\theta$ cambia de $90^\circ$ en A a $0^\circ$ en B; además, la trayectoria es curva y aparece una aceleración radial $a_{\text{rad}} = v^2/R$ que crece a medida que el cuerpo gana velocidad. Por eso no sirven las ecuaciones de aceleración constante y se resuelve por energía.
 
 **¿Por qué el cuerpo 1 no vuelve a la altura de A?** En el choque elástico se conserva la energía cinética **del sistema**, no la de cada cuerpo. El cuerpo 1 le transfiere al cuerpo 2 la mayor parte de su energía: después del choque le quedan $\left(\tfrac{1}{3}\right)^2 = \tfrac{1}{9}$ de su energía cinética inicial, y por eso sube a $R/9 \approx 0{,}089$ m.
 
@@ -208,10 +208,10 @@ $$
 \tau_z = (\vec r \times \vec T')_z = r_x\,T'_y - r_y\,T'_x = 0 \cdot 0 - (-R)\,T = {\color{RoyalBlue} R\,T}
 $$
 
-Como la cuerda no desliza, la velocidad del punto tangente es la del bloque: $v_x = \omega_z\,R$, y por lo tanto $a_x = \alpha_z\,R$. Con $I = m\,R^2$:
+Como la cuerda no desliza, la velocidad del punto tangente es la del bloque: $v_x = \omega_z\,R$, y por lo tanto $a_x = \gamma_z\,R$. Con $I = m\,R^2$:
 
 $$
-\tau_z = I\,\alpha_z \implies R\,T = m\,R^2\,\frac{a_x}{R} \implies {\color{RoyalBlue} T = m\,a_x}
+\tau_z = I\,\gamma_z \implies R\,T = m\,R^2\,\frac{a_x}{R} \implies {\color{RoyalBlue} T = m\,a_x}
 $$
 
 ### 3.4 a) Aceleración

@@ -248,7 +248,7 @@ flecha(ax, c, (0, -0.8), C_PESO, r"$\vec w$", dx=0.18)
 flecha(ax, pc, 0.6 * n, C_NORMAL, r"$\vec N$", dx=-0.12, dy=-0.12)
 flecha(ax, pc, 0.45 * u, C_ROCE, r"$\vec f$", dx=0.08, dy=-0.18)
 ax.add_patch(Arc(c, 1.15, 1.15, theta1=150, theta2=200, color="0.3", lw=0.9))
-ax.text(*(c + 0.78 * np.array([np.cos(np.radians(175)), np.sin(np.radians(175))])), r"$\alpha_z$",
+ax.text(*(c + 0.78 * np.array([np.cos(np.radians(175)), np.sin(np.radians(175))])), r"$\gamma_z$",
         ha="center", color="0.3")
 guardar(fig, OUT, "p5_cilindro_F")
 
@@ -313,7 +313,7 @@ flecha(ax, (0, -0.5), (0.5, 0), C_ROCE, r"$\vec f$", dx=0.15, dy=-0.15)
 flecha(ax, (0.1, 0), (0, -0.38), C_PESO, r"$\vec w$", dx=0.17, dy=0.08)
 flecha(ax, (-0.1, -0.5), (0, 0.65), C_NORMAL, r"$\vec N$", dx=-0.17, dy=-0.08)
 ax.add_patch(Arc((0, 0), 1.35, 1.35, theta1=110, theta2=170, color="0.3", lw=0.9))
-ax.text(-0.62, 0.58, r"$\alpha_z$", color="0.3")
+ax.text(-0.62, 0.58, r"$\gamma_z$", color="0.3")
 guardar(fig, OUT, "r4_cilindro_F")
 
 # R5: resorte, polea y dos masas
