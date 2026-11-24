@@ -39,8 +39,11 @@ Young, H. D.; Freedman, R. A. — \emph{University Physics with Modern Physics},
   \nointerlineskip\vspace{1pt}{\color{NavyBlue!40}\rule{\linewidth}{0.4pt}}\par\vspace{1pt}}
 % Una fórmula por renglón: fórmula a la izquierda, unidades a la derecha (gris).
 \newcommand{\f}[2]{\par\(\displaystyle #1\)\hfill{\color{gray}\footnotesize #2}\par\vspace{2pt}}
-% Enlace entre secciones: estrella roja con el capítulo donde continúa.
-\newcommand{\enlace}[1]{{\color{BrickRed}\star\,\text{\scriptsize #1}}}
+% Enlace entre secciones: estrella verde con el capítulo donde continúa.
+% Todas las estrellas son verdes (23/nov/2026): el rojo queda para las trampas.
+\newcommand{\enlace}[1]{{\color{ForestGreen}\star\,\text{\scriptsize #1}}}
+% Analogía: estrella verde, misma ecuación con otras variables (lineal <-> angular).
+\newcommand{\analogia}[1]{{\color{ForestGreen}\star\,\text{\scriptsize #1}}}
 \newcommand{\nota}[1]{\par{\color{gray}\footnotesize #1}\par\vspace{1pt}}
 
 \begin{document}
@@ -51,9 +54,10 @@ Young, H. D.; Freedman, R. A. — \emph{University Physics with Modern Physics},
 % multicols*: las columnas se llenan en orden, sin balancear (la hoja crece).
 \begin{multicols*}{3}
 \capitulo{Cap. 2 — Movimiento en línea recta}
+\f{v_x = \frac{dx}{dt} \qquad a_x = \frac{dv_x}{dt}\;\analogia{cap. 9}}{m/s \;\;m/s\(^2\)}
 
 \subtema{Aceleración constante}
-\nota{Solo valen si \(a_x\) = cte \quad \(x_0, v_{0x}\): en \(t = 0\)}
+\nota{Solo valen si \(a_x\) = cte \quad \(x_0, v_{0x}\): en \(t = 0\)\hfill\(\analogia{cap. 9}\)}
 \f{v_x = v_{0x} + a_x\,t}{m/s}
 \f{x = x_0 + v_{0x}\,t + \tfrac{1}{2}\,a_x\,t^2}{m}
 \f{v_x^2 = v_{0x}^2 + 2\,a_x\,(x - x_0)\;\enlace{cap. 6}}{m\(^2\)/s\(^2\)}
@@ -76,13 +80,13 @@ Young, H. D.; Freedman, R. A. — \emph{University Physics with Modern Physics},
 \subtema{Mov. circular uniforme}
 \nota{\(v\) cte pero cambia la dirección: \(\vec a \perp \vec v\)}
 \nota{\(a_{\text{rad}}\): radial, hacia el centro (centrípeta)}
-\f{a_{\text{rad}} = \gamma = \frac{v^2}{R}}{m/s\(^2\)}
+\f{a_{\text{rad}} = \frac{v^2}{R}}{m/s\(^2\)}
 \f{v = \frac{2\pi R}{T}}{m/s}
-\f{a_{\text{rad}} = \gamma = \frac{4\pi^2 R}{T^2}}{m/s\(^2\)}
+\f{a_{\text{rad}} = \frac{4\pi^2 R}{T^2}}{m/s\(^2\)}
 \nota{\(T\): período [s], tiempo de una vuelta}
 \nota{\(v\): rapidez lineal \quad \(\omega\): velocidad angular}
-\f{\omega = \frac{v}{R} = \frac{2\pi}{T}}{rad/s}
-\f{a_{\text{rad}} = \gamma = \omega^2 R}{m/s\(^2\)}
+\f{\omega = \frac{v}{R} = \frac{2\pi}{T}\;\enlace{cap. 9}}{rad/s}
+\f{a_{\text{rad}} = \omega^2 R\;\enlace{cap. 9}}{m/s\(^2\)}
 
 \subtema{Velocidad relativa en el espacio}
 \nota{\(P\): cuerpo \quad \(A, B\): marcos de referencia}
@@ -103,17 +107,18 @@ Young, H. D.; Freedman, R. A. — \emph{University Physics with Modern Physics},
 \nota{\(\vec a = 0\): reposo \textbf{o} \(\vec v\) cte \quad Solo en marcos inerciales}
 
 \subtema{2.ª ley}
-\f{\sum\vec F = m\,\vec a}{N}
+\f{\sum\vec F = m\,\vec a\;\enlace{cap. 8}}{N}
 \f{\sum F_i = m\,a_i \quad (i = x, y, z)}{N}
 \nota{Solo fuerzas externas. {\color{BrickRed}\(m\vec a\) no es una fuerza}: no va en el diagrama de cuerpo libre}
 
+% Peso abre la col. 2 (la col. 1 se llenó con las definiciones del cap. 2).
+\columnbreak
 \subtema{Peso}
 \nota{Fuerza gravitatoria de la Tierra sobre el cuerpo}
 \f{\vec w = m\,\vec g}{N}
 \nota{Módulo: \(w = m\,g\) (positivo) \quad Dirección: hacia abajo}
 \nota{\(m\) es propia del cuerpo; \(w\) varía con \(g\) según el lugar}
 
-\columnbreak
 \subtema{3.ª ley}
 \f{\vec F_{A\,\text{sobre}\,B} = -\vec F_{B\,\text{sobre}\,A}}{N}
 \nota{Actúan sobre cuerpos \textbf{distintos}: {\color{BrickRed}nunca se cancelan entre sí}}
@@ -159,18 +164,6 @@ Young, H. D.; Freedman, R. A. — \emph{University Physics with Modern Physics},
 \nota{\(D\): crece con el área frontal y la densidad\hfill kg/m}
 \nota{\(v_t\): rapidez terminal de caída (\(a = 0\), \(f = m\,g\))}
 
-% Al pie de la columna, separado del cap. 5 por un filete negro.
-\vfill
-{\color{black}\rule{\linewidth}{0.8pt}}\par
-\subtema{Símbolos que conviene separar}
-\nota{\(W\) (cursiva): trabajo (\emph{work})\hfill J}
-\nota{W (recta): watt; la potencia es \(P\)\hfill\(1\text{ W} = 1\text{ J/s}\)}
-\nota{\(w\): peso (\emph{weight})\hfill N}
-\nota{\(k\): resorte \textbf{o} resistencia de fluidos\hfill N/m \;/\; kg/s}
-\nota{\(\vec r\): posición (radio vector)\hfill m}
-\nota{\(\vec s = \Delta\vec r\): desplazamiento recto total, de \(P_1\) a \(P_2\)\hfill m}
-\nota{\(d\vec l = d\vec r\): tramo del camino, tangente (\emph{length})\hfill m}
-
 \columnbreak
 \capitulo{Cap. 6 — Trabajo y energía cinética}
 
@@ -192,7 +185,7 @@ Young, H. D.; Freedman, R. A. — \emph{University Physics with Modern Physics},
 \nota{\(\text{kg}\cdot\frac{\text{m}^2}{\text{s}^2} = \bigl(\text{kg}\cdot\frac{\text{m}}{\text{s}^2}\bigr)\cdot\text{m} = \text{N·m} = \text{J}\)}
 
 \subtema{Energía cinética}
-\f{K = \tfrac{1}{2}\,m\,v^2}{J}
+\f{K = \tfrac{1}{2}\,m\,v^2\;\enlace{cap. 8}}{J}
 \nota{Escalar, \(K \ge 0\)}
 
 \subtema{Teorema trabajo-energía}
@@ -243,7 +236,7 @@ Young, H. D.; Freedman, R. A. — \emph{University Physics with Modern Physics},
 \nota{\(y = 0\) donde convenga: solo importa \(\Delta U\)}
 \f{W_{\text{grav}} = U_1 - U_2}{J}
 \f{W_{\text{grav}} = -(U_2 - U_1) = -\Delta U_{\text{grav}}}{J}
-\nota{{\color{BrickRed}\(\Delta U = U_2 - U_1\): siempre final menos inicial}}
+\nota{\(\Delta U = U_2 - U_1\): siempre final menos inicial}
 \nota{Sube: \(\Delta U > 0\), \(W_{\text{grav}} < 0\) (\(\vec w\) opuesto a \(\vec s\))}
 \nota{Baja: \(\Delta U < 0\), \(W_{\text{grav}} > 0\) (\(\vec w\) a favor de \(\vec s\))}
 \nota{El peso trabaja a costa de \(U\)}
@@ -254,14 +247,14 @@ Young, H. D.; Freedman, R. A. — \emph{University Physics with Modern Physics},
 \f{W_{\text{el}} = \int_{x_1}^{x_2} (-k\,x)\,dx}{J}
 \f{W_{\text{el}} = \tfrac{1}{2}\,k\,x_1^2 - \tfrac{1}{2}\,k\,x_2^2}{J}
 \f{{\color{RoyalBlue}U_{\text{el}} = \tfrac{1}{2}\,k\,x^2}}{J}
-\nota{{\color{BrickRed}\(x = 0\) fijo: longitud natural (resorte sin deformar)}}
+\nota{\(x = 0\) fijo: longitud natural (resorte sin deformar)}
 \nota{A diferencia de \(y\), el origen no se elige}
 \nota{\(U_{\text{el}} \ge 0\): estirado (\(x > 0\)) o comprimido (\(x < 0\))}
 \f{W_{\text{el}} = U_1 - U_2 = -\Delta U_{\text{el}}}{J}
 \nota{Se deforma más: \(\Delta U > 0\), \(W_{\text{el}} < 0\)}
 \nota{Vuelve hacia \(x = 0\): \(\Delta U < 0\), \(W_{\text{el}} > 0\)}
-\nota{{\color{BrickRed}\textbf{Por} el resorte (sobre el cuerpo): \(W_{\text{el}} = -\Delta U_{\text{el}}\)}}
-\nota{{\color{BrickRed}\textbf{Sobre} el resorte (cap. 6): \(W = +\Delta U_{\text{el}}\)}}
+\nota{\textbf{Por} el resorte (sobre el cuerpo): \(W_{\text{el}} = -\Delta U_{\text{el}}\)}
+\nota{\textbf{Sobre} el resorte (cap. 6): \(W = +\Delta U_{\text{el}}\)}
 
 \subtema{Conservación de la energía mecánica}
 \f{E = K + U \qquad U = U_{\text{grav}} + U_{\text{el}}}{J}
@@ -279,6 +272,158 @@ Young, H. D.; Freedman, R. A. — \emph{University Physics with Modern Physics},
 \nota{La \(E\) que se pierde pasa a energía interna \(U_{\text{int}}\)}
 \nota{Si la única fuerza no conservativa es el rozamiento:}
 \f{\Delta U_{\text{int}} = -W_{\text{otras}}}{J}
+
+% Cap. 8: resto de la col. 1 y toda la col. 2; el cap. 9 arranca en la col. 3.
+\capitulo{Cap. 8 — Cant. de movimiento y choques}
+
+\subtema{Cantidad de movimiento}
+\f{\vec p = m\,\vec v \qquad p_i = m\,v_i}{kg·m/s}
+\nota{Vector, con la dirección de \(\vec v\)}
+\nota{Sears: \emph{momento lineal}}
+
+\subtema{2.ª ley con \(\vec p\)}
+\f{\sum\vec F = \frac{d\vec p}{dt}\;\enlace{cap. 4}}{N}
+\nota{Con \(m\) cte: \(\frac{d(m\vec v)}{dt} = m\,\frac{d\vec v}{dt} = m\,\vec a\)\hfill\(\frac{\text{kg·m/s}}{\text{s}} = \text{N}\)}
+
+\subtema{Impulso}
+\nota{\(\sum\vec F\,dt = d\vec p\), sumado de \(t_1\) a \(t_2\):}
+\f{\vec J = \int_{t_1}^{t_2}\sum\vec F\,dt}{N·s}
+\f{\vec J = \vec p_2 - \vec p_1 = \Delta\vec p}{N·s = kg·m/s}
+\nota{Teorema del impulso \quad \(\vec J\) va como \(\Delta\vec p\), no como \(\vec v\)}
+\nota{\(J_x\): área bajo \(F_x(t)\), con signo (como \(W\) bajo \(F_x(x)\))}
+\f{\vec J = \sum\vec F\,\Delta t \quad (\textstyle\sum\vec F \text{ cte})}{N·s}
+\f{\vec J = \vec F_{\text{med}}\,\Delta t}{N·s}
+\nota{\(\vec F_{\text{med}}\): la fuerza cte que daría el mismo \(\vec J\)}
+\nota{Mismo \(\Delta\vec p\) en más \(\Delta t\): menos \(F_{\text{med}}\) (bolsa de aire)}
+
+\subtema{Cantidad de mov. y energía cinética}
+\nota{\(\vec p\): vector; cambia con \(\vec J\) (fuerza en el \textbf{tiempo})}
+\nota{\(K\): escalar; cambia con \(W\) (fuerza en el \textbf{camino})}
+\f{K = \tfrac{1}{2}\,m\,v^2 = \frac{(m\,v)^2}{2\,m} = \frac{p^2}{2\,m}\;\enlace{cap. 6}}{J}
+\nota{Mismo \(p\): el más liviano tiene más \(K\)}
+\nota{\(\sum\vec F = d\vec p/dt\): ley \textbf{diferencial}, en cada instante}
+\nota{\(\vec J = \Delta\vec p\), \(W_{\text{tot}} = \Delta K\): \textbf{integrales}, entre 2 estados}
+
+\subtema{Conservación de la cant. de mov.}
+\nota{Internas: pares de 3.ª ley, se cancelan\hfill\(\enlace{cap. 4}\)}
+\f{\vec P = \vec p_A + \vec p_B + \dots}{kg·m/s}
+\f{\textstyle\sum\vec F_{\text{ext}} = d\vec P/dt}{N}
+\f{\vec P_1 = \vec P_2 \quad \text{si } \textstyle\sum\vec F_{\text{ext}} = 0}{kg·m/s}
+\nota{Por componentes: si solo \(\sum F_{\text{ext},x} = 0\), solo \(P_x\) cte}
+\nota{Vale aunque las internas no sean conservativas}
+\nota{\(E\) cte si \(W_{\text{otras}} = 0\) (cap. 7); \(\vec P\) cte si \(\sum\vec F_{\text{ext}} = 0\)}
+
+\subtema{Choques}
+\nota{Internas grandes y breves: las externas se desprecian}
+\nota{{\color{BrickRed}\(\vec P\) se conserva en \textbf{todo} choque}; lo que cambia es \(K\)}
+\nota{\textbf{Elástico}: \(K\) pasa un instante a \(U_{\text{el}}\)\hfill\(\enlace{cap. 7}\)}
+\f{K_1 = K_2}{J}
+\nota{\textbf{Inelástico}: \(K\) se disipa en \(U_{\text{int}}\)\hfill\(\enlace{cap. 7}\)}
+\f{K_2 < K_1 \qquad \Delta K + \Delta U_{\text{int}} = 0}{J}
+\nota{\textbf{Totalmente inelástico} (plástico): quedan pegados}
+\f{m_A\vec v_{A1} + m_B\vec v_{B1} = (m_A + m_B)\,\vec v_2}{kg·m/s}
+\nota{{\color{BrickRed}Inelástico no implica pegados} (autos que rebotan)}
+
+\subtema{Choque elástico con B en reposo}
+\nota{Eje \(x\) \quad \(v_{B1x} = 0\) \quad incógnitas: \(v_{A2x}\), \(v_{B2x}\)}
+\f{m_A v_{A1x} = m_A v_{A2x} + m_B v_{B2x}}{kg·m/s}
+\f{\tfrac{1}{2} m_A v_{A1x}^2 = \tfrac{1}{2} m_A v_{A2x}^2 + \tfrac{1}{2} m_B v_{B2x}^2}{J}
+\nota{\(B\) a la izquierda; en \(K\) se simplifica el \(\tfrac{1}{2}\):}
+\f{m_B\,v_{B2x} = m_A\,(v_{A1x} - v_{A2x})}{kg·m/s}
+\f{m_B\,v_{B2x}^2 = m_A\,(v_{A1x} - v_{A2x})(v_{A1x} + v_{A2x})}{J}
+\nota{Diferencia de cuadrados; se divide la 2.ª por la 1.ª:}
+\f{v_{B2x} = v_{A1x} + v_{A2x}}{m/s}
+\nota{Se reemplaza en la de \(\vec P\) y se despeja \(v_{A2x}\):}
+\f{v_{A2x} = \frac{m_A - m_B}{m_A + m_B}\,v_{A1x}}{m/s}
+\f{v_{B2x} = \frac{2\,m_A}{m_A + m_B}\,v_{A1x}}{m/s}
+\nota{\(m_A = m_B\): \(A\) se frena, \(B\) sale con \(v_{A1x}\) (billar)}
+\nota{\(m_A \ll m_B\): \(A\) rebota con \(\approx -v_{A1x}\), \(B\) casi quieto}
+\nota{\(m_A \gg m_B\): \(A\) casi sigue igual, \(B\) sale con \(\approx 2\,v_{A1x}\)}
+\nota{\(v_{B2x} - v_{A2x} = v_{A1x}\): se alejan como se acercaron}
+
+\subtema{Centro de masa}
+\nota{Posición media, ponderada por las masas}
+\f{\vec r_{\text{cm}} = \frac{\sum m_i\,\vec r_i}{M} \qquad M = \sum m_i}{m}
+\nota{Por componentes: \(x_{\text{cm}} = \sum m_i\,x_i / M\), ídem \(y\), \(z\)}
+\nota{Homogéneo: en su eje de simetría (puede caer fuera)}
+\f{\vec P = M\,\vec v_{\text{cm}} \quad \text{(derivando } \vec r_{\text{cm}}\text{)}}{kg·m/s}
+\f{\sum\vec F_{\text{ext}} = M\,\vec a_{\text{cm}}\;\enlace{cap. 10}}{N}
+\nota{Se mueve como una partícula de masa \(M\)}
+\nota{\(\sum\vec F_{\text{ext}} = 0\): \(\vec v_{\text{cm}}\) cte (también en un choque)}
+
+\columnbreak
+\capitulo{Cap. 9 — Rotación de cuerpos rígidos}
+
+\subtema{Coordenada angular}
+\nota{\(\theta\): ángulo de una recta fija al cuerpo con \(+x\); su signo depende del sentido elegido como positivo}
+\nota{\(s\): arco recorrido por el punto \(P\)}
+\nota{\(r\): distancia de \(P\) al eje}
+\f{\theta = \frac{s}{r}}{rad}
+\nota{Cociente de dos longitudes: el radián no tiene dimensión}
+\f{s = r\,\theta}{m}
+\nota{{\color{BrickRed}Solo con \(\theta\) en radianes}; también todas las que salen de esta}
+\f{1\text{ rev} = 360^\circ = 2\pi\text{ rad}}{}
+\f{1\text{ rad} = \frac{360^\circ}{2\pi} \approx 57{,}3^\circ}{}
+\nota{De grados a radianes: se multiplica por \(\pi/180^\circ\)}
+\nota{\(1\text{ rpm} = 1\text{ rev/min} = 2\pi/60\text{ rad/s}\)}
+
+\subtema{Velocidad y aceleración angular}
+\nota{Eje fijo \(z\) \quad \(\omega_z, \gamma_z\): con signo, como \(v_x, a_x\)}
+\f{\omega_z = \frac{d\theta}{dt}\;\analogia{cap. 2}}{rad/s}
+\f{\gamma_z = \frac{d\omega_z}{dt} = \frac{d^2\theta}{dt^2}\;\analogia{cap. 2}}{rad/s\(^2\)}
+\nota{Todos los puntos del cuerpo comparten \(\theta\), \(\omega_z\) y \(\gamma_z\)}
+\nota{\(\gamma_z\) [rad/s\(^2\)] es angular, no componente de \(\vec a\) [m/s\(^2\)]}
+
+\subtema{Aceleración angular constante}
+\nota{Solo valen si \(\gamma_z\) = cte. Son las de cap. 2 con:}
+\nota{\(x \to \theta\) \quad \(v_x \to \omega_z\) \quad \(a_x \to \gamma_z\)\hfill\(\analogia{cap. 2}\)}
+\f{\omega_z = \omega_{0z} + \gamma_z\,t}{rad/s}
+\f{\theta = \theta_0 + \omega_{0z}\,t + \tfrac{1}{2}\,\gamma_z\,t^2}{rad}
+\f{\omega_z^2 = \omega_{0z}^2 + 2\,\gamma_z\,(\theta - \theta_0)}{rad\(^2\)/s\(^2\)}
+\f{\theta - \theta_0 = \frac{\omega_{0z} + \omega_z}{2}\,t}{rad}
+\nota{Se deducen igual: eliminando \(t\) y eliminando \(\gamma_z\)}
+
+\subtema{Cinemática lineal y angular}
+\nota{\(P\) a distancia \(r\) fija del eje: se deriva \(s = r\,\theta\)}
+\f{\frac{ds}{dt} = r\,\frac{d\theta}{dt}}{m/s}
+\f{v = r\,\omega\;\enlace{cap. 3}}{m/s}
+\nota{\(v, \omega\): módulos (\(\ge 0\)) \quad \(\vec v\): tangente a la circunferencia}
+\nota{\(\vec a\) de \(P\): dos componentes perpendiculares}
+\f{{\color{RoyalBlue}a_{\text{tan}}} = \frac{dv}{dt} = r\,\frac{d\omega}{dt} = {\color{RoyalBlue}r\,\gamma}}{m/s\(^2\)}
+\nota{Cambia el \textbf{módulo} de \(\vec v\) \quad \(a_{\text{tan}} = 0\) si \(\omega\) cte (MCU)}
+\f{a_{\text{rad}} = \frac{v^2}{r} = \frac{(r\,\omega)^2}{r}\;\enlace{cap. 3}}{m/s\(^2\)}
+\f{{\color{RoyalBlue}a_{\text{rad}} = \omega^2\,r}}{m/s\(^2\)}
+\nota{Cambia la \textbf{dirección} de \(\vec v\); apunta al eje. Vale en cada instante, aunque \(\omega\) varíe}
+\f{a = \sqrt{a_{\text{tan}}^2 + a_{\text{rad}}^2}}{m/s\(^2\)}
+\nota{\(\text{m}\cdot\text{rad/s}^2 = \text{m/s}^2\): el rad se omite}
+
+\subtema{Transmisión por cadena o correa}
+\nota{Sin deslizar: la cadena tiene la misma \(v\) en el borde de las dos ruedas}
+\f{v = r_1\,\omega_1 = r_2\,\omega_2}{m/s}
+\nota{Dientes con el mismo paso: \(\dfrac{2\pi r_1}{N_1} = \dfrac{2\pi r_2}{N_2}\) \quad \(N\): n.º de dientes}
+\f{\frac{\omega_2}{\omega_1} = \frac{r_1}{r_2} = \frac{N_1}{N_2}}{—}
+\nota{\(\omega\) inversa a \(r\) y a \(N\): la rueda chica gira más rápido}
+\nota{Bicicleta: 1 = plato (pedales) \quad 2 = piñón (rueda trasera)}
+\nota{Engranajes en contacto: misma relación, giran en sentido opuesto}
+
+
+% Símbolos: bloque comodín (puede ir en cualquier columna, o al final de la hoja).
+% Al final de la hoja: abre la 3.ª carilla, después del cap. 9.
+\columnbreak
+{\color{black}\rule{\linewidth}{0.8pt}}\par
+\subtema{Símbolos que conviene separar}
+\nota{\(W\) (cursiva): trabajo (\emph{work})\hfill J}
+\nota{W (recta): watt; la potencia es \(P\)\hfill\(1\text{ W} = 1\text{ J/s}\)}
+\nota{\(w\): peso (\emph{weight})\hfill N}
+\nota{\(k\): resorte \textbf{o} resistencia de fluidos\hfill N/m \;/\; kg/s}
+\nota{\(\vec r\): posición (radio vector)\hfill m}
+\nota{\(\vec s = \Delta\vec r\): desplazamiento recto total, de \(P_1\) a \(P_2\)\hfill m}
+\nota{\(d\vec l = d\vec r\): tramo del camino, tangente (\emph{length})\hfill m}
+\nota{\(\gamma_z\): aceleración \textbf{angular} del cuerpo\hfill rad/s\(^2\)}
+\nota{\(a_{\text{rad}}, a_{\text{tan}}\): componentes de \(\vec a\) de un punto\hfill m/s\(^2\)}
+\nota{\(\vec p\): cant. de movimiento de \textbf{una} partícula\hfill kg·m/s}
+\nota{\(\vec P\): \(\vec p\) \textbf{total} \quad \(P\) sola: potencia\hfill kg·m/s \;/\; W}
+\nota{\(\vec J\): impulso; no es el \emph{jerk} (\(d\vec a/dt\), m/s\(^3\))\hfill N·s}
 
 \end{multicols*}
 \end{document}

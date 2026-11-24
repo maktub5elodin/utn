@@ -4,15 +4,23 @@ Hoja de estudio A4 (`hoja_formulas.tex` → `make` → `build/hoja_formulas.pdf`
 
 ## Cap. 2 — Movimiento en línea recta
 
+### Definiciones
+
+| Ecuación | Unidades |
+|---|---|
+| $v_x = \dfrac{dx}{dt}$ $\quad a_x = \dfrac{dv_x}{dt}$ ${\color{ForestGreen}\star}$ cap. 9 | m/s, m/s² |
+
+Abren el capítulo en el PDF, en un solo renglón, con estrella verde hacia $\omega_z$ y $\gamma_z$ del cap. 9 (agregadas el 23/nov/2026).
+
 ### Aceleración constante
 
-Solo valen si $a_x$ = cte; $x_0$ y $v_{0x}$ son los valores en $t = 0$.
+Solo valen si $a_x$ = cte; $x_0$ y $v_{0x}$ son los valores en $t = 0$. En el PDF, una estrella verde (${\color{ForestGreen}\star}$ cap. 9) remite a las cuatro análogas de rotación. **Colores (desde el 23/nov/2026):** todas las estrellas son verdes, tanto las analogías (misma ecuación con otras variables) como los enlaces (una ecuación que se usa para deducir otra o que continúa en otro capítulo); el rojo queda solo para las trampas importantes, y el azul (RoyalBlue) para resultados clave ($U_{\text{grav}}$, $U_{\text{el}}$, $a_{\text{tan}}$, $a_{\text{rad}}$ del cap. 9).
 
 | Ecuación | Unidades |
 |---|---|
 | $v_x = v_{0x} + a_x\,t$ | m/s |
 | $x = x_0 + v_{0x}\,t + \tfrac{1}{2}\,a_x\,t^2$ | m |
-| $v_x^2 = v_{0x}^2 + 2\,a_x\,(x - x_0)$ ${\color{BrickRed}\star}$ cap. 6 | m²/s² |
+| $v_x^2 = v_{0x}^2 + 2\,a_x\,(x - x_0)$ ${\color{ForestGreen}\star}$ cap. 6 | m²/s² |
 | $x - x_0 = \dfrac{v_{0x} + v_x}{2}\,t$ | m |
 
 - **$v_x^2$, sin $t$:** de $v_x = v_{0x} + a_x\,t$ se despeja $t = \dfrac{v_x - v_{0x}}{a_x}$, se reemplaza en la $x$ de la trayectoria, $x(t)$, y se desarrolla.
@@ -33,17 +41,21 @@ Sin resistencia del aire y con el eje $y$ hacia arriba: $a_x = 0$, $a_y = {\colo
 
 ### Movimiento circular uniforme
 
-La rapidez $v$ es constante pero la dirección de $\vec v$ cambia, así que hay aceleración. $a_{\text{rad}}$ es la aceleración **radial**: perpendicular a $\vec v$ y dirigida hacia el centro, por eso también se la llama **centrípeta** («que busca el centro»). $T$ es el período [s], el tiempo de una vuelta. $v$ es la rapidez lineal [m/s], no la angular. La velocidad angular es $\omega = v/R = 2\pi/T$ [rad/s]; con ella, $v = \omega R$ y $a_{\text{rad}} = \gamma = \omega^2 R$. $\gamma$ es la notación del docente; $a_{\text{rad}}$, la del Sears.
+La rapidez $v$ es constante pero la dirección de $\vec v$ cambia, así que hay aceleración. $a_{\text{rad}}$ es la aceleración **radial**: perpendicular a $\vec v$ y dirigida hacia el centro, por eso también se la llama **centrípeta** («que busca el centro»). $T$ es el período [s], el tiempo de una vuelta. $v$ es la rapidez lineal [m/s], no la angular. La velocidad angular es $\omega = v/R = 2\pi/T$ [rad/s]; con ella, $v = \omega R$ y $a_{\text{rad}} = \omega^2 R$.
+
+**Corrección del 23/nov/2026:** hasta acá la hoja escribía $a_{\text{rad}} = \gamma$. Pero $\gamma$ es la **aceleración angular** (cap. 9, rad/s²), no una aceleración lineal: se sacó de todas las fórmulas y explicaciones de $a_{\text{rad}}$.
 
 | Ecuación | Unidades |
 |---|---|
-| $a_{\text{rad}} = \gamma = \dfrac{v^2}{R}$ | m/s² |
+| $a_{\text{rad}} = \dfrac{v^2}{R}$ | m/s² |
 | $v = \dfrac{2\pi R}{T}$ | m/s |
-| $a_{\text{rad}} = \gamma = \dfrac{4\pi^2 R}{T^2}$ | m/s² |
-| $\omega = \dfrac{v}{R} = \dfrac{2\pi}{T}$ | rad/s |
-| $a_{\text{rad}} = \gamma = \omega^2 R$ | m/s² |
+| $a_{\text{rad}} = \dfrac{4\pi^2 R}{T^2}$ | m/s² |
+| $\omega = \dfrac{v}{R} = \dfrac{2\pi}{T}$ ${\color{ForestGreen}\star}$ cap. 9 | rad/s |
+| $a_{\text{rad}} = \omega^2 R$ ${\color{ForestGreen}\star}$ cap. 9 | m/s² |
 
-#### Por qué $\omega = v/R$ y $\gamma = v^2/R$ (solo en este `.md`)
+En el PDF, las dos últimas llevan estrella al cap. 9, donde se deducen en general (con $\omega$ variable). Se quedan acá porque son las de MCU; el cap. 9 no las mueve, las extiende.
+
+#### Por qué $\omega = v/R$ y $a_{\text{rad}} = v^2/R$ (solo en este `.md`)
 
 **La idea de fondo:** $v$ dice cuánto camino se recorre por segundo, y $\omega$ cuánto ángulo se barre por segundo. $R$ es lo que convierte uno en el otro.
 
@@ -75,7 +87,7 @@ $\vec v$ es tangente al círculo, así que su dirección cambia todo el tiempo. 
 
 ![Velocidad tangente y aceleración hacia el centro en cuatro puntos del círculo](figuras/mcu_aceleracion.png)
 
-**3. Por qué $\gamma = v^2/R$**
+**3. Por qué $a_{\text{rad}} = v^2/R$**
 
 En un $\Delta t$ chico el cuerpo pasa de $P_1$ a $P_2$ y gira un ángulo $\Delta\theta$. Como $\vec v$ siempre es perpendicular al radio, $\vec v$ gira ese mismo $\Delta\theta$. Quedan dos triángulos con la misma forma (isósceles, con el mismo ángulo $\Delta\theta$):
 
@@ -88,7 +100,7 @@ $$
 \quad\Rightarrow\quad
 \frac{\Delta v}{\Delta t} = \frac{v}{R}\cdot\frac{\Delta s}{\Delta t}
 \quad\Rightarrow\quad
-\gamma = \frac{v}{R}\cdot v = \frac{v^2}{R}
+a_{\text{rad}} = \frac{v}{R}\cdot v = \frac{v^2}{R}
 $$
 
 En el último paso, con $\Delta t \to 0$, $\Delta s/\Delta t$ es $v$ y $\Delta v/\Delta t$ es la aceleración.
@@ -98,7 +110,7 @@ En el último paso, con $\Delta t \to 0$, $\Delta s/\Delta t$ es $v$ y $\Delta v
 - **Una $v$ es la que gira:** cuanto más grande es el vector, más cambia al girar el mismo ángulo.
 - **La otra $v$ es lo rápido que gira:** a más rapidez, más ángulo por segundo, porque $\omega = v/R$.
 
-Eso se ve escrito así: $\gamma = \underbrace{\omega}_{\text{lo rápido que gira}}\cdot\underbrace{v}_{\text{lo que gira}} = \dfrac{v}{R}\cdot v = \omega^2 R$.
+Eso se ve escrito así: $a_{\text{rad}} = \underbrace{\omega}_{\text{lo rápido que gira}}\cdot\underbrace{v}_{\text{lo que gira}} = \dfrac{v}{R}\cdot v = \omega^2 R$.
 
 **4. La misma cuenta con vectores**
 
@@ -113,7 +125,7 @@ $$
 $$
 
 - $|\vec v| = \omega R$: es la relación $v = \omega R$.
-- $|\vec a| = \omega^2 R$: es $\gamma$.
+- $|\vec a| = \omega^2 R$: es $a_{\text{rad}}$.
 - El signo menos de $-\omega^2\vec r$ dice que $\vec a$ es opuesta a $\vec r$: apunta hacia el centro.
 
 **5. Ejemplo y chequeo**
@@ -293,11 +305,11 @@ Por qué así:
 
 ### 2. Energía cinética y teorema trabajo-energía
 
-Entre dos puntos 1 y 2 del recorrido sobre $x$, la ecuación ${\color{BrickRed}\star}$ del cap. 2 cambia de nombres: $v_{0x} \to v_1$, $v_x \to v_2$, $x - x_0 \to s$. No hace falta que el punto 1 sea $t = 0$.
+Entre dos puntos 1 y 2 del recorrido sobre $x$, la ecuación ${\color{ForestGreen}\star}$ del cap. 2 cambia de nombres: $v_{0x} \to v_1$, $v_x \to v_2$, $x - x_0 \to s$. No hace falta que el punto 1 sea $t = 0$.
 
 | Paso | Ecuación | Unidades | PDF |
 |---|---|---|---|
-| ${\color{BrickRed}\star}$ cap. 2 | $v_2^2 = v_1^2 + 2\,a_x\,s$ | m²/s² | sí |
+| ${\color{ForestGreen}\star}$ cap. 2 | $v_2^2 = v_1^2 + 2\,a_x\,s$ | m²/s² | sí |
 | Se despeja $a_x\,s$ | $a_x\,s = \tfrac{1}{2}\,v_2^2 - \tfrac{1}{2}\,v_1^2$ | m²/s² | sí |
 | Se multiplica por $m$, con $\sum F_x = m\,a_x$ | $\bigl(\sum F_x\bigr)\,s = \tfrac{1}{2}\,m\,v_2^2 - \tfrac{1}{2}\,m\,v_1^2$ | J | sí |
 | Definición | $K = \tfrac{1}{2}\,m\,v^2$ | J | sí |
@@ -362,7 +374,7 @@ Por qué así: $\vec F\cdot\vec v$ es la fórmula que más se usa de esta secci�
 
 ### Símbolos que conviene separar
 
-Con este capítulo se acumulan letras repetidas. Está en el PDF:
+Con este capítulo se acumulan letras repetidas. Está en el PDF como bloque **comodín**: puede ir en cualquier columna, o al final de la hoja. Desde el 23/nov/2026 abre la 3.ª carilla (antes estuvo al pie de la col. 2 de la 2.ª, hasta que entró el cap. 8), con las tres entradas del cap. 8 ($\vec p$, $\vec P$, $\vec J$) y dos del cap. 9: $\gamma_z$, aceleración angular [rad/s²], y $a_{\text{rad}}, a_{\text{tan}}$, componentes de $\vec a$ de un punto [m/s²].
 
 | Símbolo | Significado | Unidad |
 |---|---|---|
@@ -532,6 +544,247 @@ Por qué así: es más un gráfico que una fórmula. Si entra, es con una figura
 
 Conviene agregarlos a «Símbolos que conviene separar» cuando el capítulo pase al PDF, sobre todo $U$ frente a $U_{\text{int}}$ y la $W$ de trabajo frente a $W_{\text{otras}}$.
 
+## Cap. 8 — Cantidad de movimiento, impulso y choques (en el PDF desde el 23/nov/2026)
+
+En el PDF ocupa el resto de la col. 1 y toda la col. 2 de la 2.ª carilla; el cap. 9 sigue en la col. 3. Para que entrara, «Símbolos que conviene separar» pasó a abrir la 3.ª carilla (la hoja puede llegar a 4 carillas: dos hojas doble faz). El Sears en español dice **momento lineal**; la hoja usa **cantidad de movimiento**, como la cátedra, y aclara el nombre del libro una vez.
+
+### La idea que ordena el capítulo
+
+Es otra vez la 2.ª ley, ahora escrita con $\vec p$ e integrada **en el tiempo** (el cap. 6 la integraba en el camino):
+
+$$
+\sum\vec F = \frac{d\vec p}{dt}
+\quad\xrightarrow{\;\times\,dt,\ \int_{t_1}^{t_2}\;}\quad
+\vec J = \int_{t_1}^{t_2}\sum\vec F\,dt = \vec p_2 - \vec p_1
+$$
+
+El Sears (§8.1, 12.ª ed. en español) lo dice así: la 2.ª ley es un **principio diferencial**, porque relaciona la fuerza con la rapidez de cambio de $\vec p$ en cada instante. En cambio, $\vec J = \Delta\vec p$ y $W_{\text{tot}} = \Delta K$ son **principios integrales**: relacionan el movimiento en dos instantes separados por un intervalo finito. Al pasar a un sistema, las fuerzas internas se cancelan de a pares por la 3.ª ley. Si además $\sum\vec F_{\text{ext}} = 0$, se conserva $\vec P$, y de ahí salen los choques.
+
+### Qué ya estaba en la hoja y qué se conectó
+
+| Pedido | Ya estaba | Conexión en el PDF |
+|---|---|---|
+| $\sum\vec F = d\vec p/dt$ | $\sum\vec F = m\,\vec a$ (cap. 4) | Estrellas verdes recíprocas cap. 4 ↔ cap. 8 |
+| $\vec p$ frente a $K$ | $K = \tfrac12 m v^2$ (cap. 6) | $K = p^2/2m$, con estrellas recíprocas cap. 6 ↔ cap. 8 |
+| Fuerzas internas que se cancelan | 3.ª ley (cap. 4) | Estrella verde al cap. 4 |
+| Energía en los choques | $U_{\text{el}}$, $\Delta K + \Delta U + \Delta U_{\text{int}} = 0$ (cap. 7) | Estrella verde al cap. 7 en elástico e inelástico |
+| Centro de masa | — | Estrella verde al cap. 10 ($\sum\vec F_{\text{ext}} = M\vec a_{\text{cm}}$, cuerpo rígido) |
+
+Todas son enlaces, ninguna analogía: ninguna fórmula del capítulo es la misma ecuación con otras variables. $\vec J$ bajo $F_x(t)$ y $W$ bajo $F_x(x)$ se parecen, pero no son la misma ecuación, así que la comparación va como nota.
+
+### 1. Cantidad de movimiento y 2.ª ley
+
+| Ecuación | Unidades | PDF |
+|---|---|---|
+| $\vec p = m\,\vec v \qquad p_i = m\,v_i$ | kg·m/s | sí |
+| $\sum\vec F = \dfrac{d\vec p}{dt}$ ${\color{ForestGreen}\star}$ cap. 4 | N | sí |
+
+En el PDF: $\vec p$ es un vector con la dirección de $\vec v$; con $m$ constante, $\dfrac{d(m\vec v)}{dt} = m\,\vec a$ (la 2.ª ley del cap. 4); unidades, $\dfrac{\text{kg·m/s}}{\text{s}} = \text{kg·m/s}^2 = \text{N}$.
+
+Por qué así: $d\vec p/dt$ es la forma en que la escribió Newton y es más general (vale aunque $m$ cambie, como en un cohete, §8.6). Para este curso alcanza con ver que, con $m$ constante, devuelve $m\vec a$.
+
+### 2. Impulso
+
+| Ecuación | Unidades | PDF |
+|---|---|---|
+| $\vec J = \displaystyle\int_{t_1}^{t_2}\sum\vec F\,dt$ | N·s | sí |
+| $\vec J = \vec p_2 - \vec p_1 = \Delta\vec p$ (teorema del impulso) | N·s = kg·m/s | sí |
+| $\vec J = \sum\vec F\,\Delta t$ (con $\sum\vec F$ constante) | N·s | sí |
+| $\vec J = \vec F_{\text{med}}\,\Delta t$ | N·s | sí |
+
+En el PDF:
+
+- De dónde sale: en cada $dt$, $\sum\vec F\,dt = d\vec p$; se suma de $t_1$ a $t_2$.
+- $\vec J$ tiene la dirección de $\Delta\vec p$, no la de $\vec v$ (una pelota que rebota recibe un impulso opuesto a su velocidad inicial).
+- $J_x$ es el área bajo la curva $F_x(t)$, con signo, como $W$ es el área bajo $F_x(x)$.
+- $\vec F_{\text{med}}$: la fuerza constante que daría el mismo impulso en el mismo $\Delta t$.
+- Mismo $\Delta\vec p$ en más $\Delta t$ da menos $F_{\text{med}}$ (bolsa de aire).
+
+Nota que no entró en el PDF por espacio: el teorema vale **por componentes**, $J_x = p_{2x} - p_{1x}$, cada eje por separado (ecuaciones 8.9 del Sears).
+
+Por qué así: la integral es la definición general, y sin ella el teorema solo valdría con fuerza constante. Las otras dos son sus casos de uso: la fuerza constante, y la fuerza media cuando la fuerza real de un golpe no se conoce.
+
+### 3. Cantidad de movimiento y energía cinética
+
+| Ecuación | Unidades | PDF |
+|---|---|---|
+| $K = \tfrac12\,m\,v^2 = \dfrac{(m\,v)^2}{2\,m} = \dfrac{p^2}{2\,m}$ ${\color{ForestGreen}\star}$ cap. 6 | J | sí |
+
+| | $\vec p$ | $K$ |
+|---|---|---|
+| Tipo | Vector | Escalar, $\ge 0$ |
+| Cambia con | $\vec J$: la fuerza a lo largo del **tiempo** | $W$: la fuerza a lo largo del **camino** |
+| Teorema | $\vec J = \Delta\vec p$ | $W_{\text{tot}} = \Delta K$ |
+| En un choque aislado | Se conserva siempre | Solo si es elástico |
+
+En el PDF: las dos primeras filas, «mismo $p$: el más liviano tiene más $K$» y la distinción diferencial / integral.
+
+Ejemplo del Sears (§8.1): dos pelotas con el mismo $p$, de 0,10 kg y 0,50 kg. Frenarlas pide el mismo impulso, pero la liviana tiene 5 veces más $K$ y pide 5 veces más trabajo. Con la misma fuerza, se tarda lo mismo en frenar cualquiera de las dos, pero la mano retrocede 5 veces más con la liviana.
+
+### 4. Conservación de la cantidad de movimiento
+
+| Ecuación | Unidades | PDF |
+|---|---|---|
+| $\vec P = \vec p_A + \vec p_B + \dots$ | kg·m/s | sí |
+| $\sum\vec F_{\text{ext}} = d\vec P/dt$ | N | sí |
+| $\vec P_1 = \vec P_2$ si $\sum\vec F_{\text{ext}} = 0$ | kg·m/s | sí |
+
+En el PDF: las internas son pares de 3.ª ley y se cancelan (estrella al cap. 4); por componentes, si solo $\sum F_{\text{ext},x} = 0$, solo se conserva $P_x$; vale aunque las fuerzas internas no sean conservativas; comparación con el cap. 7 ($E$ constante si $W_{\text{otras}} = 0$; $\vec P$ constante si $\sum\vec F_{\text{ext}} = 0$).
+
+Por qué así: la última comparación ordena las dos leyes de conservación que ya están en la hoja. Tienen condiciones distintas y por eso pueden valer por separado: en un choque inelástico se conserva $\vec P$ y no $E$.
+
+### 5. Choques
+
+| Ecuación | Unidades | PDF |
+|---|---|---|
+| Elástico: $K_1 = K_2$ ${\color{ForestGreen}\star}$ cap. 7 | J | sí |
+| Inelástico: $K_2 < K_1$, $\Delta K + \Delta U_{\text{int}} = 0$ ${\color{ForestGreen}\star}$ cap. 7 | J | sí |
+| Totalmente inelástico: $m_A\vec v_{A1} + m_B\vec v_{B1} = (m_A + m_B)\,\vec v_2$ | kg·m/s | sí |
+
+Durante el choque, las fuerzas internas son grandes y breves, así que las externas se desprecian. Por eso **$\vec P$ se conserva en todo choque**, y lo que distingue los tipos es qué pasa con $K$:
+
+- **Elástico:** las fuerzas internas son conservativas. $K$ pasa un instante a energía potencial elástica (los cuerpos se comprimen) y vuelve entera.
+- **Inelástico:** parte de $K$ se **disipa** (la palabra que se recordaba) en energía interna: deformación, calor, sonido. Es la ley de conservación de la energía del cap. 7: la energía total se conserva, la mecánica no.
+- **Totalmente inelástico** (la cátedra le dice **plástico**): los cuerpos quedan pegados y siguen con una sola velocidad.
+- **Trampa del Sears:** inelástico no implica pegados. Dos autos que chocan y rebotan también tienen un choque inelástico.
+
+El Sears no recomienda memorizar la $v_2$ ni la $K$ despejadas del choque totalmente inelástico (8.17 y 8.18): conviene plantear la conservación de $\vec P$ cada vez.
+
+### 6. Choque elástico con B en reposo
+
+| Paso | Ecuación | Unidades | PDF |
+|---|---|---|---|
+| $\vec P$ en $x$ | $m_A v_{A1x} = m_A v_{A2x} + m_B v_{B2x}$ | kg·m/s | sí |
+| $K$ | $\tfrac12 m_A v_{A1x}^2 = \tfrac12 m_A v_{A2x}^2 + \tfrac12 m_B v_{B2x}^2$ | J | sí |
+| $B$ a la izquierda | $m_B\,v_{B2x} = m_A\,(v_{A1x} - v_{A2x})$ | kg·m/s | sí |
+| Ídem, diferencia de cuadrados | $m_B\,v_{B2x}^2 = m_A\,(v_{A1x} - v_{A2x})(v_{A1x} + v_{A2x})$ | J | sí |
+| 2.ª ÷ 1.ª | $v_{B2x} = v_{A1x} + v_{A2x}$ | m/s | sí |
+| Se reemplaza y se despeja | $v_{A2x} = \dfrac{m_A - m_B}{m_A + m_B}\,v_{A1x}$ | m/s | sí |
+| | $v_{B2x} = \dfrac{2\,m_A}{m_A + m_B}\,v_{A1x}$ | m/s | sí |
+
+Casos que se leen de las fórmulas (en el PDF):
+
+- $m_A = m_B$: $A$ se frena en seco y $B$ sale con $v_{A1x}$ (billar).
+- $m_A \ll m_B$ (pelota de ping-pong contra bola de boliche): $A$ rebota con casi $-v_{A1x}$ y $B$ casi no se mueve.
+- $m_A \gg m_B$: $A$ sigue casi igual y $B$ sale con casi $2\,v_{A1x}$.
+- $v_{B2x} - v_{A2x} = v_{A1x}$: después del choque se alejan tan rápido como se acercaban. Es la ecuación del paso 2.ª ÷ 1.ª reordenada, y en el Sears vale para cualquier choque elástico en una dimensión (ec. 8.27).
+
+Por qué así: la división de la $K$ por la de $\vec P$ es el truco de todo el desarrollo. Elimina los cuadrados y deja dos ecuaciones lineales. Por eso conviene tener los pasos y no solo el resultado.
+
+### 7. Centro de masa
+
+| Ecuación | Unidades | PDF |
+|---|---|---|
+| $\vec r_{\text{cm}} = \dfrac{\sum m_i\,\vec r_i}{M} \qquad M = \sum m_i$ | m | sí |
+| $\vec P = M\,\vec v_{\text{cm}}$ | kg·m/s | sí |
+| $\sum\vec F_{\text{ext}} = M\,\vec a_{\text{cm}}$ ${\color{ForestGreen}\star}$ cap. 10 | N | sí |
+
+En el PDF: posición media ponderada por las masas; por componentes, $x_{\text{cm}} = \sum m_i\,x_i / M$ (ídem $y$, $z$); en un cuerpo homogéneo está sobre su eje de simetría y puede caer fuera del cuerpo (el centro de una rosquilla); $\vec P = M\vec v_{\text{cm}}$ sale de derivar $\vec r_{\text{cm}}$; el cm se mueve como una partícula de masa $M$; si $\sum\vec F_{\text{ext}} = 0$, $\vec v_{\text{cm}}$ es constante, también durante un choque.
+
+Por qué así: con el centro de masa, la conservación de $\vec P$ se lee como $\vec v_{\text{cm}}$ constante. Además conecta con lo que sigue: en el cuerpo rígido (cap. 10), el movimiento se separa en traslación del cm ($\sum\vec F_{\text{ext}} = M\vec a_{\text{cm}}$) más rotación alrededor del cm. En el cap. 9 aparece en el teorema de los ejes paralelos.
+
+### Símbolos que se suman con el cap. 8
+
+| Símbolo | Significado | Unidad | PDF |
+|---|---|---|---|
+| $\vec p$ | Cantidad de movimiento de **una** partícula | kg·m/s | sí |
+| $\vec P$ | Cantidad de movimiento **total** del sistema; $P$ sola es potencia | kg·m/s | sí |
+| $\vec J$ | Impulso. No es el *jerk* (sobreaceleración, $d\vec a/dt$, m/s³), que la hoja no usa | N·s | sí |
+
+## Cap. 9 — Rotación de cuerpos rígidos (en curso: §9.1–9.3)
+
+Estudiado hasta el comienzo de la energía en la rotación (§9.4, sin incluir). Todo el bloque está en el PDF.
+
+### La idea que ordena lo que va del capítulo
+
+Un solo número, $\theta$, describe la posición de todo el cuerpo: todos sus puntos giran el mismo ángulo. A partir de ahí hay dos caminos:
+
+1. **Hacia adentro de la rotación:** $\theta$, $\omega_z$, $\gamma_z$ se definen igual que $x$, $v_x$, $a_x$, y con $\gamma_z$ constante valen las mismas cuatro ecuaciones del cap. 2 (estrella verde).
+2. **Hacia cada punto:** $s = r\,\theta$ convierte ángulo en camino; derivándola una vez sale $v = r\,\omega$ y otra vez $a_{\text{tan}} = r\,\gamma$. La componente radial no sale de esa derivada: viene del cap. 3 ($v^2/r$) y se reescribe con $v = r\,\omega$.
+
+### Qué ya estaba en la hoja y qué se hizo
+
+| Pedido | Ya estaba | Decisión |
+|---|---|---|
+| $s = r\,\theta$ | Solo en este `.md` (cap. 3, «Por qué $\omega = v/R$») | Al PDF en el cap. 9: es el punto de partida |
+| $\omega = v/R$, $a_{\text{rad}} = \omega^2 R$ | En el PDF, cap. 3 (MCU) | Se quedan en el cap. 3 con estrella verde al cap. 9; en el cap. 9 se deducen en general |
+| $\gamma_z = d\omega_z/dt$ | No (el cap. 3 llamaba $\gamma$ a $a_{\text{rad}}$) | Nueva; $\gamma$ queda solo para la angular y se sacó del cap. 3 |
+| Cuatro ecuaciones con $\gamma_z$ cte | Las lineales, en el cap. 2 | Mismo orden que el cap. 2, para que se lean renglón a renglón |
+
+### Notación
+
+- **Aceleración angular: $\gamma_z$** (el Sears usa $\gamma_z$). Tres aceleraciones que no hay que mezclar:
+  - $\gamma_z$ [rad/s²]: **angular**, del cuerpo entero; la comparten todos sus puntos.
+  - $a_{\text{rad}}$ [m/s²]: componente **centrípeta** de la aceleración lineal de un punto; está siempre que haya movimiento circular, porque cambia la dirección de $\vec v$.
+  - $a_{\text{tan}} = r\,\gamma$ [m/s²]: componente **tangencial**; solo existe si cambia la rapidez (positiva si aumenta, negativa si disminuye).
+- **$r$ minúscula**, como el Sears en el cap. 9 (en el cap. 3 es $R$, el radio de la trayectoria): acá es la distancia de cada punto al eje, distinta para cada punto.
+- **Con subíndice o sin él.** $\omega_z$, $\gamma_z$ tienen signo (como $v_x$, $a_x$); $v$ y $\omega$, sin subíndice, son módulos. Las cuatro ecuaciones usan las de signo; $v = r\,\omega$, las de módulo.
+
+### 1. Coordenada angular
+
+| Ecuación | Unidades | PDF |
+|---|---|---|
+| $\theta = \dfrac{s}{r}$ | rad | sí |
+| $s = r\,\theta$ | m | sí |
+| $1\text{ rev} = 360^\circ = 2\pi\text{ rad}$ | — | sí |
+| $1\text{ rad} = \dfrac{360^\circ}{2\pi} \approx 57{,}3^\circ$ | — | sí |
+
+En el PDF: de grados a radianes se multiplica por $\pi/180^\circ$; $1\text{ rpm} = 2\pi/60$ rad/s (las máquinas se especifican en rpm).
+
+Por qué así: el radián es lo que hace que $s = r\,\theta$ no lleve factor de conversión. Con $\theta$ en grados haría falta $s = r\,\theta\,\dfrac{2\pi}{360^\circ}$, y ese factor se arrastraría a $v = r\,\omega$ y a $a_{\text{tan}} = r\,\gamma$. Por eso la advertencia en rojo vale para toda la sección.
+
+### 2. Velocidad y aceleración angular
+
+| Ecuación | Unidades | PDF |
+|---|---|---|
+| $\omega_z = \dfrac{d\theta}{dt}$ | rad/s | sí |
+| $\gamma_z = \dfrac{d\omega_z}{dt} = \dfrac{d^2\theta}{dt^2}$ | rad/s² | sí |
+
+Las dos llevan estrella verde hacia $v_x = dx/dt$ y $a_x = dv_x/dt$, que se agregaron al cap. 2: los caps. 2 y 9 quedan simétricos también en las definiciones.
+
+### 3. Aceleración angular constante
+
+| Ecuación | Unidades | PDF |
+|---|---|---|
+| $\omega_z = \omega_{0z} + \gamma_z\,t$ | rad/s | sí |
+| $\theta = \theta_0 + \omega_{0z}\,t + \tfrac{1}{2}\,\gamma_z\,t^2$ | rad | sí |
+| $\omega_z^2 = \omega_{0z}^2 + 2\,\gamma_z\,(\theta - \theta_0)$ | rad²/s² | sí |
+| $\theta - \theta_0 = \dfrac{\omega_{0z} + \omega_z}{2}\,t$ | rad | sí |
+
+En el PDF, una sola estrella verde al cap. 2, en el renglón del diccionario (mismo criterio que el cap. 2, que marca el bloque una vez). Diccionario: $x \to \theta$, $v_x \to \omega_z$, $a_x \to \gamma_z$. Se deducen igual que las del cap. 2 (eliminando $t$, o igualando las dos expresiones de $\omega_{\text{med-}z}$).
+
+Por qué así: el orden es el del cap. 2 del PDF y el de la tabla 9.1 del Sears, no el de lectura del §9.2; así cada renglón queda frente a su par. La de $\omega_z^2$ conserva la forma del cap. 2 ($\omega_z^2$ solo a la izquierda), y por eso es la que más adelante se convierte en energía, como $v_x^2$ en el cap. 6.
+
+### 4. Cinemática lineal y angular
+
+| Ecuación | Unidades | PDF |
+|---|---|---|
+| $\dfrac{ds}{dt} = r\,\dfrac{d\theta}{dt}$ | m/s | sí |
+| $v = r\,\omega$ ${\color{ForestGreen}\star}$ cap. 3 | m/s | sí |
+| $a_{\text{tan}} = \dfrac{dv}{dt} = r\,\dfrac{d\omega}{dt} = r\,\gamma$ | m/s² | sí |
+| $a_{\text{rad}} = \dfrac{v^2}{r} = \dfrac{(r\,\omega)^2}{r} = \omega^2\,r$ ${\color{ForestGreen}\star}$ cap. 3 | m/s² | sí |
+| $a = \sqrt{a_{\text{tan}}^2 + a_{\text{rad}}^2}$ | m/s² | sí |
+
+En el PDF: $r$ fija para cada punto (por eso sale de la derivada); $\vec v$ tangente; $a_{\text{tan}}$ cambia el módulo de $\vec v$ y es cero en MCU; $a_{\text{rad}}$ cambia la dirección, apunta al eje y vale en cada instante aunque $\omega$ varíe; $\text{m}\cdot\text{rad/s}^2 = \text{m/s}^2$.
+
+Por qué así:
+
+- **$a$ total:** no se pidió, pero cierra la idea de las «dos componentes»: son perpendiculares, así que el módulo sale por Pitágoras (ej. 9.4 del Sears, disco del lanzador).
+- **Lo que generaliza al cap. 3:** allá $a_{\text{rad}} = \omega^2 R$ era la única aceleración (MCU). Acá es una de dos; si $\omega$ cambia aparece $a_{\text{tan}}$ y $\vec a$ deja de apuntar al centro.
+
+### 5. Transmisión por cadena o correa
+
+| Ecuación | Unidades | PDF |
+|---|---|---|
+| $v = r_1\,\omega_1 = r_2\,\omega_2$ | m/s | sí |
+| $\dfrac{\omega_2}{\omega_1} = \dfrac{r_1}{r_2} = \dfrac{N_1}{N_2}$ | — | sí |
+
+Es el ejemplo conceptual de los engranes de bicicleta (9.6 en la 12.ª ed. en español). La cadena no se desliza ni se estira: todos sus eslabones van a la misma $v$, que es la del borde de cada rueda. Para que la cadena engrane, los dientes tienen el mismo paso en las dos ruedas, $2\pi r_1/N_1 = 2\pi r_2/N_2$, así que $r$ es proporcional a $N$.
+
+En el PDF: 1 = plato (pedales), 2 = piñón (rueda trasera); la rueda chica gira más rápido; engranajes en contacto directo cumplen la misma relación pero giran en sentido opuesto.
+
+Por qué así: se presenta como «transmisión», no como «bicicleta», porque es la relación de cualquier par polea–correa o engranaje. Es la misma $v = r\,\omega$ del bloque 4 aplicada dos veces, por eso va inmediatamente después.
+
 ---
 
 ## Compilación
@@ -546,4 +799,4 @@ Mismo esquema que `quimica_general/hoja_formulas/`: LaTeX directo (no pasa por `
 
 ---
 
-*Fuentes: Sears, F. W.; Zemansky, M. W.; Young, H. D.; Freedman, R. A. — Física universitaria, vol. 1, 11.ª ed. (Pearson Educación, México, 2004; ISBN 970-26-0511-3, ISBN-13 978-970-26-0511-9; traducción de *University Physics*, vol. 1, 11th ed., ISBN 0-8053-9186-X), ejemplar en papel; Young, H. D.; Freedman, R. A. — University Physics with Modern Physics, 13th ed. (Pearson Addison-Wesley, 2012; ISBN 978-0-321-69686-1, student edition), `Libros/Physics-Sears-13Ed-Vol1.pdf` (cap. 2 «Motion Along a Straight Line»; cap. 3 «Motion in Two or Three Dimensions», §3.3–3.5, incluida la derivación de $a_{\text{rad}}$ de §3.4; §9.3 para $v = R\omega$; cap. 4 «Newton's Laws of Motion»; cap. 5 «Applying Newton's Laws»; cap. 6 «Work and Kinetic Energy»; cap. 7 «Potential Energy and Energy Conservation»), `Programa- Bibliografia.pdf`.*
+*Fuentes: Sears, F. W.; Zemansky, M. W.; Young, H. D.; Freedman, R. A. — Física universitaria, vol. 1, 11.ª ed. (Pearson Educación, México, 2004; ISBN 970-26-0511-3, ISBN-13 978-970-26-0511-9; traducción de *University Physics*, vol. 1, 11th ed., ISBN 0-8053-9186-X), ejemplar en papel; Sears y Zemansky — Física universitaria, vol. 1, 12.ª ed., `Libros/Fisica-Sears-12Ed-Vol1.pdf` (cap. 8 «Momento lineal, impulso y choques», §8.1–8.5, incluidas las ecs. 8.19–8.25 del choque elástico con un cuerpo en reposo; ejemplo conceptual 9.6, «Engranes de bicicleta»); Young, H. D.; Freedman, R. A. — University Physics with Modern Physics, 13th ed. (Pearson Addison-Wesley, 2012; ISBN 978-0-321-69686-1, student edition), `Libros/Physics-Sears-13Ed-Vol1.pdf` (cap. 2 «Motion Along a Straight Line»; cap. 3 «Motion in Two or Three Dimensions», §3.3–3.5, incluida la derivación de $a_{\text{rad}}$ de §3.4; cap. 9 «Rotation of Rigid Bodies», §9.1–9.3 y tabla 9.1; cap. 4 «Newton's Laws of Motion»; cap. 5 «Applying Newton's Laws»; cap. 6 «Work and Kinetic Energy»; cap. 7 «Potential Energy and Energy Conservation»), `Programa- Bibliografia.pdf`.*
