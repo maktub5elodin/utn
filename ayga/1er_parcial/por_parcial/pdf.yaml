@@ -1,0 +1,10 @@
+# Variables propias de este documento. La configuración común de pandoc está
+# en pipeline_pdf/base.yaml (ver pipeline_pdf/comun.mk).
+
+variables:
+  title-meta: "Parciales modelo del 1er parcial de Álgebra y Geometría Analítica"
+  subtitle: "Álgebra y Geometría Analítica — los 7 parciales del campus (2019–2022) y el rendido el 08/08/2026, resueltos"
+  date: "24 de noviembre de 2026"
+
+# Índice corto: solo los parciales y los apéndices.
+toc-depth: 1

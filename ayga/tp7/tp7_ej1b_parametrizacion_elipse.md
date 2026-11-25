@@ -254,6 +254,6 @@ que es la ecuación ordinaria del paso 2.1.
 ---
 
 *Fuentes:*\
-*`TP 7 - EJERCICIOS RESUELTOS (2°parte).pdf` — Ejercicio 1 b), resolución de cátedra (parametrización y rango $-1{,}107 \le \theta \le 1{,}107$ rad).*\
-*`Unidad 7 teoría.pdf` (AGA Virtual) — nomenclatura de ecuación general, ordinaria y canónica; semieje mayor y menor; parametrización de la circunferencia y de la elipse; no unicidad de la parametrización.*\
+*`material_catedra/tp7_resueltos_parte_2.pdf` (en el campus: «TP 7 - EJERCICIOS RESUELTOS (2°parte)») — Ejercicio 1 b), resolución de cátedra (parametrización y rango $-1{,}107 \le \theta \le 1{,}107$ rad).*\
+*`material_catedra/unidad_7_teoria.pdf` (AGA Virtual, «Unidad 7 teoría») — nomenclatura de ecuación general, ordinaria y canónica; semieje mayor y menor; parametrización de la circunferencia y de la elipse; no unicidad de la parametrización.*\
 *Verificación numérica de todos los valores (cortes, extremos, $\arctan 2$, $r(\pi/4) = \sqrt2$, hipótesis de traslación y de circunferencia) realizada con Python/NumPy.*

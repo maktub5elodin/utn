@@ -13,7 +13,7 @@ Escritas en Markdown, en español, con diagramas ASCII. Algunos documentos (corr
 | Carpeta | Materia | Último trabajo | Última edición |
 |---|---|---|---|
 | [`analisis_matematico_i/`](analisis_matematico_i/) | Análisis Matemático I | Resolución paso a paso del 1er parcial, con figura y PDF | 09/nov/2026 |
-| [`ayga/`](ayga/) | Álgebra y Geometría Analítica | TP7 ej. 1 b): parametrización de un arco de elipse, con figuras y PDF | 04/nov/2026 |
+| [`ayga/`](ayga/) | Álgebra y Geometría Analítica | 1er parcial: los 7 modelos del campus resueltos por parcial, con figuras 3D (el rendido repitió uno) | 25/nov/2026 |
 | [`fisica_i/`](fisica_i/) | Física I | Hoja de fórmulas, cap. 8 (cantidad de movimiento, impulso, choques); 2do parcial con la notación de la hoja | 23/nov/2026 |
 | [`fundamentos_informatica/`](fundamentos_informatica/) | Fundamentos de Informática | 2do parcial: programa en C++98, casos de prueba y archivo de entrega | 09/nov/2026 |
 | [`quimica_general/`](quimica_general/) | Química General | Hoja de fórmulas: referencia del Chang al pie | 09/nov/2026 |

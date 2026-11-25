@@ -13,7 +13,7 @@ Cada documento tiene solo dos archivos propios: un `Makefile` corto (define `DOC
 
 ## Qué se versiona
 
-Excepción a la regla general del `.gitignore` (PDFs e imágenes excluidos) para trabajos con pipeline de compilación (ej. `ayga/excercise/`, `ingenieria_mecanica_i/tp_grupal_mecanica_rotacional_2/`: `.md` → figuras Python → pandoc/xelatex → PDF, con `make`). Reglas generales en `.gitignore`, válidas para cualquier ejercicio nuevo con la misma estructura (no hace falta editarlo cada vez).
+Excepción a la regla general del `.gitignore` (PDFs e imágenes excluidos) para trabajos con pipeline de compilación (ej. `ayga/tp7/`, `ingenieria_mecanica_i/tp_grupal_mecanica_rotacional_2/`: `.md` → figuras Python → pandoc/xelatex → PDF, con `make`). Reglas generales en `.gitignore`, válidas para cualquier ejercicio nuevo con la misma estructura (no hace falta editarlo cada vez).
 
 | Se versiona | Por qué |
 |---|---|

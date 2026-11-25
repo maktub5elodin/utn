@@ -3,7 +3,7 @@
 #
 # Todavía no hay figuras: los diagramas ASCII del .md salen en el PDF como
 # recuadro "Figura pendiente". Cuando se agreguen, se definen acá FIG_SCRIPT y
-# FIG_NAMES (como en ayga/excercise/Makefile).
+# FIG_NAMES (como en ayga/tp7/Makefile).
 
 DOC := Mecanica_Rotacional_2_Resolucion
 
