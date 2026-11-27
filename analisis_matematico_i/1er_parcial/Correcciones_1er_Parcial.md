@@ -433,6 +433,6 @@ $$
 ## Fuentes
 
 - Enunciado del ejercicio 2: parcial rendido el 17/oct/2026.
-- `1° parcial - Ejemplo 3.pdf` — modelo de parcial de la cátedra (ejercicios 1, 3, 4 y 5; en el 4, la rama $x > 0$ del parcial rendido fue $\frac{\mathrm{sen}\,x}{x}$, equivalente a la del modelo).
+- `1° parcial - Ejemplo 3.pdf` (`fuentes/modelo_ejemplo_3.pdf`) — modelo de parcial de la cátedra (ejercicios 1, 3, 4 y 5; en el 4, la rama $x > 0$ del parcial rendido fue $\frac{\mathrm{sen}\,x}{x}$, equivalente a la del modelo).
 
 <!-- /solo-md -->

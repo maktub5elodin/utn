@@ -1,0 +1,10 @@
+# Variables propias de este documento. La configuración común de pandoc está
+# en pipeline_pdf/base.yaml (ver pipeline_pdf/comun.mk).
+
+variables:
+  title-meta: "Modelo de 2do parcial de Análisis Matemático I — resuelto y explicado"
+  subtitle: "Análisis Matemático I — los 7 ejercicios del modelo de la clase de repaso, con la teoría necesaria"
+  date: "27 de noviembre de 2026"
+
+# Índice corto: solo los ejercicios y la hoja de fórmulas.
+toc-depth: 1
