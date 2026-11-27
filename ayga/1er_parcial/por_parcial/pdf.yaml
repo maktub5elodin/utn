@@ -5,6 +5,12 @@ variables:
   title-meta: "Parciales modelo del 1er parcial de Álgebra y Geometría Analítica"
   subtitle: "Álgebra y Geometría Analítica — los 7 parciales del campus (2019–2022) y el rendido el 08/08/2026, resueltos"
   date: "24 de noviembre de 2026"
+  # El outline (marcadores) del PDF baja hasta los ejercicios. Sin esto heredaría
+  # el tocdepth 1 del índice (\setcounter es global).
+  hyperrefoptions: [bookmarksdepth=2]
 
 # Índice corto: solo los parciales y los apéndices.
 toc-depth: 1
+
+# Fórmulas de los títulos (ℝ⁴, 4 × 4…) legibles en el outline del PDF.
+filters: [marcadores.lua]

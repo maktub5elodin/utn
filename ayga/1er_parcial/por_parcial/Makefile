@@ -25,3 +25,6 @@ $(FREC) &: temas.py $(DOC).md
 
 $(TEX): $(FREC)
 figuras: $(FREC)
+
+# Filtro propio (marcadores del outline con fórmulas en Unicode).
+$(TEX): marcadores.lua
